@@ -1,0 +1,170 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    /* background-color: #01471f58; */
+    color: #333;
+    line-height: 1.6;
+    /* background-image: url(../image/pngtree-cartoon-cute-doodles-electric-vehicle-seamless-pattern-image_1311985.jpg); */
+    
+}
+
+
+
+header{
+    background: #022210e2; 
+}
+
+
+.hero {
+    background-image: url('pngtree-cartoon-cute-doodles-electric-vehicle-seamless-pattern-image_1311985.jpg');
+    background-size: cover; /* Ensures the image covers the entire section */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #022210e2; /* Fallback color in case the image fails to load */
+}
+
+.hero-content {
+    text-align: center;
+    margin-top: 10px;
+}
+
+main{
+    margin-top: 0;
+}
+
+
+.hero h1 {
+    font-size: 6em;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: white;
+    line-height: 80px;
+    margin-top: 10px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.hero p {
+    font-size: 1.9em;
+    font-weight: 300;
+    color: white;
+    margin-bottom: 40px;
+}
+
+.hero-icons {
+    margin: 30px 0;
+}
+.hero .smallpara{
+    font-size: 22px;
+    font-family: 'Times New Roman', Times, serif;
+    margin: 20px 280px;
+}
+.hero-icons i {
+    font-size: 3em;
+    margin: 10px 20px;
+    color: #03b13a;
+}
+
+.cta-button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: 300;
+    color: #fff;
+    background-color: #032a0b;
+    border: none;
+    border-radius: 40px;
+    border: solid 2px white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 300px;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #000100;
+}
+
+
+/* Style the scrollbar */
+::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+/* Style the track */
+::-webkit-scrollbar-track {
+    background: #f0f0f000; /* Background of the scrollbar track */
+    border-radius: 10px; /* Optional: round the track */
+}
+
+/* Style the thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 128, 0, 0.585); /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Round the scrollbar thumb */
+    border: .1px solid #f0f0f000; /* Adds space around thumb */
+}
+
+/* Style the thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(4, 38, 4); /* Darker color on hover */
+}
+
+
+/* Default font sizes (for larger screens) */
+.hero h1 {
+    font-size: 6em;
+}
+
+.hero p {
+    font-size: 1.9em;
+}
+
+.hero .smallpara {
+    font-size: 22px;
+}
+
+/* For tablets (width <= 768px) */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 4em;
+    }
+    .hero span{
+     font-size: 4em;
+    }
+    .hero p {
+        font-size: 1.5em;
+    }
+
+    .hero .smallpara {
+        font-size: 18px;
+    }
+}
+
+
+.asteril{
+
+}
+/* For mobile devices (width <= 480px) */
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2.5em;
+    }
+    .hero h1 span{
+        font-size: 2em;
+       }
+    .hero p {
+        font-size: 1.2em;
+    }
+
+    .hero .smallpara {
+        font-size: 16px;
+        margin: 20px 10px; /* Adjust margin for smaller screens */
+    }
+}

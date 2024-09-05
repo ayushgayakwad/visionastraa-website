@@ -1,0 +1,149 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: rgba(255, 255, 255, 0.9); /* Slight transparency to blend with the background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Fix the header at the top */
+    top: 0; /* Align to the top of the viewport */
+    left: 0; /* Align to the left of the viewport */
+    width: 100%; /* Ensure it spans the full width */
+    z-index: 1000; /* Ensure it sits above other content */
+    padding: 10px 20px; /* Adjusted padding for better spacing */
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.links-box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    padding: 0;
+}
+
+.nav-links li {
+    margin: 0 10px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ee3e12; /* Change to your desired hover color */
+    border-bottom: 2px solid #ee491f; /* Add an underline effect */
+}
+
+.auth-buttons {
+    display: flex;
+}
+
+.auth-buttons .login,
+.auth-buttons .signup {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.auth-buttons .signup {
+    background-color: black;
+}
+
+.auth-buttons button:hover {
+    background: linear-gradient(45deg, #bc3817, #e38034); /* Adjust as needed */
+    transform: translateY(-3px); /* Creates a lifting effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a shadow effect */
+}
+
+main {
+    position: relative;
+    text-align: center;
+    color: white;
+    margin-top: 80px; /* Adjusted to push the content below the fixed header */
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Make the hero section fill the entire viewport height */
+    overflow: hidden; /* Hide any overflow */
+}
+
+.hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the entire hero section */
+    object-position: center; /* Centers the image */
+}
+
+.hero-text {
+    position: absolute;
+    top: 50%; /* Centered vertically */
+    left: 50%; /* Centered horizontally */
+    transform: translate(-50%, -50%);
+    width: 80%; /* Adjust the width as needed */
+    max-width: 800px; /* Optional: Set a maximum width */
+    text-align: center; /* Center the text within the hero section */
+    color: white; /* Ensures text is visible against the background */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Adds a shadow for better readability */
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    margin: 0;
+    line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Hide the nav links on smaller screens */
+    }
+
+    .navbar-toggler {
+        display: block; /* Show the burger menu on smaller screens */
+    }
+
+    .hero-text h1 {
+        font-size: 2rem; /* Reduce font size on smaller screens */
+    }
+
+    .auth-buttons .login,
+    .auth-buttons .signup {
+        padding: 8px 16px; /* Adjust button padding for smaller screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-text h1 {
+        font-size: 1.75rem; /* Further reduce font size on very small screens */
+    }
+
+    .auth-buttons .login,
+    .auth-buttons .signup {
+        padding: 6px 12px; /* Further adjust button padding */
+        font-size: 0.875rem; /* Adjust font size for buttons */
+    }
+}

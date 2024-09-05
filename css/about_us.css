@@ -1,0 +1,538 @@
+@import url('https://fonts.googleapis.com/css2?family=Inika:wght@400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.suntext {
+    margin-top: 350px;
+    justify-items: center;
+    display: grid;
+    place-items: center;
+}
+
+.suntext p, h4 {
+    text-align: justify;
+    max-width: 60%;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    padding-top: 60px; /* Adjust based on the height of your header */
+    background-color: #202020;
+}
+
+.about-us {
+    position: relative;
+    overflow: hidden; /* Ensure content does not overflow */
+    height: 100vh; /* Full height of the viewport */
+    color: black; /* Text color */
+}
+
+.about-us .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-us img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1; /* Ensure the image is behind the glass panel */
+}
+
+.glass-panel {
+    width: 100%;
+    height: 100%; /* Ensure it matches the height of the background image */
+    text-align: left;
+    background: rgba(0, 0, 0, 0.8); /* Black glass panel effect */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    align-items: center; /* Center align the text horizontally */
+    color: white; /* White text color */
+    padding: 1rem;
+    box-sizing: border-box; /* Ensure padding is included in the width/height */
+}
+
+.glass-panel h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    width: 100%;
+    margin-top: 25rem;
+}
+
+.glass-panel h3 {
+    font-size: 39px;
+    margin-bottom: 23rem;
+}
+
+.glass-panel p:first-of-type {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+.glass-panel h2 {
+    color: rgb(20, 227, 20);
+    text-align: center;
+}
+
+.glass-panel h4 {
+    font-size: 25px;
+    color: rgb(20, 227, 20);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    text-align: left;
+}
+
+.glass-panel p:not(:first-of-type) {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    text-align: left;
+}
+
+.mission-vision {
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem 1rem;
+    background: none; /* Ensure no background color */
+    text-align: center;
+    width: 40%;
+}
+
+.line {
+    width: 2px;
+    background-color: white;
+    height: 155px;
+}
+
+.horizontal {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    width: 80%; /* Stack items on top of each other by default */
+    align-items: center;
+    gap: 20px;
+}
+
+.mission-vision div {
+    flex: 1;
+    margin: 0 1rem;
+    width: 50%;
+}
+
+.mission-vision h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.mission h2, .vision h2 {
+    color: rgb(20, 227, 20);
+}
+
+.team {
+    padding: 3rem 1rem;
+    background: #f4f4f9;
+    text-align: center;
+}
+
+.team h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.team-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+    gap: 4rem;
+    flex-wrap: wrap;
+    margin-top: -150px;
+    z-index: 2;
+    position: relative;
+}
+
+.team-member {
+    padding: 4rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(228, 220, 220, 0.1);
+    max-width: 350px;
+    width: 100%;
+    color: black;
+    text-align: center;
+}
+
+.team-member img {
+    border-radius: 15%;
+    height: 200px;
+    width: 180px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.team-member h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.team-member p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.social-links img {
+    height: 30px;
+    width: 30px;
+}
+
+.social-links a {
+    margin: 0 0.75rem;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: scale(1.2); 
+    filter: brightness(1.1); 
+}
+
+.glass-panel1 {
+    background: rgba(181, 178, 178, 0.1); 
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.get-to-know-us {
+    padding: 3rem 1rem;
+    background: #000; 
+    text-align: center;
+    color: white; 
+}
+
+.get-to-know-us h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #fff; 
+    text-align: center;
+}
+
+.info-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap; 
+    gap: 2rem;
+}
+
+.info-box {
+    background: rgba(255, 255, 255, 0.1); 
+    padding: 2rem 1.5rem;
+    border-radius: 10px;
+    width: 22%;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, background 0.3s ease;
+    cursor: pointer;
+    color: white;
+}
+
+.info-box:hover {
+    background: rgba(255, 255, 255, 0.3); 
+    transform: translateY(-10px); 
+}
+
+.info-box img {
+    height: 50px;
+    width: 50px;
+    margin-bottom: 1rem;
+}
+
+.info-box a {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #fff; 
+}
+
+.info-box p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #ddd; 
+}
+
+.footer {
+    background-color: #23272A;
+    color: #008000;
+    padding: 10px 150px;
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer .secpart {
+    margin-left: 60px;
+}
+
+.container {
+    gap: 100px;
+}
+
+.thirdpart {
+    margin-left: 20px;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.footer h5 {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.footer p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.footer .list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+.footer .list-unstyled li {
+    margin-bottom: 8px;
+}
+
+.footer .list-unstyled a {
+    font-size: 14px;
+}
+
+.footer .text-center {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.last {
+    display: flex;
+    justify-content: space-between;
+    height: none;
+}
+
+.lastb {
+    font-weight: bold;
+    font-size: small;
+    border: none;
+    border-radius: 30px;
+    padding: 10px;
+    height: auto;
+    align-items: center;
+    margin-top: 40%;
+    background-color: #008000;
+    color: white;
+}
+
+.lastimg {
+    height: auto; 
+    width: 80px;
+}
+
+/* Media Query for screens smaller than 1000px width (Tablets) */
+@media screen and (max-width: 1000px) {
+    .glass-panel h1 {
+        font-size: 1.8rem;
+    }
+
+    .mission-vision {
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+    }
+
+    .horizontal {
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        width: 80%;
+    }
+
+    .mission-vision div {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .info-box {
+        width: 40%;
+    }
+
+    .get-to-know-us h2 {
+        font-size: 2rem;
+    }
+
+    .suntext {
+        margin-top: 600px;
+    }
+
+    .suntext p {
+        font-size: 4em;
+    }
+}
+
+/* Media Query for screens smaller than 768px width (Large Phones) */
+@media screen and (max-width: 768px) {
+    .horizontal {
+        flex-direction: column;
+    }
+
+    .line {
+        display: none;
+    }
+
+    .mission-vision {
+        flex-direction: column; 
+        padding: 1rem 0; 
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .mission-vision div {
+        margin: 0;
+        width: auto;
+    }
+
+    .info-box {
+        width: 90%;
+    }
+
+    .glass-panel h1 {
+        font-size: 1.4rem;
+    }
+
+    .glass-panel h2 {
+        color: rgb(20, 227, 20);
+        text-align: center;
+    }
+
+    .glass-panel h3 {
+        font-size: 39px;
+        margin-bottom: 34rem;
+    }
+
+    .glass-panel p {
+        font-size: 0.9rem;
+    }
+
+    .glass-panel p:first-of-type {
+        font-size: 0.8rem;
+        width: 100%;
+        text-align: center;     
+    }
+
+    .team-member {
+        margin-top: 50px;
+        max-width: 250px;
+    }
+
+    .team-container {
+        gap: 1rem;
+    }
+
+    .get-to-know-us h2 {
+        font-size: 2.5rem;
+    }
+
+    .mission-vision h2 {
+        font-size: 2rem;
+    }
+
+    .suntext p, h4 {
+        max-width: 90%;
+    }
+
+    .footer {
+        padding: 10px 10px;
+    }
+    .footer .secpart {
+        margin-left: 0;
+    }
+
+    .thirdpart,
+    .secpart {
+        margin: 5px 0;
+        flex: 0;
+    }
+
+    .row {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 5px 50px;
+        height: auto; 
+    }
+
+    .lastimg {
+        width: 40px;
+        height: auto;
+    }
+
+    .lalala p {
+        font-size: 12px;
+    }
+
+    .lastb {
+        margin-left: 30px;
+        font-weight: bold;
+        font-size: 10px;
+        border: none;
+        border-radius: 30px;
+        padding: 12px 15px;
+        background-color: #008000;
+        color: white;
+        width: 100px;
+        height: auto;
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .listone,
+    .listtwo li a {
+        padding: 1px;
+        margin: 0;
+    }
+
+    .listone,
+    .listtwo li {
+        padding: 1px;
+        margin: 0;
+    }
+}

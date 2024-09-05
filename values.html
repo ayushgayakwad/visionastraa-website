@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Values</title>
+    <link rel="stylesheet" href="css/values.css">
+    <script src="https://kit.fontawesome.com/2ca57fca93.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <header>
+        <div id="navbar-placeholder"></div>
+    </header>
+
+    <main>
+        <section class="values-section">
+            <h1>Our Values</h1>
+            <div class="values-container">
+                <div class="value-box">
+                    <h2>P</h2>
+                    <h3>Placements:</h3>
+                    <p>Ensuring students secure top industry positions through robust placement support and industry
+                        connections.</p>
+                    <i class="valuesicons fa fa-graduation-cap" aria-hidden="true"></i>
+                </div>
+                <div class="value-box">
+                    <h2>L</h2>
+                    <h3>Learning:</h3>
+                    <p>Offering comprehensive and cutting-edge learning programs to equip students with the latest
+                        knowledge and skills.</p>
+                    <i class="valuesicons fa fa-book" aria-hidden="true"></i>
+                </div>
+                <div class="value-box">
+                    <h2>U</h2>
+                    <h3>Upskill:</h3>
+                    <p>Providing opportunities for continuous upskilling to keep students ahead in their careers with
+                        advanced training modules.</p>
+                    <i class="valuesicons fa fa-certificate" aria-hidden="true"></i>
+                </div>
+                <div class="value-box">
+                    <h2>S</h2>
+                    <h3>Salary:</h3>
+                    <p>Empowering students to achieve high salaries by preparing them with the skills and expertise that
+                        top employers seek.</p>
+                    <i class="valuesicons fa fa-money" aria-hidden="true"></i>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <script>
+        fetch('navbarcomp/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+                // JavaScript to handle hamburger menu toggle
+                const hamburger = document.getElementById("hamburger");
+                const navLinks = document.getElementById("nav-links");
+
+                if (hamburger && navLinks) {
+                    hamburger.onclick = function () {
+                        navLinks.classList.toggle("active");
+                    };
+                }
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+    </script>
+</body>
+
+</html>
