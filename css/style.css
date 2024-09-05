@@ -1,0 +1,182 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inika", serif;
+}
+
+
+
+
+
+
+
+.upper {
+  padding: 2.5rem 1.3rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.main {
+  margin: 4rem 10rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.info {
+  width: 100%;
+  max-width: 25rem;
+  padding: 1rem 2rem;
+  background-color: #247329;
+  color: #fff;
+  border: 2px solid;
+  border-radius: 1.1rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+  margin-bottom: 1.3rem;
+}
+
+.data {
+  margin-bottom: 1.3rem;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.circle {
+  height: 10rem;
+  width: 10rem;
+  position: absolute;
+  bottom: -5rem;
+  right: -5rem;
+  border: 1px solid #67b467;
+  border-radius: 50%;
+  background-color: #67b467;
+}
+
+.form {
+  width: 100%;
+  max-width: 40rem;
+}
+
+.same {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+label {
+  font-size: smaller;
+  font-weight: 600;
+}
+
+input {
+  display: block;
+  border: 0;
+  border-bottom: 1px solid #000;
+  outline: none;
+  margin: 5px 0px 2rem 0px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+  margin-top: 5px;
+  font-size: 1rem;
+  border: 0;
+  outline: none;
+}
+
+textarea::placeholder {
+  font-weight: 400;
+  color: #000;
+}
+
+.submit-btn {
+  padding: 5px 2rem;
+  border: 2px solid #247329;
+  border-radius: 5px;
+  background-color: #247329;
+  color: #fff;
+  font-size: 1rem;
+  margin-top: 1.3rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 20px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .auth-buttons {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .main {
+    margin: 2rem;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info,
+  .form {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .same {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px 10px;
+    flex-direction: column;
+  }
+
+  .nav-links,
+  .auth-buttons {
+    flex-direction: column;
+    align-items: flex-start;
+    
+  }
+
+  .main {
+    margin: 1rem;
+  }
+
+  .info,
+  .form {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .same {
+    flex-direction: column;
+  }
+
+  .circle {
+    display: none;
+  }
+}

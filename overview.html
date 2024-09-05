@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/overview_style.css">
+</head>
+
+<body>
+    <main>
+        <div class="background_banner">
+            <header>
+                <div id="navbar-placeholder"></div>
+            </header>
+
+            <section class="overview">
+
+                <div class="overview-text">
+                    <h1>Overview</h1>
+                </div>
+                <div class="overview-body">
+                    <ul class="overview-list">
+                        <li>Economic Survey 2023 predicts that India's domestic electric vehicle market will see a 49 percent compound annual growth rate (CAGR) between 2022 and 2030, with 10 millionannual sales by 2030.</li>
+                        <li>EV Industry growth in India is expected to create 5 million jobs by 2035 according to NITI Aayog. 94.4%India market CAGR, 2021-2030</li>
+                    </ul>
+                    <!-- <img src="/vision-astra/images/overview_chat.png" alt="Bar graph of EV"> -->
+                </div>
+                <div class="overview-body2">
+                    <p>EV Academy plans to be leading player to deliver highly skilled EV Engineers across all domains
+                        –motor, battery, e-axle, software technology, etc.</p>
+                </div>
+                <div class="stat-container">
+
+                    <div class="stat">
+                        <h3>120k</h3>
+                        <p>Website visits</p>
+                    </div>
+                    <div class="stat">
+                        <h3>3.5k</h3>
+                        <p>Students</p>
+                    </div>
+                    <div class="stat">
+                        <h3>16%</h3>
+                        <p>Growth in 6 months</p>
+                    </div>
+                    <div class="stat">
+                        <h3>+50</h3>
+                        <p>Placements</p>
+                    </div>
+                </div>
+        </div>
+        </section>
+        <footer class="footer" style="padding-top: 35px;">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="text-uppercase">About Us</h5>
+                        <p style="color: white;">Empowering India’s talent to lead the global EV industry. <br><br>We
+                            are
+                            committed to bridging the gap between academia and industry, providing students with the
+                            practical skills and knowledge
+                            required to excel in the EV sector. Our programs are designed to foster innovation,
+                            entrepreneurship, and a deep understanding of the EV ecosystem.
+                        </p>
+                    </div>
+                    <div class="col-md-2 secpart">
+                        <h5 class="text-uppercase">Links</h5>
+                        <ul class="list-unstyled listone">
+                            <li><a href="about_us.html">About US</a></li>
+                            <li><a href="course.html">Courses</a></li>
+                            <li><a href="placements.html">Placements</a></li>
+                            <li><a href="mentors.html">Mentors</a></li>
+                            <li><a href="contactUs.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 thirdpart">
+                        <h5 class="text-uppercase">Follow Us</h5>
+                        <ul class="list-unstyled listtwo">
+                            <li><a href="https://www.instagram.com/evacademy.in/">Instagram</a></li>
+                            <li><a href="https://www.linkedin.com/company/va-ev-academy/?viewAsMember=true">linkedin</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <hr style="color: white; border-color: white;">
+                <div class="row">
+
+                    <div class="col-12 text-left last">
+
+                        <div class="lalala"><img class="lastimg" src="image/bwvasev.png" alt="">
+                            <p style="color: white;" class="mb-0 latext">© 2024 visionastraa. All rights reserved.</p>
+                        </div>
+
+
+                        <div><button class="lastb" type="button">EV academy </button></div>
+
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script>
+        fetch('navbarcomp/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+                // JavaScript to handle hamburger menu toggle
+                const hamburger = document.getElementById("hamburger");
+                const navLinks = document.getElementById("nav-links");
+
+                if (hamburger && navLinks) {
+                    hamburger.onclick = function () {
+                        navLinks.classList.toggle("active");
+                    };
+                }
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+    </script>
+</body>
+</html>
