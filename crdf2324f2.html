@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Recruitment Drive for 2023/24 Freshers</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/crdf2324f2.css">
+</head>
+<body>
+    <main>
+        <!-- Renamed to About VisionAstraa -->
+        <section class="about-visionastraa">
+            <div class="logo-container"></div>
+                <img src="image/transpatent_vsa.png" alt="Logo" class="logo">
+            </div>
+            <div class="about-visionastraa-learning-outcomes text-center">
+                <h2>About VisionAstraa</h2>
+                <p>VisionAstraa Group has multiple companies under it. We work with multiple startups from different industry verticals to build and scale their companies.We also help train, mold engineering students from second year onwards to build their startups.</p>
+            </div>
+        </section>
+
+        <!-- Renamed to About Company -->
+        <section class="about-company">
+            <div class="about-company-box">
+                <h2>Additional Content Here</h2>
+            </div>
+        </section>
+
+        <section class="social-links">
+            <div class="social-links-box">
+                <h2>Social Links</h2>
+                 <p>To get a deeper understanding of VisionAstraa's commitment to innovation and growth, we highly encourage you to visit our LinkedIn profile. As a multifaceted group with diverse companies, we are at the forefront of nurturing startups across various industry verticals, helping them scale and succeed. Additionally, we are dedicated to shaping the future of engineering by mentoring students from their early years to develop their own startups. By connecting with us on LinkedIn, you'll stay updated on our latest achievements, initiatives, and opportunities to collaborate. Click the "Visit LinkedIn" button below to learn more about how we're making an impact and how you can be a part of it.</p>
+                <div class="button-container">
+                    <button id="visitLinkedIn" onclick="visitLinkedIn()">Visit LinkedIn</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="quiz-instructions">
+            <div class="quiz-instructions-box">
+                <div class="button-container">
+                    <button id="quizInstructions" disabled onclick="goToQuizInstructions()">Quiz Instructions</button>
+                </div>
+            </div>
+            <p class="instruction-text">Please visit VisionAstraa's LinkedIn profile by clicking the "Visit LinkedIn" button below. The "Quiz Instructions" button will be enabled afterward.</p>
+        </section>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function visitLinkedIn() {
+            window.open('https://www.linkedin.com/company/visionastraa', '_blank');
+            document.getElementById('quizInstructions').disabled = false;
+        }
+
+        function goToQuizInstructions() {
+            window.location.href = 'crdf2324f3.html';
+        }
+    </script>    
+</body>
+</html>
