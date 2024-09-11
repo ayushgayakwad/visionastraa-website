@@ -13,7 +13,7 @@ if ($conn->connect_error) {
     exit();
 }
 
-$tableCreationQuery = "CREATE TABLE IF NOT EXISTS  questionnaire_data (
+$tableCreationQuery = "CREATE TABLE IF NOT EXISTS questionnaire_data (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
@@ -31,6 +31,7 @@ if ($conn->query($tableCreationQuery) === FALSE) {
     exit();
 }
 
+// Get POST data
 $first_name = $_POST['first_name'];
 $last_name = $_POST['last_name'];
 $email = $_POST['email'];
@@ -40,16 +41,25 @@ $degree = $_POST['degree'];
 $specialization = $_POST['specialization'];
 $graduation_year = $_POST['graduation'];
 
-$stmt = $conn->prepare("INSERT INTO  questionnaire_data 
-    (first_name, last_name, email, phone, college, degree, specialization, graduation_year) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ? )");
+$checkQuery = "SELECT * FROM questionnaire_data WHERE email = ? OR phone = ?";
+$stmt = $conn->prepare($checkQuery);
+$stmt->bind_param("ss", $email, $phone);
+$stmt->execute();
+$result = $stmt->get_result();
 
-$stmt->bind_param("ssssssss", $first_name, $last_name, $email, $phone, $college, $degree, $specialization, $graduation_year);
-
-if ($stmt->execute()) {
-    echo json_encode(["success" => true]);
+if ($result->num_rows > 0) {
+    echo json_encode(["success" => false, "error" => "Form already submitted"]);
 } else {
-    echo json_encode(["success" => false, "error" => $stmt->error]);
+    $insertQuery = "INSERT INTO questionnaire_data (first_name, last_name, email, phone, college, degree, specialization, graduation_year) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($insertQuery);
+    $stmt->bind_param("ssssssss", $first_name, $last_name, $email, $phone, $college, $degree, $specialization, $graduation_year);
+
+    if ($stmt->execute()) {
+        echo json_encode(["success" => true]);
+    } else {
+        echo json_encode(["success" => false, "error" => $stmt->error]);
+    }
 }
 
 $stmt->close();
