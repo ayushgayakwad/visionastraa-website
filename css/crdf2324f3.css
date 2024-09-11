@@ -14,14 +14,12 @@ main {
 }
 
 .about-visionastraa {
-    position: relative;
-    background: url('../image/VisionAstraa_gradient.jpg') no-repeat center center;
-    background-size: cover;
+    background-color: #202020;
     padding: 40px;
     margin-bottom: 30px;
     border-radius: 10px;
     transition: transform 0.1s ease, box-shadow 0.3s ease;
-    height: 350px;
+    height: 175px;
     text-align: center;
 }
 
@@ -31,7 +29,6 @@ main {
 }
 
 .about-visionastraa-learning-outcomes {
-    position: absolute;
     border-radius: 10px;
     z-index: 2;
     transition: transform 0.1s ease, box-shadow 0.3s ease;
@@ -67,7 +64,6 @@ main {
     padding: 40px;
     margin-bottom: 30px;
     border-radius: 10px;
-    text-align: center;
     transition: transform 0.1s ease, box-shadow 0.3s ease;
 }
 
@@ -216,16 +212,19 @@ button:not(:disabled):hover {
     }
 
     .about-visionastraa {
-        height: 400px;
+        height: 250px;
+        text-align: center;
     }
 
     .about-visionastraa h2 {
         font-size: 1.5rem;
+        padding-left: 30px;
         padding-right: 30px;
     }
 
     .about-visionastraa p {
         font-size: 1rem;
+        padding-left: 30px;
         padding-right: 30px;
     }
 
