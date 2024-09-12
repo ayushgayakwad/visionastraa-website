@@ -1,4 +1,4 @@
-<?php
+<?php 
 header('Content-Type: application/json');
 
 $servername = "localhost";
@@ -49,6 +49,19 @@ $role = $_POST['role'];
 
 $resume = file_get_contents($_FILES['resume']['tmp_name']);
 $resume_filename = $_FILES['resume']['name'];
+
+$checkQuery = $conn->prepare("SELECT id FROM career_applications WHERE email = ? OR phone = ?");
+$checkQuery->bind_param("ss", $email, $phone);
+$checkQuery->execute();
+$checkQuery->store_result();
+
+if ($checkQuery->num_rows > 0) {
+    echo json_encode(["success" => false, "error" => "Email or phone number already exists in the system."]);
+    $checkQuery->close();
+    exit();
+}
+
+$checkQuery->close();
 
 $stmt = $conn->prepare("INSERT INTO career_applications 
     (first_name, last_name, email, phone, college, degree, specialization, graduation_year, resume, resume_filename, goals, role, confirmationEmailSent) 
