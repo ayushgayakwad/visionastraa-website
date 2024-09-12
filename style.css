@@ -1,0 +1,236 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #000000; /* Black background */
+    color: #ffffff; /* White text */
+}
+
+/* Logo */
+.logo {
+    width: 150px;
+    display: block;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(45deg, #ff3300, #ff9900); /* Red to Orange gradient */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: #ffffff; /* White text */
+    text-align: center;
+    padding: 0 20px; /* Add padding for mobile responsiveness */
+}
+
+.hero-text {
+    max-width: 800px; /* Limit the width of text content */
+}
+
+.hero-text h1 {
+    font-size: 3em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.hero-text p {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+.cta-button {
+    padding: 15px 30px;
+    background-color: #ff3300; /* Red button */
+    color: #ffffff;
+    text-transform: uppercase;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    display: inline-block; /* Ensure button is aligned correctly */
+}
+
+.cta-button:hover {
+    background-color: #ff9900; /* Orange hover effect */
+}
+
+
+/* Education Pathways */
+.education-pathways {
+    padding: 60px 20px;
+    background-color: #1a1a1a; /* Dark grey background */
+    text-align: center;
+}
+
+.education-pathways h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #ff9900; /* Orange heading */
+}
+
+.pathways {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: #2e2e2e; /* Grey card background */
+    padding: 30px;
+    border-radius: 15px;
+    width: 300px;
+    margin: 15px;
+    color: #ffffff; /* White text */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 4px 15px rgba(255, 153, 0, 0.5); /* Yellow-orange shadow */
+}
+
+.card h3 {
+    color: #ff3300; /* Red heading */
+    font-size: 1.8em;
+}
+
+.card p {
+    margin: 15px 0;
+}
+
+.cta-link {
+    display: inline-block;
+    margin-top: 15px;
+    color: #ff9900; /* Orange link */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cta-link:hover {
+    color: #ff3300; /* Red on hover */
+}
+
+/* Resources Section */
+.resources {
+    padding: 60px 20px;
+    background-color: #000000; /* Black background */
+}
+
+.resources h2 {
+    font-size: 2.5em;
+    text-align: center;
+    color: #ffffff; /* White heading */
+    margin-bottom: 40px;
+}
+
+.resource-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.resource-card {
+    background-color: #2e2e2e;
+    padding: 30px;
+    border-radius: 15px;
+    width: 300px;
+    margin: 15px;
+    color: #ffffff;
+}
+
+.resource-card h3 {
+    color: #ff3300; /* Red heading */
+}
+
+.resource-card p {
+    margin: 15px 0;
+}
+
+/* Testimonials Section */
+.testimonials {
+    padding: 60px 20px;
+    background: linear-gradient(45deg, #ff3300, #ff9900); /* Gradient background */
+    color: #ffffff;
+}
+
+.testimonials h2 {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.testimonial-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.testimonial-card {
+    background-color: #1a1a1a;
+    border-radius: 15px;
+    padding: 30px;
+    width: 350px;
+    margin: 15px;
+    color: #ffffff;
+}
+
+.testimonial-card p {
+    font-style: italic;
+}
+
+.testimonial-card h4 {
+    margin-top: 10px;
+    color: #ff3300; /* Red text */
+}
+
+/* FAQ Section */
+.faq {
+    padding: 60px 20px;
+    background-color: #1a1a1a;
+}
+
+.faq h2 {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #ffffff; /* White text */
+}
+
+.accordion-item {
+    background-color: #2e2e2e;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.accordion-item h3 {
+    font-size: 1.5em;
+    color: #ff9900; /* Orange headings */
+    margin-bottom: 10px;
+}
+
+.accordion-content {
+    display: none;
+    padding-top: 10px;
+    color: #ffffff; /* White text */
+}
+
+/* Footer */
+footer {
+    padding: 30px;
+    text-align: center;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+footer p {
+    font-size: 0.9em;
+}
+
