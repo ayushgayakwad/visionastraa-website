@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Form</title>
+    <style>
+        body, html {
+            font-family: Arial, sans-serif;
+            background-color: #BCB28F; 
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: auto; /* Ensure the page is scrollable */
+        }
+        .form-container {
+            background-color: #22303A;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            margin: 20px auto;
+            overflow-y: auto; /* Allow the form container to scroll if content overflows */
+        }
+        .form-container h1 {
+            text-align: center;
+            color: #fff;
+            margin-top: 0;
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .form-container label {
+            display: block;
+            color: #fff;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .form-container input[type="text"],
+        .form-container input[type="email"],
+        .form-container input[type="tel"],
+        .form-container input[type="file"],
+        .form-container select,
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            color: #000;
+            background-color: #fff;
+            border: 1px solid #fff;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-container textarea {
+            resize: vertical;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 20px;
+            color: black;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .form-container button:hover {
+            background-color: #a8c9c4;
+            color: #000;
+        }
+        .navigate-button {
+            background-color: #007bff;
+            margin-top: 10px;
+            width: 100%;
+            padding: 10px;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+        }
+        .navigate-button:hover {
+            background-color: #0069d9;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 16px;
+            text-align: center;
+        }
+        .contact-admissions {
+            text-align: center;
+            margin-top: 20px;
+            color: #fff;
+        }
+        .contact-admissions a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 18px;
+        }
+        .contact-admissions a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="navbar-placeholder"></div>
+    </header>
+    <!-- Application Form -->
+    <div class="form-container">
+        <h1>
+            Apply Now!
+        </h1>
+        <form id="applicationForm" onsubmit="submitForm(event);" enctype="multipart/form-data">
+            <label for="first_name">First name</label>
+            <input type="text" id="first_name" name="first_name" pattern="[A-Za-z\s]+" title="Please enter only letters." required>
+
+            <label for="last_name">Last name</label>
+            <input type="text" id="last_name" name="last_name" pattern="[A-Za-z\s]+" title="Please enter only letters." required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number." required>
+
+            <label for="location">Your Location (City/Town)</label>
+            <input type="text" id="location" name="location" required>
+
+            <label for="college">College</label>
+            <input type="text" id="college" name="college" required>
+
+            <label for="degree">Degree (B.E/B.Tech/M.Tech)</label>
+            <input type="text" id="degree" name="degree" required>
+
+            <label for="specialization">Specialization (Branch)</label>
+            <input type="text" id="specialization" name="specialization" required>
+
+            <label for="graduation">Year of Graduation</label>
+            <input type="text" id="graduation" name="graduation" pattern="\d{4}" title="Please enter a valid year." required>
+
+            <label for="role">Applying for which role?</label>
+            <select id="role" name="role" required>
+                <option value="Select One">Select One</option>
+                <optgroup label="Development">
+                    <option value="Web Developer">Web Developer</option>
+                    <option value="Java Developer">Java Developer</option>
+                    <option value="Python Developer">Python Developer</option>
+                    <option value="Ethical Hacker">Ethical Hacker</option>
+                    <option value="Security Developer">Security Developer</option>
+                    <option value="Database Engineer">Database Engineer</option>
+                    <option value="Test Engineer">Test Engineer</option>
+                    <option value="AI/ML Engineer">AI/ML Engineer</option>
+                </optgroup>
+                <optgroup label="Content Creation">
+                    <option value="Technical Content Writer">Technical Content Writer</option>
+                </optgroup>
+                <optgroup label="Marketing">
+                    <option value="Digital Marketing">Digital Marketing</option>
+                    <option value="Sales & Marketing">Sales & Marketing</option>
+                </optgroup>
+                <optgroup label="Management">
+                    <option value="Business Development">Business Development</option>
+                    <option value="Project Management">Project Management</option>
+                    <option value="Human Resource">Human Resource</option>
+                </optgroup>
+            </select>
+
+            <label for="resume">Upload Resume (PDF format, maximum size 2MB)</label>
+            <input type="file" id="resume" name="resume" accept=".pdf" required>
+
+            <label for="goals">Why you should be selected? Describe in your own words (&lt;500 words) </label>
+            <textarea id="goals" name="goals" rows="4" required></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+        <div id="message" class="message"></div>
+    </div>
+    <script>
+        function validateForm() {
+            const resumeInput = document.getElementById('resume');
+            const file = resumeInput.files[0];
+
+            if (file) {
+                const fileSizeInMB = file.size / (1024 * 1024);
+                const fileType = file.type;
+
+                if (fileType !== 'application/pdf') {
+                    alert('Please upload the resume in PDF format only.');
+                    return false;
+                }
+
+                if (fileSizeInMB > 2) { // Maximum size of 2MB
+                    alert('The resume file size should not exceed 2MB.');
+                    return false;
+                }
+            }
+            return true;
+        }
+        function submitForm(event) {
+            event.preventDefault();
+
+            if (!validateForm()) {
+                return;
+            }
+
+            const form = document.getElementById('applicationForm');
+            const formData = new FormData(form);
+
+            fetch('php/submit_application.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const messageDiv = document.getElementById('message');
+                if (data.success) {
+                    messageDiv.textContent = "Your application has been submitted successfully!";
+                    messageDiv.style.color = "green";
+                    form.reset();
+                } else {
+                    messageDiv.textContent = "Error: " + data.error;
+                    messageDiv.style.color = "red";
+                }
+            })
+            .catch(error => {
+                const messageDiv = document.getElementById('message');
+                messageDiv.textContent = "There was an error submitting the form.";
+                messageDiv.style.color = "red";
+            });
+        }
+    </script>
+</body>
+</html>
