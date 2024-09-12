@@ -1,0 +1,252 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+body {
+  margin: 0;
+  /* overflow: hidden; */
+  font-family: "Poppins", sans-serif;
+    /* overflow: hidden; */
+
+  
+}
+
+/* Custom Scrollbar for WebKit Browsers */
+::-webkit-scrollbar {
+    width: 2px; /* Width of the scrollbar */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #0000001e; /* Track background */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #888; /* Scrollbar color */
+    border-radius: 10px; /* Rounded corners */
+    border: 3px solid #0000001e; /* Padding around the scrollbar */
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Darker color on hover */
+  }
+  
+
+
+#scrool{
+    margin-top: 100px;
+    width: 3%;
+    height: 3%;
+    opacity: .6;
+}
+/* starsss */
+.starr,
+.starr2,
+.starr3 {
+  position: absolute;
+}
+
+.starr {
+  left: 200px;
+  height: 2%;
+  width: 2%;
+  top: 500px;
+  animation: rotate 30s linear infinite;
+}
+.starr2 {
+  left: 600px;
+  top: 200px;
+  animation: rotate 30s linear infinite;
+}
+.starr3 {
+  right: 200px;
+  top: 650px;
+  height: 5%;
+  width: 5%;
+  animation: rotate 30s linear infinite;
+}
+
+.starr:hover,
+.starr2:hover,
+.starr3:hover {
+  animation: rotate 1s linear infinite;
+  cursor: pointer;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* //star-end// */
+
+
+
+.landingbody {
+  margin: 0;
+  background: linear-gradient(
+    to right bottom,
+    rgb(0, 0, 0),
+    rgb(27, 17, 17),
+    rgb(8, 8, 42),
+    rgb(0, 0, 0)
+  );
+  height: 99vh;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  margin-bottom: 10px;
+}
+
+.hero-body {
+  margin-top: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgb(255, 255, 255);
+}
+.hero-body h1,
+p {
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  max-width: 1200px;
+}
+
+.hero-body h1 {
+  font-weight: 600;
+  font-size: 45px;
+}
+.hero-body p {
+  font-size: 20px;
+  font-weight: normal;
+}
+
+
+/* 2ndpart */
+
+
+.subhero-body{
+    margin: 100px 50px 50px 50px;
+    
+
+}
+.vpvmf{
+    /* background: #F1D3CE; */
+    display: flex;
+    gap: 40px;
+    text-align: center;
+    flex-direction: row;
+    padding: 20px;
+}
+
+.vp{
+    background-color: #F1D3CE;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.253);
+}
+.vmf{
+    background-color: #D1E9F6;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.253);
+}
+
+
+.thirdhero{
+    margin: 50px 50px 100px 50px;
+    display: flex;
+    flex-direction: row;
+    background-color: #55679C;
+    padding: 50px;
+    border-radius: 40px;
+    color: white;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+}
+.leftetx {
+    max-width: 60%;
+    font-size: x-large;
+    gap: 40px;
+    text-align: left;
+    flex-direction: row;
+    padding: 20px;
+}
+.leftetx h1{
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    text-underline-offset: 20px;
+}
+.leftetx p{
+    text-align: left;
+    margin-right: 40px;
+}
+
+.thirdheroshero{
+    /* margin: 30px 0px 30px 0px; */
+    padding: 30px 0px 30px 0px;
+    background-color: rgb(23, 23, 23);
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+}
+.faq{
+    padding: 30px 0px 30px 0px;
+    background-color: rgb(23, 23, 23);
+}
+.holder{
+    
+    margin: 0px 50px 100px 50px;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    background-color: #ffffff;
+    border-radius: 40px;
+    padding: 40px;
+}
+
+.ques{
+    border: 3px solid rgb(0, 0, 0);
+    width: 50%;
+    padding: 20px;
+    border-radius: 20px;
+    border-right: 7px solid black;
+    border-bottom: 7px solid black;
+    
+}
+
+.ans{
+    border: 3px solid rgb(0, 0, 0);
+    border-radius: 20px;
+    width: 50%;
+    background-color: #FCDE70;
+    padding: 2px 20px;
+    border-right: 7px solid black;
+    border-bottom: 7px solid black;
+}
+.ans h1{
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    text-underline-offset: 10px;
+}
+
+.qhold li {
+    border: .5px solid black;
+    gap: 8px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    /* list-style: none; */
+    font-weight: 400;
+    padding: 20px;
+    text-decoration: none;
+
+}
+
+.qhold p{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    color: black;
+    
+
+}
