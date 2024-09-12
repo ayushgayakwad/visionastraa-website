@@ -1,0 +1,204 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #22303A;
+    color: #333;
+  }
+  
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+  
+  .header {
+    /* text-align: center; */
+    margin-bottom: 40px;
+  }
+  
+  .badge {
+    display: inline-block;
+    background-color: #f2f4f6;
+    border-radius: 15px;
+    padding: 8px 15px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+  
+  .header h1 {
+    font-size: 48px;
+    font-weight: 700;
+    color: #ccc;
+  }
+  
+  .header p {
+    font-size: 18px;
+    color: #ccc;
+    margin-top: 10px;
+  }
+  
+  .filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    margin-bottom: 30px;
+    gap: 10px;
+  }
+  
+  .filter-buttons button {
+    background-color: #ffffff;
+    border: 2px solid #e2e8f0;
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #151e2a;
+    transition: all 0.3s ease;
+  }
+  
+  .filter-buttons button:hover {
+    background-color: #a8c9c4;
+  }
+  
+  .filter-buttons .active {
+    background-color: #1f2937;
+    color: #fff;
+  }
+  
+  .job-listings {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .job-item {
+    background-color: #BCB28F;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e5e7eb;
+    transition: transform 0.3s ease; /* Smooth transition */
+  }
+  .job-item:hover{
+    transform: scale(0.99); /* Shrinks the box to 99% of its size */
+  }
+  .job-item .job-details {
+    max-width: 70%;
+  }
+  
+  .job-item h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: black;
+  }
+  
+  .job-item p {
+    font-size: 16px;
+    color: black;
+    margin-bottom: 10px;
+  }
+  
+  .job-meta {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .job-meta span {
+    display: inline-flex;
+    align-items: center;
+    background-color: #e5e7eb;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #1f2937;
+    white-space: nowrap;
+  }
+  
+  .apply-link {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
+    text-decoration: none;
+    border: 2px solid transparent;
+    padding: 8px 15px;
+    transition: all 0.3s ease;
+  }
+  
+  .apply-link:hover {
+    border-color: #1f2937;
+    border-radius: 5px;
+  }
+
+  
+  
+  /* Responsive Design */
+  
+  @media (max-width: 768px) {
+    .header h1 {
+      font-size: 36px;
+    }
+  
+    .filter-buttons {
+      gap: 8px;
+    }
+  
+    .job-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .apply-link {
+      margin-top: 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .header h1 {
+      font-size: 28px;
+    }
+  
+    .filter-buttons {
+      flex-direction: column;
+      gap: 5px;
+    }
+  
+    .job-item {
+      padding: 15px;
+    }
+  
+    .job-meta {
+      flex-direction: column;
+      gap: 5px;
+    }
+  
+    .job-item h2 {
+      font-size: 20px;
+    }
+  
+    .apply-link {
+      font-size: 14px;
+    }
+  }
+  .dropdown-content {
+    margin-top: 10px;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+  }
+  .dropdown-heading {
+    cursor: pointer; /* Indicate that the heading is clickable */
+  }
+  .dropdown-heading:hover {
+    color: #9B4D1C; /* Optional: change color on hover */
+  }
