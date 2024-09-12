@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['access_granted'])) {
+    header('Location: crdf2324f.html');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,7 +110,7 @@
         }
 
         function goToQuizInstructions() {
-            window.location.href = 'crdf2324f3.html';
+            window.location.href = 'crdf2324f3.php';
         }
     </script>    
 </body>

@@ -1,3 +1,7 @@
+<?php
+session_start();
+$_SESSION['access_granted'] = true;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -185,7 +189,7 @@
                     messageDiv.textContent = "Your application has been submitted successfully!";
                     messageDiv.style.color = "green";
                     form.reset();
-                    window.location.href = 'crdf2324f2.html';
+                    window.location.href = 'crdf2324f2.php';
                 } else {
                     messageDiv.textContent = "Error: " + data.error;
                     messageDiv.style.color = "red";
