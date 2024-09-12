@@ -1,8 +1,7 @@
 /* General styling */
 body {
-    background-image: linear-gradient(rgba(4,9,30,0.7), rgba(4,9,30,0.7)),url(bg.jpeg);
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    background-color: #202020;
     margin: 0;
     padding: 0;
 }
