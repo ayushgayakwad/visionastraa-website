@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Inika:wght@400;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  margin: 0 80px;
+  padding-top: 10px;
+}
+
+/* Adjust the .navbar styles to center content */
+.navbar {
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center;
+  /* background: rgba(255, 255, 255, 0.481); White with transparency */
+  backdrop-filter: blur(10px); /* Blurring effect */
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 0px 0px 0px 0px;
+  /* height: 50px; */
+  width: 60%;
+  border-radius: 50px;
+  margin: 30px auto; /* Center the navbar horizontally */
+  position: relative; /* Set position relative for .nav-links */
+  z-index: 1000;
+}
+
+.logo img {
+  height: 110px;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row; /* Horizontal alignment for desktop */
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  transition: transform 0.3s ease-in-out;
+}
+
+.nav-links a {
+  font-size: 18px;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  padding: 0 10px;
+  align-items: center;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 10px;
+}
+
+/* Ensure the hamburger icon is also centered */
+.hamburger {
+  position: absolute; /* Position absolute to place it at the center */
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+}
+
+.hamburger span {
+  height: 2px;
+  width: 25px;
+  background-color: black;
+  margin: 4px;
+  border-radius: 2px;
+}
+
+/* Responsive Styles */
+@media (max-width: 1100px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* To position the dropdown menu */
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 90px;
+    left: 10;
+    margin-right: 110px;
+    height: calc(100vh - 60px);
+    /* background-color: rgba(255, 255, 255, 0.974); */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-100%);
+    opacity: 0;
+
+    visibility: hidden;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    z-index: 2000;
+  }
+
+  .nav-links.active {
+    max-height: 500px;
+    min-width: 280px;
+    transform: translateY(0);
+    opacity: 1;
+    padding: 0;
+    border-radius: 8px;
+    visibility: visible;
+    z-index: 2000;
+  }
+
+  .nav-links li {
+    margin: 20px 0;
+    border-bottom: 1px solid green;
+  }
+
+  .nav-links a {
+    /* font-size: larger; */
+  }
+}

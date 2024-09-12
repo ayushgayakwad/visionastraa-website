@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>visionastraa-startup-academy</title>
+    <link rel="stylesheet" href="./css/VAhome.modules.css">
+</head>
+
+
+<body>
+
+    <div class="landingbody">
+        <header></header>
+        <div id="navbar-placeholder"></div>
+        </header>
+
+
+        <div class="hero-body">
+            <img class="starr" src="image/earth.svg" alt="">
+            <h1>Empowering India's Innovators from Classrooms to Boardrooms, Creating Job Creators!
+            </h1>
+            <img class="starr2" src="image/earth.svg" alt="">
+            <p>Unlocking Entrepreneurial Potential with Guidance, Mentorship, and Vision for Tomorrow's Leaders.</p>
+            <img class="starr3" src="image/earth.svg" alt="">
+            <img id="scrool" src="image/mouse-cursor (1).png" alt="">
+        </div>
+
+        <div class="subhero-body">
+            <div class="vpvmf">
+                <div class="vp">
+                    <h2>VisionPreneur (VP)🧑‍🎓 <br> Tomorrow’s Startup Founders</h2>
+                    <p>Select 2nd or 3rd-year students building startups with VisionAstraa’s guidance. These future
+                        entrepreneurs commit to 1-2 years, working in teams on investable ideas, turning visions into
+                        ventures before their final year.
+                    </p>
+
+                </div>
+                <div class="vmf">
+                    <h2>VisionAstraa Micro-Faculty (VMF)🧑‍🏫 <br> Expert Startup Mentors</h2>
+                    <p>Industry experts—mentors, technologists, and VCs—guiding VisionPreneurs weekly. VMFs provide
+                        hands-on support, track progress, and ensure students are ready with project documents,
+                        presentations, and investor pitches.</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="thirdheroshero">
+            <div class="thirdhero">
+                <div class="leftetx">
+                    <h1>Network with smart people</h1>
+                    <p><br> Great things happen when great people come together. It's magic! <br> Connect with a diverse
+                        community of creative minds to network, share ideas, and gain valuable insights into your craft.
+                    </p>
+                </div>
+                <img src="image/image.webp" alt="">
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="holder">
+                <div class="ques">
+                    <div class="qhold"><h1>FAQs</h1>
+                        <ul>
+                            <li><a href=""><p>What exactly is VisionAstraa?</p></a></li>
+                            <li><a href=""><p>Do i have to pay for anything?</p></a></li>
+                            <li><a href=""><p></p></a></li>
+                            <li><a href=""><p></p></a></li>
+                        </ul></div>
+                    
+                </div>
+            <div class="ans">
+                <h1>Answers</h1>
+            </div>
+            </div>
+            
+        </div>
+
+
+
+    </div>
+
+</body>
+<script>
+    function openPopup(module, content) {
+        document.getElementById('popup-module').innerHTML = module;
+        document.getElementById('popup-content').innerHTML = content;
+
+        document.getElementById('popup').style.display = 'flex';
+    }
+
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+    }
+    fetch('navbarcomp-VA/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-placeholder').innerHTML = data;
+            // JavaScript to handle hamburger menu toggle
+            const hamburger = document.getElementById("hamburger");
+            const navLinks = document.getElementById("nav-links");
+
+            if (hamburger && navLinks) {
+                hamburger.onclick = function () {
+                    navLinks.classList.toggle("active");
+                };
+            }
+        })
+        .catch(error => console.error('Error loading navbar:', error));
+</script>
+
+</html>
