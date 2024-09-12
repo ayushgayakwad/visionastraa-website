@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['access_granted'])) {
-    header('Location: crdf2324f.html');
+    header('Location: crdf2324f.php');
     exit();
 }
 ?>
