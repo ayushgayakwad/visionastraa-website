@@ -282,15 +282,24 @@
 </html>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // Select all dropdown headings
-    const dropdownHeadings = document.querySelectorAll('.dropdown-heading');
+  // Select all dropdown headings
+  const dropdownHeadings = document.querySelectorAll('.dropdown-heading');
 
-    dropdownHeadings.forEach(heading => {
-      heading.addEventListener('click', () => {
-        // Toggle the visibility of the next sibling element (dropdown content)
-        const content = heading.nextElementSibling;
-        content.style.display = content.style.display === 'none' || content.style.display === '' ? 'block' : 'none';
-      });
+  dropdownHeadings.forEach(heading => {
+    heading.addEventListener('click', () => {
+      // Toggle the visibility of the next sibling element (dropdown content)
+      const content = heading.nextElementSibling;
+      
+      if (content.classList.contains('show')) {
+        content.classList.remove('show');
+      } else {
+        // Hide any other open dropdowns
+        document.querySelectorAll('.dropdown-content.show').forEach(openContent => {
+          openContent.classList.remove('show');
+        });
+        content.classList.add('show');
+      }
     });
   });
+});
 </script>
