@@ -16,64 +16,123 @@ body {
     animation: gradientAnimation 10s ease infinite;
 }
 
-/* Animation for gradient background */
+/* Gradient Background Animation */
 @keyframes gradientAnimation {
     0% { background-position: 0% 0%; }
     50% { background-position: 50% 50%; }
     100% { background-position: 0% 0%; }
 }
 
-/* Remove space between sections */
+/* Layout Reset */
 header, footer {
     margin: 0;
 }
 
-/* Flexbox for content organization */
 main {
     flex: 1;
     margin: 0;
     padding: 0;
 }
 
-/* Header Styling */
+/* Header Styles */
 header {
-    background-color: #003366;
+    background: transparent; /* Make header invisible */
     color: white;
-    padding: 15px 0;
+    padding: 20px 0;
     width: 100%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: relative; /* Ensure proper positioning for the children */
 }
 
+/* Header Content */
 .header-content {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center; /* Center logo and hamburger */
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    flex-wrap: wrap; /* Ensure items wrap on smaller screens */
+    flex-wrap: wrap; /* Responsive wrap */
+    position: relative;
+     /* Move content further down */
 }
 
-.logo {
-    height: 40px;
+/* Logo Styling */
+.logo img {
+    height: 60px; /* Adjusted logo size */
+    margin-right: 10px; /* Space between logo and hamburger */
+    z-index: 10; /* Ensure logo stays above other elements */
 }
 
-nav {
+/* Hamburger Menu Styling */
+.hamburger {
+    display: none; /* Hide by default */
+    flex-direction: column;
+    cursor: pointer;
+    padding: 8px; /* Reduced size */
+    z-index: 10; /* Ensure hamburger menu stays above other elements */
+}
+
+.hamburger span {
+    height: 2px;
+    width: 20px; /* Reduced size */
+    background-color: black;
+    margin: 3px; /* Adjusted spacing */
+    border-radius: 2px;
+}
+
+/* Navbar Styling */
+.navbar {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    background: rgba(0, 51, 102, 0.8); /* Blue with transparency */
+    backdrop-filter: blur(10px); /* Blurring effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    height: 60px; /* Adjusted height */
+    width: 85%; /* Increased navbar width */
+    margin: 0 auto; /* Center horizontally */
+    border-radius: 50px;
+    z-index: 10; /* Ensure navbar stays above other elements */
+    justify-content: center; /* Center contents */
+    position: relative; /* For positioning of navbar items */
+}
+
+/* Navbar Links Styling */
+.nav-links {
+    list-style: none;
     display: flex;
     gap: 20px;
+    align-items: center;
+    padding: 0;
+    margin: 0;
 }
 
-nav a {
+.nav-links a {
+    font-size: 18px;
+    font-weight: bold;
     color: white;
     text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s, transform 0.2s;
-    font-size: 18px;
+    padding: 0 10px;
 }
 
-nav a:hover {
-    color: #ffcc00;
+.nav-links a:hover {
+    color: #FF3939; /* Changed hover color to match the red from the gradient */
     transform: scale(1.1);
+}
+
+/* Hide Navbar on Small Screens */
+@media (max-width: 1100px) {
+    .hamburger {
+        display: flex; /* Show hamburger on smaller screens */
+    }
+
+    .nav-links {
+        display: none; /* Hide navbar links on smaller screens */
+    }
+
+    .header-content {
+        justify-content: center; /* Center logo and hamburger */
+    }
 }
 
 /* Hero Section */
@@ -82,7 +141,7 @@ nav a:hover {
     color: white;
     padding: 60px 20px;
     text-align: justify;
-    border-bottom: 5px solid #ffcc00;
+    border-bottom: 5px solid #004080;
 }
 
 #hero h1 {
@@ -92,7 +151,7 @@ nav a:hover {
 
 #hero button {
     padding: 12px 24px;
-    background-color: #ffcc00;
+    background-color: #ffcc00; /* Removed since not used elsewhere */
     border: none;
     color: #003366;
     font-size: 18px;
@@ -101,11 +160,11 @@ nav a:hover {
 }
 
 #hero button:hover {
-    background-color: #e6b800;
+    background-color: #e6b800; /* Removed since not used elsewhere */
     transform: scale(1.05);
 }
 
-/* About Section (White Box) */
+/* About Section */
 #about-startup-academy {
     background-color: white;
     padding: 40px 20px;
@@ -118,8 +177,6 @@ nav a:hover {
 
 #about-startup-academy img {
     max-width: 100%;
-    height: auto;
-    width: auto;
     margin-bottom: 20px;
     border-radius: 10px;
     object-fit: cover;
@@ -130,8 +187,7 @@ footer {
     background-color: #003366;
     color: white;
     text-align: center;
-    padding: 20px 15px;
-    width: 100%;
+    padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -141,26 +197,16 @@ footer p {
 }
 
 /* Responsive Styles */
-@media (max-width: 1280px) {
-    .header-content {
-        padding: 0 15px; /* Adjust padding for larger tablets */
-    }
-}
-
-@media (max-width: 1024px) {
-    .header-content {
-        padding: 0 10px; /* Reduce padding for smaller tablets */
-    }
-
-    nav {
-        gap: 15px; /* Adjust gap for tablet view */
-    }
-}
-
 @media (max-width: 768px) {
     .header-content {
-        flex-direction: column; /* Stack header items vertically */
-        align-items: flex-start;
+        flex-direction: row; /* Ensure row layout */
+        align-items: center; /* Align logo and hamburger */
+        justify-content: center; /* Center logo and hamburger */
+    }
+
+    .navbar {
+        width: auto; /* Adjust width to fit content */
+        margin: 0; /* Remove margin */
     }
 
     nav {
@@ -178,13 +224,12 @@ footer p {
 
     #about-startup-academy {
         padding: 20px 10px;
-        margin: 10px auto;
     }
 }
 
 @media (max-width: 600px) {
     nav a {
-        font-size: 16px; /* Adjust font size for smaller tablets */
+        font-size: 16px;
     }
 
     #hero h1 {
@@ -198,17 +243,16 @@ footer p {
 
     #about-startup-academy {
         padding: 15px;
-        margin: 5px auto;
     }
 }
 
 @media (max-width: 480px) {
     nav a {
-        font-size: 14px; /* Further adjust font size for very small screens */
+        font-size: 14px;
     }
 
     #hero h1 {
-        font-size: 20px; /* Further reduce font size */
+        font-size: 20px;
     }
 
     #hero button {
@@ -220,6 +264,14 @@ footer p {
         padding: 10px;
     }
 }
+
+
+
+
+
+
+
+
 
 
 
