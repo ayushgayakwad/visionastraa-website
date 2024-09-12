@@ -192,9 +192,12 @@
     }
   }
   .dropdown-content {
-    margin-top: 10px;
-    padding: 10px;
-    border-top: 1px solid #ddd;
+    max-height: 0; /* Initially hidden */
+    overflow: hidden; /* Hide overflow content */
+    transition: max-height 0.5s ease-out; /* Smooth transition */
+  }
+  .dropdown-content.show {
+    max-height: 500px; /* Adjust to fit the content height */
   }
   .dropdown-heading {
     cursor: pointer; /* Indicate that the heading is clickable */
