@@ -1,0 +1,235 @@
+/* Global Styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #101437, #003366, #FF3939, #000000);
+    background-size: 400% 400%;
+    animation: gradientAnimation 10s ease infinite;
+}
+
+/* Animation for gradient background */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 50% 50%; }
+    100% { background-position: 0% 0%; }
+}
+
+/* Remove space between sections */
+header, footer {
+    margin: 0;
+}
+
+/* Flexbox for content organization */
+main {
+    flex: 1;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styling */
+header {
+    background-color: #003366;
+    color: white;
+    padding: 15px 0;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-wrap: wrap; /* Ensure items wrap on smaller screens */
+}
+
+.logo {
+    height: 40px;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s, transform 0.2s;
+    font-size: 18px;
+}
+
+nav a:hover {
+    color: #ffcc00;
+    transform: scale(1.1);
+}
+
+/* Hero Section */
+#hero {
+    background-color: #004080;
+    color: white;
+    padding: 60px 20px;
+    text-align: justify;
+    border-bottom: 5px solid #ffcc00;
+}
+
+#hero h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+#hero button {
+    padding: 12px 24px;
+    background-color: #ffcc00;
+    border: none;
+    color: #003366;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#hero button:hover {
+    background-color: #e6b800;
+    transform: scale(1.05);
+}
+
+/* About Section (White Box) */
+#about-startup-academy {
+    background-color: white;
+    padding: 40px 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+#about-startup-academy img {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    padding: 20px 15px;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+footer p {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* Responsive Styles */
+@media (max-width: 1280px) {
+    .header-content {
+        padding: 0 15px; /* Adjust padding for larger tablets */
+    }
+}
+
+@media (max-width: 1024px) {
+    .header-content {
+        padding: 0 10px; /* Reduce padding for smaller tablets */
+    }
+
+    nav {
+        gap: 15px; /* Adjust gap for tablet view */
+    }
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column; /* Stack header items vertically */
+        align-items: flex-start;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #hero h1 {
+        font-size: 28px;
+    }
+
+    #hero button {
+        font-size: 16px;
+    }
+
+    #about-startup-academy {
+        padding: 20px 10px;
+        margin: 10px auto;
+    }
+}
+
+@media (max-width: 600px) {
+    nav a {
+        font-size: 16px; /* Adjust font size for smaller tablets */
+    }
+
+    #hero h1 {
+        font-size: 24px;
+    }
+
+    #hero button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    #about-startup-academy {
+        padding: 15px;
+        margin: 5px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    nav a {
+        font-size: 14px; /* Further adjust font size for very small screens */
+    }
+
+    #hero h1 {
+        font-size: 20px; /* Further reduce font size */
+    }
+
+    #hero button {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+
+    #about-startup-academy {
+        padding: 10px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
