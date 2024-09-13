@@ -260,6 +260,15 @@ button:not(:disabled):hover {
         height: 1250px;
     }
 
+    .about-visionastraa-learning-outcomes {
+        position: absolute;
+        border-radius: 10px;
+        z-index: 2;
+        transition: transform 0.1s ease, box-shadow 0.3s ease;
+        text-align: center;
+        width: 90%;
+    }
+
     .about-visionastraa h2 {
         font-size: 1.5rem;
         padding-right: 50px;
@@ -288,7 +297,118 @@ button:not(:disabled):hover {
         z-index: 3;
     }
     .quote {
-        width: 275px;
+        width: 250px;
+        display: inline-block;
+        z-index: 4;
+    }
+
+    .course-image {
+        margin-bottom: 20px;
+        margin-right: 0;
+    }
+
+    .social-links {
+        background-color: #202020;
+        padding: 40px;
+        margin-bottom: 30px;
+        border-radius: 10px;
+        transition: transform 0.1s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        height: 400px; /* Adjust height as needed */
+    }
+    
+    .social-links-box {
+        width: 100%;
+        text-align: center;
+    }
+
+    .quiz-instructions {
+        background-color: #202020;
+        padding: 40px;
+        margin-bottom: 30px;
+        border-radius: 10px;
+        transition: transform 0.1s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        height: 350px; /* Adjust height as needed */
+    }
+    
+    
+    .instruction-text {
+        color: #fff;
+        font-size: 11px;
+        margin-bottom: 20px;
+    }
+}
+
+
+@media screen and (max-width: 400px) {
+
+    .about-visionastraa-container, .about-company-container, .social-links-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-visionastraa {
+        height: 1325px;
+    }
+
+    .about-visionastraa-learning-outcomes {
+        position: absolute;
+        border-radius: 10px;
+        z-index: 2;
+        transition: transform 0.1s ease, box-shadow 0.3s ease;
+        text-align: center;
+        width: 90%;
+    }
+
+    .about-visionastraa h2 {
+        font-size: 1.5rem;
+        padding-right: 50px;
+    }
+
+    .about-visionastraa-learning-outcomes h3 {
+        font-size:20px;
+        margin-bottom: 20px;
+        margin-top: 25px;
+        padding-right: 150px;
+        padding-left: 60px;
+        text-align: center;
+    }
+
+    .about-visionastraa p {
+        font-size: 1rem;
+        padding-right: 50px;
+        padding-left: 0;
+    }
+
+    .visionastraa-list {
+        list-style-type: disc;
+        padding-left: 20px;
+        text-align: left;
+        margin-top: 25px;
+        margin-right: 25px;
+    }
+    
+    .visionastraa-list li {
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
+
+    .quote-container {
+        margin-top: 50px;
+        margin-right: 30px;
+        text-align: center;
+        position: relative;
+        z-index: 3;
+    }
+    .quote {
+        width: 210px;
         display: inline-block;
         z-index: 4;
     }
