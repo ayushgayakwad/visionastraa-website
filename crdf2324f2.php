@@ -1,3 +1,18 @@
+<?php
+session_start();
+if (isset($_SESSION['access_granted']) && $_SESSION['access_granted'] === true) {
+    if (isset($_SESSION['expires_at']) && time() > $_SESSION['expires_at']) {
+        session_unset();
+        session_destroy();
+        header("Location: crdf2324f.php");
+        exit;
+    }
+} else {
+    header("Location: crdf2324f.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

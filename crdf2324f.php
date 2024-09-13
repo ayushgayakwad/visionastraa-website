@@ -1,7 +1,3 @@
-<?php
-session_start();
-$_SESSION['access_granted'] = true;
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
