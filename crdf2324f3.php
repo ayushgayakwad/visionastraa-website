@@ -1,3 +1,17 @@
+<?php
+session_start();
+if (isset($_SESSION['access_granted']) && $_SESSION['access_granted'] === true) {
+    if (isset($_SESSION['expires_at']) && time() > $_SESSION['expires_at']) {
+        session_unset();
+        session_destroy();
+        header("Location: crdf2324f.php");
+        exit;
+    }
+} else {
+    header("Location: crdf2324f.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,7 +62,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         function goToQuiz() {
-            window.location.href = 'http://form-timer.com/start/7f4e12fe';
+            window.location.href = 'http://form-timer.com/start/9f952b16';
         }
     </script>    
 </body>
