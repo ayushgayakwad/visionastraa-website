@@ -34,7 +34,13 @@ body {
 #sendFeedback:hover{
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.253);
 }
-
+header{
+  position: fixed;
+  top: 0;
+  width: 100%; 
+  z-index: 0;
+  transition: top 0.3s ease;  
+}
 /* Custom Scrollbar for WebKit Browsers */
 ::-webkit-scrollbar {
     width: 0px; 
@@ -103,6 +109,8 @@ body {
 
 .landingbody {
   margin: 0;
+  /* margin-top: 0; */
+  position: absolute;
   background: linear-gradient(
     to right bottom,
     rgb(0, 0, 0),
@@ -111,13 +119,14 @@ body {
     rgb(0, 0, 0)
   );
   height: 99vh;
+  z-index: 1;
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
   margin-bottom: 10px;
 }
 
 .hero-body {
-  margin-top: 130px;
+  margin-top: 230px;
   display: flex;
   flex-direction: column;
   justify-content: center;
