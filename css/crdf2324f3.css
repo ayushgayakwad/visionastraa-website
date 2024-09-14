@@ -19,7 +19,7 @@ main {
     margin-bottom: 30px;
     border-radius: 10px;
     transition: transform 0.1s ease, box-shadow 0.3s ease;
-    height: 175px;
+    height: 205px;
     text-align: center;
 }
 
@@ -54,7 +54,7 @@ main {
 }
 
 .about-visionastraa-learning-outcomes p {
-    font-size: 16px;
+    font-size: 1.5rem;
     margin-bottom: 20px;
     padding-right: 40px;
 }
@@ -74,6 +74,11 @@ main {
 
 .about-company-box h2 {
     font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.about-company-box p {
+    font-size: 1.5rem;
     margin-bottom: 20px;
 }
 
@@ -213,7 +218,7 @@ button:not(:disabled):hover {
     }
 
     .about-visionastraa {
-        height: 250px;
+        height: 275px;
         text-align: center;
     }
 

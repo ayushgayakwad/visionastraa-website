@@ -1,4 +1,8 @@
 <?php
+session_start();
+
+$response = [];
+
 header('Content-Type: application/json');
 
 $servername = "localhost";
@@ -31,7 +35,6 @@ if ($conn->query($tableCreationQuery) === FALSE) {
     exit();
 }
 
-// Get POST data
 $first_name = $_POST['first_name'];
 $last_name = $_POST['last_name'];
 $email = $_POST['email'];
@@ -56,7 +59,10 @@ if ($result->num_rows > 0) {
     $stmt->bind_param("ssssssss", $first_name, $last_name, $email, $phone, $college, $degree, $specialization, $graduation_year);
 
     if ($stmt->execute()) {
-        echo json_encode(["success" => true]);
+        $_SESSION['access_granted'] = true;
+        $_SESSION['expires_at'] = time() + 120;
+        $response = ['success' => true];
+        echo json_encode($response);
     } else {
         echo json_encode(["success" => false, "error" => $stmt->error]);
     }

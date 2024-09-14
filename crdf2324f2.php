@@ -1,10 +1,18 @@
 <?php
 session_start();
-if (!isset($_SESSION['access_granted'])) {
-    header('Location: crdf2324f.php');
-    exit();
+if (isset($_SESSION['access_granted']) && $_SESSION['access_granted'] === true) {
+    if (isset($_SESSION['expires_at']) && time() > $_SESSION['expires_at']) {
+        session_unset();
+        session_destroy();
+        header("Location: crdf2324f.php");
+        exit;
+    }
+} else {
+    header("Location: crdf2324f.php");
+    exit;
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,44 +44,61 @@ if (!isset($_SESSION['access_granted'])) {
                 <img src="image/transpatent_vsa.png" alt="Logo" class="logo">
             </div>
             <div class="about-visionastraa-learning-outcomes text-center">
-                <h2>About VisionAstraa</h2>
+                <h2>About VisionAstraa Group</h2>
                 <p>VisionAstraa Group has multiple companies under it. We work with multiple startups from different industry verticals to build and scale their companies. We also help train, mold engineering students from second year onwards to build their startups.</p>
+                <div class="quote-container">
+                    <img src="image/QF.png" alt="quote" class="quote">
+                </div>
+                <h3>Our Portfolio Companies:</h3>
+                <div class="container">
+                    <div class="portfolio-container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <ul class="visionastraa-list">
+                                    <li>VisionAstraa Startup Academy</li>
+                                    <li>Milk Magic Pvt. Ltd.</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="visionastraa-list">
+                                    <li>EV Startup (Stealth Mode)</li>
+                                    <li>VisionAstraa EV Academy <br>(launching soon)</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="visionastraa-list">
+                                    <li>VisionAstraa Events (Stealth Mode)</li>
+                                    <li>Vet Pharma Company <br>(Incorporation Stage)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
+        
 
         <section class="about-company">
             <div class="about-company-box">
                 <h2>Gallery</h2>
                 <div class="row gallery">
                     <div class="col-md-4">
-                        <a href="image/ic4.jpg" target="_blank"><img src="image/ic4.jpg" alt="Image 1"></a>
+                        <a href="image/ic4.png" target="_blank"><img src="image/ic4.jpg" alt="Image 1"></a>
                     </div>
                     <div class="col-md-4">
-                        <a href="image/ic2.jpg" target="_blank"><img src="image/ic2.jpg" alt="Image 2"></a>
+                        <a href="image/ic3.jpg" target="_blank"><img src="image/ic3.jpg" alt="Image 2"></a>
                     </div>
                     <div class="col-md-4">
-                        <a href="image/ic3.jpg" target="_blank"><img src="image/ic3.jpg" alt="Image 3"></a>
+                        <a href="image/ic2.jpg" target="_blank"><img src="image/ic2.jpg" alt="Image 3"></a>
                     </div>
                     <div class="col-md-4">
-                        <a href="image/ic9.jpg" target="_blank"><img src="image/ic9.jpg" alt="Image 4"></a>
+                        <a href="image/ic12.jpg" target="_blank"><img src="image/ic12.jpg" alt="Image 4"></a>
                     </div>
                     <div class="col-md-4">
-                        <a href="image/ic5.jpg" target="_blank"><img src="image/ic5.jpg" alt="Image 5"></a>
+                        <a href="image/ic14.jpg" target="_blank"><img src="image/ic14.jpg" alt="Image 5"></a>
                     </div>
                     <div class="col-md-4">
-                        <a href="image/ic6.jpg" target="_blank"><img src="image/ic6.jpg" alt="Image 6"></a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="image/ic7.jpg" target="_blank"><img src="image/ic7.jpg" alt="Image 7"></a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="image/ic8.jpg" target="_blank"><img src="image/ic8.jpg" alt="Image 8"></a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="image/ic10.jpg" target="_blank"><img src="image/ic10.jpg" alt="Image 9"></a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="image/ic1.jpg" target="_blank"><img src="image/ic1.jpg" alt="Image 10"></a>
+                        <a href="image/ic8.jpg" target="_blank"><img src="image/ic8.jpg" alt="Image 6"></a>
                     </div>
                 </div>
             </div>
