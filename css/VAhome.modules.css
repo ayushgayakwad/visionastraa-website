@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
+html{
+    scroll-behavior: smooth;
+}
 body {
   margin: 0;
   /* overflow: hidden; */
@@ -9,25 +11,35 @@ body {
   
 }
 
+#feedback{
+  width: 100%;
+  height: 200px;
+  border-radius: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 3px solid black;
+  font-family: "Poppins", sans-serif;
+}
+#sendFeedback{
+  margin: 2px 40% 2px 40%;
+  border-radius: 10px;
+  border: 3px solid black;
+  padding: 10px;
+  width: 100px;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  background-color:antiquewhite;
+}
+#sendFeedback:hover{
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.253);
+}
+
 /* Custom Scrollbar for WebKit Browsers */
 ::-webkit-scrollbar {
-    width: 2px; /* Width of the scrollbar */
+    width: 0px; 
   }
-  
-  ::-webkit-scrollbar-track {
-    background: #0000001e; /* Track background */
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background-color: #888; /* Scrollbar color */
-    border-radius: 10px; /* Rounded corners */
-    border: 3px solid #0000001e; /* Padding around the scrollbar */
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Darker color on hover */
-  }
-  
+
 
 
  .hero-body a #scrool{
@@ -39,6 +51,8 @@ body {
     height: 10%;
     opacity: .6;
 }
+
+
 /* starsss */
 .starr,
 .starr2,
