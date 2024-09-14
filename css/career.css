@@ -55,8 +55,9 @@
   .explore {
     font-size: 16px;              
     font-weight: 600;        
-    color: white;          
-    background-color: rgb(72, 72, 205); 
+    color: black; 
+    background-color: aqua;         
+    /* background-color: rgb(72, 72, 205);  */
     border-radius: 15px;        
     padding: 15px 25px;         
     border: none;                
@@ -68,7 +69,9 @@
     line-height: 1.2;     
     margin-top: 30px;       
   }
-  
+  .explore:hover{
+    background-color: rgb(132, 207, 207);
+  }
   .filter-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -239,6 +242,7 @@
     max-height: 0; /* Initially hidden */
     overflow: hidden; /*Hide overflow content */
     color: #101114;
+
   }
   .dropdown-content.show {
     max-height: 500px; /* Adjust to fit the content height */
@@ -279,11 +283,11 @@
 .hero-section {
   display: flex;
   align-items: flex-start;
-  justify-content: flex-start;
-  text-align: center;
+  justify-content: space-around;
   padding: 70px 20px;
   background-color: #101114;
   padding-top: 60px;
+  height: 75vh;
 }
 
 .hero-content {
@@ -301,6 +305,22 @@
 .hero-content p {
   font-size: 16px;
   color: #b0b0b0;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.hero-image {
+  flex: 1;
+  text-align: right; /* This aligns the image to the right */
+  padding-left: 20px;
+  padding-right: 160px;
+  margin-bottom: 30px;
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain; /* Ensures the image fits nicely */
 }
 
 .job-meta i {
