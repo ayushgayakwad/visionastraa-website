@@ -12,8 +12,8 @@
 <body>
 
     <div class="landingbody">
-        <header></header>
-        <div id="navbar-placeholder"></div>
+        <header>
+            <div id="navbar-placeholder"></div>
         </header>
 
 
@@ -27,7 +27,7 @@
             <a href="#scrollid"><img id="scrool" src="image/mouse-cursor (1).png" alt=""></a>
         </div>
 
-        <div id="#scrollid" class="subhero-body">
+        <div id="scrollid" class="subhero-body">
             <div class="vpvmf">
                 <div class="vp">
                     <h2>VisionPreneur (VP)🧑‍🎓 <br> Tomorrow’s Startup Founders</h2>
@@ -64,16 +64,16 @@
                     <div class="qhold">
                         <h1>FAQs</h1>
                         <ul>
-                            <li id="fst"><a  >
+                            <li id="fst"><a>
                                     <p>What exactly is VisionAstraa?</p>
                                 </a></li>
-                            <li id="snd"><a  >
-                                    <p>Do i have to pay for anything?</p>
+                            <li id="snd"><a>
+                                    <p>Do I have to pay for anything?</p>
                                 </a></li>
-                            <li id="trd"><a  >
+                            <li id="trd"><a>
                                     <p>How to submit my startup ideas?</p>
                                 </a></li>
-                            <li id="fou"><a  >
+                            <li id="fou"><a>
                                     <p>My question isn't listed here (Send us feedback)</p>
                                 </a></li>
                         </ul>
@@ -85,57 +85,73 @@
                 </div>
             </div>
         </div>
-    </div>
 
-</body>
-<script>
+        <script>
+            const ques = document.querySelector("#fst");
+            const ques2 = document.querySelector("#snd");
+            const ques3 = document.querySelector("#trd");
+            const ques4 = document.querySelector("#fou");
+            const answersbox = document.querySelector(".answersbox");
 
-    const ques = document.querySelector("#fst");
-    const ques2 = document.querySelector("#snd");
-    const ques3= document.querySelector("#trd");
-    const ques4 = document.querySelector("#fou");
-    const answersbox = document.querySelector(".answersbox");
-    ques.addEventListener("click",function(){
-        answersbox.innerHTML = "VisionAstraa is dedicated to transforming higher education and entrepreneurship in India. Our vision is to shift students from job seekers to job creators through grassroots innovation. We provide guidance and mentorship to help college students build the companies of tomorrow. "
-    })
-    ques2.addEventListener("click",function(){
-        answersbox.innerHTML = "No. VisionAstraa is 100% free. "
-    })
-    ques3.addEventListener("click",function(){
-        answersbox.innerHTML = "VisionAstraa is dedicated to transforming higher education and entrepreneurship in India. Our vision is to shift students from job seekers to job creators through grassroots innovation. We provide guidance and mentorship to help college students build the companies of tomorrow. "
-    })
-    ques4.addEventListener("click",function(){
-        answersbox.innerHTML = "VisionAstraa is dedicated to transforming higher education and entrepreneurship in India. Our vision is to shift students from job seekers to job creators through grassroots innovation. We provide guidance and mentorship to help college students build the companies of tomorrow. "
-    })
+            ques.addEventListener("click", function () {
+                answersbox.innerHTML = "VisionAstraa is dedicated to transforming higher education and entrepreneurship in India. Our vision is to shift students from job seekers to job creators through grassroots innovation. We provide guidance and mentorship to help college students build the companies of tomorrow. ";
+            });
+
+            ques2.addEventListener("click", function () {
+                answersbox.innerHTML = "No. VisionAstraa is 100% free.";
+            });
+
+            ques3.addEventListener("click", function () {
+                answersbox.innerHTML = "VisionAstraa is dedicated to transforming higher education and entrepreneurship in India. Our vision is to shift students from job seekers to job creators through grassroots innovation. We provide guidance and mentorship to help college students build the companies of tomorrow.";
+            });
+
+            ques4.addEventListener("click", function () {
+                answersbox.innerHTML = `<p>Please provide your feedback below:</p>
+                    <textarea id="feedback" placeholder="Enter your feedback"></textarea>
+                    <button id="sendFeedback">Send</button> `;
+
+                const sendFeedbackButton = document.querySelector("#sendFeedback");
+                sendFeedbackButton.addEventListener("click", function () {
+                    const feedbackText = document.querySelector("#feedback").value;
+                    if (feedbackText) {
+                        alert("Thank you for your feedback: " + feedbackText);
+                  
+                        document.querySelector("#feedback").value = '';
+                    } else {
+                        alert("Please enter your feedback before sending.");
+                    }
+                });
+            });
 
 
 
 
-    function openPopup(module, content) {
-        document.getElementById('popup-module').innerHTML = module;
-        document.getElementById('popup-content').innerHTML = content;
 
-        document.getElementById('popup').style.display = 'flex';
-    }
+            function openPopup(module, content) {
+                document.getElementById('popup-module').innerHTML = module;
+                document.getElementById('popup-content').innerHTML = content;
 
-    function closePopup() {
-        document.getElementById('popup').style.display = 'none';
-    }
-    fetch('navbarcomp-VA/navbar.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('navbar-placeholder').innerHTML = data;
-            // JavaScript to handle hamburger menu toggle
-            const hamburger = document.getElementById("hamburger");
-            const navLinks = document.getElementById("nav-links");
-
-            if (hamburger && navLinks) {
-                hamburger.onclick = function () {
-                    navLinks.classList.toggle("active");
-                };
+                document.getElementById('popup').style.display = 'flex';
             }
-        })
-        .catch(error => console.error('Error loading navbar:', error));
-</script>
+
+            function closePopup() {
+                document.getElementById('popup').style.display = 'none';
+            }
+            fetch('navbarcomp-VA/navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar-placeholder').innerHTML = data;
+  
+                    const hamburger = document.getElementById("hamburger");
+                    const navLinks = document.getElementById("nav-links");
+
+                    if (hamburger && navLinks) {
+                        hamburger.onclick = function () {
+                            navLinks.classList.toggle("active");
+                        };
+                    }
+                })
+                .catch(error => console.error('Error loading navbar:', error));
+        </script>
 
 </html>
