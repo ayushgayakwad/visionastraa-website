@@ -16,11 +16,9 @@ body {
 }
 
 /* Section Defaults */
-section {
-    padding: 60px 20px;
-    margin: 20px auto;
+section 
+{
     width: 100%;
-    max-width: 1200px; /* Max width to avoid expanding too much on larger screens */
 }
 
 /* Hero Section */
@@ -30,8 +28,10 @@ section {
     text-align: center;
     border-radius: 0 0 40px 40px;
     box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5);
-    padding: 20px 20px;
+    width: 100%;
     margin-bottom: 40px;
+    height: 99vh;
+    padding-top: 30px;
 }
 
 .hero h1 {
@@ -104,17 +104,20 @@ section {
     background-color: #f1d1c9;
     border-radius: 40px;
     color: #202020;
-    padding: 40px 20px;
+    padding: 40px 20px ;
     box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
     margin: 80px auto 20px;
-    text-align: center;
+    text-align: justify;
     max-width: 1100px; /* Adjust width for larger screens */
+    padding-left: 100px;
+    padding-right: 100px;   
 }
 
 .about-us h1 {
     font-size: 48px;
     margin-bottom: 20px;
     font-weight: bolder;
+    text-align: center;
 }
 
 .about-us p {
@@ -156,7 +159,7 @@ section {
 #core-values {
     text-align: center;
     font-size: 24px;
-    padding: 30px 0; /* Reduced padding to move section up */
+    padding: 30px 20px; /* Reduced padding to move section up */
     margin-top: -20px;
 }
 
@@ -275,6 +278,16 @@ section {
 }
 
 @media (max-width: 768px) {
+
+    .hero{
+        height: 600px;  
+    }
+
+    .about-us{
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+    
     section {
         max-width: 700px;
     }
@@ -285,6 +298,7 @@ section {
     .vision-card, .mission-card {
         width: 100%;
         max-width: none;
+        flex: 1 1 260px;
     }
     .statistics-container {
         flex-direction: column;
@@ -297,6 +311,7 @@ section {
     .card {
         max-width: 100%;
         margin-bottom: 20px;
+        flex: 1 1 200px;
     }
 }
 
@@ -322,3 +337,4 @@ section {
         font-size: 14px;
     }
 }
+
