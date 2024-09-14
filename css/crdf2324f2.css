@@ -1,0 +1,458 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1c1c1c;
+    color: #fff;
+}
+
+main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+.about-visionastraa {
+    position: relative;
+    background: url('../image/VisionAstraa_gradient.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 40px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
+    height: 920px;
+    text-align: center;
+}
+
+.about-visionastraa:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px #876eea;
+}
+
+.about-visionastraa-learning-outcomes {
+    position: absolute;
+    border-radius: 10px;
+    z-index: 2;
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.visionastraa-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    text-align: left;
+    margin-top: 25px;
+}
+
+.visionastraa-list li {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.logo-container {
+    text-align: center;
+    position: relative;
+    z-index: 3;
+}
+.logo {
+    max-width: 100px;
+    display: inline-block;
+    z-index: 4;
+}
+
+.quote-container {
+    margin-top: 25px;
+    text-align: center;
+    position: relative;
+    z-index: 3;
+}
+.quote {
+    width: 350px;
+    margin-right: 25px;
+    display: inline-block;
+    z-index: 4;
+}
+
+.about-visionastraa-learning-outcomes h2 {
+    font-size: 2.5em;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    padding-right: 40px;
+}
+
+.about-visionastraa-learning-outcomes h3 {
+    font-size: 27px;
+    margin-bottom: 20px;
+    margin-top: 25px;
+    padding-right: 140px;
+    padding-left: 100px;
+    text-align: center;
+}
+
+.about-visionastraa-learning-outcomes p {
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-top: 25px;
+    padding-right: 140px;
+    padding-left: 100px;
+    text-align: justify;
+}
+
+.about-company {
+    background-color: #202020;
+    padding: 40px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
+}
+
+.about-company:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px #876eea;
+}
+
+.about-company-box h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.about-company-box ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.about-company-box ul li {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.social-links {
+    background-color: #202020;
+    padding: 40px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 250px; /* Adjust height as needed */
+}
+
+.social-links-box {
+    width: 100%;
+    text-align: center;
+}
+
+.social-links:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px #876eea;
+}
+
+.social-links-box h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.social-links-box p {
+    font-size: 20px;
+}
+
+.social-links-box ul {
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+}
+
+.social-links-box ul li {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.quiz-instructions {
+    background-color: #202020;
+    padding: 40px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 250px; /* Adjust height as needed */
+}
+
+.quiz-instructions-box {
+    width: 100%;
+    text-align: center;
+}
+
+.quiz-instructions:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px #876eea;
+}
+
+.quiz-instructions-box h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.quiz-instructions-box ul {
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+}
+
+.quiz-instructions-box ul li {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0; /* Adjust spacing around the button container */
+}
+
+
+button {
+    background-color: #3e2ea9;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+}
+
+button:not(:disabled):hover {
+    background-color: #2d1a7a;
+}
+
+.instruction-text {
+    color: #fff;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+@media screen and (max-width: 768px) {
+
+    .about-visionastraa-container, .about-company-container, .social-links-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-visionastraa {
+        height: 1250px;
+    }
+
+    .about-visionastraa-learning-outcomes {
+        position: absolute;
+        border-radius: 10px;
+        z-index: 2;
+        transition: transform 0.1s ease, box-shadow 0.3s ease;
+        text-align: center;
+        width: 90%;
+    }
+
+    .about-visionastraa h2 {
+        font-size: 1.5rem;
+        padding-right: 50px;
+    }
+
+    .about-visionastraa-learning-outcomes h3 {
+        font-size: 27px;
+        margin-bottom: 20px;
+        margin-top: 25px;
+        padding-right: 140px;
+        padding-left: 80px;
+        text-align: center;
+    }
+
+    .about-visionastraa p {
+        font-size: 1rem;
+        padding-right: 50px;
+        padding-left: 0;
+    }
+
+    .quote-container {
+        margin-top: 50px;
+        margin-right: 30px;
+        text-align: center;
+        position: relative;
+        z-index: 3;
+    }
+    .quote {
+        width: 250px;
+        display: inline-block;
+        z-index: 4;
+    }
+
+    .course-image {
+        margin-bottom: 20px;
+        margin-right: 0;
+    }
+
+    .social-links {
+        background-color: #202020;
+        padding: 40px;
+        margin-bottom: 30px;
+        border-radius: 10px;
+        transition: transform 0.1s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        height: 400px; /* Adjust height as needed */
+    }
+    
+    .social-links-box {
+        width: 100%;
+        text-align: center;
+    }
+
+    .quiz-instructions {
+        background-color: #202020;
+        padding: 40px;
+        margin-bottom: 30px;
+        border-radius: 10px;
+        transition: transform 0.1s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        height: 350px; /* Adjust height as needed */
+    }
+    
+    
+    .instruction-text {
+        color: #fff;
+        font-size: 11px;
+        margin-bottom: 20px;
+    }
+}
+
+
+@media screen and (max-width: 400px) {
+
+    .about-visionastraa-container, .about-company-container, .social-links-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-visionastraa {
+        height: 1325px;
+    }
+
+    .about-visionastraa-learning-outcomes {
+        position: absolute;
+        border-radius: 10px;
+        z-index: 2;
+        transition: transform 0.1s ease, box-shadow 0.3s ease;
+        text-align: center;
+        width: 90%;
+    }
+
+    .about-visionastraa h2 {
+        font-size: 1.5rem;
+        padding-right: 50px;
+    }
+
+    .about-visionastraa-learning-outcomes h3 {
+        font-size:20px;
+        margin-bottom: 20px;
+        margin-top: 25px;
+        padding-right: 150px;
+        padding-left: 60px;
+        text-align: center;
+    }
+
+    .about-visionastraa p {
+        font-size: 1rem;
+        padding-right: 50px;
+        padding-left: 0;
+    }
+
+    .visionastraa-list {
+        list-style-type: disc;
+        padding-left: 20px;
+        text-align: left;
+        margin-top: 25px;
+        margin-right: 25px;
+    }
+    
+    .visionastraa-list li {
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
+
+    .quote-container {
+        margin-top: 50px;
+        margin-right: 30px;
+        text-align: center;
+        position: relative;
+        z-index: 3;
+    }
+    .quote {
+        width: 210px;
+        display: inline-block;
+        z-index: 4;
+    }
+
+    .course-image {
+        margin-bottom: 20px;
+        margin-right: 0;
+    }
+
+    .social-links {
+        background-color: #202020;
+        padding: 40px;
+        margin-bottom: 30px;
+        border-radius: 10px;
+        transition: transform 0.1s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        height: 400px; /* Adjust height as needed */
+    }
+    
+    .social-links-box {
+        width: 100%;
+        text-align: center;
+    }
+
+    .quiz-instructions {
+        background-color: #202020;
+        padding: 40px;
+        margin-bottom: 30px;
+        border-radius: 10px;
+        transition: transform 0.1s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        height: 350px; /* Adjust height as needed */
+    }
+    
+    
+    .instruction-text {
+        color: #fff;
+        font-size: 11px;
+        margin-bottom: 20px;
+    }
+}
