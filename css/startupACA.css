@@ -1,0 +1,287 @@
+/* Global Styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #101437, #003366, #FF3939, #000000);
+    background-size: 400% 400%;
+    animation: gradientAnimation 10s ease infinite;
+}
+
+/* Gradient Background Animation */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 50% 50%; }
+    100% { background-position: 0% 0%; }
+}
+
+/* Layout Reset */
+header, footer {
+    margin: 0;
+}
+
+main {
+    flex: 1;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styles */
+header {
+    background: transparent; /* Make header invisible */
+    color: white;
+    padding: 20px 0;
+    width: 100%;
+    position: relative; /* Ensure proper positioning for the children */
+}
+
+/* Header Content */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center logo and hamburger */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-wrap: wrap; /* Responsive wrap */
+    position: relative;
+     /* Move content further down */
+}
+
+/* Logo Styling */
+.logo img {
+    height: 60px; /* Adjusted logo size */
+    margin-right: 10px; /* Space between logo and hamburger */
+    z-index: 10; /* Ensure logo stays above other elements */
+}
+
+/* Hamburger Menu Styling */
+.hamburger {
+    display: none; /* Hide by default */
+    flex-direction: column;
+    cursor: pointer;
+    padding: 8px; /* Reduced size */
+    z-index: 10; /* Ensure hamburger menu stays above other elements */
+}
+
+.hamburger span {
+    height: 2px;
+    width: 20px; /* Reduced size */
+    background-color: black;
+    margin: 3px; /* Adjusted spacing */
+    border-radius: 2px;
+}
+
+/* Navbar Styling */
+.navbar {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    background: rgba(0, 51, 102, 0.8); /* Blue with transparency */
+    backdrop-filter: blur(10px); /* Blurring effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    height: 60px; /* Adjusted height */
+    width: 85%; /* Increased navbar width */
+    margin: 0 auto; /* Center horizontally */
+    border-radius: 50px;
+    z-index: 10; /* Ensure navbar stays above other elements */
+    justify-content: center; /* Center contents */
+    position: relative; /* For positioning of navbar items */
+}
+
+/* Navbar Links Styling */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links a {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    padding: 0 10px;
+}
+
+.nav-links a:hover {
+    color: #FF3939; /* Changed hover color to match the red from the gradient */
+    transform: scale(1.1);
+}
+
+/* Hide Navbar on Small Screens */
+@media (max-width: 1100px) {
+    .hamburger {
+        display: flex; /* Show hamburger on smaller screens */
+    }
+
+    .nav-links {
+        display: none; /* Hide navbar links on smaller screens */
+    }
+
+    .header-content {
+        justify-content: center; /* Center logo and hamburger */
+    }
+}
+
+/* Hero Section */
+#hero {
+    background-color: #004080;
+    color: white;
+    padding: 60px 20px;
+    text-align: justify;
+    border-bottom: 5px solid #004080;
+}
+
+#hero h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+#hero button {
+    padding: 12px 24px;
+    background-color: #ffcc00; /* Removed since not used elsewhere */
+    border: none;
+    color: #003366;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#hero button:hover {
+    background-color: #e6b800; /* Removed since not used elsewhere */
+    transform: scale(1.05);
+}
+
+/* About Section */
+#about-startup-academy {
+    background-color: white;
+    padding: 40px 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+#about-startup-academy img {
+    max-width: 100%;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+footer p {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: row; /* Ensure row layout */
+        align-items: center; /* Align logo and hamburger */
+        justify-content: center; /* Center logo and hamburger */
+    }
+
+    .navbar {
+        width: auto; /* Adjust width to fit content */
+        margin: 0; /* Remove margin */
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #hero h1 {
+        font-size: 28px;
+    }
+
+    #hero button {
+        font-size: 16px;
+    }
+
+    #about-startup-academy {
+        padding: 20px 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    nav a {
+        font-size: 16px;
+    }
+
+    #hero h1 {
+        font-size: 24px;
+    }
+
+    #hero button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    #about-startup-academy {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    nav a {
+        font-size: 14px;
+    }
+
+    #hero h1 {
+        font-size: 20px;
+    }
+
+    #hero button {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+
+    #about-startup-academy {
+        padding: 10px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
