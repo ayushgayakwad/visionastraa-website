@@ -16,7 +16,7 @@
   .container {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 0px 20px;
     background-color: #fff;
   }
 #navbar-placeholder {
@@ -55,7 +55,7 @@
     font-size: 16px;              
     font-weight: 600;        
     color: black; 
-    background-color: #5169F6;         
+    background-color: #F4ADCD;         
     /* background-color: rgb(72, 72, 205);  */
     border-radius: 15px;        
     padding: 15px 25px;         
@@ -69,7 +69,7 @@
     margin-top: 30px;       
   }
   .explore:hover{
-    background-color: rgb(132, 207, 207);
+    background-color: #BE6081;
   }
   .filter-buttons {
     display: flex;
@@ -287,13 +287,15 @@
   padding: 70px 20px;
   background-color: #101114;
   padding-top: 60px;
-  height: 75vh;
+  height: 65vh;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;  
 }
 
 .hero-content {
   height: 50vh;
   padding-top: 50px;
-  padding-left: 50px; 
+/*   padding-left: 50px;  */
 }
 
 .hero-content h1 {
@@ -317,11 +319,11 @@
   margin-bottom: 30px;
 }
 
-.hero-image img {
+/* .hero-image img {
   max-width: 100%;
   height: auto;
-  object-fit: contain; /* Ensures the image fits nicely */
-}
+  object-fit: contain; 
+} */
 
 .job-meta i {
   margin-right: 8px; /* Adjust the value as needed */
@@ -348,26 +350,36 @@
 }
 
 .search-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50%;
-  margin-top: 80px;
-}
+    /* position: absolute; */
+    overflow: hidden;
+    background-color: #BE6081;
+    backdrop-filter: blur(2px);
+    align-self: center;
+    width: 450px;
+  }
 
-.search-bar input {
-  width: 50%;
-  padding: 10px;
-  padding-right: 60px; /* Space for the search icon */
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  outline: none;
-}
+.searchbar-icon {
+    position: absolute;
+    right: 27px;
+    top: 25px;
+    background-color: transparent;
+    color: #BE6081;
+    cursor: pointer;
+  }
 
-.search-bar i {
-  position: absolute;
-  right: 200px;
-  color: #999;
-  font-size: 18px;
-}
+input[type=text] {
+    padding: 9px;
+    border: none;
+    margin: 16px 14px;
+    font-size: 18px;
+    background-color: #F4ADCD;
+    text-align: left;
+    text-indent: 8px;
+    outline: none;
+    width: 420px;
+  }
+
+.search-bar , input[type=text] {
+    border-radius: 30px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
+  }
