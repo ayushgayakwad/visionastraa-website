@@ -11,14 +11,13 @@
   body {
     font-family: 'Poppins', sans-serif;
     color: #fff;
-    /* background-color: #151e2a; */
   }
   
   .container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 40px 20px;
-    background-color: #F8F9F9;
+    background-color: #fff;
   }
 #navbar-placeholder {
     margin: 0;
@@ -56,7 +55,7 @@
     font-size: 16px;              
     font-weight: 600;        
     color: black; 
-    background-color: aqua;         
+    background-color: #5169F6;         
     /* background-color: rgb(72, 72, 205);  */
     border-radius: 15px;        
     padding: 15px 25px;         
@@ -110,6 +109,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    background-color: #fff;
   }
 
   .job-item {
@@ -175,7 +175,7 @@
     font-weight: 600;
     color: #1f2937;
     text-decoration: none;
-    background-color: #E9FBE9;
+    background-color: #badbba;
     border: 2.5px solid #bcddbc;
     padding: 8px 15px;
     transition: all 0.3s ease;
@@ -184,7 +184,7 @@
   
   .apply-link:hover {
     border: 2px solid #bcddbc;
-    background-color: #badbba;
+    background-color: #daf2da;
     border-radius: 20px;
   }
 
@@ -251,7 +251,7 @@
     cursor: pointer; /* Indicate that the heading is clickable */
   }
   .dropdown-heading:hover {
-    color: #5169F6; /* Optional: change color on hover */
+    color: #5169F6; 
   }
   .skills {
     display: flex;
@@ -325,4 +325,49 @@
 
 .job-meta i {
   margin-right: 8px; /* Adjust the value as needed */
+}
+.dropdown-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  position: relative;
+}
+
+.arrow {
+  margin-right: 10px; /* Add space between arrow and text */
+  transition: transform 0.3s ease; /* Smooth arrow rotation */
+  transform: rotate(0deg); /* Arrow initially points right */
+}
+.job-item.active .dropdown-content {
+  display: block; /* Show dropdown content when active */
+}
+
+.job-item.active .arrow {
+  transform: rotate(90deg); 
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  margin-top: 80px;
+}
+
+.search-bar input {
+  width: 50%;
+  padding: 10px;
+  padding-right: 60px; /* Space for the search icon */
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+}
+
+.search-bar i {
+  position: absolute;
+  right: 200px;
+  color: #999;
+  font-size: 18px;
 }
