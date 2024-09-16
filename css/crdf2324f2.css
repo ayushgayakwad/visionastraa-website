@@ -138,7 +138,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 250px; /* Adjust height as needed */
+    height: 310px; /* Adjust height as needed */
 }
 
 .social-links-box {
@@ -181,7 +181,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 250px; /* Adjust height as needed */
+    height: 200px; /* Adjust height as needed */
 }
 
 .quiz-instructions-box {
@@ -335,7 +335,7 @@ button:not(:disabled):hover {
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
-        height: 350px; /* Adjust height as needed */
+        height: 220px; /* Adjust height as needed */
     }
     
     
@@ -428,7 +428,7 @@ button:not(:disabled):hover {
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
-        height: 400px; /* Adjust height as needed */
+        height: 600px; /* Adjust height as needed */
     }
     
     .social-links-box {
@@ -446,7 +446,7 @@ button:not(:disabled):hover {
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
-        height: 350px; /* Adjust height as needed */
+        height: 220px; /* Adjust height as needed */
     }
     
     
