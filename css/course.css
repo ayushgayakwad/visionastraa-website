@@ -120,6 +120,26 @@ main {
     box-shadow: 0 0 10px #876eea;
 }
 
+.confirmation-info {
+    background-color: #202020;
+    padding: 40px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
+}
+
+.confirmation-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.confirmation-info:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px #876eea;
+}
+
 .course-image {
     flex: 1;
     margin-right: 20px;

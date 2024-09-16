@@ -34,7 +34,13 @@ body {
 #sendFeedback:hover{
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.253);
 }
-
+header{
+  position: fixed;
+  top: 0;
+  width: 100%; 
+  z-index: 0;
+  transition: top 0.3s ease;  
+}
 /* Custom Scrollbar for WebKit Browsers */
 ::-webkit-scrollbar {
     width: 0px; 
@@ -103,6 +109,8 @@ body {
 
 .landingbody {
   margin: 0;
+  /* margin-top: 0; */
+  position: absolute;
   background: linear-gradient(
     to right bottom,
     rgb(0, 0, 0),
@@ -111,13 +119,14 @@ body {
     rgb(0, 0, 0)
   );
   height: 99vh;
+  z-index: 1;
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
   margin-bottom: 10px;
 }
 
 .hero-body {
-  margin-top: 130px;
+  margin-top: 230px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -273,4 +282,91 @@ p {
     margin-top: 40px;
     text-align: justify;
 
+}
+
+/* For small devices (iPhone SE, Galaxy S8+, etc.) */
+@media only screen and (max-width: 375px) {
+  .hero-body {
+      margin-top: 140px;
+  }
+
+  .subhero-body {
+      padding-top: 40px; /* Add padding to create separation between hero and tiles */
+  }
+
+  .vpvmf {
+      flex-direction: column;
+      padding: 10px;
+      margin-top: 20px; /* Add margin to avoid overlap */
+  }
+}
+
+/* For medium devices (iPhone XR, Pixel 7, Galaxy S20 Ultra, iPad Mini) */
+@media only screen and (max-width: 768px) {
+  .hero-body {
+      margin-top: 170px;
+  }
+
+  .subhero-body {
+      padding-top: 50px; /* More padding between hero and sub-hero */
+  }
+
+  .vpvmf {
+      flex-direction: column;
+      padding: 20px;
+      margin-top: 30px; /* More margin to ensure tiles stay separate */
+  }
+}
+
+/* For larger devices (iPads, Surface Pro 7, etc.) */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .hero-body {
+      margin-top: 200px;
+  }
+
+  .subhero-body {
+      padding-top: 70px;
+  }
+
+  .vpvmf {
+      flex-direction: row;
+      gap: 40px;
+      padding: 30px;
+      margin-top: 40px; /* Ensure enough separation on tablets */
+  }
+}
+
+/* For laptops and larger screens (MacBooks, Surface Laptops, etc.) */
+@media only screen and (min-width: 1025px) {
+  .hero-body {
+      margin-top: 200px;
+  }
+
+  .subhero-body {
+      padding-top: 80px; /* Large gap for better separation */
+  }
+
+  .vpvmf {
+      flex-direction: row;
+      gap: 50px;
+      padding: 40px;
+      margin-top: 50px; /* Keep tiles well-separated from hero section */
+  }
+}
+
+/* Specific adjustments for folding devices like Surface Duo, Galaxy Z Fold 5 */
+@media only screen and (min-width: 400px) and (max-width: 800px) and (orientation: landscape) {
+  .hero-body {
+      margin-top: 150px;
+  }
+
+  .subhero-body {
+      padding-top: 40px;
+  }
+
+  .vpvmf {
+      flex-direction: row;
+      padding: 20px;
+      margin-top: 30px;
+  }
 }
