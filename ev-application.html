@@ -231,6 +231,7 @@
                 if (data.success) {
                     messageDiv.textContent = "Your application has been submitted successfully!";
                     messageDiv.style.color = "green";
+                    window.location.href = `ev-application-confirmation.html`;
                     form.reset();
                 } else {
                     messageDiv.textContent = "Error: " + data.error;
