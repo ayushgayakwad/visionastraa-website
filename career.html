@@ -18,8 +18,10 @@
       <a href="#top-buttons"><button class="explore">Explore Jobs</button></a>
       </div>
       <div class="search-bar">
-        <input type="text" id="job-search" placeholder="Search here...">
-      <i class="fas fa-search"></i>
+        <input id="searchbar" 
+            onkeyup="search_job()"
+             type="text" name="search" placeholder="Search Jobs...">
+        <span class="searchbar-icon"><i class="fas fa-search"></i></span>
       </div>
     </header>
 
@@ -34,7 +36,7 @@
     </div>
   </article>
     <section class="job-listings">
-      <article class="job-item" id="Development">
+      <article class="job-item" id="Development" data-title="Web Developer">
         <div class="job-details">
           <h2 class="dropdown-heading">Web Developer</h2>
           <p class="dropdown-toggle">
@@ -58,7 +60,7 @@
         <a href="careerapplication.html" class="apply-link">Apply</a>
       </article>
 
-      <article class="job-item">
+      <article class="job-item" data-title="Java Developer">
         <div class="job-details">
           <h2 class="dropdown-heading">Java Developer</h2>
           <p class="dropdown-toggle">
@@ -81,7 +83,7 @@
         <a href="careerapplication.html" class="apply-link">Apply</a>
       </article>
 
-      <article class="job-item">
+      <article class="job-item" data-title="Python Developer">
         <div class="job-details">
           <h2 class="dropdown-heading">Python Developer</h2>
           <p class="dropdown-toggle">
@@ -104,7 +106,7 @@
         <a href="careerapplication.html" class="apply-link">Apply</a>
       </article>
 
-      <article class="job-item">
+      <article class="job-item" data-title="Ethical Hacker">
         <div class="job-details">
           <h2 class="dropdown-heading">Ethical Hacker</h2>
           <p class="dropdown-toggle">
@@ -130,7 +132,7 @@
         <a href="careerapplication.html" class="apply-link">Apply</a>
       </article>
 
-      <article class="job-item">
+      <article class="job-item" data-title="Security Developer">
         <div class="job-details">
           <h2 class="dropdown-heading">Security Developer</h2>
           <p class="dropdown-toggle">
@@ -154,7 +156,7 @@
         <a href="careerapplication.html" class="apply-link">Apply</a>
       </article>
 
-      <article class="job-item">
+      <article class="job-item" data-title="Database Engineer">
         <div class="job-details">
           <h2 class="dropdown-heading">Database Engineer</h2>
           <p class="dropdown-toggle">
@@ -179,7 +181,7 @@
         <a href="careerapplication.html" class="apply-link">Apply</a>
       </article>
 
-      <article class="job-item">
+      <article class="job-item" data-title="Test Engineer">
         <div class="job-details">
           <h2 class="dropdown-heading">Test Engineer</h2>
           <p class="dropdown-toggle">
@@ -207,7 +209,7 @@
         <a href="careerapplication.html" class="apply-link">Apply</a>
       </article>
 
-      <article class="job-item">
+      <article class="job-item" data-title="AI/ML Engineer">
         <div class="job-details">
           <h2 class="dropdown-heading">AI/ML Engineer</h2>
           <p class="dropdown-toggle">
@@ -231,7 +233,7 @@
         <a href="careerapplication.html" class="apply-link">Apply</a>
       </article>
 
-      <article class="job-item" id="ContentCreation">
+      <article class="job-item" id="ContentCreation" data-title="Technical Content Writer">
         <div class="job-details">
           <h2 class="dropdown-heading">Technical Content Writer</h2>
           <p class="dropdown-toggle">
@@ -255,7 +257,7 @@
         <a href="careerapplication.html" class="apply-link">Apply</a>
       </article>
 
-      <article class="job-item" id="Marketing">
+      <article class="job-item" id="Marketing" data-title="Digital Marketing">
         <div class="job-details">
           <h2 class="dropdown-heading">Digital Marketing</h2>
           <p class="dropdown-toggle">
@@ -279,7 +281,7 @@
         <a href="careerapplication.html" class="apply-link">Apply</a>
       </article>
 
-      <article class="job-item">
+      <article class="job-item" data-title="Sales & Marketing">
         <div class="job-details">
           <h2 class="dropdown-heading">Sales & Marketing</h2>
           <p class="dropdown-toggle">
@@ -303,7 +305,7 @@
         <a href="careerapplication.html" class="apply-link">Apply</a>
       </article>
 
-      <article class="job-item" id="Management">
+      <article class="job-item" id="Management" data-title="Business Development">
         <div class="job-details">
           <h2 class="dropdown-heading">Business Development</h2>
           <p class="dropdown-toggle">
@@ -326,7 +328,7 @@
         <a href="careerapplication.html" class="apply-link">Apply</a>
       </article>
 
-      <article class="job-item">
+      <article class="job-item" data-title="Project Management">
         <div class="job-details">
           <h2 class="dropdown-heading">Project Management</h2>
           <p class="dropdown-toggle">
@@ -350,7 +352,7 @@
         <a href="careerapplication.html" class="apply-link">Apply</a>
       </article>
 
-      <article class="job-item">
+      <article class="job-item" data-title="Human Resource">
         <div class="job-details">
           <h2 class="dropdown-heading">Human Resource</h2>
           <p class="dropdown-toggle">
@@ -359,7 +361,7 @@
         </p>
           <div class="dropdown-content">
             <ul>
-              <li>We’re looking for Human Resource Manager</li>
+              <li>We’re looking for a Human Resource Manager</li>
               <li>Skills in recruitment, employee relations, and performance management. Knowledge of labor laws, HR policies, and organizational development.</li>
             </ul>
           </div>
@@ -441,4 +443,19 @@ fetch('navbarcomp-VA/navbar.html')
                     }
                 })
                 .catch(error => console.error('Error loading navbar:', error));
+
+  // Search-bar for job filter...
+    function search_job() {
+        const searchInput = document.getElementById('searchbar').value.toUpperCase();
+        const jobCards = document.querySelectorAll('.job-item');
+        jobCards.forEach(jobCard => {
+            const title = jobCard.getAttribute('data-title').toUpperCase();
+            if (title.indexOf(searchInput) > -1) {
+                jobCard.style.display = '';
+            } else {
+                jobCard.style.display = 'none';
+            }
+        });
+    }
+  
 </script>
