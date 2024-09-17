@@ -22,7 +22,7 @@
 #navbar-placeholder {
     margin: 0;
     padding: 0;
-    background-color: #101114;
+    background: linear-gradient(to right bottom, rgb(0, 0, 0), rgb(27, 17, 17), rgb(8, 8, 42), rgb(0, 0, 0));
 }
   .header {
     /* text-align: center; */
@@ -55,7 +55,7 @@
     font-size: 16px;              
     font-weight: 600;        
     color: black; 
-    background-color: #F4ADCD;         
+    background-color: #5169f6    ;         
     /* background-color: rgb(72, 72, 205);  */
     border-radius: 15px;        
     padding: 15px 25px;         
@@ -69,7 +69,7 @@
     margin-top: 30px;       
   }
   .explore:hover{
-    background-color: #BE6081;
+    background-color: #687ae3;
   }
   .filter-buttons {
     display: flex;
@@ -285,7 +285,7 @@
   align-items: flex-start;
   justify-content: space-around;
   padding: 70px 20px;
-  background-color: #101114;
+  background: linear-gradient(to right bottom, rgb(0, 0, 0), rgb(27, 17, 17), rgb(8, 8, 42), rgb(0, 0, 0));;
   padding-top: 60px;
   height: 65vh;
   border-bottom-left-radius: 40px;
@@ -352,7 +352,7 @@
 .search-bar {
     /* position: absolute; */
     overflow: hidden;
-    background-color: #BE6081;
+    background-color: transparent;
     backdrop-filter: blur(2px);
     align-self: center;
     width: 450px;
@@ -363,7 +363,7 @@
     right: 27px;
     top: 25px;
     background-color: transparent;
-    color: #BE6081;
+    color: #5169F6;
     cursor: pointer;
   }
 
@@ -372,7 +372,8 @@ input[type=text] {
     border: none;
     margin: 16px 14px;
     font-size: 18px;
-    background-color: #F4ADCD;
+    background-color: #f0f2ff
+    ;
     text-align: left;
     text-indent: 8px;
     outline: none;
