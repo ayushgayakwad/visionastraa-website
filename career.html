@@ -20,7 +20,7 @@
       <div class="search-bar">
         <input id="searchbar" 
             onkeyup="search_job()"
-             type="text" name="search" placeholder="Search Jobs...">
+             type="text" name="search" placeholder="Search Internships...">
         <span class="searchbar-icon"><i class="fas fa-search"></i></span>
       </div>
     </header>
@@ -377,7 +377,9 @@
       </article>
     </section>
   </div>
-
+  <div id="no-results" style="display:none; color: red; text-align: center; margin-top: 20px;">
+    No results found.
+</div>
 </body>
 </html>
 <script>
@@ -457,5 +459,4 @@ fetch('navbarcomp-VA/navbar.html')
             }
         });
     }
-  
 </script>
