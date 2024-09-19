@@ -1,101 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Vision Astraa</title>
-    <!-- FontAwesome for icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Contact Admissions Department</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+
     <header>
-        <div class="header-content"></div>
-            <img src= "logo2.png" alt="VisionAstraa Logo" class="logo">    
-            <nav>
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="startupACA.html">Startup Academy</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-        </div>
-    <main class="boody">
-        <div class="container">
-            <!-- Contact Form -->
-            <div class="contact-form">
-                <h2>Contact Admissions Department</h2>
-                <form id="contactForm" action="php/submit_contact_new.php" method="post">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" placeholder="Name" required minlength="2" pattern="[A-Za-z\s]+" title="Please enter a valid name (letters only).">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Email" required title="Please enter a valid email address.">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" placeholder="Phone Number" required pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number.">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" placeholder="Message" required minlength="10"></textarea>
-                    </div>
-                    <button type="submit">Submit</button>
-                </form>
-                <div id="formResponse"></div>
-            </div>
-        </div>
-    </main>
-    <!-- Contact Information in the footer -->
-    <footer class="contact-info">
-        <div class="info-item">
-            <p>For questions, technical assistance, or collaboration opportunities, reach us via the contact info below.</p>
-            <p class="info-heading">Head of Admissions</p>
-            <ul class="no-bullets">
-                <li><i class="fas fa-phone-alt"></i><a href="tel:+918197355166">+91 8197355166</a></li>
-                <li><i class="fas fa-phone-alt"></i><a href="tel:+919740183638">+91 9740183638</a></li>
-            </ul>
-            <li><i class="fas fa-envelope"></i><a href="mailto:admissions@visionastraa.com">admissions@visionastraa.com</a></li>
-            <div class="address">
-            <i class="fa fa-map-marker"></i>
-            <span>Bengaluru, KA, India</span>
-            </div>
+        <img src="logo2.png" alt="Logo" class="logo">
+        <nav>
+            <div class="nav-links"></div>
+        </nav>
+    </header>
+
+    <div class="form-container">
+        <h2>Contact Admissions Department</h2>
+        <form>
+            <label for="name">NAME:</label>
+            <input type="text" id="name" placeholder="Name">
+            
+            <label for="email">EMAIL:</label>
+            <input type="email" id="email" placeholder="Email">
+            
+            <label for="phone">PHONE NUMBER:</label>
+            <input type="tel" id="phone" placeholder="Phone Number">
+            
+            <label for="message">MESSAGE:</label>
+            <textarea id="message" rows="4" placeholder="Message"></textarea>
+
+            <button type="submit">SUBMIT</button>
+        </form>
     </div>
+
+    <footer>
+        <div class="footer-content">FOOTER</div>
     </footer>
-</header>
-    <script>
-        fetch('navbarcomp/navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navbar-placeholder').innerHTML = data;
-            })
-            .catch(error => console.error('Error loading navbar:', error));
 
-        document.getElementById('contactForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            var form = e.target;
-            if (form.checkValidity()) {
-                var formData = new FormData(form);
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'php/submit_contact_new.php', true);
-                xhr.onload = function () {
-                    var response = JSON.parse(this.responseText);
-                    var responseElement = document.getElementById('formResponse');
-                    responseElement.innerHTML = response.message;
-                    responseElement.style.color = response.success ? 'green' : 'red';
-                };
-                xhr.send(formData);
-            } else {
-                alert('Please fill out the form correctly.');
-            }
-        });
-    </script>
 </body>
-
 </html>

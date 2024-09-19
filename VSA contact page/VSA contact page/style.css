@@ -1,0 +1,267 @@
+/* General styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Poppins', sans-serif; 
+    background-color: #f4f4f4; 
+    color: #202020;
+}
+
+/* Header styles */
+header {
+    background: linear-gradient(to right bottom, rgb(0, 0, 0), rgb(27, 17, 17), rgb(8, 8, 42), rgb(0, 0, 0));
+    color: #fff;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); 
+}
+
+.logo {
+    width: 120px; 
+    height: auto;
+    float: left;
+}
+/* Main section */
+.container {
+    background-color: #ffffff;
+    margin: 150px auto;
+    padding: 50px; 
+    width: 80%; 
+    border-radius: 40px;
+    box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.15); 
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+.container:hover {
+    box-shadow: 8px 8px 24px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px) rotateX(3deg);
+}
+
+h2 {
+    color: #202020;
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
+}
+.form-group {
+    margin-bottom: 30px;
+}
+
+.form-group label {
+    font-size: 18px;
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px 18px; 
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1); 
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #202020;
+    box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.2); 
+    outline: none;
+    transform: scale(1.03);
+}
+
+button[type="submit"] {
+    display: block;
+    margin: 40px auto;
+    background-color: #202020;
+    color: white;
+    border: none;
+    padding: 15px 50px; 
+    font-size: 18px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+button[type="submit"]:hover {
+    background-color: #333;
+    transform: translateY(-3px) scale(1.08); 
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.3); 
+}
+
+button[type="submit"]:active {
+    background-color: #444;
+    transform: scale(0.98) translateY(1px);
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer */
+footer {
+    color: white;
+    padding: 30px 0;
+    text-align: center;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500; 
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #ffd700; 
+}
+
+footer i {
+    margin-right: 10px;
+    color: #ffffff;
+    font-size: 20px; 
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+footer i:hover {
+    color: #ffd700; 
+    transform: scale(1.2); 
+}
+
+.contact-info ul {
+    list-style-type: none;
+    padding-left: 0; 
+}
+
+.contact-info li {
+    list-style-type: none; 
+}
+.info-item {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border-radius: 40px;
+    padding: 50px 40px; 
+    margin: 10px 0;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.info-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 6px 6px 16px rgba(0, 0, 0, 0.3); 
+}
+
+.info-heading {
+    font-size: 24px;
+    margin-bottom: 15px; 
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.info-item p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #cccccc;
+}
+.info-item .address{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+.info-item .address i{
+    margin-right: 10px;
+}
+/* Responsive Media Queries */
+
+/* General Reset for Mobile */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px; /* Slightly smaller font for mobile */
+    }
+
+    /* Header */
+    header {
+        padding: 15px; /* Less padding on mobile */
+        text-align: center; /* Center-align the content for mobile */
+    }
+
+    .logo {
+        width: 100px; /* Slightly smaller logo for mobile */
+    }
+
+    /* Main Section */
+    .container {
+        width: 90%; /* Make the container wider for mobile */
+        padding: 30px; /* Reduce padding on mobile */
+    }
+
+    h2 {
+        font-size: 36px; /* Adjust heading size for mobile */
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 10px; /* Smaller input fields for mobile */
+        font-size: 14px;
+    }
+
+    button[type="submit"] {
+        padding: 12px 40px;
+        font-size: 16px; /* Adjust button size for mobile */
+    }
+
+    /* Footer */
+    footer {
+        padding: 20px 0;
+    }
+
+    .info-item {
+        padding: 30px 20px; /* Reduce padding in info-item */
+    }
+
+    /* Address and icons alignment */
+    .info-item .address {
+        flex-direction: row; /* Keep icon and text in a row on mobile */
+    }
+}
+
+/* For very small screens (less than 480px) */
+@media (max-width: 480px) {
+    nav {
+        gap: 10px;
+    }
+
+    nav a {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    h2 {
+        font-size: 28px; /* Further reduce font size on very small screens */
+    }
+
+    button[type="submit"] {
+        padding: 10px 35px;
+        font-size: 14px;
+    }
+
+    .info-item {
+        padding: 20px 15px; /* Reduce info-item padding further */
+    }
+
+    footer i {
+        font-size: 18px; /* Slightly smaller icons in footer */
+    }
+}
