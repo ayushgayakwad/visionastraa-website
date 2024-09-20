@@ -7,19 +7,21 @@
     <style>
         /* Import Poppins font */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
         /* Apply Poppins font and general styles */
         body, html {
             font-family: 'Poppins', sans-serif;
-            background-color: #ffffff;
+            background-color: white;
             margin: 0;
             padding: 0;
             height: 100%;
             overflow: auto;
         }
+
         .form-container {
-            background-color: #202020;
+            background-color: #D3D9FF;
             padding: 20px;
-            border-radius: 16px; /* Maximize border radius */
+            border-radius: 16px;
             box-shadow: 4px 4px 8px rgba(0,0,0,0.253); 
             width: 90%;
             max-width: 800px;
@@ -29,13 +31,13 @@
 
         .form-container h1 {
             text-align: center;
-            color: #fff;
+            color: black;
             margin-top: 0;
         }
 
         .form-container label {
             display: block;
-            color: #fff;
+            color: black;
             margin-bottom: 8px;
             font-weight: bold;
         }
@@ -52,33 +54,38 @@
             color: #333;
             background-color: #f9f9f9;
             border: 1px solid #fff;
-            border-radius: 12px; /* Increase border radius */
+            border-radius: 12px;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif; /* Apply Poppins to form inputs */
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.1); /* Add box shadow */
         }
 
         /* Customize placeholder */
         ::placeholder {
-            color: #b3b3b3;
+            color: grey;
             font-family: 'Poppins', sans-serif;
         }
 
+        /* Submit button style */
         .form-container button {
-            width: 100%;
+            width: 200px; /* Make the button smaller */
             padding: 12px;
-            background: #5169F6;
+            background-color: #5169f6; 
             border: none;
-            border-radius: 30px; /* Maximize button border radius */
+            border-radius: 30px;
             color: white;
             cursor: pointer;
             font-size: 16px;
             font-weight: bold;
             font-family: 'Poppins', sans-serif;
             transition: background-color 0.3s ease;
+            display: block;
+            margin: 20px auto; /* Center the button horizontally */
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.253); /* Add box shadow to submit button */
         }
 
         .form-container button:hover {
-            background: linear-gradient(90deg, #0056b3, #009bff); /* Darker gradient on hover */
+            background-color: #0056b3;
         }
 
         .message {
@@ -155,7 +162,7 @@
             <label for="goals">Why you should be selected? Describe in your own words (&lt;500 words)</label>
             <textarea id="goals" name="goals" rows="4" placeholder="Write your response here..." required></textarea>
 
-            <button type="submit">Submit</button>
+            <button type="submit">SUBMIT</button>
         </form>
         <div id="message" class="message"></div>
     </div>
