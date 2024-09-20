@@ -22,12 +22,19 @@
 #navbar-placeholder {
     margin: 0;
     padding: 0;
-    background: linear-gradient(to right bottom, rgb(0, 0, 0), rgb(27, 17, 17), rgb(8, 8, 42), rgb(0, 0, 0));
+    background: none;
 }
-  .header {
-    /* text-align: center; */
-    margin-bottom: 40px;
-  }
+header{
+  position: fixed;
+  top: 0;
+  width: 100%; 
+  z-index: 0;
+  transition: top 0.3s ease;  
+}
+/* Custom Scrollbar for WebKit Browsers */
+::-webkit-scrollbar {
+  width: 0px; 
+}
   
   .badge {
     display: inline-block;
@@ -131,7 +138,7 @@
     transition: border 0s, box-shadow 0s;
   }
   .job-item .job-details {
-    max-width: 70%;
+    max-width: 82.5%;
   }
   .job-details p{
     font-size: 12px;
@@ -282,20 +289,22 @@
 }
 .hero-section {
   display: flex;
+  flex-direction: row;
   align-items: flex-start;
-  justify-content: space-around;
-  padding: 70px 20px;
+  align-self: center;
+  justify-content: space-between;
+  padding: 20px;
   background: linear-gradient(to right bottom, rgb(0, 0, 0), rgb(27, 17, 17), rgb(8, 8, 42), rgb(0, 0, 0));;
-  padding-top: 60px;
-  height: 65vh;
+  padding-top: 120px; 
+  height: 85vh;
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;  
 }
 
 .hero-content {
-  height: 50vh;
-  padding-top: 50px;
-/*   padding-left: 50px;  */
+  height: 80vh;
+  padding-left: 70px; 
+  padding-top: 80px;
 }
 
 .hero-content h1 {
@@ -310,21 +319,6 @@
   align-items: flex-start;
   justify-content: flex-start;
 }
-
-.hero-image {
-  flex: 1;
-  text-align: right; /* This aligns the image to the right */
-  padding-left: 20px;
-  padding-right: 160px;
-  margin-bottom: 30px;
-}
-
-/* .hero-image img {
-  max-width: 100%;
-  height: auto;
-  object-fit: contain; 
-} */
-
 .job-meta i {
   margin-right: 8px; /* Adjust the value as needed */
 }
@@ -354,26 +348,29 @@
     overflow: hidden;
     background-color: transparent;
     backdrop-filter: blur(2px);
-    align-self: center;
+    align-self: flex-start;
     width: 450px;
+    padding-top: 160px;
+    margin-right: 70px;
+    position: relative;
   }
 
 .searchbar-icon {
     position: absolute;
-    right: 27px;
-    top: 25px;
+    right: 20px;
+    top: 185px;
     background-color: transparent;
     color: #5169F6;
     cursor: pointer;
+    padding-right: 20px;
   }
 
 input[type=text] {
-    padding: 9px;
+    padding: 10px 40px 10px 16px;
     border: none;
     margin: 16px 14px;
     font-size: 18px;
-    background-color: #f0f2ff
-    ;
+    background-color: #f0f2ff;
     text-align: left;
     text-indent: 8px;
     outline: none;
