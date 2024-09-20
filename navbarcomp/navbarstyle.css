@@ -108,7 +108,7 @@ body {
   }
 
   .nav-links.active {
-    max-height: 600px;
+    max-height: 550px;
     min-width: 280px;
     transform: translateY(0);
     opacity: 1;
