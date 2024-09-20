@@ -11,19 +11,18 @@
   body {
     font-family: 'Poppins', sans-serif;
     color: #fff;
-    /* background-color: #151e2a; */
   }
   
   .container {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 40px 20px;
-    background-color: #F8F9F9;
+    padding: 0px 20px;
+    background-color: #fff;
   }
 #navbar-placeholder {
     margin: 0;
     padding: 0;
-    background-color: #101114;
+    background: linear-gradient(to right bottom, rgb(0, 0, 0), rgb(27, 17, 17), rgb(8, 8, 42), rgb(0, 0, 0));
 }
   .header {
     /* text-align: center; */
@@ -56,7 +55,7 @@
     font-size: 16px;              
     font-weight: 600;        
     color: black; 
-    background-color: aqua;         
+    background-color: #5169f6    ;         
     /* background-color: rgb(72, 72, 205);  */
     border-radius: 15px;        
     padding: 15px 25px;         
@@ -70,7 +69,7 @@
     margin-top: 30px;       
   }
   .explore:hover{
-    background-color: rgb(132, 207, 207);
+    background-color: #687ae3;
   }
   .filter-buttons {
     display: flex;
@@ -110,6 +109,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    background-color: #fff;
   }
 
   .job-item {
@@ -175,7 +175,7 @@
     font-weight: 600;
     color: #1f2937;
     text-decoration: none;
-    background-color: #E9FBE9;
+    background-color: #badbba;
     border: 2.5px solid #bcddbc;
     padding: 8px 15px;
     transition: all 0.3s ease;
@@ -184,7 +184,7 @@
   
   .apply-link:hover {
     border: 2px solid #bcddbc;
-    background-color: #badbba;
+    background-color: #daf2da;
     border-radius: 20px;
   }
 
@@ -251,7 +251,7 @@
     cursor: pointer; /* Indicate that the heading is clickable */
   }
   .dropdown-heading:hover {
-    color: #5169F6; /* Optional: change color on hover */
+    color: #5169F6; 
   }
   .skills {
     display: flex;
@@ -285,15 +285,17 @@
   align-items: flex-start;
   justify-content: space-around;
   padding: 70px 20px;
-  background-color: #101114;
+  background: linear-gradient(to right bottom, rgb(0, 0, 0), rgb(27, 17, 17), rgb(8, 8, 42), rgb(0, 0, 0));;
   padding-top: 60px;
-  height: 75vh;
+  height: 65vh;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;  
 }
 
 .hero-content {
   height: 50vh;
   padding-top: 50px;
-  padding-left: 50px; 
+/*   padding-left: 50px;  */
 }
 
 .hero-content h1 {
@@ -317,12 +319,68 @@
   margin-bottom: 30px;
 }
 
-.hero-image img {
+/* .hero-image img {
   max-width: 100%;
   height: auto;
-  object-fit: contain; /* Ensures the image fits nicely */
-}
+  object-fit: contain; 
+} */
 
 .job-meta i {
   margin-right: 8px; /* Adjust the value as needed */
 }
+.dropdown-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  position: relative;
+}
+
+.arrow {
+  margin-right: 10px; /* Add space between arrow and text */
+  transition: transform 0.3s ease; /* Smooth arrow rotation */
+  transform: rotate(0deg); /* Arrow initially points right */
+}
+.job-item.active .dropdown-content {
+  display: block; /* Show dropdown content when active */
+}
+
+.job-item.active .arrow {
+  transform: rotate(90deg); 
+}
+
+.search-bar {
+    /* position: absolute; */
+    overflow: hidden;
+    background-color: transparent;
+    backdrop-filter: blur(2px);
+    align-self: center;
+    width: 450px;
+  }
+
+.searchbar-icon {
+    position: absolute;
+    right: 27px;
+    top: 25px;
+    background-color: transparent;
+    color: #5169F6;
+    cursor: pointer;
+  }
+
+input[type=text] {
+    padding: 9px;
+    border: none;
+    margin: 16px 14px;
+    font-size: 18px;
+    background-color: #f0f2ff
+    ;
+    text-align: left;
+    text-indent: 8px;
+    outline: none;
+    width: 420px;
+  }
+
+.search-bar , input[type=text] {
+    border-radius: 30px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
+  }
