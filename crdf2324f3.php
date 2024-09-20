@@ -62,7 +62,7 @@ if (isset($_SESSION['access_granted']) && $_SESSION['access_granted'] === true) 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         function goToQuiz() {
-            window.location.href = 'http://form-timer.com/start/9f952b16';
+            window.location.href = 'http://form-timer.com/start/3536bbbb';
         }
     </script>    
 </body>

@@ -118,10 +118,9 @@ if (isset($_SESSION['access_granted']) && $_SESSION['access_granted'] === true) 
             <div class="quiz-instructions-box">
                 <h2>Test Instructions</h2>
                 <div class="button-container">
-                    <button id="quizInstructions" disabled onclick="goToQuizInstructions()">View Test Instructions</button>
+                    <button id="quizInstructions" onclick="goToQuizInstructions()">View Test Instructions</button>
                 </div>
             </div>
-            <p class="instruction-text">Follow Us on LinkedIn to enable "Test Instructions".</p>
         </section>
     </main>
 
