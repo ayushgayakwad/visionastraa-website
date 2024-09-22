@@ -61,10 +61,10 @@ header{
   .explore {
     font-size: 16px;              
     font-weight: 600;        
-    color: black; 
+    color: #fff; 
     background-color: #5169f6    ;         
     /* background-color: rgb(72, 72, 205);  */
-    border-radius: 15px;        
+    border-radius: 30px;        
     padding: 15px 25px;         
     border: none;                
     cursor: pointer;             
@@ -180,7 +180,7 @@ header{
   .apply-link {
     font-size: 16px;
     font-weight: 600;
-    color: #1f2937;
+    color: #0D4E20;
     text-decoration: none;
     background-color: #badbba;
     border: 2.5px solid #bcddbc;
@@ -293,26 +293,27 @@ header{
   transform: rotate(90deg); 
 }
 
-.search-bar {
-    /* position: absolute; */
-    overflow: hidden;
-    background-color: transparent;
-    backdrop-filter: blur(2px);
-    align-self: flex-start;
-    width: 450px;
-    padding-top: 160px;
-    margin-right: 70px;
-    position: relative;
-  }
+#searchbar{
+  overflow: hidden;
+  margin-top: 180px;
+  margin-right: 70px;
+  align-self: flex-start;
+  position: relative;
+  width: 420px;
+  text-indent: 16px;
+  outline: none;
+  border-radius: 30px;
+  border: none;
+}
 
 .searchbar-icon {
     position: absolute;
-    right: 20px;
-    top: 185px;
+    right: 7%;
+    top: 43%;
+    transform: translateY(-50%);
     background-color: transparent;
     color: #5169F6;
     cursor: pointer;
-    padding-right: 20px;
   }
 
 input[type=text] {
