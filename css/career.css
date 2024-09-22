@@ -308,7 +308,7 @@ header{
 
 .searchbar-icon {
     position: absolute;
-    right: 100px;
+    right: 7%;
     top: 43%;
     transform: translateY(-50%);
     background-color: transparent;
