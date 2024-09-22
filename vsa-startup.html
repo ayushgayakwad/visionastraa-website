@@ -11,9 +11,11 @@
     
       <!-- Hero Section -->
       <section class="hero">
+        <header>
+          <div id="navbar-placeholder"></div>
+        </header>
         <div class="hero-container">
           <h1>Welcome to VisionAstraa StartUp Academy</h1>
-          <h2>Empowering Future Leaders in Entrepreneurship</h2>
           <div class="panoramic-container">
               <img src="image/ic1.jpg" alt="Startup-academy">
           </div>
@@ -101,6 +103,23 @@
           </div>
         </section>
       </div>
+      <script>
+         fetch('navbarcomp-VA/navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar-placeholder').innerHTML = data;
+
+                    const hamburger = document.getElementById("hamburger");
+                    const navLinks = document.getElementById("nav-links");
+
+                    if (hamburger && navLinks) {
+                        hamburger.onclick = function () {
+                            navLinks.classList.toggle("active");
+                        };
+                    }
+                })
+                .catch(error => console.error('Error loading navbar:', error));
+      </script>
 </body>
 </html>
 

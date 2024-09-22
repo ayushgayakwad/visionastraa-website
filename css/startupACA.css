@@ -37,24 +37,21 @@ section {
     border-radius: 0 0 40px 40px;
     box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5);
     width: 100%;
-    height: 95vh;
+    height: 97vh;
     padding-top: 30px;
     margin: 0;
     overflow-x: hidden;
+    margin-top: -25px;
 }
 
 .hero-container {
     margin: 0 auto;
+    
 }
 
 .hero h1 {
-    font-size: 48px;
-    margin-bottom: 5px;
-}
-
-.hero h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 36px;
+    margin-bottom: 10px;
 }
 
 .hero p {
@@ -66,7 +63,7 @@ section {
 .panoramic-container {
     overflow: hidden;
     width: 100%;
-    height: 310px;
+    height: 300px;
     margin-top: 10px;
     border-radius: 20px;
 }
@@ -181,12 +178,14 @@ section {
     font-size: 18px;
     margin-bottom: 10px;
     text-align: center;
+    padding-top: 30px;
 }
 
 .card p {
     font-size: 16px;
     text-align: center;
     margin-bottom: 80px;
+    padding-top: 10px;
 }
 
 
@@ -219,8 +218,8 @@ section {
     background-color: #000000;
     color: #d8efd3 ;
     border-radius: 50%;
-    width: 140px;
-    height: 140px;
+    width: 120px;
+    height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -235,22 +234,20 @@ section {
 
 .stat-number {
     display: block;
-    font-size: 30px;
+    font-size: 28px;
     color: #000000;
     font-weight: bold;
 }
 
 .stat-item p {
-    font-size: 18px;
+    font-size: 15px;
     color: #000000;
     
 }
 
 /* Responsive Styles */
 @media (max-width: 1200px) {
-    section {
-        max-width: 1200px;
-    }
+   
     
 }
 
@@ -259,14 +256,20 @@ section {
         max-width: 1200px;
     }
     .hero{
-        height: 580px;  
+        height: 750px;  
+        padding-top: 40px;
     }
+    .hero h1 {
+        margin-bottom: 30px;
+        margin-top: 20px;
+    }
+    .hero p {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-size: 20px;
     .about-us{
         padding-left: 50px;
         padding-right: 50px;
-    }
-    section {
-        max-width: 700px;
     }
     .vision-mission {
         flex-direction: column;
@@ -284,13 +287,14 @@ section {
     .card-container {
         flex-direction: column;
         align-items: center;
+        height: 90px;
     }
     .card {
         max-width: 100%;
         margin-bottom: 20px;
         flex: 1 1 200px;
+        height: 90px;
     }
-
 }
 
 @media (max-width: 992px) {
@@ -306,18 +310,30 @@ section {
     .hero p {
         font-size: 14px;
     }
+    .card {
+        height: 300px;
+    }
 }
 
 @media (max-width: 768px) {
     .hero{
-        height: 580px; 
+        height: 750px; 
+        padding-top: 40px;
+    }
+    .hero h1 {
+        margin-bottom: 30px;
+        margin-top: 20px;
+    }
+    .hero p {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .panoramic-container { 
+        height: 300px;
     }
     .about-us{
         padding-left: 50px;
         padding-right: 50px;
-    }
-    section {
-        max-width: 100%;
     }
     .vision-mission {
         flex-direction: column;
