@@ -12,7 +12,13 @@
     font-family: 'Poppins', sans-serif;
     color: #fff;
   }
-  
+  html, body {
+  height: 100%; /* Ensures that body takes full height */
+  overflow-y: auto; /* Ensures vertical scrolling */
+  margin: 0;
+  padding: 0;
+}
+
   .container {
     max-width: 1100px;
     margin: 0 auto;
@@ -28,7 +34,7 @@ header{
   position: fixed;
   top: 0;
   width: 100%; 
-  z-index: 0;
+  z-index: 10;
   transition: top 0.3s ease;  
 }
 /* Custom Scrollbar for WebKit Browsers */
@@ -241,7 +247,7 @@ header{
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  align-self: center;
+  /* align-self: center; */
   justify-content: space-between;
   padding: 20px;
   background: linear-gradient(to right bottom, rgb(0, 0, 0), rgb(27, 17, 17), rgb(8, 8, 42), rgb(0, 0, 0));;
@@ -294,52 +300,58 @@ header{
 }
 
 #searchbar{
+  position: relative;
   overflow: hidden;
   margin-top: 180px;
   margin-right: 70px;
   align-self: flex-start;
-  position: relative;
   width: 420px;
   text-indent: 16px;
   outline: none;
   border-radius: 30px;
   border: none;
 }
+/* #searchbar i{
+  right: 7%;
+} */
 
 .searchbar-icon {
-    position: absolute;
-    right: 7%;
-    top: 43%;
+    position: relative;
+    /* margin-right: 10px; */
+    right: 20%;
+    top: 39%;
     transform: translateY(-50%);
     background-color: transparent;
     color: #5169F6;
     cursor: pointer;
+    z-index: 1;
+    /* display: none; */
   }
 
 input[type=text] {
     padding: 10px 40px 10px 16px;
     border: none;
-    margin: 16px 14px;
+    margin: 0;
+    /* margin: 16px 14px; */
     font-size: 18px;
     background-color: #f0f2ff;
     text-align: left;
     text-indent: 8px;
     outline: none;
     width: 420px;
+    border-radius: 30px;
+    box-sizing: border-box;
   }
-
-.search-bar , input[type=text] {
+  .search-bar , input[type=text] {
     border-radius: 30px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
   }
 
+  
+
 /* Responsive Design */
-  
+
   @media (max-width: 768px) {
-    .header h1 {
-      font-size: 36px;
-    }
-  
     .filter-buttons {
       margin: 50px 0 30px;
       gap: 8px;
@@ -362,9 +374,55 @@ input[type=text] {
         align-self: center;
       margin-top: 10px;
     }
+    .hero-section {
+      flex-direction: column; /* Stack items vertically */
+      align-items: center; /* Center items horizontally */
+    }
+  
+    .hero-content {
+      padding: 20px;
+      text-align: center; 
+      width: 100%; /* Full width on mobile */
+      padding: 5px;
+      box-sizing: border-box; /* Include padding in width calculation */
+    }
+  
+    .hero-content h1 {
+      font-size: 32px; /* Adjust heading size */
+    }
+  
+    .hero-content p {
+      font-size: 16px; /* Adjust paragraph size */
+    }
+  
+    .explore {
+      margin-top: 20px; /* Add space above the button */
+    }
+  
+    #searchbar {
+      width: 300px;
+      margin-left: 4px;
+      margin-right: 4px;
+      margin-top: auto; 
+      /* box-sizing: border-box;  */
+    } 
+  
+    /* Adjust the input inside the search bar */
+    .hero-section .search-bar input[type="text"] {
+      width: 50%;
+      margin: 0;
+      text-indent: 16px; /* Adjust text indentation */
+    }
+  
+    /* Adjust the search icon position */
+    .searchbar-icon {
+      display: none; /* Hides the search icon on smaller devices */
+    }
   }
-
 @media (max-width: 600px) {
+  .hero-content{
+    margin-top: 5px;
+  }
   
     .filter-buttons button {
       padding: 6px 15px;
@@ -384,9 +442,27 @@ input[type=text] {
       padding: 8px 16px;
       font-size: 0.9rem;
     }
+    .hero-content h1 {
+      font-size: 28px; /* Further reduce heading size */
+    }
+  
+    .hero-content p {
+      font-size: 14px; /* Further reduce paragraph size */
+    }
+  
+    .hero-section .search-bar {
+      padding: 8px;
+    }
+    .searchbar-icon {
+      display: none; /* Hides the search icon on smaller devices */
+    }
   }
   
   @media (max-width: 480px) {
+
+    .hero-content{
+      margin-top: 5px;
+    }
     .header h1 {
       font-size: 28px;
     }
@@ -425,5 +501,19 @@ input[type=text] {
         width: 100%;
       text-align: center;
       font-size: 14px;
+    }
+    .hero-content h1 {
+      font-size: 24px; /* Adjust for very small screens */
+    }
+  
+    .hero-content p {
+      font-size: 12px;
+    }
+  
+    .hero-section .search-bar {
+      padding: 6px;
+    }
+    .searchbar-icon {
+      display: none; /* Hides the search icon on smaller devices */
     }
   }
