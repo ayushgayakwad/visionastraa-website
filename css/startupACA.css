@@ -106,11 +106,9 @@ section {
     justify-content: space-between;
     flex-direction: row;
     gap: 40px;
-    margin-left: 8.5%;
-    margin-right: 8.75%;
-    width: 82.5%;
+    width: 100%;
     margin-top: 60px;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
 }
 
 .vision-card, .mission-card {
@@ -142,7 +140,7 @@ section {
     padding: 30px 20px;
     width: 82.5%; /* Container width */
     margin: 0 auto;
-    margin-top: 60px;
+    margin-top: 80px;
     margin-bottom: 60px;
 }
 
@@ -357,7 +355,7 @@ section {
         margin-bottom: 10px;
     }
     .statistics-container {
-        margin-top: 825px;
+        margin-top: 760px;
         flex-direction: column;
         gap: 0px;
         
@@ -408,12 +406,13 @@ section {
     }
     .card {
         max-width: 100%;
-        margin-bottom: 10px;
+        
         flex: 1 1 200px;
         border-radius: 20px;
+        height: 250px;
     }
     .vision-mission { 
-        width: fit-content;
+        width: 100%;
         align-items: center;
     }
     .statistics { 
