@@ -222,7 +222,7 @@ function submitForm(event) {
     const form = document.getElementById('applicationForm');
     const formData = new FormData(form);
 
-    fetch('php/submit_application.php', {
+    fetch('php/submit_vsa_career_application.php', {
         method: 'POST',
         body: formData
     })
