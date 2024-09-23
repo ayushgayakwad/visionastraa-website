@@ -21,7 +21,6 @@ body {
     max-width: 82.5%;
     margin: 0 auto; 
     padding: 15px 15px; 
-    overflow-x: hidden;
 }
 
 section {
@@ -281,9 +280,6 @@ section {
         flex: 1 1 260px;
         margin-bottom: 20px;
     }
-    .statistics-container {
-        flex-direction: column;
-    }
     .card-container {
         flex-direction: column;
         align-items: center;
@@ -293,7 +289,14 @@ section {
         max-width: 100%;
         margin-bottom: 20px;
         flex: 1 1 200px;
-        height: 90px;
+        height: 300px;
+    }
+
+    .statistics-container {
+        margin-top: 825px;
+        flex-direction: column;
+        gap: 0px;
+        
     }
 }
 
@@ -312,6 +315,12 @@ section {
     }
     .card {
         height: 300px;
+    }
+    .statistics-container {
+        margin-top: 825px;
+        flex-direction: column;
+        gap: 0px;
+        
     }
 }
 
@@ -346,6 +355,7 @@ section {
         margin-bottom: 10px;
     }
     .statistics-container {
+        margin-top: 825px;
         flex-direction: column;
         gap: 0px;
         
