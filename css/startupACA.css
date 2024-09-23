@@ -77,7 +77,7 @@ section {
 /* About Us Section */
 .about-us {
     background-color: #f1d1c9;
-    border-radius: 40px;
+    border-radius: 20px;
     color: #202020;
     padding: 40px 20px;
     padding-left: 80px;
@@ -109,6 +109,8 @@ section {
     margin-left: 8.5%;
     margin-right: 8.75%;
     width: 82.5%;
+    margin-top: 60px;
+    margin-bottom: 60px;
 }
 
 .vision-card, .mission-card {
@@ -138,9 +140,10 @@ section {
     text-align: center;
     font-size: 24px;
     padding: 30px 20px;
-    
     width: 82.5%; /* Container width */
     margin: 0 auto;
+    margin-top: 60px;
+    margin-bottom: 60px;
 }
 
 #core-values h2 {
@@ -153,7 +156,7 @@ section {
 /* Card Container */
 .card-container {
     display: flex;
-    justify-content: space-between; /* More balanced spacing */
+    justify-content: space-between; 
     gap: 40px;
     width: 100%;
     margin-bottom: 20px;
@@ -191,7 +194,7 @@ section {
 .statistics {
     background-color: #d8efd3;
     text-align: center;
-    border-radius: 40px;
+    border-radius: 20px;
     box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
     padding: 0;
     width: 100%;
@@ -245,8 +248,7 @@ section {
 
 /* Responsive Styles */
 @media (max-width: 1200px) {
-   
-    
+
 }
 
 @media (max-width: 1100px) {
@@ -395,5 +397,26 @@ section {
     }
     .stat-item p {
         font-size: 14px;
+    }
+    .about-us { 
+        border-radius: 20px;
+    }
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .card {
+        max-width: 100%;
+        margin-bottom: 10px;
+        flex: 1 1 200px;
+        border-radius: 20px;
+    }
+    .vision-mission { 
+        width: fit-content;
+        align-items: center;
+    }
+    .statistics { 
+        border-radius: 20px;
     }
 }
