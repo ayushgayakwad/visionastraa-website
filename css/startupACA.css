@@ -103,7 +103,6 @@ section {
 
 /* Vision & Mission Section */
 .vision-mission {
-    padding: 60px 20px;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
