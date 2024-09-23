@@ -155,7 +155,7 @@ if ($result->num_rows > 0) {
 
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= "From: VisionAstraa Group <visionastra360@gmail.com>" . "\r\n";
+        $headers .= "From: VisionAstraa Group <recruitment@visionastraa.com>" . "\r\n";
 
         if (mail($recipient_email, "Your EV Startup Assessment Result", $message, $headers)) {
             $update_sql = "UPDATE test SET emailSent = true WHERE email = '$recipient_email'";
