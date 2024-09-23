@@ -10,7 +10,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT name, email, score, percentage FROM test WHERE percentage > 40 AND percentage < 96 AND emailSent = false";
+$sql = "SELECT name, email, score, percentage FROM quiz_data WHERE percentage > 40 AND percentage < 96 AND emailSent = false";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -102,7 +102,7 @@ if ($result->num_rows > 0) {
             <div class="container">
                 <p>Hello ' . htmlspecialchars($name) . ',</p>
                 <p><b>Thank you very much for your interest in applying for our open positions for VisionAstraa EV Startup.</b></p>
-                <p>Your Score from the <b>Online Skill Assessment Test for VisionAstraa EV Startup</b> is:</p>
+                <p>Your Score from the <b>Online Skill Assessment Test for VisionAstraa EV Startup</b> is:</p>
                 <h2 class="highlight">' . htmlspecialchars($score) . '</h2>
                 <p><b>We received over 5000+ applications from candidates across India.</b></p>
                 <p>Only the candidates with scores above 95 are being considered for the next round of technical Interviews for our EV Startup.</p>
@@ -158,7 +158,7 @@ if ($result->num_rows > 0) {
         $headers .= "From: VisionAstraa Group <recruitment@visionastraa.com>" . "\r\n";
 
         if (mail($recipient_email, "Your EV Startup Assessment Result", $message, $headers)) {
-            $update_sql = "UPDATE test SET emailSent = true WHERE email = '$recipient_email'";
+            $update_sql = "UPDATE quiz_data SET emailSent = true WHERE email = '$recipient_email'";
             $conn->query($update_sql);
             echo "Email sent to " . htmlspecialchars($recipient_email) . "<br>";
         } else {
