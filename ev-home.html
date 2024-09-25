@@ -29,11 +29,9 @@
 
 <body>
 
-
   <header>
     <div id="navbar-placeholder"></div>
   </header>
-
 
   <div id="carouselExampleIndicators" class="carousel dark-bg slide" data-bs-ride="carousel" data-bs-interval="4000">
     <div class="carousel-indicators">
@@ -49,10 +47,10 @@
         <img src="image/img1.jpg" class="d-block w-100" alt="Image 1">
       </div>
       <div class="carousel-item">
-        <img src="image/img2.jpg" class="d-block w-100" alt="Image 2">
+        <img src="image/ev-home2.png" class="d-block w-100" alt="Image 2">
       </div>
       <div class="carousel-item">
-        <img src="image/img3.jpg" class="d-block w-100" alt="Image 3">
+        <img src="image/ev-home3.png" class="d-block w-100" alt="Image 3">
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -67,34 +65,69 @@
     </button>
   </div>
 
-
+  <!-- Static text container (separate from carousel) -->
   <div class="static-text">
-    <div class="main-text">
-      CHARGE YOUR FUTURE IN EV INDUSTRY
-    </div>
-    <div class="sub-text">
-      Join our EV Academy to Master the Technology of the Future
-    </div>
+    <div class="main-text" id="main-text">CHARGE YOUR FUTURE IN EV INDUSTRY</div>
+    <div class="sub-text" id="sub-text">Join our EV Academy to Master the Technology of the Future</div>
+    <a href="#" class="btn btn-primary apply-btn" id="apply-now-btn" style="display: none;">Apply Now</a>
   </div>
 
   <!-- Scripts -->
   <script>
-    fetch('navbarcomp/navbar.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('navbar-placeholder').innerHTML = data;
-            // JavaScript to handle hamburger menu toggle
-            const hamburger = document.getElementById("hamburger");
-            const navLinks = document.getElementById("nav-links");
+    // JavaScript to dynamically update text and display button based on the active carousel image
+    const mainText = document.getElementById("main-text");
+    const subText = document.getElementById("sub-text");
+    const applyNowBtn = document.getElementById("apply-now-btn");
 
-            if (hamburger && navLinks) {
-                hamburger.onclick = function () {
-                    navLinks.classList.toggle("active");
-                };
-            }
-        })
-        .catch(error => console.error('Error loading navbar:', error));
-    </script>
+    const texts = [
+      {
+        main: "CHARGE YOUR FUTURE IN EV INDUSTRY",
+        sub: "Join our EV Academy to Master the Technology of the Future",
+        showButton: false
+      },
+      {
+        main: "LEARN FROM INDUSTRY EXPERTS",
+        sub: "Get hands-on experience with real-world EV projects",
+        showButton: false
+      },
+      {
+        main: "WANT TO ACCELERATE YOUR CAREER?",
+        sub: "Join our ELECTRIC VEHICLE MASTERY PROGRAM to master innovative technologies and excel in the EV industry.",
+        showButton: true
+      },
+    ];
+
+    const carousel = document.getElementById('carouselExampleIndicators');
+    carousel.addEventListener('slid.bs.carousel', function (event) {
+      const currentIndex = event.to;
+      mainText.innerText = texts[currentIndex].main;
+      subText.innerText = texts[currentIndex].sub;
+
+      // Display the "Apply Now" button only on the third slide
+      if (texts[currentIndex].showButton) {
+        applyNowBtn.style.display = "block";
+        applyNowBtn.href = "https://visionastraa.com/ev-application.html";
+      } else {
+        applyNowBtn.style.display = "none";
+      }
+    });
+
+    fetch('navbarcomp/navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-placeholder').innerHTML = data;
+        const hamburger = document.getElementById("hamburger");
+        const navLinks = document.getElementById("nav-links");
+
+        if (hamburger && navLinks) {
+          hamburger.onclick = function () {
+            navLinks.classList.toggle("active");
+          };
+        }
+      })
+      .catch(error => console.error('Error loading navbar:', error));
+  </script>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
