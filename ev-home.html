@@ -18,12 +18,9 @@
   <meta property="twitter:title" content="VisionAstraa EV Academy" />
   <meta property="twitter:description" content="Charge your future in EV industry with VisionAstraa EV Academy." />
   <meta property="twitter:image" content="https://visionastraa.com/image/ev_meta_image.png" />
-  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inika:wght@700&display=swap" rel="stylesheet">
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="css/Carousel.modules.css"> <!-- Adjust the path as needed -->
+  <link rel="stylesheet" href="css/Carousel.modules.css">
   <link rel="icon" href="../image/favicon-16x16" type="image/png">
 </head>
 
@@ -65,16 +62,13 @@
     </button>
   </div>
 
-  <!-- Static text container (separate from carousel) -->
   <div class="static-text">
     <div class="main-text" id="main-text">CHARGE YOUR FUTURE IN EV INDUSTRY</div>
     <div class="sub-text" id="sub-text">Join our EV Academy to Master the Technology of the Future</div>
-    <a href="#" class="btn btn-primary apply-btn" id="apply-now-btn" style="display: none;">Apply Now</a>
+    <a href="https://visionastraa.com/ev-application.html" class="btn btn-primary apply-btn" id="apply-now-btn" style="display: block;">Apply Now</a>
   </div>
 
-  <!-- Scripts -->
   <script>
-    // JavaScript to dynamically update text and display button based on the active carousel image
     const mainText = document.getElementById("main-text");
     const subText = document.getElementById("sub-text");
     const applyNowBtn = document.getElementById("apply-now-btn");
@@ -83,12 +77,12 @@
       {
         main: "CHARGE YOUR FUTURE IN EV INDUSTRY",
         sub: "Join our EV Academy to Master the Technology of the Future",
-        showButton: false
+        showButton: true
       },
       {
         main: "LEARN FROM INDUSTRY EXPERTS",
         sub: "Get hands-on experience with real-world EV projects",
-        showButton: false
+        showButton: true
       },
       {
         main: "WANT TO ACCELERATE YOUR CAREER?",
@@ -103,7 +97,6 @@
       mainText.innerText = texts[currentIndex].main;
       subText.innerText = texts[currentIndex].sub;
 
-      // Display the "Apply Now" button only on the third slide
       if (texts[currentIndex].showButton) {
         applyNowBtn.style.display = "block";
         applyNowBtn.href = "https://visionastraa.com/ev-application.html";
