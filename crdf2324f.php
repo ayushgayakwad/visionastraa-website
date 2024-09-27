@@ -185,6 +185,11 @@
                     messageDiv.textContent = "Your application has been submitted successfully!";
                     messageDiv.style.color = "green";
                     form.reset();
+                    const token = 'access_granted'; 
+                    const expirationTime = Date.now() + (10 * 60 * 1000);
+                    localStorage.setItem('token', token);
+                    localStorage.setItem('expires_at', expirationTime);
+
                     window.location.href = 'crdf2324f2.php';
                 } else {
                     messageDiv.textContent = "Error: " + data.error;

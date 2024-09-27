@@ -1,16 +1,5 @@
 <?php
 session_start();
-if (isset($_SESSION['access_granted']) && $_SESSION['access_granted'] === true) {
-    if (isset($_SESSION['expires_at']) && time() > $_SESSION['expires_at']) {
-        session_unset();
-        session_destroy();
-        header("Location: crdf2324f.php");
-        exit;
-    }
-} else {
-    header("Location: crdf2324f.php");
-    exit;
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,6 +53,16 @@ if (isset($_SESSION['access_granted']) && $_SESSION['access_granted'] === true) 
         function goToQuiz() {
             window.location.href = 'http://form-timer.com/start/3536bbbb';
         }
+        document.addEventListener("DOMContentLoaded", function () {
+            const token = localStorage.getItem('token');
+            const tokenExpiry = localStorage.getItem('expires_at');
+            if (token && tokenExpiry && new Date().getTime() < tokenExpiry) {
+                console.log("Token valid");
+            } else {
+                console.log("Token expired or missing");
+                window.location.href = 'crdf2324f.php';
+            }
+        });
     </script>    
 </body>
 </html>
