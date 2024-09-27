@@ -219,6 +219,93 @@ main {
     display: none;
 }
 
+/* Program Fee Section */
+.program-fee-section {
+    padding: 40px 0;
+    text-align: center;
+    margin: 0px auto;
+}
+
+.program-fee-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+/* Program Fee Box */
+.program-fee-box {
+    background-color: #202020;
+    width: 35%;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.program-fee-box:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px #876eea;
+}
+
+/* Course Fee Text */
+.course-fee {
+    font-size: 28px;
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.gst-text {
+    font-size: 16px;
+    color: #999;
+    margin-bottom: 30px;
+}
+
+/* Apply Now Button */
+.fee-apply-now {
+    background-color: #fff;
+    color: #000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
+}
+
+.fee-apply-now:hover {
+    background-color: #876eea;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+/* Program Features List */
+.program-features {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.program-features li {
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 25px;
+}
+
+.program-features li:before {
+    content: '✔';
+    position: absolute;
+    left: 0;
+    color: #876eea; /* Green color for the checkmark */
+}
+
+
 /* Apply Button */
 .register-course {
     background-color: #fff;
@@ -233,6 +320,43 @@ main {
 }
 
 .register-course:hover {
+    background-color: #876eea;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+.course-details-button {
+    background-color: #fff;
+    color: #000; 
+    padding: 10px 20px;
+    border: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin-right: 18px;
+}
+
+.course-details-button:hover {
+    background-color: #876eea;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+.program-fee-button {
+    background-color: #fff;
+    color: #000; 
+    padding: 10px 20px;
+    border: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.program-fee-button:hover {
     background-color: #876eea;
     color: #fff;
     transform: scale(1.05);
@@ -429,6 +553,15 @@ main {
 
     .hero-content h1 {
         font-size: 2em;
+    }
+
+    .program-fee-box {
+        width: 100%;
+    }
+
+    .course-details-button {
+        margin-bottom: 12px;
+        margin-right: 0px;
     }
 
     .course-info {
