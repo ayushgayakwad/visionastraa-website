@@ -13,7 +13,7 @@
       <div class="hero-content">
       <h1>Be a part of our mission</h1>
       <p>We’re looking for passionate people to join us on our mission.<br> We value flat hierarchies, clear communication, and full ownership and responsibility.</p>
-      <a href="#top-buttons"><button class="explore">Explore Jobs</button></a>
+      <a href="#top-buttons"><button class="explore">Explore Internships</button></a>
       </div>
       <div class="search-bar">
         <input id="searchbar" 
@@ -201,7 +201,6 @@
             <span>Postman</span>
             <span>TestNG</span>
             <span>JIRA</span>
-
           </div>
         </div>
         <a href="vsa-careerapplication.html" class="apply-link">Apply</a>
@@ -330,7 +329,7 @@
         <div class="job-details">
           <h2 class="dropdown-heading">Project Management</h2>
           <p class="dropdown-toggle">
-            <span class="arrow">&#9654;</span> <!-- Unicode for down arrow -->
+            <span class="arrow">&#9654;</span> 
             Hybrid(Bangalore, India)<b>.</b>Internship<b>.</b>2 months
         </p>
           <div class="dropdown-content">
@@ -375,7 +374,7 @@
       </article>
     </section>
   </div>
-
+  <div id="footer-container"></div>
 </body>
 </html>
 <script>
@@ -455,5 +454,28 @@ fetch('navbarcomp-VA/navbar.html')
             }
         });
     }
+
+                //footer 
+
+                async function loadFooter() {
+                try {
+                    const response = await fetch('./footercomp-VA/footer.html');
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    const footerHTML = await response.text();
+
+                    document.getElementById('footer-container').innerHTML = footerHTML;
+
+                    const linkElement = document.createElement('link');
+                    linkElement.rel = 'stylesheet';
+                    linkElement.href = './footercomp-VA/footer.css';
+                    document.head.appendChild(linkElement);
+                } catch (error) {
+                    console.error('Error loading the footer:', error);
+                }
+            }
+            document.addEventListener('DOMContentLoaded', loadFooter);
   
 </script>

@@ -174,7 +174,6 @@
 
             async function loadFooter() {
                 try {
-                 
                     const response = await fetch('./footercomp-VA/footer.html');
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -192,10 +191,7 @@
                     console.error('Error loading the footer:', error);
                 }
             }
-
-     
             document.addEventListener('DOMContentLoaded', loadFooter);
-
         </script>
 
 </html>
