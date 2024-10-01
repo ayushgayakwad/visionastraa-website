@@ -104,36 +104,51 @@
           </div>
         </section>
       </div>
-      <script>
-         fetch('navbarcomp-VA/navbar.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('navbar-placeholder').innerHTML = data;
 
-                    const hamburger = document.getElementById("hamburger");
-                    const navLinks = document.getElementById("nav-links");
+    <!-- Footer Section -->
+    <div class="main2">
+        <div class="about">
+            <p>VisionAstraa empowers students to transform from job seekers to job creators through grassroots innovation. We provide mentorship and guidance to help college students build the businesses of tomorrow.</p>
+            <p style="font-size: small;">© 2024 visionastraa. All rights reserved.</p>
+        </div>
+        <div class="nav">
+            <ul>
+                <h3 style="color: white;">QUICK LINKS</h3>
+                <li><a href="">about</a></li>
+                <li><a href="">contact</a></li>
+                <li><a href="">careers</a></li>
+                <li><a href="">mentors</a></li>
+            </ul>
+        </div>
+        <div class="social">
+            <ul>
+                <h3 style="color: white;">SOCIAL</h3>
+                <li><a href="">linkedIn</a></li>
+                <li><a href="">instagram</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="bigtext">
+        <h1 style="text-transform: uppercase; margin: 0; padding: 0;">VisionAstraa</h1>
+    </div>
 
-                    if (hamburger && navLinks) {
-                        hamburger.onclick = function () {
-                            navLinks.classList.toggle("active");
-                        };
-                    }
-                })
-                .catch(error => console.error('Error loading navbar:', error));
-      </script>
+    <script>
+        fetch('navbarcomp-VA/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+
+                const hamburger = document.getElementById("hamburger");
+                const navLinks = document.getElementById("nav-links");
+
+                if (hamburger && navLinks) {
+                    hamburger.onclick = function () {
+                        navLinks.classList.toggle("active");
+                    };
+                }
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
