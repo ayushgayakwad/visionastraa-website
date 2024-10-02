@@ -6,6 +6,7 @@
     <title>Contact Admissions Department</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/vsa-contact-style.css">
+    <link rel="stylesheet" href="navbarcomp/navbarstyle.css">
 </head>
 <body>
 
@@ -36,9 +37,7 @@
         <div id="formResponse"></div>
     </div>
 
-    <footer>
-        <div class="footer-content">FOOTER</div>
-    </footer>
+   
 
     <script>
         document.getElementById('contactForm').addEventListener('submit', function (e) {
@@ -61,6 +60,54 @@
             }
         });
     </script>
+    
+    <!-- Footer Section -->
+    <footer>
+        <p>© 2024 VisionAstraa. All rights reserved.</p>
+    </footer>
 
+    <script>
+        // Fetch navbar HTML and integrate it
+        fetch('navbarcomp-VA/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+
+                const hamburger = document.getElementById("hamburger");
+                const navLinks = document.getElementById("nav-links");
+
+                if (hamburger && navLinks) {
+                    hamburger.onclick = function () {
+                        navLinks.classList.toggle("active");
+                    };
+                }
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+             //footer 
+
+             async function loadFooter() {
+                try {
+                    const response = await fetch('./footercomp-VA/footer.html');
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    const footerHTML = await response.text();
+
+                    document.getElementById('footer-container').innerHTML = footerHTML;
+
+                    const linkElement = document.createElement('link');
+                    linkElement.rel = 'stylesheet';
+                    linkElement.href = './footercomp-VA/footer.css';
+                    document.head.appendChild(linkElement);
+                } catch (error) {
+                    console.error('Error loading the footer:', error);
+                }
+            }
+            document.addEventListener('DOMContentLoaded', loadFooter);
+    </script>
 </body>
 </html>
+
+
