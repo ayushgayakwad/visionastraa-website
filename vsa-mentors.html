@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,21 +6,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mentors</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/vsa-mentor.css">
+    <link rel="stylesheet" href="css\vsa-mentor.css">
     <link rel="stylesheet" href="navbarcomp/navbarstyle.css">
 </head>
-
 <body>
-    <header>
-        <img src="logo2.png" alt="Logo" class="logo">
-        
-            <!-- Hero Section -->  
-        <div id="navbar-placeholder"></div> <!-- Placeholder for navbar -->         
-        <h1>OUR GLOBAL MENTOR NETWORK</h1>
-    </header>
-   
-    <main>
+    
+      <!-- Hero Section -->
+      <section class="hero">
+        <header>
+          <div id="navbar-placeholder"></div>
+        </header>
+        <h1 class="centered-title">OUR GLOBAL MENTOR NETWORK</h1>
         <div class="container">
             <div class="mentor-grid">
                 <div>
@@ -191,7 +188,7 @@
         </div>
     </main>
     <script>
-        fetch('navbarcomp/navbar.html')
+       fetch('navbarcomp-VA/navbar.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('navbar-placeholder').innerHTML = data;
@@ -208,5 +205,4 @@
             .catch(error => console.error('Error loading navbar:', error));
     </script>
 </body>
-
 </html>
