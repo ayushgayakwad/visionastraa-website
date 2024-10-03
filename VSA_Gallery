@@ -13,7 +13,7 @@
             background-color: #fff;
             padding-left: 8.75%; 
             padding-right: 8.75%; 
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Poppins';
         }
 
             h1, h2, h3 {
