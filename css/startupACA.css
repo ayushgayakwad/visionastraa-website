@@ -149,6 +149,7 @@ section {
     margin-bottom: 30px;
     text-align: center;
     margin-top: -20px;
+    color:#ffffff;
 }
 
 /* Card Container */
@@ -242,6 +243,78 @@ section {
     font-size: 15px;
     color: #000000;
     
+}
+
+/* Footer Section */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    background: #171717;
+}
+
+.main2 {
+    display: flex;
+    background: #000;
+    padding: 60px 100px;
+    gap: 10px;
+    justify-content: space-around;
+    margin: 0;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+}
+
+.about p {
+    font-size: 18px;
+    color: white;
+    text-align: left;
+}
+
+.about {
+    width: 50%;
+}
+
+.nav ul li a,
+.social ul li a {
+    color: white;
+    font-size: 18px;
+    line-height: normal;
+    text-transform: capitalize;
+    text-decoration: none;
+}
+
+li {
+    line-height: 35px;
+}
+
+h3 {
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: white;
+    text-underline-offset: 8px;
+}
+
+.bigtext {
+    background: #000;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100px;
+    position: relative;
+}
+
+.bigtext h1 {
+    margin: 0;
+    padding: 0;
+    color: white;
+    opacity: 10%;
+    text-align: center;
+    font-size: 10vw;
+    text-transform: uppercase;
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /* Responsive Styles */
@@ -373,6 +446,53 @@ section {
     .statistics{
         margin-top: 30px;
     }
+    .main2 {
+        flex-direction: column;
+        padding: 30px 20px;
+        justify-content: center;
+    }
+    
+    .about, .nav, .social {
+        width: 100%;
+        text-align: center;
+    }
+
+    .about p {
+        text-align: justify;
+        margin: 0px 40px 40px 40px;
+    }
+
+    .nav ul, .social ul {
+        padding: 0;
+    }
+
+    .bigtext {
+        background: #000;
+        width: 100%;
+        height: 100vh; /* Full viewport height */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; /* Hide overflow to prevent scrolling */
+        position: relative;
+    }
+    
+    .bigtext h1 {
+        margin: 0;
+        padding: 0;
+        color: white;
+        opacity: 0.2; /* Slightly transparent for background effect */
+        text-align: center;
+        font-size: calc(100vw / 5); /* Adjust font-size to scale with viewport width */
+        text-transform: uppercase;
+        line-height: 0.9;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        white-space: nowrap; /* Prevents text wrapping */
+    }
+    
 }
 
 @media (max-width: 576px) {
@@ -417,5 +537,43 @@ section {
     }
     .statistics { 
         border-radius: 20px;
+    }
+    .main2 {
+        flex-direction: column;
+        padding: 30px 20px;
+        justify-content: center;
+    }
+    
+    .about, .nav, .social {
+        width: 100%;
+        text-align: center;
+    }
+
+    .about p {
+        text-align: justify;
+        margin: 0px 40px 40px 40px;
+    }
+
+    .nav ul, .social ul {
+        padding: 0;
+    }
+
+    .bigtext {
+        background: #000;
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .bigtext h1 {
+        margin: 0;
+        padding: 0;
+        color: white;
+        opacity: 10%;
+        text-align: center;
+        font-size: 40vw;
+        text-transform: uppercase;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
