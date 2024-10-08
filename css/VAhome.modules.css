@@ -35,7 +35,7 @@ body {
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.253);
 }
 header{
-  position: fixed;
+  position: absolute;
   top: 0;
   width: 100%; 
   z-index: 0;
@@ -126,7 +126,7 @@ header{
 }
 
 .hero-body {
-  margin-top: 230px;
+  margin-top: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;

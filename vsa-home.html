@@ -125,22 +125,7 @@
             });
 
 
-            const header = document.querySelector('header');
-            let lastScrollY = window.scrollY;
-            const headerInitialOffset = header.offsetTop;
-
-            window.addEventListener('scroll', () => {
-
-                if (window.scrollY > lastScrollY && window.scrollY > headerInitialOffset) {
-                    header.style.display = 'none';
-                }
-
-                else if (window.scrollY < lastScrollY) {
-                    header.style.display = 'block';
-                }
-
-                lastScrollY = window.scrollY;
-            });
+          
 
             function openPopup(module, content) {
                 document.getElementById('popup-module').innerHTML = module;
