@@ -210,6 +210,12 @@ main {
     margin-top: 24px;
 }
 
+.course-pricing-info h4 {
+    font-size: 16px;
+    max-width: 600px;
+    margin-bottom: 8px;
+}
+
 .course-pricing-info p {
     font-size: 16px;
     max-width: 600px;
@@ -221,14 +227,15 @@ main {
 
 /* Program Fee Section */
 .program-fee-section {
-    padding: 40px 0;
+    padding: 8px 0;
     text-align: center;
     margin: 0px auto;
+    display: flex;
+    flex-direction: row;
 }
 
 .program-fee-title {
     font-size: 24px;
-    margin-bottom: 20px;
     color: #fff;
 }
 
@@ -248,11 +255,23 @@ main {
     box-shadow: 0 0 10px #876eea;
 }
 
+.program-fee-box h5 {
+    background-color: #876eea;
+    margin: auto;
+    width: 30%;
+    border-radius: 48px;
+    text-align: center;
+    font-weight: normal;
+    padding: 8px;
+    font-size: small;
+}
+
 /* Course Fee Text */
 .course-fee {
     font-size: 28px;
     color: #fff;
     font-weight: bold;
+    margin-top: 16px;
     margin-bottom: 10px;
 }
 
@@ -544,6 +563,15 @@ main {
     .hero-section {
         flex-direction: column;
         height: 575px;
+    }
+
+    .program-fee-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .program-fee-box {
+        margin-bottom: 18px;
     }
 
     .hero-content, .hero-image {
