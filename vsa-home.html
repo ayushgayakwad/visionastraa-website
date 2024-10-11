@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>visionastraa-startup-academy</title>
     <link rel="stylesheet" href="./css/VAhome.modules.css">
+
 </head>
 
 
@@ -85,7 +86,7 @@
                 </div>
             </div>
         </div>
-
+        <div id="footer-container"></div>
         <script>
             const ques = document.querySelector("#fst");
             const ques2 = document.querySelector("#snd");
@@ -124,22 +125,7 @@
             });
 
 
-            const header = document.querySelector('header');
-            let lastScrollY = window.scrollY;
-            const headerInitialOffset = header.offsetTop; 
-
-            window.addEventListener('scroll', () => {
-        
-                if (window.scrollY > lastScrollY && window.scrollY > headerInitialOffset) {
-                    header.style.display = 'none'; 
-                }
-             
-                else if (window.scrollY < lastScrollY) {
-                    header.style.display = 'block'; 
-                }
-
-                lastScrollY = window.scrollY;
-            });
+          
 
             function openPopup(module, content) {
                 document.getElementById('popup-module').innerHTML = module;
@@ -166,6 +152,31 @@
                     }
                 })
                 .catch(error => console.error('Error loading navbar:', error));
+
+
+
+            //footer 
+
+            async function loadFooter() {
+                try {
+                    const response = await fetch('./footercomp-VA/footer.html');
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    const footerHTML = await response.text();
+
+                    document.getElementById('footer-container').innerHTML = footerHTML;
+
+                    const linkElement = document.createElement('link');
+                    linkElement.rel = 'stylesheet';
+                    linkElement.href = './footercomp-VA/footer.css';
+                    document.head.appendChild(linkElement);
+                } catch (error) {
+                    console.error('Error loading the footer:', error);
+                }
+            }
+            document.addEventListener('DOMContentLoaded', loadFooter);
         </script>
 
 </html>

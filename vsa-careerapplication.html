@@ -18,6 +18,27 @@
             overflow: auto;
         }
 
+        /* Dark gradient section above form */
+        .gradient-section {
+            background: linear-gradient(rgba(8, 8, 42, 0.9), rgba(8, 8, 42, 0.9));
+            padding: 40px;
+            color: white;
+            text-align: center;
+            max-width: 100%; /* Ensures it doesn't extend more than the viewport width */
+            width: 100%; /* Match the width of the navbar */
+            box-sizing: border-box;
+        }
+        .gradient-section header {
+    max-width: 1200px; /* Adjust based on your navbar or content width */
+    margin: 0 auto;
+}
+
+        .gradient-section h1 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
         .form-container {
             background-color: #D3D9FF;
             padding: 20px;
@@ -96,9 +117,11 @@
     </style>
 </head>
 <body>
-    <header>
-        <div id="navbar-placeholder"></div>
-    </header>
+    <!-- Gradient section above the form -->
+    <div class="gradient-section">
+        <header id="navbar-placeholder"></header>
+    </div>
+
     <div class="form-container">
         <h1>Apply Now!</h1>
         <form id="applicationForm" onsubmit="submitForm(event);" enctype="multipart/form-data">
@@ -166,6 +189,7 @@
         </form>
         <div id="message" class="message"></div>
     </div>
+
     <script>
         function validateForm() {
             const resumeInput = document.getElementById('resume');
@@ -188,38 +212,54 @@
             return true;
         }
 
-        function submitForm(event) {
-            event.preventDefault();
+function submitForm(event) {
+    event.preventDefault();
 
-            if (!validateForm()) {
-                return;
-            }
+    if (!validateForm()) {
+        return;
+    }
 
-            const form = document.getElementById('applicationForm');
-            const formData = new FormData(form);
+    const form = document.getElementById('applicationForm');
+    const formData = new FormData(form);
 
-            fetch('php/submit_application.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                const messageDiv = document.getElementById('message');
-                if (data.success) {
-                    messageDiv.textContent = "Your application has been submitted successfully!";
-                    messageDiv.style.color = "green";
-                    form.reset();
-                } else {
-                    messageDiv.textContent = "Error: " + data.error;
-                    messageDiv.style.color = "red";
-                }
-            })
-            .catch(error => {
-                const messageDiv = document.getElementById('message');
-                messageDiv.textContent = "There was an error submitting the form.";
-                messageDiv.style.color = "red";
-            });
+    fetch('php/submit_vsa_career_application.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        const messageDiv = document.getElementById('message');
+        if (data.success) {
+            messageDiv.textContent = "Your application has been submitted successfully!";
+            messageDiv.style.color = "green";
+            form.reset();
+        } else {
+            messageDiv.textContent = "Error: " + data.error;
+            messageDiv.style.color = "red";
         }
-    </script>
+    })
+    .catch(error => {
+        const messageDiv = document.getElementById('message');
+        messageDiv.textContent = "There was an error submitting the form.";
+        messageDiv.style.color = "red";
+    });
+}
+
+fetch('navbarcomp-VA/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-placeholder').innerHTML = data;
+
+            const hamburger = document.getElementById("hamburger");
+            const navLinks = document.getElementById("nav-links");
+
+            if (hamburger && navLinks) {
+                hamburger.onclick = function () {
+                    navLinks.classList.toggle("active");
+                };
+            }
+        })
+        .catch(error => console.error('Error loading navbar:', error));
+</script>
 </body>
 </html>

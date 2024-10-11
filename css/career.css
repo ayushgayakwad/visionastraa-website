@@ -4,20 +4,24 @@
     padding: 0;
     box-sizing: border-box;
   }
-  html {
-    scroll-behavior: smooth;
-  }
-  
   body {
     font-family: 'Poppins', sans-serif;
     color: #fff;
+    background-color: #ffffff;
   }
-  
+  html, body {
+  height: 100%; /* Ensures that body takes full height */
+  overflow-y: auto; /* Ensures vertical scrolling */
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
   .container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0px 20px;
-    background-color: #fff;
+    background-color: #171717;
   }
 #navbar-placeholder {
     margin: 0;
@@ -28,7 +32,7 @@ header{
   position: fixed;
   top: 0;
   width: 100%; 
-  z-index: 0;
+  z-index: 10;
   transition: top 0.3s ease;  
 }
 /* Custom Scrollbar for WebKit Browsers */
@@ -38,7 +42,7 @@ header{
   
   .badge {
     display: inline-block;
-    background-color: #f2f4f6;
+    background-color: #171717;
     border-radius: 15px;
     padding: 8px 15px;
     font-size: 12px;
@@ -61,10 +65,10 @@ header{
   .explore {
     font-size: 16px;              
     font-weight: 600;        
-    color: black; 
+    color: #fff; 
     background-color: #5169f6    ;         
     /* background-color: rgb(72, 72, 205);  */
-    border-radius: 15px;        
+    border-radius: 30px;        
     padding: 15px 25px;         
     border: none;                
     cursor: pointer;             
@@ -84,7 +88,7 @@ header{
     justify-content: center; /* Horizontally center items */
     align-items: center; /* Vertically center items */
     margin-top: 40px;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
     gap: 10px;
   }
   .filter-buttons a {
@@ -116,7 +120,8 @@ header{
     display: flex;
     flex-direction: column;
     gap: 20px;
-    background-color: #fff;
+    background-color: #171717;
+    margin-bottom: 100px;
   }
 
   .job-item {
@@ -124,7 +129,7 @@ header{
     border: 2px solid #d5d6d6;
     padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 2px 10px #d5d6d6;
+    /* box-shadow: 0 2px 10px #d5d6d6; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -133,8 +138,8 @@ header{
     transition: border 0s, box-shadow 0s;
   }
   .job-item:hover{
-    border: 3px solid #C0DECF;
-    box-shadow: 0 2px 10px #C0DECF;
+    border: 3px solid #b1ddc7;
+    /* box-shadow: 0 2px 10px #C0DECF; */
     transition: border 0s, box-shadow 0s;
   }
   .job-item .job-details {
@@ -180,7 +185,7 @@ header{
   .apply-link {
     font-size: 16px;
     font-weight: 600;
-    color: #1f2937;
+    color: #0D4E20;
     text-decoration: none;
     background-color: #badbba;
     border: 2.5px solid #bcddbc;
@@ -195,56 +200,6 @@ header{
     border-radius: 20px;
   }
 
-  
-  
-  /* Responsive Design */
-  
-  @media (max-width: 768px) {
-    .header h1 {
-      font-size: 36px;
-    }
-  
-    .filter-buttons {
-      gap: 8px;
-    }
-  
-    .job-item {
-      flex-direction: row;
-      align-items: flex-start;
-    }
-  
-    .apply-link {
-      margin-top: 10px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .header h1 {
-      font-size: 28px;
-    }
-  
-    .filter-buttons {
-      flex-direction: row;
-      gap: 5px;
-    }
-  
-    .job-item {
-      padding: 15px;
-    }
-  
-    .job-meta {
-      flex-direction: column;
-      gap: 5px;
-    }
-  
-    .job-item h2 {
-      font-size: 20px;
-    }
-  
-    .apply-link {
-      font-size: 14px;
-    }
-  }
   .dropdown-content {
     max-height: 0; /* Initially hidden */
     overflow: hidden; /*Hide overflow content */
@@ -291,12 +246,12 @@ header{
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  align-self: center;
+  /* align-self: center; */
   justify-content: space-between;
   padding: 20px;
   background: linear-gradient(to right bottom, rgb(0, 0, 0), rgb(27, 17, 17), rgb(8, 8, 42), rgb(0, 0, 0));;
   padding-top: 120px; 
-  height: 85vh;
+  height: 86vh;
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;  
 }
@@ -324,7 +279,7 @@ header{
 }
 .dropdown-toggle {
   cursor: pointer;
-  display: flex;
+/*   display: flex; */
   align-items: center;
   font-size: 1.1rem;
   position: relative;
@@ -343,41 +298,242 @@ header{
   transform: rotate(90deg); 
 }
 
-.search-bar {
-    /* position: absolute; */
-    overflow: hidden;
-    background-color: transparent;
-    backdrop-filter: blur(2px);
-    align-self: flex-start;
-    width: 450px;
-    padding-top: 160px;
-    margin-right: 70px;
-    position: relative;
-  }
+#searchbar{
+  position: relative;
+  overflow: hidden;
+  margin-top: 180px;
+  margin-right: 70px;
+  align-self: flex-start;
+  width: 420px;
+  text-indent: 16px;
+  outline: none;
+  border-radius: 30px;
+  border: none;
+}
+/* #searchbar i{
+  right: 7%;
+} */
 
 .searchbar-icon {
-    position: absolute;
-    right: 20px;
-    top: 185px;
+    position: relative;
+    /* margin-right: 10px; */
+    right: 20%;
+    top: 39%;
+    transform: translateY(-50%);
     background-color: transparent;
     color: #5169F6;
     cursor: pointer;
-    padding-right: 20px;
+    z-index: 1;
+    /* display: none; */
   }
 
 input[type=text] {
     padding: 10px 40px 10px 16px;
     border: none;
-    margin: 16px 14px;
+    margin: 0;
+    /* margin: 16px 14px; */
     font-size: 18px;
     background-color: #f0f2ff;
     text-align: left;
     text-indent: 8px;
     outline: none;
     width: 420px;
+    border-radius: 30px;
+    box-sizing: border-box;
   }
-
-.search-bar , input[type=text] {
+  .search-bar , input[type=text] {
     border-radius: 30px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
+  }
+  
+  section {
+    background-color: #ffffff; /* Set the background color for all other sections */
+}
+/* Responsive Design */
+
+/* For larger devices (iPads, Surface Pro 7, etc.) */
+@media only screen and (min-width: 769px) and (max-width: 1024px){
+  .hero-section {
+    flex-direction: column;
+    align-items: center; 
+    height: 70vh;
+  }
+  .searchbar-icon {
+    display: none;
+  }
+}
+
+  @media (max-width: 768px) {
+    .filter-buttons {
+      margin: 50px 0 30px;
+      gap: 8px;
+    }
+
+      .filter-buttons button {
+      padding: 8px 18px;
+      font-size: 0.8rem;
+    }
+  
+    .job-item {
+      flex-direction: column;
+    }
+
+    .job-meta {
+      justify-content: flex-start;
+    }
+  
+    .apply-link {
+        align-self: center;
+      margin-top: 10px;
+    }
+    .hero-section {
+      flex-direction: column; /* Stack items vertically */
+      align-items: center; /* Center items horizontally */
+      height: 70vh;
+    }
+  
+    .hero-content {
+      padding: 20px;
+      text-align: center; 
+      width: 100%; /* Full width on mobile */
+      padding: 5px;
+      box-sizing: border-box; /* Include padding in width calculation */
+    }
+  
+    .hero-content h1 {
+      font-size: 32px; /* Adjust heading size */
+    }
+  
+    .hero-content p {
+      font-size: 16px; /* Adjust paragraph size */
+    }
+  
+    .explore {
+      margin-top: 20px; /* Add space above the button */
+    }
+  
+    #searchbar {
+      width: 300px;
+      margin-left: 4px;
+      margin-right: 4px;
+      margin-top: auto; 
+      /* box-sizing: border-box;  */
+    } 
+  
+    /* Adjust the input inside the search bar */
+    .hero-section .search-bar input[type="text"] {
+      width: 50%;
+      margin: 0;
+      text-indent: 16px; /* Adjust text indentation */
+    }
+  
+    /* Adjust the search icon position */
+    .searchbar-icon {
+      display: none; /* Hides the search icon on smaller devices */
+    }
+  }
+@media (max-width: 600px) {
+  .hero-content{
+    margin-top: 5px;
+  }
+  
+    .filter-buttons button {
+      padding: 6px 15px;
+      font-size: 0.75rem;
+    }
+  
+    .job-item {
+      padding: 15px;
+    }
+  
+    .job-meta span {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+    }
+  
+    .apply-link {
+      padding: 8px 16px;
+      font-size: 0.9rem;
+    }
+    .hero-section{
+      height: 70vh;
+    }
+    .hero-content h1 {
+      font-size: 28px; /* Further reduce heading size */
+    }
+  
+    .hero-content p {
+      font-size: 14px; /* Further reduce paragraph size */
+    }
+  
+    .hero-section .search-bar {
+      padding: 8px;
+    }
+    .searchbar-icon {
+      display: none; /* Hides the search icon on smaller devices */
+    }
+  }
+  
+  @media (max-width: 480px) {
+
+    .hero-content{
+      margin-top: 5px;
+    }
+    .header h1 {
+      font-size: 28px;
+    }
+  
+    .filter-buttons {
+      flex-direction: column;
+      gap: 5px;
+    }
+
+      .filter-buttons button {
+      width: 100%;
+      text-align: center;
+      padding: 8px 0;
+    }
+  
+    .job-item {
+      padding: 15px;
+    }
+  
+    .job-meta {
+      flex-direction: column;
+        align-items: flex-start;
+      gap: 5px;
+    }
+
+      .job-meta span {
+      width: 100%;
+      justify-content: flex-start;
+    }
+  
+    .job-item h2 {
+      font-size: 20px;
+    }
+  
+    .apply-link {
+        width: 100%;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .hero-section{
+      height: 70vh;
+    }
+    .hero-content h1 {
+      font-size: 24px; /* Adjust for very small screens */
+    }
+  
+    .hero-content p {
+      font-size: 12px;
+    }
+  
+    .hero-section .search-bar {
+      padding: 6px;
+    }
+    .searchbar-icon {
+      display: none; /* Hides the search icon on smaller devices */
+    }
   }
