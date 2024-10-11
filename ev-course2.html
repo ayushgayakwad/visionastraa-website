@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EV Software and Control Systems</title>
+    <title>EV Academy Course</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/course.css">
@@ -34,50 +34,19 @@
             
                 <h3>Course Schedule:</h3>
                 <div class="batch-timings">Weekdays: 9:00 AM - 4:30 PM</div>
-                <p class="schedule-text">Saturday: External Mentorship & Project Work<br>Start Date: October 1st <span class="line-break-mobile">|</span><span class="line-break-desktop"><br></span> Venue: TBD in Bangalore</p>
-                <a href="ev-application.html">
-                    <button class="register-course">APPLY NOW</button>
+                <p class="schedule-text">Saturday: External Mentorship & Project Work<br>Start Date: First Week of November <span class="line-break-mobile">|</span><span class="line-break-desktop"><br></span> Venue: TBD in Bangalore</p>
+                <h3>Requirements:</h3>
+                <p>B.Tech/M.Tech graduate from ECE/EEE/Mech (or allied branches)</p>
+                <a href="#course-content">
+                    <button class="course-details-button">COURSE DETAILS</button>
+                </a>
+                <a href="#program-fee-section">
+                    <button class="program-fee-button">PROGRAM FEE</button>
                 </a>
             </div>
         </section>
-        
-        <section class="pricing-info">
-            <div class="pricing-learning-outcomes">
-                <h2>Learning Outcomes</h2>
-                <ul>
-                    <li><b>Master the fundamentals</b> of electric vehicle technology and the automotive industry.</li>
-                    <li><b>Develop expertise</b> in EV powertrain design and development, including modeling, simulation, and component selection.</li>
-                    <li><b>Acquire practical skills</b> in battery management, power electronics, and electric machine control for optimal EV performance and efficiency.</li>
-                    <li><b>Prepare for a successful career</b> in the EV industry through hands-on projects, industry-relevant training, and career development support.</li>
-                </ul>
-            </div>
-        </section>        
 
-        <section class="requirements-section">
-            <div class="requirements-box">
-                <h2>Requirements</h2>
-                <p>Bachelor's degree (B.Tech) or Master's degree (M.Tech) in:</p>
-                <ul>
-                    <li>Electrical Engineering (EEE)</li>
-                    <li>Electronics and Communication Engineering (ECE)</li>
-                    <li>Mechanical Engineering (ME) and allied branches (Industrial, Automotive, Instrumentation, Aeronautical, etc.)</li>
-                </ul>
-            </div>
-        </section>
-        <section class="course-inclusions">
-            <div class="inclusions-box">
-                <h2>This Course Includes</h2>
-                <ul>
-                    <li>Real-time project work (Weeks 5 to 12)</li>
-                    <li>Resume Preparation & Mock Interviews (Week 13)</li>
-                    <li>Group Discussion & Individual Presentation (Week 14)</li>
-                    <li>Final Project Demo (Week 15)</li>
-                    <li>Final Placement Drives (Weeks 15 to 16)</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="course-content">
+        <section id="course-content" class="course-content">
             <h2>Course Content</h2>
             <table>
                 <thead>
@@ -351,28 +320,37 @@
                         </td>
                         <td>Week 13-14</td>
                     </tr>
-
-                    <tr>
-                        <td><i class="fas fa-car"></i> Module 9</td>
-                        <td>
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#module9">ADAS (elective)</button>
-                            <div id="module9" class="collapse">
-                                <ul>
-                                    <li>Introduction to ADAS and MATLAB</li>
-                                    <li>Data Analysis and Visualization in MATLAB</li>
-                                    <li>Introduction to ADAS Sensors</li>
-                                    <li>Signal Processing for ADAS</li>
-                                    <li>ADAS Algorithms in MATLAB</li>
-                                    <li>Simulating ADAS Systems in MATLAB</li>
-                                    <li>Case Study and Project Execution</li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>Week 15</td>
-                    </tr>
                 </tbody>
             </table>
         </section>
+
+        <section>
+            <div id="program-fee-section" class="program-fee-section">
+                <h2 class="program-fee-title">Program Fee</h2>
+                <div class="program-fee-box">
+                    <div class="course-fee">Rs. 84,745.8</div>
+                    <div class="gst-text">+18% GST</div>
+                    <a href="ev-application.html">
+                        <button class="fee-apply-now">Apply Now</button>
+                    </a>
+                    <ul class="program-features">
+                        <li>In-Person Classes</li>
+                        <li>Strong Global Mentor Network with Mentors from US and Europe with an average of 20+ Years of Experience in the industry</li>
+                        <li>Hands-on Design at EV Maker Space</li>
+                        <li>Digital & Physical Twin Lab Facility</li>
+                        <li>Technology & Best Practice Transfer</li>
+                        <li>Placement India & Abroad</li>
+                        <li>Affordable Pricing</li>
+                        <li>Project to Product (Independent Student led Start-Up)</li>
+                        <li>Real-time project work (Weeks 5 to 12)</li>
+                        <li>Resume Preparation & Mock Interviews (Week 13)</li>
+                        <li>Group Discussion & Individual Presentation (Week 14)</li>
+                        <li>Final Project Demo (Week 15)</li>
+                        <li>Final Placement Drives (Weeks 15 to 16)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>     
 
         <section class="instructors">
             <h2>Meet Your Instructors</h2>
@@ -472,6 +450,17 @@
             })
             .catch(error => console.error('Error loading navbar:', error));
     </script>
+    <script>
+        document.querySelector('.course-details-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#course-content').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        document.querySelector('.program-fee-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#program-fee-section').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

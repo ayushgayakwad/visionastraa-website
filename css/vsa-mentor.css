@@ -1,50 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+/* General Styles */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
+
 
 body {
     font-family: 'Poppins', sans-serif;
     color: #fff;
+    margin: 0;
+    padding: 0;
+
 }
 
-header {
+.container {
+    max-width: 82.5%;
+    margin: 0 auto; 
+    padding: 15px 15px; 
+}
+section {
+    margin-bottom: 30px; 
+    width: 100%;
+}
+
+  header {
     background: linear-gradient(to right bottom, rgb(0, 0, 0), rgb(27, 17, 17), rgb(8, 8, 42), rgb(0, 0, 0));
     height: 300px;
+}
+.hero-container {
+    display: flex;
+    justify-content: center;  /* Centers horizontally */
+    align-items: center;      /* Centers vertically */
+    height: 300px;            /* Adjust height as needed for desired space */
+    position: relative; 
+    height: 100%;      /* Ensure correct positioning relative to its parent */
+}
+.centered-title {
+    font-size: 42px;
+    font-family: 'Poppins', sans-serif;
+    color: #f5f5f5;
+    text-align: center;
+     margin: 0;
+    transform: translateY(-120px); /* Adjust upward */
+    word-break: 2px
+}
+
+.hero-container {
+    min-height: 10px; /* Added height to avoid collapsing */
+}
+
+form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    position: relative;
-    text-align: center;
-}
-
-.logo {
-    width: 86px;
-    height: 87px;
-    position: absolute;
-    top: 38px;
-    left: 110px;
-    gap: 0px;
-    opacity: 1; 
-}
-
-.nav-links {
-    width: 721px;
-    height: 33px;
-    background-color: #D9D9D9;
-    border-radius: 20px;
-    position: absolute; 
-    top: 60px;
-    right: 100px; 
-}
-
-header h1 {
+    font-family: 'Poppins', sans-serif;  
+  }
+  header h1 {
     font-size: 48px;
     color: #f5f5f5;
     margin-top: 90px;
     animation: fadeIn 2s ease-in-out;
+    z-index: 10; 
 }
 
 /* Fade-in animation */
@@ -318,4 +336,4 @@ a{
     .mentor {
         padding: 15px;
     }
-}
+}     

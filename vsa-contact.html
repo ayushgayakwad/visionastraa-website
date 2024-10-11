@@ -6,38 +6,105 @@
     <title>Contact Admissions Department</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/vsa-contact-style.css">
+    <link rel="stylesheet" href="navbarcomp/navbarstyle.css">
 </head>
 <body>
 
     <header>
-        <img src="logo2.png" alt="Logo" class="logo">
-        <nav>
-            <div class="nav-links"></div>
-        </nav>
+        <header id="navbar-placeholder"></header>
     </header>
 
     <div class="form-container">
         <h2>Contact Admissions Department</h2>
-        <form>
+        <form id="contactForm">
             <label for="name">NAME:</label>
-            <input type="text" id="name" placeholder="Name">
+            <input type="text" id="name" name="name" placeholder="Name" required minlength="2" pattern="[A-Za-z\s]+" title="Please enter a valid name (letters only).">
             
             <label for="email">EMAIL:</label>
-            <input type="email" id="email" placeholder="Email">
+            <input type="email" id="email" name="email" placeholder="Email" required title="Please enter a valid email address.">
             
             <label for="phone">PHONE NUMBER:</label>
-            <input type="tel" id="phone" placeholder="Phone Number">
+            <input type="tel" id="phone" name="phone" placeholder="Phone Number" required pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number.">
             
             <label for="message">MESSAGE:</label>
-            <textarea id="message" rows="4" placeholder="Message"></textarea>
+            <textarea id="message" name="message" rows="4" placeholder="Message" required minlength="10"></textarea>
 
             <button type="submit">SUBMIT</button>
         </form>
+        <div id="formResponse"></div>
     </div>
 
+   
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            var form = e.target;
+            if (form.checkValidity()) {
+                var formData = new FormData(form);
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'php/submit_vsa_contact.php', true);
+                xhr.onload = function () {
+                    var response = JSON.parse(this.responseText);
+                    var responseElement = document.getElementById('formResponse');
+                    responseElement.innerHTML = response.message;
+                    responseElement.style.color = response.success ? 'green' : 'red';
+                };
+                xhr.send(formData);
+            } else {
+                alert('Please fill out the form correctly.');
+            }
+        });
+    </script>
+    
+    <!-- Footer Section -->
     <footer>
-        <div class="footer-content">FOOTER</div>
+        <p>© 2024 VisionAstraa. All rights reserved.</p>
     </footer>
 
+    <script>
+        // Fetch navbar HTML and integrate it
+        fetch('navbarcomp-VA/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+
+                const hamburger = document.getElementById("hamburger");
+                const navLinks = document.getElementById("nav-links");
+
+                if (hamburger && navLinks) {
+                    hamburger.onclick = function () {
+                        navLinks.classList.toggle("active");
+                    };
+                }
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+             //footer 
+
+             async function loadFooter() {
+                try {
+                    const response = await fetch('./footercomp-VA/footer.html');
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    const footerHTML = await response.text();
+
+                    document.getElementById('footer-container').innerHTML = footerHTML;
+
+                    const linkElement = document.createElement('link');
+                    linkElement.rel = 'stylesheet';
+                    linkElement.href = './footercomp-VA/footer.css';
+                    document.head.appendChild(linkElement);
+                } catch (error) {
+                    console.error('Error loading the footer:', error);
+                }
+            }
+            document.addEventListener('DOMContentLoaded', loadFooter);
+    </script>
 </body>
 </html>
+
+

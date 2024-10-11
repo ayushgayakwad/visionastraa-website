@@ -1,40 +1,53 @@
-* {
-  margin: 0;
-  padding: 0;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* General Styles */
+*{
   box-sizing: border-box;
+  margin: 0;
+  padding:0;
 }
 
 body {
+  margin: 0;
   font-family: 'Poppins', sans-serif;
-  color: #fff;
+  background: #ffffff;
+  color: #333333; /* Dark gray text */
+  overflow-x: hidden;
+
+}
+.container {
+    max-width: 82.5%;
+    margin: 0 auto; 
+    padding: 15px 15px; 
 }
 
+section {
+    margin-bottom: 30px; 
+    width: 100%;
+}
+/* Hero Section (Full width) */
+.hero {
+  background: linear-gradient(rgb(0, 0, 0), rgb(27, 17, 17), rgb(8, 8, 42), rgb(0, 0, 0));
+  color: #ffffff;
+  text-align: center;
+  border-radius: 0 0 40px 40px;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 97vh;
+  padding-top: 30px;
+  margin: 0;
+  overflow-x: hidden;
+  margin-top: -25px;
+}
+
+.hero-container {
+  margin: 0 auto;
+  
+}
 header {
   background: linear-gradient(to right bottom, rgb(0, 0, 0), rgb(27, 17, 17), rgb(8, 8, 42), rgb(0, 0, 0));
   height: 300px;
-  position: relative;
 }
-
-.logo {
-  width: 86px;
-  height: 87px;
-  position: absolute;
-  top: 38px;
-  left: 110px;
-  gap: 0px;
-  opacity: 1; 
-}
-
-.nav-links {
-  width: 721px;
-  height: 33px;
-  background-color: #D9D9D9;
-  border-radius: 20px;
-  position: absolute; 
-  top: 60px;
-  right: 100px; 
-}
-
 
 .form-container {
   background-color: #D3D9FF;
