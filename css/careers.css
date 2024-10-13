@@ -6,6 +6,9 @@ body {
     background-color: #1c1c1c;
     color: #fff;
 }
+body,html {
+    scroll-behavior: smooth;
+}
 
 main {
     width: 90%;
@@ -13,23 +16,62 @@ main {
     margin: 0 auto;
     padding-top: 20px;
 }
+.course-info:hover, .pricing-info:hover, .requirements-section:hover {
+    transform: none;
+}
+
 
 /* Hero Section */
 .hero-section {
     position: relative;
-    background: url('../image/courses_hero.jpg') no-repeat center center;
+    background: #171616;
     background-size: cover;
-    height: 400px;
+    height: 500px;
     color: white;
     overflow: hidden;
     border-radius: 15px; 
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 20px;
 }
 
-.hero-section:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 10px #876eea;
+.hero-content{
+    margin-top: 30px;
+    flex: 1;
+    margin-left: 20px;
 }
+
+.picture {
+    flex:1;
+    display: flex;
+    justify-content: flex-end;
+}
+.picture img{
+    width: 35%;
+    height: 45vh;
+    border-radius: 8px;
+    margin-right: 70px;
+}
+.position{
+    background-color: #fff;;
+    color: black;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 18px;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+.position:hover{
+    background-color: #876eea;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* .hero-section:hover {
+    box-shadow: 0 0 10px #876eea;
+} */
 
 /* Gradient Overlay */
 .hero-overlay {
@@ -96,7 +138,7 @@ main {
 .contact-us:hover {
     background-color: #876eea;
     color: #fff;
-    transform: scale(1.05);
+    transform: scale(1.0);
 }
 
 /* Pricing Section */
@@ -105,7 +147,7 @@ main {
     padding: 40px;
     margin-bottom: 30px;
     border-radius: 10px;
-    transition: transform 0.1s ease, box-shadow 0.3s ease
+    /* transition: transform 0.1s ease, box-shadow 0.3s ease */
 }
 
 .pricing-info-container {
@@ -154,7 +196,7 @@ main {
     margin-top: 30px;
     margin-bottom: 30px;
     border-radius: 10px;
-    transition: transform 0.1s ease, box-shadow 0.3s ease;
+    /* transition: transform 0.1s ease, box-shadow 0.3s ease; */
 }
 
 /* Gradient Overlay */
@@ -209,13 +251,13 @@ main {
     cursor: pointer;
     font-size: 18px;
     font-weight: bold;
-    transition: all 0.3s ease;
+    /* transition: all 0.3s ease; */
 }
 
 .register-course:hover {
     background-color: #876eea;
     color: #fff;
-    transform: scale(1.05);
+    transform: scale(1.01);
 }
 
 .pricing-learning-outcomes {
@@ -245,11 +287,10 @@ main {
     padding: 40px;
     margin-bottom: 30px;
     border-radius: 10px;
-    transition: transform 0.1s ease, box-shadow 0.3s ease;
 }
 .requirements-section:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 10px #876eea;
+    transform: scale(1.0);
+    box-shadow: 0 0 4px #876eea;
 }
 
 .requirements-box h2 {
@@ -273,10 +314,9 @@ main {
     padding: 40px;
     margin-bottom: 30px;
     border-radius: 10px;
-    transition: transform 0.1s ease, box-shadow 0.3s ease;
 }
 .course-inclusions:hover {
-    transform: scale(1.03);
+    transform: scale(1.0);
     box-shadow: 0 0 10px #876eea;
 }
 
@@ -372,7 +412,7 @@ main {
     border-radius: 10px;
     text-align: center;
     width: 45%;
-    transition: transform 0.1s ease, box-shadow 0.3s ease;
+    /* transition: transform 0.1s ease, box-shadow 0.3s ease; */
 }
 .instructor-card:hover {
     transform: scale(1.03);
@@ -419,7 +459,7 @@ main {
         margin-top: 30px;
         margin-bottom: 30px;
         border-radius: 10px;
-        transition: transform 0.1s ease, box-shadow 0.3s ease;
+        /* transition: transform 0.1s ease, box-shadow 0.3s ease; */
     }
 
     .line-break-desktop {
@@ -635,4 +675,35 @@ main {
         padding: 1px;
         margin: 0;
     }
+}
+.last-content{
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.criteria-box {
+    background-color: #202020;
+    width: 35%;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.criteria-box:hover{
+    transform: scale(1.001);
+    box-shadow: 0 0 6px #876eea;
+}
+.criteria {
+    padding: 40px 0;
+    text-align: center;
+    margin: 0px auto;
+    text-align: left;
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: left;
 }
