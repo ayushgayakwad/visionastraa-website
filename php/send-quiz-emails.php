@@ -10,7 +10,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT name, email, score, percentage FROM quiz_data WHERE percentage > 40 AND percentage < 96 AND emailSent = false";
+$sql = "SELECT name, email, score, percentage FROM quiz_data_4 WHERE percentage > 40 AND percentage < 96 AND emailSent = false";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -162,7 +162,7 @@ if ($result->num_rows > 0) {
         $headers .= "From: VisionAstraa Group <recruitment@visionastraa.com>" . "\r\n";
 
         if (mail($recipient_email, "Your EV Startup Assessment Result", $message, $headers)) {
-            $update_sql = "UPDATE quiz_data SET emailSent = true WHERE email = '$recipient_email'";
+            $update_sql = "UPDATE quiz_data_4 SET emailSent = true WHERE email = '$recipient_email'";
             $conn->query($update_sql);
             echo "Email sent to " . htmlspecialchars($recipient_email) . "<br>";
         } else {
