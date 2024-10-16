@@ -10,10 +10,10 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT name, email FROM webinar_batch_1 WHERE emailSent = false";
+$sql = "SELECT name, email FROM webinar_batch_2 WHERE emailSent = false";
 $result = $conn->query($sql);
 
-$meetingDate = "16-OCT-2024";
+$meetingDate = "18-OCT-2024";
 $meetingTime = "10:30 AM IST";
 $meetingLink = "https://meet.google.com/kuw-dzhf-adp";
 
@@ -21,8 +21,8 @@ $icalContent = "BEGIN:VCALENDAR\r\n" .
                "VERSION:2.0\r\n" .
                "BEGIN:VEVENT\r\n" .
                "SUMMARY:Webinar on Career Opportunities in EV Industry\r\n" .
-               "DTSTART;TZID=Asia/Kolkata:20241016T103000\r\n" .
-               "DTEND;TZID=Asia/Kolkata:20241016T110000\r\n" .
+               "DTSTART;TZID=Asia/Kolkata:20241018T103000\r\n" .
+               "DTEND;TZID=Asia/Kolkata:20241018T110000\r\n" .
                "LOCATION:$meetingLink\r\n" .
                "DESCRIPTION: Join us for an online webinar on Career Opportunities in EV Industry.\r\n" .
                "URL:$meetingLink\r\n" .
@@ -126,7 +126,7 @@ while ($row = $result->fetch_assoc()) {
     if (mail($email, $subject, $message, $headers)) {
         echo "Email sent to: $name ($email)\n";
 
-        $updateSql = "UPDATE webinar_batch_1 SET emailSent = true WHERE email = '$email'";
+        $updateSql = "UPDATE webinar_batch_2 SET emailSent = true WHERE email = '$email'";
         $conn->query($updateSql);
     } else {
         echo "Failed to send email to: $name ($email)\n";
