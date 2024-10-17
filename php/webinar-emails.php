@@ -13,16 +13,16 @@ if ($conn->connect_error) {
 $sql = "SELECT name, email FROM webinar_batch_2 WHERE emailSent = false";
 $result = $conn->query($sql);
 
-$meetingDate = "18-OCT-2024";
-$meetingTime = "10:30 AM IST";
+$meetingDate = "19-OCT-2024";
+$meetingTime = "11:30 AM IST";
 $meetingLink = "https://meet.google.com/kuw-dzhf-adp";
 
 $icalContent = "BEGIN:VCALENDAR\r\n" .
                "VERSION:2.0\r\n" .
                "BEGIN:VEVENT\r\n" .
                "SUMMARY:Webinar on Career Opportunities in EV Industry\r\n" .
-               "DTSTART;TZID=Asia/Kolkata:20241018T103000\r\n" .
-               "DTEND;TZID=Asia/Kolkata:20241018T110000\r\n" .
+               "DTSTART;TZID=Asia/Kolkata:20241019T113000\r\n" .
+               "DTEND;TZID=Asia/Kolkata:20241019T120000\r\n" .
                "LOCATION:$meetingLink\r\n" .
                "DESCRIPTION: Join us for an online webinar on Career Opportunities in EV Industry.\r\n" .
                "URL:$meetingLink\r\n" .
