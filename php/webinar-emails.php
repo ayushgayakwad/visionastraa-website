@@ -10,7 +10,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT name, email FROM webinar_batch_2 WHERE emailSent = false";
+$sql = "SELECT name, email FROM webinar_batch_3 WHERE emailSent = false";
 $result = $conn->query($sql);
 
 $meetingDate = "19-OCT-2024";
@@ -126,7 +126,7 @@ while ($row = $result->fetch_assoc()) {
     if (mail($email, $subject, $message, $headers)) {
         echo "Email sent to: $name ($email)\n";
 
-        $updateSql = "UPDATE webinar_batch_2 SET emailSent = true WHERE email = '$email'";
+        $updateSql = "UPDATE webinar_batch_3 SET emailSent = true WHERE email = '$email'";
         $conn->query($updateSql);
     } else {
         echo "Failed to send email to: $name ($email)\n";
