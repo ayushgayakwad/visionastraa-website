@@ -138,9 +138,7 @@
     </style>
 </head>
 <body>
-    <header>
-        <div id="navbar-placeholder"></div>
-    </header>
+    <header id="navbar-placeholder"></header>
 
     <div class="form-container">
         <h1>Job Opportunities in EV Startup</h1>
@@ -2902,20 +2900,21 @@
                 "WOMENâS ENGINEERING COLLEGE"]
         };
 
-        fetch('navbarcomp/navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navbar-placeholder').innerHTML = data;
-                const hamburger = document.getElementById("hamburger");
-                const navLinks = document.getElementById("nav-links");
-    
-                if (hamburger && navLinks) {
-                    hamburger.onclick = function () {
-                        navLinks.classList.toggle("active");
-                    };
-                }
-            })
-            .catch(error => console.error('Error loading navbar:', error));
+        fetch('navbarcomp-VA/navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar-placeholder').innerHTML = data;
+
+                    const hamburger = document.getElementById("hamburger");
+                    const navLinks = document.getElementById("nav-links");
+
+                    if (hamburger && navLinks) {
+                        hamburger.onclick = function () {
+                            navLinks.classList.toggle("active");
+                        };
+                    }
+                })
+                .catch(error => console.error('Error loading navbar:', error));
 
         function populateColleges() {
             const stateSelect = document.getElementById('state');
@@ -2965,7 +2964,7 @@
             const form = document.getElementById('applicationForm');
             const formData = new FormData(form);
 
-            fetch('php/submit-ev-job-application.php', {
+            fetch('php/submit-vsa-job-application.php', {
                 method: 'POST',
                 body: formData
             })
@@ -2979,7 +2978,7 @@
                 if (data.success) {
                     messageDiv.textContent = "Your application has been submitted successfully!";
                     messageDiv.style.color = "green";
-                    window.location.href = "ev-job-application-confirmation.html";
+                    window.location.href = "vsa-job-application-confirmation.html";
                     form.reset();
                 } else {
                     messageDiv.textContent = "Error: " + data.error;

@@ -13,7 +13,7 @@ if ($conn->connect_error) {
     exit();
 }
 
-$tableCreationQuery = "CREATE TABLE IF NOT EXISTS ev_job_applications (
+$tableCreationQuery = "CREATE TABLE IF NOT EXISTS vsa_job_applications (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(100) NOT NULL,
     email VARCHAR(50) NOT NULL,
@@ -51,7 +51,7 @@ $description = $_POST['description'];
 $resume = file_get_contents($_FILES['resume']['tmp_name']);
 $resume_filename = $_FILES['resume']['name'];
 
-$checkQuery = $conn->prepare("SELECT id FROM ev_job_applications WHERE email = ? OR phone = ?");
+$checkQuery = $conn->prepare("SELECT id FROM vsa_job_applications WHERE email = ? OR phone = ?");
 $checkQuery->bind_param("ss", $email, $phone);
 $checkQuery->execute();
 $checkQuery->store_result();
@@ -64,7 +64,7 @@ if ($checkQuery->num_rows > 0) {
 
 $checkQuery->close();
 
-$stmt = $conn->prepare("INSERT INTO ev_job_applications 
+$stmt = $conn->prepare("INSERT INTO vsa_job_applications 
     (full_name, email, phone, role, state, college, degree, specialization, graduation_year, resume, resume_filename, linkedin_profile_link, description) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
