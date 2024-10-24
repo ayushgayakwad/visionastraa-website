@@ -1,0 +1,234 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+html{
+    scroll-behavior: smooth;
+}
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #ffffff;
+    color: #333333; /* Dark gray text */
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0px 20px;
+    background-color: #fff;
+  }
+#navbar-placeholder {
+    margin: 0;
+    padding: 0;
+    background: none;
+}
+header{
+  position: fixed;
+  top: 0;
+  width: 100%; 
+  z-index: 0;
+  transition: top 0.3s ease;  
+}
+/* Custom Scrollbar for WebKit Browsers */
+::-webkit-scrollbar {
+  width: 0px; 
+}
+  
+/* Hero Section */
+.hero-partners {
+    background: linear-gradient(
+        to right bottom,
+        rgb(0, 0, 0),
+        rgb(27, 17, 17),
+        rgb(8, 8, 42),
+        rgb(0, 0, 0)
+    );
+    height: 40vh;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: center;
+    padding: 40px 20px; /* Increased padding-top */
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+
+.hero-content h1 {
+    font-size: 3em;
+    color: #ffffff; /* White text for contrast */
+    margin-bottom: 10px;
+    margin-top: 100px; /* Adjust this value as needed */
+}
+
+.hero-content p {
+    font-size: 1.5em;
+    color: #ffffff; /* White text */
+    margin: 0;
+}
+
+/* Partners Section */
+.partners-section {
+    padding: 60px 40px; /* Increased side padding for more white space */
+    background-color: #ffffff; /* White background for contrast */
+    text-align: center;
+}
+
+.partners-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #2d3e50; /* Dark Slate */
+}
+
+.partners-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 cards in a row */
+    gap: 30px; /* Increased space between cards */
+    padding: 0 20px; /* Additional padding for the grid */
+}
+
+/* Partner Card */
+.partner-card {
+    background-color:  #D1E9F6;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    height: 250px; /* Fixed height for square-like appearance */
+    display: flex; /* Enable flexbox */
+    flex-direction: column; /* Align items in a column */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    font-family: 'Poppins', sans-serif; /* Use Poppins font */
+}
+
+.partner-card img {
+    width: 80px; /* Slightly smaller image */
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.partner-card h3 {
+    color: #000000; /* Black for headings */
+    font-size: 1.5em;
+    font-weight: bold; /* Bold text */
+}
+
+.partner-card p {
+    color: #333333; /* Dark black for descriptions */
+    font-size: 1em;
+    margin-top: 10px; /* Space between heading and description */
+}
+
+/* Call-to-Action Section */
+.cta-partners {
+    padding: 60px 20px;
+    background-color: #ffffff; /* White background for contrast */
+    text-align: center;
+}
+
+.cta-partners h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #000000; /* Black text */
+}
+
+.cta-partners p {
+    font-size: 1.2em;
+    color: #000000; /* Black text */
+    margin-bottom: 20px; /* Decreased space between text and button */
+}
+
+.cta-button {
+    font-size: 18px;              /* Increased font size */
+    font-weight: 600;        
+    color: white;                 /* Changed text color to white */
+    background-color: #007bff;   /* New color for the button */
+    border-radius: 25px;         /* Slightly larger border radius for a rounder look */
+    padding: 20px 40px;          /* Increased padding for a larger button */
+    border: none;                
+    cursor: pointer;             
+    display: inline-flex;       
+    align-items: center;        
+    justify-content: center;    
+    text-align: center;          
+    line-height: 1.2;     
+    margin-top: 20px;            /* Adjusted margin */
+}
+
+.cta-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+
+/* Footer */
+footer {
+    padding: 20px;
+    text-align: center;
+    background: linear-gradient(
+        to right bottom,
+        rgb(0, 0, 0),
+        rgb(27, 17, 17),
+        rgb(8, 8, 42),
+        rgb(0, 0, 0)
+      );
+    color: #ffffff;
+}
+
+footer p {
+    font-size: 0.9em;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5em; /* Smaller font size */
+        margin-top: 40px; /* Adjust top margin */
+    }
+
+    .hero-content p {
+        font-size: 1.2em; /* Smaller font size */
+    }
+
+    .partners-grid {
+        grid-template-columns: 1fr; /* Single column for smaller screens */
+    }
+
+    .partners-section {
+        padding: 40px 20px; /* Adjust padding */
+    }
+
+    .partner-card {
+        height: auto; /* Allow height to adjust based on content */
+    }
+
+    .cta-partners h2 {
+        font-size: 2em; /* Smaller font size */
+    }
+
+    .cta-partners p {
+        font-size: 1em; /* Smaller font size */
+    }
+
+    .cta-button {
+        padding: 15px 30px; /* Adjust button size */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2em; /* Smaller font size */
+    }
+
+    .hero-content p {
+        font-size: 1em; /* Smaller font size */
+    }
+
+    .partners-section h2 {
+        font-size: 2em; /* Smaller font size */
+    }
+
+    .cta-partners h2 {
+        font-size: 1.8em; /* Smaller font size */
+    }
+}

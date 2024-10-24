@@ -24,7 +24,7 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 0px 0px 0px 0px;
   height: 50px;
-  width: 60%;
+  width: 90%;
   border-radius: 50px;
   margin: 30px auto; /* Center the navbar horizontally */
   position: relative; /* Set position relative for .nav-links */
@@ -108,7 +108,7 @@ body {
   }
 
   .nav-links.active {
-    max-height: 500px;
+    max-height: 550px;
     min-width: 280px;
     transform: translateY(0);
     opacity: 1;

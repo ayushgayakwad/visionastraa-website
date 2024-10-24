@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EV Payments</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="css/ev-payments.css">
+</head>
+
+<body>
+    <header>
+        <div id="navbar-placeholder"></div>
+    </header>
+
+  <main>
+    <!--
+    <section class="payment-details">
+      <h1>EV Mastery Program - Installment Plans</h1>
+
+      <table class="payment-table">
+        <thead>
+          <tr>
+            <th>Fee Description</th>
+            <th>Fees (₹)</th>
+            <th>GST (₹)</th>
+            <th>Total Amount (₹)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Registration Fee</td>
+            <td>8474.6</td>
+            <td>1525.4</td>
+            <td>10000.0</td>
+          </tr>
+          <tr>
+            <td>Program Fee</td>
+            <td>76271.2</td>
+            <td>13728.8</td>
+            <td>90000.0</td>
+          </tr>
+          <tr class="total-row">
+            <td><strong>Total</strong></td>
+            <td><strong>84745.8</strong></td>
+            <td><strong>15254.2</strong></td>
+            <td><strong>100000.0</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="button-container">
+        <a href="mailto:admissions@visionastraa.com" class="email-button">Send Email</a>
+      </div>
+      -->
+    </section>
+
+    <section class="ev-payment-info" style="text-align: center;">
+      <div class="confirmation-learning-outcomes text-align" style="text-align: center; margin-bottom: 32px;">
+        <h1>Hurry! Secure your Spot now!</h1>
+      </div>
+      <a href="image/upi.jpg" target="_blank"><img src="image/upi.jpg" alt="UPI" height="50%" width="50%" style="margin-bottom: 16px; border-radius: 10px;"/></a>
+      <div class="confirmation-learning-outcomes text-align">
+          <h6><b>Pay Admission Fees - INR 10,000/- (including GST)</b> to the following UPI ID:<br><br><b><a href="#">onedream@icici</a></b><br><br>and share screenshot to <b><a href="mailto:admissions@visionastraa.com">admissions@visionastraa.com</a></b> for confirmation.</h6>
+      </div>
+    </section>  
+  </main>
+
+  <footer class="footer" style="padding-top: 35px;">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="text-uppercase">About Us</h5>
+                <p style="color: white;">Empowering India’s talent to lead the global EV industry. <br><br>We are
+                    committed to bridging the gap between academia and industry, providing students with the practical skills and knowledge
+                    required to excel in the EV sector. Our programs are designed to foster innovation,
+                    entrepreneurship, and a deep understanding of the EV ecosystem.
+                </p>
+            </div>
+            <div class="col-md-2 secpart">
+                <h5 class="text-uppercase">Links</h5>
+                <ul class="list-unstyled listone">
+                    <li><a href="ev-aboutus.html">About US</a></li>
+                    <li><a href="ev-course.html">Courses</a></li>
+                    <li><a href="ev-placements.html">Placements</a></li>
+                    <li><a href="ev-mentors.html">Mentors</a></li>
+                    <li><a href="ev-careers.html">Careers</a></li>
+                    <li><a href="ev-contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 thirdpart">
+                <h5 class="text-uppercase">Follow Us</h5>
+                <ul class="list-unstyled listtwo">
+                    <li><a href="https://www.instagram.com/evacademy.in/">Instagram</a></li>
+                    <li><a href="https://www.linkedin.com/company/va-ev-academy/?viewAsMember=true">linkedin</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr style="color: white; border-color: white;">
+        <div class="row">
+
+            <div class="col-12 text-left last">
+
+                <div class="lalala"><img class="lastimg" src="image/bwvasev.png" alt="">
+                    <p style="color: white;" class="mb-0 latext">© 2024 visionastraa. All rights reserved.</p>
+                </div>
+
+
+                <div><button class="lastb" type="button">EV academy </button></div>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function openPopup(module, content) {
+        document.getElementById('popup-module').innerHTML = module;
+        document.getElementById('popup-content').innerHTML = content;
+
+        document.getElementById('popup').style.display = 'flex';
+    }
+
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+    }
+    fetch('navbarcomp/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-placeholder').innerHTML = data;
+            const hamburger = document.getElementById("hamburger");
+            const navLinks = document.getElementById("nav-links");
+
+            if (hamburger && navLinks) {
+                hamburger.onclick = function () {
+                    navLinks.classList.toggle("active");
+                };
+            }
+        })
+        .catch(error => console.error('Error loading navbar:', error));
+</script>
+<script>
+    document.querySelector('.course-details-button').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector('#course-content').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    document.querySelector('.program-fee-button').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector('#program-fee-section').scrollIntoView({ behavior: 'smooth' });
+    });
+</script>    
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

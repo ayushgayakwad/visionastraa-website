@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisionAstraa - Partners</title>
+    <link rel="stylesheet" href="css/vsa-partners.css">
+    <link rel="stylesheet" href="navbarcomp/navbarstyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-partners">
+        <header>
+            <div id="navbar-placeholder"></div> <!-- Placeholder for navbar -->
+        </header>
+
+        <div class="hero-content">
+            <h1>Our Trusted Partners</h1>
+            <p>Collaborating with industry leaders to empower tomorrow's innovators.</p>
+        </div>
+    </section>
+
+    <!-- Partners Grid Section -->
+    <section class="partners-section">
+        <h2>Our Partners</h2>
+        <div class="partners-grid">
+            <div class="partner-card">
+                <img src="partner1-logo.png" alt="Partner 1 Logo">
+                <h3>Partner 1</h3>
+                <p>Short description about Partner 1.</p>
+            </div>
+            <div class="partner-card">
+                <img src="partner2-logo.png" alt="Partner 2 Logo">
+                <h3>Partner 2</h3>
+                <p>Short description about Partner 2.</p>
+            </div>
+            <div class="partner-card">
+                <img src="partner3-logo.png" alt="Partner 3 Logo">
+                <h3>Partner 3</h3>
+                <p>Short description about Partner 3.</p>
+            </div>
+            <div class="partner-card">
+                <img src="partner4-logo.png" alt="Partner 4 Logo">
+                <h3>Partner 4</h3>
+                <p>Short description about Partner 4.</p>
+            </div>
+            <div class="partner-card">
+                <img src="partner5-logo.png" alt="Partner 5 Logo">
+                <h3>Partner 5</h3>
+                <p>Short description about Partner 5.</p>
+            </div>
+            <div class="partner-card">
+                <img src="partner6-logo.png" alt="Partner 6 Logo">
+                <h3>Partner 6</h3>
+                <p>Short description about Partner 6.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call-to-Action Section for New Partners -->
+    <section class="cta-partners">
+        <div class="cta-content">
+            <h2>Become a Partner</h2>
+            <p>Join us in shaping the future of innovation and education. Contact us today!</p>
+            <a href="#" class="cta-button">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>© 2024 VisionAstraa. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Fetch navbar HTML and integrate it
+        fetch('navbarcomp-VA/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+
+                const hamburger = document.getElementById("hamburger");
+                const navLinks = document.getElementById("nav-links");
+
+                if (hamburger && navLinks) {
+                    hamburger.onclick = function () {
+                        navLinks.classList.toggle("active");
+                    };
+                }
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+    </script>
+</body>
+</html>

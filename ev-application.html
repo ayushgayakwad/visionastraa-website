@@ -11,18 +11,46 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: auto; /* Ensure the page is scrollable */
+            overflow: auto; 
         }
-        .form-container {
-            background-color: #202020;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 400px;
-            margin: 20px auto;
-            overflow-y: auto; /* Allow the form container to scroll if content overflows */
-        }
+    .form-container {
+        position: relative; 
+        background-color: rgba(32, 32, 32, 0.8); 
+        background-image: url('image/ev-home2-bg.png'); 
+        background-size: cover; 
+        background-position: center; 
+        background-repeat: no-repeat; 
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 850px;
+        margin: 20px auto;
+        overflow-y: auto; 
+    }
+
+    .form-container::before {
+        content: ''; 
+        position: absolute; 
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5); 
+        border-radius: 8px; 
+        z-index: 1; 
+    }
+
+    .form-container h1,
+    .form-container h2,
+    .form-container label,
+    .form-container input,
+    .form-container select,
+    .form-container textarea,
+    .form-container button {
+        position: relative; 
+        z-index: 2; 
+    }
         .form-container h1 {
             text-align: center;
             color: #fff;
@@ -225,12 +253,16 @@
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.json())
+            .then(response => {
+                console.log(response); 
+                return response.json();
+            })
             .then(data => {
                 const messageDiv = document.getElementById('message');
                 if (data.success) {
                     messageDiv.textContent = "Your application has been submitted successfully!";
                     messageDiv.style.color = "green";
+                    window.location.href = "ev-application-confirmation.html";
                     form.reset();
                 } else {
                     messageDiv.textContent = "Error: " + data.error;
