@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Form</title>
+    <style>
+        /* Import Poppins font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        /* Apply Poppins font and general styles */
+        body, html {
+            font-family: 'Poppins', sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: auto;
+        }
+
+        /* Dark gradient section above form */
+        .gradient-section {
+            background: linear-gradient(rgba(8, 8, 42, 0.9), rgba(8, 8, 42, 0.9));
+            padding: 40px;
+            color: white;
+            text-align: center;
+            max-width: 100%; /* Ensures it doesn't extend more than the viewport width */
+            width: 100%; /* Match the width of the navbar */
+            box-sizing: border-box;
+        }
+        .gradient-section header {
+    max-width: 1200px; /* Adjust based on your navbar or content width */
+    margin: 0 auto;
+}
+
+        .gradient-section h1 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .form-container {
+            background-color: #D3D9FF;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 4px 4px 8px rgba(0,0,0,0.253); 
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            overflow-y: auto;
+        }
+
+        .form-container h1 {
+            text-align: center;
+            color: black;
+            margin-top: 0;
+        }
+
+        .form-container label {
+            display: block;
+            color: black;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="email"],
+        .form-container input[type="tel"],
+        .form-container input[type="file"],
+        .form-container select,
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+            border: 1px solid #fff;
+            border-radius: 12px;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.1); /* Add box shadow */
+        }
+
+        /* Customize placeholder */
+        ::placeholder {
+            color: grey;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Submit button style */
+        .form-container button {
+            width: 200px; /* Make the button smaller */
+            padding: 12px;
+            background-color: #5169f6; 
+            border: none;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 20px auto; /* Center the button horizontally */
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.253); /* Add box shadow to submit button */
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 16px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Gradient section above the form -->
+    <div class="gradient-section">
+        <header id="navbar-placeholder"></header>
+    </div>
+
+    <div class="form-container">
+        <h1>Apply Now!</h1>
+        <form id="applicationForm" onsubmit="submitForm(event);" enctype="multipart/form-data">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" pattern="[A-Za-z\s]+" title="Please enter only letters." required>
+
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" pattern="[A-Za-z\s]+" title="Please enter only letters." required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your 10-digit phone number" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number." required>
+
+            <label for="location">Your Location (City/Town)</label>
+            <input type="text" id="location" name="location" placeholder="Enter your city or town" required>
+
+            <label for="college">College</label>
+            <input type="text" id="college" name="college" placeholder="Enter your college name" required>
+
+            <label for="degree">Degree (B.E/B.Tech/M.Tech)</label>
+            <input type="text" id="degree" name="degree" placeholder="Enter your degree" required>
+
+            <label for="specialization">Specialization (Branch)</label>
+            <input type="text" id="specialization" name="specialization" placeholder="Enter your branch" required>
+
+            <label for="graduation">Year of Graduation</label>
+            <input type="text" id="graduation" name="graduation" placeholder="Enter your year of graduation (e.g., 2024)" pattern="\d{4}" title="Please enter a valid year." required>
+
+            <label for="role">Applying for which role?</label>
+            <select id="role" name="role" required>
+                <option value="Select One">Select One</option>
+                <optgroup label="Development">
+                    <option value="Web Developer">Web Developer</option>
+                    <option value="Java Developer">Java Developer</option>
+                    <option value="Python Developer">Python Developer</option>
+                    <option value="Ethical Hacker">Ethical Hacker</option>
+                    <option value="Security Developer">Security Developer</option>
+                    <option value="Database Engineer">Database Engineer</option>
+                    <option value="Test Engineer">Test Engineer</option>
+                    <option value="AI/ML Engineer">AI/ML Engineer</option>
+                </optgroup>
+                <optgroup label="Content Creation">
+                    <option value="Technical Content Writer">Technical Content Writer</option>
+                </optgroup>
+                <optgroup label="Marketing">
+                    <option value="Digital Marketing">Digital Marketing</option>
+                    <option value="Sales & Marketing">Sales & Marketing</option>
+                </optgroup>
+                <optgroup label="Management">
+                    <option value="Business Development">Business Development</option>
+                    <option value="Project Management">Project Management</option>
+                    <option value="Human Resource">Human Resource</option>
+                </optgroup>
+            </select>
+
+            <label for="resume">Upload Resume (PDF format, maximum size 2MB)</label>
+            <input type="file" id="resume" name="resume" accept=".pdf" required>
+
+            <label for="goals">Why you should be selected? Describe in your own words (&lt;500 words)</label>
+            <textarea id="goals" name="goals" rows="4" placeholder="Write your response here..." required></textarea>
+
+            <button type="submit">SUBMIT</button>
+        </form>
+        <div id="message" class="message"></div>
+    </div>
+
+    <script>
+        function validateForm() {
+            const resumeInput = document.getElementById('resume');
+            const file = resumeInput.files[0];
+
+            if (file) {
+                const fileSizeInMB = file.size / (1024 * 1024);
+                const fileType = file.type;
+
+                if (fileType !== 'application/pdf') {
+                    alert('Please upload the resume in PDF format only.');
+                    return false;
+                }
+
+                if (fileSizeInMB > 2) {
+                    alert('The resume file size should not exceed 2MB.');
+                    return false;
+                }
+            }
+            return true;
+        }
+
+function submitForm(event) {
+    event.preventDefault();
+
+    if (!validateForm()) {
+        return;
+    }
+
+    const form = document.getElementById('applicationForm');
+    const formData = new FormData(form);
+
+    fetch('php/submit_vsa_career_application.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        const messageDiv = document.getElementById('message');
+        if (data.success) {
+            messageDiv.textContent = "Your application has been submitted successfully!";
+            messageDiv.style.color = "green";
+            form.reset();
+        } else {
+            messageDiv.textContent = "Error: " + data.error;
+            messageDiv.style.color = "red";
+        }
+    })
+    .catch(error => {
+        const messageDiv = document.getElementById('message');
+        messageDiv.textContent = "There was an error submitting the form.";
+        messageDiv.style.color = "red";
+    });
+}
+
+fetch('navbarcomp-VA/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-placeholder').innerHTML = data;
+
+            const hamburger = document.getElementById("hamburger");
+            const navLinks = document.getElementById("nav-links");
+
+            if (hamburger && navLinks) {
+                hamburger.onclick = function () {
+                    navLinks.classList.toggle("active");
+                };
+            }
+        })
+        .catch(error => console.error('Error loading navbar:', error));
+</script>
+</body>
+</html>
