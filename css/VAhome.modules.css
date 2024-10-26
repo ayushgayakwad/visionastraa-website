@@ -330,7 +330,7 @@ p {
   .vpvmf {
     flex-direction: column;
     padding: 10px;
-    margin-top: 60%; /* Add margin to avoid overlap */
+    margin-top: 50%; /* Add margin to avoid overlap */
     align-items: center;
     justify-content: center;
   }
@@ -557,7 +557,7 @@ p {
 }
 
 /* For Tabs/Ipads(<=834pxpx) */
-@media only screen and (max-width:834px) {
+@media only screen and (min-width: 480px) and (max-width: 768px) {
   .landingbody{
     height: 80%;
   }
