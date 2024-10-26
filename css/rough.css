@@ -1,0 +1,221 @@
+/* For small devices (iPhone SE, Galaxy S8+, etc.) */
+@media only screen and (max-width: 375px) {
+    .hero-body {
+        margin-top: 140px;
+        width: 100%;
+    }
+  
+    .vpvmf {
+        flex-direction: column;
+        padding: 10px;
+        margin-top: 20px; /* Add margin to avoid overlap */
+    }
+    .thirdhero{
+      flex-direction: column;
+    }
+    .leftetx{
+      max-width: 100%;
+      font-size: small;
+      gap: 20px;
+      text-align: center;
+      flex-direction: row;
+      padding: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+    .leftetx h1{
+      text-decoration-line: underline;
+      text-decoration-style: wavy;
+      text-underline-offset: 10px;
+    }
+    .leftetx p{
+      text-align: justify;
+    }
+    .holder{
+      margin: 0px 50px 100px 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+  }
+  .ques{
+    width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+    border-right: 7px solid black;
+    border-bottom: 7px solid black;
+    
+  }
+  .subhero-body {
+    padding-top: 10px; /* Add padding to create separation between hero and tiles */
+    margin: 0px 50px 50px 50px;
+  }
+  .ans{
+    width: 100%;
+    height: 600px;
+  }
+  .qhold li{
+    padding: 0%;
+    margin: 0%;
+  }
+  }
+  
+  /* For medium devices (iPhone XR, Pixel 7, Galaxy S20 Ultra, iPad Mini) */
+  @media only screen and (max-width: 768px) {
+    .hero-body {
+        margin-top: 170px;
+    }
+  
+    .subhero-body {
+        padding-top: 50px; /* More padding between hero and sub-hero */
+    }
+  
+    .vpvmf {
+        flex-direction: column;
+        padding: 20px;
+        margin-top: 120px; /* More margin to ensure tiles stay separate */
+    }
+    .thirdhero{
+      flex-direction: column;
+    }
+    .leftetx{
+      max-width: 100%;
+      font-size: small;
+      gap: 20px;
+      text-align: center;
+      flex-direction: row;
+      padding: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+    .leftetx h1{
+      text-decoration-line: underline;
+      text-decoration-style: wavy;
+      text-underline-offset: 10px;
+    }
+    .leftetx p{
+      text-align: justify;
+    }
+    .holder{
+      margin: 0px 50px 100px 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+  }
+  .ques{
+    width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+    border-right: 7px solid black;
+    border-bottom: 7px solid black;
+    
+  }
+  .subhero-body {
+    padding-top: 10px; /* Add padding to create separation between hero and tiles */
+    margin: 0px 50px 50px 50px;
+  }
+  .ans{
+    width: 100%;
+    height: 600px;
+  }
+  }
+  
+  /* For larger devices (iPads, Surface Pro 7, etc.) */
+  @media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .hero-body {
+        margin-top: 200px;
+        height: 50%;
+    }
+  
+    .subhero-body {
+        padding-top: 70px;
+    }
+  
+    .vpvmf {
+        flex-direction: row;
+        gap: 40px;
+        padding: 30px;
+        margin-top: 120px; /* Ensure enough separation on tablets */
+    }
+    .thirdhero{
+      flex-direction: column;
+    }
+    .leftetx{
+      max-width: 100%;
+      font-size: small;
+      gap: 20px;
+      text-align: center;
+      flex-direction: row;
+      padding: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+    .leftetx h1{
+      text-decoration-line: underline;
+      text-decoration-style: wavy;
+      text-underline-offset: 10px;
+    }
+    .leftetx p{
+      text-align: justify;
+    }
+    .holder{
+      margin: 0px 50px 100px 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+  }
+  .ques{
+    width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+    border-right: 7px solid black;
+    border-bottom: 7px solid black;
+    
+  }
+  .subhero-body {
+    padding-top: 10px; /* Add padding to create separation between hero and tiles */
+    margin: 0px 50px 50px 50px;
+  }
+  .ans{
+    width: 100%;
+    height: 600px;
+  }
+  }
+  
+  /* For laptops and larger screens (MacBooks, Surface Laptops, etc.) */
+  @media only screen and (min-width: 1025px) {
+    .hero-body {
+        margin-top: 200px;
+    }
+  
+    .subhero-body {
+        padding-top: 80px; /* Large gap for better separation */
+    }
+  
+    .vpvmf {
+        flex-direction: row;
+        gap: 50px;
+        padding: 40px;
+        margin-top: 50px; /* Keep tiles well-separated from hero section */
+    }
+  }
+  
+  /* Specific adjustments for folding devices like Surface Duo, Galaxy Z Fold 5 */
+  @media only screen and (min-width: 400px) and (max-width: 800px) and (orientation: landscape) {
+    .hero-body {
+        margin-top: 150px;
+    }
+  
+    .subhero-body {
+        padding-top: 40px;
+    }
+  
+    .vpvmf {
+        flex-direction: row;
+        padding: 20px;
+        margin-top: 30px;
+    }
+  }
+  
