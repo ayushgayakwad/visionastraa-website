@@ -287,9 +287,12 @@ p {
 /* For small devices Vertical(<=480px) */
 @media only screen and (max-width: 480px) {
   .header{
-    width: 100%;
+    max-width: 80%;
+    padding: 0%;
     display: flex;
-    flex-shrink: inherit;
+  }
+  .navbar{
+    width: 50%;
   }
   .landingbody {
     width: 100%;
@@ -310,7 +313,7 @@ p {
     width: 90%;
   }
   .hero-body h1{
-    font-size: 250%;
+    font-size: 220%;
     text-align: left;
     margin-left: 15px;
   }
@@ -318,7 +321,144 @@ p {
     text-align: left;
     margin-left: 15px;
     margin-right: 12px;
-    font-size:120%;
+    font-size:160%;
+  }
+  .subhero-body{
+    margin: 20px 10px 20px 10px;
+    width: 99%;
+  }
+  .vpvmf {
+    flex-direction: column;
+    padding: 10px;
+    margin-top: 50%; /* Add margin to avoid overlap */
+    align-items: center;
+    justify-content: center;
+  }
+  .vp{
+    width: 80%;
+    padding: 20px;
+  }
+  .vp h2{
+    font-size: 110%;
+  }
+  .vp p{
+    font-size: 75%;
+    text-align:justify;
+  }
+  .vmf{
+    width: 80%;
+    padding: 20px;
+  }
+  .vmf h2{
+    font-size: 110%;
+  }
+  .vmf p{
+    font-size: 75%;
+    text-align:justify;
+  }
+  .thirdheroshero{
+    display: flex;
+    justify-content: center;
+  }
+  .thirdhero{
+    margin: 0%;
+    flex-direction: column;
+    padding: 0px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .thirdhero img{
+    width: 80%;
+    margin-bottom: 10%;
+  }
+  .leftetx{
+    max-width: 120%;
+      font-size: small;
+      gap: 20px;
+      text-align: center;
+      flex-direction: row;
+      padding: 20px;
+      justify-content: center;
+      align-items: center;
+  }
+  .leftetx h1{
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    text-underline-offset: 10px;
+    font-size: 160%;
+  }
+  .leftetx p{
+    text-align: justify;
+    font-size: 90%;
+  }
+  .holder{
+    padding: 10;
+    font-size:60%;
+    margin: 0px 20px 50px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .holder ul{
+    padding: 0;
+  }
+  .ques{
+    width: 100%;
+    border-radius: 20px;
+    border-right: 7px solid black;
+    border-bottom: 7px solid black;
+    
+  }
+  .ans{
+    width: 100%;
+    height: 40vh;
+  }
+}
+
+
+
+/* For small devices Vertical(<=389px) */
+@media only screen and (max-width: 389px) {
+  .header{
+    max-width: 80%;
+    padding: 0%;
+    display: flex;
+  }
+  .navbar{
+    width: 50%;
+  }
+  .landingbody {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  #scrool {
+    display: none; /* Hide the image */
+  }
+  a[href="#scrollid"] {
+    display: none; /* Hide the link itself */
+  }
+  .hero-body{
+    margin-top: 40% ;
+    width: 90%;
+  }
+  .hero-body h1{
+    font-size: 180%;
+    text-align: left;
+    margin-left: 15px;
+  }
+  .hero-body p{
+    text-align: left;
+    margin-left: 15px;
+    margin-right: 12px;
+    font-size:130%;
   }
   .subhero-body{
     margin: 20px 10px 20px 10px;
@@ -413,5 +553,50 @@ p {
   .ans{
     width: 100%;
     height: 40vh;
+  }
+}
+
+/* For Tabs/Ipads(<=834pxpx) */
+@media only screen and (min-width: 480px) and (max-width: 768px) {
+  .landingbody{
+    height: 80%;
+  }
+  .thirdheroshero{
+    display: flex;
+    justify-content: center;
+  }
+  .thirdhero{
+    margin: 0%;
+    flex-direction: column;
+    padding: 0px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .thirdhero img{
+    width: 80%;
+    margin-bottom: 10%;
+  }
+  .leftetx{
+    max-width: 120%;
+      font-size: x-large;
+      gap: 20px;
+      text-align: center;
+      flex-direction: row;
+      padding: 20px;
+      justify-content: center;
+      align-items: center;
+  }
+  .leftetx h1{
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    text-underline-offset: 10px;
+    font-size: 160%;
+  }
+  .leftetx p{
+    text-align: justify;
+    font-size: 90%;
   }
 }
