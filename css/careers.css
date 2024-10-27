@@ -3,11 +3,10 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    color: white;
     background-color: #1c1c1c;
-    color: #fff;
-}
-body,html {
-    scroll-behavior: smooth;
+   
+   
 }
 
 main {
@@ -15,64 +14,88 @@ main {
     max-width: 1200px;
     margin: 0 auto;
     padding-top: 20px;
-}
-.course-info:hover, .pricing-info:hover, .requirements-section:hover {
-    transform: none;
-}
 
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        
+    }
+    
+    header {
+        background:#1c1c1c;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+    }
+    
+    .page-section {
+        display: none; /* All sections are hidden by default */
+        padding: 20px;
+       
+        border-radius: 5px;
+       
+    }
+    
+    #opportunities {
+        display: block; /* Show the opportunities section by default */
+    }
+    
+    .opportunity-container {
+        display: flex; /* Use flexbox to align items horizontally */
+        justify-content: center; /* Center the boxes */
+        flex-wrap: wrap; /* Allow boxes to wrap on smaller screens */
+    }
+    
+    .opportunity-box {
+        background: #202020;
+        border-radius: 15px;
+        padding: 15px;
+        margin-bottom: 40px;
+        width: 99%; /* Set width for boxes */
+        height: 325px;
+        text-align: center;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+        display: flex;
+    justify-content: center;  /* Horizontally center */
+    align-items: center;      /* Vertically center */
+    flex-direction: column; 
+    }
+    
+    button {
+        background: #35424a;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    
+    button:hover {
+        background: #5a5a5a;
+    }
+    
+}
 
 /* Hero Section */
 .hero-section {
     position: relative;
-    background: #171616;
+    background: url('../image/courses_hero.jpg') no-repeat center center;
     background-size: cover;
-    height: 550px;
+    height: 400px;
     color: white;
     overflow: hidden;
     border-radius: 15px; 
-    transition: transform 0.1s ease, box-shadow 0.3s ease;
-    justify-content: space-between; 
-    align-items: center; 
-    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.hero-content{
-    margin-top: 40px;
-    flex: 1;
-    margin-left: 20px;
-}
-
-.picture {
-    flex:1;
-    display: flex;
-    justify-content: flex-end;
-}
-.picture img{
-    width: 35%;
-    height: 45vh;
-    border-radius: 8px;
-    margin-top: 40px;
-    margin-right: 70px;
-}
-.position{
-    background-color: #fff;;
-    color: black;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 18px;
-    margin-top: 18px;
-    padding: 10px 20px;
-    text-decoration: none;
-}
-.position:hover{
-    background-color: #876eea;
-    color: #fff;
-    text-decoration: none;
-}
-
-/* .hero-section:hover {
+.hero-section:hover {
+    transform: scale(1.03);
     box-shadow: 0 0 10px #876eea;
-} */
+}
 
 /* Gradient Overlay */
 .hero-overlay {
@@ -139,7 +162,7 @@ main {
 .contact-us:hover {
     background-color: #876eea;
     color: #fff;
-    transform: scale(1.0);
+    transform: scale(1.05);
 }
 
 /* Pricing Section */
@@ -148,7 +171,7 @@ main {
     padding: 40px;
     margin-bottom: 30px;
     border-radius: 10px;
-    /* transition: transform 0.1s ease, box-shadow 0.3s ease */
+    transition: transform 0.1s ease, box-shadow 0.3s ease
 }
 
 .pricing-info-container {
@@ -197,7 +220,7 @@ main {
     margin-top: 30px;
     margin-bottom: 30px;
     border-radius: 10px;
-    /* transition: transform 0.1s ease, box-shadow 0.3s ease; */
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
 }
 
 /* Gradient Overlay */
@@ -252,13 +275,13 @@ main {
     cursor: pointer;
     font-size: 18px;
     font-weight: bold;
-    /* transition: all 0.3s ease; */
+    transition: all 0.3s ease;
 }
 
 .register-course:hover {
     background-color: #876eea;
     color: #fff;
-    transform: scale(1.01);
+    transform: scale(1.05);
 }
 
 .pricing-learning-outcomes {
@@ -288,10 +311,11 @@ main {
     padding: 40px;
     margin-bottom: 30px;
     border-radius: 10px;
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
 }
 .requirements-section:hover {
-    transform: scale(1.0);
-    box-shadow: 0 0 4px #876eea;
+    transform: scale(1.03);
+    box-shadow: 0 0 10px #876eea;
 }
 
 .requirements-box h2 {
@@ -315,9 +339,10 @@ main {
     padding: 40px;
     margin-bottom: 30px;
     border-radius: 10px;
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
 }
 .course-inclusions:hover {
-    transform: scale(1.0);
+    transform: scale(1.03);
     box-shadow: 0 0 10px #876eea;
 }
 
@@ -413,7 +438,7 @@ main {
     border-radius: 10px;
     text-align: center;
     width: 45%;
-    /* transition: transform 0.1s ease, box-shadow 0.3s ease; */
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
 }
 .instructor-card:hover {
     transform: scale(1.03);
@@ -460,7 +485,7 @@ main {
         margin-top: 30px;
         margin-bottom: 30px;
         border-radius: 10px;
-        /* transition: transform 0.1s ease, box-shadow 0.3s ease; */
+        transition: transform 0.1s ease, box-shadow 0.3s ease;
     }
 
     .line-break-desktop {
@@ -676,39 +701,4 @@ main {
         padding: 1px;
         margin: 0;
     }
-}
-.last-content{
-    margin-top: 40px;
-    margin-bottom: 40px;
-}
-
-.criteria-box {
-    background-color: #202020;
-    width: 30%;
-    margin: 10px;
-    padding: 30px;
-    border-radius: 10px;
-    text-align: left;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.criteria-box:hover{
-    transform: scale(1.001);
-    box-shadow: 0 0 6px #876eea;
-}
-.criteria {
-    padding: 40px 0;
-    text-align: center;
-    margin: 0px auto;
-    text-align: left;
-    display: flex; /* Enables Flexbox */
-    justify-content: space-between; /* Spreads the boxes evenly */
-    align-items: flex-start; /* Aligns items to the top */
-    flex-wrap: wrap; 
-}
-
-.title {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #fff;
-    text-align: left;
 }
