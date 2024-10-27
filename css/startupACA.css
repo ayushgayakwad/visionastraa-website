@@ -30,7 +30,7 @@ section {
 
 /* Hero Section (Full width) */
 .hero {
-    background: linear-gradient(rgb(0, 0, 0), rgb(27, 17, 17), rgb(8, 8, 42), rgb(0, 0, 0));
+    background: linear-gradient(to right bottom, rgb(0, 0, 0), rgb(27, 17, 17), rgb(8, 8, 42), rgb(0, 0, 0));;
     color: #ffffff;
     text-align: center;
     border-radius: 0 0 40px 40px;

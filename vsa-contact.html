@@ -10,12 +10,14 @@
 </head>
 <body>
 
-    <header>
-        <header id="navbar-placeholder"></header>
-    </header>
-
-    <div class="form-container">
+    <section class="hero">
+        <header>
+            <header id="navbar-placeholder"></header>
+        </header>
         <h2>Contact Admissions Department</h2>
+    </section>
+    
+    <div class="form-container">
         <form id="contactForm">
             <label for="name">NAME:</label>
             <input type="text" id="name" name="name" placeholder="Name" required minlength="2" pattern="[A-Za-z\s]+" title="Please enter a valid name (letters only).">
@@ -57,11 +59,8 @@
             }
         });
     </script>
-    
-    <!-- Footer Section -->
-    <footer>
-        <p>© 2024 VisionAstraa. All rights reserved.</p>
-    </footer>
+
+    <div id="footer-container"></div>
 
     <script>
         // Fetch navbar HTML and integrate it

@@ -35,7 +35,6 @@ body {
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.253);
 }
 header{
-  position: fixed;
   top: 0;
   width: 100%; 
   z-index: 0;
@@ -126,7 +125,7 @@ header{
 }
 
 .hero-body {
-  margin-top: 230px;
+  margin-top: 70px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -309,7 +308,7 @@ p {
     display: none; /* Hide the link itself */
   }
   .hero-body{
-    margin-top: 40% ;
+    margin-top: 20% ;
     width: 90%;
   }
   .hero-body h1{
@@ -330,7 +329,7 @@ p {
   .vpvmf {
     flex-direction: column;
     padding: 10px;
-    margin-top: 50%; /* Add margin to avoid overlap */
+    margin-top: 40%; /* Add margin to avoid overlap */
     align-items: center;
     justify-content: center;
   }
@@ -446,7 +445,7 @@ p {
     display: none; /* Hide the link itself */
   }
   .hero-body{
-    margin-top: 40% ;
+    margin-top: 10% ;
     width: 90%;
   }
   .hero-body h1{
@@ -467,7 +466,7 @@ p {
   .vpvmf {
     flex-direction: column;
     padding: 10px;
-    margin-top: 40%; /* Add margin to avoid overlap */
+    margin-top: 20%; /* Add margin to avoid overlap */
     align-items: center;
     justify-content: center;
   }
