@@ -12,7 +12,6 @@
     <style>
         body {
             background-color: #fff;
-            padding: 0; /* Remove side paddings */
             font-family: 'Poppins', sans-serif;
         }
 
@@ -42,6 +41,8 @@
             display: grid;
             grid-template-columns: repeat(6, 1fr);
             grid-gap: 5px;
+            padding-top: 20px;
+            padding-bottom: 20px;
         }
 
         .gallery-collage .grid-item {
@@ -68,65 +69,10 @@
             transform: scale(1.1);
         }
 
-        .gallery-collage .grid-item:nth-child(11n+1) {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-
-        .gallery-collage .grid-item:nth-child(11n+2) {
-            grid-column: span 1;
-            grid-row: span 1;
-        }
-
-        .gallery-collage .grid-item:nth-child(11n+3) {
-            grid-column: span 2;
-            grid-row: span 1;
-        }
-
-        .gallery-collage .grid-item:nth-child(11n+4) {
-            grid-column: span 1;
-            grid-row: span 1;
-        }
-
-        .gallery-collage .grid-item:nth-child(11n+5) {
-            grid-column: span 1;
-            grid-row: span 1;
-        }
-
-        .gallery-collage .grid-item:nth-child(11n+6) {
-            grid-column: span 1;
-            grid-row: span 2;
-        }
-
-        .gallery-collage .grid-item:nth-child(11n+7) {
-            grid-column: span 1;
-            grid-row: span 1;
-        }
-
-        .gallery-collage .grid-item:nth-child(11n+8) {
-            grid-column: span 1;
-            grid-row: span 1;
-        }
-
-        .gallery-collage .grid-item:nth-child(11n+9) {
-            grid-column: span 2;
-            grid-row: span 1;
-        }
-
-        .gallery-collage .grid-item:nth-child(11n+10) {
-            grid-column: span 1;
-            grid-row: span 1;
-        }
-
-        .gallery-collage .grid-item:nth-child(11n+11) {
-            grid-column: span 2;
-            grid-row: span 1;
-        }
-
-        .about-company h2 {
-            text-align: center;
-            font-size: 48px;
-            margin-bottom: 20px;
+        .about-company {
+            padding: 40px;
+            margin-top: 40px;
+            margin-bottom: 40px;
         }
 
         .about-visionastraa {
@@ -172,6 +118,59 @@
         .floating-nav ul li a:hover {
             color: #007bff;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1,
+            h2,
+            h3 {
+                font-size: 32px;
+            }
+
+            p {
+                font-size: 18px;
+            }
+
+            .gallery-collage {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .floating-nav {
+                padding: 8px 15px;
+            }
+
+            .floating-nav ul li a {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1,
+            h2,
+            h3 {
+                font-size: 24px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+
+            .gallery-collage {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .floating-nav {
+                padding: 6px 10px;
+            }
+
+            .floating-nav ul {
+                gap: 10px;
+            }
+
+            .floating-nav ul li a {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 
@@ -200,9 +199,9 @@
             </div>
         </section>
 
-        <section class="about-company" style="margin-top: 40px; margin-bottom: 40px;">
-            <div class="about-company-box" style="padding: 20px;">
-                <div class="gallery-collage" style="padding-top: 20px; padding-bottom: 20px;">
+        <section class="about-company">
+            <div class="about-company-box">
+                <div class="gallery-collage">
                     <div class="grid-item">
                         <a href="image/ic4.png" target="_blank"><img src="image/vsa03 - Copy.jpeg" alt="Image 1"></a>
                     </div>
