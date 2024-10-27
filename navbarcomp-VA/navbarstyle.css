@@ -121,10 +121,6 @@ body {
 
   .nav-links li {
     margin: 20px 0;
-    border-bottom: 1px solid green;
-  }
-
-  .nav-links a {
-    /* font-size: larger; */
+    border-bottom: 1px solid black;
   }
 }
