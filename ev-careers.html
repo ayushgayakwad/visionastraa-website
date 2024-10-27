@@ -3,111 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EV Careers</title>
+    <title>EV Software and Control Systems</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/careers.css">
 </head>
 <body>
-    <div class="hero-section">
-        <header id="navbar-placeholder"></header>
-        <div class="hero-content">
-        <h1>Join our team!</h1>
-        <p>We're rapidly expanding as one of Bengaluru's most promising startups, led by experienced entrepreneurs!</p>
-        <a href="#role-button"><button class="position">View Our Open Positions</button></a>
-        </div>
-        <div class="picture">
-            <img src="./image/career-removebg-preview.png" alt="startup-img" >
-        </div>
-    </div>
-    <main>    
-        <!-- add all the JOB ROLES in this div -->
-        <div class="job-roles">
-            <section class="course-info" id="role-button">
-                <div class="course-pricing-info">
-                    <h2>Role:<br><b>Sales And Marketing Intern</b></br></h2>
-                    <p>We are seeking a driven and energetic intern to join our dynamic sales and marketing team for a 2-month internship. In this role, you'll gain valuable experience across both sales and marketing functions, giving you a well-rounded foundation for your future career. We are also seeking a dynamic and results-oriented Telecaller to join our growing team. As a Telecaller, you will play a crucial role in generating leads, qualifying prospects, and building strong customer relationships.</p>
-                    <a href="ev-career-application.html">
-                        <button class="register-course">APPLY NOW</button>
-                    </a>
+    <header>
+        <div id="navbar-placeholder"></div>
+    </header>
+    <main>             
+        <header>
+            <h1>Electrify Your Career </h1>
+        </header>
+    
+        <!-- Main Career Opportunities Page -->
+        <div id="opportunities" class="page-section">
+            <div class="opportunity-container">
+                <div class="opportunity-box">
+                    <h2>Sales & Marketing Intern</h2>
+                    <p>Join our dynamic sales and marketing team for a 2-month internship and gain real-world experience.</p>
+                    <button onclick="showPage('sales-marketing')">View Details</button>
                 </div>
-            </section>
-        </div>
-        
-        <section class="requirements-section">
-            <div class="requirements-box">
-                <h2>Roles And Responsibilities:</h2>
-                <ul>
-                    <li>Assist the team with lead generation and qualification activities.</li>
-                    <li>Outbound calling to potential customers to generate leads and schedule appointments.</li>
-                    <li>Qualifying leads based on predetermined criteria.</li>
-                    <li>Providing accurate and informative product/service information to potential customers.</li>
-                    <li>Addressing customer inquiries and concerns in a professional and timely manner.</li>
-                    <li>Providing insights and implementing strategies to meet the company goals.</li>
-                    <li>Craft compelling marketing materials like social media posts, email campaigns, or presentations.</li>
-                    <li>Conduct market research and competitor analysis to inform marketing strategies.</li>
-                    <li>Support with event planning and execution.</li>
-                    <li>Learn the ropes of customer relationship management (CRM).</li>
-                    <li>Maintaining accurate records of customer interactions and call outcomes.</li>
-                    <li>Achieving monthly and quarterly sales targets..</li>
-                </ul>
+                <div class="opportunity-box">
+                    <h2>Telemarketing Specialist</h2>
+                    <p>Play a crucial role in lead generation and building strong customer relationships.</p>
+                    <button onclick="showPage('telecaller')">View Details</button>
+                </div>
             </div>
-        </section>        
+        </div>
+    
+        <!-- Sales & Marketing Intern Page -->
+        <div id="sales-marketing" class="page-section">
+            <main>             
+                <section class="course-info">
+                    <div class="course-pricing-info">
+                        <h2>Role:<br><b>Sales And Marketing Intern</b></br></h2>
+                        <p>We are seeking a driven and energetic intern to join our dynamic sales and marketing team for a 2-month internship. In this role, you'll gain valuable experience across both sales and marketing functions, giving you a well-rounded foundation for your future career.</p>
+                        <a href="ev-career-application.html">
+                            <button class="register-course">APPLY NOW</button>
+                        </a>
+                    </div>
+                </section>
+                
+                <section class="pricing-info">
+                    <div class="pricing-learning-outcomes">
+                        <h2>Roles And Responsibilities:</h2>
+                        <ul>
+                            <li>Assist the team with lead generation and qualification activities.</li>
+                            <li>Provide insights and implement strategies to meet company goals.</li>
+                            <li>Craft compelling marketing materials like social media posts, email campaigns, or presentations.</li>
+                            <li>Conduct market research and competitor analysis to inform marketing strategies.</li>
+            
+                        </ul>
+                    </div>
+                </section>        
+            
+                <section class="requirements-section">
+                    <div class="requirements-box">
+                        <h2>Eligibility Criteria:</h2>
+                        <ul>
+                            <li>Graduate or currently pursuing Bachelor’s/Master’s degree in business or a related field.</li>
+                            <li>Having a sound understanding of the startup sector.</li>
+                            <li>Must be aware of the latest business policies and market regulations.</li>
+                            <li>Great time management as well as marketing skills.</li>
+                            <li>Collaborative, interactive, and leadership abilities are necessary.</li>
+                            <li>Should be a critical and analytical thinker, and solution provider.</li>
+                            <li>Must have visionary business insight.</li>
+                        </ul>
+                    </div>
+                </section>
+                <section class="course-inclusions">
+                    <div class="inclusions-box">
+                        <h2>Who Can Apply:</h2>
+                        <ul>
+                            <li>Are available for 2 months.</li>
+                            <li>Are ready for a remote internship.</li>
+                            <li>Can start the internship immediately.</li>
+                            <li>Have keen interest in sales and marketing.</li>
+                            <li>Can work both independently and in a team.</li>
+                        </ul>
+                    </div>
+                </section>
+                <section class="course-inclusions">
+                    <div class="inclusions-box">
+                        <h2>Perks And Benefits:</h2>
+                        <ul>
+                            <li>Flexible working hours.</li>
+                            <li>Incentive-based payments.</li>
+                            <li>Internship Certificate.</li>
+                            <li>Letter of Recommendation.</li>
+                            <li>Recommendations on LinkedIn.</li>
+                        </ul>
+                        
+                    </div>
+                </section>
+                <section class="course-inclusions">
+                    <div class="inclusions-box">
+                        <h2>Duration:</h2>
+                        <p>2 Months</p>
+                    </div>
+                </section>
+               
+            </main>
+            <button onclick="showPage('opportunities')"> < Back </button>
+        </div>
+    
+        <!-- Telecaller Page -->
+        <div id="telecaller" class="page-section">
+            <main>             
+                <section class="course-info">
+                    <div class="course-pricing-info">
+                        <h2>Role:<br><b>Technical Telecaller</b></br></h2>
+                        <p>We are seeking a dynamic and results-oriented individual to the role of Technical Telecaller to join our Sales & Marketing Team. As a Technical Telecaller, you will play a crucial role in generating leads, qualifying prospects, and building strong customer relationships in the EdTech segment.</p>
+                        <a href="ev-career-application.html">
+                            <button class="register-course">APPLY NOW</button>
+                        </a>
+                    </div>
+                </section>
+                
+                <section class="pricing-info">
+                    <div class="pricing-learning-outcomes">
+                        <h2>Roles And Responsibilities:</h2>
+                        <ul>
+                            <li>Outbound calling to potential customers to generate leads and schedule appointments.</li>
+                            <li>Qualifying leads based on predetermined criteria.</li>
+                            <li>Providing accurate and informative product/service information to potential customers.</li>
+                            <li>Addressing customer inquiries and concerns in a professional and timely manner.</li>
+                            <li>Maintaining accurate records of customer interactions and call outcomes.</li>
+                            <li>Achieving monthly and quarterly sales targets.</li>
+                        </ul>
+                        
+                    </div>
+                </section>        
+            
+                <section class="requirements-section">
+                    <div class="requirements-box">
+                        <h2>Eligibility Criteria:</h2>
+                        <ul>
+                            <li>Excellent verbal and written communication skills in English.</li>
+                            <li>Strong interpersonal skills and ability to build rapport with customers.</li>
+                            <li>Proven track record in telemarketing or sales.</li>
+                            <li>Ability to work independently and as part of a team.</li>
+                            <li>Bachelor's degree or equivalent experience.</li>
+                            <li>Proficient in verbal communication in multiple Indian languages is a bonus - Hindi, Telugu, Tamil, Kannada, Marathi.</li>
+                        </ul>
+                        
+                    </div>
+                </section>
+                        <section class="course-inclusions">
+                    <div class="inclusions-box">
+                        <h2>Duration:</h2>
+                        <ul>
+                            <li>2 months probation/internship period with performance-based incentives.</li>
+                            <li>Full-Time with fixed monthly stipend and bonus after probation/internship period.</li>
+                        </ul>
+                        
+                    </div>
+                </section>
+                
+                <section class="course-inclusions">
+                    <div class="inclusions-box">
+                        <h2>Perks And Benefits:</h2>
+                        <ul>
+                            <li>Competitive salary and commission structure.</li>
+                            <li>Flexible working hours.</li>
+                            <li>Work from Home opportunity.</li>
+                            <li>Opportunities for professional growth and development.</li>
+                            <li>Supportive and collaborative work environment.</li>
+                        </ul>
+                        
+                        </div>
+                </section>
+               
+                <section class="course-inclusions">
+                    <div class="inclusions-box">
+                        <p>If you are a motivated and results-driven individual looking for a challenging and rewarding career, we encourage you to apply. Please submit your <strong>resume</strong> and cover letter to <a href="mailto:careers@visionastra.com">careers@visionastra.com</a>.</p>
 
-        <section class="requirements-section">
-            <div class="requirements-box">
-                <h2>Eligibility Criteria:</h2>
-                <ul>
-                    <li>Graduate or currently pursuing Bachelor’s/Master’s degree in business or a related field.</li>
-                    <li>Bachelor's degree or equivalent experience.</li>
-                    <li>Having a sound understanding of the startup sector.</li>
-                    <li>Must be aware of the latest business policies and market regulations.</li>
-                    <li>Great time management as well as marketing skills.</li>
-                    <li>Excellent verbal and written communication skills.</li>
-                    <li>Strong interpersonal skills and ability to build rapport with customers.</li>
-                    <li>Collaborative, interactive, and leadership abilities are necessary.</li>
-                    <li>Ability to work independently and as part of a team.</li>
-                    <li>Should be a critical and analytical thinker, and solution provider.</li>
-                    <li>Must have visionary business insight.</li>
-                    <li>Proven track record in telemarketing or sales.</li>
-                </ul>
-            </div>
-        </section>
-        <section>
-            <div class="criteria">
-                <div class="criteria-box">
-                    <h2 class="title">Who Can Apply:</h2>
-                <ul>
-                    <li>Are available for 2 months.</li>
-                    <li>Are ready for a remote internship.</li>
-                    <li>Can start the internship immediately.</li>
-                    <li>Have keen interest in sales and marketing.</li>
-                    <li>Can work both independently and in a team.</li>
-                </ul>
-                </div>
-                <div class="criteria-box">
-                    <h2 class="title">Perks And Benefits:</h2>
-                <ul>
-                    <li>Flexible working hours.</li>
-                    <li>Incentive-based payments.</li>
-                    <li>Internship Certificate.</li>
-                    <li>Letter of Recommendation.</li>
-                    <li>Recommendations on LinkedIn.</li>
-                </ul>
-                </div>
-                <div class="criteria-box">
-                    <h2 class="title">Duration:</h2>
-                <ul>
-                    <li>2 Months</li>
-                </ul>
-                </div>
-                </div>
-        </section>
-        <section>
-            <div  class="last-content">
-                <p>If you are a motivated and results-driven individual looking for a challenging and rewarding career, we encourage you to apply. Please submit your <strong>RESUME</strong> and cover letter to <a href="mailto:careers@visionastra.com">careers@visionastra.com</a>.</p>
-            </div>
-        </section>
+                         </div>
+                </section>
+            
+            </main>
+           
+            <button onclick="showPage('opportunities')"> < Back</button>
+        </div>
+    
 
     </main>
     <footer class="footer" style="padding-top: 35px;">
@@ -116,11 +196,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <h5 class="text-uppercase">About Us</h5>
-                    <p style="color: white;">Empowering India’s talent to lead the global EV industry. <br><br>We are committed to bridging the gap between academia and industry,
-                        providing students with the practical skills and knowledge required to excel in the EV sector.
-                        Our programs are designed to foster innovation, entrepreneurship, and a deep understanding of the EV ecosystem. At VisionAstraa StartUp Academy, 
-                        we aim to fulfill the dreams of college students by guiding and mentoring them throughout their academic journey for a chance to build tomorrow's visionary companies.
-                </p>
+                    <p style="color: white;">Empowering India’s talent to lead the global EV industry. <br><br>We are committed to bridging the gap between academia and industry, providing students with the practical skills and knowledge required to excel in the EV sector. Our programs are designed to foster innovation, entrepreneurship, and a deep understanding of the EV ecosystem.</p>
                 </div>
                 <div class="col-md-2 secpart">
                     <h5 class="text-uppercase">Links</h5>
@@ -158,6 +234,14 @@
         </div>
     </footer>
     <script>
+        function showPage(pageId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => section.style.display = 'none');
+
+            // Show the selected section
+            document.getElementById(pageId).style.display = 'block';
+        }
         function openPopup(module, content) {
             document.getElementById('popup-module').innerHTML = module;
             document.getElementById('popup-content').innerHTML = content;
