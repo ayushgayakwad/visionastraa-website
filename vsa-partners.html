@@ -10,7 +10,7 @@
 </head>
 <body>
     <!-- Hero Section -->
-    <section class="hero-partners">
+    <section class="hero">
         <header>
             <div id="navbar-placeholder"></div> <!-- Placeholder for navbar -->
         </header>
@@ -68,9 +68,7 @@
     </section>
 
     <!-- Footer Section -->
-    <footer>
-        <p>© 2024 VisionAstraa. All rights reserved.</p>
-    </footer>
+    <div id="footer-container"></div>
 
     <script>
         // Fetch navbar HTML and integrate it
@@ -89,6 +87,29 @@
                 }
             })
             .catch(error => console.error('Error loading navbar:', error));
+
+            //footer 
+
+            async function loadFooter() {
+                try {
+                    const response = await fetch('./footercomp-VA/footer.html');
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    const footerHTML = await response.text();
+
+                    document.getElementById('footer-container').innerHTML = footerHTML;
+
+                    const linkElement = document.createElement('link');
+                    linkElement.rel = 'stylesheet';
+                    linkElement.href = './footercomp-VA/footer.css';
+                    document.head.appendChild(linkElement);
+                } catch (error) {
+                    console.error('Error loading the footer:', error);
+                }
+            }
+            document.addEventListener('DOMContentLoaded', loadFooter);
     </script>
 </body>
 </html>
