@@ -200,7 +200,6 @@ p {
 }
 .leftetx h1{
     text-decoration-line: underline;
-    text-decoration-style: wavy;
     text-underline-offset: 20px;
 }
 .leftetx p{
@@ -251,7 +250,6 @@ p {
 }
 .ans h1{
     text-decoration-line: underline;
-    text-decoration-style: wavy;
     text-underline-offset: 10px;
 }
 

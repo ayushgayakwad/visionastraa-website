@@ -42,8 +42,6 @@ body {
   }
   
   h3 {
-    text-decoration: underline;
-    text-decoration-style: wavy;
     text-decoration-color: white;
     text-underline-offset: 8px;
   }
@@ -63,10 +61,9 @@ body {
     color: white;
     opacity: 10%;
     text-align: center;
-    font-size: 10vw;  
+    font-size: 6vw;  
     text-transform: uppercase;
     position: absolute;
-    top: -80px;
     left: 50%;
     transform: translateX(-50%);
   }
@@ -80,16 +77,23 @@ body {
   
     .about,.nav, .social {
       width: 100%; 
-
       text-align: center; 
     }
   .about p{
     text-align: justify;
-    margin: 0px 40px 40px 40px;
+    margin: 40px 40px 40px 40px;
     
   }
     .nav ul, .social ul {
       padding: 0; 
+  }
+
+  ul{
+    list-style-type: none;
+  }
+
+  h3{
+    margin-top: 24px;
   }
 
   .bigtext {
@@ -99,18 +103,18 @@ body {
     position: relative;
   }
 
-  /* Fix the positioning of the h1 text */
   .bigtext h1 {
     margin: 0;
     padding: 0;
     color: white;
     opacity: 10%;
     text-align: center;
-    font-size: 40vw;  
+    font-size: 10vw;
     text-transform: uppercase;
-    /* position: absolute;  Keep it positioned absolutely */
-    /* bottom: -40px;  Align it towards the bottom */
+    position: absolute;
+    /* top: -80px; */
     left: 50%;
     transform: translateX(-50%);
   }
+
 }}
