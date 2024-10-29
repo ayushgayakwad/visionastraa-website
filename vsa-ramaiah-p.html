@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VSA - Ramaiah Institute of Technology</title>
+    <style>
+        /* Import Poppins font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        /* Apply Poppins font and general styles */
+        body, html {
+            font-family: 'Poppins', sans-serif;
+            background-color: #171717;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: auto;
+        }
+
+        .hero {
+            background: linear-gradient(to right bottom, rgb(0, 0, 0), rgb(27, 17, 17), rgb(8, 8, 42), rgb(0, 0, 0));;
+            color: #ffffff;
+            text-align: center;
+            border-radius: 40px 40px;
+            width: 100%;
+            height: 70%;
+            padding-top: 30px;
+            margin-bottom: 25px;
+            overflow-x: hidden;
+
+        }
+
+        .hero-container {
+            margin: 0 auto;
+            
+        }
+
+        .hero-container h1 {
+            font-size: 2.5em;
+            color: #ffffff; /* White text for contrast */
+            margin-bottom: 30px;
+            margin-top: 30px; /* Adjust this value as needed */
+        }
+
+        .hero-container h3 {
+            font-size: 1.75em;
+            color: #ffffff; /* White text */
+            margin: 0;
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            padding: 50px 0;
+            background-color: #ffffff;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: transform 0.3s ease; /* Add smooth zoom effect */
+        }
+
+        /* Define the 2-3-2 layout */
+        .gallery-container img:nth-child(1),
+        .gallery-container img:nth-child(2) {
+            grid-column: span 3 / span 3; /* Two full-width images in the first row */
+        }
+
+        .gallery-container img:nth-child(3),
+        .gallery-container img:nth-child(4),
+        .gallery-container img:nth-child(5) {
+            grid-column: span 1; /* Three images in the middle row */
+        }
+
+        .gallery-container img:nth-child(6),
+        .gallery-container img:nth-child(7) {
+            grid-column: span 3 / span 3; /* Two full-width images in the last row */
+        }
+
+
+        /* Hover effect for images */
+        .gallery-item:hover {
+            transform: scale(1.05); /* Slight zoom on hover */
+        }
+
+    
+    </style>
+
+</head>
+<body>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+      <header>
+        <div id="navbar-placeholder"></div>
+      </header>
+      <div class="hero-container">
+        <h1>VisionAstraa StartUp Academy</h1>
+        <h3>In collaboration with</h3>
+        <h1>Ramaiah Institute of Technology</h1>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <div class="gallery-container">
+            <img src="image/ic1.jpg" alt="Image 1" class="gallery-item">
+            <img src="image/ic2.jpg" alt="Image 2" class="gallery-item large">
+            <img src="image/ic3.jpg" alt="Image 3" class="gallery-item">
+            <img src="image/ic4.jpg" alt="Image 4" class="gallery-item tall">
+            <img src="image/ic5.jpg" alt="Image 5" class="gallery-item">
+            <img src="image/ic6.jpg" alt="Image 6" class="gallery-item large">
+            <img src="image/ic7.jpg" alt="Image 7" class="gallery-item">
+        </div>
+    </section>
+
+
+    <div id="footer-container"></div>
+
+    <script>
+        fetch('navbarcomp-VA/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+
+                const hamburger = document.getElementById("hamburger");
+                const navLinks = document.getElementById("nav-links");
+
+                if (hamburger && navLinks) {
+                    hamburger.onclick = function () {
+                        navLinks.classList.toggle("active");
+                    };
+                }
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+
+        //footer 
+        async function loadFooter() {
+                try {
+                    const response = await fetch('./footercomp-VA/footer.html');
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    const footerHTML = await response.text();
+
+                    document.getElementById('footer-container').innerHTML = footerHTML;
+
+                    const linkElement = document.createElement('link');
+                    linkElement.rel = 'stylesheet';
+                    linkElement.href = './footercomp-VA/footer.css';
+                    document.head.appendChild(linkElement);
+                } catch (error) {
+                    console.error('Error loading the footer:', error);
+                }
+            }
+            document.addEventListener('DOMContentLoaded', loadFooter);
+    </script>
+</body>
+</html>
