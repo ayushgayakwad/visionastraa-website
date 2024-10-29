@@ -15,32 +15,27 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: auto;
+            overflow-x: hidden;
         }
 
         .hero {
-            background: linear-gradient(to right bottom, rgb(0, 0, 0), rgb(27, 17, 17), rgb(8, 8, 42), rgb(0, 0, 0));;
+            background: linear-gradient(to right bottom, rgb(0, 0, 0), rgb(27, 17, 17), rgb(8, 8, 42), rgb(0, 0, 0));
             color: #ffffff;
             text-align: center;
-            border-radius: 40px 40px;
+            border-radius: 40px;
             width: 100%;
-            height: 70%;
-            padding-top: 30px;
-            margin-bottom: 25px;
-            overflow-x: hidden;
-
+            padding: 50px 20px;
         }
 
         .hero-container {
             margin: 0 auto;
-            
+            max-width: 1000px;
         }
 
         .hero-container h1 {
             font-size: 2.5em;
             color: #ffffff; /* White text for contrast */
-            margin-bottom: 30px;
-            margin-top: 30px; /* Adjust this value as needed */
+            margin: 20px 0;
         }
 
         .hero-container h3 {
@@ -48,55 +43,102 @@
             color: #ffffff; /* White text */
             margin: 0;
         }
-        
+
         /* Gallery Section */
         .gallery {
             padding: 50px 0;
-           
         }
 
         .gallery-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
-            width: 70%;
-            margin: 0 auto;
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            margin-bottom: 25px;
         }
 
         .gallery-item {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
+            position: relative;
+            overflow: hidden;
             border-radius: 15px;
-            transition: transform 0.3s ease; /* Add smooth zoom effect */
+            transition: transform 0.3s ease;
+            height: 200px;
         }
 
-        /* Define the 2-3-2 layout */
-        .gallery-container img:nth-child(1),
-        .gallery-container img:nth-child(2) {
-            grid-column: span 3 / span 3; /* Two full-width images in the first row */
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
-        .gallery-container img:nth-child(3),
-        .gallery-container img:nth-child(4),
-        .gallery-container img:nth-child(5) {
-            grid-column: span 1; /* Three images in the middle row */
+        /* Specific styles for rectangular items */
+        .gallery-item.rectangle-wide {
+            grid-column: span 2;
+            height: 250px;
         }
-
-        .gallery-container img:nth-child(6),
-        .gallery-container img:nth-child(7) {
-            grid-column: span 3 / span 3; /* Two full-width images in the last row */
-        }
-
 
         /* Hover effect for images */
         .gallery-item:hover {
-            transform: scale(1.05); /* Slight zoom on hover */
+            transform: scale(1.05);
         }
 
-    
-    </style>
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .hero-container h1 {
+                font-size: 2.2em;
+            }
 
+            .hero-container h3 {
+                font-size: 1.5em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-container h1 {
+                font-size: 2em;
+            }
+
+            .hero-container h3 {
+                font-size: 1.25em;
+            }
+
+            .gallery-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-item.rectangle-wide {
+                grid-column: span 1; /* Make all items single-column wide on smaller screens */
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-container h1 {
+                font-size: 1.75em;
+                margin: 30px 30px;
+            }
+            .hero {
+                height: auto;
+                width: auto;
+            }
+            .hero-container h3 {
+                font-size: 1.2em;
+            }
+
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item.rectangle-wide {
+                grid-column: span 1;
+                height: 200px;
+            }
+        }
+
+    </style>
 </head>
 <body>
     
@@ -112,19 +154,19 @@
       </div>
     </section>
 
-    <!-- Gallery Section -->
     <section class="gallery">
         <div class="gallery-container">
-            <img src="image/ic1.jpg" alt="Image 1" class="gallery-item">
-            <img src="image/ic2.jpg" alt="Image 2" class="gallery-item large">
-            <img src="image/ic3.jpg" alt="Image 3" class="gallery-item">
-            <img src="image/ic4.jpg" alt="Image 4" class="gallery-item tall">
-            <img src="image/ic5.jpg" alt="Image 5" class="gallery-item">
-            <img src="image/ic6.jpg" alt="Image 6" class="gallery-item large">
-            <img src="image/ic7.jpg" alt="Image 7" class="gallery-item">
+            <div class="gallery-item rectangle-wide"><img src="image/ic1.jpg" alt="Image 1"></div>
+            <div class="gallery-item"><img src="image/ic2.jpg" alt="Image 2"></div>
+            <div class="gallery-item rectangle-wide"><img src="image/ic3.jpg" alt="Image 3"></div>
+            <div class="gallery-item"><img src="image/ic4.jpg" alt="Image 4"></div>
+            <div class="gallery-item rectangle-wide"><img src="image/ic5.jpg" alt="Image 5"></div>
+            <div class="gallery-item rectangle-wide"><img src="image/ic6.jpg" alt="Image 6"></div>
+            <div class="gallery-item rectangle-wide"><img src="image/ic7.jpg" alt="Image 7"></div>
+            <div class="gallery-item"><img src="image/ic9.jpg" alt="Image 8"></div>
+            <div class="gallery-item rectangle-wide"><img src="image/ic8.jpg" alt="Image 9"></div>
         </div>
     </section>
-
 
     <div id="footer-container"></div>
 
@@ -147,25 +189,25 @@
 
         //footer 
         async function loadFooter() {
-                try {
-                    const response = await fetch('./footercomp-VA/footer.html');
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-
-                    const footerHTML = await response.text();
-
-                    document.getElementById('footer-container').innerHTML = footerHTML;
-
-                    const linkElement = document.createElement('link');
-                    linkElement.rel = 'stylesheet';
-                    linkElement.href = './footercomp-VA/footer.css';
-                    document.head.appendChild(linkElement);
-                } catch (error) {
-                    console.error('Error loading the footer:', error);
+            try {
+                const response = await fetch('./footercomp-VA/footer.html');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
+
+                const footerHTML = await response.text();
+
+                document.getElementById('footer-container').innerHTML = footerHTML;
+
+                const linkElement = document.createElement('link');
+                linkElement.rel = 'stylesheet';
+                linkElement.href = './footercomp-VA/footer.css';
+                document.head.appendChild(linkElement);
+            } catch (error) {
+                console.error('Error loading the footer:', error);
             }
-            document.addEventListener('DOMContentLoaded', loadFooter);
+        }
+        document.addEventListener('DOMContentLoaded', loadFooter);
     </script>
 </body>
 </html>
