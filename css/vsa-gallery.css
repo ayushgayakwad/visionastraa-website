@@ -103,7 +103,7 @@ body {
 .about-visionastraa {
     background: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(27, 17, 17), rgb(8, 8, 42), rgb(0, 0, 0));
     color: #fff;
-    padding: 40px 0;
+    padding: 0 0 40px 0;
     border-bottom-left-radius: 40px;
     border-bottom-right-radius: 40px;
     position: relative;
