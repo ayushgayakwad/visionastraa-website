@@ -179,20 +179,10 @@
     <main>
         <section class="about-visionastraa">
             <!-- Floating Navigation Bar -->
-            <nav class="floating-nav">
-                <ul>
-                    <li><a href="vsa-home.html">Home</a></li>
-                    <li><a href="vsa-startup.html">About Us</a></li>
-                    <li><a href="vsa-mentors.html">Mentors</a></li>
-                    <li><a href="vsa-partners.html">Partners</a></li>
-                    <li><a href="vsa-career.html">Careers</a></li>
-                    <li><a href="vsa-contact.html">Contact Us</a></li>
-                </ul>
-            </nav>
-
+            <div id="navbar-placeholder"></div>
             <div class="divider-wrapper">
                 <div class="logo-container">
-                    <img src="C:\Users\Hi\Downloads\r.jpeg" alt="Logo" class="logo">
+                    <img src="image/Logo.png" alt="Logo" class="logo">
                 </div>
                 <div class="about-company text-center">
                     <h2>Gallery</h2>
@@ -240,6 +230,23 @@
             </div>
         </section>
     </main>
+    <script>
+    fetch('navbarcomp-VA/navbar.html')
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('navbar-placeholder').innerHTML = data;
+
+        const hamburger = document.getElementById("hamburger");
+        const navLinks = document.getElementById("nav-links");
+
+        if (hamburger && navLinks) {
+            hamburger.onclick = function () {
+                navLinks.classList.toggle("active");
+            };
+        }
+    })
+    .catch(error => console.error('Error loading navbar:', error));
+    </script>
 </body>
 
 </html>
