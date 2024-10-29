@@ -1,0 +1,163 @@
+body {
+    background-color: #fff;
+    padding: 0; /* Remove side paddings */
+    font-family: 'Poppins', sans-serif;
+}
+
+h1,
+h2,
+h3 {
+    font-size: 48px;
+    font-family: 'Poppins', sans-serif;
+}
+
+p {
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+}
+
+li {
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.logo-container img {
+    width: 150px;
+    height: auto;
+}
+
+.gallery-collage {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 5px;
+}
+
+.gallery-collage .grid-item {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-collage .grid-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.gallery-collage img {
+    width: 100%;
+    height:100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    border-radius: 10px;
+}
+
+.gallery-collage img:hover {
+    transform: scale(1.1);
+}
+
+.gallery-collage .grid-item:nth-child(11n+1) {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.gallery-collage .grid-item:nth-child(11n+2) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.gallery-collage .grid-item:nth-child(11n+3) {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.gallery-collage .grid-item:nth-child(11n+4) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.gallery-collage .grid-item:nth-child(11n+5) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.gallery-collage .grid-item:nth-child(11n+6) {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+.gallery-collage .grid-item:nth-child(11n+7) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.gallery-collage .grid-item:nth-child(11n+8) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.gallery-collage .grid-item:nth-child(11n+9) {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.gallery-collage .grid-item:nth-child(11n+10) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.gallery-collage .grid-item:nth-child(11n+11) {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.about-company h2 {
+    text-align: center;
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.about-visionastraa {
+    background: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(27, 17, 17), rgb(8, 8, 42), rgb(0, 0, 0));
+    color: #fff;
+    padding: 40px 0;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    position: relative;
+}
+
+/* Floating Navigation Bar */
+.floating-nav {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.floating-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.floating-nav ul li {
+    display: inline-block;
+}
+
+.floating-nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.floating-nav ul li a:hover {
+    color: #007bff;
+}
