@@ -35,7 +35,6 @@ body {
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.253);
 }
 header{
-  position: absolute;
   top: 0;
   width: 100%; 
   z-index: 0;
@@ -126,7 +125,7 @@ header{
 }
 
 .hero-body {
-  margin-top: 100px;
+  margin-top: 70px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -201,7 +200,6 @@ p {
 }
 .leftetx h1{
     text-decoration-line: underline;
-    text-decoration-style: wavy;
     text-underline-offset: 20px;
 }
 .leftetx p{
@@ -252,7 +250,6 @@ p {
 }
 .ans h1{
     text-decoration-line: underline;
-    text-decoration-style: wavy;
     text-underline-offset: 10px;
 }
 
@@ -284,89 +281,319 @@ p {
 
 }
 
-/* For small devices (iPhone SE, Galaxy S8+, etc.) */
-@media only screen and (max-width: 375px) {
-  .hero-body {
-      margin-top: 140px;
+/* For small devices Vertical(<=480px) */
+@media only screen and (max-width: 480px) {
+  .header{
+    max-width: 80%;
+    padding: 0%;
+    display: flex;
   }
-
-  .subhero-body {
-      padding-top: 40px; /* Add padding to create separation between hero and tiles */
+  .navbar{
+    width: 50%;
   }
-
+  .landingbody {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  #scrool {
+    display: none; /* Hide the image */
+  }
+  a[href="#scrollid"] {
+    display: none; /* Hide the link itself */
+  }
+  .hero-body{
+    margin-top: 20% ;
+    width: 90%;
+  }
+  .hero-body h1{
+    font-size: 220%;
+    text-align: left;
+    margin-left: 15px;
+  }
+  .hero-body p{
+    text-align: left;
+    margin-left: 15px;
+    margin-right: 12px;
+    font-size:160%;
+  }
+  .subhero-body{
+    margin: 20px 10px 20px 10px;
+    width: 99%;
+  }
   .vpvmf {
-      flex-direction: column;
-      padding: 10px;
-      margin-top: 20px; /* Add margin to avoid overlap */
+    flex-direction: column;
+    padding: 10px;
+    margin-top: 40%; /* Add margin to avoid overlap */
+    align-items: center;
+    justify-content: center;
   }
-}
-
-/* For medium devices (iPhone XR, Pixel 7, Galaxy S20 Ultra, iPad Mini) */
-@media only screen and (max-width: 768px) {
-  .hero-body {
-      margin-top: 170px;
+  .vp{
+    width: 80%;
+    padding: 20px;
   }
-
-  .subhero-body {
-      padding-top: 50px; /* More padding between hero and sub-hero */
+  .vp h2{
+    font-size: 110%;
   }
-
-  .vpvmf {
-      flex-direction: column;
+  .vp p{
+    font-size: 75%;
+    text-align:justify;
+  }
+  .vmf{
+    width: 80%;
+    padding: 20px;
+  }
+  .vmf h2{
+    font-size: 110%;
+  }
+  .vmf p{
+    font-size: 75%;
+    text-align:justify;
+  }
+  .thirdheroshero{
+    display: flex;
+    justify-content: center;
+  }
+  .thirdhero{
+    margin: 0%;
+    flex-direction: column;
+    padding: 0px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .thirdhero img{
+    width: 80%;
+    margin-bottom: 10%;
+  }
+  .leftetx{
+    max-width: 120%;
+      font-size: small;
+      gap: 20px;
+      text-align: center;
+      flex-direction: row;
       padding: 20px;
-      margin-top: 30px; /* More margin to ensure tiles stay separate */
+      justify-content: center;
+      align-items: center;
+  }
+  .leftetx h1{
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    text-underline-offset: 10px;
+    font-size: 160%;
+  }
+  .leftetx p{
+    text-align: justify;
+    font-size: 90%;
+  }
+  .holder{
+    padding: 10;
+    font-size:60%;
+    margin: 0px 20px 50px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .holder ul{
+    padding: 0;
+  }
+  .ques{
+    width: 100%;
+    border-radius: 20px;
+    border-right: 7px solid black;
+    border-bottom: 7px solid black;
+    
+  }
+  .ans{
+    width: 100%;
+    height: 40vh;
   }
 }
 
-/* For larger devices (iPads, Surface Pro 7, etc.) */
-@media only screen and (min-width: 769px) and (max-width: 1024px) {
-  .hero-body {
-      margin-top: 200px;
-  }
 
-  .subhero-body {
-      padding-top: 70px;
-  }
 
+/* For small devices Vertical(<=389px) */
+@media only screen and (max-width: 389px) {
+  .header{
+    max-width: 80%;
+    padding: 0%;
+    display: flex;
+  }
+  .navbar{
+    width: 50%;
+  }
+  .landingbody {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  #scrool {
+    display: none; /* Hide the image */
+  }
+  a[href="#scrollid"] {
+    display: none; /* Hide the link itself */
+  }
+  .hero-body{
+    margin-top: 10% ;
+    width: 90%;
+  }
+  .hero-body h1{
+    font-size: 180%;
+    text-align: left;
+    margin-left: 15px;
+  }
+  .hero-body p{
+    text-align: left;
+    margin-left: 15px;
+    margin-right: 12px;
+    font-size:130%;
+  }
+  .subhero-body{
+    margin: 20px 10px 20px 10px;
+    width: 99%;
+  }
   .vpvmf {
-      flex-direction: row;
-      gap: 40px;
-      padding: 30px;
-      margin-top: 40px; /* Ensure enough separation on tablets */
+    flex-direction: column;
+    padding: 10px;
+    margin-top: 20%; /* Add margin to avoid overlap */
+    align-items: center;
+    justify-content: center;
   }
-}
-
-/* For laptops and larger screens (MacBooks, Surface Laptops, etc.) */
-@media only screen and (min-width: 1025px) {
-  .hero-body {
-      margin-top: 200px;
+  .vp{
+    width: 80%;
+    padding: 20px;
   }
-
-  .subhero-body {
-      padding-top: 80px; /* Large gap for better separation */
+  .vp h2{
+    font-size: 110%;
   }
-
-  .vpvmf {
-      flex-direction: row;
-      gap: 50px;
-      padding: 40px;
-      margin-top: 50px; /* Keep tiles well-separated from hero section */
+  .vp p{
+    font-size: 75%;
+    text-align:justify;
   }
-}
-
-/* Specific adjustments for folding devices like Surface Duo, Galaxy Z Fold 5 */
-@media only screen and (min-width: 400px) and (max-width: 800px) and (orientation: landscape) {
-  .hero-body {
-      margin-top: 150px;
+  .vmf{
+    width: 80%;
+    padding: 20px;
   }
-
-  .subhero-body {
-      padding-top: 40px;
+  .vmf h2{
+    font-size: 110%;
   }
-
-  .vpvmf {
+  .vmf p{
+    font-size: 75%;
+    text-align:justify;
+  }
+  .thirdheroshero{
+    display: flex;
+    justify-content: center;
+  }
+  .thirdhero{
+    margin: 0%;
+    flex-direction: column;
+    padding: 0px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .thirdhero img{
+    width: 80%;
+    margin-bottom: 10%;
+  }
+  .leftetx{
+    max-width: 120%;
+      font-size: small;
+      gap: 20px;
+      text-align: center;
       flex-direction: row;
       padding: 20px;
-      margin-top: 30px;
+      justify-content: center;
+      align-items: center;
+  }
+  .leftetx h1{
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    text-underline-offset: 10px;
+    font-size: 160%;
+  }
+  .leftetx p{
+    text-align: justify;
+    font-size: 90%;
+  }
+  .holder{
+    padding: 10;
+    font-size:60%;
+    margin: 0px 20px 50px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .holder ul{
+    padding: 0;
+  }
+  .ques{
+    width: 100%;
+    border-radius: 20px;
+    border-right: 7px solid black;
+    border-bottom: 7px solid black;
+    
+  }
+  .ans{
+    width: 100%;
+    height: 40vh;
+  }
+}
+
+/* For Tabs/Ipads(<=834pxpx) */
+@media only screen and (min-width: 480px) and (max-width: 768px) {
+  .landingbody{
+    height: 80%;
+  }
+  .thirdheroshero{
+    display: flex;
+    justify-content: center;
+  }
+  .thirdhero{
+    margin: 0%;
+    flex-direction: column;
+    padding: 0px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .thirdhero img{
+    width: 80%;
+    margin-bottom: 10%;
+  }
+  .leftetx{
+    max-width: 120%;
+      font-size: x-large;
+      gap: 20px;
+      text-align: center;
+      flex-direction: row;
+      padding: 20px;
+      justify-content: center;
+      align-items: center;
+  }
+  .leftetx h1{
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    text-underline-offset: 10px;
+    font-size: 160%;
+  }
+  .leftetx p{
+    text-align: justify;
+    font-size: 90%;
   }
 }

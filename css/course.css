@@ -532,6 +532,7 @@ main {
 .instructor-card {
     background-color: #282828;
     padding: 20px;
+    margin-right: 16px;
     border-radius: 10px;
     text-align: center;
     width: 45%;
@@ -633,6 +634,7 @@ main {
     .instructor-card {
         width: 100%;
         margin-bottom: 20px;
+        margin-right: 0px;
     }
 
     .course-content table {

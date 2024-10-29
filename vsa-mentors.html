@@ -203,6 +203,30 @@
                 }
             })
             .catch(error => console.error('Error loading navbar:', error));
+        
+        //footer 
+
+        async function loadFooter() {
+                try {
+                    const response = await fetch('./footercomp-VA/footer.html');
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    const footerHTML = await response.text();
+
+                    document.getElementById('footer-container').innerHTML = footerHTML;
+
+                    const linkElement = document.createElement('link');
+                    linkElement.rel = 'stylesheet';
+                    linkElement.href = './footercomp-VA/footer.css';
+                    document.head.appendChild(linkElement);
+                } catch (error) {
+                    console.error('Error loading the footer:', error);
+                }
+            }
+            document.addEventListener('DOMContentLoaded', loadFooter);
     </script>
+    <div id="footer-container"></div>
 </body>
 </html>
