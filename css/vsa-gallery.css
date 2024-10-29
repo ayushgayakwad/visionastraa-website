@@ -125,39 +125,3 @@ li {
     border-bottom-right-radius: 40px;
     position: relative;
 }
-
-/* Floating Navigation Bar */
-.floating-nav {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.8);
-    padding: 10px 20px;
-    border-radius: 50px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-}
-
-.floating-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 20px;
-}
-
-.floating-nav ul li {
-    display: inline-block;
-}
-
-.floating-nav ul li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    font-size: 18px;
-}
-
-.floating-nav ul li a:hover {
-    color: #007bff;
-}
