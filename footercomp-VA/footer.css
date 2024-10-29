@@ -36,6 +36,10 @@ body {
     text-transform: capitalize;
     text-decoration: none;
   }
+
+  ul {
+    list-style-type: none;
+  }
   
   li {
     line-height: 35px;
