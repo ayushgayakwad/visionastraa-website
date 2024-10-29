@@ -1,23 +1,6 @@
 body {
     background-color: #fff;
-    padding: 0; /* Remove side paddings */
-    font-family: 'Poppins', sans-serif;
-}
-
-h1,
-h2,
-h3 {
-    font-size: 48px;
-    font-family: 'Poppins', sans-serif;
-}
-
-p {
-    font-size: 24px;
-    font-family: 'Poppins', sans-serif;
-}
-
-li {
-    font-size: 16px;
+    padding: 0;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -124,4 +107,8 @@ li {
     border-bottom-left-radius: 40px;
     border-bottom-right-radius: 40px;
     position: relative;
+}
+
+@media (max-width: 768px) {
+    
 }
