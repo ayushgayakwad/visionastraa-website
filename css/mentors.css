@@ -26,6 +26,27 @@ h1 {
     color: white;
 }
 
+.extra-info {
+    position: relative;
+    background-color: #202020;
+    background-size: cover;
+    height: 100px;
+    padding-top: 24px;
+    padding-right: 8px;
+    padding-left: 8px;
+    margin-bottom: 16px;
+    color: white;
+    overflow: hidden;
+    border-radius: 15px; 
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.extra-info:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px #876eea;
+}
+
 .mentor-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -255,6 +276,21 @@ a{
     }
     h1 {
         font-size: 1.5em;
+    }
+    p {
+        font-size: small;
+    }
+    .extra-info {
+        height: 175px;
+        padding-top: 16px;
+        padding-right: 16px;
+        padding-left: 16px;
+        text-align: left;
+    }
+    
+    .extra-info:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 10px #876eea;
     }
 }
 

@@ -3,8 +3,10 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    color: white;
     background-color: #1c1c1c;
-    color: #fff;
+   
+   
 }
 
 main {
@@ -12,6 +14,70 @@ main {
     max-width: 1200px;
     margin: 0 auto;
     padding-top: 20px;
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        
+    }
+    
+    header {
+        background:#1c1c1c;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+    }
+    
+    .page-section {
+        display: none; /* All sections are hidden by default */
+        padding: 20px;
+       
+        border-radius: 5px;
+       
+    }
+    
+    #opportunities {
+        display: block; /* Show the opportunities section by default */
+    }
+    
+    .opportunity-container {
+        display: flex; /* Use flexbox to align items horizontally */
+        justify-content: center; /* Center the boxes */
+        flex-wrap: wrap; /* Allow boxes to wrap on smaller screens */
+    }
+    
+    .opportunity-box {
+        background: #202020;
+        border-radius: 15px;
+        padding: 15px;
+        margin-bottom: 40px;
+        width: 99%; /* Set width for boxes */
+        height: 325px;
+        text-align: center;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+        display: flex;
+    justify-content: center;  /* Horizontally center */
+    align-items: center;      /* Vertically center */
+    flex-direction: column; 
+    }
+    
+    button {
+        background: #35424a;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    
+    button:hover {
+        background: #5a5a5a;
+    }
+    
 }
 
 /* Hero Section */
