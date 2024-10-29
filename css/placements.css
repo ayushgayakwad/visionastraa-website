@@ -91,6 +91,41 @@ main {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* More pronounced shadow on hover */
 }
 
+.partner {
+  padding: 60px 0;
+  background-color: #ffffff;
+}
+
+.partner h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #000000;
+}
+
+.partner-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px; /* Increased space between logos */
+  padding: 20px;
+  background-color: #fff; /* Light background for the section */
+}
+
+.partner-logos img {
+  height: 250px;
+  width: 400px;
+  border-radius: 12px; /* Rounded corners */
+  padding: 10px;
+  background-color: #ffffff; /* White background for logos */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.partner-logos img:hover {
+  transform: scale(1.1); /* Slightly enlarge on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* More pronounced shadow on hover */
+}
+
 .footer {
   background-color: #23272A;
   color: #008000;
@@ -276,5 +311,14 @@ main {
 
   .h1-box {
       margin-left: 0;
+  }
+  .partner-logos img {
+    height: 200px;
+    width: 350px;
+    border-radius: 12px; /* Rounded corners */
+    padding: 10px;
+    background-color: #ffffff; /* White background for logos */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 }
