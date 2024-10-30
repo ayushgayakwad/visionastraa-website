@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campus Recruitment Drive for 2023/24 Freshers</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2PV0BKLV94"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-2PV0BKLV94');
+    </script>
     <meta name="title" content="Campus Recruitment Drive for 2023/24 Freshers" />
     <meta name="description" content="Campus Recruitment Drive for 2023/24 Freshers" />
     <meta property="og:type" content="website" />
