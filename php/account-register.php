@@ -1,19 +1,28 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get user data from POST
-    $name = $_POST['name'];
+    $name = $_POST['full_name'];
     $email = $_POST['email'];
-    $uid = $_POST['uid']; // Assuming UID is sent from the frontend
+    $uid = $_POST['uid'];
+    $phone = $_POST['phone'];
+    $role = $_POST['role'];
+    $state = $_POST['state'];
+    $college = $_POST['college'];
+    $degree = $_POST['degree'];
+    $specialization = $_POST['specialization'];
+    $graduation = $_POST['graduation'];
+    $linkedin_profile_link = $_POST['linkedin_profile_link'];
+    $description = $_POST['description'];
 
-    // Database connection details
-    $host = 'localhost'; // Adjust as needed
-    $db = 'u707137586_UserAccounts'; // Your database name
-    $user = 'u707137586_UserAccounts'; // Your database user
-    $pass = 'egtA*XgA+J>2'; // Your database password
+    $resume = file_get_contents($_FILES['resume']['tmp_name']);
+    $resume_filename = $_FILES['resume']['name'];
+
+    $host = 'localhost';
+    $db = 'u707137586_UserAccounts';
+    $user = 'u707137586_UserAccounts';
+    $pass = 'egtA*XgA+J>2';
     $charset = 'utf8mb4';
 
-    // Create a new PDO instance
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
     $options = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -28,10 +37,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // Insert user data into the database
     try {
-        $stmt = $pdo->prepare("INSERT INTO users (uid, name, email) VALUES (?, ?, ?)");
-        $stmt->execute([$uid, $name, $email]);
+        $stmt = $pdo->prepare("INSERT INTO users (uid, name, email, phone, role, state, college, degree, specialization, graduation, linkedin_profile_link, description, resume, resume_filename) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$uid, $name, $email, $phone, $role, $state, $college, $degree, $specialization, $graduation, $linkedin_profile_link, $description, $resume, $resume_filename]);
         echo json_encode(["success" => true]);
     } catch (PDOException $e) {
         echo json_encode(["success" => false, "error" => "Failed to insert user: " . $e->getMessage()]);
