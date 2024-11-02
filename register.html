@@ -61,104 +61,246 @@
       .catch((error) => console.error("Data submission error:", error));
     }
   </script>
+  <style>
+    body, html {
+        font-family: Arial, sans-serif;
+        background-color: #1c1c1c; 
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: auto; 
+        color: #ffffff;
+    }
+    
+    .form-container {
+        position: relative; 
+        background-color: rgba(32, 32, 32, 0.8); 
+        background-image: url('image/ev-home2-bg2.png');
+        background-size: cover; 
+        background-position: center; 
+        background-repeat: no-repeat; 
+        padding: 20px;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 800px;
+        margin: 20px auto;
+        overflow-y: auto;
+    }
+
+    .form-container h1,
+    .form-container h2,
+    .form-container label,
+    .form-container input,
+    .form-container select,
+    .form-container textarea,
+    .form-container button {
+        position: relative; 
+        z-index: 2; 
+    }
+
+    .form-container h1 {
+        text-align: center;
+        color: #fff;
+        margin-top: 0;
+    }
+
+    .form-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #fff;
+    }
+
+    .form-container label {
+        display: block;
+        color: #fff;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    .form-container input[type="text"],
+    .form-container input[type="email"],
+    .form-container input[type="tel"],
+    .form-container input[type="password"],
+    .form-container input[type="file"],
+    .form-container select,
+    .form-container textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        color: #000;
+        background-color: #fff;
+        border: 1px solid #fff;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .form-container textarea {
+        resize: vertical;
+    }
+
+    .form-container button {
+        width: 100%;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 20px;
+        color: black;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .form-container button:hover {
+        background-color: #5642a3;
+        color: #fff;
+    }
+
+    .navigate-button {
+        background-color: #007bff;
+        margin-top: 10px;
+        width: 100%;
+        padding: 10px;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .navigate-button:hover {
+        background-color: #0069d9;
+    }
+
+    .message {
+        margin-top: 20px;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .job-section {
+        padding: 20px;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 800px;
+        margin: 20px auto;
+        color: #ffffff;
+    }
+
+    .job-section h1, 
+    .job-section h2, 
+    .job-section p, 
+    .job-section ul, 
+    .job-section li {
+        color: #ffffff; 
+    }
+    .link {
+        color: #0062ca;
+        text-decoration: underline;
+    }
+    .link:hover {
+        text-decoration: underline;
+    }
+</style>
 </head>
 <body>
-  <h2>Register</h2>
-  <form id="registerForm" onsubmit="submitForm(event)" enctype="multipart/form-data">
-    <label for="full_name">Full Name (as per government ID):</label>
-    <input type="text" id="full_name" name="full_name" pattern="[A-Za-z\s]+" title="Please enter only letters." required><br>
+    <header id="navbar-placeholder"></header>
+  <div class="form-container">
+    <h1>Register</h1>
+    <form id="registerForm" onsubmit="submitForm(event)" enctype="multipart/form-data">
+        <label for="full_name">Full Name (as per government ID):</label>
+        <input type="text" id="full_name" name="full_name" pattern="[A-Za-z\s]+" title="Please enter only letters." required><br>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
 
-    <label for="phone">Phone Number:</label>
-    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number." required><br>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number." required><br>
 
-    <label for="which_role_are_you_applying_for">Which Role are you applying for?</label>
-    <select id="role" name="role" required>
-        <option value="">Choose</option>
-        <option value="embedded_systems_engineer">Embedded Systems Engineer (L1)</option>
-        <option value="power_electronics_engineer">Power Electronics Engineer (L1)</option>
-        <option value="battery_management_system_engineer"> Battery Management System (BMS) Engineer (L1)</option>
-        <option value="powertrain_mechanical_engineer">Powertrain Mechanical Engineer (L1)</option>
-        <option value="thermal_systems_engineer">Thermal Systems Engineer (L1)</option>
-    </select><br>
+        <label for="which_role_are_you_applying_for">Which Role are you applying for?</label>
+        <select id="role" name="role" required>
+            <option value="">Choose</option>
+            <option value="embedded_systems_engineer">Embedded Systems Engineer (L1)</option>
+            <option value="power_electronics_engineer">Power Electronics Engineer (L1)</option>
+            <option value="battery_management_system_engineer"> Battery Management System (BMS) Engineer (L1)</option>
+            <option value="powertrain_mechanical_engineer">Powertrain Mechanical Engineer (L1)</option>
+            <option value="thermal_systems_engineer">Thermal Systems Engineer (L1)</option>
+        </select><br>
 
-    <label for="state">State:</label>
-    <select id="state" name="state" onchange="populateColleges()" required>
-        <option value="">Select State</option>
-        <option value="Andhra Pradesh">Andhra Pradesh</option>
-        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-        <option value="Assam">Assam</option>
-        <option value="Bihar">Bihar</option>
-        <option value="Chhattisgarh">Chhattisgarh</option>
-        <option value="Goa">Goa</option>
-        <option value="Gujarat">Gujarat</option>
-        <option value="Haryana">Haryana</option>
-        <option value="Himachal Pradesh">Himachal Pradesh</option>
-        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-        <option value="Jharkhand">Jharkhand</option>
-        <option value="Karnataka">Karnataka</option>
-        <option value="Kerala">Kerala</option>
-        <option value="Madhya Pradesh">Madhya Pradesh</option>
-        <option value="Maharashtra">Maharashtra</option>
-        <option value="Manipur">Manipur</option>
-        <option value="Meghalaya">Meghalaya</option>
-        <option value="Mizoram">Mizoram</option>
-        <option value="Nagaland">Nagaland</option>
-        <option value="Odisha">Odisha</option>
-        <option value="Punjab">Punjab</option>
-        <option value="Rajasthan">Rajasthan</option>
-        <option value="Sikkim">Sikkim</option>
-        <option value="Tamil Nadu">Tamil Nadu</option>
-        <option value="Telangana">Telangana</option>
-        <option value="Tripura">Tripura</option>
-        <option value="Uttar Pradesh">Uttar Pradesh</option>
-        <option value="Uttarakhand">Uttarakhand</option>
-        <option value="West Bengal">West Bengal</option>
-        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-        <option value="Chandigarh">Chandigarh</option>
-        <option value="Daman and Diu">Daman and Diu</option>
-        <option value="Lakshadweep">Lakshadweep</option>
-        <option value="Delhi">Delhi</option>
-        <option value="Puducherry">Puducherry</option>
-    </select><br>
+        <label for="state">State:</label>
+        <select id="state" name="state" onchange="populateColleges()" required>
+            <option value="">Select State</option>
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+            <option value="Assam">Assam</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Chhattisgarh">Chhattisgarh</option>
+            <option value="Goa">Goa</option>
+            <option value="Gujarat">Gujarat</option>
+            <option value="Haryana">Haryana</option>
+            <option value="Himachal Pradesh">Himachal Pradesh</option>
+            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+            <option value="Jharkhand">Jharkhand</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Kerala">Kerala</option>
+            <option value="Madhya Pradesh">Madhya Pradesh</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Manipur">Manipur</option>
+            <option value="Meghalaya">Meghalaya</option>
+            <option value="Mizoram">Mizoram</option>
+            <option value="Nagaland">Nagaland</option>
+            <option value="Odisha">Odisha</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Sikkim">Sikkim</option>
+            <option value="Tamil Nadu">Tamil Nadu</option>
+            <option value="Telangana">Telangana</option>
+            <option value="Tripura">Tripura</option>
+            <option value="Uttar Pradesh">Uttar Pradesh</option>
+            <option value="Uttarakhand">Uttarakhand</option>
+            <option value="West Bengal">West Bengal</option>
+            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+            <option value="Chandigarh">Chandigarh</option>
+            <option value="Daman and Diu">Daman and Diu</option>
+            <option value="Lakshadweep">Lakshadweep</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Puducherry">Puducherry</option>
+        </select><br>
 
-    <label for="college">College:</label>
-    <select id="college" name="college" required>
-        <option value="">Select College</option>
-    </select><br>
+        <label for="college">College:</label>
+        <select id="college" name="college" required>
+            <option value="">Select College</option>
+        </select><br>
 
-    <label for="degree">Degree:</label>
-    <select id="degree" name="degree" required>
-        <option value="Select Option">Select Option</option>
-        <option value="B.E">B.E</option>
-        <option value="B.Tech">B.Tech</option>
-        <option value="M.Tech">M.Tech</option>
-    </select><br>
+        <label for="degree">Degree:</label>
+        <select id="degree" name="degree" required>
+            <option value="Select Option">Select Option</option>
+            <option value="B.E">B.E</option>
+            <option value="B.Tech">B.Tech</option>
+            <option value="M.Tech">M.Tech</option>
+        </select><br>
 
-    <label for="specialization">Specialization (Branch):</label>
-    <input type="text" id="specialization" name="specialization" required><br>
+        <label for="specialization">Specialization (Branch):</label>
+        <input type="text" id="specialization" name="specialization" required><br>
 
-    <label for="graduation">Year of Graduation:</label>
-    <input type="text" id="graduation" name="graduation" pattern="\d{4}" title="Please enter a valid year." required><br>
+        <label for="graduation">Year of Graduation:</label>
+        <input type="text" id="graduation" name="graduation" pattern="\d{4}" title="Please enter a valid year." required><br>
 
-    <label for="resume">Upload Resume (PDF format, maximum size 2MB):</label>
-    <input type="file" id="resume" name="resume" accept=".pdf" required><br>
+        <label for="resume">Upload Resume (PDF format, maximum size 2MB):</label>
+        <input type="file" id="resume" name="resume" accept=".pdf" required><br>
 
-    <label for="linkedin_profile_link">LinkedIn Profile Link:</label>
-    <input type="text" id="linkedin_profile_link" name="linkedin_profile_link" 
-        required title="Please enter a valid LinkedIn profile link"><br>
+        <label for="linkedin_profile_link">LinkedIn Profile Link:</label>
+        <input type="text" id="linkedin_profile_link" name="linkedin_profile_link" 
+            required title="Please enter a valid LinkedIn profile link"><br>
 
-    <label for="Description">Describe in your own words why you should be selected for the above role:</label>
-    <textarea id="Description" name="description" rows="5" cols="100" required 
-        title="Enter your description here"></textarea><br>
+        <label for="Description">Describe in your own words why you should be selected for the above role:</label>
+        <textarea id="Description" name="description" rows="5" cols="100" required 
+            title="Enter your description here"></textarea><br>
 
-    <button type="submit">Register</button>
-  </form>
+        <button type="submit">Register</button>
+    </form>
 </body>
 <script>
     const collegesByState = {
@@ -3090,6 +3232,22 @@
                 "WOMEN'S ENGINEERING COLLEGE",
                 "OTHER"]
         };
+
+        fetch('navbarcomp-VA/navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar-placeholder').innerHTML = data;
+
+                    const hamburger = document.getElementById("hamburger");
+                    const navLinks = document.getElementById("nav-links");
+
+                    if (hamburger && navLinks) {
+                        hamburger.onclick = function () {
+                            navLinks.classList.toggle("active");
+                        };
+                    }
+                })
+                .catch(error => console.error('Error loading navbar:', error));
 
         function populateColleges() {
             const stateSelect = document.getElementById('state');
