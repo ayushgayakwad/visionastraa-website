@@ -10,19 +10,19 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT name, email FROM webinar_batch_3 WHERE emailSent = false";
+$sql = "SELECT name, email FROM webinar_batch_7 WHERE emailSent = false";
 $result = $conn->query($sql);
 
-$meetingDate = "19-OCT-2024";
-$meetingTime = "11:30 AM IST";
+$meetingDate = "03-NOV-2024";
+$meetingTime = "01:00 PM IST";
 $meetingLink = "https://meet.google.com/kuw-dzhf-adp";
 
 $icalContent = "BEGIN:VCALENDAR\r\n" .
                "VERSION:2.0\r\n" .
                "BEGIN:VEVENT\r\n" .
                "SUMMARY:Webinar on Career Opportunities in EV Industry\r\n" .
-               "DTSTART;TZID=Asia/Kolkata:20241019T113000\r\n" .
-               "DTEND;TZID=Asia/Kolkata:20241019T120000\r\n" .
+               "DTSTART;TZID=Asia/Kolkata:20241103T130000\r\n" .
+               "DTEND;TZID=Asia/Kolkata:20241103T133000\r\n" .
                "LOCATION:$meetingLink\r\n" .
                "DESCRIPTION: Join us for an online webinar on Career Opportunities in EV Industry.\r\n" .
                "URL:$meetingLink\r\n" .
@@ -66,6 +66,9 @@ while ($row = $result->fetch_assoc()) {
         h2 {
             color: #333;
         }
+        h3 {
+            color: #333;
+        }
         p {
             color: #555;
         }
@@ -81,7 +84,7 @@ while ($row = $result->fetch_assoc()) {
 <body>
     <div class='container'>
         <h2>Hello <span style='color: #007BFF;'>$name</span>,</h2>
-        
+        <h3>Thankyou for applying for VisionAstraa EV Academy.</h3>
         <p>We are inviting you to a 30-min Online Webinar on \"<strong>Career Opportunities in EV Industry in India & Abroad</strong>\" with <strong>Mr. Rahul Sagar</strong>, Head of Driveline, Fiat PowerTrain (FPT) Industrial, Italy on <span style='color: #007BFF;'>$meetingDate</span>.</p>
         <ul>
             <li><strong>Main Panelist:</strong> Mr. <a href='https://www.linkedin.com/in/rahul-p-1588b915/' class='link'>Rahul Sagar Plavullathil</a>, Head of Driveline, Fiat PowerTrain (FPT) Industrial, Italy (17+ yrs of Automotive industry experience across USA, Germany & Italy)</li>
@@ -117,7 +120,7 @@ while ($row = $result->fetch_assoc()) {
                "Content-Transfer-Encoding: 8bit\r\n\r\n" .
                $body . "\r\n\r\n" .
                "--$boundary\r\n" .
-               "Content-Type: text/calendar; name=\"invite.ics\"\r\n" .
+               "Content-Type: text/calendar; method=REQUEST; charset=UTF-8\r\n" .
                "Content-Transfer-Encoding: 8bit\r\n" .
                "Content-Disposition: attachment; filename=\"invite.ics\"\r\n\r\n" .
                $icalContent . "\r\n\r\n" .
@@ -126,7 +129,7 @@ while ($row = $result->fetch_assoc()) {
     if (mail($email, $subject, $message, $headers)) {
         echo "Email sent to: $name ($email)\n";
 
-        $updateSql = "UPDATE webinar_batch_3 SET emailSent = true WHERE email = '$email'";
+        $updateSql = "UPDATE webinar_batch_7 SET emailSent = true WHERE email = '$email'";
         $conn->query($updateSql);
     } else {
         echo "Failed to send email to: $name ($email)\n";
