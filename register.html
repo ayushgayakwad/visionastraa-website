@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDTqlQiKyEasLlEL4fQKhmL62F3o7hsBCc",
+        authDomain: "visionastraa-website.firebaseapp.com",
+        projectId: "visionastraa-website",
+        storageBucket: "visionastraa-website.firebasestorage.app",
+        messagingSenderId: "100641652232",
+        appId: "1:100641652232:web:62a4288705be2b1f259bbd",
+        measurementId: "G-RR519GVBWS"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Function to submit registration form
+    function submitForm(event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      // Create user in Firebase
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          
+          // Send email verification
+          user.sendEmailVerification()
+            .then(() => {
+              alert("Verification email sent. Please verify your email.");
+              saveUserData(user);
+            })
+            .catch((error) => console.error("Email verification error:", error));
+        })
+        .catch((error) => console.error("Registration error:", error));
+    }
+
+    // Function to save user data to the backend
+    function saveUserData(user) {
+    user.getIdToken().then((idToken) => {
+        const formData = new FormData(document.getElementById("registerForm"));
+        formData.append("idToken", idToken); // If you still want to send the token (not necessary)
+
+        // Get UID from the user object
+        formData.append("uid", user.uid); // Add UID to the form data
+
+        // Send data to account-register.php
+        fetch("php/account-register.php", {
+        method: "POST",
+        body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+        if (data.success) {
+            alert("Registration successful!");
+        } else {
+            alert("Registration failed: " + data.error);
+        }
+        })
+        .catch((error) => console.error("Data submission error:", error));
+    });
+    }
+  </script>
+</head>
+<body>
+  <h2>Register</h2>
+  <form id="registerForm" onsubmit="submitForm(event)">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <button type="submit">Register</button>
+  </form>
+</body>
+</html>
