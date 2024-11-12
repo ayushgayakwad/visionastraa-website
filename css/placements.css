@@ -57,6 +57,35 @@ main {
   color: #E0E1DD;
 }
 
+.iframe-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.iframe-container iframe {
+  width: 100%;
+  max-width: 560px;
+  height: 315px;
+  border: none;
+}
+
+.facebook-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.facebook-container iframe {
+  width: 50%;
+  height: 750px;
+  border: none;
+}
+
 .recruiters {
   padding: 60px 0;
   background-color: #ffffff;
@@ -312,13 +341,16 @@ main {
   .h1-box {
       margin-left: 0;
   }
+  .facebook-container iframe {
+    width: 90%;
+  }
   .partner-logos img {
     height: 200px;
     width: 350px;
-    border-radius: 12px; /* Rounded corners */
+    border-radius: 12px;
     padding: 10px;
-    background-color: #ffffff; /* White background for logos */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    background-color: #ffffff; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 }
