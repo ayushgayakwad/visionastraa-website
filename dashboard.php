@@ -100,6 +100,7 @@
             <p><strong>LinkedIn Profile:</strong> <a href="<?php echo htmlspecialchars($user['linkedin_profile_link']); ?>" target="_blank">View Profile</a></p>
             <p><strong>Description:</strong> <?php echo htmlspecialchars($user['description']); ?></p>
         </div>
+        <p><a href="quiz.php" style="color: #56a3ff;">Start Quiz</a></p>
         <p><a href="php/logout.php" style="color: #56a3ff;">Logout</a></p>
     </div>
 </body>
