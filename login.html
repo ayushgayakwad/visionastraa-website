@@ -35,12 +35,28 @@
       // Firebase authentication
       auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          // Signed in
           const user = userCredential.user;
+
           if (user.emailVerified) {
-            alert("Login successful!");
-            // Redirect or take appropriate action
-            window.location.href = "dashboard.html"; // Redirect to dashboard or other page
+            // Send email to PHP server to set session
+            fetch('php/set-session.php', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: user.email })
+            })
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                // Redirect to dashboard if session is successfully set
+                window.location.href = "dashboard.php";
+              } else {
+                alert("Session could not be established. Try again.");
+              }
+            })
+            .catch(error => {
+              console.error("Error setting session:", error);
+              alert("An error occurred. Please try again.");
+            });
           } else {
             alert("Please verify your email before logging in.");
           }
@@ -190,44 +206,44 @@
     .link:hover {
         text-decoration: underline;
     }
-  </style>
+</style>
 </head>
 <body>
-    <header id="navbar-placeholder"></header>
-    <div class="form-container">
-        <h1>Login</h1>
-        <form id="loginForm" onsubmit="login(event)">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br>
+  <header id="navbar-placeholder"></header>
+  <div class="form-container">
+    <h1>Login</h1>
+    <form id="loginForm" onsubmit="login(event)">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required><br>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required><br>
 
-            <button type="submit">Login</button>
-        </form>
-        <p>
-            Don't have an account? <a href="register.html">Register here</a>.
-        </p>
-        <p>
-            Forgot your password? <a href="reset-password.html">Reset here</a>.
-        </p>
-    </div>
+      <button type="submit">Login</button>
+    </form>
+    <p>
+      Don't have an account? <a href="register.html">Register here</a>.
+    </p>
+    <p>
+      Forgot your password? <a href="reset-password.html">Reset here</a>.
+    </p>
+  </div>
 </body>
 <script>
-    fetch('navbarcomp-VA/navbar.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('navbar-placeholder').innerHTML = data;
+  fetch('navbarcomp-VA/navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar-placeholder').innerHTML = data;
 
-                    const hamburger = document.getElementById("hamburger");
-                    const navLinks = document.getElementById("nav-links");
+      const hamburger = document.getElementById("hamburger");
+      const navLinks = document.getElementById("nav-links");
 
-                    if (hamburger && navLinks) {
-                        hamburger.onclick = function () {
-                            navLinks.classList.toggle("active");
-                        };
-                    }
-                })
-                .catch(error => console.error('Error loading navbar:', error));
+      if (hamburger && navLinks) {
+        hamburger.onclick = function () {
+          navLinks.classList.toggle("active");
+        };
+      }
+    })
+    .catch(error => console.error('Error loading navbar:', error));
 </script>
 </html>
