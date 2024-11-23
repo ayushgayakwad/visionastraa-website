@@ -83,8 +83,9 @@
         die("Error fetching user data: " . $e->getMessage());
     }
     ?>
+    <header id="navbar-placeholder"></header>
     <div class="container">
-        <h1>Welcome to Your Dashboard</h1>
+        <h1>Welcome to Your VisionAstraa Dashboard</h1>
         <div class="user-details">
             <h2>User Details</h2>
             <p><strong>Name:</strong> <?php echo htmlspecialchars($user['name']); ?></p>
@@ -102,4 +103,21 @@
         <p><a href="php/logout.php" style="color: #56a3ff;">Logout</a></p>
     </div>
 </body>
+<script>
+    fetch('navbarcomp-VA/navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar-placeholder').innerHTML = data;
+
+                    const hamburger = document.getElementById("hamburger");
+                    const navLinks = document.getElementById("nav-links");
+
+                    if (hamburger && navLinks) {
+                        hamburger.onclick = function () {
+                            navLinks.classList.toggle("active");
+                        };
+                    }
+                })
+                .catch(error => console.error('Error loading navbar:', error));
+</script>
 </html>
