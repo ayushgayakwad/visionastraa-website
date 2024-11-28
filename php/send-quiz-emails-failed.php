@@ -141,7 +141,7 @@ if ($result->num_rows > 0) {
                     <li>Top EV companies from India and abroad will be hiring our upskilled students from EV Academy. (Why? - Because EV is a brand new booming industry & there is lack of skilled engineers both freshers & even experienced people).</li>
                 </ol>
                 <img src="https://www.visionastraa.com/image/ev-apply-email.png" alt="Upskill in EV Technologies" style="width:100%; max-width:600px; margin-top:8px">
-                <p>For more details on the program, modules, mentors & potential recruiters, you can check our <a href="https://drive.google.com/file/d/1HJKflv-SE8R8_P4vkXeWw8N-cjSMfW_n/view?usp=sharing">Brochure</a> & <a href="https://www.visionastraa.com/ev-home.html">Website</a></p>
+                <p>For more details on the program, modules, mentors & potential recruiters, you can check our <a href="https://drive.google.com/file/d/1HJKflv-SE8R8_P4vkXeWw8N-cjSMfW_n/view?usp=sharing">Brochure</a> & <a href="https://www.visionastraa.com/ev-academy.html">Website</a></p>
                 <p><b>Hurry Now! Limited Opportunity!</b></p>
                 <p><b>We have a small intake of only 25, with limited seats for the thousands of applications we receive nationwide.</b></p>
                 <p>Our first batch starts mid-November:</p>
