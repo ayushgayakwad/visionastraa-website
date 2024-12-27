@@ -1,6 +1,19 @@
 <?php
 session_start();
+if (isset($_GET['debug']) && $_GET['debug'] == 1) {
+    header('Content-Type: application/json');
 
+    // Collect debug data
+    $debug_data = [
+        'total_marks' => $_SESSION['total_marks'] ?? 0,
+        'answers' => $_SESSION['answers'] ?? [],
+        'question_order' => $_SESSION['question_order'] ?? [],
+        'current_question_index' => $_SESSION['current_question_index'] ?? 0,
+    ];
+
+    echo json_encode($debug_data);
+    exit();
+}
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.html");
@@ -33,36 +46,64 @@ if (!isset($_SESSION['questions_answered'])) {
     $_SESSION['questions_answered'] = [];
 }
 
-// Handle form submission (store answers, calculate total marks)
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Store the user's answer to the current question
     if (isset($_POST['answers'])) {
         $question_id = $_POST['question_id'];
-        $_SESSION['answers'][$question_id] = $_POST['answers'];  // Store answer for this question
+        $selected_answer = $_POST['answers'];
+
+        // Fetch the correct option and marks for the current question
+        $stmt = $pdo->prepare("SELECT correct_option, marks FROM quiz_questions WHERE id = ?");
+        $stmt->execute([$question_id]);
+        $question = $stmt->fetch();
+
+        if ($question) {
+            // Initialize total marks in session if not already set
+            if (!isset($_SESSION['total_marks'])) {
+                $_SESSION['total_marks'] = 0;
+            }
+
+            // Handle the case where the user had previously answered the question
+            if (isset($_SESSION['answers'][$question_id])) {
+                $previous_answer = $_SESSION['answers'][$question_id];
+
+                // If the previous answer was correct, deduct the marks
+                if ($previous_answer == $question['correct_option']) {
+                    $_SESSION['total_marks'] -= $question['marks'];
+                }
+            }
+
+            // Store the new answer in the session
+            $_SESSION['answers'][$question_id] = $selected_answer;
+
+            // If the new answer is correct, add the marks
+            if ($selected_answer == $question['correct_option']) {
+                $_SESSION['total_marks'] += $question['marks'];
+            }
+        }
     }
 
-    // Calculate the total marks after the last question
+    // Redirect to the next question
     if (isset($_POST['submit_quiz'])) {
-        $total_marks = 0;
+        // Recalculate total marks to ensure accuracy
+        $final_marks = 0;
+    
         foreach ($_SESSION['answers'] as $qid => $answer) {
-            // Fetch the correct answer and marks for the question
             $stmt = $pdo->prepare("SELECT correct_option, marks FROM quiz_questions WHERE id = ?");
             $stmt->execute([$qid]);
             $question = $stmt->fetch();
-
-            if ($question) {
-                // If the answer is correct, add the marks, otherwise add 0
-                if ($question['correct_option'] == $answer) {
-                    $total_marks += $question['marks'];
-                }
+    
+            if ($question && $question['correct_option'] == $answer) {
+                $final_marks += $question['marks'];
             }
         }
-
-        // Store the total marks in the database
+    
+        // Store the final marks in the session and database
+        $_SESSION['total_marks'] = $final_marks;
+    
         $stmt = $pdo->prepare("INSERT INTO quiz_results (user_id, total_marks) VALUES (?, ?)");
-        $stmt->execute([$user_id, $total_marks]);
-
-        // Redirect to a result page
+        $stmt->execute([$user_id, $final_marks]);
+    
+        // Mark quiz as submitted and redirect
         $_SESSION['quiz_submitted'] = true;
         header("Location: dashboard.php");
         exit();
@@ -112,11 +153,31 @@ if (!isset($_SESSION['quiz_start_time'])) {
 
 // Calculate remaining time
 $time_left = 1800 - (time() - $_SESSION['quiz_start_time']);
+// Check if the timer has expired
 if ($time_left <= 0) {
-    // If time is up, submit the quiz automatically
-    $_SESSION['quiz_expired'] = true;
-    // Calculate and store marks as if the quiz is submitted
-    header("Location: quiz.php");
+    // Ensure marks are calculated once
+    if (!isset($_SESSION['quiz_submitted'])) {
+        $final_marks = 0;
+
+        foreach ($_SESSION['answers'] as $qid => $answer) {
+            $stmt = $pdo->prepare("SELECT correct_option, marks FROM quiz_questions WHERE id = ?");
+            $stmt->execute([$qid]);
+            $question = $stmt->fetch();
+
+            if ($question && $question['correct_option'] == $answer) {
+                $final_marks += $question['marks'];
+            }
+        }
+
+        $_SESSION['total_marks'] = $final_marks;
+
+        $stmt = $pdo->prepare("INSERT INTO quiz_results (user_id, total_marks) VALUES (?, ?)");
+        $stmt->execute([$user_id, $final_marks]);
+
+        $_SESSION['quiz_submitted'] = true;
+    }
+
+    header("Location: dashboard.php");
     exit();
 }
 ?>
@@ -188,10 +249,10 @@ if ($time_left <= 0) {
             </div>
 
             <div class="options">
-                <label><input type="radio" name="answers" value="1" <?php echo (isset($_SESSION['answers'][$current_question_id]) && $_SESSION['answers'][$current_question_id] == 1) ? 'checked' : ''; ?>> <?php echo htmlspecialchars($question['option_1']); ?></label>
-                <label><input type="radio" name="answers" value="2" <?php echo (isset($_SESSION['answers'][$current_question_id]) && $_SESSION['answers'][$current_question_id] == 2) ? 'checked' : ''; ?>> <?php echo htmlspecialchars($question['option_2']); ?></label>
-                <label><input type="radio" name="answers" value="3" <?php echo (isset($_SESSION['answers'][$current_question_id]) && $_SESSION['answers'][$current_question_id] == 3) ? 'checked' : ''; ?>> <?php echo htmlspecialchars($question['option_3']); ?></label>
-                <label><input type="radio" name="answers" value="4" <?php echo (isset($_SESSION['answers'][$current_question_id]) && $_SESSION['answers'][$current_question_id] == 4) ? 'checked' : ''; ?>> <?php echo htmlspecialchars($question['option_4']); ?></label>
+                <label><input type="radio" name="answers" value="1" <?php echo (isset($_SESSION['answers'][$current_question_id]) && $_SESSION['answers'][$current_question_id] == 1) ? 'checked' : ''; ?> onchange="this.form.submit();"> <?php echo htmlspecialchars($question['option_1']); ?></label>
+                <label><input type="radio" name="answers" value="2" <?php echo (isset($_SESSION['answers'][$current_question_id]) && $_SESSION['answers'][$current_question_id] == 2) ? 'checked' : ''; ?> onchange="this.form.submit();"> <?php echo htmlspecialchars($question['option_2']); ?></label>
+                <label><input type="radio" name="answers" value="3" <?php echo (isset($_SESSION['answers'][$current_question_id]) && $_SESSION['answers'][$current_question_id] == 3) ? 'checked' : ''; ?> onchange="this.form.submit();"> <?php echo htmlspecialchars($question['option_3']); ?></label>
+                <label><input type="radio" name="answers" value="4" <?php echo (isset($_SESSION['answers'][$current_question_id]) && $_SESSION['answers'][$current_question_id] == 4) ? 'checked' : ''; ?> onchange="this.form.submit();"> <?php echo htmlspecialchars($question['option_4']); ?></label>
             </div>
 
             <input type="hidden" name="question_id" value="<?php echo $question['id']; ?>">
@@ -234,5 +295,29 @@ if ($time_left <= 0) {
 
         updateTimer();
     </script>
+    <script>
+    // Function to fetch debug logs from the server
+    function fetchDebugLogs() {
+        fetch('quiz.php?debug=1')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Debug Logs:', data);
+            })
+            .catch(error => {
+                console.error('Error fetching debug logs:', error);
+            });
+    }
+
+    // Fetch logs periodically (optional, e.g., every 10 seconds)
+    setInterval(fetchDebugLogs, 10000);
+
+    // Fetch logs immediately on page load
+    fetchDebugLogs();
+</script>
 </body>
 </html>
