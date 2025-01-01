@@ -166,9 +166,9 @@ if ($time_left <= 0) {
     <title>Electric Vehicle Quiz</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #1c1c1c;
-            color: #fff;
+            color: #ffffff;
             margin: 0;
             padding: 0;
         }
@@ -176,37 +176,66 @@ if ($time_left <= 0) {
             max-width: 800px;
             margin: 50px auto;
             padding: 20px;
-            background-color: #333;
-            border-radius: 10px;
+            background-color: #2b2b2b;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
         h1 {
             text-align: center;
-        }
-        .question {
-            margin-bottom: 20px;
-        }
-        .options {
-            margin-bottom: 20px;
-        }
-        .options label {
-            display: block;
-            margin: 5px 0;
-        }
-        .btn {
-            display: inline-block;
-            background-color: #56a3ff;
-            padding: 10px 20px;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .btn:hover {
-            background-color: #1c77cc;
+            color: #56a3ff;
         }
         .timer {
             text-align: center;
             font-size: 24px;
             margin-bottom: 20px;
+        }
+        .timer span {
+            font-weight: bold;
+            color: #56a3ff;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question p {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        .options label {
+            display: block;
+            background-color: #3d3d3d;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .options label:hover {
+            background-color: #4f4f4f;
+        }
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #56a3ff;
+            padding: 12px 24px;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 16px;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #1c77cc;
+        }
+        .btn:disabled {
+            background-color: #555;
+            cursor: not-allowed;
         }
     </style>
 </head>
