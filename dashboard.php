@@ -79,6 +79,37 @@
             background-color: #e09400;
             transform: translateY(-2px);
         }
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .popup-content {
+            background: #2b2b2b;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: #ffffff;
+        }
+        .popup button {
+            background-color: #56a3ff;
+            padding: 12px 24px;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .popup button:hover {
+            background-color: #1c77cc;
+        }
         @media (max-width: 768px) {
             .user-card {
                 flex: 1 1 100%;
@@ -94,6 +125,8 @@
         header("Location: login.html");
         exit();
     }
+
+    $quiz_submitted = isset($_GET['quiz_submitted']) && $_GET['quiz_submitted'] == 1;
 
     $host = 'localhost';
     $db = 'u707137586_UserAccounts';
@@ -130,6 +163,15 @@
         die("Error fetching user data: " . $e->getMessage());
     }
     ?>
+
+    <?php if ($quiz_submitted): ?>
+            <div class="popup">
+                <div class="popup-content">
+                    <h2>Quiz has been submitted successfully ✅</h2>
+                    <a href="dashboard.php" class="btn" style="color: #ffffff;">View Dashboard</a>
+                </div>
+            </div>
+        <?php endif; ?>
     
     <header id="navbar-placeholder"></header>
     
