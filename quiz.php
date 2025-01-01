@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+if (isset($_GET['quiz_submitted']) && $_GET['quiz_submitted'] == 1) {
+    $quiz_submitted = true;
+} else {
+    $quiz_submitted = false;
+}
+
 if (isset($_GET['debug']) && $_GET['debug'] == 1) {
     header('Content-Type: application/json');
 
@@ -91,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->execute([$user_id, $final_marks]);
     
         $_SESSION['quiz_submitted'] = true;
-        header("Location: dashboard.php");
+        header("Location: dashboard.php?quiz_submitted=1");
         exit();
     }
 }
@@ -153,7 +160,7 @@ if ($time_left <= 0) {
         $_SESSION['quiz_submitted'] = true;
     }
 
-    header("Location: dashboard.php");
+    header("Location: dashboard.php?quiz_submitted=1");
     exit();
 }
 ?>
@@ -243,7 +250,6 @@ if ($time_left <= 0) {
     <div class="container">
         <h1>Electric Vehicle Quiz</h1>
         
-        <!-- Timer -->
         <div class="timer">
             <p>Time left: <span id="timer"></span></p>
         </div>
