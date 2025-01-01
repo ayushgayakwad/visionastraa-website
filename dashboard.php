@@ -6,46 +6,95 @@
     <title>Dashboard</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #1c1c1c;
-            color: #fff;
+            color: #e0e0e0;
             margin: 0;
             padding: 0;
         }
         .container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 50px auto;
             padding: 20px;
-            background-color: #333;
-            border-radius: 10px;
+            background-color: #262626;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
         }
         h1 {
             text-align: center;
+            font-size: 2.5rem;
+            color:rgb(255, 255, 255);
+            margin-bottom: 30px;
         }
         .user-details {
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #444;
-            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
         }
-        .user-details p {
-            margin: 5px 0;
+        .user-card {
+            flex: 1 1 calc(45% - 20px);
+            background-color: #333;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        .user-card h2 {
+            font-size: 1.2rem;
+            color: #f4b400;
+            border-bottom: 2px solid #444;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+        }
+        .user-card p {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+        .user-card strong {
+            color: #f4b400;
+        }
+        .user-card a {
+            color: #add8e6;
+            text-decoration: none;
+        }
+        .user-card a:hover {
+            text-decoration: underline;
+        }
+        .links {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .links a {
+            display: inline-block;
+            margin: 10px;
+            padding: 12px 25px;
+            background-color: #f4b400;
+            color: #1c1c1c;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .links a:hover {
+            background-color: #e09400;
+            transform: translateY(-2px);
+        }
+        @media (max-width: 768px) {
+            .user-card {
+                flex: 1 1 100%;
+            }
         }
     </style>
 </head>
 <body>
     <?php
-    // Start session
     session_start();
 
-    // Check if user is logged in
     if (!isset($_SESSION['user_id'])) {
-        // Redirect to login.html if not logged in
         header("Location: login.html");
         exit();
     }
 
-    // Database connection
     $host = 'localhost';
     $db = 'u707137586_UserAccounts';
     $user = 'u707137586_UserAccounts';
@@ -65,7 +114,6 @@
         die("Database connection failed: " . $e->getMessage());
     }
 
-    // Fetch user data
     $user_id = $_SESSION['user_id'];
 
     try {
@@ -74,7 +122,6 @@
         $user = $stmt->fetch();
 
         if (!$user) {
-            // If no user is found, destroy session and redirect to login
             session_destroy();
             header("Location: login.html");
             exit();
@@ -83,42 +130,60 @@
         die("Error fetching user data: " . $e->getMessage());
     }
     ?>
+    
     <header id="navbar-placeholder"></header>
+    
     <div class="container">
-        <h1>Welcome to Your VisionAstraa Dashboard</h1>
+        <h1>Welcome to Your VisionAstra Dashboard</h1>
+        
         <div class="user-details">
-            <h2>User Details</h2>
-            <p><strong>Name:</strong> <?php echo htmlspecialchars($user['name']); ?></p>
-            <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
-            <p><strong>Phone:</strong> <?php echo htmlspecialchars($user['phone']); ?></p>
-            <p><strong>Role:</strong> <?php echo htmlspecialchars($user['role']); ?></p>
-            <p><strong>State:</strong> <?php echo htmlspecialchars($user['state']); ?></p>
-            <p><strong>College:</strong> <?php echo htmlspecialchars($user['college']); ?></p>
-            <p><strong>Degree:</strong> <?php echo htmlspecialchars($user['degree']); ?></p>
-            <p><strong>Specialization:</strong> <?php echo htmlspecialchars($user['specialization']); ?></p>
-            <p><strong>Graduation Year:</strong> <?php echo htmlspecialchars($user['graduation']); ?></p>
-            <p><strong>LinkedIn Profile:</strong> <a href="<?php echo htmlspecialchars($user['linkedin_profile_link']); ?>" target="_blank">View Profile</a></p>
-            <p><strong>Description:</strong> <?php echo htmlspecialchars($user['description']); ?></p>
+            <div class="user-card">
+                <h2>Personal Info</h2>
+                <p><strong>Name:</strong> <?php echo htmlspecialchars($user['name']); ?></p>
+                <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
+                <p><strong>Phone:</strong> <?php echo htmlspecialchars($user['phone']); ?></p>
+            </div>
+            <div class="user-card">
+                <h2>Professional Details</h2>
+                <p><strong>Role:</strong> <?php echo htmlspecialchars($user['role']); ?></p>
+                <p><strong>State:</strong> <?php echo htmlspecialchars($user['state']); ?></p>
+            </div>
+            <div class="user-card">
+                <h2>Education</h2>
+                <p><strong>College:</strong> <?php echo htmlspecialchars($user['college']); ?></p>
+                <p><strong>Degree:</strong> <?php echo htmlspecialchars($user['degree']); ?></p>
+                <p><strong>Specialization:</strong> <?php echo htmlspecialchars($user['specialization']); ?></p>
+                <p><strong>Graduation Year:</strong> <?php echo htmlspecialchars($user['graduation']); ?></p>
+            </div>
+            <div class="user-card">
+                <h2>About</h2>
+                <p><strong>Description:</strong> <?php echo htmlspecialchars($user['description']); ?></p>
+                <p><strong>LinkedIn:</strong> <a href="<?php echo htmlspecialchars($user['linkedin_profile_link']); ?>" target="_blank">View Profile</a></p>
+            </div>
         </div>
-        <p><a href="quiz.php" style="color: #56a3ff;">Start Quiz</a></p>
-        <p><a href="php/logout.php" style="color: #56a3ff;">Logout</a></p>
+
+        <div class="links">
+            <a href="quiz.php">Start Quiz</a>
+            <a href="php/logout.php">Logout</a>
+        </div>
     </div>
+
+    <script>
+      fetch('navbarcomp-VA/navbar.html')
+          .then(response => response.text())
+          .then(data => {
+              document.getElementById('navbar-placeholder').innerHTML = data;
+
+              const hamburger = document.getElementById("hamburger");
+              const navLinks = document.getElementById("nav-links");
+
+              if (hamburger && navLinks) {
+                  hamburger.onclick = function () {
+                      navLinks.classList.toggle("active");
+                  };
+              }
+          })
+          .catch(error => console.error('Error loading navbar:', error));
+    </script>
 </body>
-<script>
-    fetch('navbarcomp-VA/navbar.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('navbar-placeholder').innerHTML = data;
-
-                    const hamburger = document.getElementById("hamburger");
-                    const navLinks = document.getElementById("nav-links");
-
-                    if (hamburger && navLinks) {
-                        hamburger.onclick = function () {
-                            navLinks.classList.toggle("active");
-                        };
-                    }
-                })
-                .catch(error => console.error('Error loading navbar:', error));
-</script>
 </html>
