@@ -1,0 +1,400 @@
+/* Overall Layout */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1c1c1c;
+    color: #fff;
+}
+
+main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+/* Internships-info */
+.internships-objectives {
+    position: relative;
+    background: url('../image/course.png') no-repeat center center;
+    background-size: cover;
+    padding: 40px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
+}
+
+.internship-info {
+    position: relative;
+    background-color: #474747; 
+    padding: 40px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+.internship-info:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px #876eea;
+}
+
+/* Gradient Overlay */
+
+.internships-objectives::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0) 100%);
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.internships-objectives:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px #876eea;
+}
+
+
+.internship-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0) 100%);
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.internship-info:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px #876eea;
+}
+
+.internship-more-info {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.internship-more-info h2 {
+    font-size: 28px;
+}
+
+.internship-more-info h3 {
+    font-size: 18px;
+    margin-top: 24px;
+}
+
+.internship-more-info h4 {
+    font-size: 16px;
+    max-width: 600px;
+    margin-bottom: 8px;
+}
+
+.internship-more-info p {
+    font-size: 16px;
+    max-width: 600px;
+}
+
+.line-break-desktop {
+    display: none;
+}
+
+/* Internship Section */
+.internship-section {
+    padding: 8px 0;
+    text-align: center;
+    margin: 0px auto;
+    display: flex;
+    gap: 15px;
+    flex-direction: row;
+}
+
+/* Internship Box */
+.internship-box {
+    background-color: #202020;
+    width: 35%;
+    margin: 15px auto;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.internship-box:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px #876eea;
+}
+
+.internship-box h5 {
+    background-color: #876eea;
+    margin: auto;
+    width: 30%;
+    border-radius: 48px;
+    text-align: center;
+    font-weight: normal;
+    padding: 8px;
+    font-size: 16px;
+}
+
+/* Course Fee Text */
+.internship-type {
+    font-size: 26px;
+    color: #fff;
+    font-weight: bold;
+    margin-top: 16px;
+    margin-bottom: 10px;
+}
+
+.gst-text {
+    font-size: 16px;
+    color: #999;
+    margin-bottom: 30px;
+}
+
+/* Apply Now Button */
+.apply-now {
+    background-color: #fff;
+    color: #000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
+}
+
+.apply-now:hover {
+    background-color: #876eea;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+/* Internship-add-inf List */
+.internship-add-inf {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.internship-add-inf {
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 25px;
+}
+
+.internship-add-inf li:before {
+    content: '✔';
+    position: absolute;
+    left: 0;
+    color: #876eea; /* Green color for the checkmark */
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .internships-objectives {
+        flex-direction: column;
+        height: 575px;
+    }
+
+    .internship-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .internship-box {
+        margin-bottom: 18px;
+    }
+
+
+    .hero-content h1 {
+        font-size: 2em;
+    }
+
+    .internship-box  {
+        width: 100%;
+    }
+
+
+    .internships-objectives {
+        position: relative;
+        background: url('../image/course_m.png') no-repeat center center;
+        background-size: cover;
+        padding: 40px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        border-radius: 10px;
+        transition: transform 0.1s ease, box-shadow 0.3s ease;
+    }
+
+    .line-break-desktop {
+        display: inline;
+    }
+
+    .line-break-mobile {
+        display: none;
+    }
+
+
+}
+
+
+.footer {
+    background-color: #23272A;
+    color: #008000;
+    padding: 10px 150px;
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer .secpart{
+    margin-left: 60px;
+}
+.container{
+    gap: 100px;
+}
+.thirdpart{
+    margin-left: 20px;
+}
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.footer h5 {
+    font-weight: bold;
+    font-size:20px;
+}
+
+.footer p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    
+}
+
+.footer .list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+.footer .list-unstyled li {
+    margin-bottom: 8px;
+}
+
+.footer .list-unstyled a {
+    font-size: 14px;
+}
+
+.footer .text-center {
+    margin-top: 20px;
+    font-size: 14px;
+}
+.last{
+    display: flex;
+    justify-content: space-between;
+    height: none;
+
+}
+.lastb{
+    font-weight: bold;
+    font-size: small;
+    border: none;
+    border-radius: 30px;
+    padding: 10px;
+    height: auto;
+    align-items: center;
+    margin-top: 40%;
+    background-color: #008000;
+    color: white;
+
+}
+
+.lastimg{
+    height: auto; 
+    width:80px;
+}
+/* Media Query for screens smaller than 1000px width */
+@media screen and (max-width: 1000px) {
+
+    .suntext {
+        margin-top: 600px;
+    }
+
+    .suntext p {
+        font-size: 4em;
+    }
+
+    .footer {
+        padding: 10px 10px;
+    }
+    .footer .secpart {
+        margin-left: 0;
+    }
+
+    .thirdpart,
+    .secpart {
+        margin: 5px 0;
+        flex: 0;
+    }
+
+    .row {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 5px 50px;
+        height: auto; 
+    }
+
+    .lastimg {
+        width: 40px;
+        height: auto;
+    }
+
+    .lalala p {
+        font-size: 12px;
+    }
+
+    .lastb {
+        margin-left: 30px;
+        font-weight: bold;
+        font-size: 10px;
+        border: none;
+        border-radius: 30px;
+        padding: 12px 15px;
+        background-color: #008000;
+        color: white;
+        width: 100px;
+        height: auto;
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .listone,
+    .listtwo li a {
+        padding: 1px;
+        margin: 0;
+    }
+
+    .listone,
+    .listtwo li {
+        padding: 1px;
+        margin: 0;
+    }
+}
