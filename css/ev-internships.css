@@ -109,6 +109,84 @@ main {
     display: none;
 }
 
+/* Apply Now Button */
+.fee-apply-now {
+    background-color: #fff;
+    color: #000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
+}
+
+.fee-apply-now:hover {
+    background-color: #876eea;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+
+/* Course Content */
+.course-content {
+    padding: 40px 0;
+    color: #FFFFFF !important; /* Ensures all text within course content is white */
+}
+
+.course-content h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #FFFFFF !important; /* Ensures the heading is white */
+}
+
+.course-content table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #fff;
+    margin-top: 20px;
+}
+
+.course-content th, .course-content td {
+    padding: 15px;
+    border: 1px solid #282828;
+    color: #FFFFFF !important; /* Ensures text in table headers and cells is white */
+}
+
+.course-content th, .course-content td {
+    border: 1px solid #444;
+    padding: 10px;
+    text-align: left;
+}
+
+.course-content th {
+    background-color: #333;
+}
+
+.course-content td button {
+    background: none;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+}
+
+/* Table Headers */
+.course-content th {
+    background-color: #202020;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+}
+
+/* Table Cells */
+.course-content td {
+    background-color: #202020;
+    color: #fff;
+}
+
+
 /* Internship Section */
 .internship-section {
     padding: 8px 0;
@@ -249,7 +327,38 @@ main {
         display: none;
     }
 
+    .course-content table {
+        width: 100%;
+        overflow-x: auto;
+        border-collapse: collapse;
+        margin-top: 20px;
+        display: block;
+        max-width: 350px;
+    }
 
+    .course-content td button {
+        background: none;
+        color: #ffffff;
+        border: none;
+        cursor: pointer;
+        font-size: 0.9em;
+    }
+
+    /* Table Headers */
+    .course-content th {
+        background-color: #202020;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+        font-size: 0.9em;
+    }
+
+    /* Table Cells */
+    .course-content td {
+        background-color: #202020;
+        color: #fff;
+        font-size: 0.9em;
+    }
 }
 
 
