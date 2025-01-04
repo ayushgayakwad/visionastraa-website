@@ -83,6 +83,14 @@ main {
     position: relative;
     z-index: 2;
     max-width: 800px;
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+    text-align: left;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 10px;
+    padding-left: 25px;
 }
 
 .internship-more-info h2 {
@@ -103,6 +111,13 @@ main {
 .internship-more-info p {
     font-size: 16px;
     max-width: 600px;
+}
+
+.internship-more-info li:before {
+    content: '➱';
+    position: absolute;
+    left: 0;
+    color: #fff; 
 }
 
 .line-break-desktop {
@@ -184,8 +199,14 @@ main {
 .course-content td {
     background-color: #202020;
     color: #fff;
+    text-align: center;
 }
 
+.course-content dl, ol, ul {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-align: left;
+}
 
 /* Internship Section */
 .internship-section {
@@ -276,10 +297,10 @@ main {
 }
 
 .internship-add-inf li:before {
-    content: '✔';
+    content: '➱';
     position: absolute;
     left: 0;
-    color: #876eea; /* Green color for the checkmark */
+    color: #876eea; 
 }
 
 /* Responsive Styles */
