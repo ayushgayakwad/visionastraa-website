@@ -145,6 +145,20 @@ main {
 }
 
 
+.course-fee {
+    font-size: 28px;
+    color: #fff;
+    font-weight: bold;
+    margin-top: 16px;
+    margin-bottom: 10px;
+}
+
+.gst-text {
+    font-size: 16px;
+    color: #999;
+    margin-bottom: 30px;
+}
+
 /* Course Content */
 .course-content {
     padding: 40px 0;
@@ -340,20 +354,6 @@ main {
 
     .line-break-mobile {
         display: none;
-    }
-
-    .course-fee {
-        font-size: 28px;
-        color: #fff;
-        font-weight: bold;
-        margin-top: 16px;
-        margin-bottom: 10px;
-    }
-
-    .gst-text {
-        font-size: 16px;
-        color: #999;
-        margin-bottom: 30px;
     }
 
     .course-content table {
