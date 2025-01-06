@@ -254,12 +254,6 @@ main {
     margin-bottom: 10px;
 }
 
-.gst-text {
-    font-size: 16px;
-    color: #999;
-    margin-bottom: 30px;
-}
-
 /* Apply Now Button */
 .apply-now {
     background-color: #fff;
@@ -346,6 +340,20 @@ main {
 
     .line-break-mobile {
         display: none;
+    }
+
+    .course-fee {
+        font-size: 28px;
+        color: #fff;
+        font-weight: bold;
+        margin-top: 16px;
+        margin-bottom: 10px;
+    }
+
+    .gst-text {
+        font-size: 16px;
+        color: #999;
+        margin-bottom: 30px;
     }
 
     .course-content table {
