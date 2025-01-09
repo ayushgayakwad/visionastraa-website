@@ -5,6 +5,7 @@ body {
     padding: 0;
     background-color: #1c1c1c;
     color: #fff;
+    align-items: center;
 }
 
 main {
@@ -12,6 +13,63 @@ main {
     max-width: 1200px;
     margin: 0 auto;
     padding-top: 20px;
+}
+
+.popup1, .popup2, .popup3 {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Optional: semi-transparent background */
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.popup-content {
+    position: relative;
+    width: 60%;
+    height: 100%;
+    max-width: 500px;
+    background-color: #202020;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px; /* Optional: padding inside content */
+}
+
+.popup-content img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: white;
+    color: #333;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.show-popup-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.show-popup-btn:hover {
+    background-color: #876eea;
 }
 
 /* Internships-info */
@@ -28,7 +86,28 @@ main {
 
 .internship-info {
     position: relative;
-    background-color: #474747; 
+    background: url('../image/ihero2.png') no-repeat center center;
+    background-size: cover;
+    padding: 40px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+.internship-details {
+    position: relative;
+    background: #202020;
+    background-size: cover;
+    padding: 40px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+.internship-hero-info {
+    position: relative;
+    background: url('../image/internship_hero.jpg') no-repeat center center;
+    background-size: cover;
     padding: 40px;
     margin-top: 30px;
     margin-bottom: 30px;
@@ -38,6 +117,34 @@ main {
 .internship-info:hover {
     transform: scale(1.03);
     box-shadow: 0 0 10px #876eea;
+}
+
+.internship-details:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px #876eea;
+}
+
+/* Gradient Overlay */
+.internship-info-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.3) 100%);
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.internship-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0) 100%);
+    z-index: 1;
+    border-radius: 10px;
 }
 
 /* Gradient Overlay */
@@ -61,23 +168,33 @@ main {
 
 
 .internship-info::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0) 100%);
-    */
-    background: #202020;
-    z-index: 1;
-    border-radius: 10px;
+    position: relative;
+    height: 400px;
+    color: white;
+    overflow: hidden;
+    border-radius: 15px; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: url('../image/internship_hero.jpg') no-repeat center center;
 }
 
 .internship-info:hover {
     transform: scale(1.03);
     box-shadow: 0 0 10px #876eea;
 }
+
+.internship-more-hero-info {
+    position: relative;
+    z-index: 2;
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+    color: white;
+    margin-bottom: 10px;
+    padding-left: 25px;
+}
+
 
 .internship-more-info {
     position: relative;
@@ -88,7 +205,7 @@ main {
     margin-top: 20px;
     text-align: left;
     font-size: 16px;
-    color: #fff;
+    color: white;
     margin-bottom: 10px;
     padding-left: 25px;
 }
@@ -336,6 +453,25 @@ main {
         width: 100%;
     }
 
+    .popup1, .popup2, .popup3 {
+        width: 100%;
+        height: 100%;
+    }
+
+    .popup-content {
+        width: 80%;
+        height: 70%;
+    }
+
+    .internship-info {
+        background: url('../image/ihero1.jpg') no-repeat center center;
+        background-size: cover;
+    }
+
+    .internship-hero-overlay {
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
+
+    }
 
     .internships-objectives {
         position: relative;
