@@ -24,11 +24,27 @@
     <main>   
         <section>
             <div>
+                
+            </div>
+        </section>
+
+        <section class="internship-hero-info">
+            <div class="internship-info-overlay"></div>
+            <div class="internship-more-hero-info">
+                <br>
+                <br>
+                <br>
+                <br>
                 <h1>Project Based Internship on EV Technologies</h1>
+                <br>
+                <br>    
+                <br>
+                <br>
             </div>
         </section>
 
         <section class="internship-info">
+            <div class="internship-hero-overlay"></div>
             <div class="internship-more-info">
                 <h1>Internship Benefits</h1>
                 <li>Top 10% to get PPOs from EV companies</li>
@@ -127,15 +143,6 @@
                 </div>
             </div>
         </section>
-        
-        <section class="internship-info">
-            <div class="internship-more-info">
-                <h1>Duration (4 months) </h1>
-                <li>1 month internship (in-person in RVCE); (Feb 3 - Feb 28)</li>
-                <li>3 months project (monthly once online follow-up);</li>
-                <li>Evaluation at RVCE after 16 weeks</li>
-            </div>
-        </section>
 
         <section id="course-content" class="course-content">
             <h1>Course Content</h1>
@@ -144,12 +151,13 @@
                     <tr>
                         <th>Branch</th>
                         <th>Course</th>
-                        <th>Duration</th>
+                        <th>Duration (in-person in RVCE)</th>
+                        <th>Curriculum</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><i class="fas fa-microchip"></i> ECE/EEE</td>
+                        <td><i class="fas fa-microchip"></i> ECE/EEE and allied</td>
                         <td>
                             <button class="btn btn-link" data-toggle="collapse" data-target="#module1">Embedded Systems for Electric Vehicles (EV)</button>
                             <div id="module1" class="collapse">
@@ -164,9 +172,16 @@
                             </div>
                         </td>
                         <td>4 Weeks</td>
+                        <td><button class="show-popup-btn" onclick="showPopup1()">Click here</td>
+                        <div class="popup1" id="popup1">
+                            <div class="popup-content">
+                                <button class="close-btn" onclick="closePopup1()">&times;</button>
+                                <img src="/image/esfev.jpg" alt="Embedded Systems for Electric Vehicles (EV)">
+                            </div>
+                        </div>
                     </tr>
                     <tr>
-                        <td><i class="fas fa-project-diagram"></i> CSE/ISE and allied Branches</td>
+                        <td><i class="fas fa-project-diagram"></i> CSE/ISE and allied</td>
                         <td>
                             <button class="btn btn-link" data-toggle="collapse" data-target="#module2">AIML for Electric Vehicles (EV)</button>
                             <div id="module2" class="collapse">
@@ -181,9 +196,16 @@
                             </div>
                         </td>
                         <td>4 Weeks</td>
+                        <td><button class="show-popup-btn" onclick="showPopup2()">Click here</td>
+                            <div class="popup2" id="popup2">
+                                <div class="popup-content">
+                                    <button class="close-btn" onclick="closePopup2()">&times;</button>
+                                    <img src="/image/aimlfev.jpg" alt="AIML for Electric Vehicles (EV)">
+                                </div>
+                            </div>
                     </tr>
                     <tr>
-                        <td><i class="fas fa-cogs"></i> Mech</td>
+                        <td><i class="fas fa-cogs"></i> Mech and allied</td>
                         <td>
                             <button class="btn btn-link" data-toggle="collapse" data-target="#module3">Design & Development of Electric Vehicles (EV)</button>
                             <div id="module3" class="collapse">
@@ -198,12 +220,28 @@
                             </div>
                         </td>
                         <td>4 Weeks</td>
+                        <td><button class="show-popup-btn" onclick="showPopup3()">Click here</td>
+                            <div class="popup3" id="popup3">
+                                <div class="popup-content">
+                                    <button class="close-btn" onclick="closePopup3()">&times;</button>
+                                    <img src="/image/ddev.jpg" alt="Design & Development of Electric Vehicles (EV)">
+                                </div>
+                            </div>
                     </tr>
                 </tbody>
             </table>
         </section>
 
-        <section class="internship-info">
+        <section class="internship-details">
+            <div class="internship-more-info">
+                <h1>Duration (4 months) </h1>
+                <li>1 month internship (in-person in RVCE); (Feb 3 - Feb 28)</li>
+                <li>3 months project (monthly once online follow-up);</li>
+                <li>Evaluation at RVCE after 16 weeks</li>
+            </div>
+        </section>
+
+        <section class="internship-details">
             <div class="internship-more-info">
                 <h1>Location </h1>
                 <p>RV College of Engineering, Bengaluru</p>
@@ -295,6 +333,31 @@
             e.preventDefault();
             document.querySelector('#program-fee-section').scrollIntoView({ behavior: 'smooth' });
         });
+
+        function showPopup1() {
+            document.getElementById('popup1').style.display = "flex";
+        }
+
+        function closePopup1() {
+            document.getElementById('popup1').style.display = "none";
+        }
+
+        function showPopup2() {
+            document.getElementById('popup2').style.display = "flex";
+        }
+
+        function closePopup2() {
+            document.getElementById('popup2').style.display = "none";
+        }
+
+        function showPopup3() {
+            document.getElementById('popup3').style.display = "flex";
+        }
+
+        function closePopup3() {
+            document.getElementById('popup3').style.display = "none";
+        }
+
     </script>    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
