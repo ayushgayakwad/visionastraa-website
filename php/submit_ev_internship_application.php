@@ -24,11 +24,12 @@ $tableCreationQuery = "CREATE TABLE IF NOT EXISTS ev_pbi_applications (
     degree VARCHAR(100) NOT NULL,
     specialization VARCHAR(100) NOT NULL,
     graduation_year VARCHAR(4) NOT NULL,
+    cgpa VARCHAR(10) NOT NULL,
     resume LONGBLOB NOT NULL,
     resume_filename VARCHAR(100) NOT NULL,
     goals TEXT NOT NULL,
     referral_code VARCHAR(50),
-    role VARCHAR(20) NOT NULL DEFAULT 'Fall 2024',
+    role VARCHAR(200) NOT NULL DEFAULT 'Not Selected',
     enrolled ENUM('true', 'false') NOT NULL DEFAULT 'false',
     confirmationEmailSent ENUM('true', 'false') NOT NULL DEFAULT 'false',
     submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -48,6 +49,7 @@ $college = $_POST['college'];
 $degree = $_POST['degree'];
 $specialization = $_POST['specialization'];
 $graduation_year = $_POST['graduation'];
+$cgpa = $_POST['cgpa'];
 $goals = $_POST['goals'];
 $referral_code = isset($_POST['referral']) ? $_POST['referral'] : null;
 $role = $_POST['role'];
@@ -69,10 +71,10 @@ if ($checkQuery->num_rows > 0) {
 $checkQuery->close();
 
 $stmt = $conn->prepare("INSERT INTO ev_pbi_applications 
-    (first_name, last_name, email, phone, state, college, degree, specialization, graduation_year, resume, resume_filename, goals, referral_code, role, enrolled, confirmationEmailSent) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'false', 'false')");
+    (first_name, last_name, email, phone, state, college, degree, specialization, graduation_year, cgpa, resume, resume_filename, goals, referral_code, role, enrolled, confirmationEmailSent) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'false', 'false')");
 
-$stmt->bind_param("ssssssssssssss", $first_name, $last_name, $email, $phone, $state, $college, $degree, $specialization, $graduation_year, $resume, $resume_filename, $goals, $referral_code, $role);
+$stmt->bind_param("sssssssssssssss", $first_name, $last_name, $email, $phone, $state, $college, $degree, $specialization, $graduation_year, $cgpa, $resume, $resume_filename, $goals, $referral_code, $role);
 
 if ($stmt->execute()) {
     echo json_encode(["success" => true]);
