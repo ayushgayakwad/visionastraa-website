@@ -2,9 +2,9 @@
 header('Content-Type: application/json');
 
 $servername = "localhost";
-$username = "u707137586_EV_Reg_T1_24";
-$password = "DMKL0IYoP&4";
-$dbname = "u707137586_EV_Reg_2024_T1";
+$username = "u707137586_EV_Reg_25";
+$password = "bC9#w!Dqb2kn";
+$dbname = "u707137586_EV_Reg_25";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -27,7 +27,7 @@ $tableCreationQuery = "CREATE TABLE IF NOT EXISTS applications (
     resume_filename VARCHAR(100) NOT NULL,
     goals TEXT NOT NULL,
     referral_code VARCHAR(50),
-    term VARCHAR(20) NOT NULL DEFAULT 'Fall 2024',
+    term VARCHAR(20) NOT NULL DEFAULT 'April 2025 (Summer)',
     enrolled ENUM('true', 'false') NOT NULL DEFAULT 'false',
     confirmationEmailSent ENUM('true', 'false') NOT NULL DEFAULT 'false',
     submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
