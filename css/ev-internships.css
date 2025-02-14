@@ -261,13 +261,11 @@ main {
     transform: scale(1.05);
 }
 
-
 .course-fee {
     font-size: 28px;
     color: #fff;
     font-weight: bold;
     margin-top: 0px;
-    margin-bottom: 10px;
 }
 
 .gst-text {
@@ -351,6 +349,7 @@ main {
 
 /* Internship Box */
 .internship-box {
+    position: relative;
     background-color: #202020;
     width: 35%;
     margin: 15px auto;
@@ -358,6 +357,23 @@ main {
     border-radius: 10px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.internship-box::before {
+    content: "Special Offer";
+    position: absolute;
+    top: 80px;
+    left: -30px;
+    background-color: #fa0636;
+    color: white;
+    padding: 4px 50px;
+    font-size: 10px;
+    font-weight: bold;
+    transform: rotate(-45deg);
+    transform-origin: 0 0;
+    white-space: nowrap;
+    z-index: 10;
 }
 
 .internship-box:hover {
