@@ -10,7 +10,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT name, email FROM test WHERE emailSent = false";
+$sql = "SELECT name, email FROM email_list_1 WHERE emailSent = false";
 $result = $conn->query($sql);
 
 while ($row = $result->fetch_assoc()) {
@@ -200,7 +200,7 @@ while ($row = $result->fetch_assoc()) {
     if (mail($email, $subject, $message, $headers)) {
         echo "Email sent to: $name ($email)\n";
 
-        $updateSql = "UPDATE test SET emailSent = true WHERE email = '$email'";
+        $updateSql = "UPDATE email_list_1 SET emailSent = true WHERE email = '$email'";
         $conn->query($updateSql);
     } else {
         echo "Failed to send email to: $name ($email)\n";
