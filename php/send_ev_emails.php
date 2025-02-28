@@ -200,7 +200,7 @@ while ($row = $result->fetch_assoc()) {
     if (mail($email, $subject, $message, $headers)) {
         echo "Email sent to: $name ($email)\n";
 
-        $updateSql = "UPDATE webinar_batch_7 SET emailSent = true WHERE email = '$email'";
+        $updateSql = "UPDATE test SET emailSent = true WHERE email = '$email'";
         $conn->query($updateSql);
     } else {
         echo "Failed to send email to: $name ($email)\n";
