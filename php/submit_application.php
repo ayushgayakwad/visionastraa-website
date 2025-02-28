@@ -24,6 +24,7 @@ $tableCreationQuery = "CREATE TABLE IF NOT EXISTS applications (
     degree VARCHAR(100) NOT NULL,
     specialization VARCHAR(100) NOT NULL,
     graduation_year VARCHAR(4) NOT NULL,
+    cgpa VARCHAR(10) NOT NULL,
     resume LONGBLOB NOT NULL,
     resume_filename VARCHAR(100) NOT NULL,
     goals TEXT NOT NULL,
@@ -48,6 +49,7 @@ $college = $_POST['college'];
 $degree = $_POST['degree'];
 $specialization = $_POST['specialization'];
 $graduation_year = $_POST['graduation'];
+$cgpa = $_POST['cgpa'];
 $goals = $_POST['goals'];
 $referral_code = isset($_POST['referral']) ? $_POST['referral'] : null;
 $term = $_POST['term'];
@@ -69,10 +71,10 @@ if ($checkQuery->num_rows > 0) {
 $checkQuery->close();
 
 $stmt = $conn->prepare("INSERT INTO applications 
-    (first_name, last_name, email, phone, state, college, degree, specialization, graduation_year, resume, resume_filename, goals, referral_code, term, enrolled, confirmationEmailSent) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'false', 'false')");
+    (first_name, last_name, email, phone, state, college, degree, specialization, graduation_year, cgpa, resume, resume_filename, goals, referral_code, term, enrolled, confirmationEmailSent) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'false', 'false')");
 
-$stmt->bind_param("ssssssssssssss", $first_name, $last_name, $email, $phone, $state, $college, $degree, $specialization, $graduation_year, $resume, $resume_filename, $goals, $referral_code, $term);
+$stmt->bind_param("sssssssssssssss", $first_name, $last_name, $email, $phone, $state, $college, $degree, $specialization, $graduation_year, $cgpa, $resume, $resume_filename, $goals, $referral_code, $term);
 
 if ($stmt->execute()) {
     echo json_encode(["success" => true]);
