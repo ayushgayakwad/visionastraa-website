@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - EV Academy</title>
+    <link rel="stylesheet" href="css/EV_C.css">
+</head>
+    <body>
+
+      <nav class="navbar">
+        <div class="logo-container">
+            <img src="images/1000052219-removebg-preview.png" alt="EV Academy Logo" class="logo">
+        </div>
+
+        <!-- Hamburger Icon -->
+        <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+        
+        <ul class="nav-links">
+            <li><a href="#">EV Academy</a></li>
+            <li><a href="#">EV Courses</a></li>
+            <li><a href="#">EV Internship</a></li>
+            <li><a href="#">EV Mentors</a></li>
+            <li><a href="#">EV Jobs</a></li>
+            <li><a href="#">EV Careers</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">About Us</a></li>
+        </ul>
+    </nav>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector(".nav-links");
+            navLinks.classList.toggle("show");
+        }
+    </script>
+
+        <section class="contact-section">
+        <div class="contact-container">
+            
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <h2 class="contact-heading">Contact US</h2>
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Enter your name">
+
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Email address">
+
+                <label for="question">Question</label>
+                <textarea id="question" placeholder="Enter question or feedback"></textarea>
+
+                <button class="submit-btn">Submit</button>
+            </div>
+
+            <!-- Map -->
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.750939758974!2d77.49612627373467!3d12.92372278738725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3ee159ba3729%3A0x75a3463d510cf26e!2sR.%20V.%20College%20of%20Engineering!5e0!3m2!1sen!2sin!4v1740504473866!5m2!1sen!2sin"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+        <!-- Decorative Image -->
+        <img src="images/image1.png" alt="Decorative Image" class="decorative-image">
+
+            
+        <section class="get-started">
+            <img src="images/image1.png" alt="Decorative Image" class="decorative-image rotated-90">
+            <h2>Get started!</h2>
+            <p>Analyzing our data across both web and app platforms, gaining insights into the complete user journey.</p>
+            
+            <div class="insights">
+                <div class="insight-box">
+                    <span class="icon">📊</span>
+                    <p>Gaining Insights</p>
+                </div>
+                <div class="insight-box">
+                    <span class="icon">📈</span>
+                    <p>Identifying Opportunities</p>
+                </div>
+            </div>
+        
+            <img src="images/image1.png" alt="Decorative Image" class="decorative-image rotated-180">
+            
+            <button class="get-started-btn">Get Started</button>
+        </section>
+
+        <section class="subscribe-section">
+            <div class="subscribe-container">
+                <img src="images/image6.png" alt="Illustration" class="subscribe-image">
+                <img src="images/image5.png" alt="Stars" class="stars">
+                <img src="images/image3.png" alt="Arrow Icon" class="subscribe-arrow">
+                <div class="subscribe-content">
+                    <h2>Get incredible stories, promotions, and offers in your inbox</h2>
+                    <div class="subscribe-input-container">
+                        <input type="email" placeholder="Email address" class="subscribe-input">
+                        <div class="subscribe-container">
+                            <img src="images/image4.png" alt="Overlay" class="subscribe-overlay">
+                            <button class="subscribe-btn">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="questions-section">
+            <div class="questions-container">
+                <bold><h2>Ready to Start Your<br> Professional Career</h2></bold>
+                <button class="reach-out-btn">Reach out to us</button>
+                <div class="contact-info">
+                  <p class="contact-heading">Reach Head of Admissions:</p>
+                  <p class="contact-phone1"><i class="fas fa-phone-alt"></i> <a href="tel:+918197355166">+91 8197355166</a></p>
+                  <p class="contact-phone2"><i class="fas fa-phone-alt"></i> <a href="tel:+918075664438">+91 8075664438</a></p>
+                  <p class="contact-email">Mail us: <a href="mailto:admissions@visionastraa.com">admissions@visionastraa.com</a></p>
+              </div>
+              <script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous"></script>
+                <img src="images/image2.png" alt="Geometric Grid" class="geometric-grid">
+            </div>
+            <div class="questions-footer">
+                <p>Having questions?</p>
+                <img src="images/image3.png" alt="Arrow" class="question-arrow">
+            </div>
+        </section>
+
+        <div class="newsletter-container">
+            <h3>Subscribe to our newsletter</h3>
+            <div class="newsletter-input">
+                <span class="email-icon">✉️</span>
+                <input type="email" placeholder="Input your email">
+                <button type="submit">Subscribe</button>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-container">
+              <div class="about-us">
+                <h3>ABOUT US</h3>
+                <p>Empowering India’s talent to lead the global EV industry.</p><br>
+                <p>We are committed to bridging the gap between academia and industry, providing students with the practical skills and knowledge required to excel in the EV sector. Our programs foster innovation, entrepreneurship, and a deep understanding of the EV ecosystem.</p>
+              </div>
+              
+              <div class="footer-links">
+                <div class="links">
+                  <h3>LINKS</h3>
+                  <ul>
+                    <li><a href="#">EV Academy</a></li>
+                    <li><a href="#">EV Courses</a></li>
+                    <li><a href="#">EV Internship</a></li>
+                    <li><a href="#">EV Mentors</a></li>
+                    <li><a href="#">EV Jobs</a></li>
+                    <li><a href="#">EV Careers</a></li>
+                  </ul>
+                </div>
+
+                <div class="Company">
+                <h3>COMPANY</h3>
+                  <ul>
+                    <li><a href="#">Contact US</a></li>
+                    <li><a href="#">About US</a></li>
+                  </ul>
+                </div>
+                               
+                <div class="plans">
+                  <h3>PLANS & PRICING</h3>
+                  <ul>  
+                    <li><a href="#">Start Up</a></li>
+                    <li><a href="#">Organization</a></li>
+                  </ul>
+                </div>
+              </div>
+                
+              <div class="follow-us">
+                <h3>FOLLOW US</h3>
+                <ul>
+                  <li><a href="#">Instagram</a></li>
+                  <li><a href="#">LinkedIn</a></li>
+                  <li><a href="#">Twitter</a></li>
+                  <li><a href="#">Facebook</a></li>
+                  <li><a href="#">YouTube</a></li>
+                </ul>
+              </div>
+            </div>
+            
+            <hr>
+            
+            <div class="footer-bottom">
+              <div class="logo-container">
+                <img src="images/1000052219-removebg-preview.png" alt="VisionAstraa Logo">
+              </div>
+              <p>&copy; 2024 VisionAstraa. All rights reserved.</p>
+              <button class="ev-academy-button">EV Academy</button>
+            </div>
+          </footer>
+        <script src="MrNY.js"></script>  
+             
+    </body>
+    </html>
+    
