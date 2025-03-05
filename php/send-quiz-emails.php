@@ -145,7 +145,7 @@ if ($result->num_rows > 0) {
                 </ol>
 
                 <img src="https://www.visionastraa.com/image/ev-apply-email.png" alt="Upskill in EV Technologies" style="width:100%; max-width:600px; margin-top:8px">
-                <p>For more details on the program, modules, mentors & potential recruiters, you can check our <a href="https://drive.google.com/file/d/1HJKflv-SE8R8_P4vkXeWw8N-cjSMfW_n/view?usp=sharing">Brochure</a> & <a href="https://www.visionastraa.com/ev-home.html">Website</a></p>
+                <p>For more details on the program, modules, mentors & potential recruiters, you can check our <a href="https://drive.google.com/file/d/1HJKflv-SE8R8_P4vkXeWw8N-cjSMfW_n/view?usp=sharing">Brochure</a> & <a href="https://www.visionastraa.com/ev-academy.html">Website</a></p>
                 <p><b>Hurry Now! Limited Opportunity!</b></p>
                 <p><b>We have a small intake of only 25, with limited seats for the thousands of applications we receive nationwide.</b></p>
                 <a href="https://www.visionastraa.com/ev-application.html" style="padding: 10px; background-color: #4CAF50; color: white; text-align: center; border-radius: 5px; width: 200px; text-decoration: none; display: inline-block; font-weight: bold; margin-top:8px;">Reserve Your Spot!</a>

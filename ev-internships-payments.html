@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payments - VisionAstraa EV Academy</title>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2PV0BKLV94"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-2PV0BKLV94');
+    </script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="css/ev-payments.css">
+</head>
+
+<body>
+    <header>
+        <div id="navbar-placeholder"></div>
+    </header>
+
+  <main>
+    <!--
+    <section class="payment-details">
+      <h1>EV Mastery Program - Installment Plans</h1>
+
+      <table class="payment-table">
+        <thead>
+          <tr>
+            <th>Fee Description</th>
+            <th>Fees (₹)</th>
+            <th>GST (₹)</th>
+            <th>Total Amount (₹)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Registration Fee</td>
+            <td>8474.6</td>
+            <td>1525.4</td>
+            <td>10000.0</td>
+          </tr>
+          <tr>
+            <td>Program Fee</td>
+            <td>76271.2</td>
+            <td>13728.8</td>
+            <td>90000.0</td>
+          </tr>
+          <tr class="total-row">
+            <td><strong>Total</strong></td>
+            <td><strong>84745.8</strong></td>
+            <td><strong>15254.2</strong></td>
+            <td><strong>100000.0</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="button-container">
+        <a href="mailto:admissions@visionastraa.com" class="email-button">Send Email</a>
+      </div>
+      -->
+    </section>
+
+    <section class="ev-payment-info" style="text-align: center;">
+      <div class="confirmation-learning-outcomes text-align" style="text-align: center; margin-bottom: 32px;">
+        <h1>Hurry!<br>Secure your spot for Project-Based Internships now!</h1>
+      </div>
+      <a href="image/upi.jpg" target="_blank"><img src="image/upi.jpg" alt="UPI" height="50%" width="50%" style="margin-bottom: 16px; border-radius: 10px;"/></a>
+      <div class="confirmation-learning-outcomes text-align">
+          <h6><b>Pay Admission Fees - INR 12,000/- (including GST)</b> to the following UPI ID:<br><br><b><a href="#">onedream@icici</a></b><br><br>and share screenshot to <b><a href="mailto:admissions@visionastraa.com">admissions@visionastraa.com</a></b> for confirmation.</h6>
+      </div>
+    </section>  
+  </main>
+
+  <footer class="footer" style="padding-top: 35px;">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="text-uppercase">About Us</h5>
+                <p style="color: white;">Empowering India’s talent to lead the global EV industry. <br><br>We are
+                    committed to bridging the gap between academia and industry, providing students with the practical skills and knowledge
+                    required to excel in the EV sector. Our programs are designed to foster innovation,
+                    entrepreneurship, and a deep understanding of the EV ecosystem.
+                </p>
+            </div>
+            <div class="col-md-2 secpart">
+                <h5 class="text-uppercase">Links</h5>
+                <ul class="list-unstyled listone">
+                    <li><a href="ev-aboutus.html">About US</a></li>
+                    <li><a href="ev-course.html">Courses</a></li>
+                    <li><a href="ev-jobs.html">Jobs</a></li>
+                    <li><a href="ev-mentors.html">Mentors</a></li>
+                    <li><a href="ev-careers.html">Careers</a></li>
+                    <li><a href="ev-contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 thirdpart">
+                <h5 class="text-uppercase">Follow Us</h5>
+                <ul class="list-unstyled listtwo">
+                    <li><a href="https://www.instagram.com/evacademy.in/">Instagram</a></li>
+                    <li><a href="https://www.linkedin.com/company/va-ev-academy/?viewAsMember=true">linkedin</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr style="color: white; border-color: white;">
+        <div class="row">
+
+            <div class="col-12 text-left last">
+
+                <div class="lalala"><img class="lastimg" src="image/bwvasev.png" alt="">
+                    <p style="color: white;" class="mb-0 latext">© 2024 visionastraa. All rights reserved.</p>
+                </div>
+
+
+                <div><button class="lastb" type="button">EV academy </button></div>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function openPopup(module, content) {
+        document.getElementById('popup-module').innerHTML = module;
+        document.getElementById('popup-content').innerHTML = content;
+
+        document.getElementById('popup').style.display = 'flex';
+    }
+
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+    }
+    fetch('navbarcomp/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-placeholder').innerHTML = data;
+            const hamburger = document.getElementById("hamburger");
+            const navLinks = document.getElementById("nav-links");
+
+            if (hamburger && navLinks) {
+                hamburger.onclick = function () {
+                    navLinks.classList.toggle("active");
+                };
+            }
+        })
+        .catch(error => console.error('Error loading navbar:', error));
+
+        (function() {
+          const widgetConfig = {
+            backgroundColor: '#25D366',
+            position: 'right',
+            xoffset: '25px',
+            yoffset: '25px',
+            logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg',
+            whatsappNo: '918075664438',
+            whatsappText: 'Hello VisionAstraa team,',
+            popupTitle: 'Dear EV Aspirant, life changing opportunity is just a click away',
+            buttonText: 'Start Chat'
+          };
+        
+          let showPopup = false;
+          const container = document.createElement('div');
+          document.body.appendChild(container);
+        
+          function renderWidget() {
+            container.innerHTML = `
+              <div class="z_ft_widget" style="
+                background-color: ${widgetConfig.backgroundColor};
+                ${widgetConfig.position}: ${widgetConfig.xoffset};
+                bottom: ${widgetConfig.yoffset};
+                width: 50px;
+                height: 50px;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: fixed;
+                cursor: pointer;
+                z-index: 999;
+                transition: opacity 0.3s;
+              ">
+                <img src="${widgetConfig.logoUrl}" alt="WhatsApp" style="width: 32px; height: 32px;">
+                ${showPopup ? `
+                  <div class="z_ft_popup" style="
+                    position: absolute;
+                    bottom: 60px;
+                    width: 200px;
+                    background: white;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 16px;
+                    ${widgetConfig.position}: 0;
+                  ">
+                    <h3 style="
+                      font-size: 16px;
+                      font-weight: 600;
+                      text-align: center;
+                      margin: 30px 0px;
+                    ">${widgetConfig.popupTitle}</h3>
+                    <a href="https://wa.me/${widgetConfig.whatsappNo}?text=${widgetConfig.whatsappText}" target="_blank" rel="noopener noreferrer" style="
+                      display: inline-block;
+                      background: #25D366;
+                      color: white;
+                      padding: 8px 16px;
+                      border-radius: 4px;
+                      text-decoration: none;
+                      transition: background-color 0.3s;
+                    ">${widgetConfig.buttonText}</a>
+                    <a href="https://visionastraa.com" 
+                     target="_blank" 
+                     rel="noopener noreferrer" 
+                     style="
+                      text-align: center;
+                      font-size: 12px;
+                      color: #666;
+                      text-decoration: none;
+                      border-top: 1px solid #eee;
+                      padding-top: 12px;
+                      margin-top: 10px;
+                    ">Powered by VisionAstraa</a>
+
+                  </div>
+                ` : ''}
+              </div>
+            `;
+        
+            container.querySelector('.z_ft_widget').addEventListener('click', (e) => {
+              if (e.target.closest('.z_ft_popup-button')) return;
+              showPopup = !showPopup;
+              renderWidget();
+            });
+          }
+        
+          renderWidget();
+        })()
+</script>
+<script>
+    document.querySelector('.course-details-button').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector('#course-content').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    document.querySelector('.program-fee-button').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector('#program-fee-section').scrollIntoView({ behavior: 'smooth' });
+    });
+</script>    
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

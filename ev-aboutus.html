@@ -28,7 +28,7 @@
         </header>
         <section class="about-us">
             <div class="background">
-                <img src="image/about_us_bg.png" alt="Background Image">
+                <img src="image/aboutus.jpg" alt="Background Image">
                 <div class="glass-panel">
                     <div class="suntext">
                         <h2>From idea to impact</h2>
@@ -135,9 +135,9 @@
                 <div class="col-md-2 secpart">
                     <h5 class="text-uppercase">Links</h5>
                     <ul class="list-unstyled listone">
-                        <li><a href="ev-aboutus.html">About US</a></li>
+                        <li><a href="ev-aboutus.html">About Us</a></li>
                         <li><a href="ev-course.html">Courses</a></li>
-                        <li><a href="ev-placements.html">Placements</a></li>
+                        <li><a href="ev-jobs.html">Jobs</a></li>
                         <li><a href="ev-mentors.html">Mentors</a></li>
                         <li><a href="ev-careers.html">Careers</a></li>
                         <li><a href="ev-contact.html">Contact Us</a></li>
@@ -182,6 +182,99 @@
                 }
             })
             .catch(error => console.error('Error loading navbar:', error));
+
+            (function() {
+                const widgetConfig = {
+                    backgroundColor: '#25D366',
+                    position: 'right',
+                    xoffset: '25px',
+                    yoffset: '25px',
+                    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg',
+                    whatsappNo: '918075664438',
+                    whatsappText: 'Hello VisionAstraa team,',
+                    popupTitle: 'Dear EV Aspirant, life changing opportunity is just a click away',
+                    buttonText: 'Start Chat'
+                };
+                
+                let showPopup = false;
+                const container = document.createElement('div');
+                document.body.appendChild(container);
+                
+                function renderWidget() {
+                    container.innerHTML = `
+                    <div class="z_ft_widget" style="
+                        background-color: ${widgetConfig.backgroundColor};
+                        ${widgetConfig.position}: ${widgetConfig.xoffset};
+                        bottom: ${widgetConfig.yoffset};
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 8px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        position: fixed;
+                        cursor: pointer;
+                        z-index: 999;
+                        transition: opacity 0.3s;
+                    ">
+                        <img src="${widgetConfig.logoUrl}" alt="WhatsApp" style="width: 32px; height: 32px;">
+                        ${showPopup ? `
+                        <div class="z_ft_popup" style="
+                            position: absolute;
+                            bottom: 60px;
+                            width: 200px;
+                            background: white;
+                            border-radius: 8px;
+                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 16px;
+                            ${widgetConfig.position}: 0;
+                        ">
+                            <h3 style="
+                            font-size: 16px;
+                            font-weight: 600;
+                            text-align: center;
+                            margin: 30px 0px;
+                            ">${widgetConfig.popupTitle}</h3>
+                            <a href="https://wa.me/${widgetConfig.whatsappNo}?text=${widgetConfig.whatsappText}" target="_blank" rel="noopener noreferrer" style="
+                            display: inline-block;
+                            background: #25D366;
+                            color: white;
+                            padding: 8px 16px;
+                            border-radius: 4px;
+                            text-decoration: none;
+                            transition: background-color 0.3s;
+                            ">${widgetConfig.buttonText}</a>
+                            <a href="https://visionastraa.com" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            style="
+                            text-align: center;
+                            font-size: 12px;
+                            color: #666;
+                            text-decoration: none;
+                            border-top: 1px solid #eee;
+                            padding-top: 12px;
+                            margin-top: 10px;
+                            ">Powered by VisionAstraa</a>
+
+                        </div>
+                        ` : ''}
+                    </div>
+                    `;
+                
+                    container.querySelector('.z_ft_widget').addEventListener('click', (e) => {
+                    if (e.target.closest('.z_ft_popup-button')) return;
+                    showPopup = !showPopup;
+                    renderWidget();
+                    });
+                }
+                
+                renderWidget();
+                })();
     </script>
 </body>
 
