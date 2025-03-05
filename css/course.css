@@ -17,7 +17,7 @@ main {
 /* Hero Section */
 .hero-section {
     position: relative;
-    background: url('../image/courses_hero.jpg') no-repeat center center;
+    background: url('../image/courses_hero_new1.jpg') no-repeat center center;
     background-size: cover;
     height: 400px;
     color: white;
@@ -168,7 +168,7 @@ main {
 /* Combined Course and Pricing Section */
 .course-info {
     position: relative;
-    background: url('../image/course.png') no-repeat center center;
+    background: url('../image/courses-image.jpg') no-repeat center center;
     background-size: cover;
     padding: 40px;
     margin-top: 30px;
@@ -566,6 +566,11 @@ main {
         height: 575px;
     }
 
+    .hero-section {
+        background: url('../image/courses_hero_new2.jpg') no-repeat center center;
+        background-size: cover;
+    }
+
     .program-fee-section {
         display: flex;
         flex-direction: column;
@@ -595,7 +600,7 @@ main {
 
     .course-info {
         position: relative;
-        background: url('../image/course_m.png') no-repeat center center;
+        background: url('../image/courses-image.jpg') no-repeat center center;
         background-size: cover;
         padding: 40px;
         margin-top: 30px;

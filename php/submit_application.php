@@ -2,9 +2,9 @@
 header('Content-Type: application/json');
 
 $servername = "localhost";
-$username = "u707137586_EV_Reg_T1_24";
-$password = "DMKL0IYoP&4";
-$dbname = "u707137586_EV_Reg_2024_T1";
+$username = "u707137586_EV_Reg_25";
+$password = "bC9#w!Dqb2kn";
+$dbname = "u707137586_EV_Reg_25";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -19,15 +19,18 @@ $tableCreationQuery = "CREATE TABLE IF NOT EXISTS applications (
     last_name VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL,
     phone VARCHAR(15) NOT NULL,
+    dob VARCHAR(25) NOT NULL,
+    state VARCHAR(50) NOT NULL,
     college VARCHAR(100) NOT NULL,
     degree VARCHAR(100) NOT NULL,
     specialization VARCHAR(100) NOT NULL,
     graduation_year VARCHAR(4) NOT NULL,
+    cgpa VARCHAR(10) NOT NULL,
     resume LONGBLOB NOT NULL,
     resume_filename VARCHAR(100) NOT NULL,
     goals TEXT NOT NULL,
     referral_code VARCHAR(50),
-    term VARCHAR(20) NOT NULL DEFAULT 'Fall 2024',
+    term VARCHAR(20) NOT NULL DEFAULT 'April 2025 (Summer)',
     enrolled ENUM('true', 'false') NOT NULL DEFAULT 'false',
     confirmationEmailSent ENUM('true', 'false') NOT NULL DEFAULT 'false',
     submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -42,10 +45,13 @@ $first_name = $_POST['first_name'];
 $last_name = $_POST['last_name'];
 $email = $_POST['email'];
 $phone = $_POST['phone'];
+$dob = $_POST['dob'];
+$state = $_POST['state'];
 $college = $_POST['college'];
 $degree = $_POST['degree'];
 $specialization = $_POST['specialization'];
 $graduation_year = $_POST['graduation'];
+$cgpa = $_POST['cgpa'];
 $goals = $_POST['goals'];
 $referral_code = isset($_POST['referral']) ? $_POST['referral'] : null;
 $term = $_POST['term'];
@@ -67,10 +73,10 @@ if ($checkQuery->num_rows > 0) {
 $checkQuery->close();
 
 $stmt = $conn->prepare("INSERT INTO applications 
-    (first_name, last_name, email, phone, college, degree, specialization, graduation_year, resume, resume_filename, goals, referral_code, term, enrolled, confirmationEmailSent) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'false', 'false')");
+    (first_name, last_name, email, phone, dob, state, college, degree, specialization, graduation_year, cgpa, resume, resume_filename, goals, referral_code, term, enrolled, confirmationEmailSent) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'false', 'false')");
 
-$stmt->bind_param("sssssssssssss", $first_name, $last_name, $email, $phone, $college, $degree, $specialization, $graduation_year, $resume, $resume_filename, $goals, $referral_code, $term);
+$stmt->bind_param("ssssssssssssssss", $first_name, $last_name, $email, $phone, $dob, $state, $college, $degree, $specialization, $graduation_year, $cgpa, $resume, $resume_filename, $goals, $referral_code, $term);
 
 if ($stmt->execute()) {
     echo json_encode(["success" => true]);

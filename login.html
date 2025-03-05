@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDTqlQiKyEasLlEL4fQKhmL62F3o7hsBCc",
+        authDomain: "visionastraa-website.firebaseapp.com",
+        projectId: "visionastraa-website",
+        storageBucket: "visionastraa-website.appspot.com",
+        messagingSenderId: "100641652232",
+        appId: "1:100641652232:web:62a4288705be2b1f259bbd",
+        measurementId: "G-RR519GVBWS"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Function to handle login
+    function login(event) {
+      event.preventDefault(); // Prevent the form from refreshing the page
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      // Firebase authentication
+      auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+
+          if (user.emailVerified) {
+            // Send email to PHP server to set session
+            fetch('php/set-session.php', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: user.email })
+            })
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                // Redirect to dashboard if session is successfully set
+                window.location.href = "dashboard.php";
+              } else {
+                alert("Session could not be established. Try again.");
+              }
+            })
+            .catch(error => {
+              console.error("Error setting session:", error);
+              alert("An error occurred. Please try again.");
+            });
+          } else {
+            alert("Please verify your email before logging in.");
+          }
+        })
+        .catch((error) => {
+          console.error("Login error:", error);
+          alert(`Login failed: ${error.message}`);
+        });
+    }
+  </script>
+  <style>
+    body, html {
+        font-family: Arial, sans-serif;
+        background-color: #1c1c1c; 
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: auto; 
+        color: #ffffff;
+    }
+    
+    .form-container {
+        position: relative; 
+        background-color: rgba(32, 32, 32, 0.8); 
+        background-image: url('image/ev-home2-bg2.png');
+        background-size: cover; 
+        background-position: center; 
+        background-repeat: no-repeat; 
+        padding: 20px;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 800px;
+        margin: 20px auto;
+        overflow-y: auto;
+    }
+
+    .form-container h1,
+    .form-container h2,
+    .form-container label,
+    .form-container input,
+    .form-container select,
+    .form-container textarea,
+    .form-container button {
+        position: relative; 
+        z-index: 2; 
+    }
+
+    .form-container h1 {
+        text-align: center;
+        color: #fff;
+        margin-top: 0;
+    }
+
+    .form-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #fff;
+    }
+
+    .form-container label {
+        display: block;
+        color: #fff;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    .form-container input[type="text"],
+    .form-container input[type="email"],
+    .form-container input[type="tel"],
+    .form-container input[type="password"],
+    .form-container input[type="file"],
+    .form-container select,
+    .form-container textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        color: #000;
+        background-color: #fff;
+        border: 1px solid #fff;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .form-container textarea {
+        resize: vertical;
+    }
+
+    .form-container button {
+        width: 100%;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 20px;
+        color: black;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .form-container button:hover {
+        background-color: #5642a3;
+        color: #fff;
+    }
+
+    .navigate-button {
+        background-color: #007bff;
+        margin-top: 10px;
+        width: 100%;
+        padding: 10px;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .navigate-button:hover {
+        background-color: #0069d9;
+    }
+
+    .message {
+        margin-top: 20px;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .job-section {
+        padding: 20px;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 800px;
+        margin: 20px auto;
+        color: #ffffff;
+    }
+
+    .job-section h1, 
+    .job-section h2, 
+    .job-section p, 
+    .job-section ul, 
+    .job-section li {
+        color: #ffffff; 
+    }
+    .link {
+        color: #0062ca;
+        text-decoration: underline;
+    }
+    .link:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+  <header id="navbar-placeholder"></header>
+  <div class="form-container">
+    <h1>Login</h1>
+    <form id="loginForm" onsubmit="login(event)">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required><br>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required><br>
+
+      <button type="submit">Login</button>
+    </form>
+    <p>
+      Don't have an account? <a href="register.html">Register here</a>.
+    </p>
+    <p>
+      Forgot your password? <a href="reset-password.html">Reset here</a>.
+    </p>
+  </div>
+</body>
+<script>
+  fetch('navbarcomp-VA/navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar-placeholder').innerHTML = data;
+
+      const hamburger = document.getElementById("hamburger");
+      const navLinks = document.getElementById("nav-links");
+
+      if (hamburger && navLinks) {
+        hamburger.onclick = function () {
+          navLinks.classList.toggle("active");
+        };
+      }
+    })
+    .catch(error => console.error('Error loading navbar:', error));
+</script>
+</html>
