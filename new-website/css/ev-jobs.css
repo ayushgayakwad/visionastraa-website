@@ -143,7 +143,7 @@ nav ul li a.active {
 .recruiters {
     margin-top: 50px;
     padding: 50px 0;
-    background-image: url('images/Group\ 110\ \(2\).png'); /* Background for Recruiters */
+    background-image: url('../images/Group110_2.png'); /* Background for Recruiters */
     background-size: 50%;
     background-position: center;
     background-repeat: no-repeat;
@@ -154,7 +154,7 @@ nav ul li a.active {
 .mentors {
     margin-top: 50px;
     padding: 50px 0;
-    background-image: url('images/Group\ 110\ \(3\).png'); /* Background for Mentors */
+    background-image: url('../images/Group110_3.png'); /* Background for Mentors */
     background-size: 50%;
     background-position: center;
     background-repeat: no-repeat;
@@ -167,6 +167,7 @@ nav ul li a.active {
 h2 {
     font-size: 24px;
     font-weight: bold;
+    color: black;
 }
 
 .company-logos {
@@ -190,6 +191,7 @@ h2 {
     margin: 50px auto;
     max-width: 900px;
     position: relative;
+    color: black;
 }
 
 .partnership .images {
@@ -210,19 +212,6 @@ h2 {
     color: #333;
     line-height: 1.6;
     margin-top: 20px;
-}
-
-/* Geometrical Shapes */
-.partnership::before,
-.partnership::after {
-    content: "";
-    position: absolute;
-    width: 50px;
-    height: 60px;
-    background-color: #6B64E8;
-    opacity: 1;
-    border-radius: 10px;
-    top: 190px;
 }
 
 .partnership::before {
@@ -270,7 +259,7 @@ h2 {
 .featured-posts {
     position: relative;
     padding: 50px 20px;
-    background-image: url('images/Group\ 11.png'); /* Add your image path */
+    background-image: url('../images/Group11.png'); /* Add your image path */
     background-size: 50%;
     height: 340px; /* Ensures image covers the section */
     background-position: center; /* Centers the image */
