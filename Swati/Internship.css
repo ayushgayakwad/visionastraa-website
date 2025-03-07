@@ -250,7 +250,7 @@ display: flex;
     text-align: center;
     padding: 50px;
     background: #fff;
-    background-image: url('../images/s3.png'); /* Ensure correct path */
+    background-image: url('images/s3.png'); /* Ensure correct path */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -429,7 +429,7 @@ display: flex;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-image: url('../images/s1.png');
+    background-image: url('images/s1.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
