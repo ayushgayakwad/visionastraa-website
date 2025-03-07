@@ -1219,4 +1219,8 @@ hr {
     .logo-container {
         flex-direction: column;
     }
+    .location-container {
+        flex-direction: column;
+        align-items: center;
+    }
 }
