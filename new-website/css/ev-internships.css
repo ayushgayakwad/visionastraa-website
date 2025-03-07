@@ -166,7 +166,6 @@
 
 .eligibility-criteria ul li {
     display: flex;
-    align-items: center; /* Aligns bullet and text */
     margin-bottom: 5px;
 }
 
@@ -396,6 +395,74 @@ display: flex;
     background: #5945d6;
 }
 
+.duration {
+    text-align: center;
+    padding: 50px 20px; /* Reduced padding for mobile */
+    background: #fff;
+    background-image: url('../images/Group110_2.png'); /* Ensure correct path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: auto;
+}
+
+/* Heading */
+.duration h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Paragraph */
+.duration p {
+    max-width: 600px;
+    margin: auto;
+    font-size: 18px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Button */
+.duration .btn {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    background: #6c5ce7;
+    color: #fff;
+    border-radius: 20px;
+    text-decoration: none;
+}
+
+.duration .btn:hover {
+    background: #5945d6;
+}
+
+/* List */
+.duration ul {
+    list-style: none;
+    padding: 0;
+    font-size: 16px;
+}
+
+/* List Items */
+.duration ul li {
+    display: flex;
+    align-items: center; /* Aligns bullet and text */
+    margin-bottom: 10px;
+    font-size: 16px;
+    text-align: left;
+    font-weight: bold;
+}
+
+/* Custom Bullet Point */
+.duration ul li::before {
+    content: "➱";
+    color: #817FF0;
+    font-size: 22px; /* Increased for better visibility */
+    margin-right: 10px;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .goal {
@@ -436,6 +503,37 @@ display: flex;
         font-size: 14px;
         padding: 10px 18px;
     }
+    .duration {
+        padding: 30px 15px; /* Adjusted padding for mobile */
+    }
+
+    .duration h3 {
+        font-size: 20px; /* Reduced size for small screens */
+    }
+
+    .duration p {
+        font-size: 16px; /* Reduced size for readability */
+    }
+
+    .duration .btn {
+        font-size: 14px;
+        padding: 10px 20px; /* Adjusted for smaller screens */
+    }
+
+    .duration ul {
+        font-size: 14px; /* Slightly smaller for better fit */
+    }
+
+    .duration ul li {
+        font-size: 14px;
+        margin-bottom: 8px;
+        text-align: left;
+    }
+
+    .duration ul li::before {
+        font-size: 18px; /* Scales down bullet on small screens */
+        margin-right: 8px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -455,6 +553,38 @@ display: flex;
     .goal .btn {
         font-size: 12px;
         padding: 8px 16px;
+    }
+    .duration {
+        padding: 20px 10px;
+        background-image: url('../images/Group110_3.png');
+    }
+
+    .duration h3 {
+        font-size: 18px;
+    }
+
+    .duration p {
+        font-size: 14px;
+    }
+
+    .duration .btn {
+        font-size: 12px;
+        padding: 8px 16px;
+    }
+
+    .duration ul {
+        font-size: 13px;
+    }
+
+    .duration ul li {
+        font-size: 13px;
+        margin-bottom: 6px;
+        text-align: left;
+    }
+
+    .duration ul li::before {
+        font-size: 16px;
+        margin-right: 6px;
     }
 }
 
