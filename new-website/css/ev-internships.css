@@ -397,7 +397,7 @@ display: flex;
 
 .duration {
     text-align: center;
-    padding: 50px 20px; /* Reduced padding for mobile */
+    padding: 50px 80px; /* Reduced padding for mobile */
     background: #fff;
     background-image: url('../images/Group110_2.png'); /* Ensure correct path */
     background-size: cover;
