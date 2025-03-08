@@ -73,6 +73,7 @@
     .form-container input[type="tel"],
     .form-container input[type="password"],
     .form-container input[type="file"],
+    .form-container input[type="date"],
     .form-container select,
     .form-container textarea {
         width: 100%;
@@ -170,6 +171,9 @@
         <label for="phone">Phone Number</label>
         <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number." required>
 
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required>
+
         <label for="state">State:</label>
         <select id="state" name="state" onchange="populateColleges()" required>
             <option value="">Select State</option>
@@ -243,7 +247,11 @@
         <input type="file" id="resume" name="resume" accept=".pdf" required><br>
 
         <label for="referral">Do you have a referral code? Enter it here!</label>
-            <input type="text" id="referral" name="referral">
+        <select id="referral" name="referral" required>
+            <option value="No Referral">No Referral</option>
+            <option value="VEVT1-P1">VEVT1-P1</option> 
+            <option value="VEVT1-P1J1">VEVT1-P1J1</option> 
+        </select>
 
         <label for="goals">Why you should be selected? Describe in your own words (&lt;500 words) </label>
         <textarea id="goals" name="goals" rows="4" required></textarea>
