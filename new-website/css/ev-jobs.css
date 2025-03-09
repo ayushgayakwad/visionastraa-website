@@ -104,6 +104,13 @@ header {
     display: block;
 }
 
+/* Style for active link */
+.nav-links a.active {
+    background: #6c5ce7;
+    color: #ffffff;
+    box-shadow: 0px 2px 5px rgba(108, 92, 231, 0.2);
+}
+
 /* Responsive Navbar */
 @media (max-width: 768px) {
     header {
