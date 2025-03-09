@@ -186,7 +186,7 @@ header {
     text-align: center;
     padding: 40px 20px;
     background: #fff;
-    background-image: url('../images/Group110_1.png'); /* Ensure correct path */
+    background-image: url('../images/Group110_2.png'); /* Ensure correct path */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -800,6 +800,10 @@ hr {
     
     .get-started {
         margin-left: auto;
+    }
+
+    .mentor-section {
+        background-image: url('../images/Group110_1.png'); /* Ensure correct path */
     }
     
     .mentor-section h2 {
