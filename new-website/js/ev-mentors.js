@@ -1,23 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Mobile Menu Toggle
-    const menuIcon = document.querySelector('.menu-icon');
-    const navbarMenu = document.querySelector('.navbar ul');
-    
-    if (menuIcon) {
-        menuIcon.addEventListener('click', function() {
-            navbarMenu.classList.toggle('show');
-        });
-    }
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-        if (!event.target.closest('.navbar')) {
-            if (navbarMenu.classList.contains('show')) {
-                navbarMenu.classList.remove('show');
-            }
-        }
-    });
-    
     // Carousel Functionality
     const carousel = document.querySelector('.carousel-inner');
     const prevBtn = document.querySelector('.carousel-control.prev');

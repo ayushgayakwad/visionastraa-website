@@ -3,48 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Global Mentor Network</title>
+    <title>Mentors - VisionAstraa EV Academy</title>
     <link rel="stylesheet" href="css/ev-mentors.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
    
-    <header class="navbar">
-        <div class="nav-logo">
-            <img src="images/logo.png" alt="VisionAstraa Logo">
-        </div>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Features</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Pricing</a></li>
-            <li><a href="#" class="mentor-highlight">Mentors</a></li>
-            <li><a href="#">Contact us</a></li>
-            <li><a href="#">Careers</a></li>
-            <a href="#" class="get-started">Get Started</a>
-        </ul>
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="images/1000052219-removebg-preview.png" alt="EV Academy Logo" class="logo">
+            </div>
+    
+            <!-- Hamburger Icon -->
+            <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+            
+            <ul class="nav-links">
+                <li><a href="#">EV Academy</a></li>
+                <li><a href="#">EV Courses</a></li>
+                <li><a href="#">EV Internship</a></li>
+                <li><a href="#">EV Mentors</a></li>
+                <li><a href="#">EV Jobs</a></li>
+                <li><a href="#">EV Careers</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">About Us</a></li>
+            </ul>
+        </nav>
+    
+        <script>
+            function toggleMenu() {
+                const navLinks = document.querySelector(".nav-links");
+                navLinks.classList.toggle("show");
+            }
+        </script>
     </header>
     
     <div class="mentor-section">
         <h2>Our Global Mentor Network</h2>
         <p>Empower your vision with Our Global Mentor Network,a comprehensive platform designed to connect, guide, and elevate aspiring professionals worldwide. Learn, collaborate, and grow with industry experts who help you navigate your journey to success.</p>
     </div>
-    
-<!-- Near Our Global Network -->
-<div class="shape shape1"></div>
-<div class="shape shape2"></div>
-<div class="shape shape3"></div>
-<div class="shape shape4"></div>
-
-
-
-<!-- Near Get Started -->
-<div class="shape shape5"></div>
-<div class="shape shape6"></div>
-<div class="shape shape7"></div>
-
-    </section>
-    
 
     <!-- Mentor Carousel Section -->
 <section class="mentor-carousel-section">
@@ -112,75 +109,75 @@
     <button class="career-cta-btn">Reach out to us</button>
 </section>
 
+<div class="newsletter-container">
+    <h3>Subscribe to our newsletter</h3>
+    <div class="newsletter-input">
+        <span class="email-icon">✉️</span>
+        <input type="email" placeholder="Input your email">
+        <button type="submit">Subscribe</button>
+    </div>
+</div>
+
 <footer>
-    <div class="questions-section">
-        <h2>Having questions?</h2>
-        <img src="images/arrow.png" alt="Arrow" class="arrow-icon">
+    <div class="footer-container">
+      <div class="about-us">
+        <h3>ABOUT US</h3>
+        <p>Empowering India’s talent to lead the global EV industry.</p><br>
+        <p>We are committed to bridging the gap between academia and industry, providing students with the practical skills and knowledge required to excel in the EV sector. Our programs foster innovation, entrepreneurship, and a deep understanding of the EV ecosystem.</p>
+      </div>
+      
+      <div class="footer-links">
+        <div class="links">
+          <h3>LINKS</h3>
+          <ul>
+            <li><a href="#">EV Academy</a></li>
+            <li><a href="#">EV Courses</a></li>
+            <li><a href="#">EV Internship</a></li>
+            <li><a href="#">EV Mentors</a></li>
+            <li><a href="#">EV Jobs</a></li>
+            <li><a href="#">EV Careers</a></li>
+          </ul>
+        </div>
+
+        <div class="Company">
+        <h3>COMPANY</h3>
+          <ul>
+            <li><a href="#">Contact US</a></li>
+            <li><a href="#">About US</a></li>
+          </ul>
+        </div>
+                       
+        <div class="plans">
+          <h3>Extra</h3>
+          <ul>  
+            <li><a href="#">Extra</a></li>
+            <li><a href="#">Extra</a></li>
+          </ul>
+        </div>
+      </div>
+        
+      <div class="follow-us">
+        <h3>FOLLOW US</h3>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">YouTube</a></li>
+        </ul>
+      </div>
     </div>
-
-    <div class="newsletter">
-        <p>Subscribe to our newsletter</p>
-        <div class="input-group">
-            <input type="email" placeholder="Input your email">
-            <button>Subscribe</button>
-        </div>
-    </div>
-
-    <div class="footer-links">
-        <div class="footer-column">
-            <h4>Product</h4>
-            <a href="#">Features</a>
-            <a href="#">Pricing</a>
-        </div>
-
-        <div class="footer-column">
-            <h4>Resources</h4>
-            <a href="#">Blog</a>
-            <a href="#">User guides</a>
-            <a href="#">Webinars</a>
-        </div>
-        <div class="footer-column">
-            <h4>Company</h4>
-            <a href="#">About us</a>
-            <a href="#">Contact us</a>
-        </div>
-
-        <div class="footer-column">
-            <h4>Plans & Pricing</h4>
-            <a href="#">Personal</a>
-            <a href="#">Startup</a>
-            <a href="#">Organization</a>
-        </div>
-    </div>
-
-    <!-- Footer Bottom Section -->
+    
+    <hr>
+    
     <div class="footer-bottom">
-        <!-- Logo at the top -->
-        <div class="footer-logo">
-            <img src="images/logo.png" alt="VisionAstraa Logo">
-        </div>
-
-        <!-- Language Selector -->
-        <div class="language-selector">
-            <select>
-                <option>English</option>
-                <option>French</option>
-                <option>Spanish</option>
-            </select>
-        </div>
-
-        <!-- Copyright & Links -->
-        <p>© 2022 VisionAstraa, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Sitemap</a></p>
-
-        <!-- Social Icons -->
-        <div class="social-icons">
-            <a href="#"><img src="images/twitter.jpg" alt="Twitter"></a>
-            <a href="#"><img src="images/Facebook.jpg" alt="Facebook"></a>
-            <a href="#"><img src="images/linkedin.jpg" alt="LinkedIn"></a>
-            <a href="#"><img src="images/youtube.jpg" alt="YouTube"></a>
-        </div>
+      <div class="logo-container">
+        <img src="images/1000052219-removebg-preview.png" alt="VisionAstraa Logo">
+      </div>
+      <p>&copy; 2024 VisionAstraa. All rights reserved.</p>
+      <button class="ev-academy-button">EV Academy</button>
     </div>
-</footer>
+  </footer>
 <script src="js/ev-mentors.js"></script>
 </body>
 </html>
