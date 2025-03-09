@@ -200,6 +200,13 @@ header {
     font-size: 24px;
 }
 
+.hero h2 {
+    font-size: 2.5em;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 15px;
+}
+
 .hero p {
     font-size: 16px;
     line-height: 1.5;
