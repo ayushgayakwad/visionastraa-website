@@ -10,42 +10,41 @@
 <body>
 
     <header>
-        <div class="logo">
-            <img src="images/VisionAstra_Logo.png" alt="Vision Astraa Logo">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">About us</a></li>
-                <li><a href="#" class="active">EV Jobs</a></li>
-                <li><a href="#">Mentors</a></li>
-                <li><a href="#">Contact us</a></li>
-                <li><a href="#">Careers</a></li>
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="images/1000052219-removebg-preview.png" alt="EV Academy Logo" class="logo">
+            </div>
+    
+            <!-- Hamburger Icon -->
+            <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+            
+            <ul class="nav-links">
+                <li><a href="#">EV Academy</a></li>
+                <li><a href="#">EV Courses</a></li>
+                <li><a href="#">EV Internship</a></li>
+                <li><a href="#">EV Mentors</a></li>
+                <li><a href="#">EV Jobs</a></li>
+                <li><a href="#">EV Careers</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">About Us</a></li>
             </ul>
         </nav>
-        <button class="get-started">Get Started</button>
-    </header>    
+    
+        <script>
+            function toggleMenu() {
+                const navLinks = document.querySelector(".nav-links");
+                navLinks.classList.toggle("show");
+            }
+        </script>
+    </header>
+
     <div class="back-box">
-        <div class="background-triangle">
-          <!-- <img src="triangle-filled-svgrepo-com.svg" alt="Triangle" /> -->
-        </div>
-  
-        <div class="background-box"></div>
-        <div class="background-box"></div>
-        <div class="background-box"></div>
-        <div class="background-box"></div>
-        <div class="background-box"></div>
-        <div class="background-svg">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z" />
-          </svg>
-        </div>
-      </div>
+        
   
 
     <section class="hero">
         <h1>Launch Your Career with the <br> Perfect Opportunity</h1>
+        <br>
         <p>Welcome to our Placement Portal! Here, students can explore a <br>
             wide range of companies, discover exciting career opportunities, <br>
             and apply directly to the roles that align with their aspirations. Start <br>
@@ -79,6 +78,7 @@
 
     <section class="recruiters">
         <h2>Our Top Recruiters</h2>
+        <br>
         <div class="company-logos">
             <img src="images/mbz.jpeg" alt="Mercedes">
             <img src="images/se.png" alt="Mercedes">
@@ -94,6 +94,7 @@
 
     <section class="mentors">
         <h2>Our Mentors Come From</h2>
+        <br>
         <div class="company-logos">
             <img src="images/mercedesamg-removebg-preview.png" alt="mercedes">
                 <img src="images/png-transparent-marelli-hd-logo-thumbnail-removebg-preview.png" alt="marelli">
@@ -103,6 +104,8 @@
         </div>
     </section>
     <section class="partnership">
+        <h2>Our Partner</h2>
+        <br>
         <div class="images">
             <img src="images/rv1.jpg" alt="Signing Agreement">
             <img src="images/rv3.jpg" alt="Team at RV College">
@@ -136,6 +139,7 @@
         </div> -->
       </div>
     <h2>Featured Posts</h2>
+    <br>
     <div class="carousel-container">
         <button class="prev-btn">&#9665;</button>
         <div class="video-card">
@@ -162,10 +166,65 @@
         </a>
     </div>
 </section>
+<footer>
+    <div class="footer-container">
+      <div class="about-us">
+        <h3>ABOUT US</h3>
+        <p>Empowering India’s talent to lead the global EV industry.</p><br>
+        <p>We are committed to bridging the gap between academia and industry, providing students with the practical skills and knowledge required to excel in the EV sector. Our programs foster innovation, entrepreneurship, and a deep understanding of the EV ecosystem.</p>
+      </div>
+      
+      <div class="footer-links">
+        <div class="links">
+          <h3>LINKS</h3>
+          <ul>
+            <li><a href="#">EV Academy</a></li>
+            <li><a href="#">EV Courses</a></li>
+            <li><a href="#">EV Internship</a></li>
+            <li><a href="#">EV Mentors</a></li>
+            <li><a href="#">EV Jobs</a></li>
+            <li><a href="#">EV Careers</a></li>
+          </ul>
+        </div>
 
-</body>
-</html>
-
+        <div class="Company">
+        <h3>COMPANY</h3>
+          <ul>
+            <li><a href="#">Contact US</a></li>
+            <li><a href="#">About US</a></li>
+          </ul>
+        </div>
+                       
+        <div class="plans">
+          <h3>Extra</h3>
+          <ul>  
+            <li><a href="#">Extra</a></li>
+            <li><a href="#">Extra</a></li>
+          </ul>
+        </div>
+      </div>
+        
+      <div class="follow-us">
+        <h3>FOLLOW US</h3>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
     
+    <hr>
+    
+    <div class="footer-bottom">
+      <div class="logo-container">
+        <img src="images/1000052219-removebg-preview.png" alt="VisionAstraa Logo">
+      </div>
+      <p>&copy; 2024 VisionAstraa. All rights reserved.</p>
+      <button class="ev-academy-button">EV Academy</button>
+    </div>
+  </footer>
 </body>
 </html>
