@@ -680,4 +680,11 @@ hr {
     .partnership {
         background-image: url('../images/Group110_1.png');
     }
+    .partnership .images {
+        flex-direction: column;
+    }
+    .partnership .images img {
+        margin: 0px auto;
+        width: 80%;
+    }
 }
