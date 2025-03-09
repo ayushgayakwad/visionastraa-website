@@ -277,7 +277,7 @@ flex-grow: 0.7;
 .hamburger {
 display: block;
 position: absolute;
-right: 120px; /* Adjust for proper spacing */
+right: 80px; /* Adjust for proper spacing */
 border-radius: 15px;
 }
 

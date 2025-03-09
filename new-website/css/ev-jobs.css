@@ -129,13 +129,14 @@ header {
         justify-content: center;
         flex-grow: 0.8;
     }
-    
+
     .hamburger {
         display: block;
         position: absolute;
         right: 250px; /* Adjust for proper spacing */
         border-radius: 15px;
     }
+
     .nav-links {
         display: none;
         flex-direction: column;
@@ -654,4 +655,19 @@ hr {
     border-radius: 20px;
     border: none;
     font-weight: bold;
+}
+
+@media screen and (max-width: 480px) {
+    .hamburger {
+        display: block;
+        position: absolute;
+        right: 80px; /* Adjust for proper spacing */
+        border-radius: 15px;
+    }
+    .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 0.7;
+    }
 }
