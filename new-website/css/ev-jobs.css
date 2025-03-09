@@ -291,10 +291,15 @@ h2 {
 /* Partnership Section */
 .partnership {
     text-align: center;
-    margin: 50px auto;
-    max-width: 900px;
+    margin: 0px auto;
+    padding: 16px 0px;
     position: relative;
     color: black;
+    background: #fff;
+    background-image: url('../images/Group110_2.png'); /* Ensure correct path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .partnership .images {
@@ -305,16 +310,18 @@ h2 {
 }
 
 .partnership .images img {
-    width: 45%;
+    width: 25%;
     border-radius: 15px;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .partnership p {
     font-size: 18px;
+    padding: 0px 48px;
     color: #333;
     line-height: 1.6;
     margin-top: 20px;
+    text-align: center;
 }
 
 .partnership::before {
@@ -669,5 +676,8 @@ hr {
         align-items: center;
         justify-content: center;
         flex-grow: 0.7;
+    }
+    .partnership {
+        background-image: url('../images/Group110_1.png');
     }
 }
