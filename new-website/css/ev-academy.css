@@ -591,12 +591,6 @@ hr {
         padding: 32px;
     }
 
-    .title {
-        font-size: 1.8rem;
-        width: 100%;
-        text-align: center;
-    }
-
     .description{
         margin: 24px 0 18px 0;
     }
@@ -611,13 +605,6 @@ hr {
 
     .container-mirror {
         padding: 0 32px 32px 32px;
-    }
-
-    .title-mirror {
-        font-size: 1.8rem;
-        width: 100%;
-        text-align: center;
-        margin-top: 16px;
     }
 
     .description-mirror{
