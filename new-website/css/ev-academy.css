@@ -301,9 +301,9 @@ hr {
 }
 
 .title {
-    font-size: 3rem;
-    font-weight: bold;
-    color: #333;
+    font-size: 3em;
+    font-weight: 800;
+    color: #111827;
     margin: 0px 10px;
     width: 700px;
 }

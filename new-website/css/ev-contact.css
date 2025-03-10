@@ -308,17 +308,17 @@ display: flex;
 }
 
 .contact-heading {
-    font-size: 30px;  /* Makes it larger */
-    font-weight: bold; /* Makes it bold */
-    color: #333; /* Adjust color if needed */
-    margin-bottom: 10px; /* Reduce space below heading */
+    margin-bottom: 10px;
     display: block;
+    font-size: 2.5em;
+    font-weight: 800;
+    color: #111827;
 }
 
 .contact-form .contact-heading {
-    font-size: 36px;  
-    font-weight: bold; 
-    color: #333; 
+    font-size: 2.5em;
+    font-weight: 800;
+    color: #111827;
     margin-bottom: 10px; 
     display: block;  
     margin-left:-3px;
@@ -376,7 +376,6 @@ iframe {
     z-index: 10;
     display: flex;
     gap: 20px;
-    padding: 60px 20px;
     justify-content: center;
 }
 
@@ -397,7 +396,7 @@ iframe {
 
 /* Contact Us Section */
 .contact-section {
-    padding: 60px 20px;
+    padding: 20px 20px;
     text-align: center;
     border-radius: 20px;
     margin-bottom: 50px; /* Ensures spacing between sections */
