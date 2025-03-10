@@ -591,6 +591,11 @@ hr {
         padding: 32px;
     }
 
+    .title {
+        width: 100%;
+        text-align: center;
+    }
+
     .description{
         margin: 24px 0 18px 0;
     }
