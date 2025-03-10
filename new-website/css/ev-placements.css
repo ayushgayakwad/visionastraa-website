@@ -657,8 +657,9 @@ hr {
 }
 
 .logo-container img {
-    width: 120px; /* Adjust based on logo size */
-    margin-top: -20px; /* Aligns logo with text */
+    width: 90px;
+    height: 90px;
+    margin-top: -20px;
     margin-bottom: -20px;
 }
 
