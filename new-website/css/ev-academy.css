@@ -594,6 +594,13 @@ hr {
     .title {
         width: 100%;
         text-align: center;
+        margin: 0px;
+    }
+
+    .title-mirror {
+        width: 100%;
+        text-align: center;
+        margin: 0px;
     }
 
     .description{
