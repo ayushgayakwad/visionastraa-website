@@ -119,7 +119,7 @@
                 <input type="text" id="specialization" required>
 
                 <label for="graduation-year">Year of Graduation</label>
-                <input type="number" id="graduation-year" required>
+                <input type="text" id="graduation-year" required>
 
                 <label for="cgpa">CGPA</label>
                 <input type="text" id="cgpa" required>
@@ -135,6 +135,7 @@
 
                 <label for="referral">Do you have a referral code?</label>
                 <select id="referral" name="referral" required>
+                    <option value=""></option>
                     <option value="No Referral">No Referral</option>
                     <option value="VEVT1-P1">VEVT1-P1</option> 
                     <option value="VEVT1-P1J1">VEVT1-P1J1</option> 
@@ -225,6 +226,11 @@
         function validateForm() {
             const resumeInput = document.getElementById('resume');
             const file = resumeInput.files[0];
+
+            if(referral.value == ""){
+                alert('Please enter a valid referral code.');
+                return false;
+            }
 
             if (file) {
                 const fileSizeInMB = file.size / (1024 * 1024);

@@ -3322,6 +3322,11 @@
             const resumeInput = document.getElementById('resume');
             const file = resumeInput.files[0];
 
+            if(referral.value == ""){
+                alert('Please enter a valid referral code.');
+                return false;
+            }
+
             if (file) {
                 const fileSizeInMB = file.size / (1024 * 1024);
                 const fileType = file.type;
