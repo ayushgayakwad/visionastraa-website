@@ -9,34 +9,37 @@
 </head>
 <body>
 
-    <header>
-        <nav class="navbar">
-            <div class="logo-container">
-                <img src="images/1000052219-removebg-preview.png" alt="EV Academy Logo" class="logo">
-            </div>
-    
-            <!-- Hamburger Icon -->
-            <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
-            
-            <ul class="nav-links">
-                <li><a href="ev-academy.html">EV Academy</a></li>
-                <li><a href="#">EV Course</a></li>
-                <li><a href="ev-internship.html">EV Internship</a></li>
-                <li><a href="ev-mentors.html">EV Mentors</a></li>
-                <li><a href="ev-placements.html" class="active">EV Placements</a></li>
-                <li><a href="#">EV Careers</a></li>
-                <li><a href="ev-contact.html">Contact Us</a></li>
-                <li><a href="#">About Us</a></li>
-            </ul>
-        </nav>
-    
-        <script>
-            function toggleMenu() {
-                const navLinks = document.querySelector(".nav-links");
-                navLinks.classList.toggle("show");
-            }
-        </script>
-    </header>
+  <header>
+    <nav class="navbar">
+      <div class="logo-container">
+          <img src="images/1000052219-removebg-preview.png" alt="EV Academy Logo" class="logo">
+      </div>
+
+      <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+      </div>
+        
+      <ul class="nav-links">
+        <li><a href="ev-academy.html">EV Academy</a></li>
+        <li><a href="#">EV Course</a></li>
+        <li><a href="ev-internship.html">EV Internship</a></li>
+        <li><a href="ev-mentors.html">EV Mentors</a></li>
+        <li><a href="ev-placements.html" class="active">EV Placements</a></li>
+        <li><a href="ev-careers.html">EV Careers</a></li>
+        <li><a href="ev-contact.html">Contact Us</a></li>
+        <li><a href="#">About Us</a></li>
+      </ul>
+  </nav>
+
+  <script>
+      function toggleMenu() {
+          const navLinks = document.querySelector(".nav-links");
+          navLinks.classList.toggle("show");
+      }
+  </script>
+</header>
 
     <div class="back-box">
         
