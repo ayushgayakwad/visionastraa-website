@@ -3,15 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sales and Marketing Intern - Job Description</title>
+    <title>Careers - VisionAstraa EV Academy</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #fff;
+            overflow-x: hidden;
         }
-        .header {
+
+        header {
+            background: #6c5ce7;
+            padding: 20px;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+            background: rgba(255, 255, 255, 0.481); 
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px);
+            padding: 10px 5%;
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.08);
+            height: 80px;
+            width: 100%;
+            border-radius: 8px;
+            position: relative;
+            z-index: 1000;
+        }
+
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            height: 95px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: row;
+            padding: 0;
+            margin: 0;
+            gap: 15px;
+            font-weight: bold;
+            list-style: none;
+            transition: transform 0.3s ease-in-out;
+            z-index: 2000;
+        }
+
+        .nav-links li {
+            display: inline;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 8px 10px;
+            border-radius: 18px;
+            transition: all 0.3s ease-in-out;
+            font-weight: bold;
+        }
+
+        /* Hover & Focus Effects */
+        .nav-links a:hover,
+        .nav-links a:focus {
+            background: #6c5ce7;
+            color: #ffffff;
+            box-shadow: 0px 2px 5px rgba(108, 92, 231, 0.2);
+        }
+
+        /* Hamburger Button */
+        .hamburger {
+            background: #6c5ce7;
+            color: white;
+            font-size: 20px;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 16px;
+            position: absolute; 
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            top: 20%;
+            right: 20px;
+            transform: translateY(-5%);
+        }
+
+        /* Style for active link */
+        .nav-links a.active {
+            background: #6c5ce7;
+            color: #ffffff;
+            box-shadow: 0px 2px 5px rgba(108, 92, 231, 0.2);
+        }
+
+        .hamburger span {
+            height: 2px;
+            width: 25px;
+            background-color: black;
+            margin: 4px;
+            border-radius: 2px;
+        }
+        .header-og {
             background-color: #6c5ce7;
             color: white;
             padding: 10px 20px;
@@ -35,24 +143,17 @@
         }
         h2 {
             color: #333;
-            margin-bottom: -30px;
             text-align: left;
             font-size: 30px;
             color: #6c5ce7;
-            margin-left: 20px;
         }
         p{
             font-size: 16px;
             color: #555;
-            max-width: 500px;
-            line-height: 1.5;
-            margin-top: 50px;
-            margin-left: 20px;
         }
         ul {
             font-size: 16px;
             color: #555;
-            line-height: 1.25;
         }
         .section {
             margin-top: 20px;
@@ -69,7 +170,6 @@
             font-size: 16px;
             border-radius: 15px;
             transition: 0.3s;
-            margin-left: 20px;
         }
         .apply-container {
             text-align: left;
@@ -110,6 +210,7 @@
         li {
             margin-bottom: 8px;
         }
+
         /* Footer Styling */
         footer {
             background-color: #fff; /* White background */
@@ -130,6 +231,7 @@
         /* About Us Section */
         .about-us {
             max-width: 350px;
+            text-align: center;
         }
 
         .about-us h3 {
@@ -232,8 +334,22 @@
         }
 
         .logo-container img {
-            width: 120px; /* Adjust based on logo size */
-            margin-top: -20px; /* Aligns logo with text */
+            width: 90px;
+            height: 90px;
+            margin-top: -20px;
+            margin-bottom: -20px;
+        }
+
+        .footer-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-logo-container img {
+            width: 90px;
+            height: 90px;
+            margin-top: -20px;
             margin-bottom: -20px;
         }
 
@@ -251,6 +367,58 @@
             border-radius: 20px;
             border: none;
             font-weight: bold;
+        }
+
+        @media (max-width: 1200px) {
+            .navbar{
+                flex-direction: column;
+                align-items: center;
+                position: relative;
+            }
+                
+            .logo-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                align-self: flex-start;
+                flex-grow: 0.7;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-links {
+                position: absolute;
+                top: 90px;
+                margin: 0px auto;
+                height: calc(100vh - 60px);
+                background-color: rgba(255, 255, 255, 0.974);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                z-index: 2000;
+            }
+            
+            .nav-links.show {
+                max-height: 550px;
+                min-width: 280px;
+                transform: translateY(0);
+                opacity: 1;
+                padding: 0;
+                border-radius: 8px;
+                visibility: visible;
+                z-index: 2000;
+            }
+
+            .nav-links li {
+                margin: 12px 0;
+                border-bottom: 1px solid #6c5ce7;
+            }
+
         }
 
         /* Responsive Design */
@@ -275,20 +443,48 @@
                 flex-direction: column;
             }
         }
-            
-                
     </style>
 </head>
 <body>
+    <header>
+        <nav class="navbar">
+          <div class="logo-container">
+              <img src="images/1000052219-removebg-preview.png" alt="EV Academy Logo" class="logo">
+          </div>
+  
+          <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+              <span></span>
+              <span></span>
+              <span></span>
+          </div>
+            
+          <ul class="nav-links">
+            <li><a href="ev-academy.html">EV Academy</a></li>
+            <li><a href="#">EV Course</a></li>
+            <li><a href="ev-internship.html">EV Internship</a></li>
+            <li><a href="ev-mentors.html">EV Mentors</a></li>
+            <li><a href="ev-placements.html">EV Placements</a></li>
+            <li><a href="ev-careers.html">EV Careers</a></li>
+            <li><a href="ev-contact.html">Contact Us</a></li>
+            <li><a href="#">About Us</a></li>
+          </ul>
+      </nav>
+  
+      <script>
+          function toggleMenu() {
+              const navLinks = document.querySelector(".nav-links");
+              navLinks.classList.toggle("show");
+          }
+      </script>
+    </header>
 
-    <div class="header">
+    <div class="header-og">
     <h1>Electrify Your Career</h1>
     </div>
 
     <div class="container">
        
-        <h2>Role:
-            Technical Telecaller</h2>
+        <h2>Role: Technical Telecaller</h2>
         <p>
             We are seeking a dynamic and results-oriented individual to the role of Technical Telecaller to join our Sales & Marketing Team. As a Technical Telecaller, you will play a crucial role in generating leads, qualifying prospects, and building strong customer relationships in the EdTech segment.
         </p>
@@ -380,28 +576,28 @@
             <div class="links">
               <h3>LINKS</h3>
               <ul>
-                <li><a href="#">EV Academy</a></li>
+                <li><a href="ev-academy.html">EV Academy</a></li>
                 <li><a href="#">EV Courses</a></li>
-                <li><a href="#">EV Internship</a></li>
-                <li><a href="#">EV Mentors</a></li>
-                <li><a href="#">EV Jobs</a></li>
-                <li><a href="#">EV Careers</a></li>
+                <li><a href="ev-internship.html">EV Internship</a></li>
+                <li><a href="ev-mentors.html">EV Mentors</a></li>
+                <li><a href="ev-placements.html">EV Placements</a></li>
+                <li><a href="ev-careers.html">EV Careers</a></li>
               </ul>
             </div>
-    
+
             <div class="Company">
             <h3>COMPANY</h3>
               <ul>
-                <li><a href="#">Contact US</a></li>
-                <li><a href="#">About US</a></li>
+                <li><a href="ev-contact.html">Contact Us</a></li>
+                <li><a href="#">About Us</a></li>
               </ul>
             </div>
                            
             <div class="plans">
-              <h3>EXTRA</h3>
+              <h3>Extra</h3>
               <ul>  
-                <li><a href="#">extra</a></li>
-                <li><a href="#">extra</a></li>
+                <li><a href="#">Extra</a></li>
+                <li><a href="#">Extra</a></li>
               </ul>
             </div>
           </div>
@@ -421,15 +617,109 @@
         <hr>
         
         <div class="footer-bottom">
-          <div class="logo-container">
+          <div class="footer-logo-container">
             <img src="images/1000052219-removebg-preview.png" alt="VisionAstraa Logo">
           </div>
           <p>&copy; 2024 VisionAstraa. All rights reserved.</p>
           <button class="ev-academy-button">EV Academy</button>
         </div>
       </footer>
-    
-    <script src="js/script.js"></script>    
+
+    <script>
+        (function() {
+          const widgetConfig = {
+            backgroundColor: '#25D366',
+            position: 'right',
+            xoffset: '25px',
+            yoffset: '25px',
+            logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg',
+            whatsappNo: '918075664438',
+            whatsappText: 'Hello VisionAstraa team,',
+            popupTitle: 'Dear EV Aspirant, life changing opportunity is just a click away',
+            buttonText: 'Start Chat'
+          };
+        
+          let showPopup = false;
+          const container = document.createElement('div');
+          document.body.appendChild(container);
+        
+          function renderWidget() {
+            container.innerHTML = `
+              <div class="z_ft_widget" style="
+                background-color: ${widgetConfig.backgroundColor};
+                ${widgetConfig.position}: ${widgetConfig.xoffset};
+                bottom: ${widgetConfig.yoffset};
+                width: 50px;
+                height: 50px;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: fixed;
+                cursor: pointer;
+                z-index: 999;
+                transition: opacity 0.3s;
+              ">
+                <img src="${widgetConfig.logoUrl}" alt="WhatsApp" style="width: 32px; height: 32px;">
+                ${showPopup ? `
+                  <div class="z_ft_popup" style="
+                    position: absolute;
+                    bottom: 60px;
+                    width: 200px;
+                    background: white;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 16px;
+                    ${widgetConfig.position}: 0;
+                  ">
+                    <h3 style="
+                      font-size: 16px;
+                      font-weight: 600;
+                      text-align: center;
+                      margin: 30px 0px;
+                    ">${widgetConfig.popupTitle}</h3>
+                    <a href="https://wa.me/${widgetConfig.whatsappNo}?text=${widgetConfig.whatsappText}" target="_blank" rel="noopener noreferrer" style="
+                      display: inline-block;
+                      background: #25D366;
+                      color: white;
+                      padding: 8px 16px;
+                      border-radius: 4px;
+                      text-decoration: none;
+                      transition: background-color 0.3s;
+                    ">${widgetConfig.buttonText}</a>
+                    <a href="https://visionastraa.com" 
+                     target="_blank" 
+                     rel="noopener noreferrer" 
+                     style="
+                      text-align: center;
+                      font-size: 12px;
+                      color: #666;
+                      text-decoration: none;
+                      border-top: 1px solid #eee;
+                      padding-top: 12px;
+                      margin-top: 10px;
+                    ">Powered by VisionAstraa</a>
+
+                  </div>
+                ` : ''}
+              </div>
+            `;
+        
+            container.querySelector('.z_ft_widget').addEventListener('click', (e) => {
+              if (e.target.closest('.z_ft_popup-button')) return;
+              showPopup = !showPopup;
+              renderWidget();
+            });
+          }
+        
+          renderWidget();
+        })()
+    </script>
+    <script src="js/ev-careers.js"></script>    
 
 </body>
 </html>
