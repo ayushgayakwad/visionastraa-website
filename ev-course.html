@@ -530,6 +530,14 @@
             .catch(error => console.error('Error loading navbar:', error));
     </script>
     <script>
+        let url = window.location.href;
+        let arr = url.split('#');
+        if(arr && arr.length < 2 && 'course' !== 'profile'){
+            url = arr[0]+'#component=ev-course';
+            window.location.href = url;
+        }
+    </script>
+    <script>
         document.querySelector('.course-details-button').addEventListener('click', function(e) {
             e.preventDefault();
             document.querySelector('#course-content').scrollIntoView({ behavior: 'smooth' });
