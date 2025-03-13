@@ -328,6 +328,19 @@ hr {
     margin-bottom: -20px;
 }
 
+.footer-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-logo-container img {
+    width: 90px;
+    height: 90px;
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+
 .footer-bottom p {
     font-size: 14px;
     color: #777;

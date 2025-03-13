@@ -598,12 +598,14 @@ footer {
     font-weight: bold;
     color: #222;
     margin-bottom: 10px;
+    text-align: left;
 }
 
 .footer-links ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    text-align: left;
 }
 
 .footer-links ul li {
@@ -627,12 +629,14 @@ footer {
     font-weight: bold;
     color: #222;
     margin-bottom: 10px;
+    text-align: left;
 }
 
 .follow-us ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    text-align: left;
 }
 
 .follow-us ul li {
@@ -679,6 +683,19 @@ hr {
     margin-bottom: -20px;
 }
 
+.footer-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-logo-container img {
+    width: 90px;
+    height: 90px;
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+
 .footer-bottom p {
     font-size: 14px;
     color: #777;
@@ -708,12 +725,43 @@ hr {
         gap: 30px;
     }
 
+    .footer-links h3 {
+        font-size: 18px;
+        font-weight: bold;
+        color: #222;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    
+    .footer-links ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+    }
+
+    /* Follow Us Section */
+    .follow-us h3 {
+        font-size: 18px;
+        font-weight: bold;
+        color: #222;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .follow-us ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+    }
+
     .footer-bottom {
         flex-direction: column;
         gap: 15px;
     }
 
-    .logo-container {
+    .logo-container{
         flex-direction: column;
     }
 }
