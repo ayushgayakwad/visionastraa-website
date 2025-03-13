@@ -802,7 +802,7 @@ iframe {
 @media (max-width: 1200px) {
     .navbar{
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         position: relative;
     }
         
@@ -810,6 +810,7 @@ iframe {
         display: flex;
         align-items: center;
         justify-content: center;
+        align-self: flex-start;
         flex-grow: 0.7;
     }
     
@@ -820,7 +821,6 @@ iframe {
     .nav-links {
         position: absolute;
         top: 90px;
-        left: 12%;
         margin: 0px auto;
         height: calc(100vh - 60px);
         background-color: rgba(255, 255, 255, 0.974);
