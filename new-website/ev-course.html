@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EV Course - VisionAstraa EV Academy</title>
+    <link rel="stylesheet" href="css/ev-course.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+          <div class="logo-container">
+              <img src="images/1000052219-removebg-preview.png" alt="EV Academy Logo" class="logo">
+          </div>
+  
+          <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+              <span></span>
+              <span></span>
+              <span></span>
+          </div>
+            
+          <ul class="nav-links">
+            <li><a href="ev-academy.html">EV Academy</a></li>
+            <li><a href="ev-course.html" class="active">EV Course</a></li>
+            <li><a href="ev-internship.html">EV Internship</a></li>
+            <li><a href="ev-mentors.html">EV Mentors</a></li>
+            <li><a href="ev-placements.html">EV Placements</a></li>
+            <li><a href="ev-careers.html">EV Careers</a></li>
+            <li><a href="ev-contact.html">Contact Us</a></li>
+            <li><a href="#">About Us</a></li>
+          </ul>
+      </nav>
+  
+      <script>
+          function toggleMenu() {
+              const navLinks = document.querySelector(".nav-links");
+              navLinks.classList.toggle("show");
+          }
+      </script>
+    </header>
+
+    <section class="course-section">
+        <div class="left-content">
+            <img src="images/Course2.png" alt="Man using phone" class="man-image">
+        </div>
+
+        <h2>ARE YOU READY TO LEAD THE EV REVOLUTION?</h2>
+
+        <div class="right-content">
+            <div class="laptop-container">
+                <img src="images/Course1.png" alt="Laptop with testimonial" class="laptop-image">
+            </div>
+        </div>
+    </section>
+
+    <section class="geometric-section">
+        <img src="images/Course3.png" alt="Geometric Shapes" class="background-shapes">
+        <div class="content">
+            <h2>Why join us?</h2>
+            <ul class="checklist">
+                <li>Master the fundamentals of electric vehicle technology and automotive industry.</li>
+                <li>Develop expertise in EV powertrain design and development including modeling, simulation and component selection.</li>
+                <li>Acquire practical skills in battery management, power electronics, and electric machine control for optimal EV performance and efficiency.</li>
+                <li>Prepare for a successful career in the EV industry through hands-on projects, industry-relevant training, and career development support.</li>
+            </ul>
+        </div>
+    </section>
+    
+
+    <section class="mastery-program">
+        <div class="command">
+            <h1>ELECTRIC VEHICLE MASTERY PROGRAM</h1>
+            <p class="by-ev">By EV ACADEMY</p>
+            
+            <div class="partnership">
+                <img src="images/asdc-logo.png" alt="ASDC Logo">
+                <img src="images/rvce.png" alt="ASDC Logo">
+            </div>
+
+            <p class="description">
+                Stand out in the booming EV industry! Enroll in our Electric Vehicle Mastery Program now to gain essential skills from industry experts. 
+                Don't miss out—secure your spot before the seats fill up. Act now to kickstart your career in the EV industry!
+            </p>
+
+            <h3>Course Schedule:</h3>
+            <ul>
+                <li>Weekdays: 9:00 AM - 4:30 PM</li>
+                <li>Saturday: External Mentorship & Project Work</li>
+                <li>Venue: RV College of Engineering, Bengaluru</li>
+            </ul>
+
+            <h3>Requirements:</h3>
+            <p>B.Tech/M.Tech graduate from ECE/EEE/Mech (or allied branches)</p>
+
+            <div class="cta-buttons">
+                <a href="#course-content" class="btn">COURSE DETAILS</a>
+                <a href="#program-fee" class="btn">PROGRAM FEE</a>
+            </div>
+            
+        </div>
+    </section>
+
+    <section id="course-content">
+    <h1 class="modules-heading">Course Contents</h1>
+    <div class="container">
+        <div class="card">
+            <h3>Module 1: EV & Automotive Basics</h3>
+            <p>Duration: Week 1</p>
+            <button class="learn-more-btn" data-module="1">Learn More</button>
+        </div>
+        
+        <div class="card">
+            <h3>Module 2: Automotive System Engineering and Tools</h3>
+            <p>Duration: Week 2</p>
+            <button class="learn-more-btn" data-module="2">Learn More</button>
+        </div>
+        
+        <div class="card">
+            <h3>Module 3: EV Powertrain System Modeling and Simulation using MATLAB Simulink</h3>
+            <p>Duration: Week 3</p>
+            <button class="learn-more-btn" data-module="3">Learn More</button>
+        </div>
+
+        <div class="card">
+            <h3>Module 4: Energy Storage Devices</h3>
+            <p>Duration: Week 4-5</p>
+            <button class="learn-more-btn" data-module="4">Learn More</button>
+        </div>
+
+        <div class="card">
+            <h3>Module 5: Battery Management System (BMS) Design</h3>
+            <p>Duration: Week 6</p>
+            <button class="learn-more-btn" data-module="5">Learn More</button>
+        </div>
+
+        <div class="card">
+            <h3>Module 6A: Power Electronics(EEE/ECE Only)</h3>
+            <p>Duration: Week 7-8</p>
+            <button class="learn-more-btn" data-module="6-A">Learn More</button>
+        </div>    
+
+        <div class="card">
+            <h3>Module 6B: Embedded Systems For EV Applications(EEE/ECE Only)</h3>
+            <p>Duration: Week 9-10</p>
+            <button class="learn-more-btn" data-module="6-B">Learn More</button>
+        </div>  
+
+        <div class="card">
+            <h3>Module 6C: E-Axile Design(Only ME)</h3>
+            <p>Duration: Week 7-8</p>
+            <button class="learn-more-btn" data-module="6-C">Learn More</button>
+        </div>  
+
+        <div class="card">
+            <h3>Module 6D: Powertrain Design Considerations(Only for ME)</h3>
+            <p>Duration: Week 9-10</p>
+            <button class="learn-more-btn" data-module="6-D">Learn More</button>
+        </div>  
+
+        <div class="card">
+            <h3>Module 7: Electric Machines and their Controllers</h3>
+            <p>Duration: Week 11-12</p>
+            <button class="learn-more-btn" data-module="7">Learn More</button>
+        </div>  
+
+        <div class="card">
+            <h3>Module 8: Testing, Validation & Certification</h3>
+            <p>Duration: Week 13-14</p>
+            <button class="learn-more-btn" data-module="8">Learn More</button>
+        </div>  
+    </div>
+</section>
+
+    <!-- Pop-up Modal -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="popup-title"></h2>
+            <ul id="popup-content-list"></ul>
+        </div>
+    </div>
+
+    <section id="program-fee">
+    <section class="pricing-section">
+        <h2 class="program-fee-title">Program Fee</h2>
+
+        <div class="pricing-container">
+            <!-- Executive Plan -->
+            <div class="pricing-card executive">
+                <span class="badge">Executive</span>
+                <p class="mode">Hybrid</p>
+                <h3 class="price">INR 1,65,000</h3>
+                <p class="gst">+18% GST</p>
+                <button class="btn">Submit Application</button>
+                <button class="btn">Reserve Your Seat</button>
+                <ul class="features">
+                    <li>Duration: 9-10 months</li>
+                    <li>Online: 300hrs; In-Person: 200hrs</li>
+                    <li>Strong Global Mentor Network from US and Europe with an average of 20+ Years of Experience in the industry</li>
+                    <li>Hands-on Design at EV Maker Space</li>
+                    <li>Digital & Physical Twin Lab Facility</li>
+                    <li>Technology & Best Practice Transfer</li>
+                    <li>Placement India & Abroad</li>
+                </ul>
+
+                <!-- Hidden Extra Features -->
+                <ul class="extra-features hidden">
+                    <li>Affordable Pricing</li>
+                    <li>Project to Product (Independent Student led Start-Up)</li>
+                    <li>Real-time project work (Weeks 31 to 37)</li>
+                    <li>Resume Preparation & Mock Interviews (Week 37)</li>
+                    <li>Group Discussion & Individual Presentation (Week 38)</li>
+                    <li>Final Project Demo (Week 38)</li>
+                    <li>Final Placement Drives (Weeks 39-40)</li>
+                    
+                </ul>
+                <button class="btn know-more">Know More</button>
+            </div>
+
+            <!-- Premium Plan -->
+            <div class="pricing-card premium">
+                <span class="badge">Premium</span>
+                <p class="mode">In-Person</p>
+                <h3 class="price">INR 85,000</h3>
+                <p class="gst">+18% GST</p>
+                <button class="btn">Submit Application</button>
+                <button class="btn">Reserve Your Seat</button>
+                <ul class="features">
+                    <li>Duration: 4 months</li>
+                    <li>In-Person: 400hrs</li>
+                    <li>Strong Global Mentor Network from US and Europe with an average of 20+ Years of Experience in the industry</li>
+                    <li>Hands-on Design at EV Maker Space</li>
+                    <li>Digital & Physical Twin Lab Facility</li>
+                    <li>Technology & Best Practice Transfer</li>
+                    <li>Placement India & Abroad</li>
+                </ul>
+                <!-- Hidden Extra Features -->
+                <ul class="extra-features hidden">
+                    <li>Affordable Pricing</li>
+                    <li>Project to Product (Independent Student led Start-Up)</li>
+                    <li>Real-time project work  (Weeks 5 to 12)</li>
+                    <li>Resume Preparation & Mock Interviews (Week 13)</li>
+                    <li>Group Discussion & Individual Presentation (Week 14)</li>
+                    <li>Final Project Demo (Week 15)</li>
+                    <li>Final Placement Drives (Weeks 15 to 16)</li>
+                </ul>
+                <button class="btn know-more">Know More</button>
+            </div>
+        </div>
+    </section>
+    </section>
+
+    <div class="instructors-section">
+        <h2>Meet our Instructors</h2>
+        <div class="instructors-container">          
+            <div class="mentors">
+                <div class="mentor-card">
+                    <img src="images/mentor1.png" alt="Mentor 1">
+                    <h3>Dr. M Uttara Kumari</h3>
+                    <p>Professor, R.V. College of Engineering</p>
+                    <p>Experience: 30 years in Electrical and Electronics Engineering</p>
+                </div>
+                <div class="mentor-card">
+                    <img src="images/mentor2.png" alt="Mentor 2">
+                    <h3>Dr. Raja Vidya</h3>
+                    <p>Assistant Professor, RVCE, EEE Department & Coordinator for Center of Excellence Connected Autonomous Vehicle.</p>
+                    <p>Experience: 16.5 years in industry and teaching</p>
+                </div>
+                <div class="mentor-card">
+                    <img src="images/mentor3.png" alt="Mentor 3">
+                    <h3>Dr. Govinda Raju M</h3>
+                    <p>Associate Professor, R.V. College of Engineering</p>
+                    <p>Experience: Joined RVCE in 2008</p>
+                    <p>Embedded systems, computer architecture</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="newsletter-container">
+        <h3>Subscribe to our newsletter</h3>
+        <div class="newsletter-input">
+            <span class="email-icon">✉️</span>
+            <input type="email" placeholder="Input your email">
+            <button type="submit">Subscribe</button>
+        </div>
+    </div>
+      
+    <footer>
+        <div class="footer-container">
+          <div class="about-us">
+            <h3>ABOUT US</h3>
+            <p>Empowering India’s talent to lead the global EV industry.</p><br>
+            <p>We are committed to bridging the gap between academia and industry, providing students with the practical skills and knowledge required to excel in the EV sector. Our programs foster innovation, entrepreneurship, and a deep understanding of the EV ecosystem.</p>
+          </div>
+          
+          <div class="footer-links">
+            <div class="links">
+              <h3>LINKS</h3>
+              <ul>
+                <li><a href="ev-academy.html">EV Academy</a></li>
+                <li><a href="ev-course.html">EV Course</a></li>
+                <li><a href="ev-internship.html">EV Internship</a></li>
+                <li><a href="ev-mentors.html">EV Mentors</a></li>
+                <li><a href="ev-placements.html">EV Placements</a></li>
+                <li><a href="ev-careers.html">EV Careers</a></li>
+              </ul>
+            </div>
+
+            <div class="Company">
+            <h3>COMPANY</h3>
+              <ul>
+                <li><a href="ev-contact.html">Contact Us</a></li>
+                <li><a href="#">About Us</a></li>
+              </ul>
+            </div>
+                           
+            <div class="plans">
+              <h3>Extra</h3>
+              <ul>  
+                <li><a href="#">Extra</a></li>
+                <li><a href="#">Extra</a></li>
+              </ul>
+            </div>
+          </div>
+            
+          <div class="follow-us">
+            <h3>FOLLOW US</h3>
+            <ul>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">LinkedIn</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Facebook</a></li>
+              <li><a href="#">YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <hr>
+        
+        <div class="footer-bottom">
+          <div class="footer-logo-container">
+            <img src="images/1000052219-removebg-preview.png" alt="VisionAstraa Logo">
+          </div>
+          <p>&copy; 2024 VisionAstraa. All rights reserved.</p>
+          <button class="ev-academy-button">EV Academy</button>
+        </div>
+      </footer>
+
+    <script src="js/ev-course.js"></script>
+
+
+</body>
+</html>
