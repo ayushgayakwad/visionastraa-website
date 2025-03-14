@@ -1,0 +1,600 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('images/s3.png') no-repeat center center fixed;
+    background-size: cover;
+    text-align: center;
+    position: relative;
+}
+
+h2 {
+    font-size: 2.5em;
+    font-weight: 800;
+    color: #333;
+}
+header {
+    background: white;
+    padding: 20px;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    background: rgba(255, 255, 255, 0.481); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px 5%;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.08);
+    height: 80px;
+    width: 100%;
+    border-radius: 8px;
+    position: relative;
+    z-index: 1000;
+}
+
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    height: 95px;
+    width: auto;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    gap: 15px;
+    font-weight: bold;
+    list-style: none;
+    transition: transform 0.3s ease-in-out;
+    z-index: 2000;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 8px 10px;
+    border-radius: 18px;
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+}
+
+/* Hover & Focus Effects */
+.nav-links a:hover,
+.nav-links a:focus {
+    background: #6c5ce7;
+    color: #ffffff;
+    box-shadow: 0px 2px 5px rgba(108, 92, 231, 0.2);
+}
+
+/* Hamburger Button */
+.hamburger {
+    background: #6c5ce7;
+    color: white;
+    font-size: 20px;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 16px;
+    position: absolute; 
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    top: 20%;
+    right: 20px;
+    transform: translateY(-5%);
+}
+
+/* Style for active link */
+.nav-links a.active {
+    background: #6c5ce7;
+    color: #ffffff;
+    box-shadow: 0px 2px 5px rgba(108, 92, 231, 0.2);
+}
+
+.hamburger span {
+    height: 2px;
+    width: 25px;
+    background-color: black;
+    margin: 4px;
+    border-radius: 2px;
+  }
+
+.founders {
+    padding: 30px 20px;
+    position: relative;
+}
+
+.founders-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+}
+
+/* Founder cards */
+.founder-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 220px;
+    text-align: center;
+    position: relative;
+}
+
+.founder-card img {
+    width: 80px;
+    border-radius: 50%;
+}
+
+.founder-image img {
+    width: 200px;
+    top: -20px;
+    
+}
+
+/* Geometric circles */
+.circle {
+    position: absolute;
+    background: #817FF0;
+    border-radius: 50%;
+}
+
+/* Large circles in Founders section */
+.large-circle {
+    width: 40px;
+    height: 40px;
+}
+
+.left {
+    top: -23px;
+    left: 19%;
+}
+
+.right {
+    top: -23px;
+    right: 19%;
+}
+
+/* Small circles in the Mission section */
+.small-circle {
+    width: 25px;
+    height: 25px;
+}
+
+.mission-left {
+    top: -100%;
+    left: 34%;
+}
+
+
+
+/* Mission section */
+.mission {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 40px 0;
+    position: relative;
+}
+
+.get-to-know {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.get-to-know h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.get-to-know p {
+    font-size: 16px;
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto 20px;
+}
+
+.contact-btn {
+    background: #7a5af5;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.contact-btn:hover {
+    background: #6542d1;
+}
+
+
+.info-section {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+}
+
+.info-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.info-card {
+    width: 250px;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+
+/* Center the last card */
+.info-container.single {
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.info-icon {
+    width: 50px;
+    height: 50px;
+    background: #d1c4ff;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-icon img {
+    width: 30px;
+    height: 30px;
+}
+
+.info-card h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.info-card p {
+    font-size: 14px;
+    color: #333;
+}
+
+/* News Letter Section */
+.newsletter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers everything */
+    justify-content: center;
+    text-align: center;
+    color: #333;
+    margin-top: 50px;
+}
+
+.newsletter-input {
+    display: flex;
+    align-items: center;
+    background: #f5f5f5;
+    border-radius: 20px;
+    padding: -2px;
+    margin-top: 20px;
+    margin-bottom: 100px;
+    height: 45px;
+    width: 500px; /* Adjusted for balance */
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+    gap: 10px; /* Adds spacing between elements */
+}
+
+.email-icon {
+    font-size: 18px;
+    color: #777;
+    margin-left: 10px;
+}
+
+.newsletter-input input {
+    border: none;
+    background: none;
+    padding: 15px;
+    font-size: 16px;
+    outline: none;
+    flex: 1;
+    width: 100%;
+}
+
+.newsletter-input button {
+    background: #6c5ce7;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 0px 20px 20px 0px;
+    cursor: pointer;
+    height: auto;
+    transition: 0.3s ease-in-out;
+}
+
+.newsletter-input button:hover {
+    background: #8c7ae6;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #fff; /* White background */
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    padding: 50px 8%;
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1); /* Subtle top shadow */
+}
+
+/* Footer Container */
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+/* About Us Section */
+.about-us {
+    max-width: 350px;
+    text-align: center;
+}
+
+.about-us h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.about-us p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* Footer Links */
+.footer-links {
+    display: flex;
+    gap: 60px;
+}
+
+.footer-links h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 8px;
+}
+
+.footer-links ul li a {
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+    color: #000;
+}
+
+/* Follow Us Section */
+.follow-us h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.follow-us ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.follow-us ul li {
+    margin-bottom: 8px;
+}
+
+.follow-us ul li a {
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.follow-us ul li a:hover {
+    color: #000;
+}
+
+/* Footer Bottom Section */
+hr {
+    border: none;
+    height: 1px;
+    background-color: #ddd;
+    margin: 30px 0;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-container img {
+    width: 90px;
+    height: 90px;
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+
+.footer-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-logo-container img {
+    width: 90px;
+    height: 90px;
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+
+.footer-bottom p {
+    font-size: 14px;
+    color: #777;
+}
+
+/* EV Academy Button */
+.ev-academy-button {
+    background-color: #6c5ce7;
+    color: #fff;
+    padding: 10px 16px;
+    font-size: 14px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+}
+
+@media (max-width: 1200px) {
+    .navbar{
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+    }
+        
+    .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: flex-start;
+        flex-grow: 0.7;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-links {
+        position: absolute;
+        top: 90px;
+        margin: 0px auto;
+        height: calc(100vh - 60px);
+        background-color: rgba(255, 255, 255, 0.974);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        z-index: 2000;
+    }
+    
+    .nav-links.show {
+        max-height: 550px;
+        min-width: 280px;
+        transform: translateY(0);
+        opacity: 1;
+        padding: 0;
+        border-radius: 8px;
+        visibility: visible;
+        z-index: 2000;
+    }
+
+    .nav-links li {
+        margin: 12px 0;
+        border-bottom: 1px solid #6c5ce7;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .newsletter-input {
+        flex-direction: row;
+        width: 78%;
+        height: 38px;
+    }
+    .newsletter-container {
+        margin-top: 90px;
+    }
+    .newsletter-input input {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .newsletter-input button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    .newsletter-input button { 
+        width: 110px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .logo-container {
+        flex-direction: column;
+    }
+}
