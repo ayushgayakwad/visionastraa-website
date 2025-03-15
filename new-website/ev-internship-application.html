@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Application Form - VisionAstraa EV Academy</title>
+    <title>EV Internship Application Form - VisionAstraa EV Academy</title>
     <link rel="stylesheet" href="css/ev-application.css">
 </head>
 <body>
@@ -41,7 +41,7 @@
     <div class="form-container">
         <form id="application-form" onsubmit="submitForm(event);" enctype="multipart/form-data">
             <div id="step-1">
-                <h1>Apply Now!</h1>
+                <h1>EV Internship Application</h1>
                 <h2>Step 1: Personal Information</h2>
                 <label for="first_name">First Name</label>
                 <input type="text" id="first_name" name="first_name" required>
@@ -128,10 +128,11 @@
                 <label for="cgpa">CGPA</label>
                 <input type="text" id="cgpa" name="cgpa" required>
 
-                <label for="term">Applying for which term?</label>
-                <select id="term" name="term" required>
-                    <option value="April 2025 (Summer)">April 2025 (Summer)</option>
-                    <option value="Aug 2025 (Autumn/Fall)">August 2025 (Autumn/Fall)</option> 
+                <label for="role">Applying for which internship?</label>
+                <select id="role" name="role" required>
+                    <option value="Project-based Internship on Embedded Systems for Electric Vehicles (EV)">Project-based Internship on Embedded Systems for Electric Vehicles (EV)</option>
+                    <option value="Project-based Internship on AI/ML for Electric Vehicles (EV)">Project-based Internship on AI/ML for Electric Vehicles (EV)</option>
+                    <option value="Project-based Internship on Design &amp; Development for Electric Vehicles">Project-based Internship on Design &amp; Development for Electric Vehicles (EV)</option>
                 </select>
 
                 <label for="resume">Upload Resume (PDF, max 2MB)</label>
@@ -262,7 +263,7 @@
             const form = document.getElementById('application-form');
             const formData = new FormData(form);
 
-            fetch('php/submit-ev-application.php', {
+            fetch('php/submit-ev-internship-application.php', {
                 method: 'POST',
                 body: formData
             })
