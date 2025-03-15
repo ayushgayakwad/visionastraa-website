@@ -208,13 +208,14 @@
 .hero h2 {
     font-size: 2.5em;
     font-weight: 800;
-    color: #111827;
+    color: black;
     margin-bottom: 15px;
 }
 
 .hero p {
-    font-size: 16px;
+    font-size: 1.2rem;
     line-height: 1.5;
+    color: #333;
 }
 
 /* New Users Stats */
@@ -275,7 +276,7 @@
 .mentors {
     margin-top: 50px;
     padding: 50px 0;
-    background-image: url('../images/Group110_3.png'); /* Background for Mentors */
+    background-image: url('../images/Course5.png'); /* Background for Mentors */
     background-size: 50%;
     background-position: center;
     background-repeat: no-repeat;
@@ -283,10 +284,8 @@
     z-index: 10;
 }
 
-
-
 h2 {
-    font-size: 24px;
+    font-size: 2.5em;
     font-weight: bold;
     color: black;
 }
@@ -464,12 +463,13 @@ h2 {
 }
 
 .post-description h3 {
+    font-size: 1.5rem;
     font-weight: bold;
 }
 
 .post-description p {
-    color: gray;
-    font-size: 14px;
+    color: #333;
+    font-size: 1.2rem;
 }
 
 .watch-btn {
@@ -478,10 +478,10 @@ h2 {
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    border-radius: 5px;
-    margin-top: 10px;
+    border-radius: 20px;
+    margin-top: 16px;
+    font-size: 1em;
 }
-
 
 .background-box {
     position: absolute;
@@ -494,7 +494,6 @@ h2 {
     top: 4%;
     left: 5%;
     border-radius: 10px;
-
 }
 
 .background-box:nth-child(1) { --box-color: #ff6b6b; --rotate: 20deg; top: 10%; left: 4%; }

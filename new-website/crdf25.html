@@ -43,19 +43,19 @@
             <div id="step-1">
                 <h1>Campus Recruitment Drive for 2025</h1>
                 <h2>Step 1: Personal Information</h2>
-                <label for="first_name">First Name</label>
-                <input type="text" id="first_name" name="first_name" required>
+                <label for="first_name">First Name *</label>
+                <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
 
-                <label for="last_name">Last Name</label>
-                <input type="text" id="last_name" name="last_name" required>
+                <label for="last_name">Last Name *</label>
+                <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
 
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" placeholder="Email address" required>
 
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" required>
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" placeholder="Phone number" required>
 
-                <label for="dob">Date of Birth</label>
+                <label for="dob">Date of Birth *</label>
                 <input type="date" id="dob" name="dob" required>
 
                 <button class="btn" onclick="nextStep()">Next</button>
@@ -63,7 +63,7 @@
 
             <div id="step-2" style="display: none;">
                 <h2>Step 2: Education & Application Details</h2>
-                <label for="state">State</label>
+                <label for="state">State *</label>
                 <select id="state" name="state" onchange="populateColleges()" required>
                     <option value="">Select State</option>
                     <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -103,15 +103,15 @@
                     <option value="Puducherry">Puducherry</option>
                 </select>
 
-                <label for="location">Your Location</label>
-                <input type="text" id="location" name="location" required>
+                <label for="location">Your Location (City/Town) *</label>
+                <input type="text" id="location" name="location" placeholder="Enter your city/town" required>
 
-                <label for="college">College</label>
+                <label for="college">College *</label>
                 <select id="college" name="college" required>
                     <option value="">Select College</option>
                 </select>
 
-                <label for="degree">Degree</label>
+                <label for="degree">Degree *</label>
                 <select id="degree" name="degree" required>
                     <option value="Select Option">Select Option</option>
                     <option value="B.E">B.E</option>
@@ -119,25 +119,25 @@
                     <option value="M.Tech">M.Tech</option>
                 </select>
 
-                <label for="specialization">Specialization (Branch)</label>
-                <input type="text" id="specialization" name="specialization" required>
+                <label for="specialization">Specialization (Branch) *</label>
+                <input type="text" id="specialization" name="specialization" placeholder="Enter your specialization" required>
 
-                <label for="graduation_year">Year of Graduation</label>
-                <input type="text" id="graduation_year" name="graduation" required>
+                <label for="graduation_year">Year of Graduation *</label>
+                <input type="text" id="graduation_year" name="graduation" placeholder="Enter your year of graduation" required>
 
-                <label for="cgpa">CGPA</label>
-                <input type="text" id="cgpa" name="cgpa" required>
+                <label for="cgpa">CGPA *</label>
+                <input type="text" id="cgpa" name="cgpa" placeholder="Enter your CGPA" required>
 
-                <label for="role">Applying for which role?</label>
+                <label for="role">Applying for which role? *</label>
                 <select id="role" name="role" required>
                     <option value="Role 1">Role 1</option>
                     <option value="Role 2">Role 2</option>
                 </select>
 
-                <label for="resume">Upload Resume (PDF, max 2MB)</label>
+                <label for="resume">Upload Resume (PDF, max 2MB) *</label>
                 <input type="file" id="resume" name="resume" accept="application/pdf" required>
 
-                <label for="referral">Do you have a referral code?</label>
+                <label for="referral">Do you have a referral code? *</label>
                 <select id="referral" name="referral" required>
                     <option value=""></option>
                     <option value="No Referral">No Referral</option>
@@ -145,8 +145,8 @@
                     <option value="VEVT1-P1J1">VEVT1-P1J1</option> 
                 </select>
 
-                <label for="goals">Why should you be selected? (max 500 words)</label>
-                <textarea id="goals" name="goals" rows="5" required></textarea>
+                <label for="goals">Why should you be selected? (max 500 words) *</label>
+                <textarea id="goals" name="goals" rows="5" placeholder="Why should you be selected?" required></textarea>
 
                 <div class="button-container">
                     <button class="back-button" onclick="prevStep()">Back</button>
