@@ -726,6 +726,11 @@ iframe {
         flex-direction: row;
     }
 
+    .subscribe-btn {
+        padding: 12px 12px;
+        font-size: 14px;
+    }
+
     .subscribe-arrow{
         width: 100px;
         left: 22%;
@@ -754,8 +759,8 @@ iframe {
     }
 
     .subscribe-image {
-        width: 120px;
-        margin-bottom: -200px;
+        width: 90px;
+        margin-bottom: -215px;
         left: -43%;
     }
 
@@ -788,7 +793,7 @@ iframe {
         top: 45%;
     }
 }
-@media (max-width: 375px) {
+@media (max-width: 324px) {
     .subscribe-section {
         flex-direction: column;
         text-align: center;
@@ -801,7 +806,7 @@ iframe {
     }
 
     .subscribe-image {
-        width: 100px;
+        width: 70px;
         margin-bottom: -500px;
         left: -43%;
     }
