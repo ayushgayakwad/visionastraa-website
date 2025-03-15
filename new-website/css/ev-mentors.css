@@ -558,6 +558,21 @@ header {
     transform: rotate(45deg);
 }
 
+.home-page-button {
+    background-color: #6c5ce7;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.home-page-button:hover {
+    background-color: #8c7ae6;
+}
+
 /* Footer Styling */
 footer {
     background-color: #fff; /* White background */

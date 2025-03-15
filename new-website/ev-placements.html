@@ -169,6 +169,15 @@
         </a>
     </div>
 </section>
+<div class="newsletter-container">
+  <h3>Subscribe to our newsletter</h3>
+  <div id="newsletterResponse" style="margin-top: 16px;"></div>
+  <div class="newsletter-input">
+      <span class="email-icon">✉️</span>
+      <input type="email" id="newsletterEmail" placeholder="Enter your email" required>
+      <button type="submit" id="subscribeButton">Subscribe</button>
+  </div>
+</div>
 <footer>
     <div class="footer-container">
       <div class="about-us">
@@ -230,6 +239,46 @@
     </div>
   </footer>
   <script>
+    document.getElementById('subscribeButton').addEventListener('click', function (e) {
+        e.preventDefault();
+        var emailInput = document.getElementById('newsletterEmail');
+        var email = emailInput.value;
+        var responseElement = document.getElementById('newsletterResponse');
+        
+        if (email && validateEmail(email)) {
+            var formData = new FormData();
+            formData.append('email', email);
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'php/ev-subscribe-newsletter.php', true);
+            
+            xhr.onload = function () {
+                var response = JSON.parse(this.responseText);
+                responseElement.innerHTML = response.message;
+                responseElement.style.color = response.success ? 'green' : 'red';
+                if (response.success) {
+                    emailInput.value = ''; 
+                }
+            };
+            
+            xhr.onerror = function() {
+                responseElement.innerHTML = "Error submitting your email. Please try again.";
+                responseElement.style.color = 'red';
+            };
+            
+            xhr.send(formData);
+        } else {
+            responseElement.innerHTML = "Please enter a valid email address.";
+            responseElement.style.color = 'red';
+        }
+    });
+
+    // Email validation function
+    function validateEmail(email) {
+        var re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return re.test(String(email).toLowerCase());
+    }
+    
     (function() {
           const widgetConfig = {
             backgroundColor: '#25D366',
