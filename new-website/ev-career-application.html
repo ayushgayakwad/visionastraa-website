@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Application Form - VisionAstraa EV Academy</title>
+    <title>Job Application Form - VisionAstraa EV Academy</title>
     <link rel="stylesheet" href="css/ev-application.css">
 </head>
 <body>
@@ -41,7 +41,7 @@
     <div class="form-container">
         <form id="application-form" onsubmit="submitForm(event);" enctype="multipart/form-data">
             <div id="step-1">
-                <h1>Apply Now!</h1>
+                <h1>Job Application Form</h1>
                 <h2>Step 1: Personal Information</h2>
                 <label for="first_name">First Name</label>
                 <input type="text" id="first_name" name="first_name" required>
@@ -128,22 +128,14 @@
                 <label for="cgpa">CGPA</label>
                 <input type="text" id="cgpa" name="cgpa" required>
 
-                <label for="term">Applying for which term?</label>
-                <select id="term" name="term" required>
-                    <option value="April 2025 (Summer)">April 2025 (Summer)</option>
-                    <option value="Aug 2025 (Autumn/Fall)">August 2025 (Autumn/Fall)</option> 
+                <label for="role">Applying for which role?</label>
+                <select id="role" name="role" required>
+                    <option value="Sales And Marketing Intern">Sales And Marketing Intern</option>
+                    <option value="Telemarketing Specialist">Telemarketing Specialist</option>
                 </select>
 
                 <label for="resume">Upload Resume (PDF, max 2MB)</label>
                 <input type="file" id="resume" name="resume" accept="application/pdf" required>
-
-                <label for="referral">Do you have a referral code?</label>
-                <select id="referral" name="referral" required>
-                    <option value=""></option>
-                    <option value="No Referral">No Referral</option>
-                    <option value="VEVT1-P1">VEVT1-P1</option> 
-                    <option value="VEVT1-P1J1">VEVT1-P1J1</option> 
-                </select>
 
                 <label for="goals">Why should you be selected? (max 500 words)</label>
                 <textarea id="goals" name="goals" rows="5" required></textarea>
@@ -231,11 +223,6 @@
             const resumeInput = document.getElementById('resume');
             const file = resumeInput.files[0];
 
-            if(referral.value == ""){
-                alert('Please enter a valid referral code.');
-                return false;
-            }
-
             if (file) {
                 const fileSizeInMB = file.size / (1024 * 1024);
                 const fileType = file.type;
@@ -262,7 +249,7 @@
             const form = document.getElementById('application-form');
             const formData = new FormData(form);
 
-            fetch('php/submit-ev-application.php', {
+            fetch('php/submit-ev-career-application.php', {
                 method: 'POST',
                 body: formData
             })
