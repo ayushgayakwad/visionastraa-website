@@ -709,7 +709,7 @@ ul li {
 
 .container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+    grid-template-columns: repeat(3, 0.3fr); /* 3 cards per row */
     gap: 20px;
     max-width: 1200px;
     margin: 50px auto;
