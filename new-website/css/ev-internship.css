@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -123,32 +125,46 @@
 }
 
 .pricing-card {
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 30px;
     text-align: center;
-    width: 100%;
-    max-width: 320px; /* Prevents excessive stretching */
-    margin: 0 auto;
-    transition: box-shadow 0.3s ease-in-out;
+    width: 370px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    position: relative;
+    gap: 50px;
+    margin: 20px;
 }
 
-.pricing-card:hover {
-    box-shadow: 0 8px 16px rgba(129, 127, 240, 0.5);
+.es {
+    box-shadow: 0px 0px 15px #817FF0;
+}
+
+.aiml {
+    box-shadow: 0px 0px 10px #817FF0;
+}
+
+.dd {
+    box-shadow: 0px 0px 10px #817FF0;
 }
 
 .course-category {
-    background: #E6E0FF;
-    padding: 5px;
-    border-radius: 5px;
-    margin: 10px 0;
-    display: inline-block;
+    background: #636AE8;
+    color: #ffffff;
+    padding: 6px 12px;
     font-size: 14px;
-    color: #4A4A4A;
+    font-weight: bold;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 10px;
 }
 
 .pricing-card h2 {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.pricing-card h3 {
     font-size: 20px;
     margin: 10px 0;
 }
@@ -160,23 +176,39 @@
 }
 
 .apply-btn, .reserve-btn {
-    background: #817FF0;
-    color: white;
+    display: block;
+    width: 70%;
     padding: 10px;
+    margin: 10px auto;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #636AE8;
     border: none;
-    border-radius: 5px;
-    margin-top: 10px;
+    border-radius: 20px;
     cursor: pointer;
-    width: 100%;
-    font-size: 14px;
+    transition: all 0.3s ease;
 }
 
 .reserve-btn {
-    background: #4A4A4A;
+    display: block;
+    width: 70%;
+    padding: 10px;
+    margin: 10px auto;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #636AE8;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .apply-btn:hover, .reserve-btn:hover {
     opacity: 0.9;
+    background-color: #817FF0;
+    color: white;
 }
 
 .eligibility-criteria {
@@ -608,8 +640,8 @@
 }
 
 .content h1 {
-    font-size: 36px;
-    font-weight: bold;
+    font-size: 2em;
+    font-weight: 800;
     color: #ffffff;
 }
 
