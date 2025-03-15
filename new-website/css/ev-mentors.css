@@ -251,7 +251,11 @@ header {
     overflow: hidden;
     position: relative;
     border-radius: 16px;
-    background-color: white;
+    background: #fff;
+    background-image: url('../images/Course7.png'); /* Ensure correct path */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
     padding: 20px 0;
 }
 
@@ -556,6 +560,14 @@ header {
     top: 80px;
     right: 5%;
     transform: rotate(45deg);
+}
+
+.mentor-name a{
+    color: #6c5ce7;
+}
+
+.mentor-name a:hover{
+    color: #8c7ae6;
 }
 
 .home-page-button {
