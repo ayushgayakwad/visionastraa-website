@@ -1,3 +1,27 @@
+<?php
+$servername = "localhost";
+$username = "u707137586_EV_Jobs";
+$password = "Sjj*/u9~xH9";
+$dbname = "u707137586_EV_Jobs";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT role, company, location, url FROM job_listings";
+$result = $conn->query($sql);
+
+$jobs = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $jobs[] = $row;
+    }
+}
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +60,7 @@
         <li><a href="ev-internship.html">EV Internship</a></li>
         <li><a href="ev-mentors.html">EV Mentors</a></li>
         <li><a href="ev-placements.html">EV Placements</a></li>
-        <li><a href="ev-careers.html" class="active">EV Careers</a></li>
+        <li><a href="ev-careers.html">EV Careers</a></li>
         <li><a href="ev-contact.html">Contact Us</a></li>
         <li><a href="ev-about-us.html">About Us</a></li>
       </ul>
@@ -49,86 +73,18 @@
       }
   </script>
 </header>
-
-    <!-- Join Our Team Section -->
     <section class="join-team">
-        <h2>Join our team</h2>
-        <p>Be a part of a dynamic and innovative team where creativity, growth, and collaboration drive success. Explore exciting opportunities and take the next step in your career.</p>
+        <h2>EV Jobs</h2>
+        <p>Discover exciting career opportunities in the rapidly growing EV industry. Be a part of the revolution driving sustainable mobility and shaping the future of transportation.</p>
         <button class="join-button" onclick="location.href='#open-positions-section'">View open positions</button>
-
     </section>
 
-    <!-- Our Values Section -->
-    <section class="values-section">
-        <h2>Our values</h2>
-        <div class="values-container">
-            <div class="value-card">
-                <img src="images/career3.png" alt="Build community">
-                <h3>Build community</h3>
-                <p>We believe in teamwork, collaboration, and creating a supportive space where everyone thrives together.</p>
-            </div>
-            <div class="value-card">
-                <img src="images/career1.png" alt="Love your craft">
-                <h3>Love your craft</h3>
-                <p> Passion fuels excellence. We encourage creativity, innovation, and mastery in everything we do.</p>
-            </div>
-            <div class="value-card">
-                <img src="images/career2.png" alt="Grow as you go">
-                <h3>Grow as you go</h3>
-                <p>Learning never stops. We embrace challenges and continuous growth to reach new heights.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- <section class="life-at-company">
-      <h2>Life at our company</h2>
-      <div class="image-grid">
-          <img src="images/b46c02c5-29c6-4112-a501-ebd5af5159c3.jpg" alt="Team Collaboration">
-          <img src="images/Group of people working together.jpg" alt="Creative Workspace">
-          <img src="images/Social Vectors & Illustrations for Free Download _ Freepik.jpg" alt="Friendly Work Environment">
-      </div>
-    </section> -->
-  
-
-    <!-- Perks Section -->
-<section class="perks-section">
-  <h2>Perks </h2>
-  <div class="perks-container">
-      <div class="perk-card purple">
-        <span class="icon">✅</span>
-        <p>Work-Life Balance Initiatives</p>
-      </div>
-      <div class="perk-card light-pink">
-          <span class="icon">📘</span>
-          <p>In-House Training Workshops</p>
-      </div>
-      <div class="perk-card orange">
-          <span class="icon">⭐</span>
-          <p>Work-from-Home Options</p>
-      </div>
-      <div class="perk-card soft-pink">
-          <span class="icon">📈</span>
-          <p>Career Advancement & Internship Opportunities</p>
-      </div>
-      <div class="perk-card teal">
-          <span class="icon">🤝</span>
-          <p>Networking & Collaboration with EV Experts</p>
-      </div>
-      <div class="perk-card light-purple">
-          <span class="icon">📜</span>
-          <p>Certification of Excellence in EV Technologies</p>
-      </div>
-  </div>
-</section>
-
-
-<!-- Open Positions Section -->
 <section id="open-positions-section" class="careers-container">
     <div class="header-container">
         <h2>Open Positions</h2>
         <div class="search-bar">
             <label for="search-bar">
-                <i class="fas fa-search"></i> <!-- FontAwesome Search Icon -->
+                <i class="fas fa-search"></i>
             </label>
             <input type="text" id="search-bar" placeholder="Type positions...">
         </div>               
@@ -137,25 +93,17 @@
     <br>
 
     <div class="job-list">
-        <div class="job-item">
-            <div class="job-content">
-                <span class="job-type" style="margin-bottom: 4px;">Internship / Remote</span>
-                <h3 style="margin-bottom: 4px;">Sales & Marketing Intern</h3>
-                <p style="margin-bottom: 4px;">Join our dynamic sales and marketing team for a 2-month internship and gain real-world experience.</p>
-                <a href="ev-c-smi.html" class="job-description-link">Job Description</a>
+        <?php foreach ($jobs as $job): ?>
+            <div class="job-item">
+                <div class="job-content">
+                    <span class="job-type" style="margin-bottom: 4px;">Full-Time / Location: <?= htmlspecialchars($job['location']) ?></span>
+                    <h3 style="margin-bottom: 4px;"> <?= htmlspecialchars($job['role']) ?> </h3>
+                    <p style="margin-bottom: 4px;"> Company: <?= htmlspecialchars($job['company']) ?> </p>
+                    <a href="<?= htmlspecialchars($job['url']) ?>" class="job-description-link" target="_blank">Job Description</a>
+                </div>
+                <a href="<?= htmlspecialchars($job['url']) ?>" style="text-decoration: none;" target="_blank"><button class="apply-btn">Apply now</button></a>
             </div>
-            <a href="ev-career-application.html" style="text-decoration: none;"><button class="apply-btn">Apply now</button></a>
-        </div>
-
-        <div class="job-item">
-            <div class="job-content">
-                <span class="job-type" style="margin-bottom: 4px;">Full-Time / Remote</span>
-                <h3 style="margin-bottom: 4px;">Telemarketing Specialist</h3>
-                <p style="margin-bottom: 4px;">Play a crucial role in lead generation and building strong customer relationships.</p>
-                <a href="ev-c-ti.html" class="job-description-link">Job Description</a>
-            </div>
-            <a href="ev-career-application.html" style="text-decoration: none;"><button class="apply-btn">Apply now</button></a>
-        </div>
+        <?php endforeach; ?>
     </div>
 </section>
 

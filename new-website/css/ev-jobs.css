@@ -1,0 +1,664 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    text-align: center;
+}
+
+header {
+    background: white;
+    padding: 20px;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    background: rgba(255, 255, 255, 0.481); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px 5%;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.08);
+    height: 80px;
+    width: 100%;
+    border-radius: 8px;
+    position: relative;
+    z-index: 1000;
+}
+
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    height: 95px;
+    width: auto;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    gap: 15px;
+    font-weight: bold;
+    list-style: none;
+    transition: transform 0.3s ease-in-out;
+    z-index: 2000;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 8px 10px;
+    border-radius: 18px;
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+}
+
+/* Hover & Focus Effects */
+.nav-links a:hover,
+.nav-links a:focus {
+    background: #6c5ce7;
+    color: #ffffff;
+    box-shadow: 0px 2px 5px rgba(108, 92, 231, 0.2);
+}
+
+/* Hamburger Button */
+.hamburger {
+    background: #6c5ce7;
+    color: white;
+    font-size: 20px;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 16px;
+    position: absolute; 
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    top: 20%;
+    right: 20px;
+    transform: translateY(-5%);
+}
+
+/* Style for active link */
+.nav-links a.active {
+    background: #6c5ce7;
+    color: #ffffff;
+    box-shadow: 0px 2px 5px rgba(108, 92, 231, 0.2);
+}
+
+.hamburger span {
+    height: 2px;
+    width: 25px;
+    background-color: black;
+    margin: 4px;
+    border-radius: 2px;
+  }
+
+/* Join Our Team Section */
+.join-team {
+    background: #fff;
+    background-image: url('../images/Group110_1.png'); /* Ensure correct path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 50px 20px;
+}
+
+.join-team h2 {
+    font-size: 2.5em;
+    color: #222;
+    font-weight: 800;
+    text-align: center;
+}
+
+.join-team p {
+    font-size: 16px;
+    color: #666;
+    max-width: 800px;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.join-button {
+    background-color: #6c5ce7;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.join-button:hover {
+    background-color: #8c7ae6;
+}
+
+/* Careers Section */
+.careers-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+/* Header and Search Bar */
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 150px;
+}
+
+h2 {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.job-type{
+    font-size: 18px;
+    font-weight: 600;
+    color: #6c5ce7;
+    text-align: left;
+}
+
+.search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 350px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 5px;
+    background: white;
+}
+
+.search-bar i {
+    margin-left: 10px;
+    color: #888;
+    font-size: 16px;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding: 8px 10px;
+    width: 100%;
+}
+
+/* Job Listings */
+.job-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.job-item {
+    padding: 18px;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.job-item:hover {
+    transform: scale(1.02);
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.job-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 75%;
+    text-align: left;
+}
+
+.job-type {
+    color: #6c5ce7;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+p {
+    font-size: 14px;
+    color: #444;
+}
+
+a {
+    color: #6c5ce7;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+/* Apply Button */
+.apply-btn {
+    background: #EAE6FF;
+    color: #6c5ce7;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.apply-btn:hover {
+    background: #6c5ce7;
+    color: white;
+}
+
+/* News Letter Section */
+.newsletter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers everything */
+    justify-content: center;
+    text-align: center;
+    margin-top: 50px; /* Adds space above */
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.newsletter-input {
+    display: flex;
+    align-items: center;
+    background: #f5f5f5;
+    border-radius: 20px;
+    padding: -2px;
+    margin-top: 20px;
+    margin-bottom: 100px;
+    height: 45px;
+    width: 500px; /* Adjusted for balance */
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+    gap: 10px; /* Adds spacing between elements */
+}
+
+.email-icon {
+    font-size: 18px;
+    color: #777;
+    margin-left: 10px;
+}
+
+.newsletter-input input {
+    border: none;
+    background: none;
+    padding: 15px;
+    font-size: 16px;
+    outline: none;
+    flex: 1;
+    width: 100%;
+}
+
+.newsletter-input button {
+    background: #6c5ce7;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 0px 20px 20px 0px;
+    cursor: pointer;
+    height: auto;
+    transition: 0.3s ease-in-out;
+}
+
+.newsletter-input button:hover {
+    background: #8c7ae6;
+}
+
+@media (max-width: 768px) {
+    .newsletter-input {
+        flex-direction: row;
+        width: 78%;
+        height: 38px;
+    }
+    .newsletter-container {
+        margin-top: 90px;
+    }
+    .newsletter-input input {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .newsletter-input button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    .newsletter-input button { 
+        width: 110px;
+    }
+}
+
+@media (max-width: 480px) {
+    .newsletter-input {
+        flex-direction: row;
+        width: 80%;
+        height: 38px;
+    }
+    .newsletter-container {
+        margin-top: 90px;
+    }
+    .newsletter-input input {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .newsletter-input button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    .newsletter-input button { 
+        width: 100px;
+    }
+
+    .header-container{
+        gap: 25px;
+    }
+    .careers-container h2{
+        padding-left: 18px;
+    }
+}
+
+/* Footer Styling */
+footer {
+    background-color: #fff; /* White background */
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    padding: 50px 8%;
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1); /* Subtle top shadow */
+}
+
+/* Footer Container */
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+/* About Us Section */
+.about-us {
+    max-width: 350px;
+    text-align: center;
+}
+
+.about-us h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.about-us p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* Footer Links */
+.footer-links {
+    display: flex;
+    gap: 60px;
+}
+
+.footer-links h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.footer-links ul li {
+    margin-bottom: 8px;
+}
+
+.footer-links ul li a {
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+    color: #000;
+}
+
+/* Follow Us Section */
+.follow-us h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.follow-us ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.follow-us ul li {
+    margin-bottom: 8px;
+}
+
+.follow-us ul li a {
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.follow-us ul li a:hover {
+    color: #000;
+}
+
+/* Footer Bottom Section */
+hr {
+    border: none;
+    height: 1px;
+    background-color: #ddd;
+    margin: 30px 0;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-container img {
+    width: 90px;
+    height: 90px;
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+
+.footer-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-logo-container img {
+    width: 90px;
+    height: 90px;
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+
+.footer-bottom p {
+    font-size: 14px;
+    color: #777;
+}
+
+/* EV Academy Button */
+.ev-academy-button {
+    background-color: #6c5ce7;
+    color: #fff;
+    padding: 10px 16px;
+    font-size: 14px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .footer-links h3 {
+        font-size: 18px;
+        font-weight: bold;
+        color: #222;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    
+    .footer-links ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+    }
+
+    /* Follow Us Section */
+    .follow-us h3 {
+        font-size: 18px;
+        font-weight: bold;
+        color: #222;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .follow-us ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .logo-container{
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 1200px) {
+    .navbar{
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+    }
+        
+    .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: flex-start;
+        flex-grow: 0.7;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-links {
+        position: absolute;
+        top: 90px;
+        left: 12%;
+        margin: 0px auto;
+        height: calc(100vh - 60px);
+        background-color: rgba(255, 255, 255, 0.974);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        z-index: 2000;
+    }
+    
+    .nav-links.show {
+        max-height: 550px;
+        min-width: 280px;
+        transform: translateY(0);
+        opacity: 1;
+        padding: 0;
+        border-radius: 8px;
+        visibility: visible;
+        z-index: 2000;
+    }
+
+    .nav-links li {
+        margin: 12px 0;
+        border-bottom: 1px solid #6c5ce7;
+    }
+
+}
