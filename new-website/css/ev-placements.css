@@ -662,6 +662,11 @@ h2 {
         font-size: 0.9rem; 
       }
 
+      .iv-logos img {
+        width: 80%;
+        height: auto;
+      }
+
     .newsletter-input {
         flex-direction: row;
         width: 78%;
