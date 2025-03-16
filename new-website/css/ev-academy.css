@@ -420,8 +420,8 @@ hr {
     text-align: center;
     padding: 50px 20px;
     background: #fff;
-    background-image: url('../images/Group110_1.png'); /* Ensure correct path */
-    background-size: cover;
+    background-image: url('../images/Group110_3.png'); /* Ensure correct path */
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -451,6 +451,11 @@ hr {
     display: flex;
     margin: 0px 64px;
     justify-content: flex-start;
+}
+
+.features-list-container {
+    text-align: center;
+    justify-items: center;
 }
 
 .features-list ul {
@@ -538,7 +543,7 @@ hr {
 }
 
 .contact-heading {
-    font-size: 30px;
+    font-size: 2.5em;
     font-weight: bold;
     color: #333;
     margin-bottom: 10px;
@@ -716,6 +721,14 @@ iframe {
 
     .illustration-mirror{
         content: url('../images/home3.png');
+    }
+
+    .features {
+        background: #fff;
+        background-image: url('../images/Group110_1.png'); /* Ensure correct path */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 
     .features-content {
