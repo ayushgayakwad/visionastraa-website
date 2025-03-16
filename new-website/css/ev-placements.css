@@ -273,6 +273,55 @@
     z-index: 10;
 }
 
+.iv {
+    padding: 25px 0;
+    background-color: #ffffff;
+  }
+  
+  .iv h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #000000;
+  }
+  
+  .iv-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px; 
+    padding: 20px;
+    background-color: #fff; 
+  }
+  
+  .iv-logos a {
+    flex: 1 1 calc(33.333% - 30px); 
+    display: block; 
+    text-align: center; 
+  }
+  
+  .iv-logos img {
+    width: 100%;
+    height: auto; 
+    border-radius: 12px; 
+    padding: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .iv-logos img:hover {
+    transform: scale(1.1); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
+  }
+  
+  .iv-logos .subtext {
+    font-size: 1rem;
+    color: #555555;
+    margin-top: 10px;
+    text-align: center;
+    line-height: 1.5; 
+  }
+
 .mentors {
     margin-top: 50px;
     padding: 50px 0;
@@ -596,7 +645,23 @@ h2 {
     background: #8c7ae6;
 }
 
+@media (max-width: 1024px) {
+    .iv-logos a {
+      flex: 1 1 calc(50% - 30px); 
+    }
+  }
+
 @media (max-width: 768px) {
+    .iv-logos a {
+        flex: 1 1 calc(100% - 30px); 
+      }
+      .iv h2 {
+        font-size: 2rem; 
+      }
+      .iv-logos .subtext {
+        font-size: 0.9rem; 
+      }
+
     .newsletter-input {
         flex-direction: row;
         width: 78%;
