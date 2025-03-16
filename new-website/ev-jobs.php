@@ -27,7 +27,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Careers - VisionAstraa EV Academy</title>
+    <title>EV Jobs - VisionAstraa EV Academy</title>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2PV0BKLV94"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
