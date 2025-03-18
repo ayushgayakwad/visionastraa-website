@@ -12,365 +12,356 @@
 
     gtag('config', 'G-2PV0BKLV94');
     </script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="css/careers.css">
+    <link rel="icon" href="images/favicon-16x16.png" type="image/png">
+    <link rel="stylesheet" href="css/ev-careers.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-    <header>
-        <div id="navbar-placeholder"></div>
-    </header>
-    <main>             
-        <header>
-            <h1>Electrify Your Career </h1>
-        </header>
-    
-        <!-- Main Career Opportunities Page -->
-        <div id="opportunities" class="page-section">
-            <div class="opportunity-container">
-                <div class="opportunity-box">
-                    <h2>Sales & Marketing Intern</h2>
-                    <p>Join our dynamic sales and marketing team for a 2-month internship and gain real-world experience.</p>
-                    <button onclick="showPage('sales-marketing')">View Details</button>
-                </div>
-                <div class="opportunity-box">
-                    <h2>Telemarketing Specialist</h2>
-                    <p>Play a crucial role in lead generation and building strong customer relationships.</p>
-                    <button onclick="showPage('telecaller')">View Details</button>
-                </div>
+  <header>
+    <nav class="navbar">
+      <div class="logo-container">
+        <a href="ev-academy.html"><img src="images/1000052219-removebg-preview.png" alt="EV Academy Logo" class="logo"></a>
+      </div>
+
+      <!-- Hamburger Icon -->
+      <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+      </div>
+        
+      <ul class="nav-links">
+        <li><a href="ev-academy.html">EV Academy</a></li>
+        <li><a href="ev-course.html">EV Course</a></li>
+        <li><a href="ev-internship.html">EV Internship</a></li>
+        <li><a href="ev-mentors.html">EV Mentors</a></li>
+        <li><a href="ev-placements.html">EV Placements</a></li>
+        <li><a href="ev-careers.html" class="active">EV Careers</a></li>
+        <li><a href="ev-contact.html">Contact Us</a></li>
+        <li><a href="ev-about-us.html">About Us</a></li>
+      </ul>
+  </nav>
+
+  <script>
+      function toggleMenu() {
+          const navLinks = document.querySelector(".nav-links");
+          navLinks.classList.toggle("show");
+      }
+  </script>
+</header>
+
+    <!-- Join Our Team Section -->
+    <section class="join-team">
+        <h2>Join our team</h2>
+        <p>Be a part of a dynamic and innovative team where creativity, growth, and collaboration drive success. Explore exciting opportunities and take the next step in your career.</p>
+        <button class="join-button" onclick="location.href='#open-positions-section'">View open positions</button>
+
+    </section>
+
+    <!-- Our Values Section -->
+    <section class="values-section">
+        <h2>Our values</h2>
+        <div class="values-container">
+            <div class="value-card">
+                <img src="images/career3.png" alt="Build community">
+                <h3>Build community</h3>
+                <p>We believe in teamwork, collaboration, and creating a supportive space where everyone thrives together.</p>
+            </div>
+            <div class="value-card">
+                <img src="images/career1.png" alt="Love your craft">
+                <h3>Love your craft</h3>
+                <p> Passion fuels excellence. We encourage creativity, innovation, and mastery in everything we do.</p>
+            </div>
+            <div class="value-card">
+                <img src="images/career2.png" alt="Grow as you go">
+                <h3>Grow as you go</h3>
+                <p>Learning never stops. We embrace challenges and continuous growth to reach new heights.</p>
             </div>
         </div>
-    
-        <!-- Sales & Marketing Intern Page -->
-        <div id="sales-marketing" class="page-section">
-            <main>             
-                <section class="course-info">
-                    <div class="course-pricing-info">
-                        <h2>Role:<br><b>Sales And Marketing Intern</b></br></h2>
-                        <p>We are seeking a driven and energetic intern to join our dynamic sales and marketing team for a 2-month internship. In this role, you'll gain valuable experience across both sales and marketing functions, giving you a well-rounded foundation for your future career.</p>
-                        <a href="ev-career-application.html">
-                            <button class="register-course">APPLY NOW</button>
-                        </a>
-                    </div>
-                </section>
-                
-                <section class="pricing-info">
-                    <div class="pricing-learning-outcomes">
-                        <h2>Roles And Responsibilities:</h2>
-                        <ul>
-                            <li>Assist the team with lead generation and qualification activities.</li>
-                            <li>Provide insights and implement strategies to meet company goals.</li>
-                            <li>Craft compelling marketing materials like social media posts, email campaigns, or presentations.</li>
-                            <li>Conduct market research and competitor analysis to inform marketing strategies.</li>
-            
-                        </ul>
-                    </div>
-                </section>        
-            
-                <section class="requirements-section">
-                    <div class="requirements-box">
-                        <h2>Eligibility Criteria:</h2>
-                        <ul>
-                            <li>Graduate or currently pursuing Bachelor’s/Master’s degree in business or a related field.</li>
-                            <li>Having a sound understanding of the startup sector.</li>
-                            <li>Must be aware of the latest business policies and market regulations.</li>
-                            <li>Great time management as well as marketing skills.</li>
-                            <li>Collaborative, interactive, and leadership abilities are necessary.</li>
-                            <li>Should be a critical and analytical thinker, and solution provider.</li>
-                            <li>Must have visionary business insight.</li>
-                        </ul>
-                    </div>
-                </section>
-                <section class="course-inclusions">
-                    <div class="inclusions-box">
-                        <h2>Who Can Apply:</h2>
-                        <ul>
-                            <li>Are available for 2 months.</li>
-                            <li>Are ready for a remote internship.</li>
-                            <li>Can start the internship immediately.</li>
-                            <li>Have keen interest in sales and marketing.</li>
-                            <li>Can work both independently and in a team.</li>
-                        </ul>
-                    </div>
-                </section>
-                <section class="course-inclusions">
-                    <div class="inclusions-box">
-                        <h2>Perks And Benefits:</h2>
-                        <ul>
-                            <li>Flexible working hours.</li>
-                            <li>Incentive-based payments.</li>
-                            <li>Internship Certificate.</li>
-                            <li>Letter of Recommendation.</li>
-                            <li>Recommendations on LinkedIn.</li>
-                        </ul>
-                        
-                    </div>
-                </section>
-                <section class="course-inclusions">
-                    <div class="inclusions-box">
-                        <h2>Duration:</h2>
-                        <p>2 Months</p>
-                    </div>
-                </section>
-               
-            </main>
-            <button onclick="showPage('opportunities')"> < Back </button>
-        </div>
-    
-        <!-- Telecaller Page -->
-        <div id="telecaller" class="page-section">
-            <main>             
-                <section class="course-info">
-                    <div class="course-pricing-info">
-                        <h2>Role:<br><b>Technical Telecaller</b></br></h2>
-                        <p>We are seeking a dynamic and results-oriented individual to the role of Technical Telecaller to join our Sales & Marketing Team. As a Technical Telecaller, you will play a crucial role in generating leads, qualifying prospects, and building strong customer relationships in the EdTech segment.</p>
-                        <a href="ev-career-application.html">
-                            <button class="register-course">APPLY NOW</button>
-                        </a>
-                    </div>
-                </section>
-                
-                <section class="pricing-info">
-                    <div class="pricing-learning-outcomes">
-                        <h2>Roles And Responsibilities:</h2>
-                        <ul>
-                            <li>Outbound calling to potential customers to generate leads and schedule appointments.</li>
-                            <li>Qualifying leads based on predetermined criteria.</li>
-                            <li>Providing accurate and informative product/service information to potential customers.</li>
-                            <li>Addressing customer inquiries and concerns in a professional and timely manner.</li>
-                            <li>Maintaining accurate records of customer interactions and call outcomes.</li>
-                            <li>Achieving monthly and quarterly sales targets.</li>
-                        </ul>
-                        
-                    </div>
-                </section>        
-            
-                <section class="requirements-section">
-                    <div class="requirements-box">
-                        <h2>Eligibility Criteria:</h2>
-                        <ul>
-                            <li>Excellent verbal and written communication skills in English.</li>
-                            <li>Strong interpersonal skills and ability to build rapport with customers.</li>
-                            <li>Proven track record in telemarketing or sales.</li>
-                            <li>Ability to work independently and as part of a team.</li>
-                            <li>Bachelor's degree or equivalent experience.</li>
-                            <li>Proficient in verbal communication in multiple Indian languages is a bonus - Hindi, Telugu, Tamil, Kannada, Marathi.</li>
-                        </ul>
-                        
-                    </div>
-                </section>
-                        <section class="course-inclusions">
-                    <div class="inclusions-box">
-                        <h2>Duration:</h2>
-                        <ul>
-                            <li>2 months probation/internship period with performance-based incentives.</li>
-                            <li>Full-Time with fixed monthly stipend and bonus after probation/internship period.</li>
-                        </ul>
-                        
-                    </div>
-                </section>
-                
-                <section class="course-inclusions">
-                    <div class="inclusions-box">
-                        <h2>Perks And Benefits:</h2>
-                        <ul>
-                            <li>Competitive salary and commission structure.</li>
-                            <li>Flexible working hours.</li>
-                            <li>Work from Home opportunity.</li>
-                            <li>Opportunities for professional growth and development.</li>
-                            <li>Supportive and collaborative work environment.</li>
-                        </ul>
-                        
-                        </div>
-                </section>
-               
-                <section class="course-inclusions">
-                    <div class="inclusions-box">
-                        <p>If you are a motivated and results-driven individual looking for a challenging and rewarding career, we encourage you to apply. Please submit your <strong>resume</strong> and cover letter to <a href="mailto:careers@visionastra.com">careers@visionastra.com</a>.</p>
+    </section>
 
-                         </div>
-                </section>
-            
-            </main>
-           
-            <button onclick="showPage('opportunities')"> < Back</button>
-        </div>
-    
+    <!-- <section class="life-at-company">
+      <h2>Life at our company</h2>
+      <div class="image-grid">
+          <img src="images/b46c02c5-29c6-4112-a501-ebd5af5159c3.jpg" alt="Team Collaboration">
+          <img src="images/Group of people working together.jpg" alt="Creative Workspace">
+          <img src="images/Social Vectors & Illustrations for Free Download _ Freepik.jpg" alt="Friendly Work Environment">
+      </div>
+    </section> -->
+  
 
-    </main>
-    <footer class="footer" style="padding-top: 35px;">
+    <!-- Perks Section -->
+<section class="perks-section">
+  <h2>Perks </h2>
+  <div class="perks-container">
+      <div class="perk-card purple">
+        <span class="icon">✅</span>
+        <p>Work-Life Balance Initiatives</p>
+      </div>
+      <div class="perk-card light-pink">
+          <span class="icon">📘</span>
+          <p>In-House Training Workshops</p>
+      </div>
+      <div class="perk-card orange">
+          <span class="icon">⭐</span>
+          <p>Work-from-Home Options</p>
+      </div>
+      <div class="perk-card soft-pink">
+          <span class="icon">📈</span>
+          <p>Career Advancement & Internship Opportunities</p>
+      </div>
+      <div class="perk-card teal">
+          <span class="icon">🤝</span>
+          <p>Networking & Collaboration with EV Experts</p>
+      </div>
+      <div class="perk-card light-purple">
+          <span class="icon">📜</span>
+          <p>Certification of Excellence in EV Technologies</p>
+      </div>
+  </div>
+</section>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h5 class="text-uppercase">About Us</h5>
-                    <p style="color: white;">Empowering India’s talent to lead the global EV industry. <br><br>We are committed to bridging the gap between academia and industry, providing students with the practical skills and knowledge required to excel in the EV sector. Our programs are designed to foster innovation, entrepreneurship, and a deep understanding of the EV ecosystem.</p>
-                </div>
-                <div class="col-md-2 secpart">
-                    <h5 class="text-uppercase">Links</h5>
-                    <ul class="list-unstyled listone">
-                        <li><a href="ev-aboutus.html">About Us</a></li>
-                        <li><a href="ev-course.html">Courses</a></li>
-                        <li><a href="ev-jobs.html">Jobs</a></li>
-                        <li><a href="ev-mentors.html">Mentors</a></li>
-                        <li><a href="ev-careers.html">Careers</a></li>
-                        <li><a href="ev-contact.html">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 thirdpart">
-                    <h5 class="text-uppercase">Follow Us</h5>
-                    <ul class="list-unstyled listtwo">
-                        <li><a href="https://www.instagram.com/evacademy.in/">Instagram</a></li>
-                        <li><a href="https://www.linkedin.com/company/va-ev-academy/?viewAsMember=true">linkedin</a></li>
-                    </ul>
-                </div>
+
+<!-- Open Positions Section -->
+<section id="open-positions-section" class="careers-container">
+    <div class="header-container">
+        <h2>Open Positions</h2>
+        <div class="search-bar">
+            <label for="search-bar">
+                <i class="fas fa-search"></i> <!-- FontAwesome Search Icon -->
+            </label>
+            <input type="text" id="search-bar" placeholder="Type positions...">
+        </div>               
+    </div>
+
+    <br>
+
+    <div class="job-list">
+        <div class="job-item">
+            <div class="job-content">
+                <span class="job-type" style="margin-bottom: 4px;">Internship / Remote</span>
+                <h3 style="margin-bottom: 4px;">Sales & Marketing Intern</h3>
+                <p style="margin-bottom: 4px;">Join our dynamic sales and marketing team for a 2-month internship and gain real-world experience.</p>
+                <a href="ev-c-smi.html" class="job-description-link">Job Description</a>
             </div>
-            <hr style="color: white; border-color: white;">
-            <div class="row">
-
-                <div class="col-12 text-left last">
-
-                    <div class="lalala"><img class="lastimg" src="image/bwvasev.png" alt="">
-                        <p style="color: white;" class="mb-0 latext">© 2024 visionastraa. All rights reserved.</p>
-                    </div>
-
-
-                    <div><button class="lastb" type="button">EV academy </button></div>
-
-                </div>
-            </div>
+            <a href="ev-career-application.html" style="text-decoration: none;"><button class="apply-btn">Apply now</button></a>
         </div>
-    </footer>
-    <script>
-        function showPage(pageId) {
-            // Hide all sections
-            const sections = document.querySelectorAll('.page-section');
-            sections.forEach(section => section.style.display = 'none');
 
-            // Show the selected section
-            document.getElementById(pageId).style.display = 'block';
-        }
-        function openPopup(module, content) {
-            document.getElementById('popup-module').innerHTML = module;
-            document.getElementById('popup-content').innerHTML = content;
-    
-            document.getElementById('popup').style.display = 'flex';
-        }
+        <div class="job-item">
+            <div class="job-content">
+                <span class="job-type" style="margin-bottom: 4px;">Full-Time / Remote</span>
+                <h3 style="margin-bottom: 4px;">Telemarketing Specialist</h3>
+                <p style="margin-bottom: 4px;">Play a crucial role in lead generation and building strong customer relationships.</p>
+                <a href="ev-c-ti.html" class="job-description-link">Job Description</a>
+            </div>
+            <a href="ev-career-application.html" style="text-decoration: none;"><button class="apply-btn">Apply now</button></a>
+        </div>
+    </div>
+</section>
 
-        function closePopup() {
-            document.getElementById('popup').style.display = 'none';
-        }
-        fetch('navbarcomp/navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navbar-placeholder').innerHTML = data;
-                // JavaScript to handle hamburger menu toggle
-                const hamburger = document.getElementById("hamburger");
-                const navLinks = document.getElementById("nav-links");
+<div class="newsletter-container">
+  <h3>Subscribe to our newsletter</h3>
+  <div id="newsletterResponse" style="margin-top: 16px;"></div>
+  <div class="newsletter-input">
+      <span class="email-icon">✉️</span>
+      <input type="email" id="newsletterEmail" placeholder="Enter your email" required>
+      <button type="submit" id="subscribeButton">Subscribe</button>
+  </div>
+</div>
     
-                if (hamburger && navLinks) {
-                    hamburger.onclick = function () {
-                        navLinks.classList.toggle("active");
-                    };
+<footer>
+  <div class="footer-container">
+    <div class="about-us">
+      <h3>ABOUT US</h3>
+      <p>Empowering India’s talent to lead the global EV industry.</p><br>
+      <p>We are committed to bridging the gap between academia and industry, providing students with the practical skills and knowledge required to excel in the EV sector. Our programs foster innovation, entrepreneurship, and a deep understanding of the EV ecosystem.</p>
+    </div>
+    
+    <div class="footer-links">
+      <div class="links">
+        <h3>LINKS</h3>
+        <ul>
+          <li><a href="ev-academy.html">EV Academy</a></li>
+          <li><a href="ev-course.html">EV Course</a></li>
+          <li><a href="ev-internship.html">EV Internship</a></li>
+          <li><a href="ev-mentors.html">EV Mentors</a></li>
+          <li><a href="ev-placements.html">EV Placements</a></li>
+          <li><a href="ev-jobs.php">EV Jobs</a></li>
+        </ul>
+      </div>
+
+      <div class="Company">
+      <h3>COMPANY</h3>
+        <ul>
+          <li><a href="ev-about-us.html">About Us</a></li>
+          <li><a href="ev-careers.html">EV Careers</a></li>
+        </ul>
+      </div>
+                     
+      <div class="plans">
+        <h3>CONTACT</h3>
+        <ul>  
+          <li><a href="ev-contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+      
+    <div class="follow-us">
+      <h3>FOLLOW US</h3>
+      <ul>
+        <li><a href="https://www.instagram.com/va_ev_academy/">Instagram</a></li>
+        <li><a href="https://in.linkedin.com/company/va-ev-academy">LinkedIn</a></li>
+        <li><a href="https://www.youtube.com/@VisionAstraaEVAcademy">YouTube</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <hr>
+  
+  <div class="footer-bottom">
+    <div class="footer-logo-container">
+      <img src="images/1000052219-removebg-preview.png" alt="VisionAstraa Logo">
+    </div>
+    <p>&copy; 2024 VisionAstraa. All rights reserved.</p>
+    <button class="ev-academy-button">EV Academy</button>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('subscribeButton').addEventListener('click', function (e) {
+        e.preventDefault();
+        var emailInput = document.getElementById('newsletterEmail');
+        var email = emailInput.value;
+        var responseElement = document.getElementById('newsletterResponse');
+        
+        if (email && validateEmail(email)) {
+            var formData = new FormData();
+            formData.append('email', email);
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'php/ev-subscribe-newsletter.php', true);
+            
+            xhr.onload = function () {
+                var response = JSON.parse(this.responseText);
+                responseElement.innerHTML = response.message;
+                responseElement.style.color = response.success ? 'green' : 'red';
+                if (response.success) {
+                    emailInput.value = ''; 
                 }
-            })
-            .catch(error => console.error('Error loading navbar:', error));
+            };
+            
+            xhr.onerror = function() {
+                responseElement.innerHTML = "Error submitting your email. Please try again.";
+                responseElement.style.color = 'red';
+            };
+            
+            xhr.send(formData);
+        } else {
+            responseElement.innerHTML = "Please enter a valid email address.";
+            responseElement.style.color = 'red';
+        }
+    });
 
-            (function() {
-          const widgetConfig = {
-            backgroundColor: '#25D366',
-            position: 'right',
-            xoffset: '25px',
-            yoffset: '25px',
-            logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg',
-            whatsappNo: '918075664438',
-            whatsappText: 'Hello VisionAstraa team,',
-            popupTitle: 'Dear EV Aspirant, life changing opportunity is just a click away',
-            buttonText: 'Start Chat'
-          };
-        
-          let showPopup = false;
-          const container = document.createElement('div');
-          document.body.appendChild(container);
-        
-          function renderWidget() {
-            container.innerHTML = `
-              <div class="z_ft_widget" style="
-                background-color: ${widgetConfig.backgroundColor};
-                ${widgetConfig.position}: ${widgetConfig.xoffset};
-                bottom: ${widgetConfig.yoffset};
-                width: 50px;
-                height: 50px;
-                border-radius: 8px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                position: fixed;
-                cursor: pointer;
-                z-index: 999;
-                transition: opacity 0.3s;
-              ">
-                <img src="${widgetConfig.logoUrl}" alt="WhatsApp" style="width: 32px; height: 32px;">
-                ${showPopup ? `
-                  <div class="z_ft_popup" style="
-                    position: absolute;
-                    bottom: 60px;
-                    width: 200px;
-                    background: white;
-                    border-radius: 8px;
-                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 16px;
-                    ${widgetConfig.position}: 0;
-                  ">
-                    <h3 style="
-                      font-size: 16px;
-                      font-weight: 600;
-                      text-align: center;
-                      margin: 30px 0px;
-                    ">${widgetConfig.popupTitle}</h3>
-                    <a href="https://wa.me/${widgetConfig.whatsappNo}?text=${widgetConfig.whatsappText}" target="_blank" rel="noopener noreferrer" style="
-                      display: inline-block;
-                      background: #25D366;
-                      color: white;
-                      padding: 8px 16px;
-                      border-radius: 4px;
-                      text-decoration: none;
-                      transition: background-color 0.3s;
-                    ">${widgetConfig.buttonText}</a>
-                    <a href="https://visionastraa.com" 
-                     target="_blank" 
-                     rel="noopener noreferrer" 
-                     style="
-                      text-align: center;
-                      font-size: 12px;
-                      color: #666;
-                      text-decoration: none;
-                      border-top: 1px solid #eee;
-                      padding-top: 12px;
-                      margin-top: 10px;
-                    ">Powered by VisionAstraa</a>
+    // Email validation function
+    function validateEmail(email) {
+        var re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return re.test(String(email).toLowerCase());
+    }
+    
+  (function() {
+    const widgetConfig = {
+      backgroundColor: '#25D366',
+      position: 'right',
+      xoffset: '25px',
+      yoffset: '25px',
+      logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg',
+      whatsappNo: '918075664438',
+      whatsappText: 'Hello VisionAstraa team,',
+      popupTitle: 'Dear EV Aspirant, life changing opportunity is just a click away',
+      buttonText: 'Start Chat'
+    };
+  
+    let showPopup = false;
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+  
+    function renderWidget() {
+      container.innerHTML = `
+        <div class="z_ft_widget" style="
+          background-color: ${widgetConfig.backgroundColor};
+          ${widgetConfig.position}: ${widgetConfig.xoffset};
+          bottom: ${widgetConfig.yoffset};
+          width: 50px;
+          height: 50px;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: fixed;
+          cursor: pointer;
+          z-index: 999;
+          transition: opacity 0.3s;
+        ">
+          <img src="${widgetConfig.logoUrl}" alt="WhatsApp" style="width: 32px; height: 32px;">
+          ${showPopup ? `
+            <div class="z_ft_popup" style="
+              position: absolute;
+              bottom: 60px;
+              width: 200px;
+              background: white;
+              border-radius: 8px;
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              padding: 16px;
+              ${widgetConfig.position}: 0;
+            ">
+              <h3 style="
+                font-size: 16px;
+                font-weight: 600;
+                text-align: center;
+                margin: 30px 0px;
+              ">${widgetConfig.popupTitle}</h3>
+              <a href="https://wa.me/${widgetConfig.whatsappNo}?text=${widgetConfig.whatsappText}" target="_blank" rel="noopener noreferrer" style="
+                display: inline-block;
+                background: #25D366;
+                color: white;
+                padding: 8px 16px;
+                border-radius: 4px;
+                text-decoration: none;
+                transition: background-color 0.3s;
+              ">${widgetConfig.buttonText}</a>
+              <a href="https://visionastraa.com" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               style="
+                text-align: center;
+                font-size: 12px;
+                color: #666;
+                text-decoration: none;
+                border-top: 1px solid #eee;
+                padding-top: 12px;
+                margin-top: 10px;
+              ">Powered by ZEPIC</a>
 
-                  </div>
-                ` : ''}
-              </div>
-            `;
-        
-            container.querySelector('.z_ft_widget').addEventListener('click', (e) => {
-              if (e.target.closest('.z_ft_popup-button')) return;
-              showPopup = !showPopup;
-              renderWidget();
-            });
-          }
-        
-          renderWidget();
-        })()
-    </script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            </div>
+          ` : ''}
+        </div>
+      `;
+  
+      container.querySelector('.z_ft_widget').addEventListener('click', (e) => {
+        if (e.target.closest('.z_ft_popup-button')) return;
+        showPopup = !showPopup;
+        renderWidget();
+      });
+    }
+  
+    renderWidget();
+  })()
+</script>
+<script src="js/ev-careers.js"></script>    
+
 </body>
 </html>

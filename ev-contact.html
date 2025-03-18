@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,112 +12,260 @@
 
     gtag('config', 'G-2PV0BKLV94');
     </script>
-    <!-- FontAwesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="css/contactUs.css">
+    <link rel="icon" href="images/favicon-16x16.png" type="image/png">
+    <link rel="stylesheet" href="css/ev-contact.css">
 </head>
-<body>
-    <header>
-        <div id="navbar-placeholder"></div>
+    <body>
+
+      <header>
+        <nav class="navbar">
+          <div class="logo-container">
+            <a href="ev-academy.html"><img src="images/1000052219-removebg-preview.png" alt="EV Academy Logo" class="logo"></a>
+          </div>
+  
+          <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+              <span></span>
+              <span></span>
+              <span></span>
+          </div>
+            
+          <ul class="nav-links">
+            <li><a href="ev-academy.html">EV Academy</a></li>
+            <li><a href="ev-course.html">EV Course</a></li>
+            <li><a href="ev-internship.html">EV Internship</a></li>
+            <li><a href="ev-mentors.html">EV Mentors</a></li>
+            <li><a href="ev-placements.html">EV Placements</a></li>
+            <li><a href="ev-careers.html">EV Careers</a></li>
+            <li><a href="ev-contact.html" class="active">Contact Us</a></li>
+            <li><a href="ev-about-us.html">About Us</a></li>
+          </ul>
+      </nav>
+  
+      <script>
+          function toggleMenu() {
+              const navLinks = document.querySelector(".nav-links");
+              navLinks.classList.toggle("show");
+          }
+      </script>
     </header>
-    <div class="boody">
-        <div class="container">
-            <div class="contact-form">
-                <h2>Contact Admissions Department</h2> <br>
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" placeholder="Name" required minlength="2" pattern="[A-Za-z\s]+" title="Please enter a valid name (letters only).">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Email" required title="Please enter a valid email address.">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" placeholder="Phone Number" required pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number.">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" placeholder="Message" required minlength="10"></textarea>
-                    </div>
-                    <button type="submit">Submit</button>
-                </form>
-                <div id="formResponse"></div>
-            </div>
-            <div class="contact-info">
-                <p>For questions, technical assistance, or collaboration opportunities via the contact information provided.</p>
-                <!-- <div class="info-item">
-                    <i class="fas fa-phone-alt"></i>
-                    <a href="tel:+918197355166">+91 8197355166</a>
-                </div> -->
-                <div class="info-item">
-                    <div class="info-heading-container">
-                        <p class="info-heading">Reach Head of Admissions</p>
-                    </div>
-                    <br><br><br>
-                    <div class="sub-info-item">
-                        <ul class="no-bullets">
-                            <li><i class="fas fa-phone-alt"></i>
-                                <a href="tel:+918197355166">+91 8197355166</a></li>
-                                <li>
-                                    <i class="fas fa-phone-alt"></i>
-                                    <a href="tel:+918197355166">+91 8075664438</a>
-                                </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-envelope"></i>
-                    <a href="mailto:admissions@visionastraa.com">admissions@visionastraa.com</a>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <p>Bengaluru, KA, India</p>
-                </div>
+
+        <section class="contact-section">
+        <div class="contact-container">
+            
+            <!-- Contact Form -->
+            <form id="contactForm">
+              <div class="contact-form">
+                  <h2 class="contact-heading">Contact Us</h2>
+                  <label for="name">Name</label>
+                  <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" placeholder="Email address" required>
+
+                  <label for="phone">Phone Number</label>
+                  <input type="tel" id="phone" name="phone" placeholder="Phone number" required>
+
+                  <label for="message">Message</label>
+                  <textarea id="message" name="message" placeholder="Enter question or feedback" required></textarea>
+
+                  <button class="submit-btn" type="submit">Submit</button>
+                  <div id="formResponse"></div>
+              </div>
+            </form>
+
+            <!-- Map -->
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15554.968044718!2d77.48156017534198!3d12.924296066804215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3fc2fcdd6063%3A0x71b5da698a475dca!2sVisionAstraa%20EV%20Academy!5e0!3m2!1sen!2sin!4v1739531493658!5m2!1sen!2sin"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
-    </div>
-    <script>
-        fetch('navbarcomp/navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navbar-placeholder').innerHTML = data;
-                // JavaScript to handle hamburger menu toggle
-                const hamburger = document.getElementById("hamburger");
-                const navLinks = document.getElementById("nav-links");
+    </section>
+
+        <!-- Decorative Image -->
+        <img src="images/image1.png" alt="Decorative Image" class="decorative-image">
+
+            
+        <!-- <section class="get-started">
+            <img src="images/image1.png" alt="Decorative Image" class="decorative-image rotated-90">
+            <h2>Get started!</h2>
+            <p>Analyzing our data across both web and app platforms, gaining insights into the complete user journey.</p>
+            
+            <div class="insights">
+                <div class="insight-box">
+                    <span class="icon">📊</span>
+                    <p>Gaining Insights</p>
+                </div>
+                <div class="insight-box">
+                    <span class="icon">📈</span>
+                    <p>Identifying Opportunities</p>
+                </div>
+            </div>
+        
+            <img src="images/image1.png" alt="Decorative Image" class="decorative-image rotated-180">
+            
+            <button class="get-started-btn">Get Started</button>
+        </section> -->
+
+        <section class="subscribe-section">
+            <div class="subscribe-container">
+                <img src="images/image6.png" alt="Illustration" class="subscribe-image">
+                <img src="images/image5.png" alt="Stars" class="stars">
+                <img src="images/image3.png" alt="Arrow Icon" class="subscribe-arrow">
+                <div class="subscribe-content">
+                    <h2>Get incredible stories, promotions, and offers in your inbox</h2>
+                    <div class="subscribe-input-container">
+                        <input type="email" id="newsletterEmail" placeholder="Email address" class="subscribe-input">
+                        <div class="subscribe-container">
+                            <img src="images/image4.png" alt="Overlay" class="subscribe-overlay">
+                            <button class="subscribe-btn" type="submit" id="subscribeButton">Subscribe</button>
+                        </div>
+                    </div>
+                    <div id="newsletterResponse"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="questions-section">
+            <div class="questions-container">
+                <bold><h2>Ready to Start Your Professional Career</h2></bold>
+                <a href="ev-contact.html" style="text-decoration: none;"><button class="reach-out-btn">Reach out to us</button></a>
+                <div class="contact-info">
+                  <p class="contact-heading">Reach Head of Admissions:</p>
+                  <p class="contact-phone1"><i class="fas fa-phone-alt"></i> <a href="tel:+918197355166">+91 8197355166</a></p>
+                  <p class="contact-phone2"><i class="fas fa-phone-alt"></i> <a href="tel:+918075664438">+91 8075664438</a></p>
+                  <p class="contact-email">Mail us: <a href="mailto:admissions@visionastraa.com">admissions@visionastraa.com</a></p>
+              </div>
+              <script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous"></script>
+                <img src="images/image2.png" alt="Geometric Grid" class="geometric-grid">
+            </div>
+            <div class="questions-footer">
+                <p>Having questions?</p>
+                <img src="images/image3.png" alt="Arrow" class="question-arrow">
+            </div>
+        </section>
+
+        <br>
+        <br>
+
+        <footer>
+            <div class="footer-container">
+              <div class="about-us">
+                <h3>ABOUT US</h3>
+                <p>Empowering India’s talent to lead the global EV industry.</p><br>
+                <p>We are committed to bridging the gap between academia and industry, providing students with the practical skills and knowledge required to excel in the EV sector. Our programs foster innovation, entrepreneurship, and a deep understanding of the EV ecosystem.</p>
+              </div>
+              
+              <div class="footer-links">
+                <div class="links">
+                  <h3>LINKS</h3>
+                  <ul>
+                    <li><a href="ev-academy.html">EV Academy</a></li>
+                    <li><a href="ev-course.html">EV Course</a></li>
+                    <li><a href="ev-internship.html">EV Internship</a></li>
+                    <li><a href="ev-mentors.html">EV Mentors</a></li>
+                    <li><a href="ev-placements.html">EV Placements</a></li>
+                    <li><a href="ev-jobs.php">EV Jobs</a></li>
+                  </ul>
+                </div>
     
-                if (hamburger && navLinks) {
-                    hamburger.onclick = function () {
-                        navLinks.classList.toggle("active");
-                    };
+                <div class="Company">
+                <h3>COMPANY</h3>
+                  <ul>
+                    <li><a href="ev-about-us.html">About Us</a></li>
+                    <li><a href="ev-careers.html">EV Careers</a></li>
+                  </ul>
+                </div>
+                               
+                <div class="plans">
+                  <h3>CONTACT</h3>
+                  <ul>  
+                    <li><a href="ev-contact.html">Contact Us</a></li>
+                  </ul>
+                </div>
+              </div>
+                
+              <div class="follow-us">
+                <h3>FOLLOW US</h3>
+                <ul>
+                  <li><a href="https://www.instagram.com/va_ev_academy/">Instagram</a></li>
+                  <li><a href="https://in.linkedin.com/company/va-ev-academy">LinkedIn</a></li>
+                  <li><a href="https://www.youtube.com/@VisionAstraaEVAcademy">YouTube</a></li>
+                </ul>
+              </div>
+            </div>
+            
+            <hr>
+            
+            <div class="footer-bottom">
+              <div class="footer-logo-container">
+                <img src="images/1000052219-removebg-preview.png" alt="VisionAstraa Logo">
+              </div>
+              <p>&copy; 2024 VisionAstraa. All rights reserved.</p>
+              <button class="ev-academy-button">EV Academy</button>
+            </div>
+          </footer>
+
+          <script>
+            document.getElementById('subscribeButton').addEventListener('click', function (e) {
+        e.preventDefault();
+        var emailInput = document.getElementById('newsletterEmail');
+        var email = emailInput.value;
+        var responseElement = document.getElementById('newsletterResponse');
+        
+        if (email && validateEmail(email)) {
+            var formData = new FormData();
+            formData.append('email', email);
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'php/ev-subscribe-newsletter.php', true);
+            
+            xhr.onload = function () {
+                var response = JSON.parse(this.responseText);
+                responseElement.innerHTML = response.message;
+                responseElement.style.color = response.success ? 'green' : 'red';
+                if (response.success) {
+                    emailInput.value = ''; 
                 }
-            })
-            .catch(error => console.error('Error loading navbar:', error));
-        /* document.getElementById("hamburger").onclick = function () {
-            document.getElementById("nav-links").classList.toggle("active");
-        }; */
-        document.getElementById('contactForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            var form = e.target;
-            if (form.checkValidity()) {
-                var formData = new FormData(form);
+            };
+            
+            xhr.onerror = function() {
+                responseElement.innerHTML = "Error submitting your email. Please try again.";
+                responseElement.style.color = 'red';
+            };
+            
+            xhr.send(formData);
+        } else {
+            responseElement.innerHTML = "Please enter a valid email address.";
+            responseElement.style.color = 'red';
+        }
+    });
 
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'php/submit_contact_new.php', true);
-                xhr.onload = function () {
-                    var response = JSON.parse(this.responseText);
-                    var responseElement = document.getElementById('formResponse');
-                    responseElement.innerHTML = response.message;
-                    responseElement.style.color = response.success ? 'green' : 'red';
-                };
-                xhr.send(formData);
-            } else {
-                alert('Please fill out the form correctly.');
-            }
-        });
+    // Email validation function
+    function validateEmail(email) {
+        var re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return re.test(String(email).toLowerCase());
+    }
+            document.getElementById('contactForm').addEventListener('submit', function (e) {
+              e.preventDefault();
+              var form = e.target;
+              if (form.checkValidity()) {
+                  var formData = new FormData(form);
 
-        (function() {
+                  var xhr = new XMLHttpRequest();
+                  xhr.open('POST', 'php/submit-ev-contact.php', true);
+                  xhr.onload = function () {
+                      var response = JSON.parse(this.responseText);
+                      var responseElement = document.getElementById('formResponse');
+                      responseElement.innerHTML = response.message;
+                      responseElement.style.color = response.success ? 'green' : 'red';
+                  };
+                  xhr.send(formData);
+              } else {
+                  alert('Please fill out the form correctly.');
+              }
+          });
+
+            (function() {
           const widgetConfig = {
             backgroundColor: '#25D366',
             position: 'right',
@@ -194,7 +341,7 @@
                       border-top: 1px solid #eee;
                       padding-top: 12px;
                       margin-top: 10px;
-                    ">Powered by VisionAstraa</a>
+                    ">Powered by ZEPIC</a>
 
                   </div>
                 ` : ''}
@@ -210,7 +357,8 @@
         
           renderWidget();
         })()
-    </script>
-</body>
-
-</html>
+          </script>
+        <script src="js/ev-contact.js"></script>      
+    </body>
+    </html>
+    

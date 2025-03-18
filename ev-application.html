@@ -12,274 +12,240 @@
 
     gtag('config', 'G-2PV0BKLV94');
     </script>
-    <style>
-        body, html {
-            font-family: Arial, sans-serif;
-            background-color: #1c1c1c; 
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: auto; 
-        }
-    .form-container {
-        position: relative; 
-        background-color: rgba(32, 32, 32, 0.8); 
-        background-image: url('image/new-apply-now.jpg'); 
-        background-size: cover; 
-        background-position: center; 
-        background-repeat: no-repeat; 
-        padding: 20px;
-        border-radius: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 90%;
-        max-width: 850px;
-        margin: 20px auto;
-        overflow-y: auto; 
-    }
-
-    .form-container::before {
-        content: ''; 
-        position: absolute; 
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5); 
-        border-radius: 8px; 
-        z-index: 1; 
-    }
-
-    .form-container h1,
-    .form-container h2,
-    .form-container label,
-    .form-container input,
-    .form-container select,
-    .form-container textarea,
-    .form-container button {
-        position: relative; 
-        z-index: 2; 
-    }
-        .form-container h1 {
-            text-align: center;
-            color: #fff;
-            margin-top: 0;
-        }
-        .form-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-        .form-container label {
-            display: block;
-            color: #fff;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        .form-container input[type="text"],
-        .form-container input[type="email"],
-        .form-container input[type="tel"],
-        .form-container input[type="file"],
-        .form-container input[type="date"],
-        .form-container select,
-        .form-container textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            color: #000;
-            background-color: #fff;
-            border: 1px solid #fff;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        .form-container textarea {
-            resize: vertical;
-        }
-        .form-container button {
-            width: 100%;
-            padding: 10px;
-            background-color: #fff;
-            border-radius: 20px;
-            color: black;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .form-container button:hover {
-            background-color: #5642a3;
-            color: #fff;
-        }
-        .navigate-button {
-            background-color: #007bff;
-            margin-top: 10px;
-            width: 100%;
-            padding: 10px;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            text-align: center;
-        }
-        .navigate-button:hover {
-            background-color: #0069d9;
-        }
-        .message {
-            margin-top: 20px;
-            font-size: 16px;
-            text-align: center;
-        }
-        .contact-admissions {
-            text-align: center;
-            margin-top: 20px;
-            color: #fff;
-        }
-        .contact-admissions a {
-            text-decoration: none;
-            color: #007bff;
-            font-size: 18px;
-        }
-        .contact-admissions a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <meta name="title" content="VisionAstraa EV Academy" />
+    <meta name="description" content="Charge your future in EV industry with VisionAstraa EV Academy." />
+    <meta name="keywords" content="EV, Electric Vehicle, EV Academy, EV Training, EV Institute, EV Certificate, EV Course, EV Courses, EV Upskilling, EV Certification Program, EV Program, EV Placement, EV Jobs, EV Package, Electric Vehicle Academy, Electric Vehicle Training, Electric Vehicle Institute, Electric Vehicle Certificate, Electric Vehicle Course, Electric Vehicle Upskilling, Electric Vehicle Certification Program, Electric Vehicle Program, Electric Vehicle Placement, Electric Vehicle Jobs, Electric Vehicle Package, EV Diploma Course, EV Diploma, EV M.Tech, EV M.Tech Course, Electric Vehicle Diploma Course, Electric Vehicle Diploma, Electric Vehicle M.Tech, Electric Vehicle M.Tech Course, Nikhil Jain C S, NikhilJain, Nikhil Jain CS" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://visionastraa.com/ev-application.html" />
+    <meta property="og:title" content="VisionAstraa EV Academy" />
+    <meta property="og:description" content="Charge your future in EV industry with VisionAstraa EV Academy." />
+    <meta property="og:image" content="https://visionastraa.com/images/ev_meta_image.png" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://visionastraa.com/ev-application.html" />
+    <meta property="twitter:title" content="VisionAstraa EV Academy" />
+    <meta property="twitter:description" content="Charge your future in EV industry with VisionAstraa EV Academy." />
+    <meta property="twitter:image" content="https://visionastraa.com/images/ev_meta_image.png" />
+    <link rel="icon" href="images/favicon-16x16.png" type="image/png">
+    <link rel="stylesheet" href="css/ev-application.css">
 </head>
 <body>
-     <header>
-        <div id="navbar-placeholder"></div>
-    </header>
-    <!-- Application Form -->
-    <div class="form-container">
-        <h1>Apply Now!</h1>
-
-        <form id="applicationForm" onsubmit="submitForm(event);" enctype="multipart/form-data">
-            <label for="first_name">First name</label>
-            <input type="text" id="first_name" name="first_name" pattern="[A-Za-z\s]+" title="Please enter only letters." required>
-
-            <label for="last_name">Last name</label>
-            <input type="text" id="last_name" name="last_name" pattern="[A-Za-z\s]+" title="Please enter only letters." required>
-
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number." required>
-
-            <label for="dob">Date of Birth:</label>
-            <input type="date" id="dob" name="dob" required>
+    <header>
+        <nav class="navbar">
+          <div class="logo-container">
+            <a href="ev-academy.html"><img src="images/1000052219-removebg-preview.png" alt="EV Academy Logo" class="logo"></a>
+          </div>
+  
+          <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+              <span></span>
+              <span></span>
+              <span></span>
+          </div>
             
-            <label for="state">State:</label>
-            <select id="state" name="state" onchange="populateColleges()" required>
-                <option value="">Select State</option>
-                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                <option value="Assam">Assam</option>
-                <option value="Bihar">Bihar</option>
-                <option value="Chhattisgarh">Chhattisgarh</option>
-                <option value="Goa">Goa</option>
-                <option value="Gujarat">Gujarat</option>
-                <option value="Haryana">Haryana</option>
-                <option value="Himachal Pradesh">Himachal Pradesh</option>
-                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                <option value="Jharkhand">Jharkhand</option>
-                <option value="Karnataka">Karnataka</option>
-                <option value="Kerala">Kerala</option>
-                <option value="Madhya Pradesh">Madhya Pradesh</option>
-                <option value="Maharashtra">Maharashtra</option>
-                <option value="Manipur">Manipur</option>
-                <option value="Meghalaya">Meghalaya</option>
-                <option value="Mizoram">Mizoram</option>
-                <option value="Nagaland">Nagaland</option>
-                <option value="Odisha">Odisha</option>
-                <option value="Punjab">Punjab</option>
-                <option value="Rajasthan">Rajasthan</option>
-                <option value="Sikkim">Sikkim</option>
-                <option value="Tamil Nadu">Tamil Nadu</option>
-                <option value="Telangana">Telangana</option>
-                <option value="Tripura">Tripura</option>
-                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                <option value="Uttarakhand">Uttarakhand</option>
-                <option value="West Bengal">West Bengal</option>
-                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                <option value="Chandigarh">Chandigarh</option>
-                <option value="Daman and Diu">Daman and Diu</option>
-                <option value="Lakshadweep">Lakshadweep</option>
-                <option value="Delhi">Delhi</option>
-                <option value="Puducherry">Puducherry</option>
-            </select>
+          <ul class="nav-links">
+            <li><a href="ev-academy.html">EV Academy</a></li>
+            <li><a href="ev-course.html">EV Course</a></li>
+            <li><a href="ev-internship.html">EV Internship</a></li>
+            <li><a href="ev-mentors.html">EV Mentors</a></li>
+            <li><a href="ev-placements.html">EV Placements</a></li>
+            <li><a href="ev-careers.html">EV Careers</a></li>
+            <li><a href="ev-contact.html">Contact Us</a></li>
+            <li><a href="ev-about-us.html">About Us</a></li>
+          </ul>
+      </nav>
+  
+      <script>
+          function toggleMenu() {
+              const navLinks = document.querySelector(".nav-links");
+              navLinks.classList.toggle("show");
+          }
+      </script>
+    </header>
+    <div class="form-container">
+        <form id="application-form" onsubmit="submitForm(event);" enctype="multipart/form-data">
+            <div id="step-1">
+                <h1>Apply Now!</h1>
+                <h2>Step 1: Personal Information</h2>
+                <label for="first_name">First Name *</label>
+                <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
 
-            <label for="location">Your Location (City/Town)</label>
-            <input type="text" id="location" name="location" required>
+                <label for="last_name">Last Name *</label>
+                <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
 
-            <label for="college">College:</label>
-            <select id="college" name="college" required>
-                <option value="">Select College</option>
-            </select>
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" placeholder="Email address" required>
 
-            <label for="degree">Degree:</label>
-            <select id="degree" name="degree" required>
-                <option value="Select Option">Select Option</option>
-                <option value="B.E">B.E</option>
-                <option value="B.Tech">B.Tech</option>
-                <option value="M.Tech">M.Tech</option>
-            </select>
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" placeholder="Phone number" required>
 
-            <label for="specialization">Specialization (Branch)</label>
-            <input type="text" id="specialization" name="specialization" required>
+                <label for="dob">Date of Birth *</label>
+                <input type="date" id="dob" name="dob" required>
 
-            <label for="graduation">Year of Graduation</label>
-            <input type="text" id="graduation" name="graduation" pattern="\d{4}" title="Please enter a valid year." required>
+                <button class="btn" onclick="nextStep()">Next</button>
+            </div>
 
-            <label for="cgpa">CGPA:</label>
-            <input type="text" id="cgpa" name="cgpa" required><br>
+            <div id="step-2" style="display: none;">
+                <h2>Step 2: Education & Application Details</h2>
+                <label for="state">State *</label>
+                <select id="state" name="state" onchange="populateColleges()" required>
+                    <option value="">Select State</option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                    <option value="Assam">Assam</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                    <option value="Jharkhand">Jharkhand</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Manipur">Manipur</option>
+                    <option value="Meghalaya">Meghalaya</option>
+                    <option value="Mizoram">Mizoram</option>
+                    <option value="Nagaland">Nagaland</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Sikkim">Sikkim</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Tripura">Tripura</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Uttarakhand">Uttarakhand</option>
+                    <option value="West Bengal">West Bengal</option>
+                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                    <option value="Chandigarh">Chandigarh</option>
+                    <option value="Daman and Diu">Daman and Diu</option>
+                    <option value="Lakshadweep">Lakshadweep</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Puducherry">Puducherry</option>
+                </select>
 
-            <label for="term">Applying for which term?</label>
-            <select id="term" name="term" required>
-                <option value="April 2025 (Summer)">April 2025 (Summer)</option>
-                <option value="Aug 2025 (Autumn/Fall)">August 2025 (Autumn/Fall)</option> 
-            </select>
+                <label for="location">Your Location (City/Town) *</label>
+                <input type="text" id="location" name="location" placeholder="Enter your city/town" required>
 
-            <label for="resume">Upload Resume (PDF format, maximum size 2MB)</label>
-            <input type="file" id="resume" name="resume" accept=".pdf" required>
+                <label for="college">College *</label>
+                <select id="college" name="college" required>
+                    <option value="">Select College</option>
+                </select>
 
-            <label for="referral">Do you have a referral code? Enter it here!</label>
-            <select id="referral" name="referral" required>
-                <option value=""></option>
-                <option value="No Referral">No Referral</option>
-                <option value="VEVT1-P1">VEVT1-P1</option> 
-                <option value="VEVT1-P1J1">VEVT1-P1J1</option> 
-            </select>
+                <label for="degree">Degree *</label>
+                <select id="degree" name="degree" required>
+                    <option value="Select Option">Select Option</option>
+                    <option value="B.E">B.E</option>
+                    <option value="B.Tech">B.Tech</option>
+                    <option value="M.Tech">M.Tech</option>
+                </select>
 
-            <label for="goals">Why you should be selected? Describe in your own words (&lt;500 words) </label>
-            <textarea id="goals" name="goals" rows="4" required></textarea>
+                <label for="specialization">Specialization (Branch) *</label>
+                <input type="text" id="specialization" name="specialization" placeholder="Enter your specialization" required>
 
-            <button type="submit">Submit</button>
+                <label for="graduation_year">Year of Graduation *</label>
+                <input type="text" id="graduation_year" name="graduation" placeholder="Enter your year of graduation" required>
+
+                <label for="cgpa">CGPA *</label>
+                <input type="text" id="cgpa" name="cgpa" placeholder="Enter your CGPA" required>
+
+                <label for="term">Applying for which term? *</label>
+                <select id="term" name="term" required>
+                    <option value="April 2025 (Summer)">April 2025 (Summer)</option>
+                    <option value="Aug 2025 (Autumn/Fall)">August 2025 (Autumn/Fall)</option> 
+                </select>
+
+                <label for="resume">Upload Resume (PDF, max 2MB) *</label>
+                <input type="file" id="resume" name="resume" accept="application/pdf" required>
+
+                <label for="referral">Do you have a referral code? *</label>
+                <select id="referral" name="referral" required>
+                    <option value=""></option>
+                    <option value="No Referral">No Referral</option>
+                    <option value="VEVT1-P1">VEVT1-P1</option> 
+                    <option value="VEVT1-P1J1">VEVT1-P1J1</option> 
+                </select>
+
+                <label for="goals">Why should you be selected? (max 500 words) *</label>
+                <textarea id="goals" name="goals" rows="5" placeholder="Why should you be selected?" required></textarea>
+
+                <div class="button-container">
+                    <button class="back-button" onclick="prevStep()">Back</button>
+                    <button type="submit" class="btn">Submit</button>
+                </div>
+            </div>
         </form>
-
-        <button class="navigate-button" onclick="navigateToCoursePage()">View courses</button>
-
         <div id="message" class="message"></div>
     </div>
 
-    <div class="contact-admissions">
-        <p>Have questions? <a href="ev-contact.html">Contact Admissions</a></p>
-    </div>
+    <footer>
+        <div class="footer-container">
+          <div class="about-us">
+            <h3>ABOUT US</h3>
+            <p>Empowering India’s talent to lead the global EV industry.</p><br>
+            <p>We are committed to bridging the gap between academia and industry, providing students with the practical skills and knowledge required to excel in the EV sector. Our programs foster innovation, entrepreneurship, and a deep understanding of the EV ecosystem.</p>
+          </div>
+          
+          <div class="footer-links">
+            <div class="links">
+                <h3>LINKS</h3>
+                <ul>
+                  <li><a href="ev-academy.html">EV Academy</a></li>
+                  <li><a href="ev-course.html">EV Course</a></li>
+                  <li><a href="ev-internship.html">EV Internship</a></li>
+                  <li><a href="ev-mentors.html">EV Mentors</a></li>
+                  <li><a href="ev-placements.html">EV Placements</a></li>
+                  <li><a href="ev-jobs.php">EV Jobs</a></li>
+                </ul>
+              </div>
+  
+              <div class="Company">
+              <h3>COMPANY</h3>
+                <ul>
+                  <li><a href="ev-about-us.html">About Us</a></li>
+                  <li><a href="ev-careers.html">EV Careers</a></li>
+                </ul>
+              </div>
+                             
+              <div class="plans">
+                <h3>CONTACT</h3>
+                <ul>  
+                  <li><a href="ev-contact.html">Contact Us</a></li>
+                </ul>
+              </div>
+            </div>
+            
+          <div class="follow-us">
+            <h3>FOLLOW US</h3>
+            <ul>
+                <li><a href="https://www.instagram.com/va_ev_academy/">Instagram</a></li>
+                <li><a href="https://in.linkedin.com/company/va-ev-academy">LinkedIn</a></li>
+                <li><a href="https://www.youtube.com/@VisionAstraaEVAcademy">YouTube</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <hr>
+        
+        <div class="footer-bottom">
+          <div class="footer-logo-container">
+            <img src="images/1000052219-removebg-preview.png" alt="VisionAstraa Logo">
+          </div>
+          <p>&copy; 2024 VisionAstraa. All rights reserved.</p>
+          <button class="ev-academy-button">EV Academy</button>
+        </div>
+      </footer>
 
     <script>
-         fetch('navbarcomp/navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navbar-placeholder').innerHTML = data;
-                const hamburger = document.getElementById("hamburger");
-                const navLinks = document.getElementById("nav-links");
-    
-                if (hamburger && navLinks) {
-                    hamburger.onclick = function () {
-                        navLinks.classList.toggle("active");
-                    };
-                }
-            })
-            .catch(error => console.error('Error loading navbar:', error));
+        function nextStep() {
+            document.getElementById("step-1").style.display = "none";
+            document.getElementById("step-2").style.display = "block";
+        }
+        function prevStep() {
+            document.getElementById("step-2").style.display = "none";
+            document.getElementById("step-1").style.display = "block";
+        }
         function validateForm() {
             const resumeInput = document.getElementById('resume');
             const file = resumeInput.files[0];
@@ -298,18 +264,13 @@
                     return false;
                 }
 
-                if (fileSizeInMB > 2) { // Maximum size of 2MB
+                if (fileSizeInMB > 2) { 
                     alert('The resume file size should not exceed 2MB.');
                     return false;
                 }
             }
             return true;
         }
-
-        function navigateToCoursePage() {
-            window.location.href = 'ev-course.html';
-        }
-
         function submitForm(event) {
             event.preventDefault();
 
@@ -317,10 +278,10 @@
                 return;
             }
 
-            const form = document.getElementById('applicationForm');
+            const form = document.getElementById('application-form');
             const formData = new FormData(form);
 
-            fetch('php/submit_application.php', {
+            fetch('php/submit-ev-application.php', {
                 method: 'POST',
                 body: formData
             })
@@ -346,7 +307,6 @@
                 messageDiv.style.color = "red";
             });
         }
-
         function populateColleges() {
             const stateSelect = document.getElementById('state');
             const collegeSelect = document.getElementById('college');
@@ -3293,7 +3253,6 @@
                 "WOMEN'S ENGINEERING COLLEGE",
                 "OTHER"]
         };
-
         (function() {
           const widgetConfig = {
             backgroundColor: '#25D366',
@@ -3370,7 +3329,7 @@
                       border-top: 1px solid #eee;
                       padding-top: 12px;
                       margin-top: 10px;
-                    ">Powered by VisionAstraa</a>
+                    ">Powered by ZEPIC</a>
 
                   </div>
                 ` : ''}
@@ -3386,7 +3345,6 @@
         
           renderWidget();
         })()
-
     </script>
 </body>
 </html>
