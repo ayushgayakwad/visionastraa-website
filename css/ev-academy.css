@@ -442,8 +442,8 @@ hr {
 
 .features-image img {
     width: 450px;
-    border-radius: 20px;
     height: auto;
+    border-radius: 20px;
     margin-bottom: 16px;
 }
 
@@ -507,74 +507,6 @@ hr {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-}
-
-/* Call US */
-.call-section {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap; /* Allows content to wrap on smaller screens */
-    background: rgba(108, 92, 231, 0.1);
-    padding: 20px;
-    border-radius: 35px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 950px;
-    margin: 50px auto; /* Centers the section */
-    gap: 20px; /* Adds spacing */
-}
-
-.text-content {
-    flex: 1;
-    padding: 20px;
-    min-width: 250px; /* Prevents content from shrinking too much */
-}
-
-.text-content h2 {
-    font-size: clamp(18px, 2.5vw, 24px); /* Responsive font size */
-    margin-bottom: 15px;
-    color: #333;
-}
-
-.call-button {
-    display: inline-block;
-    background-color: #6c5ce7;
-    color: #ffffff;
-    padding: 12px 15px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    width: 100%;
-    max-width: 180px; /* Keeps button size consistent */
-    transition: 0.3s ease-in-out;
-}
-
-.call-button:hover {
-    background-color: #7b7df3;
-}
-
-.image-content-team {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    min-width: 280px; /* Ensures the image is visible on smaller screens */
-}
-
-.image-content-team img {
-    width: 100%;
-    max-width: 500px;
-    border-radius: 25px;
-}
-
-.button-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%; /* Takes full width on small screens */
-    align-items: left;
 }
 
 /* Contact Section */
@@ -815,26 +747,6 @@ iframe {
     .features-image img {
         width: 350px;
         height: auto;
-        border-radius: 20px;
-    }
-
-    .call-section {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .text-content {
-        width: 100%;
-        text-align: center;
-    }
-
-    .button-container {
-        width: 100%;
-        align-items: center;
-    }
-
-    .image-content-team img {
-        max-width: 90%;
     }
 
     .contact-container {
