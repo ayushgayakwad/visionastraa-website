@@ -375,7 +375,7 @@ hr {
     font-size: 2.5rem;
     font-weight: bold;
     color: #333;
-    margin: 0px 10px;
+    margin: 0px 0px;
     width: 100%;
 }
 
@@ -388,7 +388,7 @@ hr {
 .description-mirror {
     font-size: 1rem;
     color: #333;
-    margin: 10px 10px 18px 10px;
+    margin: 10px 10px 18px 0px;
 }
 
 .btn-mirror {
@@ -399,7 +399,7 @@ hr {
     border-radius: 24px;
     font-size: 1rem;
     cursor: pointer;
-    margin: 0px 10px 10px 10px;
+    margin: 0px 10px 10px 0px;
     font-weight: bold;
 }
 
@@ -414,6 +414,13 @@ hr {
 .illustration-mirror {
     width: 80%;
     height: auto;
+}
+
+.image-content-mirror img {
+    width: 90%;
+    height: auto;
+    border-radius: 20px;
+    margin: 16px auto;
 }
 
 .features {
@@ -441,8 +448,10 @@ hr {
 }
 
 .features-image img {
-    width: 250px;
+    width: 450px;
+    border-radius: 20px;
     height: auto;
+    margin-bottom: 16px;
 }
 
 .features-list {
@@ -713,6 +722,7 @@ iframe {
 
     .container-mirror {
         padding: 0 32px 32px 32px;
+        align-items: flex-start;
     }
 
     .description-mirror{
@@ -720,7 +730,14 @@ iframe {
     }
 
     .illustration-mirror{
-        content: url('../images/home3.png');
+        content: url('../images/home1.jpg');
+    }
+
+    .image-content-mirror img {
+        width: 350px;
+        height: auto;
+        border-radius: 20px;
+        margin: 8px auto;
     }
 
     .features {
@@ -741,6 +758,12 @@ iframe {
         width: 50%;
         display: flex;
         justify-content: center;
+    }
+
+    .features-image img {
+        width: 350px;
+        height: auto;
+        border-radius: 20px;
     }
 
     .contact-container {
