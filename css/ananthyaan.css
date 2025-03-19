@@ -187,9 +187,17 @@
         gap: 30px;
     }
 
+    .footer-links ul {
+        text-align: center;
+    }
+
     .footer-bottom {
         flex-direction: column;
         gap: 15px;
+    }
+
+    .follow-us ul {
+        text-align: center;
     }
 
     .logo-container {
