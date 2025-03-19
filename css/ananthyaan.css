@@ -116,6 +116,12 @@
     text-align: center;
   }
 
+  h3 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: black;
+  }
+
   @media (max-width: 1200px) {
     .navbar{
         flex-direction: column;
@@ -234,7 +240,7 @@
 
 .program-fee-title {
     text-align: center;
-    font-size: 32px; /* Adjust size as needed */
+    font-size: 2.5em; /* Adjust size as needed */
     margin: 0px auto;
     font-weight: bold;
     margin-bottom: 20px; 
@@ -365,17 +371,17 @@ ul {
 }
 
 .features ul li {
-    font-size: 14px; /* Adjust text size */
+    font-size: 18px; /* Adjust text size */
     font-weight: 500; /* Slightly bolder text */
     margin: 8px 0; /* Spacing between items */
     display: flex;
-    align-items: center;
+    align-items: flex-start;
 }
 
 /* Checkmark Styling */
 .features li::before {
     content: "•"; 
-    color: #A28EFF; /* Purple color */
+    color: black; /* Purple color */
     font-weight: bold;
     margin-right: 10px; /* Proper spacing */
     font-size: 18px; /* Slightly larger checkmark */
@@ -405,7 +411,7 @@ ul {
 }
 
 .features-title {
-    font-size: 2.5rem;
+    font-size: 2.5em;
     font-weight: bold;
     color: black;
 }
@@ -445,8 +451,8 @@ ul {
 }
 
 .features-list li {
-    font-size: 1rem;
-    color: #333;
+    font-size: 18px;
+    color: black;
     margin-bottom: 10px;
 }
 
@@ -458,8 +464,9 @@ ul {
     border-radius: 24px;
     font-size: 1rem;
     cursor: pointer;
-    margin: 32px 10px 0px 10px;
+    margin: 16px auto 8px auto;
     font-weight: bold;
+    align-self: center;
 }
 
 /* New Users Stats */
@@ -621,17 +628,17 @@ h2 {
 }
 
 .partnership .images img {
-    width: 15%;
+    width: 12%;
     border-radius: 15px;
+    margin-bottom: 15px;
 }
 
 .partnership p {
     font-size: 18px;
-    padding: 0px 48px;
+    padding: 0px 64px;
     color: #333;
     line-height: 1.6;
-    margin-top: 20px;
-    text-align: center;
+    text-align: justify;
 }
 
 .partnership::before {
@@ -895,6 +902,24 @@ h2 {
   }
 
 @media (max-width: 768px) {
+    h2 {
+        padding: 0px 20px;
+        font-size: 2em;
+    }
+
+    h3 {
+        padding: 0px 20px;
+        font-size: 1.5em;
+      }
+
+    .program-fee-title {
+        font-size: 2em;
+    }
+
+    .features-title {
+        font-size: 2em;
+    }
+
     .iv-logos a {
         flex: 1 1 calc(100% - 30px); 
       }
@@ -1098,7 +1123,7 @@ hr {
         flex-direction: column;
     }
     .partnership .images img {
-        margin: 0px auto;
-        width: 80%;
+        margin: 0px auto 24px auto;
+        width: 40%;
     }
 }
