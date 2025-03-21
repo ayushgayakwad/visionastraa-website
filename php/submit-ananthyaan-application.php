@@ -21,6 +21,8 @@ $tableCreationQuery = "CREATE TABLE IF NOT EXISTS registrations (
     tl_dept VARCHAR(100) NOT NULL,
     tl_email VARCHAR(50) NOT NULL,
     tl_phone VARCHAR(15) NOT NULL,
+    state VARCHAR(50) NOT NULL,
+    college VARCHAR(100) NOT NULL,
     m2_name VARCHAR(50),
     m2_year VARCHAR(50),
     m2_dept VARCHAR(100),
@@ -52,6 +54,9 @@ $tl_year = $_POST['tl_year'];
 $tl_dept = $_POST['tl_dept'];
 $tl_email = $_POST['tl_email'];
 $tl_phone = $_POST['tl_phone'];
+
+$state = $_POST['state'];
+$college = $_POST['college'];
 
 $m2_name = isset($_POST['m2_name']) ? $_POST['m2_name'] : null;
 $m2_year = isset($_POST['m2_year']) ? $_POST['m2_year'] : null;
@@ -88,15 +93,15 @@ if ($checkQuery->num_rows > 0) {
 $checkQuery->close();
 
 $stmt = $conn->prepare("INSERT INTO registrations 
-    (team_name, tl_name, tl_year, tl_dept, tl_email, tl_phone, 
+    (team_name, tl_name, tl_year, tl_dept, tl_email, tl_phone, state, college,
     m2_name, m2_year, m2_dept, m2_email, m2_phone, 
     m3_name, m3_year, m3_dept, m3_email, m3_phone, 
     m4_name, m4_year, m4_dept, m4_email, m4_phone, 
     abstract, abstract_filename) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-$stmt->bind_param("sssssssssssssssssssssss", 
-    $team_name, $tl_name, $tl_year, $tl_dept, $tl_email, $tl_phone, 
+$stmt->bind_param("sssssssssssssssssssssssss", 
+    $team_name, $tl_name, $tl_year, $tl_dept, $tl_email, $tl_phone, $state, $college,
     $m2_name, $m2_year, $m2_dept, $m2_email, $m2_phone, 
     $m3_name, $m3_year, $m3_dept, $m3_email, $m3_phone, 
     $m4_name, $m4_year, $m4_dept, $m4_email, $m4_phone, 
