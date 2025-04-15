@@ -54,7 +54,8 @@ $graduation_year = $_POST['graduation'];
 $cgpa = $_POST['cgpa'];
 $linkedin = $_POST['linkedin'];
 $goals = $_POST['goals'];
-$role = $_POST['role'];
+$roleArray = $_POST['role'];
+$role = implode(", ", $roleArray);
 
 $checkQuery = $conn->prepare("SELECT id FROM crdf25 WHERE email = ? OR phone = ?");
 $checkQuery->bind_param("ss", $email, $phone);

@@ -121,14 +121,34 @@
                 <label for="cgpa">CGPA *</label>
                 <input type="text" id="cgpa" name="cgpa" placeholder="Enter your CGPA" required>
 
-                <label for="role">Applying for which role? *</label>
-                <select id="role" name="role" required>
-                    <option value="EV System Integration Engineer (Mech/EEE)">EV System Integration Engineer (Mech/EEE)</option>
-                    <option value="EV Embedded Systems Engineer (ECE)">EV Embedded Systems Engineer (ECE)</option>
-                    <option value="Power Electronics Engineer (EEE/ECE)">Power Electronics Engineer (EEE/ECE)</option>
-                    <option value="Battery Management System (BMS) Engineer (EEE/ECE)">Battery Management System (BMS) Engineer (EEE/ECE)</option>
-                    <option value="Mechanical EV Design Engineer (Mech)">Mechanical EV Design Engineer (Mech)</option>
-                </select>
+                <fieldset>
+                    <legend>Applying for which role(s)? *</legend>
+                
+                    <label>
+                        <input type="checkbox" name="role[]" value="EV System Integration Engineer (Mech/EEE)">
+                        EV System Integration Engineer (Mech/EEE)
+                    </label><br>
+                
+                    <label>
+                        <input type="checkbox" name="role[]" value="EV Embedded Systems Engineer (ECE)">
+                        EV Embedded Systems Engineer (ECE)
+                    </label><br>
+                
+                    <label>
+                        <input type="checkbox" name="role[]" value="Power Electronics Engineer (EEE/ECE)">
+                        Power Electronics Engineer (EEE/ECE)
+                    </label><br>
+                
+                    <label>
+                        <input type="checkbox" name="role[]" value="Battery Management System (BMS) Engineer (EEE/ECE)">
+                        Battery Management System (BMS) Engineer (EEE/ECE)
+                    </label><br>
+                
+                    <label>
+                        <input type="checkbox" name="role[]" value="Mechanical EV Design Engineer (Mech)">
+                        Mechanical EV Design Engineer (Mech)
+                    </label>
+                </fieldset>                
 
                 <label for="linkedin">LinkedIn Profile URL</label>
                 <input type="text" id="linkedin" name="linkedin" placeholder="Enter your LinkedIn Profile URL">
@@ -148,11 +168,33 @@
             <a href="https://www.linkedin.com/company/veltrik" target="_blank" aria-label="LinkedIn Profile">
               <i class="fab fa-linkedin"></i> Follow us on LinkedIn</a>
         </div>
+        <div class="linkedin-icon">
+            <a href="https://veltrik.com" target="_blank" aria-label="Website">
+              <i class="fas fa-link"></i> Visit Website</a>
+        </div>
 
     </div>
 
     <script>
         function nextStep() {
+            const requiredFields = ["first_name", "last_name", "email", "phone", "alt_phone", "dob"];
+            let allValid = true;
+
+            requiredFields.forEach(function(id) {
+                const field = document.getElementById(id);
+                if (!field.value.trim()) {
+                    field.style.border = "2px solid red";
+                    allValid = false;
+                } else {
+                    field.style.border = "";
+                }
+            });
+
+            if (!allValid) {
+                alert("Please fill out all required fields before proceeding.");
+                return;
+            }
+
             document.getElementById("step-1").style.display = "none";
             document.getElementById("step-2").style.display = "block";
         }
