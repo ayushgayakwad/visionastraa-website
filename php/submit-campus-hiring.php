@@ -19,19 +19,17 @@ $tableCreationQuery = "CREATE TABLE IF NOT EXISTS crdf25 (
     last_name VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL,
     phone VARCHAR(15) NOT NULL,
+    alt_phone VARCHAR(15) NOT NULL,
     dob VARCHAR(25) NOT NULL,
     state VARCHAR(50) NOT NULL,
-    location VARCHAR(255) NOT NULL,
     college VARCHAR(100) NOT NULL,
     degree VARCHAR(100) NOT NULL,
     specialization VARCHAR(100) NOT NULL,
     graduation_year VARCHAR(4) NOT NULL,
     cgpa VARCHAR(10) NOT NULL,
-    resume LONGBLOB NOT NULL,
-    resume_filename VARCHAR(100) NOT NULL,
+    linkedin VARCHAR(200) NOT NULL,
     goals TEXT NOT NULL,
-    referral_code VARCHAR(50),
-    role VARCHAR(200) NOT NULL DEFAULT 'Role 1',
+    role VARCHAR(200) NOT NULL DEFAULT 'Unknown',
     enrolled ENUM('true', 'false') NOT NULL DEFAULT 'false',
     confirmationEmailSent ENUM('true', 'false') NOT NULL DEFAULT 'false',
     submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -46,20 +44,17 @@ $first_name = $_POST['first_name'];
 $last_name = $_POST['last_name'];
 $email = $_POST['email'];
 $phone = $_POST['phone'];
+$alt_phone = $_POST['alt_phone'];
 $dob = $_POST['dob'];
 $state = $_POST['state'];
-$location = $_POST['location'];
 $college = $_POST['college'];
 $degree = $_POST['degree'];
 $specialization = $_POST['specialization'];
 $graduation_year = $_POST['graduation'];
 $cgpa = $_POST['cgpa'];
+$linkedin = $_POST['linkedin'];
 $goals = $_POST['goals'];
-$referral_code = isset($_POST['referral']) ? $_POST['referral'] : null;
 $role = $_POST['role'];
-
-$resume = file_get_contents($_FILES['resume']['tmp_name']);
-$resume_filename = $_FILES['resume']['name'];
 
 $checkQuery = $conn->prepare("SELECT id FROM crdf25 WHERE email = ? OR phone = ?");
 $checkQuery->bind_param("ss", $email, $phone);
@@ -75,10 +70,10 @@ if ($checkQuery->num_rows > 0) {
 $checkQuery->close();
 
 $stmt = $conn->prepare("INSERT INTO crdf25 
-    (first_name, last_name, email, phone, dob, state, location, college, degree, specialization, graduation_year, cgpa, resume, resume_filename, goals, referral_code, role, enrolled, confirmationEmailSent) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'false', 'false')");
+    (first_name, last_name, email, phone, alt_phone, dob, state, college, degree, specialization, graduation_year, cgpa, linkedin, goals, role, enrolled, confirmationEmailSent) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'false', 'false')");
 
-$stmt->bind_param("sssssssssssssssss", $first_name, $last_name, $email, $phone, $dob, $state, $location, $college, $degree, $specialization, $graduation_year, $cgpa, $resume, $resume_filename, $goals, $referral_code, $role);
+$stmt->bind_param("sssssssssssssss", $first_name, $last_name, $email, $phone, $alt_phone, $dob, $state, $college, $degree, $specialization, $graduation_year, $cgpa, $linkedin, $goals, $role);
 
 if ($stmt->execute()) {
     echo json_encode(["success" => true]);

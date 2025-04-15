@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campus Recruitment Drive for 2025 - VisionAstraa EV Academy</title>
+    <title>Campus Recruitment Drive for 2025 Batch - Veltrik.EV</title>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2PV0BKLV94"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -12,32 +12,16 @@
 
     gtag('config', 'G-2PV0BKLV94');
     </script>
-    <link rel="icon" href="images/favicon-16x16.png" type="image/png">
-    <link rel="stylesheet" href="css/ev-application.css">
+    <link rel="icon" href="images/veltrik.jpg" type="image/png">
+    <link rel="stylesheet" href="css/campus-hiring.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
     <header>
         <nav class="navbar">
           <div class="logo-container">
-            <a href="ev-academy.html"><img src="images/1000052219-removebg-preview.png" alt="EV Academy Logo" class="logo"></a>
+            <a href="https://veltrik.ev"><img src="images/veltrik.jpg" alt="Veltrik.EV Logo" class="logo"></a>
           </div>
-  
-          <div class="hamburger" onclick="toggleMenu()" id="hamburger">
-              <span></span>
-              <span></span>
-              <span></span>
-          </div>
-            
-          <ul class="nav-links">
-            <li><a href="ev-academy.html">EV Academy</a></li>
-            <li><a href="ev-course.html">EV Course</a></li>
-            <li><a href="ev-internship.html">EV Internship</a></li>
-            <li><a href="ev-mentors.html">EV Mentors</a></li>
-            <li><a href="ev-placements.html">EV Placements</a></li>
-            <li><a href="ev-careers.html">EV Careers</a></li>
-            <li><a href="ev-contact.html">Contact Us</a></li>
-            <li><a href="ev-about-us.html">About Us</a></li>
-          </ul>
       </nav>
   
       <script>
@@ -50,7 +34,7 @@
     <div class="form-container">
         <form id="application-form" onsubmit="submitForm(event);" enctype="multipart/form-data">
             <div id="step-1">
-                <h1>Campus Recruitment Drive for 2025</h1>
+                <h1>Campus Recruitment Drive for 2025 Batch</h1>
                 <h2>Step 1: Personal Information</h2>
                 <label for="first_name">First Name *</label>
                 <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
@@ -61,8 +45,11 @@
                 <label for="email">Email *</label>
                 <input type="email" id="email" name="email" placeholder="Email address" required>
 
-                <label for="phone">Phone Number *</label>
-                <input type="tel" id="phone" name="phone" placeholder="Phone number" required>
+                <label for="phone">WhatsApp Number *</label>
+                <input type="tel" id="phone" name="phone" placeholder="WhatsApp number" required>
+
+                <label for="alt_phone">Alternate Phone Number *</label>
+                <input type="tel" id="alt_phone" name="alt_phone" placeholder="Alternate Phone number" required>
 
                 <label for="dob">Date of Birth *</label>
                 <input type="date" id="dob" name="dob" required>
@@ -112,9 +99,6 @@
                     <option value="Puducherry">Puducherry</option>
                 </select>
 
-                <label for="location">Your Location (City/Town) *</label>
-                <input type="text" id="location" name="location" placeholder="Enter your city/town" required>
-
                 <label for="college">College *</label>
                 <select id="college" name="college" required>
                     <option value="">Select College</option>
@@ -139,20 +123,15 @@
 
                 <label for="role">Applying for which role? *</label>
                 <select id="role" name="role" required>
-                    <option value="Role 1">Role 1</option>
-                    <option value="Role 2">Role 2</option>
+                    <option value="EV System Integration Engineer (Mech/EEE)">EV System Integration Engineer (Mech/EEE)</option>
+                    <option value="EV Embedded Systems Engineer (ECE)">EV Embedded Systems Engineer (ECE)</option>
+                    <option value="Power Electronics Engineer (EEE/ECE)">Power Electronics Engineer (EEE/ECE)</option>
+                    <option value="Battery Management System (BMS) Engineer (EEE/ECE)">Battery Management System (BMS) Engineer (EEE/ECE)</option>
+                    <option value="Mechanical EV Design Engineer (Mech)">Mechanical EV Design Engineer (Mech)</option>
                 </select>
 
-                <label for="resume">Upload Resume (PDF, max 2MB) *</label>
-                <input type="file" id="resume" name="resume" accept="application/pdf" required>
-
-                <label for="referral">Do you have a referral code? *</label>
-                <select id="referral" name="referral" required>
-                    <option value=""></option>
-                    <option value="No Referral">No Referral</option>
-                    <option value="VEVT1-P1">VEVT1-P1</option> 
-                    <option value="VEVT1-P1J1">VEVT1-P1J1</option> 
-                </select>
+                <label for="linkedin">LinkedIn Profile URL</label>
+                <input type="text" id="linkedin" name="linkedin" placeholder="Enter your LinkedIn Profile URL">
 
                 <label for="goals">Why should you be selected? (max 500 words) *</label>
                 <textarea id="goals" name="goals" rows="5" placeholder="Why should you be selected?" required></textarea>
@@ -164,65 +143,13 @@
             </div>
         </form>
         <div id="message" class="message"></div>
-    </div>
 
-    <footer>
-        <div class="footer-container">
-          <div class="about-us">
-            <h3>ABOUT US</h3>
-            <p>Empowering India’s talent to lead the global EV industry.</p><br>
-            <p>We are committed to bridging the gap between academia and industry, providing students with the practical skills and knowledge required to excel in the EV sector. Our programs foster innovation, entrepreneurship, and a deep understanding of the EV ecosystem.</p>
-          </div>
-          
-          <div class="footer-links">
-            <div class="links">
-                <h3>LINKS</h3>
-                <ul>
-                  <li><a href="ev-academy.html">EV Academy</a></li>
-                  <li><a href="ev-course.html">EV Course</a></li>
-                  <li><a href="ev-internship.html">EV Internship</a></li>
-                  <li><a href="ev-mentors.html">EV Mentors</a></li>
-                  <li><a href="ev-placements.html">EV Placements</a></li>
-                  <li><a href="ev-jobs.php">EV Jobs</a></li>
-                </ul>
-            </div>
-  
-              <div class="Company">
-              <h3>COMPANY</h3>
-                <ul>
-                  <li><a href="ev-about-us.html">About Us</a></li>
-                  <li><a href="ev-careers.html">EV Careers</a></li>
-                </ul>
-              </div>
-                             
-              <div class="plans">
-                <h3>CONTACT</h3>
-                <ul>  
-                  <li><a href="ev-contact.html">Contact Us</a></li>
-                </ul>
-              </div>
-            </div>
-            
-          <div class="follow-us">
-            <h3>FOLLOW US</h3>
-            <ul>
-                <li><a href="https://www.instagram.com/va_ev_academy/">Instagram</a></li>
-                <li><a href="https://in.linkedin.com/company/va-ev-academy">LinkedIn</a></li>
-                <li><a href="https://www.youtube.com/@VisionAstraaEVAcademy">YouTube</a></li>
-            </ul>
-          </div>
+        <div class="linkedin-icon">
+            <a href="https://www.linkedin.com/company/veltrik" target="_blank" aria-label="LinkedIn Profile">
+              <i class="fab fa-linkedin"></i> Follow us on LinkedIn</a>
         </div>
-        
-        <hr>
-        
-        <div class="footer-bottom">
-          <div class="footer-logo-container">
-            <img src="images/1000052219-removebg-preview.png" alt="VisionAstraa Logo">
-          </div>
-          <p>&copy; 2024 VisionAstraa. All rights reserved.</p>
-          <button class="ev-academy-button">EV Academy</button>
-        </div>
-      </footer>
+
+    </div>
 
     <script>
         function nextStep() {
@@ -233,42 +160,14 @@
             document.getElementById("step-2").style.display = "none";
             document.getElementById("step-1").style.display = "block";
         }
-        function validateForm() {
-            const resumeInput = document.getElementById('resume');
-            const file = resumeInput.files[0];
-
-            if(referral.value == ""){
-                alert('Please enter a valid referral code.');
-                return false;
-            }
-
-            if (file) {
-                const fileSizeInMB = file.size / (1024 * 1024);
-                const fileType = file.type;
-
-                if (fileType !== 'application/pdf') {
-                    alert('Please upload the resume in PDF format only.');
-                    return false;
-                }
-
-                if (fileSizeInMB > 2) { 
-                    alert('The resume file size should not exceed 2MB.');
-                    return false;
-                }
-            }
-            return true;
-        }
+        
         function submitForm(event) {
             event.preventDefault();
-
-            if (!validateForm()) {
-                return;
-            }
 
             const form = document.getElementById('application-form');
             const formData = new FormData(form);
 
-            fetch('php/submit-ev-crdf25.php', {
+            fetch('php/submit-campus-hiring.php', {
                 method: 'POST',
                 body: formData
             })
@@ -281,7 +180,7 @@
                 if (data.success) {
                     messageDiv.textContent = "Your application has been submitted successfully!";
                     messageDiv.style.color = "green";
-                    window.location.href = "ev-application-confirmation.html";
+                    //window.location.href = "ev-application-confirmation.html";
                     form.reset();
                 } else {
                     messageDiv.textContent = "Error: " + data.error;
@@ -3240,98 +3139,7 @@
                 "WOMEN'S ENGINEERING COLLEGE",
                 "OTHER"]
         };
-        (function() {
-          const widgetConfig = {
-            backgroundColor: '#25D366',
-            position: 'right',
-            xoffset: '25px',
-            yoffset: '25px',
-            logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg',
-            whatsappNo: '918075664438',
-            whatsappText: 'Hello VisionAstraa team,',
-            popupTitle: 'Dear EV Aspirant, life changing opportunity is just a click away',
-            buttonText: 'Start Chat'
-          };
         
-          let showPopup = false;
-          const container = document.createElement('div');
-          document.body.appendChild(container);
-        
-          function renderWidget() {
-            container.innerHTML = `
-              <div class="z_ft_widget" style="
-                background-color: ${widgetConfig.backgroundColor};
-                ${widgetConfig.position}: ${widgetConfig.xoffset};
-                bottom: ${widgetConfig.yoffset};
-                width: 50px;
-                height: 50px;
-                border-radius: 8px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                position: fixed;
-                cursor: pointer;
-                z-index: 999;
-                transition: opacity 0.3s;
-              ">
-                <img src="${widgetConfig.logoUrl}" alt="WhatsApp" style="width: 32px; height: 32px;">
-                ${showPopup ? `
-                  <div class="z_ft_popup" style="
-                    position: absolute;
-                    bottom: 60px;
-                    width: 200px;
-                    background: white;
-                    border-radius: 8px;
-                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 16px;
-                    ${widgetConfig.position}: 0;
-                  ">
-                    <h3 style="
-                      font-size: 16px;
-                      font-weight: 600;
-                      text-align: center;
-                      margin: 30px 0px;
-                    ">${widgetConfig.popupTitle}</h3>
-                    <a href="https://wa.me/${widgetConfig.whatsappNo}?text=${widgetConfig.whatsappText}" target="_blank" rel="noopener noreferrer" style="
-                      display: inline-block;
-                      background: #25D366;
-                      color: white;
-                      padding: 8px 16px;
-                      border-radius: 4px;
-                      text-decoration: none;
-                      transition: background-color 0.3s;
-                    ">${widgetConfig.buttonText}</a>
-                    <a href="https://visionastraa.com" 
-                     target="_blank" 
-                     rel="noopener noreferrer" 
-                     style="
-                      text-align: center;
-                      font-size: 12px;
-                      color: #666;
-                      text-decoration: none;
-                      border-top: 1px solid #eee;
-                      padding-top: 12px;
-                      margin-top: 10px;
-                    ">Powered by ZEPIC</a>
-
-                  </div>
-                ` : ''}
-              </div>
-            `;
-        
-            container.querySelector('.z_ft_widget').addEventListener('click', (e) => {
-              if (e.target.closest('.z_ft_popup-button')) return;
-              showPopup = !showPopup;
-              renderWidget();
-            });
-          }
-        
-          renderWidget();
-        })()
     </script>
 </body>
 </html>
