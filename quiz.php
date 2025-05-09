@@ -20,6 +20,7 @@ if (isset($_GET['debug']) && $_GET['debug'] == 1) {
     echo json_encode($debug_data);
     exit();
 }
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.html");
     exit();
@@ -171,79 +172,134 @@ if ($time_left <= 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Electric Vehicle Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --primary-dark: #4338ca;
+            --secondary: #0ea5e9;
+            --accent: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            
+            --text-primary: #111827;
+            --text-secondary: #4b5563;
+            --text-tertiary: #6b7280;
+            --text-light: #9ca3af;
+            
+            --bg-white: #ffffff;
+            --bg-light: #f9fafb;
+            --bg-lighter: #f3f4f6;
+            --bg-lightest: #f1f5f9;
+            
+            --border-light: #e5e7eb;
+            --border-medium: #d1d5db;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #1c1c1c;
-            color: #ffffff;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-primary);
             margin: 0;
             padding: 0;
         }
+
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 50px auto;
-            padding: 20px;
-            background-color: #2b2b2b;
+            padding: 30px;
+            background-color: var(--bg-white);
             border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--shadow-lg);
         }
+
         h1 {
             text-align: center;
-            color: #56a3ff;
+            color: var(--primary);
+            font-weight: 500;
         }
+
         .timer {
             text-align: center;
-            font-size: 24px;
+            font-size: 20px;
             margin-bottom: 20px;
         }
+
         .timer span {
             font-weight: bold;
-            color: #56a3ff;
+            color: var(--success);
         }
+
         .question {
             margin-bottom: 20px;
         }
+
         .question p {
             font-size: 18px;
             line-height: 1.5;
         }
+
         .options label {
             display: block;
-            background-color: #3d3d3d;
-            padding: 10px;
-            border-radius: 6px;
-            margin: 8px 0;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .options label:hover {
-            background-color: #4f4f4f;
-        }
-        .options input[type="radio"] {
-            margin-right: 10px;
-        }
-        .btn-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .btn {
-            display: inline-block;
-            background-color: #56a3ff;
-            padding: 12px 24px;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 6px;
+            background-color: var(--bg-lighter);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
             font-size: 16px;
-            margin: 5px;
-            transition: background-color 0.3s;
+            cursor: pointer;
+            border: 1px solid var(--border-medium);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
+
+        .options input[type="radio"]:checked + label {
+            background-color: var(--primary-light);
+            border-color: var(--primary-dark);
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: var(--primary);
+            color: var(--bg-white);
+            border-radius: 8px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: background-color 0.3s ease;
+        }
+
         .btn:hover {
-            background-color: #1c77cc;
+            background-color: var(--primary-dark);
         }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
         .btn:disabled {
-            background-color: #555;
+            background-color: var(--bg-lightest);
+            color: var(--text-light);
             cursor: not-allowed;
         }
+
     </style>
 </head>
 <body>
@@ -270,13 +326,13 @@ if ($time_left <= 0) {
 
             <div class="btn-container">
                 <?php if ($current_question_index > 0): ?>
-                    <a href="quiz.php?previous=true" class="btn">Previous</a>
+                    <a href="quiz.php?previous=true" class="btn"><i class="fas fa-chevron-left"></i> Previous</a>
                 <?php endif; ?>
 
                 <?php if ($current_question_index < 29): ?>
-                    <a href="quiz.php?next=true" class="btn">Next</a>
+                    <a href="quiz.php?next=true" class="btn">Next <i class="fas fa-chevron-right"></i></a>
                 <?php else: ?>
-                    <button type="submit" name="submit_quiz" class="btn">Submit</button>
+                    <button type="submit" name="submit_quiz" class="btn">Submit <i class="fas fa-check-circle"></i></button>
                 <?php endif; ?>
             </div>
         </form>
@@ -303,26 +359,5 @@ if ($time_left <= 0) {
 
         updateTimer();
     </script>
-    <script>
-    function fetchDebugLogs() {
-        fetch('quiz.php?debug=1')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Debug Logs:', data);
-            })
-            .catch(error => {
-                console.error('Error fetching debug logs:', error);
-            });
-    }
-
-    setInterval(fetchDebugLogs, 10000);
-
-    fetchDebugLogs();
-</script>
 </body>
 </html>
