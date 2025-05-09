@@ -62,57 +62,71 @@
     }
   </script>
   <style>
+    :root {
+        --primary: #4f46e5;
+        --primary-light: #6366f1;
+        --primary-dark: #4338ca;
+        --secondary: #0ea5e9;
+        --accent: #8b5cf6;
+        --success: #10b981;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+        
+        --text-primary: #111827;
+        --text-secondary: #4b5563;
+        --text-tertiary: #6b7280;
+        --text-light: #9ca3af;
+        
+        --bg-white: #ffffff;
+        --bg-light: #f9fafb;
+        --bg-lighter: #f3f4f6;
+        --bg-lightest: #f1f5f9;
+        
+        --border-light: #e5e7eb;
+        --border-medium: #d1d5db;
+        
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
     body, html {
-        font-family: Arial, sans-serif;
-        background-color: #1c1c1c; 
+        font-family: 'Roboto', sans-serif;
+        background-color: var(--bg-light);
         margin: 0;
         padding: 0;
         height: 100%;
-        overflow: auto; 
-        color: #ffffff;
+        overflow: auto;
+        color: var(--text-primary);
     }
-    
+
     .form-container {
         position: relative; 
-        background-color: rgba(32, 32, 32, 0.8); 
-        background-image: url('image/ev-home2-bg2.png');
-        background-size: cover; 
-        background-position: center; 
-        background-repeat: no-repeat; 
-        padding: 20px;
-        border-radius: 20px;
+        background-color: var(--bg-white);
+        border-radius: 12px;
+        box-shadow: var(--shadow-lg);
+        padding: 30px;
         width: 90%;
         max-width: 800px;
         margin: 20px auto;
-        overflow-y: auto;
-    }
-
-    .form-container h1,
-    .form-container h2,
-    .form-container label,
-    .form-container input,
-    .form-container select,
-    .form-container textarea,
-    .form-container button {
-        position: relative; 
-        z-index: 2; 
     }
 
     .form-container h1 {
         text-align: center;
-        color: #fff;
+        color: var(--primary);
         margin-top: 0;
     }
 
     .form-container h2 {
         text-align: center;
         margin-bottom: 20px;
-        color: #fff;
+        color: var(--text-light);
     }
 
     .form-container label {
         display: block;
-        color: #fff;
+        color: var(--text-light);
         margin-bottom: 8px;
         font-weight: bold;
     }
@@ -125,50 +139,54 @@
     .form-container select,
     .form-container textarea {
         width: 100%;
-        padding: 10px;
+        padding: 12px;
         margin-bottom: 20px;
-        color: #000;
-        background-color: #fff;
-        border: 1px solid #fff;
-        border-radius: 4px;
+        color: var(--text-primary);
+        background-color: var(--bg-white);
+        border: 1px solid var(--border-medium);
+        border-radius: 8px;
         box-sizing: border-box;
-    }
-
-    .form-container textarea {
-        resize: vertical;
+        font-size: 16px;
     }
 
     .form-container button {
         width: 100%;
-        padding: 10px;
-        background-color: #fff;
+        padding: 12px;
+        background-color: var(--primary);
         border-radius: 20px;
-        color: black;
+        color: var(--bg-white);
         border: none;
         cursor: pointer;
         font-size: 16px;
+        box-shadow: var(--shadow-sm);
     }
 
     .form-container button:hover {
-        background-color: #5642a3;
-        color: #fff;
+        background-color: var(--primary-dark);
     }
 
     .navigate-button {
-        background-color: #007bff;
+        background-color: var(--secondary);
         margin-top: 10px;
         width: 100%;
-        padding: 10px;
-        color: white;
+        padding: 12px;
+        color: var(--bg-white);
         border: none;
-        border-radius: 4px;
+        border-radius: 8px;
         cursor: pointer;
         font-size: 16px;
-        text-align: center;
     }
 
     .navigate-button:hover {
-        background-color: #0069d9;
+        background-color: var(--primary-dark);
+    }
+    
+    .login-text {
+        text-align: center;
+    }
+    
+    .login-text p {
+        text-align: center;
     }
 
     .message {
@@ -177,28 +195,72 @@
         text-align: center;
     }
 
-    .job-section {
-        padding: 20px;
-        border-radius: 20px;
-        width: 90%;
-        max-width: 800px;
-        margin: 20px auto;
-        color: #ffffff;
+    .message a {
+        color: var(--primary);
+        text-decoration: underline;
     }
 
-    .job-section h1, 
-    .job-section h2, 
-    .job-section p, 
-    .job-section ul, 
-    .job-section li {
-        color: #ffffff; 
+    .message a:hover {
+        color: var(--primary-light);
     }
-    .link {
-        color: #0062ca;
-        text-decoration: underline;
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .form-container {
+            padding: 20px;
+        }
+
+        .form-container h1 {
+            font-size: 24px;
+        }
+
+        .form-container h2 {
+            font-size: 16px;
+        }
+
+        .form-container input,
+        .form-container button {
+            font-size: 14px;
+            padding: 10px;
+        }
+
+        .form-container button {
+            border-radius: 12px;
+        }
+
+        .navigate-button {
+            font-size: 14px;
+            padding: 10px;
+        }
     }
-    .link:hover {
-        text-decoration: underline;
+
+    @media (max-width: 480px) {
+        .form-container {
+            padding: 15px;
+        }
+
+        .form-container h1 {
+            font-size: 20px;
+        }
+
+        .form-container h2 {
+            font-size: 14px;
+        }
+
+        .form-container input,
+        .form-container button {
+            font-size: 12px;
+            padding: 8px;
+        }
+
+        .form-container button {
+            border-radius: 10px;
+        }
+
+        .navigate-button {
+            font-size: 12px;
+            padding: 8px;
+        }
     }
 </style>
 </head>
@@ -301,7 +363,7 @@
 
         <button type="submit">Register</button>
     </form>
-    <p>Have an account? <a href="login.html">Login here</a>.</p>
+    <p class="login-text">Have an account? <a href="login.html">Login here</a>.</p>
 </body>
 <script>
     const collegesByState = {
