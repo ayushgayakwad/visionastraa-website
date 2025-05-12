@@ -68,7 +68,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VisionAstra Dashboard</title>
+    <title>VisionAstraa Dashboard</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -129,14 +129,20 @@
 
         .profile-sidebar {
             width: 320px;
-            background: var(--bg-white);
+            background: linear-gradient(to bottom, #a8a9fb 2%, #ffffff 98%);
             border-right: 1px solid var(--border-light);
-            padding: 2rem;
+            padding: 1rem;
             display: flex;
             flex-direction: column;
             position: fixed;
             height: 100vh;
             overflow-y: auto;
+        }
+        
+        .logo {
+            width: 35%;
+            height: auto;
+            align-self: center;
         }
 
         .content-area {
@@ -212,6 +218,7 @@
             border-radius: 8px;
             background-color: var(--bg-lighter);
             transition: all 0.2s ease;
+            border: 1px solid black;
         }
 
         .contact-item:hover {
@@ -628,8 +635,8 @@
 <body>
     <div class="dashboard">
         <div class="dashboard-main">
-            <!-- Sidebar with Profile Information -->
             <aside class="profile-sidebar">
+                <img src="image/logo2.png" alt="VisionAstraa Logo" class="logo">
                 <div class="profile-header">
                     <div class="profile-avatar">
                         <span class="profile-avatar-text"><?php echo $firstLetter; ?></span>
@@ -674,10 +681,21 @@
                 <h3 class="sidebar-section-title">Quick Actions</h3>
                 
                 <div class="sidebar-actions">
-                    <a href="quiz.php" class="btn btn-primary">
+                    <?php
+                        try {
+                            $stmt = $pdo->prepare("SELECT * FROM quiz_results WHERE user_id = ?");
+                            $stmt->execute([$user_id]);
+                            $quiz_result = $stmt->fetch();
+                        } catch (PDOException $e) {
+                            die("Error checking quiz submission: " . $e->getMessage());
+                        }
+                    ?>
+                    <a href="<?php echo $quiz_result ? '#' : 'quiz.php'; ?>" class="btn btn-primary" 
+                       <?php echo $quiz_result ? 'onclick="alert(\'You have already taken the quiz. You cannot retake it.\'); return false;"' : ''; ?>>
                         <i class="fas fa-clipboard-list btn-icon"></i>
                         Start Quiz
                     </a>
+                    
                     <a href="php/logout.php" class="btn btn-secondary">
                         <i class="fas fa-sign-out-alt btn-icon"></i>
                         Logout
