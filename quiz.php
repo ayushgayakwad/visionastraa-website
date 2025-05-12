@@ -138,6 +138,21 @@ if (!isset($_SESSION['quiz_start_time'])) {
     $_SESSION['quiz_start_time'] = time(); 
 }
 
+try {
+    $stmt = $pdo->prepare("SELECT * FROM quiz_results WHERE user_id = ?");
+    $stmt->execute([$user_id]);
+    $quiz_result = $stmt->fetch();
+} catch (PDOException $e) {
+    die("Error checking quiz submission: " . $e->getMessage());
+}
+
+if ($quiz_result) {
+    header("Location: dashboard.php?quiz_submitted=1");
+    exit();
+} else {
+    
+}
+
 $time_left = 1800 - (time() - $_SESSION['quiz_start_time']);
 if ($time_left <= 0) {
     if (!isset($_SESSION['quiz_submitted'])) {
