@@ -727,7 +727,8 @@ iframe {
     }
 
     .illustration-mirror{
-        content: url('../images/home3.png');
+        content: url('../image/home4.jpg');
+        width: 100%;
     }
 
     .features {
