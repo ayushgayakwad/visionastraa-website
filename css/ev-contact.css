@@ -1025,16 +1025,22 @@ iframe {
         margin-left: -40px;
     }
     .contact-heading {
-        font-size: 12px;
+        font-size: 10px;
         margin-left: -55px;
     }
+
     .contact-email {
-        margin-left: 10% ;
+        font-size: 10px;
+    }
+
+    .contact-info a {
+        font-size: 10px;
     }
 
     .reach-out-btn {
         width: 60%;
         height: auto;
+        font-size: 12px;
     }
 }
 
