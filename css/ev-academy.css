@@ -324,7 +324,6 @@ hr {
 
 .text-content {
     max-width: 500px;
-    position: relative;
 }
 
 .title {
@@ -338,7 +337,7 @@ hr {
 .subtitle-image {
     width: 350px;
     height: auto;
-    margin: 10px 0;
+    margin: 10px 0px 10px 10px;
 }
 
 .description {
@@ -370,6 +369,7 @@ hr {
 .illustration {
     width: 100%;
     height: auto;
+    margin-top: 32px;
 }
 
 .text-content-mirror {
@@ -711,7 +711,7 @@ iframe {
     }
 
     .subtitle-image{
-        content: url('../images/home1.png');
+        content: url('../images/home1.jpg');
     }
 
     .image-content{
@@ -815,6 +815,7 @@ iframe {
 @media (max-width: 480px) {
     .subtitle-image {
         width: 100%;
+        margin: 10px 0;
     }
 
     .subtitle-image-mirror {
