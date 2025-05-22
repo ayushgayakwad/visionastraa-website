@@ -234,8 +234,8 @@
 }
 
 .stat-box {
-    width: 120px;
-    height: 80px;
+    width: 140px;
+    height: 100px;
     background-color: #E8E8E8;
     border-radius: 10px;
     display: flex;
@@ -259,6 +259,7 @@
 .stat-box span {
     font-size: 14px;
     color: gray;
+    text-align: center;
 }
 
 /* Color Variations */
