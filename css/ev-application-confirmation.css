@@ -85,6 +85,12 @@ header {
     box-shadow: 0px 2px 5px rgba(108, 92, 231, 0.2);
 }
 
+.nav-links a.apply {
+    background: #186454;
+    color: #ffffff;
+    box-shadow: 0px 2px 5px rgba(108, 92, 231, 0.2);
+}
+
 /* Hamburger Button */
 .hamburger {
     background: #6c5ce7;

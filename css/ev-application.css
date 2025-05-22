@@ -145,6 +145,12 @@ h2 {
     margin-bottom: 20px;
 }
 
+.nav-links a.apply {
+    background: #186454;
+    color: #ffffff;
+    box-shadow: 0px 2px 5px rgba(108, 92, 231, 0.2);
+}
+
 label {
     display: block;
     font-weight: bold;

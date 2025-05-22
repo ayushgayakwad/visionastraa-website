@@ -58,11 +58,12 @@ $conn->close();
         <li><a href="ev-academy.html">EV Academy</a></li>
         <li><a href="ev-course.html">EV Course</a></li>
         <li><a href="ev-internship.html">EV Internship</a></li>
-        <li><a href="ev-mentors.html">EV Mentors</a></li>
+        <!-- <li><a href="ev-mentors.html">EV Mentors</a></li> -->
         <li><a href="ev-placements.html">EV Placements</a></li>
-        <li><a href="ev-careers.html">EV Careers</a></li>
+        <!-- <li><a href="ev-careers.html">EV Careers</a></li> -->
         <li><a href="ev-contact.html">Contact Us</a></li>
         <li><a href="ev-about-us.html">About Us</a></li>
+        <li><a href="ev-application.html" class="apply">Apply Now</a></li>
       </ul>
   </nav>
 
@@ -132,7 +133,7 @@ $conn->close();
           <li><a href="ev-academy.html">EV Academy</a></li>
           <li><a href="ev-course.html">EV Course</a></li>
           <li><a href="ev-internship.html">EV Internship</a></li>
-          <li><a href="ev-mentors.html">EV Mentors</a></li>
+          <!-- <li><a href="ev-mentors.html">EV Mentors</a></li> -->
           <li><a href="ev-placements.html">EV Placements</a></li>
           <li><a href="ev-jobs.php">EV Jobs</a></li>
         </ul>
@@ -142,7 +143,7 @@ $conn->close();
       <h3>COMPANY</h3>
         <ul>
           <li><a href="ev-about-us.html">About Us</a></li>
-          <li><a href="ev-careers.html">EV Careers</a></li>
+          <!-- <li><a href="ev-careers.html">EV Careers</a></li> -->
         </ul>
       </div>
                      
