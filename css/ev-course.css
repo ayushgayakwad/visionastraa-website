@@ -216,9 +216,10 @@ header {
 
 /* Man image */
 .man-image {
-    width: 230px;
+    width: 420px;
     height: auto;
     max-width: 100%;
+    border-radius: 20px;
 }
 
 /* Text content */
@@ -233,6 +234,14 @@ h2 {
     color: #636AE8;
     line-height: 1.3;
     max-width: 70%;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 32px;
+    gap: 20px;
 }
 
 /* Laptop image should be centered below */
@@ -298,7 +307,7 @@ h2 {
     }
 
     .man-image {
-        display: none;
+        width: 100%;
     }
 
     .laptop-image {
@@ -1434,5 +1443,8 @@ hr {
 @media (max-width: 480px) {
     h2 {
         font-size: 1.8em;
+    }
+    .image-container {
+        flex-direction: column;
     }
 }
