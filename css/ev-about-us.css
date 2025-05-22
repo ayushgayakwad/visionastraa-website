@@ -232,6 +232,176 @@ p {
     border-radius: 10px;
 }
 
+
+/* Mentor Section */
+.mentor-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px;
+    background: #fff;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+}
+
+.mentor-section h2 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #333;
+    margin-bottom: 15px;
+    max-width: 800px;
+}
+
+.mentor-section p {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.mentor-carousel-section {
+    background: #fff;
+    background-image: url('../images/s3.png'); /* Ensure correct path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 30px;
+}
+
+.mentor-name a{
+    color: #6c5ce7;
+}
+
+.mentor-name a:hover{
+    color: #8c7ae6;
+}
+
+/* Carousel Styles */
+.carousel-container {
+    width: 90%;
+    max-width: 1200px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    background-color: #817FF0;
+    border-radius: 24px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.carousel {
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    border-radius: 16px;
+    background: #fff;
+    background-image: url('../images/Course7.png'); /* Ensure correct path */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px 0;
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.carousel-item {
+    min-width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 20px;
+    background: transparent;
+}
+
+.carousel-item img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.carousel-item img:hover {
+    transform: scale(1.05);
+}
+
+.carousel-item h3 {
+    margin-top: 15px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.mentor-details {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    display: inline-block;
+    width: 80%;
+    max-width: 600px;
+    transition: transform 0.3s;
+}
+
+.mentor-details h4 {
+    color: #817FF0;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.mentor-details p {
+    color: #555;
+    line-height: 1.5;
+    font-size: 0.95em;
+    text-align: center;
+}
+
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #817FF0;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-control:hover {
+    background: #4f46e5;
+}
+
+.carousel-control.prev {
+    left: 10px;
+}
+
+.carousel-control.next {
+    right: 10px;
+}
+
+.carousel-control i {
+    font-size: 1.2em;
+}
+
 /* Responsive Design */
 
 /* Tablet View (Keeps Desktop Layout) */
@@ -1074,6 +1244,13 @@ iframe {
         height: 550px;
         width: auto;
         top: 650px;
+    }
+    .mentor-section {
+        padding: 30px 15px;
+    }
+    .mentor-details {
+        width: 95%;
+        padding: 15px;
     }
     .contact-section {
         flex-direction: column;
