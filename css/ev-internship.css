@@ -597,10 +597,11 @@
 .benefits-image img {
     border-radius: 10px;
     position: relative;
-    height: 350px;
-    width: 350px;
+    height: 100%;
+    width: 450px;
     padding: 15px;
     margin-left: 60px;
+    border-radius: 36px;
 }
 
 /* Responsive Internship Benefits */
@@ -633,7 +634,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-image: url('../images/s1.png');
+    background-color: #5945d6;
+    background-image: url('../images/Course6.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -647,11 +649,11 @@
 }
 
 .content {
-    max-width: 50%;
+    width: 100%;
     color: #ffffff;
     font-size: 20px;
     margin-left: 30px;
-    text-align: left;
+    text-align: center;
 }
 
 .content h1 {
@@ -697,11 +699,11 @@
 
     .content h1{
         max-width: 80%;
-        margin: 0;
+        margin: auto;
         font-size: 16px;
     }
     .content {
-        margin-left: -150px;
+        margin-left: auto;
     }
     .content p {
         font-size: 8px;
@@ -738,6 +740,10 @@
     .content button {
         font-size: 12px;
         padding: 8px 16px;
+    }
+
+    .benefits-content h2 {
+        text-align: center;
     }
 }
 
