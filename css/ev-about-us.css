@@ -699,7 +699,7 @@ p {
     text-align: center;
     border-radius: 15px;
     overflow: hidden;
-    height: 500px;
+    height: 625px;
     margin-top: 50px;
 }
 
@@ -732,21 +732,41 @@ p {
 }
 
 .founder-center-image img {
-    max-width: 80%;
+    max-width: 100%;
     height: auto;
     border-radius: 12px;
 }
 
-/* Small Circle Above the Quotes */
-.small-circle {
-    width: 35px; /* Adjust size as needed */
-    height: 35px;
-    position: absolute;
-    bottom: 67px; /* Moves the circle above the text */
-    left: 432px; /* Adjust left position to align with quotes */
+.linkedin-follow {
+    margin-top: 0px;
+    z-index: 1000;
 }
 
-/* Mission Statement */
+.linkedin-link {
+    display: flex;
+    align-items: center;
+    color: #0077B5;
+}
+
+.linkedin-link:hover {
+    opacity: 0.8;
+}
+
+.linkedin-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 28px;
+    margin-right: 10px;
+}
+
+.small-circle {
+    width: 35px; 
+    height: 35px;
+    position: absolute;
+    bottom: 67px; 
+    left: 432px; 
+}
+
 .founder-text {
     position: relative;
     z-index: 1;
@@ -790,7 +810,7 @@ p {
     }
 
     .founder-center-image img {
-        max-width: 90%;
+        max-width: 100%;
     }
 }
 
@@ -1252,6 +1272,11 @@ iframe {
         width: 95%;
         padding: 15px;
     }
+
+    .linkedin-follow {
+        margin-bottom: 16px;
+    }
+
     .contact-section {
         flex-direction: column;
         text-align: center;
