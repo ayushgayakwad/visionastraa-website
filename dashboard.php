@@ -912,12 +912,7 @@
             <h2 class="popup-title">Ready to Begin?</h2>
             <p class="popup-text">
                 <?php
-                    $branchMessage = "Electric Vehicle Assessment";
-                    if (stripos($user['specialization'], 'mechanical') !== false) {
-                        $branchMessage .= " for Mechanical and allied branches";
-                    } elseif (stripos($user['specialization'], 'electrical') !== false) {
-                        $branchMessage .= " for EEE/ECE and allied branches";
-                    }
+                    $branchMessage = "Questionnaire for Student Entrepreneurs";
                     echo "You are about to start the <strong>$branchMessage</strong>.";
                 ?>
             </p>
