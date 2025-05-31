@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2PV0BKLV94"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2PV0BKLV94');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+
+  <script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyBVrVsc9Yd_mZzB5p-dwNV9d4u7QYPq8b8",
+        authDomain: "visionastraa-web.firebaseapp.com",
+        projectId: "visionastraa-web",
+        storageBucket: "visionastraa-web.firebasestorage.app",
+        messagingSenderId: "373329589705",
+        appId: "1:373329589705:web:2a7cd317ad50d8fe80e418",
+        measurementId: "G-B3SVBX4BPP"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function login(event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      document.getElementById("loading-spinner").style.display = "block";
+      
+      auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+
+          if (user.emailVerified) {
+            fetch('php/set-session.php', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: user.email })
+            })
+            .then(response => response.json())
+            .then(data => {
+              console.log("Session response:", data);
+              if (data.success) {
+                window.location.href = "dashboard.php";
+              } else {
+                alert("Session could not be established. Try again.");
+              }
+            })
+            .catch(error => {
+              console.error("Error setting session:", error);
+              alert("An error occurred. Please try again.");
+            });
+          } else {
+            showVerificationReminder();
+          }
+        })
+        .catch((error) => {
+          console.error("Login error:", error);
+        
+          if (error.message && error.message.includes("INVALID_LOGIN_CREDENTIALS")) {
+            showErrorPopup();
+          } else {
+            alert("Login failed: " + error.message);
+          }
+        })
+        .finally(() => {
+          document.getElementById("loading-spinner").style.display = "none";
+        });
+    }
+  </script>
+
+  <style>
+    :root {
+        --primary: #4f46e5;
+        --primary-light: #6366f1;
+        --primary-dark: #4338ca;
+        --secondary: #0ea5e9;
+        --accent: #8b5cf6;
+        --success: #10b981;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+        
+        --text-primary: #111827;
+        --text-secondary: #4b5563;
+        --text-tertiary: #6b7280;
+        --text-light: #9ca3af;
+        
+        --bg-white: #ffffff;
+        --bg-light: #f9fafb;
+        --bg-lighter: #f3f4f6;
+        --bg-lightest: #f1f5f9;
+        
+        --border-light: #e5e7eb;
+        --border-medium: #d1d5db;
+        
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    body, html {
+        font-family: 'Roboto', sans-serif;
+        background: linear-gradient(to bottom, #a8a9fb 2%, #ffffff 98%);
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: auto;
+        color: var(--text-primary);
+    }
+    
+    .logo-container {
+        width: auto;
+        text-align: center;
+    }
+    
+    .logo {
+        width: 10%;
+        height: auto;
+        margin: 1rem;   
+    }
+
+    .form-container {
+        position: relative; 
+        background-color: var(--bg-white);
+        border-radius: 12px;
+        box-shadow: var(--shadow-lg);
+        padding: 30px;
+        width: 90%;
+        max-width: 800px;
+        margin: 20px auto;
+    }
+
+    .form-container h1 {
+        text-align: center;
+        color: var(--primary);
+        margin-top: 0;
+    }
+
+    .form-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: var(--text-light);
+    }
+
+    .form-container label {
+        display: block;
+        color: var(--text-light);
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    .form-container input[type="email"],
+    .form-container input[type="password"] {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        color: var(--text-primary);
+        background-color: var(--bg-white);
+        border: 1px solid var(--border-medium);
+        border-radius: 8px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+
+    .form-container button {
+        width: 100%;
+        padding: 12px;
+        background-color: var(--primary);
+        border-radius: 20px;
+        color: var(--bg-white);
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .form-container button:hover {
+        background-color: var(--primary-dark);
+    }
+
+    .navigate-button {
+        background-color: var(--secondary);
+        margin-top: 10px;
+        width: 100%;
+        padding: 12px;
+        color: var(--bg-white);
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .navigate-button:hover {
+        background-color: var(--primary-dark);
+    }
+
+    .message {
+        margin-top: 20px;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .message a {
+        color: var(--primary);
+        text-decoration: underline;
+    }
+
+    .message a:hover {
+        color: var(--primary-light);
+    }
+
+    #loading-spinner {
+        margin-top: 20px;
+        display: none;
+        text-align: center;
+    }
+
+    #loading-spinner div {
+        width: 30px;
+        height: 30px;
+        border: 4px solid var(--primary);
+        border-top: 4px solid var(--bg-white);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .popup {
+      display: flex;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease-in-out;
+  }
+
+  .popup-content {
+      background-color: var(--bg-white);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+  }
+
+  .popup-icon {
+      font-size: 40px;
+      margin-bottom: 10px;
+  }
+
+  .popup-title {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: var(--warning);
+  }
+
+  .popup-text {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+  }
+
+  .btn-secondary {
+      background-color: var(--secondary);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+  }
+
+  .btn-secondary:hover {
+      background-color: var(--primary-dark);
+  }
+
+  @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+  }
+
+    @media (max-width: 768px) {
+        .form-container {
+            padding: 20px;
+            margin: 10px;
+            max-width: 100%;
+        }
+
+        .form-container h1 {
+            font-size: 24px;
+        }
+
+        .form-container input[type="email"],
+        .form-container input[type="password"],
+        .form-container button {
+            padding: 10px;
+            font-size: 14px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .logo {
+            width: 25%;
+            height: auto;
+            margin: 1rem;   
+        }
+    
+        .form-container {
+            padding: 15px;
+            margin: 5px;
+            max-width: 100%;
+        }
+
+        .form-container h1 {
+            font-size: 20px;
+        }
+
+        .form-container label {
+            font-size: 14px;
+        }
+
+        .form-container input[type="email"],
+        .form-container input[type="password"],
+        .form-container button {
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        .navigate-button {
+            font-size: 14px;
+            padding: 10px;
+        }
+
+        .message {
+            font-size: 14px;
+        }
+    }
+  </style>
+</head>
+<body>
+  <div class="logo-container">
+    <img src="./navbarcomp-VA/1000010772-removebg-preview.png" alt="VisionAstraa Logo" class="logo">
+  </div>
+  <div class="form-container">
+    <h1>Login</h1>
+    <form id="loginForm" onsubmit="login(event)">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required><br>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required><br>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <div id="loading-spinner">
+      <div></div>
+    </div>
+
+    <div class="message">
+      <p>
+        Don't have an account? <a href="register.html">Register here</a>.
+      </p>
+      <p>
+        Forgot your password? <a href="reset-password.html">Reset here</a>.
+      </p>
+    </div>
+  </div>
+  <div id="email-verification-popup" class="popup" style="display: none;">
+    <div class="popup-content">
+      <div class="popup-icon">
+        <i class="fas fa-exclamation-circle" style="color: var(--warning);"></i>
+      </div>
+      <h2 class="popup-title">Email Not Verified</h2>
+      <p class="popup-text">Please verify your email before logging in. Check your inbox for the verification link.</p>
+      <button class="btn btn-secondary" onclick="document.getElementById('email-verification-popup').style.display='none';">Close</button>
+    </div>
+  </div>
+  <div id="error-popup" class="popup" style="display: none;">
+      <div class="popup-content">
+        <div class="popup-icon">
+          <i class="fas fa-exclamation-triangle" style="color: var(--danger);"></i>
+        </div>
+        <h2 class="popup-title" style="color: var(--danger);">Login Failed</h2>
+        <p class="popup-text">Invalid login credentials or account doesn't exist.</p>
+        <button class="btn-secondary" onclick="closeErrorPopup()">Close</button>
+      </div>
+    </div>
+</body>
+<script>
+  function showVerificationReminder() {
+    document.getElementById('email-verification-popup').style.display = 'flex';
+  }
+
+  function showErrorPopup() {
+    document.getElementById('error-popup').style.display = 'flex';
+  }
+
+  function closeErrorPopup() {
+    document.getElementById('error-popup').style.display = 'none';
+  }
+</script>
+<script>
+  function showVerificationReminder() {
+    document.getElementById('email-verification-popup').style.display = 'flex';
+  }
+</script>
+</html>
