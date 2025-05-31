@@ -760,7 +760,7 @@
                                 <i class="fas fa-clipboard-check btn-icon"></i> Assessment Already Taken
                             </button>
                             <p style="margin-top: 10px; color: var(--text-secondary);">
-                                <strong>Your Score:</strong> <?php echo htmlspecialchars($quiz_result['total_marks']); ?>
+                                <strong>Your Score:</strong> <?php echo htmlspecialchars($quiz_result['total_marks']);?> out of 200<br>
                             </p>
                         <?php else: ?>
                             <a href="#" class="btn btn-primary" onclick="showQuizPopup(); return false;">
