@@ -27,7 +27,6 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
-$specialization = $_SESSION['specialization'];
 
 $host = 'localhost';
 $db = 'u707137586_UserData';
@@ -51,17 +50,13 @@ if (!isset($_SESSION['questions_answered'])) {
     $_SESSION['questions_answered'] = [];
 }
 
-if (!isset($_SESSION['specialization'])) {
-    die("Specialization not found. Please log in again.");
-}
-
 $question_table = 'quiz_questions';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['answers']) || isset($_POST['subjective_answer'])) {
         $question_id = $_POST['question_id'];
 
-        $stmt = $pdo->prepare("SELECT correct_option, marks, qtype FROM $question_table WHERE id = ?");
+        $stmt = $pdo->prepare("SELECT marks, qtype FROM $question_table WHERE id = ?");
         $stmt->execute([$question_id]);
         $question = $stmt->fetch();
 
@@ -71,32 +66,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
 
             $qtype = $question['qtype'];
+            $marks_array = json_decode($question['marks'], true);
 
             if (isset($_SESSION['answers'][$question_id])) {
                 $prev_answer = $_SESSION['answers'][$question_id];
-                if (
-                    ($qtype === 'objective' && $prev_answer == $question['correct_option']) ||
-                    ($qtype === 'subjective' && strtolower(trim($prev_answer)) == strtolower(trim($question['correct_option'])))
-                ) {
-                    $_SESSION['total_marks'] -= $question['marks'];
-                }
+                $_SESSION['total_marks'] -= $marks_array[$prev_answer] ?? 0;
             }
 
             if ($qtype === 'objective') {
                 $selected_answer = $_POST['answers'];
                 $_SESSION['answers'][$question_id] = $selected_answer;
-
-                if ($selected_answer == $question['correct_option']) {
-                    $_SESSION['total_marks'] += $question['marks'];
-                }
-
+                $_SESSION['total_marks'] += $marks_array[$selected_answer] ?? 0;
             } elseif ($qtype === 'subjective') {
                 $user_answer = trim($_POST['subjective_answer']);
                 $_SESSION['answers'][$question_id] = $user_answer;
-
-                if (strtolower($user_answer) == strtolower(trim($question['correct_option']))) {
-                    $_SESSION['total_marks'] += $question['marks'];
-                }
             }
         }
     }
@@ -105,19 +88,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $final_marks = 0;
 
         foreach ($_SESSION['answers'] as $qid => $answer) {
-            $stmt = $pdo->prepare("SELECT correct_option, marks, qtype FROM $question_table WHERE id = ?");
+            $stmt = $pdo->prepare("SELECT marks, qtype FROM $question_table WHERE id = ?");
             $stmt->execute([$qid]);
             $question = $stmt->fetch();
 
             if ($question) {
-                if (
-                    ($question['qtype'] === 'objective' && $answer == $question['correct_option']) ||
-                    ($question['qtype'] === 'subjective' && strtolower(trim($answer)) == strtolower(trim($question['correct_option'])))
-                ) {
-                    $final_marks += $question['marks'];
+                $marks_array = json_decode($question['marks'], true);
+                if ($question['qtype'] === 'objective') {
+                    $final_marks += $marks_array[$answer] ?? 0;
                 }
             }
         }
+
+        $_SESSION['total_marks'] = $final_marks;
+
+        $stmt = $pdo->prepare("INSERT INTO quiz_results (user_id, total_marks) VALUES (?, ?)");
+        $stmt->execute([$user_id, $final_marks]);
 
         $_SESSION['total_marks'] = $final_marks;
 
@@ -131,10 +117,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 if (!isset($_SESSION['question_order'])) {
-    $stmt = $pdo->query("SELECT id FROM $question_table ORDER BY RAND() LIMIT 50");
+    $stmt = $pdo->query("SELECT id FROM $question_table ORDER BY RAND() LIMIT 12");
     $question_ids = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-    if (count($question_ids) < 50) {
+    if (count($question_ids) < 12) {
         die("Not enough questions in the database.");
     }
 
@@ -189,12 +175,15 @@ if ($time_left <= 0) {
         $final_marks = 0;
 
         foreach ($_SESSION['answers'] as $qid => $answer) {
-            $stmt = $pdo->prepare("SELECT correct_option, marks FROM $question_table WHERE id = ?");
+            $stmt = $pdo->prepare("SELECT marks, qtype FROM $question_table WHERE id = ?");
             $stmt->execute([$qid]);
             $question = $stmt->fetch();
 
-            if ($question && $question['correct_option'] == $answer) {
-                $final_marks += $question['marks'];
+            if ($question) {
+                $marks_array = json_decode($question['marks'], true);
+                if ($question['qtype'] === 'objective') {
+                    $final_marks += $marks_array[$answer] ?? 0;
+                }
             }
         }
 
@@ -202,8 +191,6 @@ if ($time_left <= 0) {
 
         $stmt = $pdo->prepare("INSERT INTO quiz_results (user_id, total_marks) VALUES (?, ?)");
         $stmt->execute([$user_id, $final_marks]);
-
-        $_SESSION['quiz_submitted'] = true;
     }
 
     header("Location: dashboard.php?quiz_submitted=1");
@@ -531,7 +518,7 @@ if ($time_left <= 0) {
                     <a href="assessment.php?previous=true" class="btn"><i class="fas fa-chevron-left"></i> Previous</a>
                 <?php endif; ?>
 
-                <?php if ($current_question_index < 49): ?>
+                <?php if ($current_question_index < 11): ?>
                     <a href="assessment.php?next=true" class="btn">Next <i class="fas fa-chevron-right"></i></a>
                 <?php else: ?>
                     <button type="submit" name="submit_quiz" class="btn">Submit <i class="fas fa-check-circle"></i></button>
