@@ -705,9 +705,9 @@
                         }
                     ?>
                     <?php if ($quiz_result): ?>
-                        <a href="#" class="btn btn-primary" onclick="showAlreadyTakenPopup(); return false;">
-                            <i class="fas fa-clipboard-list btn-icon"></i> Start Online Assessment
-                        </a>
+                        <button class="btn btn-primary" disabled style="cursor: not-allowed; opacity: 0.6;">
+                            <i class="fas fa-clipboard-check btn-icon"></i> Assessment Already Taken
+                        </button>
                     <?php else: ?>
                         <a href="#" class="btn btn-primary" onclick="showQuizPopup(); return false;">
                             <i class="fas fa-clipboard-list btn-icon"></i> Start Online Assessment
@@ -742,9 +742,6 @@
                     <div class="tab-item" data-tab="education">
                         <i class="fas fa-graduation-cap"></i> Education
                     </div>
-                    <div class="tab-item" data-tab="about">
-                        <i class="fas fa-info-circle"></i> About
-                    </div>
                 </div>
                 
                 <div id="assessment-tab" class="tab-content active">
@@ -759,9 +756,12 @@
                         <p>Start the online assessment to test your knowledge and skills. Please ensure you are prepared to complete it in one sitting.</p>
                         <br>
                         <?php if ($quiz_result): ?>
-                            <a href="#" class="btn btn-primary" onclick="showAlreadyTakenPopup(); return false;">
-                                <i class="fas fa-clipboard-list btn-icon"></i> Start Online Assessment
-                            </a>
+                            <button class="btn btn-primary" disabled style="cursor: not-allowed; opacity: 0.6;">
+                                <i class="fas fa-clipboard-check btn-icon"></i> Assessment Already Taken
+                            </button>
+                            <p style="margin-top: 10px; color: var(--text-secondary);">
+                                <strong>Your Score:</strong> <?php echo htmlspecialchars($quiz_result['total_marks']); ?>
+                            </p>
                         <?php else: ?>
                             <a href="#" class="btn btn-primary" onclick="showQuizPopup(); return false;">
                                 <i class="fas fa-clipboard-list btn-icon"></i> Start Online Assessment
@@ -842,20 +842,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="about-tab" class="tab-content">
-                    <div class="info-section">
-                        <div class="info-section-header">
-                            <h3 class="info-section-title">
-                                <i class="fas fa-user-edit info-section-icon"></i>
-                                About Me
-                            </h3>
-                        </div>
-                        <div class="info-section-content">
-                            <p><?php echo htmlspecialchars($user['description']); ?></p>
                         </div>
                     </div>
                 </div>
