@@ -105,11 +105,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt = $pdo->prepare("INSERT INTO quiz_results (user_id, total_marks) VALUES (?, ?)");
         $stmt->execute([$user_id, $final_marks]);
 
-        $_SESSION['total_marks'] = $final_marks;
-
-        $stmt = $pdo->prepare("INSERT INTO quiz_results (user_id, total_marks) VALUES (?, ?)");
-        $stmt->execute([$user_id, $final_marks]);
-
         $_SESSION['quiz_submitted'] = true;
         header("Location: dashboard.php?quiz_submitted=1");
         exit();
