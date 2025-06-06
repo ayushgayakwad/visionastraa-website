@@ -35,37 +35,42 @@
     function login(event) {
       event.preventDefault();
 
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+      const emailField = document.getElementById("email");
+      const passwordField = document.getElementById("password");
+
+      const email = emailField.value;
+      const password = passwordField.value;
 
       document.getElementById("loading-spinner").style.display = "block";
       
       auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
           const user = userCredential.user;
-
-          if (user.emailVerified) {
-            fetch('php/set-session.php', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ email: user.email })
-            })
-            .then(response => response.json())
-            .then(data => {
-              console.log("Session response:", data);
-              if (data.success) {
-                window.location.href = "dashboard.php";
-              } else {
-                alert("Session could not be established. Try again.");
-              }
-            })
-            .catch(error => {
-              console.error("Error setting session:", error);
-              alert("An error occurred. Please try again.");
-            });
-          } else {
-            showVerificationReminder();
-          }
+          fetch('php/set-session.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: user.email })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              window.location.href = "dashboard.php";
+            } else {
+              showSessionErrorPopup();
+              emailField.value = '';
+              passwordField.value = '';
+              return auth.currentUser .delete().then(() => {
+                console.log("Account deleted due to session error.");
+              }).catch((error) => {
+                console.error("Error deleting account:", error);
+                alert("Failed to delete account: " + error.message);
+              });
+            }
+          })
+          .catch(error => {
+            console.error("Error setting session:", error);
+            alert("An error occurred. Please try again.");
+          });
         })
         .catch((error) => {
           console.error("Login error:", error);
@@ -391,7 +396,17 @@
       </p>
     </div>
   </div>
-  <div id="email-verification-popup" class="popup" style="display: none;">
+  <div id="session-error-popup" class="popup" style="display: none;">
+    <div class="popup-content">
+      <div class="popup-icon">
+        <i class="fas fa-exclamation-triangle" style="color: var(--danger);"></i>
+      </div>
+      <h2 class="popup-title" style="color: var(--danger);">Session Error</h2>
+      <p class="popup-text">Session could not be established due to an internal server error. Please register (create a new account) again with the same or different email ID.</p>
+      <button class="btn-secondary" onclick="closeSessionErrorPopup()">Close</button>
+    </div>
+  </div>
+  <!-- <div id="email-verification-popup" class="popup" style="display: none;">
     <div class="popup-content">
       <div class="popup-icon">
         <i class="fas fa-exclamation-circle" style="color: var(--warning);"></i>
@@ -400,7 +415,7 @@
       <p class="popup-text">Please verify your email before logging in. Check your inbox for the verification link.</p>
       <button class="btn btn-secondary" onclick="document.getElementById('email-verification-popup').style.display='none';">Close</button>
     </div>
-  </div>
+  </div> -->
   <div id="error-popup" class="popup" style="display: none;">
       <div class="popup-content">
         <div class="popup-icon">
@@ -413,8 +428,12 @@
     </div>
 </body>
 <script>
-  function showVerificationReminder() {
-    document.getElementById('email-verification-popup').style.display = 'flex';
+  function showSessionErrorPopup() {
+    document.getElementById('session-error-popup').style.display = 'flex';
+  }
+
+  function closeSessionErrorPopup() {
+    document.getElementById('session-error-popup').style.display = 'none';
   }
 
   function showErrorPopup() {
@@ -423,11 +442,6 @@
 
   function closeErrorPopup() {
     document.getElementById('error-popup').style.display = 'none';
-  }
-</script>
-<script>
-  function showVerificationReminder() {
-    document.getElementById('email-verification-popup').style.display = 'flex';
   }
 </script>
 </html>

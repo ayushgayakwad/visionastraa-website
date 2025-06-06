@@ -43,17 +43,21 @@ gtag('config', 'G-2PV0BKLV94');
       auth.createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
           const user = userCredential.user;
+
+          saveUserData(user);
+          document.getElementById("registerForm").reset();
+          document.getElementById('success-popup').style.display = 'flex';
     
-          user.sendEmailVerification()
-            .then(() => {
-              showVerificationPopup();
-              saveUserData(user);
-              document.getElementById("registerForm").reset();
-            })
-            .catch((error) => {
-              console.error("Email verification error:", error);
-              document.getElementById("loading-spinner").style.display = "none";
-            });
+        //   user.sendEmailVerification()
+        //     .then(() => {
+        //       showVerificationPopup();
+        //       saveUserData(user);
+        //       document.getElementById("registerForm").reset();
+        //     })
+        //     .catch((error) => {
+        //       console.error("Email verification error:", error);
+        //       document.getElementById("loading-spinner").style.display = "none";
+        //     });
         })
         .catch((error) => {
           console.error("Registration error:", error);
@@ -493,7 +497,7 @@ gtag('config', 'G-2PV0BKLV94');
         <button type="submit">Register</button>
     </form>
     <p class="login-text">Have an account? <a href="login.html">Login here</a>.</p>
-    <div id="verification-popup" class="popup" style="display: none;">
+    <!-- <div id="verification-popup" class="popup" style="display: none;">
         <div class="popup-content">
             <div class="popup-icon">
                 <i class="fas fa-envelope" style="color: var(--success);"></i>
@@ -501,6 +505,16 @@ gtag('config', 'G-2PV0BKLV94');
             <h2 class="popup-title">Verification Email Sent</h2>
             <p class="popup-text">Please check your email inbox and verify your email address to complete registration.</p>
             <button class="btn btn-secondary" onclick="window.location.href='login.html'">Continue</button>
+        </div>
+    </div> -->
+    <div id="success-popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <div class="popup-icon">
+                <i class="fas fa-check-circle" style="color: var(--success);"></i>
+            </div>
+            <h2 class="popup-title">Registration Successful</h2>
+            <p class="popup-text">You have successfully registered! You can now login with your new account.</p>
+            <button class="btn-secondary" onclick="document.getElementById('success-popup').style.display='none'; window.location.href='login.html';">Continue</button>
         </div>
     </div>
 </body>
