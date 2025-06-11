@@ -7,6 +7,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campus Recruitment Drive for 2023/24 Freshers</title>
+    <script src='https://au.zepiccdn.com/85f875b6-c8ea-3415-a553-c0922a605c5b/c3594d20-13cb-3a79-83d5-8796fb429d2d/sdk.js' async=true></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2PV0BKLV94"></script>
     <script>
     window.dataLayer = window.dataLayer || [];

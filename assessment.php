@@ -112,10 +112,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 if (!isset($_SESSION['question_order'])) {
-    $stmt = $pdo->query("SELECT id FROM $question_table ORDER BY RAND() LIMIT 50");
+    $stmt = $pdo->query("SELECT id FROM $question_table ORDER BY RAND() LIMIT 15");
     $question_ids = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-    if (count($question_ids) < 50) {
+    if (count($question_ids) < 15) {
         die("Not enough questions in the database.");
     }
 
@@ -513,7 +513,7 @@ if ($time_left <= 0) {
                     <a href="assessment.php?previous=true" class="btn"><i class="fas fa-chevron-left"></i> Previous</a>
                 <?php endif; ?>
 
-                <?php if ($current_question_index < 49): ?>
+                <?php if ($current_question_index < 14): ?>
                     <a href="assessment.php?next=true" class="btn">Next <i class="fas fa-chevron-right"></i></a>
                 <?php else: ?>
                     <button type="submit" name="submit_quiz" class="btn">Submit <i class="fas fa-check-circle"></i></button>
