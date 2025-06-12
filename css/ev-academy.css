@@ -425,11 +425,7 @@ hr {
 .features {
     text-align: center;
     padding: 50px 20px;
-    background: #fff;
-    background-image: url('../images/Group110_3.png'); /* Ensure correct path */
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-color: #f9f9f9;
 }
 
 .features-title {
@@ -495,7 +491,11 @@ hr {
 }
 
 .placements {
-    background-color: #f9f9f9;
+    background: #fff;
+    background-image: url('../images/Group110_3.png'); /* Ensure correct path */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
     text-align: center;
     padding: 50px 32px;
 }
