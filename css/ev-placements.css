@@ -176,6 +176,10 @@
 
 /* Responsive Navbar */
 @media (max-width: 768px) {
+    .hero p {
+        width: 80%;
+    }
+    
     .footer-container {
         flex-direction: column;
         text-align: center;
@@ -222,6 +226,9 @@
     font-size: 1.2rem;
     line-height: 1.5;
     color: #333;
+    width: 80%;
+    text-align: center;
+    justify-self: center;
 }
 
 /* New Users Stats */
