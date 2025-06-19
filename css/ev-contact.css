@@ -1070,6 +1070,36 @@ iframe {
     color: red;
 }
 
+.social-links {
+  margin-top: 20px;
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.social-links a {
+  color: #333;
+  margin: 0 15px;
+  font-size: 28px;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #0077b5; 
+}
+
+.social-links a:nth-child(2):hover {
+  color: #e4405f;
+}
+
+.social-links a:nth-child(3):hover {
+  color: #ff0000;
+}
+
+.map-social-container {
+    display: flex;
+    flex-direction: column;
+}
+
 /* News Letter Section */
 .newsletter-container {
     display: flex;

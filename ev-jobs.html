@@ -80,7 +80,6 @@
           Sharing highlights from our previous batch placement results!
         </p>
 
-        <!-- New Users Stats in a Row -->
         <div class="stats">
             <div class="stat-box purple">
                 <i class="fas fa-briefcase"></i>
@@ -168,9 +167,9 @@
     <h2>Placement Drive Highlights</h2>
     <div class="student-grid">
       <div class="student-card">
-        <img src="images/p1.jpg" alt="Student Name">
+        <img src="images/p13.jpg" alt="Student Name">
         <div class="student-info">
-          <h3><strong>Jacob Nelson</strong>, B.Tech, EEE, College of Engineering, Trivandrum & <strong>Anusha Yalasangi</strong>, B.Tech, ECE, KLE Institute of Technology, Hubli</h3>
+          <h3><strong>Jacob Nelson</strong>, B.Tech, EEE, College of Engineering, Trivandrum</h3>
           <br>
           <p><strong>Hired at Chara Technologies</strong></p>
         </div>
@@ -226,7 +225,7 @@
         <div class="student-info">
           <h3><strong>Md. Adnan</strong>, B.Tech, EEE, Sri Siddhartha IT, Tumkur</h3>
           <br>
-          <p><strong>Hired at Mecwin Technologies</strong></p>
+          <p><strong>Hired at Mecwin Technologies</strong></p>
         </div>
       </div>
 
@@ -256,6 +255,24 @@
           <p><strong>Hired at Ultraviolette Automotive</strong></p>
         </div>
       </div>
+
+      <div class="student-card">
+        <img src="images/p11.jpg" alt="Student Name">
+        <div class="student-info">
+          <h3><strong>Aishwarya R</strong>, B.Tech, EEE, CMRIT</h3>
+          <br>
+          <p><strong>Hired at IPEC Technologies</strong></p>
+        </div>
+      </div>
+
+      <div class="student-card">
+        <img src="images/p12.jpg" alt="Student Name">
+        <div class="student-info">
+          <h3><strong>Shalina Nelson</strong>, B.Tech, EEE, GEC, Thrissur</h3>
+          <br>
+          <p><strong>Hired at IPEC Technologies</strong></p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -270,37 +287,17 @@
           <a href="images/image-ipec-iv3.jpg" target="_blank"><img src="images/image-ipec-iv3.jpg" alt=""></a>
       </div>
   </section>
-    
-    <!-- Featured Posts Section -->
-    <section class="featured-posts">
-      <div class="back-box">
-          <!-- Background elements can be added here -->
-      </div>
-      <h2>Featured Posts</h2>
-      <br>
-      <div class="carousel-container">
-          <button class="prev-btn">&#9665;</button>
-          <div class="video-card">
-              <iframe 
-                  id="video-frame" 
-                  width="100%" 
-                  height="250" 
-                  src="https://youtube.com/embed/oYDfUTUXxUs" 
-                  title="Tech Talk with VisionAstraa"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  allowfullscreen>
-              </iframe>
-          </div>
-          <button class="next-btn">&#9655;</button>
-      </div>
-      <div class="post-description">
-          <h3 id="video-title">Tech Talk With VisionAstraa</h3>
-          <a id="video-link" href="https://www.youtube.com/watch?v=oYDfUTUXxUs" target="_blank">
-              <button class="watch-btn">Watch on YouTube</button>
-          </a>
-      </div>
-  </section>
+
+  <div class="marquee-wrapper placement-marquee">
+    <div class="marquee-text">
+      <strong>Placement Stats:</strong> &nbsp;&nbsp;&nbsp;
+      Highest Package: ₹12 LPA &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+      Average Package: ₹5.5 LPA &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+      Total Companies: 40+ &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+      Avg Interviews Per Student: 5 &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+      100% Placement Guarantee or Money Back!
+    </div>
+  </div>
 
   <h2 style="font-size: 0.1px; color: white;">EV, Electric Vehicle, EV Academy, EV Training, EV Institute, EV Certificate, EV Course, EV Upskilling, EV Certification Program, EV Program, EV Placement, EV Jobs, EV Package, Electric Vehicle Academy, Electric Vehicle Training, Electric Vehicle Institute, Electric Vehicle Certificate, Electric Vehicle Course, Electric Vehicle Upskilling, Electric Vehicle Certification Program, Electric Vehicle Program, Electric Vehicle Placement, Electric Vehicle Jobs, Electric Vehicle Package, EV Diploma Course, EV Diploma, EV M.Tech, EV M.Tech Course, Electric Vehicle Diploma Course, Electric Vehicle Diploma, Electric Vehicle M.Tech, Electric Vehicle M.Tech Course, Nikhil Jain C S, NikhilJain, Nikhil Jain CS</h2>
     <h2 style="font-size: 0.1px; color: white;">EV, Electric Vehicle, EV Academy, EV Training, EV Institute, EV Certificate, EV Course, EV Upskilling, EV Certification Program, EV Program, EV Placement, EV Jobs, EV Package, Electric Vehicle Academy, Electric Vehicle Training, Electric Vehicle Institute, Electric Vehicle Certificate, Electric Vehicle Course, Electric Vehicle Upskilling, Electric Vehicle Certification Program, Electric Vehicle Program, Electric Vehicle Placement, Electric Vehicle Jobs, Electric Vehicle Package, EV Diploma Course, EV Diploma, EV M.Tech, EV M.Tech Course, Electric Vehicle Diploma Course, Electric Vehicle Diploma, Electric Vehicle M.Tech, Electric Vehicle M.Tech Course, Nikhil Jain C S, NikhilJain, Nikhil Jain CS</h2>
@@ -393,42 +390,6 @@
     </div>
   </footer>
   <script>
-    const videos = [
-        { id: 'oYDfUTUXxUs', title: 'Tech Talk with VisionAstraa', link: 'https://www.youtube.com/watch?v=oYDfUTUXxUs' },
-        { id: 'FHFrmgKikOs', title: 'Why Hire from VisionAstraa EV Academy?', link: 'https://www.youtube.com/watch?v=FHFrmgKikOs' },
-        { id: '8CgZoxnYy_k', title: 'Hands-on EV Parts Integration', link: 'https://www.youtube.com/watch?v=8CgZoxnYy_k' }
-    ];
-
-    let currentVideoIndex = 0;
-
-    function updateVideo() {
-        const video = videos[currentVideoIndex];
-        const iframe = document.getElementById('video-frame');
-        const title = document.getElementById('video-title');
-        const link = document.getElementById('video-link');
-
-        iframe.src = `https://youtube.com/embed/${video.id}`;
-        title.textContent = video.title;
-        link.href = video.link;
-    }
-
-    document.querySelector('.prev-btn').addEventListener('click', () => {
-        currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
-        updateVideo();
-    });
-
-    document.querySelector('.next-btn').addEventListener('click', () => {
-        currentVideoIndex = (currentVideoIndex + 1) % videos.length;
-        updateVideo();
-    });
-
-    updateVideo();
-
-    setInterval(() => {
-        currentVideoIndex = (currentVideoIndex + 1) % videos.length;
-        updateVideo();
-    }, 3000);
-
     document.getElementById('subscribeButton').addEventListener('click', function (e) {
         e.preventDefault();
         var emailInput = document.getElementById('newsletterEmail');
