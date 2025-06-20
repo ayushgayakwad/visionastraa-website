@@ -2,6 +2,8 @@
 
 import mysql.connector
 import smtplib
+import time
+import random
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
@@ -13,15 +15,17 @@ SMTP_PORT = 587
 SMTP_USERNAME = 'careers@visionastraa.in'
 SMTP_PASSWORD = '4@upm7$K'
 
-EMAIL_SUBJECT = "Reminder: Job Opportunities in the EV Industry Webinar - June 20, 10:30 AM (Fri)"
+CAMPAIGN_ID = "ev_webinar_2025_06_20"
+
+EMAIL_SUBJECT = "Job Opportunities in the EV Industry Webinar - June 20, 10:30 AM (Fri)"
 
 EMAIL_BODY_TEMPLATE = """\
 <html>
   <body style="font-family:Arial, sans-serif;line-height:1.5;color:#333;">
     <p>Dear {first_name},</p>
-    <p>Reminder: <strong>Job Opportunities in the EV Industry</strong> webinar—June 20, Friday, 10:30 AM IST.</p>
+    <p><strong>Job Opportunities in the EV Industry</strong> webinar—June 20, Friday, 10:30 AM IST.</p>
     <p>
-      Webinar Link: <a href="https://visionastraa.com/track/click.php?email={email}&target={meet_url}" 
+      Webinar Link: <a href="https://visionastraa.com/track/click.php?email={email}&target={meet_url}&campaign_id={campaign_id}" 
       target="_blank" style="color:#1a73e8;">Join Webinar</a>
     </p>
     <p><strong>Details:</strong></p>
@@ -31,13 +35,13 @@ EMAIL_BODY_TEMPLATE = """\
       <li>Agenda: Why EV, Trends, Job Opportunities</li>
     </ul>
     <p>Best Regards,<br>VisionAstraa Group</p>
-    <img src="https://visionastraa.com/track/open.php?email={email}" width="1" height="1" style="display:none;" />
+    <img src="{image_url}" width="1" height="1" style="display:none;" />
   </body>
 </html>
 """
 
 def create_ics():
-    dt_start = datetime(2025,6,20,10,30)
+    dt_start = datetime(2025, 6, 20, 10, 30)
     dt_end = dt_start + timedelta(minutes=60)
     dtstamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     dtstart = dt_start.strftime("%Y%m%dT%H%M%S")
@@ -69,7 +73,17 @@ END:VCALENDAR
 
 def send_email(to_address, first_name):
     meet_url = quote("https://meet.google.com/prn-gckz-eug", safe='')
-    body = EMAIL_BODY_TEMPLATE.format(first_name=first_name, email=to_address, meet_url=meet_url)
+    random_token = random.randint(100000, 999999)
+    image_url = f"https://visionastraa.com/track/open.php?email={quote(to_address)}&campaign_id={CAMPAIGN_ID}&r={random_token}"
+
+    body = EMAIL_BODY_TEMPLATE.format(
+        first_name=first_name,
+        email=quote(to_address),
+        meet_url=meet_url,
+        campaign_id=CAMPAIGN_ID,
+        image_url=image_url
+    )
+
     ics_content = create_ics()
 
     msg = MIMEMultipart('mixed')
@@ -91,7 +105,7 @@ def send_email(to_address, first_name):
             server.sendmail(SMTP_USERNAME, to_address, msg.as_string())
         return True
     except Exception as e:
-        print(f"Error sending to {to_address}: {e}")
+        print(f"❌ Error sending to {to_address}: {e}")
         return False
 
 conn = mysql.connector.connect(
@@ -102,7 +116,6 @@ conn = mysql.connector.connect(
 )
 cursor = conn.cursor(dictionary=True)
 tables = ['test']
-# tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 
 for tbl in tables:
     cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Kerala' AND emailSent=0")
@@ -114,4 +127,3 @@ for tbl in tables:
 
 cursor.close()
 conn.close()
-
