@@ -1,7 +1,7 @@
 name: Send Emails - EV Campaign
 on:
-  schedule:
-    - cron: "0 9 * * *" 
+  # schedule:
+  #   - cron: "0 9 * * *" 
   workflow_dispatch: 
 
 jobs:
