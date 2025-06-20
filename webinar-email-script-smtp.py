@@ -23,17 +23,31 @@ EMAIL_BODY_TEMPLATE = """\
 <html>
   <body style="font-family:Arial, sans-serif;line-height:1.5;color:#333;">
     <p>Dear {first_name},</p>
-    <p><strong>Job Opportunities in the EV Industry</strong> webinar—June 20, Friday, 10:30 AM IST.</p>
+    <p>
+      Sharing a Webinar Link for <strong>"Job Opportunities in EV Industry"</strong> for <strong>2025 graduates</strong><br>
+      (B.Tech & M.Tech) from <strong>EEE, ECE & Mechanical Engineering</strong> branches only.
+    </p>
     <p>
       Webinar Link: <a href="https://visionastraa.com/track/click.php?email={email}&target={meet_url}&campaign_id={campaign_id}" 
       target="_blank" style="color:#1a73e8;">Join Webinar</a>
     </p>
-    <p><strong>Details:</strong></p>
+    <p><strong>Webinar Details (Virtual):</strong></p>
     <ul>
-      <li>Guest: Rahul Plavullathil, Head of Driveline, FPT Industrial, Turin, Italy</li>
-      <li>Moderator: Yedu Jathavedan, Co‑founder & Chairman, VisionAstraa Group</li>
-      <li>Agenda: Why EV, Trends, Job Opportunities</li>
+      <li>Fireside Chat with Special Guest:<br>
+          Rahul Plavullathil, Head of Driveline, FPT Industrial, Turin, Italy (20 min)
+      </li>
+      <li>Moderated by:<br>
+          Yedu Jathavedan, Co-founder & Chairman, VisionAstraa Group
+      </li>
+      <li>Conversation will cover:
+        <ul>
+          <li>Why EV?</li>
+          <li>Industry Trends</li>
+          <li>Job Opportunities in the EV Industry, etc.</li>
+        </ul>
+      </li>
     </ul>
+    <p><strong>To add the webinar to your calendar and receive a reminder, please click "YES" on the calendar invite.</strong></p>
     <p>Best Regards,<br>VisionAstraa Group</p>
     <img src="{image_url}" width="1" height="1" style="display:none;" />
   </body>
