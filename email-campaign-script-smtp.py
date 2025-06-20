@@ -175,7 +175,7 @@ EMAIL_BODY_TEMPLATE = """\
     </tr>
     </table>
     <hr>
-    <h3 style="font-size: 24px;">Placement Stats from 2024:</h3>
+    <h3 style="font-size: 24px;">Placement Stats:</h3>
     <ul style="font-size: 18px;">
       <li><strong>Highest Package:</strong> ₹12 LPA</li>
       <li><strong>Average Package:</strong> ₹5.5 LPA</li>
@@ -245,7 +245,7 @@ EMAIL_BODY_TEMPLATE = """\
     <h3 style="color:#d9534f;">🚀 Our Next Batch Starts – July 2025</h3>
     <h3>So hurry before spots are taken!</h3>
     <hr>
-    <h3>See why top companies prefer our graduates:</h3>
+    <h3 style="font-size: 24px;">See why top companies prefer our graduates:</h3>
     <br>
     <p><strong>🎥 Watch:</strong> Dr. Shiva, Founder of Mecwin Technologies speaks about VisionAstraa.</p>
     <br>    
@@ -332,8 +332,8 @@ conn = mysql.connector.connect(
     database='u707137586_Campus_Hiring'
 )
 cursor = conn.cursor(dictionary=True)
-tables = ['test']
-# tables = ['crdf25', 'crdf25_north', 'crdf25_south']
+# tables = ['test']
+tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 
 for tbl in tables:
     cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Kerala' AND emailSent=0")
