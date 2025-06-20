@@ -129,7 +129,8 @@ conn = mysql.connector.connect(
     database='u707137586_Campus_Hiring'
 )
 cursor = conn.cursor(dictionary=True)
-tables = ['test']
+# tables = ['test']
+tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 
 for tbl in tables:
     cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Kerala' AND emailSent=0")
