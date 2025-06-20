@@ -12,13 +12,13 @@ SMTP_PORT = 587
 SMTP_USERNAME = 'careers@visionastraa.in'
 SMTP_PASSWORD = '4@upm7$K'
 
-EMAIL_SUBJECT = "Job Opportunities in EV Industry - June 20, 10:30am (Fri)"
+EMAIL_SUBJECT = "Reminder: Job Opportunities in the EV Industry Webinar - June 20, 10:30 AM (Fri)"
 
 EMAIL_BODY_TEMPLATE = """\
 <html>
   <body style="font-family: Arial, sans-serif; line-height: 1.5; color: #333;">
     <p>Dear {first_name},</p>
-
+    <p>We wanted to remind you about the upcoming <strong>"Job Opportunities in the EV Industry"</strong> webinar, scheduled for June 20, Friday, at 10:30 AM IST.</p>
     <p>
       Sharing a Webinar Link for <strong>"Job Opportunities in EV Industry"</strong> for <strong>2025 graduates</strong><br>
       (B.Tech & M.Tech) from <strong>EEE, ECE & Mechanical Engineering</strong> branches only.
