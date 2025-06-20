@@ -1,4 +1,4 @@
-name: Send Emails - EV Webinar
+name: Send Emails - EV Campaign
 on:
   schedule:
     - cron: "0 9 * * *" 
@@ -23,4 +23,4 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run the Python script
-        run: python webinar-email-script-smtp.py
+        run: python email-campaign-script-smtp.py

@@ -74,7 +74,8 @@ EMAIL_BODY_TEMPLATE = """\
       margin-top: 20px;
     }}
     .faq h4 {{
-      margin-bottom: 5px;
+      margin-top: 0px;
+      margin-bottom: 0px;
       color: #222;
     }}
     .footer {{
@@ -174,8 +175,8 @@ EMAIL_BODY_TEMPLATE = """\
     </tr>
     </table>
     <hr>
-    <h3>Placement Stats from 2024:</h3>
-    <ul>
+    <h3 style="font-size: 24px;">Placement Stats from 2024:</h3>
+    <ul style="font-size: 18px;">
       <li><strong>Highest Package:</strong> ₹12 LPA</li>
       <li><strong>Average Package:</strong> ₹5.5 LPA</li>
       <li><strong>Minimum Guaranteed:</strong> ₹4 LPA</li>
@@ -227,8 +228,6 @@ EMAIL_BODY_TEMPLATE = """\
       <p>Ans: If you don't get placed, you'll get your full money back, no questions asked!!</p>
     </div>
     <hr>
-    <h3 style="color:#d9534f;">🚀 Our Next Batch Starts – July 2025</h3>
-
     <div style="margin: 20px 0; text-align:center;">
         <img src="https://visionastraa.com/images/home1.jpg" alt="Golden Opportunity" style="max-width:100%; border-radius:8px;">
         <p style="color: #c82333; font-size: 16px; font-weight: bold; margin-top: 10px; text-align: left;">
@@ -242,11 +241,11 @@ EMAIL_BODY_TEMPLATE = """\
     <a href="https://visionastraa.com/track/click.php?email={email}&target={apply}&campaign_id={campaign_id}" class="btn" style="background-color: #28a745;">APPLY NOW</a>
     <a href="https://visionastraa.com/track/click.php?email={email}&target={placements}&campaign_id={campaign_id}" class="btn" style="background-color: #28a745;">PLACEMENTS</a>
     <a href="https://visionastraa.com/track/click.php?email={email}&target={curriculum}&campaign_id={campaign_id}" class="btn" style="background-color: #28a745;">CURRICULUM</a>
+    
+    <h3 style="color:#d9534f;">🚀 Our Next Batch Starts – July 2025</h3>
+    <h3>So hurry before spots are taken!</h3>
     <hr>
-    <h3>Companies that hire from VisionAstraa EV Academy</h3>
-    <br>
-    <hr>
-    <p>See why top companies prefer our graduates:</p>
+    <h3>See why top companies prefer our graduates:</h3>
     <br>
     <p><strong>🎥 Watch:</strong> Dr. Shiva, Founder of Mecwin Technologies speaks about VisionAstraa.</p>
     <br>    
