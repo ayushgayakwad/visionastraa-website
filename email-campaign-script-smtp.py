@@ -250,14 +250,14 @@ EMAIL_BODY_TEMPLATE = """\
     <br>
     <p><strong>🎥 Watch:</strong> Dr. Shiva, Founder of Mecwin Technologies speaks about VisionAstraa.</p>
     <br>    
-    <a href="https://www.youtube.com/watch?v=FHFrmgKikOs" target="_blank" style="display:inline-block; position:relative; text-align:center;">
+    <a href="https://visionastraa.com/track/click.php?email={email}&target={youtube}&campaign_id={campaign_id}" target="_blank" style="display:inline-block; position:relative; text-align:center;">
     <img src="https://visionastraa.com/images/hqdefault-overlay.jpg" alt="Watch Video" style="width:100%; max-width:600px; border-radius:8px; display:block;">
     </a>
     <br>
     <hr>
     <h3>Still thinking?</h3>
     <p>Grab your guaranteed EV Job <strong>before someone else does!</strong></p>
-    <a href="https://visionastraa.com/track/click.php?email={email}&target={apply}&campaign_id={campaign_id}"" class="btn" style="background-color: #28a745;">APPLY NOW</a> 
+    <a href="https://visionastraa.com/track/click.php?email={email}&target={apply}&campaign_id={campaign_id}" class="btn" style="background-color: #28a745;">APPLY NOW</a> 
     <hr>
     <div class="footer" style="text-align: center;">
     <p>Email: <a href="mailto:admissions@visionastraa.com">admissions@visionastraa.com</a></p>
@@ -293,6 +293,7 @@ def send_email(to_address, first_name):
     placements = quote("https://www.visionastraa.com/ev-jobs.html", safe='')
     curriculum = quote("https://www.visionastraa.com/ev-course.html", safe='')
     payments = quote("https://www.visionastraa.com/ev-payments.html", safe='')
+    youtube = quote("https://www.youtube.com/watch?v=FHFrmgKikOs", safe='')
     random_token = random.randint(100000, 999999)
     image_url = f"https://visionastraa.com/track/open.php?email={quote(to_address)}&campaign_id={CAMPAIGN_ID}&r={random_token}"
 
@@ -305,7 +306,8 @@ def send_email(to_address, first_name):
         apply=apply,
         placements=placements,
         curriculum=curriculum,
-        payments=payments
+        payments=payments,
+        youtube=youtube
     )
 
     msg = MIMEMultipart('mixed')
