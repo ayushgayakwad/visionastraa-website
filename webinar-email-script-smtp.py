@@ -148,11 +148,7 @@ college_placeholders = ', '.join(['%s'] * len(target_colleges))
 
 for tbl in tables:
     query = f"""
-        SELECT email, first_name
-FROM {tbl}
-WHERE college IN ({
-college_placeholders) )
-AND emailSent = 0
+        SELECT email, first_name FROM {tbl} WHERE college IN ({college_placeholders}) AND emailSent = 0
     """
 
     cursor.execute(query, target_colleges)
