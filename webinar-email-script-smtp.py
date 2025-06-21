@@ -15,9 +15,9 @@ SMTP_PORT = 587
 SMTP_USERNAME = 'careers@visionastraa.in'
 SMTP_PASSWORD = '4@upm7$K'
 
-CAMPAIGN_ID = "ev_webinar_2025_06_21"
+CAMPAIGN_ID = "ev_webinar_2025_06_22"
 
-EMAIL_SUBJECT = "Reminder: Job Opportunities in the EV Industry Webinar - June 21, 10:45 AM (Sat)"
+EMAIL_SUBJECT = "Job Opportunities in the EV Industry Webinar - June 22, 10:45 AM (Sun)"
 
 EMAIL_BODY_TEMPLATE = """\
 <html>
@@ -27,7 +27,7 @@ EMAIL_BODY_TEMPLATE = """\
       Sharing a Webinar Link for <strong>"Job Opportunities in EV Industry"</strong> for <strong>2025 graduates</strong><br>
       (B.Tech & M.Tech) from <strong>EEE, ECE & Mechanical Engineering</strong> branches only.
     </p>
-    <p><strong>Date: June 21, Sat</strong></p>
+    <p><strong>Date: June 22, Sun</strong></p>
     <p><strong>Time: 10:45 AM, IST</strong></p>
     <p>
       Webinar Link: <a href="https://visionastraa.com/track/click.php?email={email}&target={meet_url}&campaign_id={campaign_id}" 
@@ -57,7 +57,7 @@ EMAIL_BODY_TEMPLATE = """\
 """
 
 def create_ics():
-    dt_start = datetime(2025, 6, 21, 10, 45)
+    dt_start = datetime(2025, 6, 22, 10, 45)
     dt_end = dt_start + timedelta(minutes=60)
     dtstamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     dtstart = dt_start.strftime("%Y%m%dT%H%M%S")
@@ -72,7 +72,7 @@ DTSTAMP:{dtstamp}
 DTSTART;TZID=Asia/Kolkata:{dtstart}
 DTEND;TZID=Asia/Kolkata:{dtend}
 SUMMARY:Job Opportunities in EV Industry Webinar
-UID:visionastraa-ev-webinar-20250621@visionastraa.in
+UID:visionastraa-ev-webinar-20250622@visionastraa.in
 ORGANIZER;CN=VisionAstraa Group:mailto:{SMTP_USERNAME}
 DESCRIPTION:Join the webinar on Job Opportunities in EV Industry.\\nhttps://meet.google.com/prn-gckz-eug
 LOCATION:Online (Google Meet)
@@ -135,13 +135,14 @@ cursor = conn.cursor(dictionary=True)
 tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 
 target_colleges = [
-    "BAPUJI INSTITUTE OF ENGINEERING & TECHNOLOGY",
-    "DAYANANDA SAGAR COLLEGE OF ENGINEERING",
-    "K.L.S. GOGTE INSTITUTE OF TECHNOLOGY",
-    "BANGALORE INSTITUTE OF TECHNOLOGY",
-    "SHARNBASVA UNIVERSITY",
-    "GM INSTITUTE OF TECHNOLOGY",
-    "M. S. RAMAIAH INSTITUTE OF TECHNOLOGY"
+    "THE NATIONAL INSTITUTE OF ENGINEERING",
+    "JAWAHARLAL NEHRU NEW COLLEGE OF ENGINEERING",
+    "RAO BAHADUR Y MAHABALESWARAPPA ENGINEERING COLLEGE",
+    "CAMBRIDGE INSTITUTE OF TECHNOLOGY",
+    "K.L.E.INSTITUTE OF TECHNOLOGY",
+    "B.M.S.COLLEGE OF ENGINEERING",
+    "PES INSTITUTE OF TECHNOLOGY & MANAGEMENT",
+    "KLS VISHWANATHRAO DESHPANDE INSTITUTE OF TECHNOLOGY"
 ]
 
 college_placeholders = ', '.join(['%s'] * len(target_colleges))
