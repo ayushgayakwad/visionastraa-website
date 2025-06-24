@@ -15,9 +15,9 @@ SMTP_PORT = 587
 SMTP_USERNAME = 'careers@visionastraa.in'
 SMTP_PASSWORD = '4@upm7$K'
 
-CAMPAIGN_ID = "ev_webinar_2025_06_24"
+CAMPAIGN_ID = "ev_webinar_2025_06_25"
 
-EMAIL_SUBJECT = "Join Now! Webinar Started Already! Job Opportunities in the EV Industry Webinar - June 24, 10:45 AM (Tue)"
+EMAIL_SUBJECT = "Join Now! Webinar Started Already! Job Opportunities in the EV Industry Webinar - June 25, 11:30 AM (Wed)"
 
 EMAIL_BODY_TEMPLATE = """\
 <html>
@@ -27,8 +27,8 @@ EMAIL_BODY_TEMPLATE = """\
       Sharing a Webinar Link for <strong>"Job Opportunities in EV Industry"</strong> for <strong>2025 graduates</strong><br>
       (B.Tech & M.Tech) from <strong>EEE, ECE & Mechanical Engineering</strong> branches only.
     </p>
-    <p><strong>Date: June 24, Tue</strong></p>
-    <p><strong>Time: 10:45 AM, IST</strong></p>
+    <p><strong>Date: June 25, Wed</strong></p>
+    <p><strong>Time: 11:30 AM, IST</strong></p>
     <p>
       Webinar Link: <a href="https://visionastraa.com/track/click.php?email={email}&target={meet_url}&campaign_id={campaign_id}" 
       target="_blank" style="color:#1a73e8;">Join Webinar</a>
@@ -57,7 +57,7 @@ EMAIL_BODY_TEMPLATE = """\
 """
 
 def create_ics():
-    dt_start = datetime(2025, 6, 24, 10, 45)
+    dt_start = datetime(2025, 6, 25, 11, 30)
     dt_end = dt_start + timedelta(minutes=60)
     dtstamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     dtstart = dt_start.strftime("%Y%m%dT%H%M%S")
@@ -72,7 +72,7 @@ DTSTAMP:{dtstamp}
 DTSTART;TZID=Asia/Kolkata:{dtstart}
 DTEND;TZID=Asia/Kolkata:{dtend}
 SUMMARY:Job Opportunities in EV Industry Webinar
-UID:visionastraa-ev-webinar-20250624@visionastraa.in
+UID:visionastraa-ev-webinar-20250625@visionastraa.in
 ORGANIZER;CN=VisionAstraa Group:mailto:{SMTP_USERNAME}
 DESCRIPTION:Join the webinar on Job Opportunities in EV Industry.\\nhttps://meet.google.com/prn-gckz-eug
 LOCATION:Online (Google Meet)
@@ -135,29 +135,12 @@ cursor = conn.cursor(dictionary=True)
 tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 
 target_colleges = [
-    "SHRI MADHWA VADIRAJA INSTITUTE OF TECHNOLOGY AND MANAGEMENT",
-    "TONTADARYA COLLEGE OF ENGINEERING",
-    "NMAM INSTITUTE OF TECHNOLOGY, NITTE",
-    "GOVERNMENT ENGINEERING COLLEGE TALAKAL",
-    "GURU NANAK DEV ENGINEERING COLLEGE, BIDAR",
-    "SDM INSTITUTE OF TECHNOLOGY UJIRE-574240",
-    "ANGADI INSTITTUTE OF TECHNOLOGY AND MANAGEMENT",
-    "JSS SCIENCE AND TECHNOLOGY UNIVERSITY",
-    "VISVESVARAYA TECHNOLOGICAL UNIVERSITY",
-    "SAI VIDYA INSTITUTE OF TECHNOLOGY",
-    "SRI SIDDHARTHA ACADEMY OF HIGHER EDUCATION AGALKOTE",
-    "ALVA'S INSTITUTE OF ENGINEERING AND TECHNOLOGY",
-    "A. J. INSTITUTE OF ENGINEERING AND TECHNOLOGY MANGALURU",
-    "A.M.C. ENGINEERING COLLEGE",
-    "A.G.M RURAL COLLEGE OF ENGINEERING AND TECHNOLOGY",
-    "MAHARAJA INSTITUTE OF TECHNOLOGY THANDAVAPURA",
-    "K.V.G.COLLEGE OF ENGINEERING",
-    "MVJ COLLEGE OF ENGINEERING",
-    "ACS COLLEGE OF ENGINEERING",
-    "COORG INSTITUTE OF TECHNOLOGY",
-    "KALPATARU INSTITUTE OF TECHNOLOGY",
-    "P.D. A. COLLEGE OF ENGINEERING",
-    "MYSURU ROYAL INSTITUTE OF TECHNOLOGY"
+    "VELLORE INSTITUTE OF TECHNOLOGY",
+    "SATHYABAMA INSTITUTE OF SCIENCE AND TECHNOLOGY",
+    "M.KUMARASAMY COLLEGE OF ENGINEERING",
+    "ANNA UNIVERSITY",
+    "SAVEETHA INSTITUTE OF MEDICAL AND TECHNICAL SCIENCES",
+    "VELLORE INSTITUTE OF TECHNOLOGY CHENNAI OFF CAMPUS"
 ]
 
 college_placeholders = ', '.join(['%s'] * len(target_colleges))
