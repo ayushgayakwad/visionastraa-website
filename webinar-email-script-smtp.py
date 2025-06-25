@@ -15,9 +15,9 @@ SMTP_PORT = 587
 SMTP_USERNAME = 'careers@visionastraa.in'
 SMTP_PASSWORD = '4@upm7$K'
 
-CAMPAIGN_ID = "ev_webinar_2025_06_25"
+CAMPAIGN_ID = "ev_webinar_2025_06_26"
 
-EMAIL_SUBJECT = "Join Now! Webinar Started Already! Job Opportunities in the EV Industry Webinar - June 25, 11:30 AM (Wed)"
+EMAIL_SUBJECT = "Job Opportunities in the EV Industry Webinar - June 26, 10:45 AM (Thu)"
 
 EMAIL_BODY_TEMPLATE = """\
 <html>
@@ -27,8 +27,8 @@ EMAIL_BODY_TEMPLATE = """\
       Sharing a Webinar Link for <strong>"Job Opportunities in EV Industry"</strong> for <strong>2025 graduates</strong><br>
       (B.Tech & M.Tech) from <strong>EEE, ECE & Mechanical Engineering</strong> branches only.
     </p>
-    <p><strong>Date: June 25, Wed</strong></p>
-    <p><strong>Time: 11:30 AM, IST</strong></p>
+    <p><strong>Date: June 26, Thu</strong></p>
+    <p><strong>Time: 10:45 AM, IST</strong></p>
     <p>
       Webinar Link: <a href="https://visionastraa.com/track/click.php?email={email}&target={meet_url}&campaign_id={campaign_id}" 
       target="_blank" style="color:#1a73e8;">Join Webinar</a>
@@ -57,7 +57,7 @@ EMAIL_BODY_TEMPLATE = """\
 """
 
 def create_ics():
-    dt_start = datetime(2025, 6, 25, 11, 30)
+    dt_start = datetime(2025, 6, 26, 10, 45)
     dt_end = dt_start + timedelta(minutes=60)
     dtstamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     dtstart = dt_start.strftime("%Y%m%dT%H%M%S")
@@ -72,7 +72,7 @@ DTSTAMP:{dtstamp}
 DTSTART;TZID=Asia/Kolkata:{dtstart}
 DTEND;TZID=Asia/Kolkata:{dtend}
 SUMMARY:Job Opportunities in EV Industry Webinar
-UID:visionastraa-ev-webinar-20250625@visionastraa.in
+UID:visionastraa-ev-webinar-20250626@visionastraa.in
 ORGANIZER;CN=VisionAstraa Group:mailto:{SMTP_USERNAME}
 DESCRIPTION:Join the webinar on Job Opportunities in EV Industry.\\nhttps://meet.google.com/prn-gckz-eug
 LOCATION:Online (Google Meet)
@@ -135,12 +135,21 @@ cursor = conn.cursor(dictionary=True)
 tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 
 target_colleges = [
-    "VELLORE INSTITUTE OF TECHNOLOGY",
-    "SATHYABAMA INSTITUTE OF SCIENCE AND TECHNOLOGY",
-    "M.KUMARASAMY COLLEGE OF ENGINEERING",
-    "ANNA UNIVERSITY",
+    "VELLORE INSTITUTE OF TECHNOLOGY CHENNAI OFF CAMPUS",
+    "SONA COLLEGE OF TECHNOLOGY",
+    "KPR INSTITUTE OF ENGINEERING AND TECHNOLOGY",
+    "PSNA COLLEGE OF ENGINEERING AND TECHNOLOGY , DINDIGUL",
+    "K RAMAKRISHNAN COLLEGE OF TECHNOLOGY",
+    "SRI VENKATESWARA COLLEGE OF ENGINEERING",
     "SAVEETHA INSTITUTE OF MEDICAL AND TECHNICAL SCIENCES",
-"SRM VALLIAMMAI ENGINEERING COLLEGE", "SRM TRP ENGINEERING COLLEGE", "SRM INSTITUTE OF SCIENCE AND TECHNOLOGY RAMAPURAM CAMPUS", "SRM INSTITUTE OF SCIENCE AND TECHNOLOGY RAMAPURAM PART CAMPUS", "SRM INSTITUTE OF SCIENCE AND TECHNOLOGY TIRUCHIRAPPALLI"
+    "UNIVERSITY COLLEGE OF ENGINEERING, BITCAMPUS TIRUCHIRAPPALLI",
+    "GOVERNMENT COLLEGE OF ENGINEERING,SALEM",
+    "PERI INSTITUTE OF TECHNOLOGY",
+    "VELAMMAL INSTITUTE OF TECHNOLOGY",
+    "PAAVAI ENGINEERING COLLEGE",
+    "ST. JOSEPH'S COLLEGE OF ENGINEERING",
+    "ANNA UNIVERSITY REGIONAL CAMPUS COIMBATORE",
+    "GOVERNMENT COLLEGE OF ENGINEERING, TIRUNELVELI"
 ]
 
 college_placeholders = ', '.join(['%s'] * len(target_colleges))
