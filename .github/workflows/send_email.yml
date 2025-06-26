@@ -1,7 +1,7 @@
 name: Send Emails - EV Webinar
 on:
   schedule:
-    - cron: "15 5 * * *"
+    - cron: "10 5 * * *"
   workflow_dispatch: 
 
 jobs:
