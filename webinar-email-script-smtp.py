@@ -15,9 +15,9 @@ SMTP_PORT = 587
 SMTP_USERNAME = 'careers@visionastraa.in'
 SMTP_PASSWORD = '4@upm7$K'
 
-CAMPAIGN_ID = "ev_webinar_2025_06_26"
+CAMPAIGN_ID = "ev_webinar_2025_06_27"
 
-EMAIL_SUBJECT = "Join Now! Webinar Started Already! Job Opportunities in the EV Industry Webinar - June 26, 10:45 AM (Thu)"
+EMAIL_SUBJECT = "Job Opportunities in the EV Industry Webinar - June 27, 11:30 AM (Thu)"
 
 EMAIL_BODY_TEMPLATE = """\
 <html>
@@ -27,8 +27,8 @@ EMAIL_BODY_TEMPLATE = """\
       Sharing a Webinar Link for <strong>"Job Opportunities in EV Industry"</strong> for <strong>2025 graduates</strong><br>
       (B.Tech & M.Tech) from <strong>EEE, ECE & Mechanical Engineering</strong> branches only.
     </p>
-    <p><strong>Date: June 26, Thu</strong></p>
-    <p><strong>Time: 10:45 AM, IST</strong></p>
+    <p><strong>Date: June 27, Thu</strong></p>
+    <p><strong>Time: 11:30 AM, IST</strong></p>
     <p>
       Webinar Link: <a href="https://visionastraa.com/track/click.php?email={email}&target={meet_url}&campaign_id={campaign_id}" 
       target="_blank" style="color:#1a73e8;">Join Webinar</a>
@@ -57,7 +57,7 @@ EMAIL_BODY_TEMPLATE = """\
 """
 
 def create_ics():
-    dt_start = datetime(2025, 6, 26, 10, 45)
+    dt_start = datetime(2025, 6, 27, 11, 30)
     dt_end = dt_start + timedelta(minutes=60)
     dtstamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     dtstart = dt_start.strftime("%Y%m%dT%H%M%S")
@@ -72,7 +72,7 @@ DTSTAMP:{dtstamp}
 DTSTART;TZID=Asia/Kolkata:{dtstart}
 DTEND;TZID=Asia/Kolkata:{dtend}
 SUMMARY:Job Opportunities in EV Industry Webinar
-UID:visionastraa-ev-webinar-20250626@visionastraa.in
+UID:visionastraa-ev-webinar-20250627@visionastraa.in
 ORGANIZER;CN=VisionAstraa Group:mailto:{SMTP_USERNAME}
 DESCRIPTION:Join the webinar on Job Opportunities in EV Industry.\\nhttps://meet.google.com/prn-gckz-eug
 LOCATION:Online (Google Meet)
