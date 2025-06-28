@@ -15,20 +15,20 @@ SMTP_PORT = 587
 SMTP_USERNAME = 'careers@visionastraa.in'
 SMTP_PASSWORD = '4@upm7$K'
 
-CAMPAIGN_ID = "ev_webinar_2025_06_28"
+CAMPAIGN_ID = "ev_webinar_2025_06_29"
 
-EMAIL_SUBJECT = "Job Opportunities in the EV Industry Webinar - June 28, 10:30 AM (Thu)"
+EMAIL_SUBJECT = "Last chance to attend! Job Opportunities in the EV Industry Webinar - June 29, 09:45 AM (Sun)"
 
 EMAIL_BODY_TEMPLATE = """\
 <html>
   <body style="font-family:Arial, sans-serif;line-height:1.5;color:#333;">
     <p>Dear {first_name},</p>
     <p>
-      Sharing a Webinar Link for <strong>"Job Opportunities in EV Industry"</strong> for <strong>2025 graduates</strong><br>
+      Sharing Webinar Link for students who missed it last time. Last chance to attend. <strong>"Job Opportunities in EV Industry"</strong> for <strong>2025 graduates</strong><br>
       (B.Tech & M.Tech) from <strong>EEE, ECE & Mechanical Engineering</strong> branches only.
     </p>
-    <p><strong>Date: June 28, Sat</strong></p>
-    <p><strong>Time: 10:30 AM, IST</strong></p>
+    <p><strong>Date: June 29, Sun</strong></p>
+    <p><strong>Time: 09:45 AM, IST</strong></p>
     <p>
       Webinar Link: <a href="https://visionastraa.com/track/click.php?email={email}&target={meet_url}&campaign_id={campaign_id}" 
       target="_blank" style="color:#1a73e8;">Join Webinar</a>
@@ -57,7 +57,7 @@ EMAIL_BODY_TEMPLATE = """\
 """
 
 def create_ics():
-    dt_start = datetime(2025, 6, 28, 10, 30)
+    dt_start = datetime(2025, 6, 29, 9, 45)
     dt_end = dt_start + timedelta(minutes=60)
     dtstamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     dtstart = dt_start.strftime("%Y%m%dT%H%M%S")
@@ -72,7 +72,7 @@ DTSTAMP:{dtstamp}
 DTSTART;TZID=Asia/Kolkata:{dtstart}
 DTEND;TZID=Asia/Kolkata:{dtend}
 SUMMARY:Job Opportunities in EV Industry Webinar
-UID:visionastraa-ev-webinar-20250628@visionastraa.in
+UID:visionastraa-ev-webinar-20250629@visionastraa.in
 ORGANIZER;CN=VisionAstraa Group:mailto:{SMTP_USERNAME}
 DESCRIPTION:Join the webinar on Job Opportunities in EV Industry.\\nhttps://meet.google.com/prn-gckz-eug
 LOCATION:Online (Google Meet)
@@ -135,18 +135,16 @@ cursor = conn.cursor(dictionary=True)
 tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 
 target_colleges = [
-    "ADITYA COLLEGE OF ENGINEERING & TECHNOLOGY",
-    "VIGNAN'S INSTITUTE OF INFORMATION TECHNOLOGY",
-    "NARAYANA ENGINEERING COLLEGE",
-    "NRI INSTITUTE OF TECHNOLOGY",
-    "ADITYA ENGINEERING COLLEGE",
-    "POTTI SRIRAMULU CHALAVADI MALLIKARJUNA RAO COLLEGE OF ENGINEERING AND TECHNOLOGY",
-    "VIGNAN'S NIRULA INSTITUTE OF TECHNOLOGY & SCIENCE FOR WOMEN",
-    "LBS INSTITUTE OF TECHNOLOGY FOR WOMEN",
-    "AMRITA VISHWA VIDYAPEETHAM AMRITAPURI CAMPUS",
-    "TKM COLLEGE OF ENGINEERING",
-    "NSS College of Engineering",
-    "TOCH INSTITUTE OF SCIENCE & TECHNOLOGY"
+    "BAPUJI INSTITUTE OF ENGINEERING & TECHNOLOGY",
+    "DAYANANDA SAGAR COLLEGE OF ENGINEERING",
+    "K.L.S. GOGTE INSTITUTE OF TECHNOLOGY",
+    "BANGALORE INSTITUTE OF TECHNOLOGY",
+    "SHARNBASVA UNIVERSITY",
+    "COLLEGE OF ENGINEERING TRIVANDRUM",
+    "GM INSTITUTE OF TECHNOLOGY",
+    "THE NATIONAL INSTITUTE OF ENGINEERING",
+    "JAWAHARLAL NEHRU NEW COLLEGE OF ENGINEERING",
+    "RAO BAHADUR Y MAHABALESWARAPPA ENGINEERING COLLEGE"
 ]
 
 college_placeholders = ', '.join(['%s'] * len(target_colleges))
