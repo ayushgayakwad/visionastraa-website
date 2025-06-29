@@ -15,9 +15,9 @@ SMTP_PORT = 587
 SMTP_USERNAME = 'careers@visionastraa.in'
 SMTP_PASSWORD = '4@upm7$K'
 
-CAMPAIGN_ID = "ev_webinar_2025_06_29"
+CAMPAIGN_ID = "ev_webinar_2025_06_30"
 
-EMAIL_SUBJECT = "Last chance to attend! Job Opportunities in the EV Industry Webinar - June 29, 09:45 AM (Sun)"
+EMAIL_SUBJECT = "Last chance to attend! Job Opportunities in the EV Industry Webinar - June 30, 10:30 AM (Mon)"
 
 EMAIL_BODY_TEMPLATE = """\
 <html>
@@ -27,8 +27,8 @@ EMAIL_BODY_TEMPLATE = """\
       Sharing Webinar Link for students who missed it last time. Last chance to attend. <strong>"Job Opportunities in EV Industry"</strong> for <strong>2025 graduates</strong><br>
       (B.Tech & M.Tech) from <strong>EEE, ECE & Mechanical Engineering</strong> branches only.
     </p>
-    <p><strong>Date: June 29, Sun</strong></p>
-    <p><strong>Time: 09:45 AM, IST</strong></p>
+    <p><strong>Date: June 30, Mon</strong></p>
+    <p><strong>Time: 10:30 AM, IST</strong></p>
     <p>
       Webinar Link: <a href="https://visionastraa.com/track/click.php?email={email}&target={meet_url}&campaign_id={campaign_id}" 
       target="_blank" style="color:#1a73e8;">Join Webinar</a>
@@ -57,7 +57,7 @@ EMAIL_BODY_TEMPLATE = """\
 """
 
 def create_ics():
-    dt_start = datetime(2025, 6, 29, 9, 45)
+    dt_start = datetime(2025, 6, 30, 10, 30)
     dt_end = dt_start + timedelta(minutes=60)
     dtstamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     dtstart = dt_start.strftime("%Y%m%dT%H%M%S")
@@ -72,7 +72,7 @@ DTSTAMP:{dtstamp}
 DTSTART;TZID=Asia/Kolkata:{dtstart}
 DTEND;TZID=Asia/Kolkata:{dtend}
 SUMMARY:Job Opportunities in EV Industry Webinar
-UID:visionastraa-ev-webinar-20250629@visionastraa.in
+UID:visionastraa-ev-webinar-20250630@visionastraa.in
 ORGANIZER;CN=VisionAstraa Group:mailto:{SMTP_USERNAME}
 DESCRIPTION:Join the webinar on Job Opportunities in EV Industry.\\nhttps://meet.google.com/prn-gckz-eug
 LOCATION:Online (Google Meet)
@@ -135,16 +135,24 @@ cursor = conn.cursor(dictionary=True)
 tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 
 target_colleges = [
-    "BAPUJI INSTITUTE OF ENGINEERING & TECHNOLOGY",
-    "DAYANANDA SAGAR COLLEGE OF ENGINEERING",
-    "K.L.S. GOGTE INSTITUTE OF TECHNOLOGY",
-    "BANGALORE INSTITUTE OF TECHNOLOGY",
-    "SHARNBASVA UNIVERSITY",
-    "COLLEGE OF ENGINEERING TRIVANDRUM",
-    "GM INSTITUTE OF TECHNOLOGY",
-    "THE NATIONAL INSTITUTE OF ENGINEERING",
-    "JAWAHARLAL NEHRU NEW COLLEGE OF ENGINEERING",
-    "RAO BAHADUR Y MAHABALESWARAPPA ENGINEERING COLLEGE"
+    "OTHER",
+    "NAGESH KARAJAGI ORCHID COLLEGE OF ENGINEERING AND TECHNOLOGY, SOLAPUR",
+    "ALL INDIA SHRI SHIVAJI MEMORIAL SOCIETY'S INSTITUTE OF INFORMATION TECHNOLOGY",
+    "JAYAWANTRAO SAWANT COLLEGE OF ENGINEERING & TECHNOLOGY",
+    "JSPM'S RAJARSHI SHAHU COLLEGE OF ENGINEERING",
+    "MARATHWADA MITRA MANDAL'S COLLEGE OF ENGINEERING",
+    "VISHWAKARMA INSTITUTE OF TECHNOLOGY",
+    "SHARAD INSTITUTE OF TECHNOLOGY COLLEGE OF ENGINEERING",
+    "DR. D. Y. PATIL INSTITUTE OF TECHNOLOGY",
+    "PROGRESSIVE EDUCATION SOCIETY'S MODERN COLLEGE OF ENGINEERING, PUNE",
+    "MODERN EDUCATION SOCIETY'S WADIA COLLEGE OF ENGINEERING",
+    "SHRI GURU GOBIND SINGHJI INSTITUTE OF ENGINEERING AND TECHNOLOGY",
+    "BAJAJ INSTITUTE OF TECHNOLOGY",
+    "PRIYADARSHINI BHAGWATI COLLEGE OF ENGINEERING",
+    "SKN SINHGAD COLLEGE OF ENGINEERING",
+    "GOVERNMENT COLLEGE OF ENGINEERING, JALGAON(M.5.)",
+    "GOVERNMENT COLLEGE OF ENGINEERING",
+    "MIT ACADEMY OF ENGINEERING"
 ]
 
 college_placeholders = ', '.join(['%s'] * len(target_colleges))
