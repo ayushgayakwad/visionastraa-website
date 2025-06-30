@@ -13,7 +13,7 @@ from urllib.parse import quote
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 587
 SMTP_USERNAME = 'careers@visionastraa.in'
-SMTP_PASSWORD = '4@upm7$K'
+SMTP_PASSWORD = '1?Q#v!$adw:M'
 
 CAMPAIGN_ID = "ev_webinar_2025_07_01"
 
