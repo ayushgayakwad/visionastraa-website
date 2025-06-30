@@ -51,6 +51,11 @@ EMAIL_BODY_TEMPLATE = """\
     </ul>
     <p><strong>To add the webinar to your calendar and receive a reminder, please click "YES" on the calendar invite.</strong></p>
     <p>Best Regards,<br>VisionAstraa Group</p>
+    <br>
+    <p style="font-size:12px;color:#888;">
+      If you no longer wish to receive emails from us, you can 
+      <a href="https://visionastraa.com/unsubscribe.php?email={email}&campaign_id={campaign_id}" style="color:#1a73e8;">unsubscribe here</a>.
+    </p>
     <img src="{image_url}" width="1" height="1" style="display:none;" />
   </body>
 </html>
@@ -152,10 +157,13 @@ college_placeholders = ', '.join(['%s'] * len(target_colleges))
 
 for tbl in tables:
     query = f"""
-        SELECT email, first_name FROM {tbl} WHERE college IN ({college_placeholders}) AND emailSent = 0
+        SELECT email, first_name FROM {tbl} 
+WHERE college IN ({college_placeholders}) 
+AND emailSent = 0 
+AND email NOT IN (SELECT email FROM unsubscribed_emails WHERE campaign_id = %s)
     """
 
-    cursor.execute(query, target_colleges)
+    cursor.execute(query, target_colleges + [CAMPAIGN_ID])
 
     for row in cursor.fetchall():
         if send_email(row['email'], row['first_name']):
