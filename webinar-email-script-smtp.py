@@ -15,9 +15,9 @@ SMTP_PORT = 587
 SMTP_USERNAME = 'careers@visionastraa.in'
 SMTP_PASSWORD = '1?Q#v!$adw:M'
 
-CAMPAIGN_ID = "ev_webinar_2025_07_01"
+CAMPAIGN_ID = "ev_webinar_2025_07_02"
 
-EMAIL_SUBJECT = "Reminder: Job Opportunities in the EV Industry Webinar - July 01, 10:30 AM (Tue)"
+EMAIL_SUBJECT = "Job Opportunities in the EV Industry Webinar - July 02, 10:30 AM (Wed)"
 
 EMAIL_BODY_TEMPLATE = """\
 <html>
@@ -27,7 +27,7 @@ EMAIL_BODY_TEMPLATE = """\
       Sharing webinar link for <strong>"Job Opportunities in EV Industry"</strong> for <strong>2025 graduates</strong><br>
       (B.Tech & M.Tech) from <strong>EEE, ECE & Mechanical Engineering</strong> branches only.
     </p>
-    <p><strong>Date: July 01, Tue</strong></p>
+    <p><strong>Date: July 02, Wed</strong></p>
     <p><strong>Time: 10:30 AM, IST</strong></p>
     <p>
       Webinar Link: <a href="https://visionastraa.com/track/click.php?email={email}&target={meet_url}&campaign_id={campaign_id}" 
@@ -62,7 +62,7 @@ EMAIL_BODY_TEMPLATE = """\
 """
 
 def create_ics():
-    dt_start = datetime(2025, 7, 1, 10, 30)
+    dt_start = datetime(2025, 7, 2, 10, 30)
     dt_end = dt_start + timedelta(minutes=60)
     dtstamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     dtstart = dt_start.strftime("%Y%m%dT%H%M%S")
@@ -77,7 +77,7 @@ DTSTAMP:{dtstamp}
 DTSTART;TZID=Asia/Kolkata:{dtstart}
 DTEND;TZID=Asia/Kolkata:{dtend}
 SUMMARY:Job Opportunities in EV Industry Webinar
-UID:visionastraa-ev-webinar-20250701@visionastraa.in
+UID:visionastraa-ev-webinar-20250702@visionastraa.in
 ORGANIZER;CN=VisionAstraa Group:mailto:{SMTP_USERNAME}
 DESCRIPTION:Join the webinar on Job Opportunities in EV Industry.\\nhttps://meet.google.com/prn-gckz-eug
 LOCATION:Online (Google Meet)
@@ -136,21 +136,27 @@ conn = mysql.connector.connect(
     database='u707137586_Campus_Hiring'
 )
 cursor = conn.cursor(dictionary=True)
+
 # tables = ['test']
 tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 
 target_colleges = [
-    "MALLA REDDY ENGINEERING COLLEGE",
-    "SREENIDHI INSTITUTE OF SCIENCE & TECHNOLOGY",
-    "B V RAJU INSTITUTE OF TECHNOLOGY",
-    "VARDHAMAN COLLEGE OF ENGINEERING",
-    "MATURI VENKATA SUBBA RAO ENGINEERING COLLEGE",
-    "JNTUH UNIVERSITY COLLEGE OF ENGINEERING JAGTIAL",
-    "BHOJ REDDY ENGINEERING COLLEGE FOR WOMEN",
-    "GURU NANAK INSTITUTIONS TECHNICAL CAMPUS",
-    "ACE ENGINEERING COLLEGE",
-    "MAHATMA GANDHI INSTITUTE OF TECHNOLOGY",
-    "SRI INDU COLLEGE OF ENGINEERING & TECHNOLOGY"
+    "NAGESH KARAJAGI ORCHID COLLEGE OF ENGINEERING AND TECHNOLOGY, SOLAPUR",
+    "JSPM'S RAJARSHI SHAHU COLLEGE OF ENGINEERING",
+    "MARATHWADA MITRA MANDAL'S COLLEGE OF ENGINEERING",
+    "JAYAWANTRAO SAWANT COLLEGE OF ENGINEERING & TECHNOLOGY",
+    "VISHWAKARMA INSTITUTE OF TECHNOLOGY",
+    "SHARAD INSTITUTE OF TECHNOLOGY COLLEGE OF ENGINEERING",
+    "DR. D. Y. PATIL INSTITUTE OF TECHNOLOGY",
+    "PROGRESSIVE EDUCATION SOCIETY'S MODERN COLLEGE OF ENGINEERING, PUNE",
+    "MODERN EDUCATION SOCIETY'S WADIA COLLEGE OF ENGINEERING",
+    "SHRI GURU GOBIND SINGHJI INSTITUTE OF ENGINEERING AND TECHNOLOGY",
+    "ALL INDIA SHRI SHIVAJI MEMORIAL SOCIETY'S INSTITUTE OF INFORMATION TECHNOLOGY",
+    "SKN SINHGAD COLLEGE OF ENGINEERING",
+    "GOVERNMENT COLLEGE OF ENGINEERING, JALGAON(M.5.)",
+    "MIT ACADEMY OF ENGINEERING",
+    "SANT GAJANAN MAHARAJ COLLEGE OF ENGINEERING",
+    "DEPARTMENT OF TECHNOLOGY, SHIVAJI UNIVERSITY, KOLHAPUR"
 ]
 
 college_placeholders = ', '.join(['%s'] * len(target_colleges))
