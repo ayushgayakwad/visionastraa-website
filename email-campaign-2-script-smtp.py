@@ -1,44 +1,66 @@
+# CURRENTLY SENDS 1 EMAIL EVERY 3 SECONDS (BUT MORE ROBUST AND RELIABLE)
+
+import mysql.connector
+import smtplib
+import time
+import random
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.application import MIMEApplication
+from datetime import datetime, timedelta, timezone
+from urllib.parse import quote
+
+SMTP_SERVER = 'smtp.hostinger.com'
+SMTP_PORT = 587
+SMTP_USERNAME = 'visionastraa@evcourse.in'
+SMTP_PASSWORD = '>p>W|jv?Kg1'
+
+CAMPAIGN_ID = "ev_promotional_campaign_2_2025"
+
+EMAIL_SUBJECT = "Looking for Job in your CORE Field?"
+
+EMAIL_BODY_TEMPLATE = """\
 <html>
 <head>
   <meta charset="UTF-8">
   <title>EV Academy Placement Campaign</title>
   <style>
-    body {
+    body {{
       font-family: Arial, sans-serif;
       background-color: #f6f6f6;
       margin: 0;
       padding: 0;
-    }
-    .container {
+    }}
+    .container {{
       max-width: 700px;
       margin: 20px auto;
       background-color: #ffffff;
       padding: 30px;
       border-radius: 8px;
       color: #333333;
-    }
-    h1, h2, h3 {
+    }}
+    h1, h2, h3 {{
       color: #333333;
-    }
-    p {
+    }}
+    p {{
         margin-top: 0px;
         margin-bottom: 0px;
-    }
-    .vaev-logo {
+    }}
+    .vaev-logo {{
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         gap: 15px;
         margin-top: 15px;
-    }
-    .vaev-logo-item img {
+    }}
+    .vaev-logo-item img {{
         width: 100%;
         height: auto;
         object-fit: contain;
         max-width: 120px;
         transition: filter 0.3s ease;
-    }
-    .btn {
+    }}
+    .btn {{
       display: inline-block;
       padding: 12px 20px;
       margin: 10px 5px 20px 0;
@@ -47,19 +69,19 @@
       text-decoration: none;
       border-radius: 4px;
       font-weight: bold;
-    }
-    .faq {
+    }}
+    .faq {{
       margin-top: 20px;
-    }
-    .faq h4 {
+    }}
+    .faq h4 {{
       margin-top: 0px;
       margin-bottom: 0px;
       color: #222;
-    }
-    .footer {
+    }}
+    .footer {{
       font-size: 14px;
       color: #777777;
-    }
+    }}
   </style>
 </head>
 <body>
@@ -273,3 +295,64 @@
   </div>
 </body>
 </html>
+"""
+
+def send_email(to_address, first_name):
+    vaev_linkedin = quote("https://www.linkedin.com/company/va-ev-academy", safe='')
+    apply = quote("https://www.visionastraa.com/ev-application.html", safe='')
+    placements = quote("https://www.visionastraa.com/ev-jobs.html", safe='')
+    curriculum = quote("https://www.visionastraa.com/ev-course.html", safe='')
+    payments = quote("https://www.visionastraa.com/ev-payments.html", safe='')
+    youtube = quote("https://www.youtube.com/watch?v=8CgZoxnYy_k", safe='')
+    random_token = random.randint(100000, 999999)
+    image_url = f"https://visionastraa.com/track/open.php?email={quote(to_address)}&campaign_id={CAMPAIGN_ID}&r={random_token}"
+
+    body = EMAIL_BODY_TEMPLATE.format(
+        first_name=first_name,
+        email=quote(to_address),
+        campaign_id=CAMPAIGN_ID,
+        image_url=image_url,
+        vaev_linkedin=vaev_linkedin,
+        apply=apply,
+        placements=placements,
+        curriculum=curriculum,
+        payments=payments,
+        youtube=youtube
+    )
+
+    msg = MIMEMultipart('mixed')
+    msg['Subject'] = EMAIL_SUBJECT
+    msg['From'] = SMTP_USERNAME
+    msg['To'] = to_address
+    msg.attach(MIMEText(body, 'html'))
+
+    try:
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+            server.starttls()
+            server.login(SMTP_USERNAME, SMTP_PASSWORD)
+            server.sendmail(SMTP_USERNAME, to_address, msg.as_string())
+        return True
+    except Exception as e:
+        print(f"❌ Error sending to {to_address}: {e}")
+        return False
+
+conn = mysql.connector.connect(
+    host='srv1640.hstgr.io',
+    user='u707137586_Campus_Hiring',
+    password='6q+SFd~o[go',
+    database='u707137586_Campus_Hiring'
+)
+cursor = conn.cursor(dictionary=True)
+tables = ['test']
+# tables = ['crdf25', 'crdf25_north', 'crdf25_south']
+
+for tbl in tables:
+    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Kerala' AND emailSent=0")
+    for row in cursor.fetchall():
+        if send_email(row['email'], row['first_name']):
+            print(f"✅ Sent to {row['email']}")
+            cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
+            conn.commit()
+
+cursor.close()
+conn.close()
