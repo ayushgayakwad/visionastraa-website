@@ -364,7 +364,7 @@ AND emailSent = 0
 AND email NOT IN (SELECT email FROM unsubscribed_emails)
     """
 
-    cursor.execute(query, target_colleges + [CAMPAIGN_ID])
+    cursor.execute(query, target_colleges)
 
     for row in cursor.fetchall():
         if send_email(row['email'], row['first_name']):
