@@ -93,8 +93,8 @@ EMAIL_BODY_TEMPLATE = """\
     <br>
     <h2>🌟 From Rural Roots to EV Industry Leader – Your Journey Starts Here!</h2>
     <h3>ARE YOU LOOKING FOR A JOB IN YOUR CORE FIELD?</h3>
-    <h2 style="color: #28a745;">WE GUARANTEE 100% PLACEMENT IN TOP EV COMPANIES!</h2>
-    <p>Your Future in Electric Vehicles Starts with <strong><a href="https://visionastraa.com/track/click.php?email={email}&target={vaev_linkedin}&campaign_id={campaign_id}" target="_blank">VisionAstraa EV Academy</a></strong>!</p>
+    <h2 style="color: #28a745;">WE GUARANTEE 100% PLACEMENT IN TOP EV COMPANIES ELSE 100% MONEY BACK!</h2>
+    <p>Your Future in Electric Vehicles Starts with <strong><a href="https://visionastraa.com/track/click.php?email={email}&target={vaev_website}&campaign_id={campaign_id}" target="_blank">VisionAstraa EV Academy</a></strong>!</p>
     <br>
     <p>Are you an engineering graduate with dreams of working in India’s fastest‑growing industry – Electric Vehicles?</p>
     <br>
@@ -103,8 +103,8 @@ EMAIL_BODY_TEMPLATE = """\
     <p>And yet – they made it. So can you.</p>
     <p>
       ✅ <strong>100% Placement Guarantee</strong><br>
-      ✅ <strong>Average Package: ₹5.5 LPA</strong><br>
       ✅ <strong>Highest Package: ₹12 LPA</strong><br>
+      ✅ <strong>Average Package: ₹5.5 LPA</strong><br>
       ✅ <strong>Lowest Package: ₹4 LPA</strong>
     </p>
     <br>
@@ -117,7 +117,7 @@ EMAIL_BODY_TEMPLATE = """\
       <li>KLE Institute of Technology, Hubli</li>
       <li>CMR Institute of Technology, Bengaluru</li>
       <li>Sri Siddhartha Institute of Technology, Tumkur</li>
-      <li>GEC Ramnagara</li>
+      <li>Government Engineering College, Ramnagara</li>
       <li>Bapuji Institute of Engineering & Technology, Davangere</li>
       <li>and many more.</li>
     </ul>
@@ -324,6 +324,7 @@ EMAIL_BODY_TEMPLATE = """\
 
 def send_email(to_address, first_name):
     vaev_linkedin = quote("https://www.linkedin.com/company/va-ev-academy", safe='')
+    vaev_website = quote("https://www.visionastraa.com", safe='')
     apply = quote("https://www.visionastraa.com/ev-application.html", safe='')
     placements = quote("https://www.visionastraa.com/ev-jobs.html", safe='')
     curriculum = quote("https://www.visionastraa.com/ev-course.html", safe='')
@@ -342,7 +343,8 @@ def send_email(to_address, first_name):
         placements=placements,
         curriculum=curriculum,
         payments=payments,
-        youtube=youtube
+        youtube=youtube,
+        vaev_website=vaev_website
     )
 
     msg = MIMEMultipart('mixed')
