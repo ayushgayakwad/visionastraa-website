@@ -9,6 +9,7 @@ from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from datetime import datetime, timedelta, timezone
 from urllib.parse import quote
+from email.utils import formataddr
 
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 587
@@ -279,6 +280,11 @@ EMAIL_BODY_TEMPLATE = """\
             </td>
         </tr>
     </table>
+    <br>
+    <p style="font-size:12px;color:#888;">
+      If you no longer wish to receive emails from us, you can 
+      <a href="https://visionastraa.com/track/unsubscribe.php?email={email}&campaign_id={campaign_id}" style="color:#1a73e8;">unsubscribe here</a>.
+    </p>
     </div>
     <img src="{image_url}" width="1" height="1" style="display:none;" />
   </div>
@@ -311,7 +317,7 @@ def send_email(to_address, first_name):
 
     msg = MIMEMultipart('mixed')
     msg['Subject'] = EMAIL_SUBJECT
-    msg['From'] = SMTP_USERNAME
+    msg['From'] = formataddr(("EV Jobs", SMTP_USERNAME))
     msg['To'] = to_address
     msg.attach(MIMEText(body, 'html'))
 
@@ -336,7 +342,7 @@ cursor = conn.cursor(dictionary=True)
 tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 
 for tbl in tables:
-    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Uttar Pradesh' AND emailSent=0")
+    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Uttar Pradesh' AND emailSent=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
     for row in cursor.fetchall():
         if send_email(row['email'], row['first_name']):
             print(f"✅ Sent to {row['email']}")
