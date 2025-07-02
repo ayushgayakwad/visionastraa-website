@@ -342,11 +342,11 @@ cursor = conn.cursor(dictionary=True)
 tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 
 for tbl in tables:
-    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Uttar Pradesh' AND emailSent=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
+    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Kerala' AND emailSent_2=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
     for row in cursor.fetchall():
         if send_email(row['email'], row['first_name']):
             print(f"✅ Sent to {row['email']}")
-            cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
+            cursor.execute(f"UPDATE {tbl} SET emailSent_2=1 WHERE email=%s", (row['email'],))
             conn.commit()
 
 cursor.close()
