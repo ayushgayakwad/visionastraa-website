@@ -287,7 +287,7 @@ EMAIL_BODY_TEMPLATE = """\
     <hr>
     <p>For questions:</p>
     <p>Email: <a href="mailto:admissions@visionastraa.com">admissions@visionastraa.com</a></p>
-    <p>Phone: +91 80756 64438, +91 81973 55166</p>
+    <p>Phone: <a href="tel:+918075664438">+91 80756 64438</a>, <a href="tel:+918197355166">+91 81973 55166</a></p>
     <p>Talk to our Founder & CEO: <a href="https://www.linkedin.com/in/nikhiljaincs" target="_blank">Nikhil Jain C S</a></p>
 
     <hr>
