@@ -145,7 +145,7 @@ EMAIL_BODY_TEMPLATE = """\
     <br>
     <p style="color: #d9534f;"><strong>HURRY!! Only few seats left.</strong></p>
     <br>
-    <p style="color: #5943d6;"><strong>(Mechanical already closed; just few seats in EEE/ECE left.)</strong></p>
+    <p style="color: #5943d6;"><strong>(Only 1 seat left for Mechanical; just few seats in EEE/ECE left.)</strong></p>
     <br>
     <p><strong>SECURE your SEAT NOW!</strong></p>    
     <br>
