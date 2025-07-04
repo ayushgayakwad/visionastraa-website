@@ -374,7 +374,7 @@ cursor = conn.cursor(dictionary=True)
 tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 
 for tbl in tables:
-    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Karnataka' AND emailSent_2=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
+    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Kerala' AND emailSent_2=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
     for row in cursor.fetchall():
         if send_email(row['email'], row['first_name']):
             print(f"✅ Sent to {row['email']}")
