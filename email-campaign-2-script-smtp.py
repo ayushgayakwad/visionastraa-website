@@ -13,11 +13,11 @@ from email.utils import formataddr
 
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 587
-SMTP_USERNAME = 'visionastraa@evcourse.in'
-SMTP_PASSWORD = '>p>W|jv?Kg1'
+# SMTP_USERNAME = 'visionastraa@evcourse.in'
+# SMTP_PASSWORD = '>p>W|jv?Kg1'
 
-# SMTP_USERNAME = 'careers@visionastraa.in'
-# SMTP_PASSWORD = '1?Q#v!$adw:M'
+SMTP_USERNAME = 'careers@visionastraa.in'
+SMTP_PASSWORD = '1?Q#v!$adw:M'
 
 CAMPAIGN_ID = "ev_promotional_campaign_2_2025"
 
@@ -377,7 +377,7 @@ conn = mysql.connector.connect(
 cursor = conn.cursor(dictionary=True)
 # tables = ['test']
 # tables = ['crdf25', 'crdf25_north', 'crdf25_south']
-tables = ['email_list_1', 'email_list_2', 'email_list_3']
+tables = ['email_list_4', 'email_list_5']
 
 for tbl in tables:
     # cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Tamil Nadu' AND emailSent_2=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
