@@ -16,6 +16,9 @@ SMTP_PORT = 587
 SMTP_USERNAME = 'visionastraa@evcourse.in'
 SMTP_PASSWORD = '>p>W|jv?Kg1'
 
+# SMTP_USERNAME = 'careers@visionastraa.in'
+# SMTP_PASSWORD = '1?Q#v!$adw:M'
+
 CAMPAIGN_ID = "ev_promotional_campaign_2_2025"
 
 EMAIL_SUBJECT = "Want to get Job in EV Industry?"
