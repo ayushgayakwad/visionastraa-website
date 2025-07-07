@@ -377,7 +377,7 @@ conn = mysql.connector.connect(
 cursor = conn.cursor(dictionary=True)
 # tables = ['test']
 # tables = ['crdf25', 'crdf25_north', 'crdf25_south']
-tables = ['email_list_4', 'email_list_5']
+tables = ['email_list_6', 'email_list_7']
 
 for tbl in tables:
     # cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Tamil Nadu' AND emailSent_2=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
