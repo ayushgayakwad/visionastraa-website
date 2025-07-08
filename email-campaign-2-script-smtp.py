@@ -13,11 +13,11 @@ from email.utils import formataddr
 
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 587
-# SMTP_USERNAME = 'visionastraa@evcourse.in'
-# SMTP_PASSWORD = '>p>W|jv?Kg1'
+SMTP_USERNAME = 'visionastraa@evcourse.in'
+SMTP_PASSWORD = '>p>W|jv?Kg1'
 
-SMTP_USERNAME = 'careers@visionastraa.in'
-SMTP_PASSWORD = '1?Q#v!$adw:M'
+# SMTP_USERNAME = 'careers@visionastraa.in'
+# SMTP_PASSWORD = '1?Q#v!$adw:M'
 
 CAMPAIGN_ID = "ev_promotional_campaign_2_2025"
 
@@ -97,11 +97,11 @@ EMAIL_BODY_TEMPLATE = """\
     <h2>🌟 From Rural Roots to EV Industry Leader – Your Journey Starts Here!</h2>
     <h3>ARE YOU LOOKING FOR A JOB IN YOUR CORE FIELD?</h3>
     <h2 style="color: #28a745;">WE GUARANTEE 100% PLACEMENT IN TOP EV COMPANIES ELSE 100% MONEY BACK!</h2>
-    <p>Your Future in Electric Vehicles Starts with <strong><a href="https://www.visionastraa.com" target="_blank">VisionAstraa EV Academy</a></strong>!</p>
+    <p>Your Future in Electric Vehicles Starts with <strong><a href="https://visionastraa.com/track/click.php?email={email}&target={vaev_website}&campaign_id={campaign_id}" target="_blank">VisionAstraa EV Academy</a></strong>!</p>
     <br>
     <p>Are you an engineering graduate with dreams of working in India’s fastest‑growing industry – Electric Vehicles?</p>
     <br>
-    <p>At <strong><a href="https://www.linkedin.com/company/va-ev-academy" target="_blank">VisionAstraa EV Academy</a></strong> we understand your journey. Many of our successful students come from rural families, where fathers are farmers, mothers are homemakers, and dreams are big but resources are limited.</p>
+    <p>At <strong><a href="https://visionastraa.com/track/click.php?email={email}&target={vaev_linkedin}&campaign_id={campaign_id}" target="_blank">VisionAstraa EV Academy</a></strong> we understand your journey. Many of our successful students come from rural families, where fathers are farmers, mothers are homemakers, and dreams are big but resources are limited.</p>
     <br>
     <p>And yet – they made it. So can you.</p>
     <p>
@@ -160,9 +160,9 @@ EMAIL_BODY_TEMPLATE = """\
     <p style="color: #c82333; font-size: 16px; font-weight: bold; margin-top: 10px; text-align: left;">
             Don't Miss this GOLDEN opportunity to secure a guaranteed job in EV Industry by Nov, 2025 if you join today!
         </p>
-    <a href="https://www.visionastraa.com/ev-application.html" class="btn">APPLY NOW</a>
-    <a href="https://www.visionastraa.com/ev-jobs.html" class="btn">PLACEMENTS</a>
-    <a href="https://www.visionastraa.com/ev-course.html" class="btn">CURRICULUM</a>
+    <a href="https://visionastraa.com/track/click.php?email={email}&target={apply}&campaign_id={campaign_id}" class="btn">APPLY NOW</a>
+    <a href="https://visionastraa.com/track/click.php?email={email}&target={placements}&campaign_id={campaign_id}" class="btn">PLACEMENTS</a>
+    <a href="https://visionastraa.com/track/click.php?email={email}&target={curriculum}&campaign_id={campaign_id}" class="btn">CURRICULUM</a>
     <hr>
     <h3>Companies that come for Hiring at VisionAstraa EV Academy:</h3>
     <br>
@@ -261,10 +261,10 @@ EMAIL_BODY_TEMPLATE = """\
       <p>Ans: CGPA cutoff, EV project works and interview.</p>
       <br>
       <h4>8. How much is the course fee?</h4>
-      <p>Ans: Lowest compared to any other offline hands-on EV Programs for Engineering graduates. Payable in installments. Final installment only after placement. Details here - <a href="https://www.visionastraa.com/ev-course.html">Fee Details</a></p>
+      <p>Ans: Lowest compared to any other offline hands-on EV Programs for Engineering graduates. Payable in installments. Final installment only after placement. Details here - <a href="https://visionastraa.com/track/click.php?email={email}&target={curriculum}&campaign_id={campaign_id}" target="_blank">Fee Details</a></p>
       <br>
       <h4>9. How do I secure my admission?</h4>
-      <p>Just pay Admission Fee of INR 10,000 + GST (included in total fees) (Fully refundable if not admitted) - <a href="https://www.visionastraa.com/ev-payments.html" target="_blank">Admission Fees</a></p></p>
+      <p>Just pay Admission Fee of INR 10,000 + GST (included in total fees) (Fully refundable if not admitted) - <a href="https://visionastraa.com/track/click.php?email={email}&target={payments}&campaign_id={campaign_id}" target="_blank">Admission Fees</a></p></p>
       <br>
       <h4>10. Will I receive any recognized certification after completing the course?</h4>
       <p>Ans: Yes, you will receive ASDC certified credentials upon successful completion.</p>
@@ -282,7 +282,7 @@ EMAIL_BODY_TEMPLATE = """\
       <p>Ans: If you don't get placed, you'll get your full money back, no questions asked!!</p>
     </div>
     <br>
-    <a href="https://www.youtube.com/watch?v=8CgZoxnYy_k" target="_blank" style="display:inline-block; position:relative; text-align:center;">
+    <a href="https://visionastraa.com/track/click.php?email={email}&target={youtube}&campaign_id={campaign_id}" target="_blank" style="display:inline-block; position:relative; text-align:center;">
     <img src="https://visionastraa.com/images/campaign-2.png" alt="Watch Video" style="width:100%; max-width:600px; border-radius:8px; display:block;">
     </a>
     <br>
@@ -319,6 +319,7 @@ EMAIL_BODY_TEMPLATE = """\
         <a href="https://visionastraa.com/track/unsubscribe.php?email={email}&campaign_id={campaign_id}" style="color:#1a73e8;">unsubscribe here</a>.
       </p>
     </div>
+    <img src="{image_url}" width="1" height="1" style="display:none;">
   </div>
 </body>
 </html>
@@ -376,18 +377,18 @@ conn = mysql.connector.connect(
 )
 cursor = conn.cursor(dictionary=True)
 # tables = ['test']
-# tables = ['crdf25', 'crdf25_north', 'crdf25_south']
-tables = ['email_list_6', 'email_list_7']
+tables = ['crdf25', 'crdf25_north', 'crdf25_south']
+# tables = ['email_list_6', 'email_list_7']
 
 for tbl in tables:
-    # cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Tamil Nadu' AND emailSent_2=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
-    cursor.execute(f"SELECT email, name FROM {tbl} WHERE emailSent=0")
+    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Tamil Nadu' AND emailSent_2=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
+    # cursor.execute(f"SELECT email, name FROM {tbl} WHERE emailSent=0")
     for row in cursor.fetchall():
         # if send_email(row['email'], row['first_name']):
         if send_email(row['email'], row['name']):
             print(f"✅ Sent to {row['email']}")
-            # cursor.execute(f"UPDATE {tbl} SET emailSent_2=1 WHERE email=%s", (row['email'],))
-            cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
+            cursor.execute(f"UPDATE {tbl} SET emailSent_2=1 WHERE email=%s", (row['email'],))
+            # cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
             conn.commit()
 
 cursor.close()
