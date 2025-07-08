@@ -368,12 +368,12 @@ def send_email(to_address, first_name):
 
 conn = mysql.connector.connect(
     host='srv1640.hstgr.io',
-    # user='u707137586_Campus_Hiring',
-    # password='6q+SFd~o[go',
-    # database='u707137586_Campus_Hiring'
-    user = "u707137586_EV_Reg_T1_24",
-    password = "DMKL0IYoP&4",
-    database = "u707137586_EV_Reg_2024_T1"
+    user='u707137586_Campus_Hiring',
+    password='6q+SFd~o[go',
+    database='u707137586_Campus_Hiring'
+    # user = "u707137586_EV_Reg_T1_24",
+    # password = "DMKL0IYoP&4",
+    # database = "u707137586_EV_Reg_2024_T1"
 )
 cursor = conn.cursor(dictionary=True)
 # tables = ['test']
