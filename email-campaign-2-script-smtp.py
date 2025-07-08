@@ -384,8 +384,8 @@ for tbl in tables:
     cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Tamil Nadu' AND emailSent_2=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
     # cursor.execute(f"SELECT email, name FROM {tbl} WHERE emailSent=0")
     for row in cursor.fetchall():
-        # if send_email(row['email'], row['first_name']):
-        if send_email(row['email'], row['name']):
+        if send_email(row['email'], row['first_name']):
+        # if send_email(row['email'], row['name']):
             print(f"✅ Sent to {row['email']}")
             cursor.execute(f"UPDATE {tbl} SET emailSent_2=1 WHERE email=%s", (row['email'],))
             # cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
