@@ -1,3 +1,26 @@
+# CURRENTLY SENDS 1 EMAIL EVERY 3 SECONDS (BUT MORE ROBUST AND RELIABLE)
+
+import mysql.connector
+import smtplib
+import time
+import random
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.application import MIMEApplication
+from datetime import datetime, timedelta, timezone
+from urllib.parse import quote
+from email.utils import formataddr
+
+SMTP_SERVER = 'smtp.hostinger.com'
+SMTP_PORT = 587
+SMTP_USERNAME = 'careers@visionastraa.in'
+SMTP_PASSWORD = '1?Q#v!$adw:M'
+
+CAMPAIGN_ID = "ev_pcd_25"
+
+EMAIL_SUBJECT = "VisionAstraa EV Academy - Details about Pooled Placement Drive for ITI/Diploma Candidates for Automotive Companies"
+
+EMAIL_BODY_TEMPLATE = """\
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,13 +28,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pooled Placement Drive Invitation</title>
     <style>
-        body {
+        body {{
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-        }
-        .container {
+            box-sizing: border-box;
+        }}
+        .container {{
             width: 100%;
             max-width: 600px;
             margin: 0 auto;
@@ -19,64 +43,58 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
+        }}
+        h2 {{
             color: #4CAF50;
             font-size: 24px;
-        }
-        p {
+        }}
+        p {{
             font-size: 16px;
             line-height: 1.5;
             margin: 10px 0;
-        }
-        ul {
+        }}
+        ul {{
             list-style-type: disc;
             padding: 8px;
-        }
-        ul li {
+        }}
+        ul li {{
             margin: 5px 0;
-        }
-        a {
+        }}
+        a {{
             color: #1a73e8;
             text-decoration: none;
-        }
-        .footer {
+        }}
+        .footer {{
             text-align: center;
             font-size: 14px;
             color: #888888;
             margin-top: 20px;
-        }
-        .bold {
+        }}
+        .bold {{
             font-weight: bold;
-        }
-        .event-info {
+        }}
+        .event-info {{
             background-color: #e8f4e5;
             padding: 15px;
             border-radius: 8px;
             margin: 15px 0;
-        }
-        .event-info p {
+        }}
+        .event-info p {{
             margin: 5px 0;
-        }
-        .cta {
+        }}
+        .cta {{
             background-color: #4CAF50;
             color: #ffffff;
             padding: 10px 20px;
             text-align: center;
             border-radius: 4px;
             font-weight: bold;
-        }
-        .cta a {
+        }}
+        .cta a {{
             color: #ffffff;
             text-decoration: none;
-        }
-        img {
-            max-width: 90%;
-            height: auto;
-            display: block;
-            margin: auto auto;
-        }
-        .button {
+        }}
+        .button {{
             display: inline-block;
             background-color: #25D366;
             color: white;
@@ -87,13 +105,44 @@
             font-weight: bold;
             text-decoration: none;
             width: auto;
-        }
-        .button.instagram {
+        }}
+        .button.instagram {{
             background-color: #E1306C;
-        }
-        .button:hover {
+        }}
+        .button:hover {{
             opacity: 0.8;
-        }
+        }}
+        img {{
+            max-width: 90%;
+            height: auto;
+            display: block;
+            margin: auto auto;
+        }}
+        @media only screen and (max-width: 600px) {{
+            h2 {{
+                font-size: 22px;
+            }}
+            p, ul {{
+                font-size: 14px;
+            }}
+            .container {{
+                padding: 15px;
+            }}
+            .event-info {{
+                padding: 10px;
+            }}
+            .button {{
+                padding: 10px 15px;
+                font-size: 14px;
+            }}
+            .footer {{
+                font-size: 12px;
+            }}
+            img {{
+                max-width: 100%;
+                height: auto;
+            }}
+        }}
     </style>
 </head>
 <body>
@@ -147,7 +196,7 @@
         Engg/Diploma - <a href="https://chat.whatsapp.com/FJrzy3rmuit05neTfzKEy6" target="_blank" class="button">Join Engg/Diploma Group</a></p>
 
         <p>Thanks,<br>
-        <a href="https://www.linkedin.com/in/nikhiljaincs" target="_blank">Nikhil Jain C S</a><br>
+        <a href="https://www.linkedin.com/in/nikhiljaincs" target="_blank">Nikhil Jain C S</a><br>
         Co-founder & CEO,<br>
         VisionAstraa EV Academy</p>
 
@@ -161,6 +210,55 @@
             <p><strong>Enter from Dr. Ambedkar Road (near KR Circle)</strong><br>
             <a href="https://maps.app.goo.gl/2gvvL9LNyfuYcgSm7" target="_blank">View on Google Maps</a></p>
         </div>
+        <img src="{image_url}" width="1" height="1" style="display:none;">
     </div>
 </body>
 </html>
+"""
+
+def send_email(to_address):
+    random_token = random.randint(100000, 999999)
+    image_url = f"https://visionastraa.com/track/open.php?email={quote(to_address)}&campaign_id={CAMPAIGN_ID}&r={random_token}"
+
+    body = EMAIL_BODY_TEMPLATE.format(
+        email=quote(to_address),
+        campaign_id=CAMPAIGN_ID,
+        image_url=image_url,
+    )
+
+    msg = MIMEMultipart('mixed')
+    msg['Subject'] = EMAIL_SUBJECT
+    msg['From'] = formataddr(("VisionAstraa EV Academy", SMTP_USERNAME))
+    msg['To'] = to_address
+    msg.attach(MIMEText(body, 'html'))
+
+    try:
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+            server.starttls()
+            server.login(SMTP_USERNAME, SMTP_PASSWORD)
+            server.sendmail(SMTP_USERNAME, to_address, msg.as_string())
+        return True
+    except Exception as e:
+        print(f"❌ Error sending to {to_address}: {e}")
+        return False
+
+conn = mysql.connector.connect(
+    host='srv1640.hstgr.io',
+    user='u707137586_EVA_PCD_25',
+    password='Co!&*n3/$p5#',
+    database='u707137586_EVA_PCD_25'
+)
+
+cursor = conn.cursor(dictionary=True)
+tables = ['student_list']
+
+for tbl in tables:
+    cursor.execute(f"SELECT email FROM {tbl} WHERE emailSent=0")
+    for row in cursor.fetchall():
+        if send_email(row['email']):
+            print(f"✅ Sent to {row['email']}")
+            cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
+            conn.commit()
+
+cursor.close()
+conn.close()
