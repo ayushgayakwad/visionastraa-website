@@ -200,7 +200,7 @@ EMAIL_BODY_TEMPLATE = """\
         Co-founder & CEO,<br>
         VisionAstraa EV Academy</p>
 
-        <img src="https://visionastraa.com/images/ev-pcd-2.png" alt="image">
+        <img src="https://visionastraa.com/images/ev-pcd-3.jpg" alt="image">
 
         <div class="footer">
             <p><strong>Venue Location:</strong><br>
