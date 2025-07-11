@@ -23,4 +23,5 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run the Python script
-        run: python webinar-email-script-smtp.py
+        # run: python webinar-email-script-smtp.py
+        run: python webinar-email-script-multiple-smtp.py
