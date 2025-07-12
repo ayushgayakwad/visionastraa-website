@@ -29,7 +29,7 @@ SMTP_PASSWORD = SMTP1_PASSWORD
 
 CAMPAIGN_ID = "ev_webinar_2025_07_12"
 
-EMAIL_SUBJECT = "Last chance to attend! Job Opportunities in the EV Industry Webinar - July 12, 11:00 AM (Sat)"
+EMAIL_SUBJECT = "Reminder: Last chance to attend! Job Opportunities in the EV Industry Webinar - July 12, 11:00 AM (Sat)"
 
 EMAIL_BODY_TEMPLATE = """\
 <html>
@@ -180,6 +180,9 @@ for tbl in tables:
             SMTP_USERNAME = SMTP2_USERNAME
             SMTP_PASSWORD = SMTP2_PASSWORD
             print("🔁 Switched to second SMTP credentials.")
+        elif email_count == 3000:
+            print("📧 Sent 3000 emails.")
+            break
         if send_email(row['email'], row['first_name']):
             print(f"✅ Sent to {row['email']}")
             cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
