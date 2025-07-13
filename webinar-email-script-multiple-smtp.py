@@ -174,7 +174,7 @@ email_count = 0
 #     cursor.execute(query, target_colleges)
 
 for tbl in tables:
-    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Tamil Nadu' AND emailSent=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
+    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Andhra Pradesh' AND emailSent=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
     for row in cursor.fetchall():
         if email_count == 1500:
             SMTP_USERNAME = SMTP2_USERNAME
