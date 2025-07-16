@@ -143,7 +143,7 @@ EMAIL_BODY_TEMPLATE = """\
     </ul>
     <p><strong>Our students, on average, got the opportunity to interview with around 5 EV companies and secured multiple offers.</strong></p>
     <hr>
-    <h3 style="color: #d9534f;">Our Next Batch Starts – July 2025!</h3>
+    <h3 style="color: #d9534f;">Inauguration Day – August 4th, 2025!</h3>
     <p><strong>Admissions are filling up quickly. We only take ~25 students in a batch.</strong></p> 
     <br>
     <p style="color: #d9534f;"><strong>HURRY!! Only few seats left.</strong></p>
@@ -381,7 +381,7 @@ tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 # tables = ['email_list_6', 'email_list_7']
 
 for tbl in tables:
-    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Andhra Pradesh' AND emailSent_2=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
+    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Tamil Nadu' AND emailSent_2=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
     # cursor.execute(f"SELECT email, name FROM {tbl} WHERE emailSent=0")
     for row in cursor.fetchall():
         if send_email(row['email'], row['first_name']):

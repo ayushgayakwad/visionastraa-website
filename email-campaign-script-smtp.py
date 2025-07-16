@@ -243,7 +243,7 @@ EMAIL_BODY_TEMPLATE = """\
     <a href="https://visionastraa.com/track/click.php?email={email}&target={placements}&campaign_id={campaign_id}" class="btn" style="background-color: #28a745;">PLACEMENTS</a>
     <a href="https://visionastraa.com/track/click.php?email={email}&target={curriculum}&campaign_id={campaign_id}" class="btn" style="background-color: #28a745;">CURRICULUM</a>
     
-    <h3 style="color:#d9534f;">🚀 Our Next Batch Starts – July 2025</h3>
+    <h3 style="color:#d9534f;">🚀 Next Batch starts on August 4th, 2025.</h3>
     <h3>So hurry before spots are taken!</h3>
     <hr>
     <h3 style="font-size: 24px;">See why top companies prefer our graduates:</h3>
