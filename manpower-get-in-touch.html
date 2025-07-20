@@ -12,7 +12,7 @@
     <header class="header" id="header">
         <div class="container">
             <div class="header-content">
-                <a href="vms.html" class="logo">
+                <a href="manpower.html" class="logo">
                     <div class="logo-icon">
                         <span>VA</span>
                     </div>
@@ -20,8 +20,8 @@
                 </a>
 
                 <nav class="nav-desktop">
-                    <a href="vms.html" class="nav-link">Home</a>
-                    <a href="vms-get-in-touch.html" class="nav-link active">Get in Touch</a>
+                    <a href="manpower.html" class="nav-link">Home</a>
+                    <a href="manpower-get-in-touch.html" class="nav-link active">Get in Touch</a>
                 </nav>
 
                 <button class="mobile-menu-btn" id="mobileMenuBtn">
@@ -32,8 +32,8 @@
             </div>
 
             <nav class="nav-mobile" id="mobileNav">
-                <a href="vms.html" class="nav-link-mobile">Home</a>
-                <a href="vms-get-in-touch.html" class="nav-link-mobile active">Get in Touch</a>
+                <a href="manpower.html" class="nav-link-mobile">Home</a>
+                <a href="manpower-get-in-touch.html" class="nav-link-mobile active">Get in Touch</a>
             </nav>
         </div>
     </header>
@@ -131,7 +131,7 @@
                         <div class="card">
                             <div class="card-content">
                                 <h3 class="contact-form-title">Send us a message</h3>
-                                <form class="contact-form" id="contactForm">
+                                <form class="contact-form" id="contactForm" method="POST">
                                     <div class="form-group">
                                         <label for="name" class="form-label">Name</label>
                                         <input type="text" id="name" name="name" class="form-input" placeholder="Your full name" required>
@@ -148,6 +148,8 @@
                                     </div>
 
                                     <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+
+                                    <div id="formMessage" style="margin-top:15px;"></div>
                                 </form>
                             </div>
                         </div>
@@ -172,7 +174,7 @@
                                 </div>
                                 <div class="contact-details-text">
                                     <h4 class="contact-label">Email</h4>
-                                    <p class="contact-value">careers@visionastraa.com</p>
+                                    <p class="contact-value"><a href="mailto:careers@visionastraa.com">careers@visionastraa.com</a></p>
                                 </div>
                             </div>
 
@@ -184,7 +186,7 @@
                                 </div>
                                 <div class="contact-details-text">
                                     <h4 class="contact-label">Phone</h4>
-                                    <p class="contact-value">+91 000 000 0000</p>
+                                    <p class="contact-value"><a href="tel:+918197355166">+91 819 735 5166</a></p>
                                 </div>
                             </div>
 
@@ -233,8 +235,8 @@
                 <div class="footer-section">
                     <h3 class="footer-title">Quick Links</h3>
                     <ul class="footer-links">
-                        <li><a href="vms.html">Home</a></li>
-                        <li><a href="vms-get-in-touch.html">Get in Touch</a></li>
+                        <li><a href="manpower.html">Home</a></li>
+                        <li><a href="manpower-get-in-touch.html">Get in Touch</a></li>
                     </ul>
                 </div>
                 
@@ -259,5 +261,28 @@
     </footer>
 
     <script src="js/vms-script.js"></script>
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const formData = new FormData(form);
+
+            fetch("php/submit-manpower-form.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(result => {
+                document.getElementById("formMessage").innerHTML =
+                    `<div style="color: green;">${result}</div>`;
+                form.reset();
+            })
+            .catch(error => {
+                document.getElementById("formMessage").innerHTML =
+                    `<div style="color: red;">Error: ${error.message}</div>`;
+            });
+        });
+        </script>
 </body>
 </html>
