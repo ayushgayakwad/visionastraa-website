@@ -262,11 +262,38 @@
 
     <script src="js/vms-script.js"></script>
     <script>
+        function showNotification(message, type) {
+            const formMessage = document.getElementById("formMessage");
+            formMessage.innerHTML = `
+                <div style="color: ${type === 'success' ? 'green' : 'red'};">${message}</div>
+            `;
+        }
+
         document.getElementById("contactForm").addEventListener("submit", function (e) {
             e.preventDefault();
 
             const form = e.target;
             const formData = new FormData(form);
+            const name = formData.get("name")?.trim();
+            const email = formData.get("email")?.trim();
+            const message = formData.get("message")?.trim();
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!name || !email || !message) {
+                showNotification("Please fill in all fields.", "error");
+                return;
+            }
+
+            if (!emailRegex.test(email)) {
+                showNotification("Please enter a valid email address.", "error");
+                return;
+            }
+
+            submitBtn.textContent = "Sending...";
+            submitBtn.disabled = true;
 
             fetch("php/submit-manpower-form.php", {
                 method: "POST",
@@ -274,15 +301,26 @@
             })
             .then(response => response.text())
             .then(result => {
-                document.getElementById("formMessage").innerHTML =
-                    `<div style="color: green;">${result}</div>`;
-                form.reset();
+                if (result.toLowerCase().includes("success")) {
+                    setTimeout(() => {
+                        showNotification("Thank you for your message! We'll get back to you soon.", "success");
+                        form.reset();
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    }, 2000);
+                } else {
+                    showNotification(result, "error");
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
             })
             .catch(error => {
-                document.getElementById("formMessage").innerHTML =
-                    `<div style="color: red;">Error: ${error.message}</div>`;
+                showNotification("An error occurred. Please try again later.", "error");
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                console.error("Error:", error);
             });
         });
-        </script>
+    </script>
 </body>
 </html>

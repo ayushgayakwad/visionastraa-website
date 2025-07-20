@@ -80,44 +80,6 @@ function initializeAnimations() {
   })
 }
 
-function initializeContactForm() {
-  const contactForm = document.getElementById("contactForm")
-
-  if (contactForm) {
-    contactForm.addEventListener("submit", (e) => {
-      e.preventDefault()
-
-      const formData = new FormData(contactForm)
-      const name = formData.get("name")
-      const email = formData.get("email")
-      const message = formData.get("message")
-
-      if (!name || !email || !message) {
-        showNotification("Please fill in all fields.", "error")
-        return
-      }
-
-      if (!isValidEmail(email)) {
-        showNotification("Please enter a valid email address.", "error")
-        return
-      }
-
-      const submitBtn = contactForm.querySelector('button[type="submit"]')
-      const originalText = submitBtn.textContent
-
-      submitBtn.textContent = "Sending..."
-      submitBtn.disabled = true
-
-      setTimeout(() => {
-        showNotification("Thank you for your message! We'll get back to you soon.", "success")
-        contactForm.reset()
-        submitBtn.textContent = originalText
-        submitBtn.disabled = false
-      }, 2000)
-    })
-  }
-}
-
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   return emailRegex.test(email)
