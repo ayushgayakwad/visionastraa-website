@@ -973,3 +973,17 @@ body {
 .block {
   display: block;
 }
+
+.btn.nav-get-started {
+  padding: 0.3rem 1rem;
+  margin-left: 1rem;
+}
+
+.btn.nav-get-started-mobile {
+  padding: 0.3rem 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: block;
+  width: fit-content;
+  margin: auto;
+}
