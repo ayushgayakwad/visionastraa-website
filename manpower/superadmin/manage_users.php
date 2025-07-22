@@ -18,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['approve_id'])) {
     $stmt->execute([$approve_id]);
     $message = 'User approved!';
 }
-// Handle user update
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_user_id'])) {
     $edit_id = (int)$_POST['edit_user_id'];
     $name = $_POST['edit_name'] ?? '';
@@ -29,10 +28,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_user_id'])) {
     $location = $_POST['edit_location'] ?? null;
     $email = $_POST['edit_email'] ?? '';
     $company_id = $_POST['edit_company_id'] ?? null;
-    $update_sql = 'UPDATE users SET name=?, phone=?, dob=?, aadhaar=?, pan=?, location=?, email=?, company_id=? WHERE id=? AND role="user"';
+    $gender = $_POST['edit_gender'] ?? '';
+    $update_sql = 'UPDATE users SET name=?, phone=?, dob=?, aadhaar=?, pan=?, location=?, email=?, company_id=?, gender=? WHERE id=? AND role="user"';
     $stmt = $pdo->prepare($update_sql);
-    $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $company_id, $edit_id]);
+    $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $company_id, $gender, $edit_id]);
     $message = 'User details updated!';
+}
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_user'])) {
+    $name = $_POST['name'] ?? '';
+    $phone = $_POST['phone'] ?? '';
+    $dob = $_POST['dob'] ?? null;
+    $aadhaar = $_POST['aadhaar'] ?? null;
+    $pan = $_POST['pan'] ?? null;
+    $location = $_POST['location'] ?? null;
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+    $gender = $_POST['gender'] ?? '';
+    $company_id = $_POST['company_id'] ?? null;
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $message = 'Invalid email address.';
+    } elseif (strlen($password) < 6) {
+        $message = 'Password must be at least 6 characters.';
+    } elseif (empty($name) || empty($phone)) {
+        $message = 'Name and phone are required.';
+    } elseif ($company_id === null || $company_id === '') {
+        $message = 'Please select a company or Unemployed.';
+    } else {
+        $stmt = $pdo->prepare('SELECT id FROM users WHERE email = ?');
+        $stmt->execute([$email]);
+        if ($stmt->fetch()) {
+            $message = 'Email already exists.';
+        } else {
+            $hash = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $pdo->prepare('INSERT INTO users (name, phone, dob, aadhaar, pan, location, email, password, gender, role, approved, created_by, company_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, "user", 1, ?, ?)');
+            $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $hash, $gender, $_SESSION['user_id'], $company_id]);
+            $message = 'User created successfully!';
+        }
+    }
 }
 $stmt = $pdo->prepare('SELECT u.*, c.name AS company_name FROM users u LEFT JOIN companies c ON u.company_id = c.id WHERE u.role = "user"');
 $stmt->execute();
@@ -106,6 +138,7 @@ $pending_users = $stmt->fetchAll();
                 <div class="tab-btns">
                     <button class="tab-btn active" onclick="showTab('users-list')">All Users</button>
                     <button class="tab-btn" onclick="showTab('approve-users')">Approve Users</button>
+                    <button class="tab-btn" onclick="showTab('create-user')">Create User</button>
                 </div>
                 <div id="users-list" class="tab-content active">
                     <?php foreach ($all_users as $user): ?>
@@ -147,6 +180,13 @@ $pending_users = $stmt->fetchAll();
                                         <label>Aadhaar Card:</label><input type="text" name="edit_aadhaar" value="<?php echo htmlspecialchars($user['aadhaar']); ?>">
                                         <label>PAN Card:</label><input type="text" name="edit_pan" value="<?php echo htmlspecialchars($user['pan']); ?>">
                                         <label>Location:</label><input type="text" name="edit_location" value="<?php echo htmlspecialchars($user['location']); ?>">
+                                        <label>Gender:</label>
+                                        <select name="edit_gender" required>
+                                            <option value="">Select Gender</option>
+                                            <option value="Male" <?php if ($user['gender'] == 'Male') echo 'selected'; ?>>Male</option>
+                                            <option value="Female" <?php if ($user['gender'] == 'Female') echo 'selected'; ?>>Female</option>
+                                            <option value="Other" <?php if ($user['gender'] == 'Other') echo 'selected'; ?>>Other</option>
+                                        </select>
                                         <label>Company:</label>
                                         <select name="edit_company_id" required>
                                             <option value="0">Unemployed</option>
@@ -198,6 +238,7 @@ $pending_users = $stmt->fetchAll();
                                         <label>Aadhaar Card:</label><span><?php echo htmlspecialchars($user['aadhaar']); ?></span>
                                         <label>PAN Card:</label><span><?php echo htmlspecialchars($user['pan']); ?></span>
                                         <label>Location:</label><span><?php echo htmlspecialchars($user['location']); ?></span>
+                                        <label>Gender:</label><span><?php echo htmlspecialchars($user['gender']); ?></span>
                                         <label>Company:</label><span><?php echo htmlspecialchars($user['company_name']); ?></span>
                                         <label>Registered At:</label><span><?php echo htmlspecialchars($user['created_at']); ?></span>
                                     </div>
@@ -210,6 +251,33 @@ $pending_users = $stmt->fetchAll();
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </div>
+                <div id="create-user" class="tab-content">
+                    <form method="post" style="max-width:400px;margin:0 auto;display:flex;flex-direction:column;gap:1rem;">
+                        <input type="hidden" name="create_user" value="1">
+                        <input type="text" name="name" placeholder="Full Name" required class="form-input">
+                        <input type="text" name="phone" placeholder="Phone Number" required class="form-input">
+                        <input type="date" name="dob" placeholder="Date of Birth" class="form-input">
+                        <select name="gender" required class="form-input">
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <input type="text" name="aadhaar" placeholder="Aadhaar Card" class="form-input">
+                        <input type="text" name="pan" placeholder="PAN Card" class="form-input">
+                        <input type="text" name="location" placeholder="Location" class="form-input">
+                        <select name="company_id" required class="form-input">
+                            <option value="">Select Company or Unemployed</option>
+                            <option value="0">Unemployed</option>
+                            <?php foreach ($companies_list as $company): ?>
+                                <option value="<?php echo $company['id']; ?>"><?php echo htmlspecialchars($company['name']); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <input type="email" name="email" placeholder="User Email" required class="form-input">
+                        <input type="password" name="password" placeholder="Password" required class="form-input">
+                        <button type="submit" class="btn btn-primary btn-lg" style="padding: 0.3rem 1rem;">Create User</button>
+                    </form>
+                </div>
             </div>
         </section>
     </main>
@@ -220,9 +288,12 @@ $pending_users = $stmt->fetchAll();
             if(tabId === 'users-list') {
                 document.querySelector('.tab-btn:nth-child(1)').classList.add('active');
                 document.getElementById('users-list').classList.add('active');
-            } else {
+            } else if(tabId === 'approve-users') {
                 document.querySelector('.tab-btn:nth-child(2)').classList.add('active');
                 document.getElementById('approve-users').classList.add('active');
+            } else {
+                document.querySelector('.tab-btn:nth-child(3)').classList.add('active');
+                document.getElementById('create-user').classList.add('active');
             }
         }
         function showUserEditPopup(id) {

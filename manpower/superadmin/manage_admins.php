@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_admin'])) {
     $email = $_POST['email'] ?? '';
     $company_id = $_POST['company_id'] ?? null;
     $password = $_POST['password'] ?? '';
+    $gender = $_POST['gender'] ?? '';
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message = 'Invalid email address.';
     } elseif (strlen($password) < 6) {
@@ -32,8 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_admin'])) {
             $message = 'Email already exists.';
         } else {
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $pdo->prepare('INSERT INTO users (name, phone, dob, aadhaar, pan, location, email, password, role, approved, created_by, company_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, "admin", 1, ?, ?)');
-            $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $hash, $_SESSION['user_id'], $company_id]);
+            $stmt = $pdo->prepare('INSERT INTO users (name, phone, dob, aadhaar, pan, location, email, password, gender, role, approved, created_by, company_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, "admin", 1, ?, ?)');
+            $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $hash, $gender, $_SESSION['user_id'], $company_id]);
             $message = 'Admin created successfully!';
         }
     }
@@ -49,9 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_admin_id'])) {
     $location = $_POST['edit_location'] ?? null;
     $email = $_POST['edit_email'] ?? '';
     $company_id = $_POST['edit_company_id'] ?? null;
-    $update_sql = 'UPDATE users SET name=?, phone=?, dob=?, aadhaar=?, pan=?, location=?, email=?, company_id=? WHERE id=? AND role="admin"';
+    $gender = $_POST['edit_gender'] ?? '';
+    $update_sql = 'UPDATE users SET name=?, phone=?, dob=?, aadhaar=?, pan=?, location=?, email=?, company_id=?, gender=? WHERE id=? AND role="admin"';
     $stmt = $pdo->prepare($update_sql);
-    $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $company_id, $edit_id]);
+    $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $company_id, $gender, $edit_id]);
     $message = 'Admin details updated!';
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['unassign_admin_id'])) {
@@ -162,6 +164,13 @@ $admins = $stmt->fetchAll();
                                         <label>Aadhaar Card:</label><input type="text" name="edit_aadhaar" value="<?php echo htmlspecialchars($admin['aadhaar']); ?>">
                                         <label>PAN Card:</label><input type="text" name="edit_pan" value="<?php echo htmlspecialchars($admin['pan']); ?>">
                                         <label>Location:</label><input type="text" name="edit_location" value="<?php echo htmlspecialchars($admin['location']); ?>">
+                                        <label>Gender:</label>
+                                        <select name="edit_gender" required>
+                                            <option value="">Select Gender</option>
+                                            <option value="Male" <?php if ($admin['gender'] == 'Male') echo 'selected'; ?>>Male</option>
+                                            <option value="Female" <?php if ($admin['gender'] == 'Female') echo 'selected'; ?>>Female</option>
+                                            <option value="Other" <?php if ($admin['gender'] == 'Other') echo 'selected'; ?>>Other</option>
+                                        </select>
                                         <label>Company:</label>
                                         <select name="edit_company_id" required>
                                             <option value="0" <?php if ($admin['company_id'] == 0) echo 'selected'; ?>>Unemployed</option>
@@ -186,6 +195,12 @@ $admins = $stmt->fetchAll();
                         <input type="text" name="aadhaar" placeholder="Aadhaar Card" class="form-input">
                         <input type="text" name="pan" placeholder="PAN Card" class="form-input">
                         <input type="text" name="location" placeholder="Location" class="form-input">
+                        <select name="gender" required class="form-input">
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
                         <select name="company_id" required class="form-input">
                             <option value="">Select Company</option>
                             <?php foreach ($companies_list as $company): ?>

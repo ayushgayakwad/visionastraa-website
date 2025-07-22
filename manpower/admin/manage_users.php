@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_user'])) {
     $location = $_POST['location'] ?? null;
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
+    $gender = $_POST['gender'] ?? '';
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message = 'Invalid email address.';
     } elseif (strlen($password) < 6) {
@@ -36,8 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_user'])) {
             $message = 'Email already exists.';
         } else {
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $pdo->prepare('INSERT INTO users (name, phone, dob, aadhaar, pan, location, email, password, role, approved, created_by, company_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, "user", 0, ?, ?)');
-            $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $hash, $_SESSION['user_id'], $admin_company_id]);
+            $stmt = $pdo->prepare('INSERT INTO users (name, phone, dob, aadhaar, pan, location, email, password, gender, role, approved, created_by, company_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, "user", 0, ?, ?)');
+            $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $hash, $gender, $_SESSION['user_id'], $admin_company_id]);
             $message = 'User created successfully! Awaiting super admin approval.';
         }
     }
@@ -52,9 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_user_id'])) {
     $pan = $_POST['edit_pan'] ?? null;
     $location = $_POST['edit_location'] ?? null;
     $email = $_POST['edit_email'] ?? '';
-    $update_sql = 'UPDATE users SET name=?, phone=?, dob=?, aadhaar=?, pan=?, location=?, email=? WHERE id=? AND role="user" AND company_id=?';
+    $gender = $_POST['edit_gender'] ?? '';
+    $update_sql = 'UPDATE users SET name=?, phone=?, dob=?, aadhaar=?, pan=?, location=?, email=?, gender=? WHERE id=? AND role="user" AND company_id=?';
     $stmt = $pdo->prepare($update_sql);
-    $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $edit_id, $admin_company_id]);
+    $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $gender, $edit_id, $admin_company_id]);
     $message = 'User details updated!';
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['unassign_user_id'])) {
@@ -63,7 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['unassign_user_id'])) 
     $stmt->execute([$unassign_id, $admin_company_id]);
     $message = 'User unassigned from company!';
 }
-$stmt = $pdo->prepare('SELECT id, name, phone, dob, aadhaar, pan, location, email, created_at, approved FROM users WHERE role = "user" AND created_by = ? AND company_id = ?');
+// Fetch all users created by this admin and with the same company_id
+$stmt = $pdo->prepare('SELECT id, name, phone, dob, aadhaar, pan, location, email, gender, created_at, approved FROM users WHERE role = "user" AND created_by = ? AND company_id = ?');
 $stmt->execute([$_SESSION['user_id'], $admin_company_id]);
 $all_users = $stmt->fetchAll();
 ?>
@@ -165,6 +168,13 @@ $all_users = $stmt->fetchAll();
                                         <label>Aadhaar Card:</label><input type="text" name="edit_aadhaar" value="<?php echo htmlspecialchars($user['aadhaar']); ?>">
                                         <label>PAN Card:</label><input type="text" name="edit_pan" value="<?php echo htmlspecialchars($user['pan']); ?>">
                                         <label>Location:</label><input type="text" name="edit_location" value="<?php echo htmlspecialchars($user['location']); ?>">
+                                        <label>Gender:</label>
+                                        <select name="edit_gender" required>
+                                            <option value="">Select Gender</option>
+                                            <option value="Male" <?php if ($user['gender'] == 'Male') echo 'selected'; ?>>Male</option>
+                                            <option value="Female" <?php if ($user['gender'] == 'Female') echo 'selected'; ?>>Female</option>
+                                            <option value="Other" <?php if ($user['gender'] == 'Other') echo 'selected'; ?>>Other</option>
+                                        </select>
                                     </div>
                                     <input type="hidden" name="edit_user_id" value="<?php echo $user['id']; ?>">
                                     <button type="submit" class="btn btn-primary btn-lg" style="padding: 0.3rem 1rem;">Save</button>
@@ -179,6 +189,12 @@ $all_users = $stmt->fetchAll();
                         <input type="text" name="name" placeholder="Full Name" required class="form-input">
                         <input type="text" name="phone" placeholder="Phone Number" required class="form-input">
                         <input type="date" name="dob" placeholder="Date of Birth" class="form-input">
+                        <select name="gender" required class="form-input">
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
                         <input type="text" name="aadhaar" placeholder="Aadhaar Card" class="form-input">
                         <input type="text" name="pan" placeholder="PAN Card" class="form-input">
                         <input type="text" name="location" placeholder="Location" class="form-input">
