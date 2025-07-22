@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_id'], $_POST['da
         if ($in_dt && $out_dt) {
             $interval = $in_dt->diff($out_dt);
             $hours = $interval->h + $interval->i / 60;
-            if ($interval->invert) $hours = 24 - $hours; // handle overnight
+            if ($interval->invert) $hours = 24 - $hours;
             $hours = round($hours, 2);
         }
     }
@@ -118,7 +118,6 @@ if ($selected_user) {
                 </form>
                 <script>
 document.getElementById('user_id_select').addEventListener('change', function() {
-    // Set the hidden user_id in the month form and submit it
     document.getElementById('user_id_hidden').value = this.value;
     document.getElementById('user_month_form').submit();
 });

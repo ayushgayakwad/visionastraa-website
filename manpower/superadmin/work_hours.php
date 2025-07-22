@@ -17,16 +17,16 @@ if ($selected_user) {
     $stmt = $pdo->prepare('SELECT wh.date, wh.hours_json, wh.company_id, c.name AS company_name FROM work_hours wh LEFT JOIN companies c ON wh.company_id = c.id WHERE wh.user_id = ? AND wh.date BETWEEN ? AND ?');
     $stmt->execute([$selected_user, $start, $end]);
     foreach ($stmt->fetchAll() as $row) {
-        $work_hours[$row['date']] = [
+        $entry = [
             'in' => json_decode($row['hours_json'], true)['in'] ?? '',
             'out' => json_decode($row['hours_json'], true)['out'] ?? '',
             'hours' => json_decode($row['hours_json'], true)['hours'] ?? '',
             'company_id' => $row['company_id'],
             'company_name' => $row['company_name']
         ];
-        // Tally total hours per company
+        $work_hours[$row['date']][] = $entry;
         $company = $row['company_name'] ?: 'Unknown';
-        $hours_val = is_numeric(json_decode($row['hours_json'], true)['hours'] ?? null) ? (float)json_decode($row['hours_json'], true)['hours'] : 0;
+        $hours_val = is_numeric($entry['hours']) ? (float)$entry['hours'] : 0;
         if (!isset($company_totals[$company])) $company_totals[$company] = 0;
         $company_totals[$company] += $hours_val;
     }
@@ -109,14 +109,22 @@ document.getElementById('user_id_select').addEventListener('change', function() 
                         $days = date('t', strtotime($selected_month . '-01'));
                         for ($d = 1; $d <= $days; $d++) {
                             $date = $selected_month . '-' . str_pad($d, 2, '0', STR_PAD_LEFT);
-                            $entry = $work_hours[$date] ?? null;
-                            echo '<tr' . ($entry ? ' class="filled"' : '') . '>';
-                            echo '<td>' . htmlspecialchars($date) . '</td>';
-                            echo '<td>' . htmlspecialchars($entry['company_name'] ?? '') . '</td>';
-                            echo '<td>' . htmlspecialchars($entry['in'] ?? '') . '</td>';
-                            echo '<td>' . htmlspecialchars($entry['out'] ?? '') . '</td>';
-                            echo '<td>' . htmlspecialchars($entry['hours'] ?? '') . '</td>';
-                            echo '</tr>';
+                            if (!empty($work_hours[$date])) {
+                                foreach ($work_hours[$date] as $entry) {
+                                    echo '<tr class="filled">';
+                                    echo '<td>' . htmlspecialchars($date) . '</td>';
+                                    echo '<td>' . htmlspecialchars($entry['company_name'] ?? '') . '</td>';
+                                    echo '<td>' . htmlspecialchars($entry['in'] ?? '') . '</td>';
+                                    echo '<td>' . htmlspecialchars($entry['out'] ?? '') . '</td>';
+                                    echo '<td>' . htmlspecialchars($entry['hours'] ?? '') . '</td>';
+                                    echo '</tr>';
+                                }
+                            } else {
+                                echo '<tr>';
+                                echo '<td>' . htmlspecialchars($date) . '</td>';
+                                echo '<td></td><td></td><td></td><td></td>';
+                                echo '</tr>';
+                            }
                         }
                         ?>
                     </table>
