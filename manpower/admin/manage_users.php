@@ -11,7 +11,6 @@ if ($admin_company_id == 0) {
     echo '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Access Denied</title><link rel="stylesheet" href="../../css/vms-styles.css"></head><body><div style="max-width:600px;margin:4rem auto;text-align:center;"><h1 style="color:red;">Access Denied</h1><p>You are not assigned to any company. Please contact the super admin for access.</p><a href="dashboard.php" style="color:#2b6cb0;">&larr; Back to Dashboard</a></div></body></html>';
     exit;
 }
-// Handle user creation
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_user'])) {
     $name = $_POST['name'] ?? '';
     $phone = $_POST['phone'] ?? '';
@@ -43,7 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_user'])) {
         }
     }
 }
-// Handle user update
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_user_id'])) {
     $edit_id = (int)$_POST['edit_user_id'];
     $name = $_POST['edit_name'] ?? '';
@@ -129,6 +127,7 @@ $all_users = $stmt->fetchAll();
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
                     <a href="manage_users.php" class="nav-link active">Manage Users</a>
+                    <a href="work_hours.php" class="nav-link">Work Hours</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>

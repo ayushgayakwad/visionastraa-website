@@ -6,7 +6,6 @@ $message = '';
 $stmt = $pdo->prepare('SELECT id, name FROM companies ORDER BY name ASC');
 $stmt->execute();
 $companies_list = $stmt->fetchAll();
-// Handle admin creation
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_admin'])) {
     $name = $_POST['name'] ?? '';
     $phone = $_POST['phone'] ?? '';
@@ -39,7 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_admin'])) {
         }
     }
 }
-// Handle admin update
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_admin_id'])) {
     $edit_id = (int)$_POST['edit_admin_id'];
     $name = $_POST['edit_name'] ?? '';
@@ -135,6 +133,7 @@ $admins = $stmt->fetchAll();
                     <a href="manage_users.php" class="nav-link">Manage Users</a>
                     <a href="manage_admins.php" class="nav-link active">Manage Admins</a>
                     <a href="manage_companies.php" class="nav-link">Manage Companies</a>
+                    <a href="work_hours.php" class="nav-link">Work Hours</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>

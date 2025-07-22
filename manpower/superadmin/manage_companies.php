@@ -95,6 +95,7 @@ $companies = $stmt->fetchAll();
                     <a href="manage_users.php" class="nav-link">Manage Users</a>
                     <a href="manage_admins.php" class="nav-link">Manage Admins</a>
                     <a href="manage_companies.php" class="nav-link active">Manage Companies</a>
+                    <a href="work_hours.php" class="nav-link">Work Hours</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>

@@ -76,6 +76,7 @@ include '../auth.php';
                     <a href="manage_users.php" class="nav-link">Manage Users</a>
                     <a href="manage_admins.php" class="nav-link">Manage Admins</a>
                     <a href="manage_companies.php" class="nav-link">Manage Companies</a>
+                    <a href="work_hours.php" class="nav-link">Work Hours</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>
@@ -98,6 +99,10 @@ include '../auth.php';
                         <a href="manage_companies.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-building"></i></span>
                             Manage Companies
+                        </a>
+                        <a href="work_hours.php" class="dashboard-action-btn">
+                            <span class="dashboard-action-icon"><i class="fa-solid fa-clock"></i></span>
+                            Work Hours
                         </a>
                         <a href="../logout.php" class="dashboard-action-btn" style="background:#e53e3e;">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-right-from-bracket"></i></span>

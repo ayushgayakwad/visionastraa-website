@@ -82,7 +82,7 @@ if ($selected_user) {
                     </select>
                     <label for="month">Month:</label>
                     <input type="month" name="month" id="month" value="<?php echo htmlspecialchars($selected_month); ?>">
-                    <button type="submit" class="btn btn-primary">View</button>
+                    <button type="submit" class="btn btn-primary" style="padding:0.3rem 1rem;">View</button>
                 </form>
                 <script>
 document.getElementById('user_id_select').addEventListener('change', function() {

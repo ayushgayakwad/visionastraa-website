@@ -79,6 +79,7 @@ $admin_company_id = $admin['company_id'] ?? null;
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link active">Dashboard</a>
                     <a href="manage_users.php" class="nav-link">Manage Users</a>
+                    <a href="work_hours.php" class="nav-link">Work Hours</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>
@@ -99,6 +100,10 @@ $admin_company_id = $admin['company_id'] ?? null;
                         <a href="manage_users.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-users"></i></span>
                             Manage Users
+                        </a>
+                        <a href="work_hours.php" class="dashboard-action-btn">
+                            <span class="dashboard-action-icon"><i class="fa-solid fa-clock"></i></span>
+                            Work Hours
                         </a>
                         <a href="../logout.php" class="dashboard-action-btn" style="background:#e53e3e;">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
