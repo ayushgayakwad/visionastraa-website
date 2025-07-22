@@ -3,9 +3,16 @@ $required_role = 'user';
 include '../auth.php';
 require_once '../db.php';
 $user_id = $_SESSION['user_id'];
-$stmt = $pdo->prepare('SELECT name, email, phone, dob, aadhaar, pan, location, created_at FROM users WHERE id = ?');
+$stmt = $pdo->prepare('SELECT u.name, u.email, u.phone, u.dob, u.aadhaar, u.pan, u.location, u.created_at, u.gender, u.company_id, c.name AS company_name FROM users u LEFT JOIN companies c ON u.company_id = c.id WHERE u.id = ?');
 $stmt->execute([$user_id]);
 $user = $stmt->fetch();
+$company_hours = [];
+$stmt = $pdo->prepare('SELECT wh.company_id, c.name AS company_name, SUM(CAST(JSON_UNQUOTE(JSON_EXTRACT(wh.hours_json, "$.hours")) AS DECIMAL(5,2))) AS total_hours FROM work_hours wh LEFT JOIN companies c ON wh.company_id = c.id WHERE wh.user_id = ? GROUP BY wh.company_id');
+$stmt->execute([$user_id]);
+foreach ($stmt->fetchAll() as $row) {
+    $company = $row['company_id'] == 0 ? 'Unemployed' : ($row['company_name'] ?: 'Unknown');
+    $company_hours[$company] = round($row['total_hours'], 2);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,10 +94,22 @@ $user = $stmt->fetch();
                         <div class="profile-title">Personal Information</div>
                         <div class="profile-grid">
                             <div class="profile-label">Name:</div><div class="profile-value"><?php echo htmlspecialchars($user['name']); ?></div>
+                            <div class="profile-label">Gender:</div><div class="profile-value"><?php echo htmlspecialchars($user['gender']); ?></div>
                             <div class="profile-label">Phone:</div><div class="profile-value"><?php echo htmlspecialchars($user['phone']); ?></div>
                             <div class="profile-label">Date of Birth:</div><div class="profile-value"><?php echo htmlspecialchars($user['dob']); ?></div>
                             <div class="profile-label">Location:</div><div class="profile-value"><?php echo htmlspecialchars($user['location']); ?></div>
+                            <div class="profile-label">Company:</div><div class="profile-value"><?php echo $user['company_id'] == 0 ? 'Unemployed' : htmlspecialchars($user['company_name']); ?></div>
                         </div>
+                        <?php if ($company_hours): ?>
+                        <div style="margin-top:1.5rem;">
+                            <div style="font-weight:600;">Total Working Hours by Company:</div>
+                            <ul style="margin:0.5rem 0 0 1.2rem;">
+                                <?php foreach ($company_hours as $cname => $hours): ?>
+                                    <li><?php echo htmlspecialchars($cname); ?>: <?php echo $hours; ?> hours</li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div id="account-tab" class="tab-content">
