@@ -71,6 +71,7 @@ $filter_company = $_GET['filter_company'] ?? '';
 $filter_gender = $_GET['filter_gender'] ?? '';
 $filter_status = $_GET['filter_status'] ?? '';
 
+$where = ['u.role = "user"'];
 $params = [];
 if ($search) {
     $where[] = '(u.name LIKE ? OR u.email LIKE ? OR u.phone LIKE ?)';
