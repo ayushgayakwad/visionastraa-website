@@ -3,7 +3,15 @@ $required_role = 'super_admin';
 include '../auth.php';
 require_once '../db.php';
 $message = '';
-// Approve user if POSTed
+$stmt = $pdo->prepare('SELECT id, name FROM companies ORDER BY name ASC');
+$stmt->execute();
+$companies_list = $stmt->fetchAll();
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['unassign_user_id'])) {
+    $unassign_id = (int)$_POST['unassign_user_id'];
+    $stmt = $pdo->prepare('UPDATE users SET company_id = 0 WHERE id = ?');
+    $stmt->execute([$unassign_id]);
+    $message = 'User unassigned from company!';
+}
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['approve_id'])) {
     $approve_id = (int)$_POST['approve_id'];
     $stmt = $pdo->prepare('UPDATE users SET approved = 1 WHERE id = ?');
@@ -20,17 +28,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_user_id'])) {
     $pan = $_POST['edit_pan'] ?? null;
     $location = $_POST['edit_location'] ?? null;
     $email = $_POST['edit_email'] ?? '';
-    $update_sql = 'UPDATE users SET name=?, phone=?, dob=?, aadhaar=?, pan=?, location=?, email=? WHERE id=? AND role="user"';
+    $company_id = $_POST['edit_company_id'] ?? null;
+    $update_sql = 'UPDATE users SET name=?, phone=?, dob=?, aadhaar=?, pan=?, location=?, email=?, company_id=? WHERE id=? AND role="user"';
     $stmt = $pdo->prepare($update_sql);
-    $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $edit_id]);
+    $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $company_id, $edit_id]);
     $message = 'User details updated!';
 }
-// Fetch all users
-$stmt = $pdo->prepare('SELECT id, name, phone, dob, aadhaar, pan, location, email, created_at, approved FROM users WHERE role = "user"');
+$stmt = $pdo->prepare('SELECT u.*, c.name AS company_name FROM users u LEFT JOIN companies c ON u.company_id = c.id WHERE u.role = "user"');
 $stmt->execute();
 $all_users = $stmt->fetchAll();
-// Fetch users to approve
-$stmt = $pdo->prepare('SELECT id, name, email, phone, dob, aadhaar, pan, location, created_at FROM users WHERE role = "user" AND approved = 0');
+$stmt = $pdo->prepare('SELECT u.*, c.name AS company_name FROM users u LEFT JOIN companies c ON u.company_id = c.id WHERE u.role = "user" AND u.approved = 0');
 $stmt->execute();
 $pending_users = $stmt->fetchAll();
 ?>
@@ -54,14 +61,15 @@ $pending_users = $stmt->fetchAll();
         .user-card-title { font-size: 1.2rem; font-weight: 600; }
         .user-card-email { color: #555; }
         .user-card-date { color: #888; font-size: 0.95rem; }
-        .user-card-action { margin-left: auto; }
+        .user-card-company { color: #2b6cb0; font-size: 1rem; font-weight: 500; }
+        .user-card-action { margin-left: auto; display: flex; gap: 0.5rem; }
         .user-popup-bg { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.35); z-index: 1000; justify-content: center; align-items: center; }
         .user-popup-bg.active { display: flex; }
         .user-popup { background: #fff; border-radius: 14px; padding: 2rem 2.5rem; min-width: 350px; max-width: 95vw; box-shadow: 0 8px 32px rgba(0,0,0,0.18); position: relative; }
         .user-popup-close { position: absolute; top: 1rem; right: 1rem; font-size: 1.5rem; color: #888; cursor: pointer; }
         .user-popup-details { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 2rem; margin-bottom: 1.5rem; }
         .user-popup-details label { font-weight: 500; color: #333; }
-        .user-popup-details input { width: 100%; padding: 0.3rem 0.5rem; border-radius: 4px; border: 1px solid #ccc; }
+        .user-popup-details input, .user-popup-details select { width: 100%; padding: 0.3rem 0.5rem; border-radius: 4px; border: 1px solid #ccc; }
         .user-popup-details span { color: #444; }
         @media (max-width: 600px) { .user-popup { padding: 1rem 0.5rem; } .user-popup-details { grid-template-columns: 1fr; } }
     </style>
@@ -80,6 +88,7 @@ $pending_users = $stmt->fetchAll();
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
                     <a href="manage_users.php" class="nav-link active">Manage Users</a>
                     <a href="manage_admins.php" class="nav-link">Manage Admins</a>
+                    <a href="manage_companies.php" class="nav-link">Manage Companies</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>
@@ -105,6 +114,11 @@ $pending_users = $stmt->fetchAll();
                                 <div>
                                     <div class="user-card-title"><?php echo htmlspecialchars($user['name']); ?></div>
                                     <div class="user-card-email"><?php echo htmlspecialchars($user['email']); ?></div>
+                                    <?php if ($user['company_id'] != 0): ?>
+                                        <div class="user-card-company">Company: <?php echo htmlspecialchars($user['company_name']); ?></div>
+                                    <?php else: ?>
+                                        <div class="user-card-company">Unemployed</div>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="user-card-date">
                                     Registered At: <?php echo htmlspecialchars($user['created_at']); ?>
@@ -115,6 +129,9 @@ $pending_users = $stmt->fetchAll();
                             </div>
                             <div class="user-card-action">
                                 <button class="btn btn-primary" style="padding: 0.3rem 1rem;" onclick="event.stopPropagation(); showUserEditPopup(<?php echo $user['id']; ?>)">Edit</button>
+                                <?php if ($user['company_id'] != 0): ?>
+                                    <button class="btn btn-danger" style="padding: 0.3rem 1rem;" onclick="event.stopPropagation(); unassignUser(<?php echo $user['id']; ?>)">Unassign</button>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="user-popup-bg" id="user-edit-popup-bg-<?php echo $user['id']; ?>">
@@ -130,6 +147,15 @@ $pending_users = $stmt->fetchAll();
                                         <label>Aadhaar Card:</label><input type="text" name="edit_aadhaar" value="<?php echo htmlspecialchars($user['aadhaar']); ?>">
                                         <label>PAN Card:</label><input type="text" name="edit_pan" value="<?php echo htmlspecialchars($user['pan']); ?>">
                                         <label>Location:</label><input type="text" name="edit_location" value="<?php echo htmlspecialchars($user['location']); ?>">
+                                        <label>Company:</label>
+                                        <select name="edit_company_id" required>
+                                            <option value="0">Unemployed</option>
+                                            <?php foreach ($companies_list as $company): ?>
+                                                <option value="<?php echo $company['id']; ?>" <?php echo ($user['company_id'] == $company['id']) ? 'selected' : ''; ?>>
+                                                    <?php echo htmlspecialchars($company['name']); ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
                                     </div>
                                     <input type="hidden" name="edit_user_id" value="<?php echo $user['id']; ?>">
                                     <button type="submit" class="btn btn-primary btn-lg" style="padding: 0.3rem 1rem;">Save</button>
@@ -148,6 +174,9 @@ $pending_users = $stmt->fetchAll();
                                     <div>
                                         <div class="user-card-title"><?php echo htmlspecialchars($user['name']); ?></div>
                                         <div class="user-card-email"><?php echo htmlspecialchars($user['email']); ?></div>
+                                    </div>
+                                    <div class="user-card-company">
+                                        Company: <?php echo htmlspecialchars($user['company_name']); ?>
                                     </div>
                                     <div class="user-card-date">
                                         Registered At: <?php echo htmlspecialchars($user['created_at']); ?>
@@ -169,6 +198,7 @@ $pending_users = $stmt->fetchAll();
                                         <label>Aadhaar Card:</label><span><?php echo htmlspecialchars($user['aadhaar']); ?></span>
                                         <label>PAN Card:</label><span><?php echo htmlspecialchars($user['pan']); ?></span>
                                         <label>Location:</label><span><?php echo htmlspecialchars($user['location']); ?></span>
+                                        <label>Company:</label><span><?php echo htmlspecialchars($user['company_name']); ?></span>
                                         <label>Registered At:</label><span><?php echo htmlspecialchars($user['created_at']); ?></span>
                                     </div>
                                     <form method="post" style="text-align:center;">
@@ -206,6 +236,20 @@ $pending_users = $stmt->fetchAll();
         }
         function closeUserApprovePopup(id) {
             document.getElementById('user-approve-popup-bg-' + id).classList.remove('active');
+        }
+        function unassignUser(id) {
+            if (confirm('Are you sure you want to unassign this user from their current company?')) {
+                const form = document.createElement('form');
+                form.method = 'post';
+                form.action = ''; // Submit to the current page
+                const unassignInput = document.createElement('input');
+                unassignInput.type = 'hidden';
+                unassignInput.name = 'unassign_user_id';
+                unassignInput.value = id;
+                form.appendChild(unassignInput);
+                document.body.appendChild(form);
+                form.submit();
+            }
         }
     </script>
 </body>

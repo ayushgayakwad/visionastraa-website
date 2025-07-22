@@ -3,6 +3,14 @@ $required_role = 'admin';
 include '../auth.php';
 require_once '../db.php';
 $message = '';
+$stmt = $pdo->prepare('SELECT company_id FROM users WHERE id = ? AND role = "admin"');
+$stmt->execute([$_SESSION['user_id']]);
+$admin = $stmt->fetch();
+$admin_company_id = $admin['company_id'] ?? null;
+if ($admin_company_id == 0) {
+    echo '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Access Denied</title><link rel="stylesheet" href="../../css/vms-styles.css"></head><body><div style="max-width:600px;margin:4rem auto;text-align:center;"><h1 style="color:red;">Access Denied</h1><p>You are not assigned to any company. Please contact the super admin for access.</p><a href="dashboard.php" style="color:#2b6cb0;">&larr; Back to Dashboard</a></div></body></html>';
+    exit;
+}
 // Handle user creation
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_user'])) {
     $name = $_POST['name'] ?? '';
@@ -19,6 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_user'])) {
         $message = 'Password must be at least 6 characters.';
     } elseif (empty($name) || empty($phone)) {
         $message = 'Name and phone are required.';
+    } elseif (!$admin_company_id) {
+        $message = 'Admin is not assigned to a company.';
     } else {
         $stmt = $pdo->prepare('SELECT id FROM users WHERE email = ?');
         $stmt->execute([$email]);
@@ -26,8 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_user'])) {
             $message = 'Email already exists.';
         } else {
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $pdo->prepare('INSERT INTO users (name, phone, dob, aadhaar, pan, location, email, password, role, approved, created_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, "user", 0, ?)');
-            $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $hash, $_SESSION['user_id']]);
+            $stmt = $pdo->prepare('INSERT INTO users (name, phone, dob, aadhaar, pan, location, email, password, role, approved, created_by, company_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, "user", 0, ?, ?)');
+            $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $hash, $_SESSION['user_id'], $admin_company_id]);
             $message = 'User created successfully! Awaiting super admin approval.';
         }
     }
@@ -42,14 +52,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_user_id'])) {
     $pan = $_POST['edit_pan'] ?? null;
     $location = $_POST['edit_location'] ?? null;
     $email = $_POST['edit_email'] ?? '';
-    $update_sql = 'UPDATE users SET name=?, phone=?, dob=?, aadhaar=?, pan=?, location=?, email=? WHERE id=? AND role="user"';
+    $update_sql = 'UPDATE users SET name=?, phone=?, dob=?, aadhaar=?, pan=?, location=?, email=? WHERE id=? AND role="user" AND company_id=?';
     $stmt = $pdo->prepare($update_sql);
-    $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $edit_id]);
+    $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $edit_id, $admin_company_id]);
     $message = 'User details updated!';
 }
-// Fetch all users created by this admin
-$stmt = $pdo->prepare('SELECT id, name, phone, dob, aadhaar, pan, location, email, created_at, approved FROM users WHERE role = "user" AND created_by = ?');
-$stmt->execute([$_SESSION['user_id']]);
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['unassign_user_id'])) {
+    $unassign_id = (int)$_POST['unassign_user_id'];
+    $stmt = $pdo->prepare('UPDATE users SET company_id = 0 WHERE id = ? AND role = "user" AND company_id = ?');
+    $stmt->execute([$unassign_id, $admin_company_id]);
+    $message = 'User unassigned from company!';
+}
+$stmt = $pdo->prepare('SELECT id, name, phone, dob, aadhaar, pan, location, email, created_at, approved FROM users WHERE role = "user" AND created_by = ? AND company_id = ?');
+$stmt->execute([$_SESSION['user_id'], $admin_company_id]);
 $all_users = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
@@ -132,6 +147,9 @@ $all_users = $stmt->fetchAll();
                             </div>
                             <div class="user-card-action">
                                 <button class="btn btn-primary" style="padding: 0.3rem 1rem;" onclick="event.stopPropagation(); showUserEditPopup(<?php echo $user['id']; ?>)">Edit</button>
+                                <?php if ($admin_company_id != 0): ?>
+                                    <button class="btn btn-danger" style="padding: 0.3rem 1rem; margin-left:0.5rem;" onclick="event.stopPropagation(); unassignUser(<?php echo $user['id']; ?>)">Unassign</button>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="user-popup-bg" id="user-edit-popup-bg-<?php echo $user['id']; ?>">
@@ -189,6 +207,20 @@ $all_users = $stmt->fetchAll();
         }
         function closeUserEditPopup(id) {
             document.getElementById('user-edit-popup-bg-' + id).classList.remove('active');
+        }
+        function unassignUser(id) {
+            if (confirm('Are you sure you want to unassign this user from your company?')) {
+                const form = document.createElement('form');
+                form.method = 'post';
+                form.action = '';
+                const unassignInput = document.createElement('input');
+                unassignInput.type = 'hidden';
+                unassignInput.name = 'unassign_user_id';
+                unassignInput.value = id;
+                form.appendChild(unassignInput);
+                document.body.appendChild(form);
+                form.submit();
+            }
         }
     </script>
 </body>
