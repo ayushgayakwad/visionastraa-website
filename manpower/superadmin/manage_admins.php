@@ -62,8 +62,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['unassign_admin_id']))
     $stmt->execute([$unassign_id]);
     $message = 'Admin unassigned from company!';
 }
-$stmt = $pdo->prepare('SELECT u.*, c.name AS company_name FROM users u LEFT JOIN companies c ON u.company_id = c.id WHERE u.role = "admin"');
-$stmt->execute();
+$search = $_GET['search'] ?? '';
+$filter_company = $_GET['filter_company'] ?? '';
+$filter_gender = $_GET['filter_gender'] ?? '';
+
+$where = ['u.role = "admin"'];
+$params = [];
+if ($search) {
+    $where[] = '(u.name LIKE ? OR u.email LIKE ? OR u.phone LIKE ?)';
+    $params[] = "%$search%";
+    $params[] = "%$search%";
+    $params[] = "%$search%";
+}
+if ($filter_company !== '' && $filter_company !== 'all') {
+    $where[] = 'u.company_id = ?';
+    $params[] = $filter_company;
+}
+if ($filter_gender !== '' && $filter_gender !== 'all') {
+    $where[] = 'u.gender = ?';
+    $params[] = $filter_gender;
+}
+$where_sql = $where ? ('WHERE ' . implode(' AND ', $where)) : '';
+
+$stmt = $pdo->prepare("SELECT u.*, c.name AS company_name FROM users u LEFT JOIN companies c ON u.company_id = c.id $where_sql ORDER BY u.created_at DESC");
+$stmt->execute($params);
 $admins = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
@@ -132,6 +154,26 @@ $admins = $stmt->fetchAll();
                     <button class="tab-btn" onclick="showTab('create-admin')">Create Admin</button>
                 </div>
                 <div id="admins-list" class="tab-content active">
+                    <form method="get" style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;align-items:center;">
+                        <input type="text" name="search" placeholder="Search by name, email, phone" value="<?php echo htmlspecialchars($search); ?>" class="form-input" style="min-width:180px;">
+                        <select name="filter_company" class="form-input">
+                            <option value="all">All Companies</option>
+                            <option value="0" <?php if ($filter_company === '0') echo 'selected'; ?>>Unemployed</option>
+                            <?php foreach ($companies_list as $company): ?>
+                                <option value="<?php echo $company['id']; ?>" <?php if ($filter_company == $company['id']) echo 'selected'; ?>><?php echo htmlspecialchars($company['name']); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <select name="filter_gender" class="form-input">
+                            <option value="all">All Genders</option>
+                            <option value="Male" <?php if ($filter_gender === 'Male') echo 'selected'; ?>>Male</option>
+                            <option value="Female" <?php if ($filter_gender === 'Female') echo 'selected'; ?>>Female</option>
+                            <option value="Other" <?php if ($filter_gender === 'Other') echo 'selected'; ?>>Other</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary" style="padding:0.3rem 1.2rem;">Filter</button>
+                        <?php if ($search || ($filter_company !== '' && $filter_company !== 'all') || ($filter_gender !== '' && $filter_gender !== 'all')): ?>
+                            <a href="<?php echo strtok($_SERVER['REQUEST_URI'], '?'); ?>" class="btn" style="background:#eee;color:#333;padding:0.3rem 1.2rem;text-decoration:none;">Clear Filters</a>
+                        <?php endif; ?>
+                    </form>
                     <?php foreach ($admins as $admin): ?>
                         <div class="admin-card" onclick="showAdminPopup(<?php echo $admin['id']; ?>)">
                             <div class="admin-card-content">

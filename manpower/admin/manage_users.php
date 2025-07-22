@@ -65,9 +65,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['unassign_user_id'])) 
     $stmt->execute([$unassign_id, $admin_company_id]);
     $message = 'User unassigned from company!';
 }
-// Fetch all users created by this admin and with the same company_id
-$stmt = $pdo->prepare('SELECT id, name, phone, dob, aadhaar, pan, location, email, gender, created_at, approved FROM users WHERE role = "user" AND created_by = ? AND company_id = ?');
-$stmt->execute([$_SESSION['user_id'], $admin_company_id]);
+$search = $_GET['search'] ?? '';
+$filter_gender = $_GET['filter_gender'] ?? '';
+$where = ['role = "user"', 'created_by = ?', 'company_id = ?'];
+$params = [$_SESSION['user_id'], $admin_company_id];
+if ($search) {
+    $where[] = '(name LIKE ? OR email LIKE ? OR phone LIKE ?)';
+    $params[] = "%$search%";
+    $params[] = "%$search%";
+    $params[] = "%$search%";
+}
+if ($filter_gender !== '' && $filter_gender !== 'all') {
+    $where[] = 'gender = ?';
+    $params[] = $filter_gender;
+}
+$where_sql = $where ? ('WHERE ' . implode(' AND ', $where)) : '';
+$stmt = $pdo->prepare("SELECT id, name, phone, dob, aadhaar, pan, location, email, gender, created_at, approved FROM users $where_sql");
+$stmt->execute($params);
 $all_users = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
@@ -134,6 +148,19 @@ $all_users = $stmt->fetchAll();
                     <button class="tab-btn" onclick="showTab('create-user')">Create User</button>
                 </div>
                 <div id="users-list" class="tab-content active">
+                    <form method="get" style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;align-items:center;">
+                        <input type="text" name="search" placeholder="Search by name, email, phone" value="<?php echo htmlspecialchars($search); ?>" class="form-input" style="min-width:180px;">
+                        <select name="filter_gender" class="form-input">
+                            <option value="all">All Genders</option>
+                            <option value="Male" <?php if ($filter_gender === 'Male') echo 'selected'; ?>>Male</option>
+                            <option value="Female" <?php if ($filter_gender === 'Female') echo 'selected'; ?>>Female</option>
+                            <option value="Other" <?php if ($filter_gender === 'Other') echo 'selected'; ?>>Other</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary" style="padding:0.3rem 1.2rem;">Filter</button>
+                        <?php if ($search || ($filter_gender !== '' && $filter_gender !== 'all')): ?>
+                            <a href="<?php echo strtok($_SERVER['REQUEST_URI'], '?'); ?>" class="btn" style="background:#eee;color:#333;padding:0.3rem 1.2rem;text-decoration:none;">Clear Filters</a>
+                        <?php endif; ?>
+                    </form>
                     <?php foreach ($all_users as $user): ?>
                         <div class="user-card" onclick="showUserEditPopup(<?php echo $user['id']; ?>)">
                             <div class="user-card-content">

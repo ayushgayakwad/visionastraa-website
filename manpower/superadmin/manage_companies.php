@@ -32,8 +32,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_company_id']))
     $stmt->execute([$id]);
     $message = 'Company deleted!';
 }
-$stmt = $pdo->prepare('SELECT * FROM companies ORDER BY created_at DESC');
-$stmt->execute();
+$search = $_GET['search'] ?? '';
+$where = [];
+$params = [];
+if ($search) {
+    $where[] = '(name LIKE ? OR location LIKE ?)';
+    $params[] = "%$search%";
+    $params[] = "%$search%";
+}
+$where_sql = $where ? ('WHERE ' . implode(' AND ', $where)) : '';
+$stmt = $pdo->prepare("SELECT * FROM companies $where_sql ORDER BY created_at DESC");
+$stmt->execute($params);
 $companies = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
@@ -105,6 +114,13 @@ $companies = $stmt->fetchAll();
                     <button class="tab-btn" onclick="showTab('add-company')">Add Company</button>
                 </div>
                 <div id="companies-list" class="tab-content active">
+                    <form method="get" style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;align-items:center;">
+                        <input type="text" name="search" placeholder="Search by name or location" value="<?php echo htmlspecialchars($search); ?>" class="form-input" style="min-width:180px;">
+                        <button type="submit" class="btn btn-primary" style="padding:0.3rem 1.2rem;">Search</button>
+                        <?php if ($search): ?>
+                            <a href="<?php echo strtok($_SERVER['REQUEST_URI'], '?'); ?>" class="btn" style="background:#eee;color:#333;padding:0.3rem 1.2rem;text-decoration:none;">Clear Search</a>
+                        <?php endif; ?>
+                    </form>
                     <?php foreach ($companies as $company): ?>
                         <div class="company-card">
                             <div class="company-info">
