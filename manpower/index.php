@@ -59,15 +59,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <header class="header" id="header">
         <div class="container">
             <div class="header-content">
-                <a href="../manpower.html" class="logo">
+                <a href="../staffing-solution.html" class="logo">
                     <div class="logo-icon">
                         <span>VA</span>
                     </div>
                     <span class="logo-text">Staffing Solutions</span>
                 </a>
                 <nav class="nav-desktop">
-                    <a href="../manpower.html" class="nav-link">Home</a>
-                    <a href="../manpower-get-in-touch.html" class="nav-link">Get in Touch</a>
+                    <a href="../staffing-solution.html" class="nav-link">Home</a>
+                    <a href="../manpower-services.html" class="nav-link">Get in Touch</a>
                     <a href="index.php" class="btn btn-primary nav-get-started active">Get Started</a>
                 </nav>
                 <button class="mobile-menu-btn" id="mobileMenuBtn">
@@ -77,8 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </button>
             </div>
             <nav class="nav-mobile" id="mobileNav">
-                <a href="../manpower.html" class="nav-link-mobile">Home</a>
-                <a href="../manpower-get-in-touch.html" class="nav-link-mobile">Get in Touch</a>
+                <a href="../staffing-solution.html" class="nav-link-mobile">Home</a>
+                <a href="../manpower-services.html" class="nav-link-mobile">Get in Touch</a>
                 <a href="index.php" class="btn btn-primary nav-get-started-mobile active">Get Started</a>
             </nav>
         </div>
@@ -127,8 +127,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="footer-section">
                     <h3 class="footer-title">Quick Links</h3>
                     <ul class="footer-links">
-                        <li><a href="../manpower.html">Home</a></li>
-                        <li><a href="../manpower-get-in-touch.html">Get in Touch</a></li>
+                        <li><a href="../staffing-solution.html">Home</a></li>
+                        <li><a href="../manpower-services.html">Get in Touch</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
