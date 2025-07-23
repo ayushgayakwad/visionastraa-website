@@ -17,6 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_admin'])) {
     $company_id = $_POST['company_id'] ?? null;
     $password = $_POST['password'] ?? '';
     $gender = $_POST['gender'] ?? '';
+    $bank_name = $_POST['bank_name'] ?? '';
+    $bank_account_number = $_POST['bank_account_number'] ?? '';
+    $bank_branch = $_POST['bank_branch'] ?? '';
+    $bank_ifsc = $_POST['bank_ifsc'] ?? '';
+    $bank_account_type = $_POST['bank_account_type'] ?? '';
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message = 'Invalid email address.';
     } elseif (strlen($password) < 6) {
@@ -32,8 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_admin'])) {
             $message = 'Email already exists.';
         } else {
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $pdo->prepare('INSERT INTO users (name, phone, dob, aadhaar, pan, location, email, password, gender, role, approved, created_by, company_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, "admin", 1, ?, ?)');
-            $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $hash, $gender, $_SESSION['user_id'], $company_id]);
+            $stmt = $pdo->prepare('INSERT INTO users (name, phone, dob, aadhaar, pan, location, email, password, gender, role, approved, created_by, company_id, bank_name, bank_account_number, bank_branch, bank_ifsc, bank_account_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, "admin", 1, ?, ?, ?, ?, ?, ?, ?)');
+            $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $hash, $gender, $_SESSION['user_id'], $company_id, $bank_name, $bank_account_number, $bank_branch, $bank_ifsc, $bank_account_type]);
             $message = 'Admin created successfully!';
         }
     }
@@ -49,9 +54,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_admin_id'])) {
     $email = $_POST['edit_email'] ?? '';
     $company_id = $_POST['edit_company_id'] ?? null;
     $gender = $_POST['edit_gender'] ?? '';
-    $update_sql = 'UPDATE users SET name=?, phone=?, dob=?, aadhaar=?, pan=?, location=?, email=?, company_id=?, gender=? WHERE id=? AND role="admin"';
+    $bank_name = $_POST['edit_bank_name'] ?? '';
+    $bank_account_number = $_POST['edit_bank_account_number'] ?? '';
+    $bank_branch = $_POST['edit_bank_branch'] ?? '';
+    $bank_ifsc = $_POST['edit_bank_ifsc'] ?? '';
+    $bank_account_type = $_POST['edit_bank_account_type'] ?? '';
+    $update_sql = 'UPDATE users SET name=?, phone=?, dob=?, aadhaar=?, pan=?, location=?, email=?, company_id=?, gender=?, bank_name=?, bank_account_number=?, bank_branch=?, bank_ifsc=?, bank_account_type=? WHERE id=? AND role="admin"';
     $stmt = $pdo->prepare($update_sql);
-    $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $company_id, $gender, $edit_id]);
+    $stmt->execute([$name, $phone, $dob, $aadhaar, $pan, $location, $email, $company_id, $gender, $bank_name, $bank_account_number, $bank_branch, $bank_ifsc, $bank_account_type, $edit_id]);
     $message = 'Admin details updated!';
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['unassign_admin_id'])) {
@@ -109,7 +119,7 @@ $admins = $stmt->fetchAll();
         .admin-card-action { margin-left: auto; }
         .admin-popup-bg { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.35); z-index: 1000; justify-content: center; align-items: center; }
         .admin-popup-bg.active { display: flex; }
-        .admin-popup { background: #fff; border-radius: 14px; padding: 2rem 2.5rem; min-width: 350px; max-width: 95vw; box-shadow: 0 8px 32px rgba(0,0,0,0.18); position: relative; }
+        .admin-popup { background: #fff; border-radius: 14px; padding: 2rem 2.5rem; min-width: 350px; max-width: 95vw; box-shadow: 0 8px 32px rgba(0,0,0,0.18); position: relative; max-height: 90vh; overflow-y: auto; }
         .admin-popup-close { position: absolute; top: 1rem; right: 1rem; font-size: 1.5rem; color: #888; cursor: pointer; }
         .admin-popup-details { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 2rem; margin-bottom: 1.5rem; }
         .admin-popup-details label { font-weight: 500; color: #333; }
@@ -122,7 +132,7 @@ $admins = $stmt->fetchAll();
     <header class="header" id="header">
         <div class="container">
             <div class="header-content">
-                <a href="../../manpower.html" class="logo">
+                <a href="../../staffing-solution.html" class="logo">
                     <div class="logo-icon">
                         <span>VA</span>
                     </div>
@@ -198,26 +208,65 @@ $admins = $stmt->fetchAll();
                                 <h2 style="text-align:center; margin-bottom:1.5rem;">Edit Admin Details</h2>
                                 <form method="post" style="text-align:center;">
                                     <div class="admin-popup-details">
-                                        <label>Name:</label><input type="text" name="edit_name" value="<?php echo htmlspecialchars($admin['name']); ?>" required>
-                                        <label>Email:</label><input type="email" name="edit_email" value="<?php echo htmlspecialchars($admin['email']); ?>" required>
-                                        <label>Phone:</label><input type="text" name="edit_phone" value="<?php echo htmlspecialchars($admin['phone']); ?>" required>
-                                        <label>Date of Birth:</label><input type="date" name="edit_dob" value="<?php echo htmlspecialchars($admin['dob']); ?>">
-                                        <label>Aadhaar Card:</label><input type="text" name="edit_aadhaar" value="<?php echo htmlspecialchars($admin['aadhaar']); ?>">
-                                        <label>PAN Card:</label><input type="text" name="edit_pan" value="<?php echo htmlspecialchars($admin['pan']); ?>">
-                                        <label>Location:</label><input type="text" name="edit_location" value="<?php echo htmlspecialchars($admin['location']); ?>">
+                                        <label>Name:</label><input type="text" name="edit_name" value="<?php echo htmlspecialchars($admin['name'] ?? ''); ?>" required>
+                                        <label>Email:</label><input type="email" name="edit_email" value="<?php echo htmlspecialchars($admin['email'] ?? ''); ?>" required>
+                                        <label>Phone:</label><input type="text" name="edit_phone" value="<?php echo htmlspecialchars($admin['phone'] ?? ''); ?>" required>
+                                        <label>Date of Birth:</label><input type="date" name="edit_dob" value="<?php echo htmlspecialchars($admin['dob'] ?? ''); ?>">
+                                        <label>Aadhaar Card:</label><input type="text" name="edit_aadhaar" value="<?php echo htmlspecialchars($admin['aadhaar'] ?? ''); ?>">
+                                        <label>PAN Card:</label><input type="text" name="edit_pan" value="<?php echo htmlspecialchars($admin['pan'] ?? ''); ?>">
+                                        <label>Location:</label><input type="text" name="edit_location" value="<?php echo htmlspecialchars($admin['location'] ?? ''); ?>">
                                         <label>Gender:</label>
                                         <select name="edit_gender" required>
                                             <option value="">Select Gender</option>
-                                            <option value="Male" <?php if ($admin['gender'] == 'Male') echo 'selected'; ?>>Male</option>
-                                            <option value="Female" <?php if ($admin['gender'] == 'Female') echo 'selected'; ?>>Female</option>
-                                            <option value="Other" <?php if ($admin['gender'] == 'Other') echo 'selected'; ?>>Other</option>
+                                            <option value="Male" <?php if (($admin['gender'] ?? '') == 'Male') echo 'selected'; ?>>Male</option>
+                                            <option value="Female" <?php if (($admin['gender'] ?? '') == 'Female') echo 'selected'; ?>>Female</option>
+                                            <option value="Other" <?php if (($admin['gender'] ?? '') == 'Other') echo 'selected'; ?>>Other</option>
                                         </select>
                                         <label>Company:</label>
                                         <select name="edit_company_id" required>
-                                            <option value="0" <?php if ($admin['company_id'] == 0) echo 'selected'; ?>>Unemployed</option>
+                                            <option value="0" <?php if (($admin['company_id'] ?? 0) == 0) echo 'selected'; ?>>Unemployed</option>
                                             <?php foreach ($companies_list as $company): ?>
-                                                <option value="<?php echo $company['id']; ?>" <?php if ($admin['company_id'] == $company['id']) echo 'selected'; ?>><?php echo htmlspecialchars($company['name']); ?></option>
+                                                <option value="<?php echo $company['id']; ?>" <?php if (($admin['company_id'] ?? '') == $company['id']) echo 'selected'; ?>><?php echo htmlspecialchars($company['name']); ?></option>
                                             <?php endforeach; ?>
+                                        </select>
+                                        <label>Bank Name:</label>
+                                        <select name="edit_bank_name" required>
+                                            <option value="">Select Bank</option>
+                                            <option value="Axis Bank" <?php if (($admin['bank_name'] ?? '') == 'Axis Bank') echo 'selected'; ?>>Axis Bank</option>
+                                            <option value="Bank of Baroda" <?php if (($admin['bank_name'] ?? '') == 'Bank of Baroda') echo 'selected'; ?>>Bank of Baroda</option>
+                                            <option value="Bank of India" <?php if (($admin['bank_name'] ?? '') == 'Bank of India') echo 'selected'; ?>>Bank of India</option>
+                                            <option value="Bank of Maharashtra" <?php if (($admin['bank_name'] ?? '') == 'Bank of Maharashtra') echo 'selected'; ?>>Bank of Maharashtra</option>
+                                            <option value="Canara Bank" <?php if (($admin['bank_name'] ?? '') == 'Canara Bank') echo 'selected'; ?>>Canara Bank</option>
+                                            <option value="Central Bank of India" <?php if (($admin['bank_name'] ?? '') == 'Central Bank of India') echo 'selected'; ?>>Central Bank of India</option>
+                                            <option value="Federal Bank" <?php if (($admin['bank_name'] ?? '') == 'Federal Bank') echo 'selected'; ?>>Federal Bank</option>
+                                            <option value="HDFC Bank" <?php if (($admin['bank_name'] ?? '') == 'HDFC Bank') echo 'selected'; ?>>HDFC Bank</option>
+                                            <option value="ICICI Bank" <?php if (($admin['bank_name'] ?? '') == 'ICICI Bank') echo 'selected'; ?>>ICICI Bank</option>
+                                            <option value="Indian Bank" <?php if (($admin['bank_name'] ?? '') == 'Indian Bank') echo 'selected'; ?>>Indian Bank</option>
+                                            <option value="Indian Overseas Bank (IOB)" <?php if (($admin['bank_name'] ?? '') == 'Indian Overseas Bank (IOB)') echo 'selected'; ?>>Indian Overseas Bank (IOB)</option>
+                                            <option value="IDBI Bank" <?php if (($admin['bank_name'] ?? '') == 'IDBI Bank') echo 'selected'; ?>>IDBI Bank</option>
+                                            <option value="IDFC First Bank" <?php if (($admin['bank_name'] ?? '') == 'IDFC First Bank') echo 'selected'; ?>>IDFC First Bank</option>
+                                            <option value="IndusInd Bank" <?php if (($admin['bank_name'] ?? '') == 'IndusInd Bank') echo 'selected'; ?>>IndusInd Bank</option>
+                                            <option value="Jammu & Kashmir Bank" <?php if (($admin['bank_name'] ?? '') == 'Jammu & Kashmir Bank') echo 'selected'; ?>>Jammu & Kashmir Bank</option>
+                                            <option value="Karnataka Bank" <?php if (($admin['bank_name'] ?? '') == 'Karnataka Bank') echo 'selected'; ?>>Karnataka Bank</option>
+                                            <option value="Kotak Mahindra Bank" <?php if (($admin['bank_name'] ?? '') == 'Kotak Mahindra Bank') echo 'selected'; ?>>Kotak Mahindra Bank</option>
+                                            <option value="Punjab National Bank (PNB)" <?php if (($admin['bank_name'] ?? '') == 'Punjab National Bank (PNB)') echo 'selected'; ?>>Punjab National Bank (PNB)</option>
+                                            <option value="RBL Bank" <?php if (($admin['bank_name'] ?? '') == 'RBL Bank') echo 'selected'; ?>>RBL Bank</option>
+                                            <option value="South Indian Bank" <?php if (($admin['bank_name'] ?? '') == 'South Indian Bank') echo 'selected'; ?>>South Indian Bank</option>
+                                            <option value="State Bank of India (SBI)" <?php if (($admin['bank_name'] ?? '') == 'State Bank of India (SBI)') echo 'selected'; ?>>State Bank of India (SBI)</option>
+                                            <option value="Tamilnad Mercantile Bank" <?php if (($admin['bank_name'] ?? '') == 'Tamilnad Mercantile Bank') echo 'selected'; ?>>Tamilnad Mercantile Bank</option>
+                                            <option value="UCO Bank" <?php if (($admin['bank_name'] ?? '') == 'UCO Bank') echo 'selected'; ?>>UCO Bank</option>
+                                            <option value="Union Bank of India" <?php if (($admin['bank_name'] ?? '') == 'Union Bank of India') echo 'selected'; ?>>Union Bank of India</option>
+                                            <option value="Yes Bank" <?php if (($admin['bank_name'] ?? '') == 'Yes Bank') echo 'selected'; ?>>Yes Bank</option>
+                                            <option value="Others" <?php if (($admin['bank_name'] ?? '') == 'Others') echo 'selected'; ?>>Others</option>
+                                        </select>
+                                        <label>Bank Account Number:</label><input type="text" name="edit_bank_account_number" value="<?php echo htmlspecialchars($admin['bank_account_number'] ?? ''); ?>" required>
+                                        <label>Bank Branch:</label><input type="text" name="edit_bank_branch" value="<?php echo htmlspecialchars($admin['bank_branch'] ?? ''); ?>" required>
+                                        <label>Bank IFSC Code:</label><input type="text" name="edit_bank_ifsc" value="<?php echo htmlspecialchars($admin['bank_ifsc'] ?? ''); ?>" required>
+                                        <label>Type of Account:</label>
+                                        <select name="edit_bank_account_type" required>
+                                            <option value="">Select Account Type</option>
+                                            <option value="Savings" <?php if (($admin['bank_account_type'] ?? '') == 'Savings') echo 'selected'; ?>>Savings</option>
+                                            <option value="Current" <?php if (($admin['bank_account_type'] ?? '') == 'Current') echo 'selected'; ?>>Current</option>
                                         </select>
                                     </div>
                                     <input type="hidden" name="edit_admin_id" value="<?php echo $admin['id']; ?>">
@@ -247,6 +296,44 @@ $admins = $stmt->fetchAll();
                             <?php foreach ($companies_list as $company): ?>
                                 <option value="<?php echo $company['id']; ?>"><?php echo htmlspecialchars($company['name']); ?></option>
                             <?php endforeach; ?>
+                        </select>
+                        <label>Bank Name:</label>
+                        <select name="bank_name" required class="form-input">
+                            <option value="">Select Bank</option>
+                            <option value="Axis Bank">Axis Bank</option>
+                            <option value="Bank of Baroda">Bank of Baroda</option>
+                            <option value="Bank of India">Bank of India</option>
+                            <option value="Bank of Maharashtra">Bank of Maharashtra</option>
+                            <option value="Canara Bank">Canara Bank</option>
+                            <option value="Central Bank of India">Central Bank of India</option>
+                            <option value="Federal Bank">Federal Bank</option>
+                            <option value="HDFC Bank">HDFC Bank</option>
+                            <option value="ICICI Bank">ICICI Bank</option>
+                            <option value="Indian Bank">Indian Bank</option>
+                            <option value="Indian Overseas Bank (IOB)">Indian Overseas Bank (IOB)</option>
+                            <option value="IDBI Bank">IDBI Bank</option>
+                            <option value="IDFC First Bank">IDFC First Bank</option>
+                            <option value="IndusInd Bank">IndusInd Bank</option>
+                            <option value="Jammu & Kashmir Bank">Jammu & Kashmir Bank</option>
+                            <option value="Karnataka Bank">Karnataka Bank</option>
+                            <option value="Kotak Mahindra Bank">Kotak Mahindra Bank</option>
+                            <option value="Punjab National Bank (PNB)">Punjab National Bank (PNB)</option>
+                            <option value="RBL Bank">RBL Bank</option>
+                            <option value="South Indian Bank">South Indian Bank</option>
+                            <option value="State Bank of India (SBI)">State Bank of India (SBI)</option>
+                            <option value="Tamilnad Mercantile Bank">Tamilnad Mercantile Bank</option>
+                            <option value="UCO Bank">UCO Bank</option>
+                            <option value="Union Bank of India">Union Bank of India</option>
+                            <option value="Yes Bank">Yes Bank</option>
+                            <option value="Others">Others</option>
+                        </select>
+                        <input type="text" name="bank_account_number" placeholder="Bank Account Number" required class="form-input">
+                        <input type="text" name="bank_branch" placeholder="Bank Branch" required class="form-input">
+                        <input type="text" name="bank_ifsc" placeholder="Bank IFSC Code" required class="form-input">
+                        <select name="bank_account_type" required class="form-input">
+                            <option value="">Select Account Type</option>
+                            <option value="Savings">Savings</option>
+                            <option value="Current">Current</option>
                         </select>
                         <input type="email" name="email" placeholder="Admin Email" required class="form-input">
                         <input type="password" name="password" placeholder="Password" required class="form-input">

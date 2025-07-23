@@ -71,7 +71,7 @@ if ($selected_user) {
     <header class="header" id="header">
         <div class="container">
             <div class="header-content">
-                <a href="../../manpower.html" class="logo">
+                <a href="../../staffing-solution.html" class="logo">
                     <div class="logo-icon"><span>VA</span></div>
                     <span class="logo-text">Staffing Solutions</span>
                 </a>

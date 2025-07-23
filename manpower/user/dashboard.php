@@ -3,7 +3,7 @@ $required_role = 'user';
 include '../auth.php';
 require_once '../db.php';
 $user_id = $_SESSION['user_id'];
-$stmt = $pdo->prepare('SELECT u.name, u.email, u.phone, u.dob, u.aadhaar, u.pan, u.location, u.created_at, u.gender, u.company_id, c.name AS company_name FROM users u LEFT JOIN companies c ON u.company_id = c.id WHERE u.id = ?');
+$stmt = $pdo->prepare('SELECT u.name, u.email, u.phone, u.dob, u.aadhaar, u.pan, u.location, u.created_at, u.gender, u.company_id, c.name AS company_name, u.bank_name, u.bank_account_number, u.bank_branch, u.bank_ifsc, u.bank_account_type FROM users u LEFT JOIN companies c ON u.company_id = c.id WHERE u.id = ?');
 $stmt->execute([$user_id]);
 $user = $stmt->fetch();
 $company_hours = [];
@@ -88,6 +88,7 @@ foreach ($stmt->fetchAll() as $row) {
                     <button class="tab-btn active" onclick="showTab('profile-tab')">Profile</button>
                     <button class="tab-btn" onclick="showTab('account-tab')">Account</button>
                     <button class="tab-btn" onclick="showTab('id-tab')">ID Info</button>
+                    <button class="tab-btn" onclick="showTab('bank-tab')">Bank Details</button>
                 </div>
                 <div id="profile-tab" class="tab-content active">
                     <div class="profile-card">
@@ -130,6 +131,18 @@ foreach ($stmt->fetchAll() as $row) {
                         </div>
                     </div>
                 </div>
+                <div id="bank-tab" class="tab-content">
+                    <div class="id-card">
+                        <div class="profile-title">Bank Details</div>
+                        <div class="id-grid">
+                            <div class="id-label">Bank Name:</div><div class="id-value"><?php echo htmlspecialchars($user['bank_name']); ?></div>
+                            <div class="id-label">Account Number:</div><div class="id-value"><?php echo htmlspecialchars($user['bank_account_number']); ?></div>
+                            <div class="id-label">Branch:</div><div class="id-value"><?php echo htmlspecialchars($user['bank_branch']); ?></div>
+                            <div class="id-label">IFSC Code:</div><div class="id-value"><?php echo htmlspecialchars($user['bank_ifsc']); ?></div>
+                            <div class="id-label">Account Type:</div><div class="id-value"><?php echo htmlspecialchars($user['bank_account_type']); ?></div>
+                        </div>
+                    </div>
+                </div>
                 <p style="text-align:center; margin-top:2rem;">
                     <a href="../logout.php" class="btn btn-primary" style="padding: 0.3rem 1rem;">Logout</a>
                 </p>
@@ -146,9 +159,12 @@ foreach ($stmt->fetchAll() as $row) {
             } else if(tabId === 'account-tab') {
                 document.querySelector('.tab-btn:nth-child(2)').classList.add('active');
                 document.getElementById('account-tab').classList.add('active');
-            } else {
+            } else if(tabId === 'id-tab') {
                 document.querySelector('.tab-btn:nth-child(3)').classList.add('active');
                 document.getElementById('id-tab').classList.add('active');
+            } else if(tabId === 'bank-tab') {
+                document.querySelector('.tab-btn:nth-child(4)').classList.add('active');
+                document.getElementById('bank-tab').classList.add('active');
             }
         }
     </script>
