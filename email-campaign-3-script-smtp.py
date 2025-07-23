@@ -225,7 +225,7 @@ tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 # tables = ['email_list_6', 'email_list_7']
 
 for tbl in tables:
-    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Karnataka' AND emailSent_2=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
+    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Kerala' AND emailSent_2=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
     # cursor.execute(f"SELECT email, name FROM {tbl} WHERE emailSent=0")
     for row in cursor.fetchall():
         if send_email(row['email'], row['first_name']):
