@@ -273,7 +273,6 @@ $all_users = $stmt->fetchAll();
                         <input type="text" name="aadhaar" placeholder="Aadhaar Card" class="form-input">
                         <input type="text" name="pan" placeholder="PAN Card" class="form-input">
                         <input type="text" name="location" placeholder="Location" class="form-input">
-                        <label>Bank Name:</label>
                         <select name="bank_name" required class="form-input">
                             <option value="">Select Bank</option>
                             <option value="Axis Bank">Axis Bank</option>
@@ -320,6 +319,14 @@ $all_users = $stmt->fetchAll();
         </section>
     </main>
     <script>
+        window.addEventListener('scroll', function() {
+            var header = document.getElementById('header');
+            if (window.scrollY > 10) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
         function showTab(tabId) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));

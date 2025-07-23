@@ -162,6 +162,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 icon.textContent = 'Show';
             }
         }
+        window.addEventListener('scroll', function() {
+            var header = document.getElementById('header');
+            if (window.scrollY > 10) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
     </script>
 </body>
 </html> 

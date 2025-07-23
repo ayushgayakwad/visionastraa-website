@@ -150,6 +150,14 @@ foreach ($stmt->fetchAll() as $row) {
         </section>
     </main>
     <script>
+        window.addEventListener('scroll', function() {
+            var header = document.getElementById('header');
+            if (window.scrollY > 10) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
         function showTab(tabId) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));

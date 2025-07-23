@@ -113,5 +113,15 @@ include '../auth.php';
             </div>
         </section>
     </main>
+    <script>
+        window.addEventListener('scroll', function() {
+            var header = document.getElementById('header');
+            if (window.scrollY > 10) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
 </body>
 </html> 

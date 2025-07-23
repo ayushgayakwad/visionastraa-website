@@ -378,7 +378,6 @@ $pending_users = $stmt->fetchAll();
                                 <option value="<?php echo $company['id']; ?>"><?php echo htmlspecialchars($company['name']); ?></option>
                             <?php endforeach; ?>
                         </select>
-                        <label>Bank Name:</label>
                         <select name="bank_name" required class="form-input">
                             <option value="">Select Bank</option>
                             <option value="Axis Bank">Axis Bank</option>
@@ -465,6 +464,16 @@ $pending_users = $stmt->fetchAll();
                 form.submit();
             }
         }
+    </script>
+    <script>
+        window.addEventListener('scroll', function() {
+            var header = document.getElementById('header');
+            if (window.scrollY > 10) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
     </script>
 </body>
 </html> 
