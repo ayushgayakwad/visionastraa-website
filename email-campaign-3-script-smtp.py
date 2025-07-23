@@ -97,6 +97,10 @@ EMAIL_BODY_TEMPLATE = """\
       <img src="https://visionastraa.com/images/EV_Academy.png" alt="EV Academy">
     </div>
     <br>
+    <h2 style="color: #d9534f;">🎯 Who is the Lucky One?</h2>
+    <p><strong>Last couple of seats open.</strong> This is your <strong>last chance</strong> to join the upcoming batch and get placed by the end of the year.</p>
+    <p style="color: #28a745;"><strong>✅ 28 people have already signed up. Only <span style="color:#d9534f;">2 seats left!</span></strong></p>
+    <br>
     <h2>🌟 DON'T MISS OUT! OR LOSE A YEAR!</h2>
     <h3>ARE YOU LOOKING FOR A JOB IN YOUR CORE FIELD?</h3>
     <h2 style="color: #28a745;">WE GUARANTEE 100% PLACEMENT IN TOP EV COMPANIES!</h2>
@@ -120,7 +124,7 @@ EMAIL_BODY_TEMPLATE = """\
     <br>
     <p><strong>Call/Message us - <a href="tel:+918075664438">+91 8075664438</a> for Admissions!</strong></p>
     <br>
-    <img src="https://visionastraa.com/images/campaign-3.png" style="width:100%; max-width:600px; border-radius:8px; display:block; margin: auto auto;">
+    <img src="https://visionastraa.com/images/campaign-4.jpg" style="width:100%; max-width:600px; border-radius:8px; display:block; margin: auto auto;">
     <br>
     <p style="color: #c82333; font-size: 16px; font-weight: bold; margin-top: 10px; text-align: left;">
         Don't Miss this GOLDEN opportunity to secure a guaranteed job in EV Industry by Nov, 2025 if you join today!
