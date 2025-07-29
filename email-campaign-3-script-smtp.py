@@ -99,7 +99,7 @@ EMAIL_BODY_TEMPLATE = """\
     <br>
     <h2 style="color: #d9534f;">🎯 Who is the Lucky One?</h2>
     <p><strong>Last couple of seats open.</strong> This is your <strong>last chance</strong> to join the upcoming batch and get placed by the end of the year.</p>
-    <p style="color: #28a745;"><strong>✅ 28 people have already signed up. Only <span style="color:#d9534f;">2 seats left!</span></strong></p>
+    <p style="color: #28a745;"><strong>✅ 34 people have already signed up. Only <span style="color:#d9534f;">2 seats left!</span></strong></p>
     <br>
     <h2>🌟 DON'T MISS OUT! OR LOSE A YEAR!</h2>
     <h3>ARE YOU LOOKING FOR A JOB IN YOUR CORE FIELD?</h3>
@@ -109,8 +109,6 @@ EMAIL_BODY_TEMPLATE = """\
     <p>Are you an engineering graduate with dreams of working in India’s fastest‑growing industry – Electric Vehicles?</p>
     <br>
     <hr>
-    <br>
-    <p style="color: #5943d6;"><strong>Below 25 Students who is looking for job already joined us for next batch!</strong></p>
     <br>
     <p><strong>What are you waiting for? JOIN NOW to guarantee a job!</strong></p>
     <br>
@@ -124,7 +122,7 @@ EMAIL_BODY_TEMPLATE = """\
     <br>
     <p><strong>Call/Message us - <a href="tel:+918075664438">+91 8075664438</a> for Admissions!</strong></p>
     <br>
-    <img src="https://visionastraa.com/images/campaign-4.jpg" style="width:100%; max-width:600px; border-radius:8px; display:block; margin: auto auto;">
+    <img src="https://visionastraa.com/images/campaign-5.jpg" style="width:100%; max-width:600px; border-radius:8px; display:block; margin: auto auto;">
     <br>
     <p style="color: #c82333; font-size: 16px; font-weight: bold; margin-top: 10px; text-align: left;">
         Don't Miss this GOLDEN opportunity to secure a guaranteed job in EV Industry by Nov, 2025 if you join today!
@@ -212,27 +210,27 @@ def send_email(to_address, first_name):
 
 conn = mysql.connector.connect(
     host='srv1640.hstgr.io',
-    user='u707137586_Campus_Hiring',
-    password='6q+SFd~o[go',
-    database='u707137586_Campus_Hiring'
-    # user = "u707137586_EV_Reg_T1_24",
-    # password = "DMKL0IYoP&4",
-    # database = "u707137586_EV_Reg_2024_T1"
+    # user='u707137586_Campus_Hiring',
+    # password='6q+SFd~o[go',
+    # database='u707137586_Campus_Hiring'
+    user = "u707137586_EV_Reg_T1_24",
+    password = "DMKL0IYoP&4",
+    database = "u707137586_EV_Reg_2024_T1"
 )
 cursor = conn.cursor(dictionary=True)
 # tables = ['test']
-tables = ['crdf25', 'crdf25_north', 'crdf25_south']
-# tables = ['email_list_6', 'email_list_7']
+# tables = ['crdf25', 'crdf25_north', 'crdf25_south']
+tables = ['email_list_1', 'email_list_2', 'email_list_3']
 
 for tbl in tables:
-    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Andhra Pradesh' AND emailSent_2=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
-    # cursor.execute(f"SELECT email, name FROM {tbl} WHERE emailSent=0")
+    # cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Andhra Pradesh' AND emailSent_2=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
+    cursor.execute(f"SELECT email, name FROM {tbl} WHERE emailSent=0")
     for row in cursor.fetchall():
-        if send_email(row['email'], row['first_name']):
-        # if send_email(row['email'], row['name']):
+        # if send_email(row['email'], row['first_name']):
+        if send_email(row['email'], row['name']):
             print(f"✅ Sent to {row['email']}")
-            cursor.execute(f"UPDATE {tbl} SET emailSent_2=1 WHERE email=%s", (row['email'],))
-            # cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
+            # cursor.execute(f"UPDATE {tbl} SET emailSent_2=1 WHERE email=%s", (row['email'],))
+            cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
             conn.commit()
 
 cursor.close()
