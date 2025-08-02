@@ -193,12 +193,12 @@ conn = mysql.connector.connect(
     # database = "u707137586_EV_Reg_2024_T1"
 )
 cursor = conn.cursor(dictionary=True)
-tables = ['test']
-# tables = ['crdf25', 'crdf25_north', 'crdf25_south']
+# tables = ['test']
+tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 # tables = ['email_list_4', 'email_list_5', 'email_list_6']
 
 for tbl in tables:
-    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Kerala' AND emailSent=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
+    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Karnataka' AND emailSent=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
     # cursor.execute(f"SELECT email, name FROM {tbl} WHERE emailSent=0")
     for row in cursor.fetchall():
         if send_email(row['email'], row['first_name']):
