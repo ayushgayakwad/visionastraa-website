@@ -13,11 +13,11 @@ from email.utils import formataddr
 
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 587
-SMTP_USERNAME = 'visionastraa@evcourse.in'
-SMTP_PASSWORD = '>p>W|jv?Kg1'
+# SMTP_USERNAME = 'visionastraa@evcourse.in'
+# SMTP_PASSWORD = '>p>W|jv?Kg1'
 
-# SMTP_USERNAME = 'careers@visionastraa.in'
-# SMTP_PASSWORD = '1?Q#v!$adw:M'
+SMTP_USERNAME = 'careers@visionastraa.in'
+SMTP_PASSWORD = '1?Q#v!$adw:M'
 
 CAMPAIGN_ID = "ev_inauguration_campaign_2025"
 
@@ -198,7 +198,7 @@ tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 # tables = ['email_list_4', 'email_list_5', 'email_list_6']
 
 for tbl in tables:
-    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Kerala' AND emailSent=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
+    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Tamil Nadu' AND emailSent=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
     # cursor.execute(f"SELECT email, name FROM {tbl} WHERE emailSent=0")
     for row in cursor.fetchall():
         if send_email(row['email'], row['first_name']):
