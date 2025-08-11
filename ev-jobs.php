@@ -61,6 +61,7 @@ $conn->close();
         <!-- <li><a href="ev-mentors.html">EV Mentors</a></li> -->
         <li><a href="ev-jobs.html">EV Placements</a></li>
         <li><a href="ev-projects.html">EV Internship</a></li>
+        <li><a href="ev-gallery.html">Gallery</a></li>
         <!-- <li><a href="ev-careers.html">EV Careers</a></li> -->
         <li><a href="ev-contact.html">Contact Us</a></li>
         <li><a href="best-ev-training-institute.html">About Us</a></li>
