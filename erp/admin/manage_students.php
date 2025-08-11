@@ -74,6 +74,7 @@ $students = $stmt->fetchAll();
                     <div class="logo-icon"><span>VA</span></div>
                     <span class="logo-text">EV Academy ERP</span>
                 </a>
+                <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
                     <a href="manage_students.php" class="nav-link active">Students</a>
@@ -125,9 +126,9 @@ $students = $stmt->fetchAll();
             </section>
 
             <section class="card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <div class="responsive-actions" style="margin-bottom: 1.5rem;">
                     <h2 style="color:#3a4a6b;">Student List</h2>
-                    <form method="get" style="display:flex; gap:0.5rem;">
+                    <form method="get">
                         <input type="text" name="search" placeholder="Search students..." value="<?php echo htmlspecialchars($search); ?>" class="form-input" style="width:250px;">
                         <button type="submit" class="btn btn-primary"><i class="fa-solid fa-search"></i> Search</button>
                     </form>

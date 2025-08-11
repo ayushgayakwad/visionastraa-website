@@ -45,6 +45,7 @@ if ($class_id) {
                     <div class="logo-icon"><span>VA</span></div>
                     <span class="logo-text">EV Academy ERP</span>
                 </a>
+                <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
                     <a href="manage_students.php" class="nav-link">Students</a>
@@ -73,6 +74,7 @@ if ($class_id) {
                     <button type="submit" class="btn btn-primary"><i class="fa-solid fa-eye"></i> View</button>
                 </form>
                 <?php if ($class_id): ?>
+                <div style="overflow-x:auto;">
                 <table class="table">
                     <tr>
                         <th>Student</th>
@@ -102,6 +104,7 @@ if ($class_id) {
                     </tr>
                     <?php endforeach; ?>
                 </table>
+                </div>
                 <?php endif; ?>
             </section>
         </div>

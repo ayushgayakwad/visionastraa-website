@@ -20,6 +20,7 @@ include '../auth.php';
                     <div class="logo-icon"><span>VA</span></div>
                     <span class="logo-text">EV Academy ERP</span>
                 </a>
+                <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link active">Dashboard</a>
                     <a href="add_working_hours.php" class="nav-link">Add Working Hours</a>
