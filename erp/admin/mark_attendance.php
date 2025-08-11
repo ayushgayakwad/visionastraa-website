@@ -3,15 +3,12 @@ $required_role = 'admin';
 include '../auth.php';
 require_once '../db.php';
 $message = '';
-// Fetch all classes
 $stmt = $pdo->prepare('SELECT id, name FROM erp_classes ORDER BY name ASC');
 $stmt->execute();
 $classes = $stmt->fetchAll();
-// Fetch all students
 $stmt = $pdo->prepare('SELECT id, name FROM erp_users WHERE role = "student" ORDER BY name ASC');
 $stmt->execute();
 $students = $stmt->fetchAll();
-// Handle attendance submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['class_id'], $_POST['date'])) {
     $class_id = $_POST['class_id'];
     $date = $_POST['date'];
@@ -54,45 +51,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['class_id'], $_POST['d
     <main>
         <div class="container">
             <section class="form-section card">
-                <h2 style="color:#3a4a6b;">Mark Attendance</h2>
+                <h2 style="color:#3a4a6b; margin-bottom: 1.5rem;">Mark Attendance</h2>
                 <?php if ($message): ?>
-                    <div class="alert alert-success" style="color: #1b5e20; text-align:center; margin-bottom: 1rem;">
-                        <?php echo htmlspecialchars($message); ?>
-                    </div>
+                    <div class="alert"><?php echo htmlspecialchars($message); ?></div>
                 <?php endif; ?>
-                <form method="post">
-                    <label>Class:
-                        <select name="class_id" required class="form-input">
-                            <option value="">Select Class</option>
-                            <?php foreach ($classes as $class): ?>
-                                <option value="<?php echo $class['id']; ?>"><?php echo htmlspecialchars($class['name']); ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </label>
-                    <label>Date:
-                        <input type="date" name="date" required class="form-input">
-                    </label>
-                    <table class="table">
-                        <tr>
-                            <th>Student</th>
-                            <th>Present</th>
-                            <th>Absent</th>
-                        </tr>
-                        <?php foreach ($students as $student): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($student['name']); ?></td>
-                            <td><input type="radio" name="attendance[<?php echo $student['id']; ?>]" value="present" checked></td>
-                            <td><input type="radio" name="attendance[<?php echo $student['id']; ?>]" value="absent"></td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                    <button type="submit" class="btn btn-primary">Mark Attendance</button>
+                <form method="post" style="display: grid; gap: 1rem;">
+                    <div style="display:grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                        <div>
+                            <label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Class</label>
+                            <select name="class_id" required class="form-input">
+                                <option value="">Select Class</option>
+                                <?php foreach ($classes as $class): ?>
+                                    <option value="<?php echo $class['id']; ?>"><?php echo htmlspecialchars($class['name']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Date</label>
+                            <input type="date" name="date" required class="form-input">
+                        </div>
+                    </div>
+                    <div style="overflow-x:auto;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Present</th>
+                                    <th>Absent</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($students as $student): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($student['name']); ?></td>
+                                    <td style="text-align:center"><input type="radio" name="attendance[<?php echo $student['id']; ?>]" value="present" checked></td>
+                                    <td style="text-align:center"><input type="radio" name="attendance[<?php echo $student['id']; ?>]" value="absent"></td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Mark Attendance</button>
+                    </div>
                 </form>
-            </section>
-            <section class="card">
-                <h2 style="color:#3a4a6b;">Attendance List</h2>
-                <!-- Table styled with .table -->
-                <!-- ... existing table code ... -->
             </section>
         </div>
     </main>

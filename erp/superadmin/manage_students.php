@@ -4,7 +4,6 @@ include '../auth.php';
 require_once '../db.php';
 $message = '';
 
-// Handle Add Student
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_student'])) {
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
@@ -32,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_student'])) {
     }
 }
 
-// Handle Edit Student
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_student_id'])) {
     $edit_id = (int)$_POST['edit_student_id'];
     $name = $_POST['edit_name'] ?? '';
@@ -46,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_student_id'])) {
     $message = 'Student details updated!';
 }
 
-// List Students
 $search = $_GET['search'] ?? '';
 $where = ['role = "student"'];
 $params = [];

@@ -4,7 +4,6 @@ include '../auth.php';
 require_once '../db.php';
 $message = '';
 
-// Handle Add Admin
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_admin'])) {
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
@@ -32,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_admin'])) {
     }
 }
 
-// Handle Edit Admin
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_admin_id'])) {
     $edit_id = (int)$_POST['edit_admin_id'];
     $name = $_POST['edit_name'] ?? '';
@@ -46,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_admin_id'])) {
     $message = 'Admin details updated!';
 }
 
-// List Admins
 $search = $_GET['search'] ?? '';
 $where = ['role = "admin"'];
 $params = [];
@@ -217,7 +214,6 @@ $admins = $stmt->fetchAll();
 
     <script>
         function editAdmin(id) {
-            // Fetch admin data and populate modal
             fetch(`get_admin.php?id=${id}`)
                 .then(response => response.json())
                 .then(data => {

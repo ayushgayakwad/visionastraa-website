@@ -4,12 +4,10 @@ include '../auth.php';
 require_once '../db.php';
 $message = '';
 
-// Fetch all classes for assignment
 $stmt = $pdo->prepare('SELECT id, name FROM erp_classes ORDER BY name ASC');
 $stmt->execute();
 $class_list = $stmt->fetchAll();
 
-// Handle Add Faculty
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_faculty'])) {
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
@@ -37,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_faculty'])) {
     }
 }
 
-// Handle Edit Faculty
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_faculty_id'])) {
     $edit_id = (int)$_POST['edit_faculty_id'];
     $name = $_POST['edit_name'] ?? '';
@@ -51,7 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_faculty_id'])) {
     $message = 'Faculty details updated!';
 }
 
-// List Faculty
 $search = $_GET['search'] ?? '';
 $where = ['role = "faculty"'];
 $params = [];

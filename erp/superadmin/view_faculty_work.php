@@ -3,14 +3,12 @@ $required_role = 'super_admin';
 include '../auth.php';
 require_once '../db.php';
 
-// Fetch all faculty
 $stmt = $pdo->prepare('SELECT id, name FROM erp_users WHERE role = "faculty" ORDER BY name ASC');
 $stmt->execute();
 $faculty_list = $stmt->fetchAll();
 
 $faculty_id = $_GET['faculty_id'] ?? ($faculty_list[0]['id'] ?? null);
 
-// Fetch all classes
 $stmt = $pdo->prepare('SELECT id, name FROM erp_classes ORDER BY name ASC');
 $stmt->execute();
 $classes = $stmt->fetchAll();

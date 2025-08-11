@@ -2,7 +2,6 @@
 $required_role = 'admin';
 include '../auth.php';
 require_once '../db.php';
-// Fetch all classes
 $stmt = $pdo->prepare('SELECT id, name FROM erp_classes ORDER BY name ASC');
 $stmt->execute();
 $classes = $stmt->fetchAll();
@@ -33,17 +32,9 @@ if ($class_id) {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        body { background: #e6f4ea; }
-        .header { background: #1b5e20; }
-        .btn-primary { background: #43a047; color: #fff; }
-        .btn-primary:hover { background: #388e3c; }
-        .form-section { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); padding: 2rem; margin-bottom: 2rem; }
-        .table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
-        .table th, .table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid #e0e0e0; text-align: center; }
-        .table th { background: #43a047; color: #fff; }
-        .table tr:nth-child(even) { background: #f1f8e9; }
-        .present { color: #388e3c; font-weight: bold; }
-        .absent { color: #c62828; font-weight: bold; }
+        .present { color: #2e7d32; font-weight: 600; }
+        .absent { color: #c62828; font-weight: 600; }
+        .table th, .table td { text-align: center; }
     </style>
 </head>
 <body>
@@ -68,7 +59,7 @@ if ($class_id) {
         <div class="container">
             <section class="card">
                 <h2 style="color:#3a4a6b;">Attendance Calendar</h2>
-                <form method="get" style="display:flex; gap:1rem; align-items:center;">
+                <form method="get" style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
                     <label>Class:
                         <select name="class_id" class="form-input">
                             <?php foreach ($classes as $class): ?>
@@ -79,7 +70,7 @@ if ($class_id) {
                     <label>Month:
                         <input type="month" name="month" value="<?php echo htmlspecialchars($month); ?>" class="form-input">
                     </label>
-                    <button type="submit" class="btn btn-primary">View</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-eye"></i> View</button>
                 </form>
                 <?php if ($class_id): ?>
                 <table class="table">

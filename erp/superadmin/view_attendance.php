@@ -3,7 +3,6 @@ $required_role = 'super_admin';
 include '../auth.php';
 require_once '../db.php';
 
-// Fetch all classes
 $stmt = $pdo->prepare('SELECT id, name FROM erp_classes ORDER BY name ASC');
 $stmt->execute();
 $classes = $stmt->fetchAll();

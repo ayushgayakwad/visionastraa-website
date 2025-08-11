@@ -3,8 +3,6 @@ $required_role = 'admin';
 include '../auth.php';
 require_once '../db.php';
 $message = '';
-
-// Handle Add Student
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_student'])) {
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
@@ -31,7 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_student'])) {
         }
     }
 }
-// Handle Edit Student
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_student_id'])) {
     $edit_id = (int)$_POST['edit_student_id'];
     $name = $_POST['edit_name'] ?? '';
@@ -44,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_student_id'])) {
     $stmt->execute([$name, $email, $dob, $phone, $college_name, $edit_id]);
     $message = 'Student details updated!';
 }
-// List Students
 $search = $_GET['search'] ?? '';
 $where = ['role = "student"'];
 $params = [];
@@ -90,62 +86,144 @@ $students = $stmt->fetchAll();
     </header>
     <main>
         <div class="container">
-            <h1 style="text-align:center; color:#1b5e20; margin:2rem 0;">Manage Students</h1>
+            <h1 class="hero-title" style="text-align:center; color:#3a4a6b; margin:2rem 0;">Manage Students</h1>
             <?php if ($message): ?>
-                <div class="alert alert-success" style="color: #1b5e20; text-align:center; margin-bottom: 1rem;">
-                    <?php echo htmlspecialchars($message); ?>
-                </div>
+                <div class="alert"><?php echo htmlspecialchars($message); ?></div>
             <?php endif; ?>
+
             <section class="form-section card">
-                <h2 style="color:#3a4a6b;">Add Student</h2>
-                <form method="post" style="display: flex; flex-wrap: wrap; gap: 1rem;">
-                    <input type="text" name="name" placeholder="Name" required class="form-input" style="flex:1;">
-                    <input type="email" name="email" placeholder="Email" required class="form-input" style="flex:1;">
-                    <input type="password" name="password" placeholder="Password" required class="form-input" style="flex:1;">
-                    <input type="date" name="dob" placeholder="Date of Birth" class="form-input" style="flex:1;">
-                    <input type="text" name="phone" placeholder="Phone" required class="form-input" style="flex:1;">
-                    <input type="text" name="college_name" placeholder="College Name" class="form-input" style="flex:1;">
-                    <button type="submit" name="create_student" class="btn btn-primary" style="flex:1;">Add Student</button>
+                <h2 style="color:#3a4a6b; margin-bottom: 1.5rem;">Add New Student</h2>
+                <form method="post" style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                    <div>
+                        <label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Name *</label>
+                        <input type="text" name="name" required class="form-input">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Email *</label>
+                        <input type="email" name="email" required class="form-input">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Password *</label>
+                        <input type="password" name="password" required class="form-input">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Date of Birth</label>
+                        <input type="date" name="dob" class="form-input">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Phone *</label>
+                        <input type="text" name="phone" required class="form-input">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">College Name</label>
+                        <input type="text" name="college_name" class="form-input">
+                    </div>
+                    <div style="grid-column: 1 / -1;">
+                        <button type="submit" name="create_student" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Student</button>
+                    </div>
                 </form>
             </section>
+
             <section class="card">
-                <h2 style="color:#3a4a6b;">Student List</h2>
-                <form method="get" style="margin-bottom:1rem;">
-                    <input type="text" name="search" placeholder="Search by name, email, phone, college" value="<?php echo htmlspecialchars($search); ?>" class="form-input" style="width:300px;">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </form>
-                <table class="table">
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>DOB</th>
-                        <th>Phone</th>
-                        <th>College</th>
-                        <th>Actions</th>
-                    </tr>
-                    <?php foreach ($students as $student): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($student['name']); ?></td>
-                            <td><?php echo htmlspecialchars($student['email']); ?></td>
-                            <td><?php echo htmlspecialchars($student['dob']); ?></td>
-                            <td><?php echo htmlspecialchars($student['phone']); ?></td>
-                            <td><?php echo htmlspecialchars($student['college_name']); ?></td>
-                            <td>
-                                <form method="post" style="display:inline;">
-                                    <input type="hidden" name="edit_student_id" value="<?php echo $student['id']; ?>">
-                                    <input type="text" name="edit_name" value="<?php echo htmlspecialchars($student['name']); ?>" required style="width:100px;">
-                                    <input type="email" name="edit_email" value="<?php echo htmlspecialchars($student['email']); ?>" required style="width:150px;">
-                                    <input type="date" name="edit_dob" value="<?php echo htmlspecialchars($student['dob']); ?>" style="width:120px;">
-                                    <input type="text" name="edit_phone" value="<?php echo htmlspecialchars($student['phone']); ?>" required style="width:100px;">
-                                    <input type="text" name="edit_college_name" value="<?php echo htmlspecialchars($student['college_name']); ?>" style="width:120px;">
-                                    <button type="submit" class="edit-btn">Save</button>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </table>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h2 style="color:#3a4a6b;">Student List</h2>
+                    <form method="get" style="display:flex; gap:0.5rem;">
+                        <input type="text" name="search" placeholder="Search students..." value="<?php echo htmlspecialchars($search); ?>" class="form-input" style="width:250px;">
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-search"></i> Search</button>
+                    </form>
+                </div>
+                <div style="overflow-x:auto;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>College</th>
+                                <th>Date of Birth</th>
+                                <th>Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($students as $student): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($student['name']); ?></td>
+                                <td><?php echo htmlspecialchars($student['email']); ?></td>
+                                <td><?php echo htmlspecialchars($student['phone']); ?></td>
+                                <td><?php echo htmlspecialchars($student['college_name']); ?></td>
+                                <td><?php echo $student['dob'] ? date('M d, Y', strtotime($student['dob'])) : '-'; ?></td>
+                                <td><?php echo date('M d, Y', strtotime($student['created_at'])); ?></td>
+                                <td>
+                                    <button class="btn" style="background:#e3eafc; color:#3a4a6b; padding:0.3rem 0.6rem; font-size:0.9rem;"
+                                        onclick="editStudent(
+                                            <?php echo (int)$student['id']; ?>,
+                                            '<?php echo htmlspecialchars($student['name'], ENT_QUOTES); ?>',
+                                            '<?php echo htmlspecialchars($student['email'], ENT_QUOTES); ?>',
+                                            '<?php echo htmlspecialchars($student['phone'], ENT_QUOTES); ?>',
+                                            '<?php echo htmlspecialchars($student['college_name'], ENT_QUOTES); ?>',
+                                            '<?php echo htmlspecialchars($student['dob'], ENT_QUOTES); ?>'
+                                        )">
+                                        <i class="fa-solid fa-edit"></i> Edit
+                                    </button>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </section>
         </div>
     </main>
+    <!-- Edit Student Modal -->
+    <div id="editModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000;">
+        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:white; padding:2rem; border-radius:14px; width:90%; max-width:500px;">
+            <h3 style="color:#3a4a6b; margin-bottom:1.5rem;">Edit Student</h3>
+            <form method="POST" id="editForm" style="display:grid; gap:1rem;">
+                <input type="hidden" name="edit_student_id" id="edit_student_id">
+                <div>
+                    <label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Name</label>
+                    <input type="text" name="edit_name" id="edit_name" class="form-input" required>
+                </div>
+                <div>
+                    <label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Email</label>
+                    <input type="email" name="edit_email" id="edit_email" class="form-input" required>
+                </div>
+                <div>
+                    <label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Phone</label>
+                    <input type="text" name="edit_phone" id="edit_phone" class="form-input" required>
+                </div>
+                <div>
+                    <label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">College Name</label>
+                    <input type="text" name="edit_college_name" id="edit_college_name" class="form-input">
+                </div>
+                <div>
+                    <label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Date of Birth</label>
+                    <input type="date" name="edit_dob" id="edit_dob" class="form-input">
+                </div>
+                <div style="display:flex; gap:1rem; justify-content:flex-end;">
+                    <button type="button" class="btn" style="background:#f6f8fb; color:#3a4a6b;" onclick="closeEditModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Update Student</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        function editStudent(id, name, email, phone, college, dob) {
+            document.getElementById('edit_student_id').value = id;
+            document.getElementById('edit_name').value = name || '';
+            document.getElementById('edit_email').value = email || '';
+            document.getElementById('edit_phone').value = phone || '';
+            document.getElementById('edit_college_name').value = college || '';
+            document.getElementById('edit_dob').value = dob || '';
+            document.getElementById('editModal').style.display = 'block';
+        }
+        function closeEditModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+        document.getElementById('editModal').addEventListener('click', function(e){
+            if (e.target === this) closeEditModal();
+        });
+    </script>
 </body>
 </html>

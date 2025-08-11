@@ -4,7 +4,6 @@ include '../auth.php';
 require_once '../db.php';
 $message = '';
 
-// Handle Add Faculty (from modal/inline form)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['quick_add_faculty'])) {
     $name = $_POST['faculty_name'] ?? '';
     $email = $_POST['faculty_email'] ?? '';
@@ -32,12 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['quick_add_faculty']))
     }
 }
 
-// Fetch all faculty for assignment
 $stmt = $pdo->prepare('SELECT id, name FROM erp_users WHERE role = "faculty" ORDER BY name ASC');
 $stmt->execute();
 $faculty_list = $stmt->fetchAll();
 
-// Handle Add Class
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_class'])) {
     $name = $_POST['name'] ?? '';
     $faculty_id = $_POST['faculty_id'] !== '' ? $_POST['faculty_id'] : null;
@@ -50,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_class'])) {
     }
 }
 
-// Handle Edit Class
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_class_id'])) {
     $edit_id = (int)$_POST['edit_class_id'];
     $name = $_POST['edit_name'] ?? '';
@@ -61,7 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_class_id'])) {
     $message = 'Class details updated!';
 }
 
-// List Classes
 $stmt = $pdo->prepare('SELECT c.*, f.name AS faculty_name FROM erp_classes c LEFT JOIN erp_users f ON c.faculty_id = f.id ORDER BY c.created_at DESC');
 $stmt->execute();
 $classes = $stmt->fetchAll();
