@@ -201,8 +201,7 @@ $admins = $stmt->fetchAll();
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>College</th>
-                                <th>Date of Birth</th>
+                                <th>Documents</th>
                                 <th>Created</th>
                                 <th>Actions</th>
                             </tr>
@@ -213,8 +212,20 @@ $admins = $stmt->fetchAll();
                                 <td><?php echo htmlspecialchars($admin['name']); ?></td>
                                 <td><?php echo htmlspecialchars($admin['email']); ?></td>
                                 <td><?php echo htmlspecialchars($admin['phone']); ?></td>
-                                <td><?php echo htmlspecialchars($admin['college_name']); ?></td>
-                                <td><?php echo $admin['dob'] ? date('M d, Y', strtotime($admin['dob'])) : '-'; ?></td>
+                                <td>
+                                    <?php if ($admin['acknowledgement_form']): ?>
+                                        <a href="../uploads/documents/<?php echo htmlspecialchars($admin['acknowledgement_form']); ?>" target="_blank">Ack Form</a><br>
+                                    <?php endif; ?>
+                                    <?php if ($admin['application_form']): ?>
+                                        <a href="../uploads/documents/<?php echo htmlspecialchars($admin['application_form']); ?>" target="_blank">App Form</a><br>
+                                    <?php endif; ?>
+                                    <?php if ($admin['resume']): ?>
+                                        <a href="../uploads/documents/<?php echo htmlspecialchars($admin['resume']); ?>" target="_blank">Resume</a><br>
+                                    <?php endif; ?>
+                                    <?php if ($admin['certificates']): ?>
+                                        <a href="../uploads/documents/<?php echo htmlspecialchars($admin['certificates']); ?>" target="_blank">Certificates</a>
+                                    <?php endif; ?>
+                                </td>
                                 <td><?php echo date('M d, Y', strtotime($admin['created_at'])); ?></td>
                                 <td>
                                     <?php if ($tab === 'approve'): ?>

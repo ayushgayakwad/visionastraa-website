@@ -218,6 +218,7 @@ $users = $stmt->fetchAll();
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Role</th>
+                                <th>Documents</th>
                                 <th>Created</th>
                                 <th>Actions</th>
                             </tr>
@@ -229,6 +230,20 @@ $users = $stmt->fetchAll();
                                 <td><?php echo htmlspecialchars($user['email']); ?></td>
                                 <td><?php echo htmlspecialchars($user['phone']); ?></td>
                                 <td><?php echo ucfirst(htmlspecialchars($user['role'])); ?></td>
+                                <td>
+                                    <?php if ($user['acknowledgement_form']): ?>
+                                        <a href="../uploads/documents/<?php echo htmlspecialchars($user['acknowledgement_form']); ?>" target="_blank">Ack Form</a><br>
+                                    <?php endif; ?>
+                                    <?php if ($user['application_form']): ?>
+                                        <a href="../uploads/documents/<?php echo htmlspecialchars($user['application_form']); ?>" target="_blank">App Form</a><br>
+                                    <?php endif; ?>
+                                    <?php if ($user['resume']): ?>
+                                        <a href="../uploads/documents/<?php echo htmlspecialchars($user['resume']); ?>" target="_blank">Resume</a><br>
+                                    <?php endif; ?>
+                                    <?php if ($user['certificates']): ?>
+                                        <a href="../uploads/documents/<?php echo htmlspecialchars($user['certificates']); ?>" target="_blank">Certificates</a>
+                                    <?php endif; ?>
+                                </td>
                                 <td><?php echo date('M d, Y', strtotime($user['created_at'])); ?></td>
                                 <td>
                                     <?php if ($tab === 'approve'): ?>

@@ -30,6 +30,7 @@ $student_id = $_SESSION['user_id'];
                     <a href="dashboard.php" class="nav-link active">Dashboard</a>
                     <a href="view_attendance.php" class="nav-link">View Attendance</a>
                     <a href="fee_payment.php" class="nav-link">Fee Payment</a>
+                    <a href="upload_documents.php" class="nav-link">Upload Documents</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>
@@ -47,6 +48,10 @@ $student_id = $_SESSION['user_id'];
                         <a href="fee_payment.php" class="dashboard-action-btn" style="margin-top:1em;background:#e3eafc;color:#3a4a6b;">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-indian-rupee-sign"></i></span>
                             Fee Payment
+                        </a>
+                        <a href="upload_documents.php" class="dashboard-action-btn" style="margin-top:1em;">
+                            <span class="dashboard-action-icon"><i class="fa-solid fa-file-arrow-up"></i></span>
+                            Upload Documents
                         </a>
                     </div>
                 </div>
