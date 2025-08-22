@@ -177,49 +177,6 @@ $students = $stmt->fetchAll();
                     </table>
                 </div>
             </section>
-    <hr>
-    <h2>Student Fee Approvals</h2>
-    <?php
-    require_once '../db.php';
-    $stmt = $pdo->query("SELECT sf.*, s.name FROM student_fees sf JOIN students s ON sf.student_id = s.id WHERE sf.status = 'pending' ORDER BY sf.created_at DESC");
-    $fees = $stmt->fetchAll();
-    if ($fees):
-    ?>
-    <table border="1" cellpadding="8">
-        <tr>
-            <th>Student Name</th>
-            <th>Paid Amount</th>
-            <th>Screenshot</th>
-            <th>Submitted At</th>
-            <th>Action</th>
-        </tr>
-        <?php foreach ($fees as $fee): ?>
-        <tr>
-            <td><?php echo htmlspecialchars($fee['name']); ?></td>
-            <td>₹<?php echo number_format($fee['paid_amount']); ?></td>
-            <td><a href="../uploads/<?php echo htmlspecialchars($fee['screenshot']); ?>" target="_blank">View</a></td>
-            <td><?php echo $fee['created_at']; ?></td>
-            <td>
-                <form method="post" style="display:inline">
-                    <input type="hidden" name="fee_id" value="<?php echo $fee['id']; ?>">
-                    <button type="submit" name="approve_fee">Approve</button>
-                </form>
-            </td>
-        </tr>
-        <?php endforeach; ?>
-    </table>
-    <?php else: ?>
-    <p>No pending fee approvals.</p>
-    <?php endif; ?>
-
-    <?php
-    if (isset($_POST['approve_fee'])) {
-        $fee_id = intval($_POST['fee_id']);
-        $stmt = $pdo->prepare("UPDATE student_fees SET status = 'approved' WHERE id = ?");
-        $stmt->execute([$fee_id]);
-        echo "<script>location.reload();</script>";
-    }
-    ?>
         </div>
     </main>
 
