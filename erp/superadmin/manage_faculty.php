@@ -5,6 +5,18 @@ require_once '../db.php';
 $message = '';
 $tab = $_GET['tab'] ?? 'all';
 
+// Handle role change between faculty and faculty_admin
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_role'])) {
+    $user_id = (int)$_POST['user_id'];
+    $current_role = $_POST['current_role'];
+    $new_role = ($current_role === 'faculty') ? 'faculty_admin' : 'faculty';
+
+    $stmt = $pdo->prepare('UPDATE erp_users SET role = ? WHERE id = ?');
+    $stmt->execute([$new_role, $user_id]);
+    $message = 'Faculty role updated successfully!';
+}
+
+
 $stmt = $pdo->prepare('SELECT id, name FROM erp_classes ORDER BY name ASC');
 $stmt->execute();
 $class_list = $stmt->fetchAll();
@@ -15,8 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_faculty'])) {
     $password = $_POST['password'] ?? '';
     $dob = $_POST['dob'] ?? null;
     $phone = $_POST['phone'] ?? '';
-    $assigned_class = $_POST['assigned_class'] ?? '';
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $role = $_POST['role'] ?? 'faculty';
+    
+    if (!in_array($role, ['faculty', 'faculty_admin'])) {
+        $message = 'Invalid role selected.';
+    }
+    else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message = 'Invalid email address.';
     } elseif (strlen($password) < 6) {
         $message = 'Password must be at least 6 characters.';
@@ -29,9 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_faculty'])) {
             $message = 'Email already exists.';
         } else {
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $pdo->prepare('INSERT INTO erp_users (name, email, password, dob, phone, assigned_class, role, approved) VALUES (?, ?, ?, ?, ?, ?, "faculty", 1)');
-            $stmt->execute([$name, $email, $hash, $dob, $phone, $assigned_class]);
-            $message = 'Faculty created successfully!';
+            $stmt = $pdo->prepare('INSERT INTO erp_users (name, email, password, dob, phone, role, approved) VALUES (?, ?, ?, ?, ?, ?, 1)');
+            $stmt->execute([$name, $email, $hash, $dob, $phone, $role]);
+            $message = 'Faculty user created successfully!';
         }
     }
 }
@@ -42,10 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_faculty_id'])) {
     $email = $_POST['edit_email'] ?? '';
     $dob = $_POST['edit_dob'] ?? null;
     $phone = $_POST['edit_phone'] ?? '';
-    $assigned_class = $_POST['edit_assigned_class'] ?? '';
-    $update_sql = 'UPDATE erp_users SET name=?, email=?, dob=?, phone=?, assigned_class=? WHERE id=? AND role="faculty"';
+    $update_sql = 'UPDATE erp_users SET name=?, email=?, dob=?, phone=? WHERE id=? AND role IN ("faculty", "faculty_admin")';
     $stmt = $pdo->prepare($update_sql);
-    $stmt->execute([$name, $email, $dob, $phone, $assigned_class, $edit_id]);
+    $stmt->execute([$name, $email, $dob, $phone, $edit_id]);
     $message = 'Faculty details updated!';
 }
 
@@ -65,11 +80,10 @@ if (isset($_POST['action']) && isset($_POST['faculty_id'])) {
 
 
 $search = $_GET['search'] ?? '';
-$where = ['role = "faculty"'];
+$where = ['role IN ("faculty", "faculty_admin")'];
 $params = [];
 if ($search) {
-    $where[] = '(name LIKE ? OR email LIKE ? OR phone LIKE ? OR assigned_class LIKE ?)';
-    $params[] = "%$search%";
+    $where[] = '(name LIKE ? OR email LIKE ? OR phone LIKE ?)';
     $params[] = "%$search%";
     $params[] = "%$search%";
     $params[] = "%$search%";
@@ -131,42 +145,38 @@ $faculty = $stmt->fetchAll();
             <?php endif; ?>
             
             <section class="form-section card">
-                <h2 style="color:#3a4a6b; margin-bottom: 1.5rem;">Add New Faculty</h2>
+                <h2 style="color:#3a4a6b; margin-bottom: 1.5rem;">Add New Faculty User</h2>
                 <form method="POST" style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
                     <div>
-                        <label for="name" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Name *</label>
-                        <input type="text" id="name" name="name" class="form-input" required>
+                        <label style="display: block; margin-bottom: 0.5rem;">Name *</label>
+                        <input type="text" name="name" class="form-input" required>
                     </div>
                     <div>
-                        <label for="email" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Email *</label>
-                        <input type="email" id="email" name="email" class="form-input" required>
+                        <label style="display: block; margin-bottom: 0.5rem;">Email *</label>
+                        <input type="email" name="email" class="form-input" required>
                     </div>
                     <div>
-                        <label for="password" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Password *</label>
-                        <input type="password" id="password" name="password" class="form-input" required>
+                        <label style="display: block; margin-bottom: 0.5rem;">Password *</label>
+                        <input type="password" name="password" class="form-input" required>
                     </div>
                     <div>
-                        <label for="dob" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Date of Birth</label>
-                        <input type="date" id="dob" name="dob" class="form-input">
+                        <label style="display: block; margin-bottom: 0.5rem;">Date of Birth</label>
+                        <input type="date" name="dob" class="form-input">
                     </div>
                     <div>
-                        <label for="phone" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Phone *</label>
-                        <input type="tel" id="phone" name="phone" class="form-input" required>
+                        <label style="display: block; margin-bottom: 0.5rem;">Phone *</label>
+                        <input type="tel" name="phone" class="form-input" required>
                     </div>
                     <div>
-                        <label for="assigned_class" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Assigned Class</label>
-                        <select id="assigned_class" name="assigned_class" class="form-input">
-                            <option value="">Select a class (optional)</option>
-                            <?php foreach ($class_list as $class): ?>
-                                <option value="<?php echo htmlspecialchars($class['name']); ?>">
-                                    <?php echo htmlspecialchars($class['name']); ?>
-                                </option>
-                            <?php endforeach; ?>
+                        <label style="display: block; margin-bottom: 0.5rem;">Role</label>
+                        <select name="role" class="form-input">
+                            <option value="faculty">Faculty</option>
+                            <option value="faculty_admin">Faculty Admin</option>
                         </select>
                     </div>
                     <div style="grid-column: 1 / -1;">
                         <button type="submit" name="create_faculty" class="btn btn-primary">
-                            <i class="fa-solid fa-plus"></i> Add Faculty
+                            <i class="fa-solid fa-plus"></i> Add Faculty User
                         </button>
                     </div>
                 </form>
@@ -174,14 +184,14 @@ $faculty = $stmt->fetchAll();
 
             <section class="card">
                 <div class="tab-btns">
-                    <a href="?tab=all" class="tab-btn <?php echo ($tab === 'all' ? 'active' : ''); ?>">All Faculty</a>
-                    <a href="?tab=approve" class="tab-btn <?php echo ($tab === 'approve' ? 'active' : ''); ?>">Approve Faculty</a>
+                    <a href="?tab=all" class="tab-btn <?php echo ($tab === 'all' ? 'active' : ''); ?>">All Faculty Users</a>
+                    <a href="?tab=approve" class="tab-btn <?php echo ($tab === 'approve' ? 'active' : ''); ?>">Approve Faculty Users</a>
                 </div>
                 <div class="responsive-actions" style="margin-bottom: 1.5rem;">
                     <h2 style="color:#3a4a6b;"><?php echo ($tab === 'approve' ? 'Pending Approvals' : 'Faculty List'); ?></h2>
                     <form method="GET">
                         <input type="hidden" name="tab" value="<?php echo htmlspecialchars($tab); ?>">
-                        <input type="text" name="search" placeholder="Search faculty..." class="form-input" style="width: 250px;" value="<?php echo htmlspecialchars($search); ?>">
+                        <input type="text" name="search" placeholder="Search..." class="form-input" style="width: 250px;" value="<?php echo htmlspecialchars($search); ?>">
                         <button type="submit" class="btn btn-primary">
                             <i class="fa-solid fa-search"></i> Search
                         </button>
@@ -195,8 +205,7 @@ $faculty = $stmt->fetchAll();
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Assigned Class</th>
-                                <th>Date of Birth</th>
+                                <th>Role</th>
                                 <th>Created</th>
                                 <th>Actions</th>
                             </tr>
@@ -207,8 +216,7 @@ $faculty = $stmt->fetchAll();
                                 <td><?php echo htmlspecialchars($faculty_member['name']); ?></td>
                                 <td><?php echo htmlspecialchars($faculty_member['email']); ?></td>
                                 <td><?php echo htmlspecialchars($faculty_member['phone']); ?></td>
-                                <td><?php echo htmlspecialchars($faculty_member['assigned_class']); ?></td>
-                                <td><?php echo $faculty_member['dob'] ? date('M d, Y', strtotime($faculty_member['dob'])) : '-'; ?></td>
+                                <td><?php echo ($faculty_member['role'] === 'faculty_admin' ? 'Faculty Admin' : 'Faculty'); ?></td>
                                 <td><?php echo date('M d, Y', strtotime($faculty_member['created_at'])); ?></td>
                                 <td>
                                     <?php if ($tab === 'approve'): ?>
@@ -221,6 +229,13 @@ $faculty = $stmt->fetchAll();
                                         <button onclick="editFaculty(<?php echo $faculty_member['id']; ?>)" class="btn" style="background: #e3eafc; color: #3a4a6b; padding: 0.3rem 0.6rem; font-size: 0.9rem;">
                                             <i class="fa-solid fa-edit"></i> Edit
                                         </button>
+                                        <form method="POST" style="display:inline-block; margin-left: 5px;">
+                                            <input type="hidden" name="user_id" value="<?php echo $faculty_member['id']; ?>">
+                                            <input type="hidden" name="current_role" value="<?php echo $faculty_member['role']; ?>">
+                                            <button type="submit" name="change_role" class="btn" style="background: #5bc0de; color: #fff;">
+                                                Make <?php echo ($faculty_member['role'] === 'faculty' ? 'Admin' : 'Faculty'); ?>
+                                            </button>
+                                        </form>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -239,30 +254,19 @@ $faculty = $stmt->fetchAll();
             <form method="POST" id="editForm" style="display: grid; gap: 1rem;">
                 <input type="hidden" name="edit_faculty_id" id="edit_faculty_id">
                 <div>
-                    <label for="edit_name" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Name</label>
+                    <label style="display: block; margin-bottom: 0.5rem;">Name</label>
                     <input type="text" id="edit_name" name="edit_name" class="form-input" required>
                 </div>
                 <div>
-                    <label for="edit_email" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Email</label>
+                    <label style="display: block; margin-bottom: 0.5rem;">Email</label>
                     <input type="email" id="edit_email" name="edit_email" class="form-input" required>
                 </div>
                 <div>
-                    <label for="edit_phone" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Phone</label>
+                    <label style="display: block; margin-bottom: 0.5rem;">Phone</label>
                     <input type="tel" id="edit_phone" name="edit_phone" class="form-input" required>
                 </div>
                 <div>
-                    <label for="edit_assigned_class" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Assigned Class</label>
-                    <select id="edit_assigned_class" name="edit_assigned_class" class="form-input">
-                        <option value="">Select a class (optional)</option>
-                        <?php foreach ($class_list as $class): ?>
-                            <option value="<?php echo htmlspecialchars($class['name']); ?>">
-                                <?php echo htmlspecialchars($class['name']); ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div>
-                    <label for="edit_dob" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Date of Birth</label>
+                    <label style="display: block; margin-bottom: 0.5rem;">Date of Birth</label>
                     <input type="date" id="edit_dob" name="edit_dob" class="form-input">
                 </div>
                 <div style="display: flex; gap: 1rem; justify-content: flex-end;">
@@ -275,7 +279,6 @@ $faculty = $stmt->fetchAll();
 
     <script>
         function editFaculty(id) {
-            // Fetch faculty data and populate modal
             fetch(`get_faculty.php?id=${id}`)
                 .then(response => response.json())
                 .then(data => {
@@ -283,7 +286,6 @@ $faculty = $stmt->fetchAll();
                     document.getElementById('edit_name').value = data.name;
                     document.getElementById('edit_email').value = data.email;
                     document.getElementById('edit_phone').value = data.phone;
-                    document.getElementById('edit_assigned_class').value = data.assigned_class;
                     document.getElementById('edit_dob').value = data.dob;
                     document.getElementById('editModal').style.display = 'block';
                 });
@@ -292,8 +294,7 @@ $faculty = $stmt->fetchAll();
         function closeEditModal() {
             document.getElementById('editModal').style.display = 'none';
         }
-
-        // Close modal when clicking outside
+        
         document.getElementById('editModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeEditModal();

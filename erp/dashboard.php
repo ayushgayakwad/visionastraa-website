@@ -12,6 +12,9 @@ switch ($role) {
     case 'admin':
         header('Location: admin/dashboard.php');
         break;
+    case 'faculty_admin':
+        header('Location: faculty_admin/dashboard.php');
+        break;
     case 'faculty':
         header('Location: faculty/dashboard.php');
         break;
