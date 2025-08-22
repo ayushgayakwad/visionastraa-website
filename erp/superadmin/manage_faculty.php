@@ -3,6 +3,7 @@ $required_role = 'super_admin';
 include '../auth.php';
 require_once '../db.php';
 $message = '';
+$tab = $_GET['tab'] ?? 'all';
 
 $stmt = $pdo->prepare('SELECT id, name FROM erp_classes ORDER BY name ASC');
 $stmt->execute();
@@ -48,6 +49,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_faculty_id'])) {
     $message = 'Faculty details updated!';
 }
 
+if (isset($_POST['action']) && isset($_POST['faculty_id'])) {
+    $faculty_id = intval($_POST['faculty_id']);
+    $action = $_POST['action'];
+    if ($action === 'approve') {
+        $stmt = $pdo->prepare("UPDATE erp_users SET approved = 1 WHERE id = ?");
+        $stmt->execute([$faculty_id]);
+        $message = 'Faculty approved successfully!';
+    } elseif ($action === 'reject') {
+        $stmt = $pdo->prepare("DELETE FROM erp_users WHERE id = ?");
+        $stmt->execute([$faculty_id]);
+        $message = 'Faculty rejected successfully!';
+    }
+}
+
+
 $search = $_GET['search'] ?? '';
 $where = ['role = "faculty"'];
 $params = [];
@@ -58,6 +74,13 @@ if ($search) {
     $params[] = "%$search%";
     $params[] = "%$search%";
 }
+
+if ($tab === 'approve') {
+    $where[] = 'approved = 0';
+} else {
+    $where[] = 'approved = 1';
+}
+
 $where_sql = $where ? ('WHERE ' . implode(' AND ', $where)) : '';
 $stmt = $pdo->prepare("SELECT * FROM erp_users $where_sql ORDER BY created_at DESC");
 $stmt->execute($params);
@@ -72,6 +95,11 @@ $faculty = $stmt->fetchAll();
     <link rel="stylesheet" href="../erp-theme.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        .tab-btns { display: flex; gap: 1em; margin-bottom: 2em; flex-wrap: wrap; }
+        .tab-btn { padding: 0.7em 2em; border-radius: 8px; background: #e3eafc; color: #3a4a6b; font-weight: 500; border: none; cursor: pointer; text-align:center; text-decoration: none; }
+        .tab-btn.active { background: #3a4a6b; color: #fff; }
+    </style>
 </head>
 <body>
     <header class="header" id="header">
@@ -145,9 +173,14 @@ $faculty = $stmt->fetchAll();
             </section>
 
             <section class="card">
+                <div class="tab-btns">
+                    <a href="?tab=all" class="tab-btn <?php echo ($tab === 'all' ? 'active' : ''); ?>">All Faculty</a>
+                    <a href="?tab=approve" class="tab-btn <?php echo ($tab === 'approve' ? 'active' : ''); ?>">Approve Faculty</a>
+                </div>
                 <div class="responsive-actions" style="margin-bottom: 1.5rem;">
-                    <h2 style="color:#3a4a6b;">Faculty List</h2>
+                    <h2 style="color:#3a4a6b;"><?php echo ($tab === 'approve' ? 'Pending Approvals' : 'Faculty List'); ?></h2>
                     <form method="GET">
+                        <input type="hidden" name="tab" value="<?php echo htmlspecialchars($tab); ?>">
                         <input type="text" name="search" placeholder="Search faculty..." class="form-input" style="width: 250px;" value="<?php echo htmlspecialchars($search); ?>">
                         <button type="submit" class="btn btn-primary">
                             <i class="fa-solid fa-search"></i> Search
@@ -178,9 +211,17 @@ $faculty = $stmt->fetchAll();
                                 <td><?php echo $faculty_member['dob'] ? date('M d, Y', strtotime($faculty_member['dob'])) : '-'; ?></td>
                                 <td><?php echo date('M d, Y', strtotime($faculty_member['created_at'])); ?></td>
                                 <td>
-                                    <button onclick="editFaculty(<?php echo $faculty_member['id']; ?>)" class="btn" style="background: #e3eafc; color: #3a4a6b; padding: 0.3rem 0.6rem; font-size: 0.9rem;">
-                                        <i class="fa-solid fa-edit"></i> Edit
-                                    </button>
+                                    <?php if ($tab === 'approve'): ?>
+                                        <form method="POST" style="display:inline;">
+                                            <input type="hidden" name="faculty_id" value="<?php echo $faculty_member['id']; ?>">
+                                            <button type="submit" name="action" value="approve" class="btn btn-primary">Approve</button>
+                                            <button type="submit" name="action" value="reject" class="btn">Reject</button>
+                                        </form>
+                                    <?php else: ?>
+                                        <button onclick="editFaculty(<?php echo $faculty_member['id']; ?>)" class="btn" style="background: #e3eafc; color: #3a4a6b; padding: 0.3rem 0.6rem; font-size: 0.9rem;">
+                                            <i class="fa-solid fa-edit"></i> Edit
+                                        </button>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
