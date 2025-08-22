@@ -45,6 +45,7 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : 'all';
                     <div class="logo-icon"><span>VA</span></div>
                     <span class="logo-text">EV Academy ERP</span>
                 </a>
+                <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
                     <a href="manage_admins.php" class="nav-link">Admins</a>

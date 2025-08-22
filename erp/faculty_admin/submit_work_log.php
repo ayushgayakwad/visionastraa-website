@@ -1,13 +1,13 @@
 <?php
-$required_role = 'faculty';
+$required_role = 'faculty_admin';
 include '../auth.php';
 require_once '../db.php';
 $message = '';
-$faculty_id = $_SESSION['user_id'];
+$faculty_admin_id = $_SESSION['user_id'];
 
-// Fetch classes assigned to the logged-in faculty
-$stmt = $pdo->prepare('SELECT id, name FROM erp_classes WHERE faculty_id = ? ORDER BY name ASC');
-$stmt->execute([$faculty_id]);
+// Fetch all classes for the dropdown, as admins can teach any class
+$stmt = $pdo->prepare('SELECT id, name FROM erp_classes ORDER BY name ASC');
+$stmt->execute();
 $classes = $stmt->fetchAll();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -40,9 +40,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($message)) {
-        $stmt = $pdo->prepare('INSERT INTO erp_faculty_logs (faculty_id, date, start_time, end_time, hours_worked, class_id, topics_covered, document_path, assignment_details) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-        $stmt->execute([$faculty_id, $date, $start_time, $end_time, $hours_worked, $class_id, $topics_covered, $document_path, $assignment_details]);
-        $message = 'Work log submitted successfully for review!';
+        // Auto-approve for faculty admins
+        $status = 'approved';
+        $reviewer_id = $faculty_admin_id; // Self-approved
+        $review_comments = 'Auto-approved for Faculty Admin.';
+        
+        $stmt = $pdo->prepare(
+            'INSERT INTO erp_faculty_logs (faculty_id, date, start_time, end_time, hours_worked, class_id, topics_covered, document_path, assignment_details, status, reviewer_id, review_comments, reviewed_at) 
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())'
+        );
+        $stmt->execute([$faculty_admin_id, $date, $start_time, $end_time, $hours_worked, $class_id, $topics_covered, $document_path, $assignment_details, $status, $reviewer_id, $review_comments]);
+        $message = 'Work log submitted and auto-approved!';
     }
 }
 ?>
@@ -51,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Work Log - Faculty | EV Academy ERP</title>
+    <title>Submit Work Log - Faculty Admin | EV Academy ERP</title>
     <link rel="stylesheet" href="../erp-theme.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -67,7 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
-                    <a href="submit_work_log.php" class="nav-link active">Submit Work Log</a>
+                    <a href="review_logs.php" class="nav-link">Review Work Logs</a>
+                    <a href="submit_work_log.php" class="nav-link active">Submit My Log</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>
@@ -76,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main>
         <div class="container">
             <section class="form-section card">
-                <h2 style="color:#3a4a6b; margin-bottom: 1.5rem;">Submit Daily Work Log</h2>
+                <h2 style="color:#3a4a6b; margin-bottom: 1.5rem;">Submit My Daily Work Log</h2>
                 <?php if ($message): ?>
                     <div class="alert"><?php echo $message; ?></div>
                 <?php endif; ?>
@@ -97,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div>
                             <label style="display:block; margin-bottom:0.5rem;">Class</label>
                             <select name="class_id" required class="form-input">
-                                <option value="">Select an Assigned Class</option>
+                                <option value="">Select a Class</option>
                                 <?php foreach ($classes as $class): ?>
                                     <option value="<?php echo $class['id']; ?>"><?php echo htmlspecialchars($class['name']); ?></option>
                                 <?php endforeach; ?>
@@ -117,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <input type="file" name="document" class="form-input">
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Submit for Review</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Submit & Auto-Approve</button>
                     </div>
                 </form>
             </section>

@@ -12,18 +12,17 @@ if ($id <= 0) {
     exit;
 }
 
-$stmt = $pdo->prepare('SELECT id, name, email, phone, dob, assigned_class, college_name, created_at FROM erp_users WHERE id = ? AND role = "faculty"');
+// Updated to fetch both faculty and faculty_admin
+$stmt = $pdo->prepare('SELECT id, name, email, phone, dob, assigned_class, college_name, created_at FROM erp_users WHERE id = ? AND role IN ("faculty", "faculty_admin")');
 $stmt->execute([$id]);
 $faculty = $stmt->fetch();
 
 if (!$faculty) {
     http_response_code(404);
-    echo json_encode(['error' => 'Faculty not found']);
+    echo json_encode(['error' => 'Faculty user not found']);
     exit;
 }
 
 echo json_encode($faculty);
 exit;
 ?>
-
-

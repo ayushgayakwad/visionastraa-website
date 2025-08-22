@@ -20,9 +20,11 @@ include '../auth.php';
                     <div class="logo-icon"><span>VA</span></div>
                     <span class="logo-text">EV Academy ERP</span>
                 </a>
+                <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link active">Dashboard</a>
                     <a href="review_logs.php" class="nav-link">Review Work Logs</a>
+                    <a href="submit_work_log.php" class="nav-link">Submit My Log</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>
@@ -37,6 +39,10 @@ include '../auth.php';
                         <a href="review_logs.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-check-to-slot"></i></span>
                             Review Faculty Work Logs
+                        </a>
+                        <a href="submit_work_log.php" class="dashboard-action-btn">
+                            <span class="dashboard-action-icon"><i class="fa-solid fa-clock"></i></span>
+                            Submit My Work Log
                         </a>
                     </div>
                 </div>

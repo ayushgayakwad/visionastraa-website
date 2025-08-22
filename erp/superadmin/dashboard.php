@@ -43,7 +43,7 @@ include '../auth.php';
                     <div class="dashboard-actions">
                         <a href="manage_admins.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-user-tie"></i></span>
-                            Admins
+                            Student Admins
                         </a>
                         <a href="manage_faculty.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-chalkboard-teacher"></i></span>

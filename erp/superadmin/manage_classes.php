@@ -31,7 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['quick_add_faculty']))
     }
 }
 
-$stmt = $pdo->prepare('SELECT id, name FROM erp_users WHERE role = "faculty" ORDER BY name ASC');
+// Updated to include faculty and faculty_admin roles
+$stmt = $pdo->prepare('SELECT id, name FROM erp_users WHERE role IN ("faculty", "faculty_admin") ORDER BY name ASC');
 $stmt->execute();
 $faculty_list = $stmt->fetchAll();
 
