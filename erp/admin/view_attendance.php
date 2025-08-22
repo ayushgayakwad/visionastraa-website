@@ -7,12 +7,12 @@ $stmt->execute();
 $classes = $stmt->fetchAll();
 $class_id = $_GET['class_id'] ?? ($classes[0]['id'] ?? null);
 $month = $_GET['month'] ?? date('Y-m');
-$students = [];
+$users = [];
 $attendance = [];
 if ($class_id) {
-    $stmt = $pdo->prepare('SELECT id, name FROM erp_users WHERE role = "student" ORDER BY name ASC');
+    $stmt = $pdo->prepare('SELECT id, name, role FROM erp_users WHERE role IN ("student", "admin") ORDER BY name ASC');
     $stmt->execute();
-    $students = $stmt->fetchAll();
+    $users = $stmt->fetchAll();
     $start = $month . '-01';
     $end = date('Y-m-t', strtotime($start));
     $stmt = $pdo->prepare('SELECT * FROM erp_attendance WHERE class_id = ? AND date BETWEEN ? AND ?');
@@ -77,7 +77,8 @@ if ($class_id) {
                 <div style="overflow-x:auto;">
                 <table class="table">
                     <tr>
-                        <th>Student</th>
+                        <th>User</th>
+                        <th>Role</th>
                         <?php
                         $days = range(1, date('t', strtotime($month.'-01')));
                         foreach ($days as $d) {
@@ -85,13 +86,14 @@ if ($class_id) {
                         }
                         ?>
                     </tr>
-                    <?php foreach ($students as $student): ?>
+                    <?php foreach ($users as $user): ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($student['name']); ?></td>
+                        <td><?php echo htmlspecialchars($user['name']); ?></td>
+                        <td><?php echo ucfirst(htmlspecialchars($user['role'])); ?></td>
                         <?php
                         foreach ($days as $d) {
                             $date = $month.'-'.str_pad($d,2,'0',STR_PAD_LEFT);
-                            $status = $attendance[$student['id']][$date] ?? '';
+                            $status = $attendance[$user['id']][$date] ?? '';
                             if ($status === 'present') {
                                 echo '<td class="present">P</td>';
                             } elseif ($status === 'absent') {

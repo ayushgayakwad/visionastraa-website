@@ -9,13 +9,13 @@ $classes = $stmt->fetchAll();
 
 $class_id = $_GET['class_id'] ?? ($classes[0]['id'] ?? null);
 $month = $_GET['month'] ?? date('Y-m');
-$students = [];
+$users = [];
 $attendance = [];
 
 if ($class_id) {
-    $stmt = $pdo->prepare('SELECT id, name FROM erp_users WHERE role = "student" ORDER BY name ASC');
+    $stmt = $pdo->prepare('SELECT id, name, role FROM erp_users WHERE role IN ("student", "admin") ORDER BY name ASC');
     $stmt->execute();
-    $students = $stmt->fetchAll();
+    $users = $stmt->fetchAll();
     
     $start = $month . '-01';
     $end = date('Y-m-t', strtotime($start));
@@ -142,14 +142,14 @@ if ($class_id) {
                     </button>
                 </form>
 
-                <?php if ($class_id && !empty($students)): ?>
+                <?php if ($class_id && !empty($users)): ?>
                     <div class="attendance-summary">
                         <h3 style="color:#3a4a6b; margin-bottom: 0.5rem;">
                             <i class="fa-solid fa-chart-bar"></i> 
                             Attendance Summary for <?php echo htmlspecialchars($classes[array_search($class_id, array_column($classes, 'id'))]['name']); ?>
                         </h3>
                         <p style="color:#6b7a99; margin: 0;">
-                            Showing attendance for <?php echo count($students); ?> students in <?php echo date('F Y', strtotime($month.'-01')); ?>
+                            Showing attendance for <?php echo count($users); ?> users in <?php echo date('F Y', strtotime($month.'-01')); ?>
                         </p>
                     </div>
 
@@ -157,7 +157,8 @@ if ($class_id) {
                         <table class="attendance-table">
                             <thead>
                                 <tr>
-                                    <th style="text-align: left; min-width: 150px;">Student</th>
+                                    <th style="text-align: left; min-width: 150px;">User</th>
+                                    <th>Role</th>
                                     <?php
                                     $days = range(1, date('t', strtotime($month.'-01')));
                                     foreach ($days as $d) {
@@ -168,15 +169,16 @@ if ($class_id) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($students as $student): ?>
+                                <?php foreach ($users as $user): ?>
                                 <tr>
                                     <td style="text-align: left; font-weight: 500;">
-                                        <?php echo htmlspecialchars($student['name']); ?>
+                                        <?php echo htmlspecialchars($user['name']); ?>
                                     </td>
+                                    <td><?php echo ucfirst(htmlspecialchars($user['role'])); ?></td>
                                     <?php
                                     foreach ($days as $d) {
                                         $date = $month . '-' . str_pad($d, 2, '0', STR_PAD_LEFT);
-                                        $status = $attendance[$student['id']][$date] ?? '';
+                                        $status = $attendance[$user['id']][$date] ?? '';
                                         $cell_class = '';
                                         $cell_content = '';
                                         
@@ -199,7 +201,7 @@ if ($class_id) {
                 <?php elseif ($class_id): ?>
                     <div class="alert">
                         <i class="fa-solid fa-info-circle"></i>
-                        No students found for the selected class.
+                        No users found for the selected class.
                     </div>
                 <?php else: ?>
                     <div class="alert">

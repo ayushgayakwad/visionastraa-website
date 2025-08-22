@@ -6,16 +6,16 @@ $message = '';
 $stmt = $pdo->prepare('SELECT id, name FROM erp_classes ORDER BY name ASC');
 $stmt->execute();
 $classes = $stmt->fetchAll();
-$stmt = $pdo->prepare('SELECT id, name FROM erp_users WHERE role = "student" ORDER BY name ASC');
+$stmt = $pdo->prepare('SELECT id, name, role FROM erp_users WHERE role IN ("student", "admin") ORDER BY name ASC');
 $stmt->execute();
-$students = $stmt->fetchAll();
+$users = $stmt->fetchAll();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['class_id'], $_POST['date'])) {
     $class_id = $_POST['class_id'];
     $date = $_POST['date'];
-    foreach ($students as $student) {
-        $status = $_POST['attendance'][$student['id']] ?? 'absent';
+    foreach ($users as $user) {
+        $status = $_POST['attendance'][$user['id']] ?? 'absent';
         $stmt = $pdo->prepare('INSERT INTO erp_attendance (student_id, class_id, date, status, marked_by) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE status=VALUES(status), marked_by=VALUES(marked_by)');
-        $stmt->execute([$student['id'], $class_id, $date, $status, $_SESSION['user_id']]);
+        $stmt->execute([$user['id'], $class_id, $date, $status, $_SESSION['user_id']]);
     }
     $message = 'Attendance marked!';
 }
@@ -69,24 +69,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['class_id'], $_POST['d
                         </div>
                         <div>
                             <label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Date</label>
-                            <input type="date" name="date" required class="form-input">
+                            <input type="date" name="date" required class="form-input" value="<?php echo date('Y-m-d'); ?>">
                         </div>
                     </div>
                     <div style="overflow-x:auto;">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Student</th>
+                                    <th>User</th>
+                                    <th>Role</th>
                                     <th>Present</th>
                                     <th>Absent</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($students as $student): ?>
+                                <?php foreach ($users as $user): ?>
                                 <tr>
-                                    <td><?php echo htmlspecialchars($student['name']); ?></td>
-                                    <td style="text-align:center"><input type="radio" name="attendance[<?php echo $student['id']; ?>]" value="present" checked></td>
-                                    <td style="text-align:center"><input type="radio" name="attendance[<?php echo $student['id']; ?>]" value="absent"></td>
+                                    <td><?php echo htmlspecialchars($user['name']); ?></td>
+                                    <td><?php echo ucfirst(htmlspecialchars($user['role'])); ?></td>
+                                    <td style="text-align:center"><input type="radio" name="attendance[<?php echo $user['id']; ?>]" value="present" checked></td>
+                                    <td style="text-align:center"><input type="radio" name="attendance[<?php echo $user['id']; ?>]" value="absent"></td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>

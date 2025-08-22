@@ -5,6 +5,13 @@ require_once '../db.php';
 $message = '';
 $tab = $_GET['tab'] ?? 'all';
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_role'])) {
+    $user_id = (int)$_POST['user_id'];
+    $stmt = $pdo->prepare('UPDATE erp_users SET role = "student" WHERE id = ? AND role = "admin"');
+    $stmt->execute([$user_id]);
+    $message = 'Admin role has been changed to Student successfully!';
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_admin'])) {
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
@@ -220,6 +227,12 @@ $admins = $stmt->fetchAll();
                                     <button onclick="editAdmin(<?php echo $admin['id']; ?>)" class="btn" style="background: #e3eafc; color: #3a4a6b; padding: 0.3rem 0.6rem; font-size: 0.9rem;">
                                         <i class="fa-solid fa-edit"></i> Edit
                                     </button>
+                                    <form method="POST" style="display:inline-block; margin-left: 5px;">
+                                        <input type="hidden" name="user_id" value="<?php echo $admin['id']; ?>">
+                                        <button type="submit" name="change_role" class="btn" style="background: #f0ad4e; color: #fff;">
+                                            Make Student
+                                        </button>
+                                    </form>
                                     <?php endif; ?>
                                 </td>
                             </tr>
