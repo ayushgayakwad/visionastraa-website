@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main>
         <section class="hero">
             <div class="container">
-                <section class="card" style="max-width: 480px; margin: 0 auto;">
+                <section class="card" style="max-width: 480px; margin: 2em auto;">
                     <h1 class="hero-title" style="text-align:center; color:#3a4a6b;">Login to EV Academy ERP</h1>
                     <?php if ($error): ?>
                         <div class="alert"><?php echo htmlspecialchars($error); ?></div>
