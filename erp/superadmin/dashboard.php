@@ -22,13 +22,14 @@ include '../auth.php';
                 </a>
                 <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
-                    <a href="dashboard.php" class="nav-link active">Dashboard</a>
+                    <a href="dashboard.php" class="nav-link">Dashboard</a>
                     <a href="manage_admins.php" class="nav-link">Admins</a>
                     <a href="manage_faculty.php" class="nav-link">Faculty</a>
                     <a href="manage_students.php" class="nav-link">Students</a>
+                    <a href="manage_fees.php" class="nav-link">Fees</a>
                     <a href="manage_classes.php" class="nav-link">Classes</a>
                     <a href="view_attendance.php" class="nav-link">Attendance</a>
-                    <a href="view_faculty_work.php" class="nav-link">Faculty Work</a>
+                    <a href="view_faculty_work.php" class="nav-link active">Faculty Work</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>
@@ -51,6 +52,10 @@ include '../auth.php';
                         <a href="manage_students.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-users"></i></span>
                             Students
+                        </a>
+                        <a href="manage_fees.php" class="dashboard-action-btn">
+                            <span class="dashboard-action-icon"><i class="fa-solid fa-indian-rupee-sign"></i></span>
+                            Fees
                         </a>
                         <a href="manage_classes.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-book"></i></span>

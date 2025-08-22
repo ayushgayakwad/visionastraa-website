@@ -45,6 +45,7 @@ if ($class_id) {
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
                     <a href="view_attendance.php" class="nav-link active">View Attendance</a>
+                    <a href="fee_payment.php" class="nav-link">Fee Payment</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>

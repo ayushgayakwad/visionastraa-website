@@ -1,6 +1,11 @@
 <?php
 $required_role = 'student';
 include '../auth.php';
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'student') {
+    echo '<p style="color:red">Student session not found or not a student. Please login again.</p>';
+    exit;
+}
+$student_id = $_SESSION['user_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +29,7 @@ include '../auth.php';
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link active">Dashboard</a>
                     <a href="view_attendance.php" class="nav-link">View Attendance</a>
+                    <a href="fee_payment.php" class="nav-link">Fee Payment</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>
@@ -33,11 +39,14 @@ include '../auth.php';
         <section class="hero">
             <div class="container">
                 <div class="hero-content" style="max-width: 600px; margin: 0 auto;">
-                    <h1 class="hero-title" style="text-align:center; color:#3a4a6b;">Welcome, Student!</h1>
                     <div class="dashboard-actions">
                         <a href="view_attendance.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-calendar-days"></i></span>
                             View Attendance
+                        </a>
+                        <a href="fee_payment.php" class="dashboard-action-btn" style="margin-top:1em;background:#e3eafc;color:#3a4a6b;">
+                            <span class="dashboard-action-icon"><i class="fa-solid fa-indian-rupee-sign"></i></span>
+                            Fee Payment
                         </a>
                     </div>
                 </div>
