@@ -2,33 +2,54 @@
 $required_role = 'student';
 include '../auth.php';
 require_once '../db.php';
+
+// --- Time Slot Definitions ---
+$time_slots = [
+    'GD_MORNING' => '9:00 AM - 9:30 AM',
+    'CLASS_1' => '9:30 AM - 11:00 AM',
+    'CLASS_2' => '11:30 AM - 1:30 PM',
+    'LAB' => '2:30 PM - 4:30 PM',
+    'GD_EVENING' => '4:30 PM - 6:00 PM'
+];
+
+// --- Week Selection & Date Calculation ---
+$selected_week = $_GET['week'] ?? date('Y-\WW');
+$year = (int)substr($selected_week, 0, 4);
+$week_num = (int)substr($selected_week, 6, 2);
+$date_obj = new DateTime();
+$date_obj->setISODate($year, $week_num);
+$week_start_date = $date_obj->format('Y-m-d');
+$week_dates = [];
+$days_of_week = [];
+for ($i = 0; $i < 5; $i++) {
+    $week_dates[] = $date_obj->format('Y-m-d');
+    $days_of_week[] = $date_obj->format('l');
+    $date_obj->modify('+1 day');
+}
+$week_end_date = end($week_dates);
+// --- End Week Logic ---
+
 $student_id = $_SESSION['user_id'];
 
-$date = $_GET['date'] ?? date('Y-m-d');
-$day_of_week = date('l', strtotime($date));
+// Fetch the timetable for the entire week
+$stmt_timetable = $pdo->prepare("SELECT id, day_of_week, time_slot, class_name FROM erp_timetable WHERE week_start_date = ? ORDER BY day_of_week, time_slot");
+$stmt_timetable->execute([$week_start_date]);
+$timetable_data = [];
+while($row = $stmt_timetable->fetch()){
+    $timetable_data[$row['day_of_week']][$row['time_slot']] = $row['class_name'];
+}
 
-// Find the start of the week for the selected date
-$date_obj = new DateTime($date);
-$date_obj->modify('monday this week');
-$week_start_date = $date_obj->format('Y-m-d');
-
-// Fetch today's classes from the timetable for that specific week
-$stmt = $pdo->prepare('SELECT tt.*, u.name as faculty_name FROM erp_timetable tt LEFT JOIN erp_users u ON tt.faculty_id = u.id WHERE tt.week_start_date = ? AND tt.day_of_week = ? ORDER BY tt.time_slot ASC');
-$stmt->execute([$week_start_date, $day_of_week]);
-$todays_classes = $stmt->fetchAll();
-
-// Fetch student's attendance for the selected date
-$attendance = [];
-if (!empty($todays_classes)) {
-    $timetable_ids = array_column($todays_classes, 'id');
-    $placeholders = implode(',', array_fill(0, count($timetable_ids), '?'));
-
-    $stmt = $pdo->prepare("SELECT timetable_id, status FROM erp_attendance WHERE student_id = ? AND date = ? AND timetable_id IN ($placeholders)");
-    $params = array_merge([$student_id, $date], $timetable_ids);
-    $stmt->execute($params);
-    foreach ($stmt->fetchAll() as $row) {
-        $attendance[$row['timetable_id']] = $row['status'];
-    }
+// Fetch the student's attendance for the entire week
+$stmt_attendance = $pdo->prepare("
+    SELECT tt.day_of_week, tt.time_slot, att.status 
+    FROM erp_attendance att
+    JOIN erp_timetable tt ON att.timetable_id = tt.id
+    WHERE att.student_id = ? AND att.date BETWEEN ? AND ?
+");
+$stmt_attendance->execute([$student_id, $week_start_date, $week_end_date]);
+$attendance_data = [];
+while($row = $stmt_attendance->fetch()){
+    $attendance_data[$row['day_of_week']][$row['time_slot']] = $row['status'];
 }
 ?>
 <!DOCTYPE html>
@@ -36,7 +57,7 @@ if (!empty($todays_classes)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Attendance - Student | EV Academy ERP</title>
+    <title>My Weekly Attendance - Student | EV Academy ERP</title>
     <link rel="stylesheet" href="../erp-theme.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -45,14 +66,11 @@ if (!empty($todays_classes)) {
     <header class="header" id="header">
         <div class="container">
             <div class="header-content" style="display:flex;align-items:center;justify-content:space-between;">
-                <a href="dashboard.php" class="logo" style="display:flex;align-items:center;gap:0.5em;">
-                    <div class="logo-icon"><span>VA</span></div>
-                    <span class="logo-text">EV Academy ERP</span>
-                </a>
+                <a href="dashboard.php" class="logo" style="display:flex;align-items:center;gap:0.5em;"><div class="logo-icon"><span>VA</span></div><span class="logo-text">EV Academy ERP</span></a>
                 <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
-                    <a href="view_attendance.php" class="nav-link">View Attendance</a>
+                    <a href="view_attendance.php" class="nav-link active">View Attendance</a>
                     <a href="fee_payment.php" class="nav-link">Fee Payment</a>
                     <a href="upload_documents.php" class="nav-link">Upload Documents</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
@@ -63,44 +81,56 @@ if (!empty($todays_classes)) {
     <main>
         <div class="container">
             <section class="card">
-                <h2 style="color:#3a4a6b;">My Attendance for <?php echo date("F j, Y", strtotime($date)); ?> (<?php echo $day_of_week; ?>)</h2>
-                <form method="GET" style="margin-bottom: 2em;">
-                    <label for="date" style="font-weight: 500;">Select Date:</label>
-                    <input type="date" id="date" name="date" value="<?php echo htmlspecialchars($date); ?>" class="form-input" onchange="this.form.submit()">
+                <h2 style="color:#3a4a6b;">My Weekly Attendance</h2>
+                <h3 style="color:#6b7a99; margin-bottom: 1.5rem;">Week of <?php echo date("F j, Y", strtotime($week_start_date)); ?></h3>
+                 <form method="GET" style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap; margin-bottom: 2rem;">
+                    <label for="week" style="font-weight:500;">Select Week:</label>
+                    <input type="week" name="week" id="week" value="<?php echo htmlspecialchars($selected_week); ?>" class="form-input" style="max-width:200px;">
+                    <button type="submit" class="btn btn-primary">View</button>
                 </form>
-                <?php if (empty($todays_classes)): ?>
-                    <div class="alert">No classes scheduled for today.</div>
-                <?php else: ?>
+                
+                <div style="overflow-x:auto;">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Class</th>
-                                <th>Faculty</th>
-                                <th>Status</th>
+                                <th style="text-align:left;">Day</th>
+                                <?php foreach($time_slots as $time_string): ?>
+                                    <th><?php echo $time_string; ?></th>
+                                <?php endforeach; ?>
+                                <th>Daily Total</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($todays_classes as $class): ?>
+                            <?php foreach ($days_of_week as $index => $day): ?>
+                                <?php $date = $week_dates[$index]; ?>
                                 <tr>
-                                    <td><?php echo htmlspecialchars($class['class_name']); ?></td>
-                                    <td><?php echo htmlspecialchars($class['faculty_name'] ?? 'N/A'); ?></td>
-                                    <td>
-                                        <?php
-                                        $status = $attendance[$class['id']] ?? 'Not Marked';
-                                        $status_class = '';
-                                        if ($status == 'present') {
-                                            $status_class = 'present';
-                                        } elseif ($status == 'absent') {
-                                            $status_class = 'absent';
-                                        }
-                                        echo '<span class="' . $status_class . '">' . ucfirst($status) . '</span>';
-                                        ?>
-                                    </td>
+                                    <td style="text-align:left; font-weight:500;"><?php echo date('M d (l)', strtotime($date)); ?></td>
+                                    <?php 
+                                        $daily_total = 0;
+                                        foreach (array_keys($time_slots) as $slot_key):
+                                            $class_name = $timetable_data[$day][$slot_key] ?? null;
+                                            $status = $attendance_data[$day][$slot_key] ?? null;
+
+                                            if ($class_name) {
+                                                if ($status == 'present') {
+                                                    $daily_total++;
+                                                    echo '<td style="background-color:#d4edda; color:#155724; text-align:center;">Present<br><small>('.htmlspecialchars($class_name).')</small></td>';
+                                                } elseif ($status == 'absent') {
+                                                    echo '<td style="background-color:#f8d7da; color:#721c24; text-align:center;">Absent<br><small>('.htmlspecialchars($class_name).')</small></td>';
+                                                } else {
+                                                    echo '<td style="text-align:center; color:#888;">Not Marked<br><small>('.htmlspecialchars($class_name).')</small></td>';
+                                                }
+                                            } else {
+                                                echo '<td style="background-color:#f0f0f0;"></td>'; // No class scheduled
+                                            }
+                                        endforeach; 
+                                    ?>
+                                    <td style="text-align:center; font-weight:bold;"><?php echo $daily_total; ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-                <?php endif; ?>
+                </div>
             </section>
         </div>
     </main>
