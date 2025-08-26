@@ -7,10 +7,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
+    $confirm_password = $_POST['confirm_password'] ?? '';
     $dob = $_POST['dob'] ?? null;
     $phone = $_POST['phone'] ?? '';
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if ($password !== $confirm_password) {
+        $message = 'Passwords do not match.';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message = 'Invalid email address.';
     } elseif (strlen($password) < 6) {
         $message = 'Password must be at least 6 characters.';
@@ -25,8 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $hash = password_hash($password, PASSWORD_DEFAULT);
             if ($form_type === 'student') {
                 $college_name = $_POST['college_name'] ?? '';
-                $batch = '25B01'; // Default or from form
-                $location = 'Bangalore'; // Default or from form
+                $batch = '25B01';
+                $location = 'Bangalore';
                 $stmt = $pdo->prepare('INSERT INTO erp_users (name, email, password, dob, phone, college_name, role, approved, batch, location) VALUES (?, ?, ?, ?, ?, ?, "student", 0, ?, ?)');
                 $stmt->execute([$name, $email, $hash, $dob, $phone, $college_name, $batch, $location]);
                 $message = 'Registration successful! Awaiting approval by super admin.';
@@ -54,6 +57,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .tab-btn.active { background: #3a4a6b; color: #fff; }
         .form-container { display: none; }
         .form-container.active { display: block; }
+        .password-wrapper { position: relative; display:flex; align-items:center; }
+        .show-password-toggle {
+            position: absolute; right: 0.8rem; top: 50%; transform: translateY(-50%);
+            background: none; border: none; cursor: pointer; font-size: 1rem; color: #6b7a99;
+        }
     </style>
 </head>
 <body>
@@ -80,71 +88,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <button class="tab-btn" onclick="showForm('faculty')">Register as Faculty</button>
                 </div>
 
-                <!-- Student Registration Form -->
                 <div id="student-form" class="form-container active">
                     <form method="POST" style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
                         <input type="hidden" name="form_type" value="student">
+                        <div><label style="display: block; margin-bottom: 0.5rem;">Name *</label><input type="text" name="name" class="form-input" required></div>
+                        <div><label style="display: block; margin-bottom: 0.5rem;">Email *</label><input type="email" name="email" class="form-input" required></div>
                         <div>
-                            <label for="name" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Name *</label>
-                            <input type="text" id="name" name="name" class="form-input" required>
-                        </div>
-                        <div>
-                            <label for="email" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Email *</label>
-                            <input type="email" id="email" name="email" class="form-input" required>
-                        </div>
-                        <div>
-                            <label for="password" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Password *</label>
-                            <input type="password" id="password" name="password" class="form-input" required>
+                            <label style="display: block; margin-bottom: 0.5rem;">Password *</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="student_password" name="password" class="form-input" required>
+                                <button type="button" class="show-password-toggle" onclick="togglePassword('student_password')"><i class="fa-regular fa-eye"></i></button>
+                            </div>
                         </div>
                         <div>
-                            <label for="dob" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Date of Birth</label>
-                            <input type="date" id="dob" name="dob" class="form-input">
+                            <label style="display: block; margin-bottom: 0.5rem;">Confirm Password *</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="student_confirm_password" name="confirm_password" class="form-input" required>
+                                <button type="button" class="show-password-toggle" onclick="togglePassword('student_confirm_password')"><i class="fa-regular fa-eye"></i></button>
+                            </div>
                         </div>
-                        <div>
-                            <label for="phone" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Phone *</label>
-                            <input type="tel" id="phone" name="phone" class="form-input" required>
-                        </div>
-                        <div>
-                            <label for="college_name" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">College Name</label>
-                            <input type="text" id="college_name" name="college_name" class="form-input">
-                        </div>
-                        <div style="grid-column: 1 / -1; text-align:center;">
-                            <button type="submit" name="register_student" class="btn btn-primary">
-                                <i class="fa-solid fa-user-plus"></i> Register as Student
-                            </button>
-                        </div>
+                        <div><label style="display: block; margin-bottom: 0.5rem;">Date of Birth</label><input type="date" name="dob" class="form-input"></div>
+                        <div><label style="display: block; margin-bottom: 0.5rem;">Phone *</label><input type="tel" name="phone" class="form-input" required></div>
+                        <div><label style="display: block; margin-bottom: 0.5rem;">College Name</label><input type="text" name="college_name" class="form-input"></div>
+                        <div style="grid-column: 1 / -1; text-align:center;"><button type="submit" name="register_student" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Register as Student</button></div>
                     </form>
                 </div>
 
-                <!-- Faculty Registration Form -->
                 <div id="faculty-form" class="form-container">
                     <form method="POST" style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
                         <input type="hidden" name="form_type" value="faculty">
-                        <div>
-                            <label for="faculty_name" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Name *</label>
-                            <input type="text" id="faculty_name" name="name" class="form-input" required>
+                        <div><label style="display: block; margin-bottom: 0.5rem;">Name *</label><input type="text" name="name" class="form-input" required></div>
+                        <div><label style="display: block; margin-bottom: 0.5rem;">Email *</label><input type="email" name="email" class="form-input" required></div>
+                         <div>
+                            <label style="display: block; margin-bottom: 0.5rem;">Password *</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="faculty_password" name="password" class="form-input" required>
+                                <button type="button" class="show-password-toggle" onclick="togglePassword('faculty_password')"><i class="fa-regular fa-eye"></i></button>
+                            </div>
                         </div>
                         <div>
-                            <label for="faculty_email" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Email *</label>
-                            <input type="email" id="faculty_email" name="email" class="form-input" required>
+                            <label style="display: block; margin-bottom: 0.5rem;">Confirm Password *</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="faculty_confirm_password" name="confirm_password" class="form-input" required>
+                                <button type="button" class="show-password-toggle" onclick="togglePassword('faculty_confirm_password')"><i class="fa-regular fa-eye"></i></button>
+                            </div>
                         </div>
-                        <div>
-                            <label for="faculty_password" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Password *</label>
-                            <input type="password" id="faculty_password" name="password" class="form-input" required>
-                        </div>
-                        <div>
-                            <label for="faculty_dob" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Date of Birth</label>
-                            <input type="date" id="faculty_dob" name="dob" class="form-input">
-                        </div>
-                        <div>
-                            <label for="faculty_phone" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Phone *</label>
-                            <input type="tel" id="faculty_phone" name="phone" class="form-input" required>
-                        </div>
-                        <div style="grid-column: 1 / -1; text-align:center;">
-                            <button type="submit" name="register_faculty" class="btn btn-primary">
-                                <i class="fa-solid fa-chalkboard-teacher"></i> Register as Faculty
-                            </button>
-                        </div>
+                        <div><label style="display: block; margin-bottom: 0.5rem;">Date of Birth</label><input type="date" name="dob" class="form-input"></div>
+                        <div><label style="display: block; margin-bottom: 0.5rem;">Phone *</label><input type="tel" name="phone" class="form-input" required></div>
+                        <div style="grid-column: 1 / -1; text-align:center;"><button type="submit" name="register_faculty" class="btn btn-primary"><i class="fa-solid fa-chalkboard-teacher"></i> Register as Faculty</button></div>
                     </form>
                 </div>
 
@@ -160,6 +151,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             document.getElementById(formName + '-form').classList.add('active');
             event.currentTarget.classList.add('active');
+        }
+
+        function togglePassword(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            const icon = passwordInput.nextElementSibling.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
         }
     </script>
 </body>
