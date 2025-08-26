@@ -96,7 +96,7 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
                 <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
-                    <a href="manage_timetable.php" class="nav-link active">Manage Timetable</a>
+                    <a href="manage_timetable.php" class="nav-link">Manage Timetable</a>
                     <a href="manage_faculty.php" class="nav-link">Faculty</a>
                     <a href="manage_students.php" class="nav-link">Students</a>
                     <a href="manage_fees.php" class="nav-link">Fees</a>

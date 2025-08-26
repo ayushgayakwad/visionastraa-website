@@ -126,11 +126,10 @@ $faculty = $stmt->fetchAll();
                 <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
-                    <a href="manage_admins.php" class="nav-link">Admins</a>
-                    <a href="manage_faculty.php" class="nav-link active">Faculty</a>
+                    <a href="manage_timetable.php" class="nav-link">Manage Timetable</a>
+                    <a href="manage_faculty.php" class="nav-link">Faculty</a>
                     <a href="manage_students.php" class="nav-link">Students</a>
                     <a href="manage_fees.php" class="nav-link">Fees</a>
-                    <a href="manage_classes.php" class="nav-link">Classes</a>
                     <a href="view_attendance.php" class="nav-link">Attendance</a>
                     <a href="view_faculty_work.php" class="nav-link">Faculty Work</a>
                     <a href="../logout.php" class="nav-link">Logout</a>

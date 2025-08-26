@@ -83,7 +83,7 @@ $students = $stmt->fetchAll();
                 <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
-                    <a href="manage_students.php" class="nav-link active">Students</a>
+                    <a href="manage_students.php" class="nav-link">Students</a>
                     <a href="mark_attendance.php" class="nav-link">Mark Attendance</a>
                     <a href="view_attendance.php" class="nav-link">View Attendance</a>
                     <a href="upload_documents.php" class="nav-link">Upload Documents</a>

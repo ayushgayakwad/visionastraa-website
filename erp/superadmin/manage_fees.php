@@ -51,7 +51,7 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : 'all';
                     <a href="manage_timetable.php" class="nav-link">Manage Timetable</a>
                     <a href="manage_faculty.php" class="nav-link">Faculty</a>
                     <a href="manage_students.php" class="nav-link">Students</a>
-                    <a href="manage_fees.php" class="nav-link active">Fees</a>
+                    <a href="manage_fees.php" class="nav-link">Fees</a>
                     <a href="view_attendance.php" class="nav-link">Attendance</a>
                     <a href="view_faculty_work.php" class="nav-link">Faculty Work</a>
                     <a href="../logout.php" class="nav-link">Logout</a>

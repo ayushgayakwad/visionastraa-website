@@ -1,6 +1,24 @@
 <?php
 $required_role = 'super_admin';
 include '../auth.php';
+require_once '../db.php'; // Make sure db connection is included
+
+// Get user's name from the database
+$stmt = $pdo->prepare("SELECT name FROM erp_users WHERE id = ?");
+$stmt->execute([$_SESSION['user_id']]);
+$user = $stmt->fetch();
+$user_name = $user ? htmlspecialchars($user['name']) : 'Super Admin';
+
+// Dynamic greeting based on time
+date_default_timezone_set('Asia/Kolkata');
+$hour = date('G');
+if ($hour < 12) {
+    $greeting = "Good Morning";
+} elseif ($hour < 17) {
+    $greeting = "Good Afternoon";
+} else {
+    $greeting = "Good Evening";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +56,7 @@ include '../auth.php';
         <section class="hero">
             <div class="container">
                 <div class="hero-content" style="max-width: 600px; margin: 0 auto;">
-                    <h1 class="hero-title" style="text-align:center; color:#3a4a6b;">Welcome, Super Admin!</h1>
+                    <h1 class="hero-title" style="text-align:center; color:#3a4a6b;"><?php echo $greeting . ", " . $user_name; ?>!</h1>
                     <div class="dashboard-actions">
                         <a href="manage_timetable.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-calendar-alt"></i></span>

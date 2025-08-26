@@ -52,7 +52,7 @@ if (!empty($todays_classes)) {
                 <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
-                    <a href="view_attendance.php" class="nav-link active">View Attendance</a>
+                    <a href="view_attendance.php" class="nav-link">View Attendance</a>
                     <a href="fee_payment.php" class="nav-link">Fee Payment</a>
                     <a href="upload_documents.php" class="nav-link">Upload Documents</a>
                     <a href="../logout.php" class="nav-link">Logout</a>

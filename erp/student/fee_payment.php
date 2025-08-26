@@ -76,7 +76,7 @@ if (isset($_POST['submit_fee'])) {
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
                     <a href="view_attendance.php" class="nav-link">View Attendance</a>
-                    <a href="fee_payment.php" class="nav-link active">Fee Payment</a>
+                    <a href="fee_payment.php" class="nav-link">Fee Payment</a>
                     <a href="upload_documents.php" class="nav-link">Upload Documents</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
