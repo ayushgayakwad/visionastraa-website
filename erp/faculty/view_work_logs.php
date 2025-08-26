@@ -5,9 +5,9 @@ require_once '../db.php';
 $faculty_id = $_SESSION['user_id'];
 
 // Fetch all work logs for the logged-in faculty
-$sql = 'SELECT l.*, c.name as class_name 
+$sql = 'SELECT l.*, tt.class_name 
         FROM erp_faculty_logs l 
-        JOIN erp_classes c ON l.class_id = c.id
+        JOIN erp_timetable tt ON l.timetable_id = tt.id
         WHERE l.faculty_id = ? 
         ORDER BY l.date DESC';
 $stmt = $pdo->prepare($sql);
@@ -23,11 +23,6 @@ $logs = $stmt->fetchAll();
     <link rel="stylesheet" href="../erp-theme.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <style>
-        .status-pending { color: #e67e22; font-weight: bold; }
-        .status-approved { color: #2ecc71; font-weight: bold; }
-        .status-rejected { color: #e74c3c; font-weight: bold; }
-    </style>
 </head>
 <body>
     <header class="header" id="header">
@@ -57,7 +52,6 @@ $logs = $stmt->fetchAll();
                             <tr>
                                 <th>Date</th>
                                 <th>Class</th>
-                                <th>Hours</th>
                                 <th>Topics Covered</th>
                                 <th>Assignment</th>
                                 <th>Document</th>
@@ -68,14 +62,13 @@ $logs = $stmt->fetchAll();
                         <tbody>
                             <?php if (empty($logs)): ?>
                                 <tr>
-                                    <td colspan="8" style="text-align: center;">You have not submitted any work logs yet.</td>
+                                    <td colspan="7" style="text-align: center;">You have not submitted any work logs yet.</td>
                                 </tr>
                             <?php endif; ?>
                             <?php foreach ($logs as $log): ?>
                             <tr>
                                 <td><?php echo date('d M Y', strtotime($log['date'])); ?></td>
                                 <td><?php echo htmlspecialchars($log['class_name']); ?></td>
-                                <td><?php echo htmlspecialchars($log['hours_worked']); ?></td>
                                 <td><?php echo nl2br(htmlspecialchars($log['topics_covered'])); ?></td>
                                 <td><?php echo nl2br(htmlspecialchars($log['assignment_details'])); ?></td>
                                 <td>

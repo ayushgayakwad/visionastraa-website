@@ -5,31 +5,27 @@ require_once '../db.php';
 $message = '';
 $faculty_admin_id = $_SESSION['user_id'];
 
-// Fetch all classes for the dropdown, as admins can teach any class
-$stmt = $pdo->prepare('SELECT id, name FROM erp_classes ORDER BY name ASC');
-$stmt->execute();
-$classes = $stmt->fetchAll();
+$date = $_GET['date'] ?? date('Y-m-d');
+$day_of_week = date('l', strtotime($date));
+$date_obj = new DateTime($date);
+$date_obj->modify('monday this week');
+$week_start_date = $date_obj->format('Y-m-d');
+
+// Fetch all classes for the selected day for the dropdown
+$stmt = $pdo->prepare('SELECT id, class_name FROM erp_timetable WHERE week_start_date = ? AND day_of_week = ? ORDER BY time_slot ASC');
+$stmt->execute([$week_start_date, $day_of_week]);
+$todays_classes = $stmt->fetchAll();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $date = $_POST['date'];
-    $start_time = $_POST['start_time'];
-    $end_time = $_POST['end_time'];
-    $class_id = $_POST['class_id'];
+    $timetable_id = $_POST['timetable_id'];
     $topics_covered = $_POST['topics_covered'];
     $assignment_details = $_POST['assignment_details'];
-
-    // Calculate hours worked
-    $start = new DateTime($start_time);
-    $end = new DateTime($end_time);
-    $diff = $end->diff($start);
-    $hours_worked = $diff->h + ($diff->i / 60);
-
     $document_path = null;
+
     if (isset($_FILES['document']) && $_FILES['document']['error'] == 0) {
         $upload_dir = '../uploads/faculty_work/';
-        if (!is_dir($upload_dir)) {
-            mkdir($upload_dir, 0777, true);
-        }
+        if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
         $filename = time() . '_' . uniqid() . '_' . basename($_FILES['document']['name']);
         $target_path = $upload_dir . $filename;
         if (move_uploaded_file($_FILES['document']['tmp_name'], $target_path)) {
@@ -46,10 +42,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $review_comments = 'Auto-approved for Faculty Admin.';
         
         $stmt = $pdo->prepare(
-            'INSERT INTO erp_faculty_logs (faculty_id, date, start_time, end_time, hours_worked, class_id, topics_covered, document_path, assignment_details, status, reviewer_id, review_comments, reviewed_at) 
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())'
+            'INSERT INTO erp_faculty_logs (faculty_id, date, timetable_id, topics_covered, document_path, assignment_details, status, reviewer_id, review_comments, reviewed_at) 
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())'
         );
-        $stmt->execute([$faculty_admin_id, $date, $start_time, $end_time, $hours_worked, $class_id, $topics_covered, $document_path, $assignment_details, $status, $reviewer_id, $review_comments]);
+        $stmt->execute([$faculty_admin_id, $date, $timetable_id, $topics_covered, $document_path, $assignment_details, $status, $reviewer_id, $review_comments]);
         $message = 'Work log submitted and auto-approved!';
     }
 }
@@ -75,8 +71,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
+                    <a href="manage_faculty.php" class="nav-link">Manage Faculty</a>
+                    <a href="manage_timetable.php" class="nav-link">Manage Timetable</a>
                     <a href="review_logs.php" class="nav-link">Review Work Logs</a>
-                    <a href="submit_work_log.php" class="nav-link active">Submit My Log</a>
+                    <a href="submit_work_log.php" class="nav-link">Submit My Log</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>
@@ -89,46 +87,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php if ($message): ?>
                     <div class="alert"><?php echo $message; ?></div>
                 <?php endif; ?>
-                <form method="POST" enctype="multipart/form-data" style="display: grid; gap: 1rem;">
-                    <div style="display:grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+
+                <form method="GET" style="margin-bottom: 2rem;">
+                    <label style="display:block; margin-bottom:0.5rem;">Select Date to View Classes:</label>
+                    <input type="date" name="date" class="form-input" value="<?php echo htmlspecialchars($date); ?>" onchange="this.form.submit()">
+                </form>
+
+                <?php if (empty($todays_classes)): ?>
+                    <div class="alert">There are no classes in the timetable for <?php echo htmlspecialchars($date); ?>.</div>
+                <?php else: ?>
+                    <form method="POST" enctype="multipart/form-data" style="display: grid; gap: 1rem;">
+                        <input type="hidden" name="date" value="<?php echo htmlspecialchars($date); ?>">
                         <div>
-                            <label style="display:block; margin-bottom:0.5rem;">Date</label>
-                            <input type="date" name="date" required class="form-input" value="<?php echo date('Y-m-d'); ?>">
-                        </div>
-                        <div>
-                            <label style="display:block; margin-bottom:0.5rem;">Start Time</label>
-                            <input type="time" name="start_time" required class="form-input">
-                        </div>
-                        <div>
-                            <label style="display:block; margin-bottom:0.5rem;">End Time</label>
-                            <input type="time" name="end_time" required class="form-input">
-                        </div>
-                        <div>
-                            <label style="display:block; margin-bottom:0.5rem;">Class</label>
-                            <select name="class_id" required class="form-input">
-                                <option value="">Select a Class</option>
-                                <?php foreach ($classes as $class): ?>
-                                    <option value="<?php echo $class['id']; ?>"><?php echo htmlspecialchars($class['name']); ?></option>
+                            <label style="display:block; margin-bottom:0.5rem;">Class for <?php echo htmlspecialchars($date); ?></label>
+                            <select name="timetable_id" required class="form-input">
+                                <option value="">Select a Class from Today's Schedule</option>
+                                <?php foreach ($todays_classes as $class): ?>
+                                    <option value="<?php echo $class['id']; ?>"><?php echo htmlspecialchars($class['class_name']); ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                    </div>
-                    <div>
-                        <label style="display:block; margin-bottom:0.5rem;">Topics Covered</label>
-                        <textarea name="topics_covered" required class="form-input" rows="4"></textarea>
-                    </div>
-                    <div>
-                        <label style="display:block; margin-bottom:0.5rem;">Assignment Given</label>
-                        <textarea name="assignment_details" class="form-input" rows="3"></textarea>
-                    </div>
-                     <div>
-                        <label style="display:block; margin-bottom:0.5rem;">Upload Relevant Document (Optional)</label>
-                        <input type="file" name="document" class="form-input">
-                    </div>
-                    <div>
-                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Submit & Auto-Approve</button>
-                    </div>
-                </form>
+                        <div>
+                            <label style="display:block; margin-bottom:0.5rem;">Topics Covered</label>
+                            <textarea name="topics_covered" required class="form-input" rows="4"></textarea>
+                        </div>
+                        <div>
+                            <label style="display:block; margin-bottom:0.5rem;">Assignment Given</label>
+                            <textarea name="assignment_details" class="form-input" rows="3"></textarea>
+                        </div>
+                         <div>
+                            <label style="display:block; margin-bottom:0.5rem;">Upload Relevant Document (Optional)</label>
+                            <input type="file" name="document" class="form-input">
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Submit & Auto-Approve</button>
+                        </div>
+                    </form>
+                <?php endif; ?>
             </section>
         </div>
     </main>

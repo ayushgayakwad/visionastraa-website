@@ -23,6 +23,7 @@ include '../auth.php';
                 <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link active">Dashboard</a>
+                    <a href="manage_faculty.php" class="nav-link">Manage Faculty</a>
                     <a href="manage_timetable.php" class="nav-link">Manage Timetable</a>
                     <a href="review_logs.php" class="nav-link">Review Work Logs</a>
                     <a href="submit_work_log.php" class="nav-link">Submit My Log</a>
@@ -37,6 +38,10 @@ include '../auth.php';
                 <div class="hero-content" style="max-width: 600px; margin: 0 auto;">
                     <h1 class="hero-title" style="text-align:center; color:#3a4a6b;">Welcome, Faculty Admin!</h1>
                     <div class="dashboard-actions">
+                        <a href="manage_faculty.php" class="dashboard-action-btn">
+                            <span class="dashboard-action-icon"><i class="fa-solid fa-users"></i></span>
+                            Manage Faculty
+                        </a>
                         <a href="manage_timetable.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-calendar-alt"></i></span>
                             Manage Timetable

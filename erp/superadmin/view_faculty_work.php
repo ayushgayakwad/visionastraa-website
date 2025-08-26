@@ -6,7 +6,6 @@ $message = '';
 $tab = $_GET['tab'] ?? 'pending';
 $reviewer_id = $_SESSION['user_id'];
 
-// Handle log approval/rejection
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['log_id'], $_POST['action'])) {
     $log_id = (int)$_POST['log_id'];
     $action = $_POST['action'];
@@ -19,17 +18,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['log_id'], $_POST['act
     }
 }
 
-// Get all faculty for the filter dropdown
 $stmt = $pdo->query('SELECT id, name FROM erp_users WHERE role IN ("faculty", "faculty_admin") ORDER BY name ASC');
 $faculty_list = $stmt->fetchAll();
 
-// Build the query to fetch logs
 $selected_faculty_id = $_GET['faculty_id'] ?? 'all';
 
-$sql = 'SELECT l.*, u.name as faculty_name, c.name as class_name 
+$sql = 'SELECT l.*, u.name as faculty_name, tt.class_name 
         FROM erp_faculty_logs l 
         JOIN erp_users u ON l.faculty_id = u.id 
-        JOIN erp_classes c ON l.class_id = c.id
+        JOIN erp_timetable tt ON l.timetable_id = tt.id
         WHERE l.status = :status';
 
 $params = [':status' => $tab];
@@ -75,7 +72,6 @@ $logs = $stmt->fetchAll();
                     <a href="manage_faculty.php" class="nav-link">Faculty</a>
                     <a href="manage_students.php" class="nav-link">Students</a>
                     <a href="manage_fees.php" class="nav-link">Fees</a>
-                    <a href="manage_classes.php" class="nav-link">Classes</a>
                     <a href="view_attendance.php" class="nav-link">Attendance</a>
                     <a href="view_faculty_work.php" class="nav-link active">Faculty Work</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
@@ -119,7 +115,6 @@ $logs = $stmt->fetchAll();
                                 <th>Faculty</th>
                                 <th>Date</th>
                                 <th>Class</th>
-                                <th>Hours</th>
                                 <th>Topics Covered</th>
                                 <th>Assignment</th>
                                 <th>Document</th>
@@ -141,7 +136,6 @@ $logs = $stmt->fetchAll();
                                 <td><?php echo htmlspecialchars($log['faculty_name']); ?></td>
                                 <td><?php echo date('d M Y', strtotime($log['date'])); ?></td>
                                 <td><?php echo htmlspecialchars($log['class_name']); ?></td>
-                                <td><?php echo htmlspecialchars($log['hours_worked']); ?></td>
                                 <td><?php echo nl2br(htmlspecialchars($log['topics_covered'])); ?></td>
                                 <td><?php echo nl2br(htmlspecialchars($log['assignment_details'])); ?></td>
                                 <td>
