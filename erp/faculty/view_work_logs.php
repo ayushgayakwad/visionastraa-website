@@ -37,6 +37,7 @@ $logs = $stmt->fetchAll();
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
                     <a href="submit_work_log.php" class="nav-link">Submit Work Log</a>
                     <a href="view_work_logs.php" class="nav-link">View Work Logs</a>
+                    <a href="view_work_stats.php" class="nav-link">My Work Stats</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>

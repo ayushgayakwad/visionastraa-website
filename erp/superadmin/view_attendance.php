@@ -62,6 +62,7 @@ if (!empty($todays_classes)) {
                     <a href="manage_fees.php" class="nav-link">Fees</a>
                     <a href="view_attendance.php" class="nav-link">Attendance</a>
                     <a href="view_faculty_work.php" class="nav-link">Faculty Work</a>
+                    <a href="view_work_stats.php" class="nav-link">Work Stats</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>

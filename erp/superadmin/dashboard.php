@@ -1,7 +1,7 @@
 <?php
 $required_role = 'super_admin';
 include '../auth.php';
-require_once '../db.php'; // Make sure db connection is included
+require_once '../db.php';
 
 // Get user's name from the database
 $stmt = $pdo->prepare("SELECT name FROM erp_users WHERE id = ?");
@@ -47,6 +47,7 @@ if ($hour < 12) {
                     <a href="manage_fees.php" class="nav-link">Fees</a>
                     <a href="view_attendance.php" class="nav-link">Attendance</a>
                     <a href="view_faculty_work.php" class="nav-link">Faculty Work</a>
+                    <a href="view_work_stats.php" class="nav-link">Work Stats</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>
@@ -81,6 +82,10 @@ if ($hour < 12) {
                         <a href="view_faculty_work.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-clock"></i></span>
                             Faculty Work
+                        </a>
+                        <a href="view_work_stats.php" class="dashboard-action-btn">
+                            <span class="dashboard-action-icon"><i class="fa-solid fa-chart-line"></i></span>
+                            Work Stats
                         </a>
                     </div>
                 </div>
