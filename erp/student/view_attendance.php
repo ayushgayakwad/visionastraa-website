@@ -2,19 +2,32 @@
 $required_role = 'student';
 include '../auth.php';
 require_once '../db.php';
-$stmt = $pdo->prepare('SELECT id, name FROM erp_classes ORDER BY name ASC');
-$stmt->execute();
-$classes = $stmt->fetchAll();
-$class_id = $_GET['class_id'] ?? ($classes[0]['id'] ?? null);
-$month = $_GET['month'] ?? date('Y-m');
+$student_id = $_SESSION['user_id'];
+
+$date = $_GET['date'] ?? date('Y-m-d');
+$day_of_week = date('l', strtotime($date));
+
+// Find the start of the week for the selected date
+$date_obj = new DateTime($date);
+$date_obj->modify('monday this week');
+$week_start_date = $date_obj->format('Y-m-d');
+
+// Fetch today's classes from the timetable for that specific week
+$stmt = $pdo->prepare('SELECT tt.*, u.name as faculty_name FROM erp_timetable tt LEFT JOIN erp_users u ON tt.faculty_id = u.id WHERE tt.week_start_date = ? AND tt.day_of_week = ? ORDER BY tt.time_slot ASC');
+$stmt->execute([$week_start_date, $day_of_week]);
+$todays_classes = $stmt->fetchAll();
+
+// Fetch student's attendance for the selected date
 $attendance = [];
-if ($class_id) {
-    $start = $month . '-01';
-    $end = date('Y-m-t', strtotime($start));
-    $stmt = $pdo->prepare('SELECT * FROM erp_attendance WHERE class_id = ? AND student_id = ? AND date BETWEEN ? AND ?');
-    $stmt->execute([$class_id, $_SESSION['user_id'], $start, $end]);
+if (!empty($todays_classes)) {
+    $timetable_ids = array_column($todays_classes, 'id');
+    $placeholders = implode(',', array_fill(0, count($timetable_ids), '?'));
+
+    $stmt = $pdo->prepare("SELECT timetable_id, status FROM erp_attendance WHERE student_id = ? AND date = ? AND timetable_id IN ($placeholders)");
+    $params = array_merge([$student_id, $date], $timetable_ids);
+    $stmt->execute($params);
     foreach ($stmt->fetchAll() as $row) {
-        $attendance[$row['date']] = $row['status'];
+        $attendance[$row['timetable_id']] = $row['status'];
     }
 }
 ?>
@@ -27,11 +40,6 @@ if ($class_id) {
     <link rel="stylesheet" href="../erp-theme.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <style>
-        .present { color: #2e7d32; font-weight: 600; }
-        .absent { color: #c62828; font-weight: 600; }
-        .table th, .table td { text-align: center; }
-    </style>
 </head>
 <body>
     <header class="header" id="header">
@@ -55,49 +63,43 @@ if ($class_id) {
     <main>
         <div class="container">
             <section class="card">
-                <h2 style="color:#3a4a6b;">Attendance Calendar</h2>
-                <form method="get" style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
-                    <label>Class:
-                        <select name="class_id" class="form-input">
-                            <?php foreach ($classes as $class): ?>
-                                <option value="<?php echo $class['id']; ?>" <?php if ($class_id == $class['id']) echo 'selected'; ?>><?php echo htmlspecialchars($class['name']); ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </label>
-                    <label>Month:
-                        <input type="month" name="month" value="<?php echo htmlspecialchars($month); ?>" class="form-input">
-                    </label>
-                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-eye"></i> View</button>
+                <h2 style="color:#3a4a6b;">My Attendance for <?php echo date("F j, Y", strtotime($date)); ?> (<?php echo $day_of_week; ?>)</h2>
+                <form method="GET" style="margin-bottom: 2em;">
+                    <label for="date" style="font-weight: 500;">Select Date:</label>
+                    <input type="date" id="date" name="date" value="<?php echo htmlspecialchars($date); ?>" class="form-input" onchange="this.form.submit()">
                 </form>
-                <?php if ($class_id): ?>
-                <div style="overflow-x:auto;">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Day</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $days = range(1, date('t', strtotime($month.'-01')));
-                        foreach ($days as $d) {
-                            $date = $month.'-'.str_pad($d,2,'0',STR_PAD_LEFT);
-                            $status = $attendance[$date] ?? '';
-                            echo '<tr><td>'.$d.'</td>';
-                            if ($status === 'present') {
-                                echo '<td class="present">Present</td>';
-                            } elseif ($status === 'absent') {
-                                echo '<td class="absent">Absent</td>';
-                            } else {
-                                echo '<td></td>';
-                            }
-                            echo '</tr>';
-                        }
-                        ?>
-                    </tbody>
-                </table>
-                </div>
+                <?php if (empty($todays_classes)): ?>
+                    <div class="alert">No classes scheduled for today.</div>
+                <?php else: ?>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Faculty</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($todays_classes as $class): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($class['class_name']); ?></td>
+                                    <td><?php echo htmlspecialchars($class['faculty_name'] ?? 'N/A'); ?></td>
+                                    <td>
+                                        <?php
+                                        $status = $attendance[$class['id']] ?? 'Not Marked';
+                                        $status_class = '';
+                                        if ($status == 'present') {
+                                            $status_class = 'present';
+                                        } elseif ($status == 'absent') {
+                                            $status_class = 'absent';
+                                        }
+                                        echo '<span class="' . $status_class . '">' . ucfirst($status) . '</span>';
+                                        ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
                 <?php endif; ?>
             </section>
         </div>

@@ -3,21 +3,39 @@ $required_role = 'admin';
 include '../auth.php';
 require_once '../db.php';
 $message = '';
-$stmt = $pdo->prepare('SELECT id, name FROM erp_classes ORDER BY name ASC');
-$stmt->execute();
-$classes = $stmt->fetchAll();
+
+// --- Week & Day Logic ---
+$date = $_GET['date'] ?? date('Y-m-d');
+$day_of_week = date('l', strtotime($date));
+
+// Find the start of the week (Monday) for the selected date
+$date_obj = new DateTime($date);
+$date_obj->modify('monday this week');
+$week_start_date = $date_obj->format('Y-m-d');
+// --- End Week & Day Logic ---
+
+
+// Fetch today's classes from the timetable for the specific week
+$stmt = $pdo->prepare('SELECT tt.*, u.name as faculty_name FROM erp_timetable tt LEFT JOIN erp_users u ON tt.faculty_id = u.id WHERE tt.week_start_date = ? AND tt.day_of_week = ? ORDER BY tt.time_slot ASC');
+$stmt->execute([$week_start_date, $day_of_week]);
+$todays_classes = $stmt->fetchAll();
+
+// Fetch all students and admins
 $stmt = $pdo->prepare('SELECT id, name, role FROM erp_users WHERE role IN ("student", "admin") ORDER BY name ASC');
 $stmt->execute();
 $users = $stmt->fetchAll();
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['class_id'], $_POST['date'])) {
-    $class_id = $_POST['class_id'];
-    $date = $_POST['date'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['timetable_id'])) {
+    $timetable_id = $_POST['timetable_id'];
+    $date_for_insert = $_POST['date'];
+
     foreach ($users as $user) {
         $status = $_POST['attendance'][$user['id']] ?? 'absent';
-        $stmt = $pdo->prepare('INSERT INTO erp_attendance (student_id, class_id, date, status, marked_by) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE status=VALUES(status), marked_by=VALUES(marked_by)');
-        $stmt->execute([$user['id'], $class_id, $date, $status, $_SESSION['user_id']]);
+
+        $stmt = $pdo->prepare('INSERT INTO erp_attendance (student_id, timetable_id, date, status, marked_by) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE status=VALUES(status), marked_by=VALUES(marked_by)');
+        $stmt->execute([$user['id'], $timetable_id, $date_for_insert, $status, $_SESSION['user_id']]);
     }
-    $message = 'Attendance marked!';
+    $message = 'Attendance marked successfully!';
 }
 ?>
 <!DOCTYPE html>
@@ -53,52 +71,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['class_id'], $_POST['d
     <main>
         <div class="container">
             <section class="form-section card">
-                <h2 style="color:#3a4a6b; margin-bottom: 1.5rem;">Mark Attendance</h2>
+                <h2 style="color:#3a4a6b; margin-bottom: 1.5rem;">Mark Attendance for <?php echo date("F j, Y", strtotime($date)); ?> (<?php echo $day_of_week; ?>)</h2>
                 <?php if ($message): ?>
                     <div class="alert"><?php echo htmlspecialchars($message); ?></div>
                 <?php endif; ?>
-                <form method="post" style="display: grid; gap: 1rem;">
-                    <div style="display:grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
-                        <div>
-                            <label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Class</label>
-                            <select name="class_id" required class="form-input">
-                                <option value="">Select Class</option>
-                                <?php foreach ($classes as $class): ?>
-                                    <option value="<?php echo $class['id']; ?>"><?php echo htmlspecialchars($class['name']); ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div>
-                            <label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Date</label>
-                            <input type="date" name="date" required class="form-input" value="<?php echo date('Y-m-d'); ?>">
-                        </div>
-                    </div>
-                    <div style="overflow-x:auto;">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>User</th>
-                                    <th>Role</th>
-                                    <th>Present</th>
-                                    <th>Absent</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($users as $user): ?>
-                                <tr>
-                                    <td><?php echo htmlspecialchars($user['name']); ?></td>
-                                    <td><?php echo ucfirst(htmlspecialchars($user['role'])); ?></td>
-                                    <td style="text-align:center"><input type="radio" name="attendance[<?php echo $user['id']; ?>]" value="present" checked></td>
-                                    <td style="text-align:center"><input type="radio" name="attendance[<?php echo $user['id']; ?>]" value="absent"></td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Mark Attendance</button>
-                    </div>
+
+                <form method="GET" style="margin-bottom: 2em;">
+                    <label for="date" style="font-weight: 500;">Select Date:</label>
+                    <input type="date" id="date" name="date" value="<?php echo htmlspecialchars($date); ?>" class="form-input" onchange="this.form.submit()">
                 </form>
+
+                <?php if (empty($todays_classes)): ?>
+                    <div class="alert">No classes scheduled for today in the timetable.</div>
+                <?php else: ?>
+                    <?php foreach ($todays_classes as $class): ?>
+                        <div class="card" style="margin-bottom: 2em;">
+                            <h3 style="color:#3a4a6b;"><?php echo htmlspecialchars($class['class_name']); ?></h3>
+                            <p style="color:#6b7a99;">Faculty: <?php echo htmlspecialchars($class['faculty_name'] ?? 'N/A'); ?></p>
+                            <form method="POST">
+                                <input type="hidden" name="timetable_id" value="<?php echo $class['id']; ?>">
+                                <input type="hidden" name="date" value="<?php echo $date; ?>">
+                                <div style="overflow-x:auto;">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>User</th>
+                                                <th>Role</th>
+                                                <th>Present</th>
+                                                <th>Absent</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($users as $user): ?>
+                                            <tr>
+                                                <td><?php echo htmlspecialchars($user['name']); ?></td>
+                                                <td><?php echo ucfirst(htmlspecialchars($user['role'])); ?></td>
+                                                <td style="text-align:center"><input type="radio" name="attendance[<?php echo $user['id']; ?>]" value="present" checked></td>
+                                                <td style="text-align:center"><input type="radio" name="attendance[<?php echo $user['id']; ?>]" value="absent"></td>
+                                            </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="margin-top: 1em;">Mark Attendance for this Class</button>
+                            </form>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </section>
         </div>
     </main>
