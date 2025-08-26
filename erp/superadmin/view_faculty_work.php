@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['log_id'], $_POST['act
     $action = $_POST['action'];
     $comments = $_POST['comments'] ?? '';
 
-    if ($action === 'approve' || $action === 'reject') {
+    if ($action === 'approved' || $action === 'rejected') {
         $stmt = $pdo->prepare('UPDATE erp_faculty_logs SET status = ?, reviewer_id = ?, review_comments = ?, reviewed_at = NOW() WHERE id = ?');
         $stmt->execute([$action, $reviewer_id, $comments, $log_id]);
         $message = "Log has been " . $action . "d.";
@@ -156,8 +156,8 @@ $logs = $stmt->fetchAll();
                                     <form method="POST">
                                         <input type="hidden" name="log_id" value="<?php echo $log['id']; ?>">
                                         <textarea name="comments" placeholder="Add comments..." rows="2" class="form-input" style="margin-bottom: 0.5rem;"></textarea>
-                                        <button type="submit" name="action" value="approve" class="btn btn-primary" style="margin-right: 0.5rem;">Approve</button>
-                                        <button type="submit" name="action" value="reject" class="btn">Reject</button>
+                                        <button type="submit" name="action" value="approved" class="btn btn-primary" style="margin-right: 0.5rem;">Approve</button>
+                                        <button type="submit" name="action" value="rejected" class="btn">Reject</button>
                                     </form>
                                 </td>
                                 <?php else: ?>
