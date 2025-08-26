@@ -59,7 +59,7 @@ if ($hour < 12) {
                             <span class="dashboard-action-icon"><i class="fa-solid fa-calendar-days"></i></span>
                             View Attendance
                         </a>
-                        <a href="fee_payment.php" class="dashboard-action-btn" style="margin-top:1em;background:#e3eafc;color:#3a4a6b;">
+                        <a href="fee_payment.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-indian-rupee-sign"></i></span>
                             Fee Payment
                         </a>
