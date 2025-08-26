@@ -20,7 +20,7 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : 'all';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         .tab-btns { display: flex; gap: 1em; margin-bottom: 2em; flex-wrap: wrap; }
-        .tab-btn { padding: 0.7em 2em; border-radius: 8px; background: #e3eafc; color: #3a4a6b; font-weight: 500; border: none; cursor: pointer; text-align:center; }
+        .tab-btn { padding: 0.7em 2em; border-radius: 8px; background: #e3eafc; color: #3a4a6b; font-weight: 500; border: none; cursor: pointer; text-align:center; text-decoration:none; }
         .tab-btn.active { background: #3a4a6b; color: #fff; }
         .filter-form { display: flex; gap: 1em; margin-bottom: 1em; flex-wrap: wrap; }
         .table { width: 100%; border-collapse: collapse; }
@@ -48,13 +48,12 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : 'all';
                 <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
-                    <a href="manage_admins.php" class="nav-link">Admins</a>
+                    <a href="manage_timetable.php" class="nav-link">Manage Timetable</a>
                     <a href="manage_faculty.php" class="nav-link">Faculty</a>
                     <a href="manage_students.php" class="nav-link">Students</a>
-                    <a href="manage_fees.php" class="nav-link">Fees</a>
-                    <a href="manage_classes.php" class="nav-link">Classes</a>
+                    <a href="manage_fees.php" class="nav-link active">Fees</a>
                     <a href="view_attendance.php" class="nav-link">Attendance</a>
-                    <a href="view_faculty_work.php" class="nav-link active">Faculty Work</a>
+                    <a href="view_faculty_work.php" class="nav-link">Faculty Work</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>
@@ -67,9 +66,72 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : 'all';
                     <h2 class="hero-title" style="text-align:center; color:#3a4a6b; margin-bottom:1em;"><i class="fa-solid fa-indian-rupee-sign"></i> Manage Student Fees</h2>
                     <div class="tab-btns">
                         <a href="manage_fees.php?tab=all" class="tab-btn<?php echo ($tab=='all')?' active':''; ?>">All Fees</a>
-                        <a href="manage_fees.php?tab=approve" class="tab-btn<?php echo ($tab=='approve')?' active':''; ?>">Approve/Reject Fees</a>
+                        <a href="manage_fees.php?tab=approve" class="tab-btn<?php echo ($tab=='approve')?' active':''; ?>">Approve/Reject</a>
+                        <a href="manage_fees.php?tab=stats" class="tab-btn<?php echo ($tab=='stats')?' active':''; ?>">Stats</a>
                     </div>
-                    <?php if ($tab == 'all'): ?>
+                    <?php if ($tab == 'stats'): ?>
+                        <?php
+                        // Fetch distinct batches
+                        $stmt_batches = $pdo->query("SELECT DISTINCT batch FROM erp_users WHERE batch IS NOT NULL AND batch != '' ORDER BY batch ASC");
+                        $batches = $stmt_batches->fetchAll(PDO::FETCH_COLUMN);
+
+                        $stats = [];
+                        $grand_total_all_time = 0;
+                        $grand_total_this_month = 0;
+
+                        // Get the first and last day of the current month
+                        $first_day_this_month = date('Y-m-01');
+                        $last_day_this_month = date('Y-m-t');
+
+                        foreach ($batches as $batch) {
+                            // Total fees collected for the batch
+                            $stmt_total = $pdo->prepare("SELECT SUM(sf.paid_amount) as total FROM student_fees sf JOIN erp_users u ON sf.student_id = u.id WHERE sf.status = 'approved' AND u.batch = ?");
+                            $stmt_total->execute([$batch]);
+                            $total_collected = $stmt_total->fetchColumn() ?: 0;
+                            $grand_total_all_time += $total_collected;
+
+                            // Fees collected this month for the batch
+                            $stmt_month = $pdo->prepare("SELECT SUM(sf.paid_amount) as total FROM student_fees sf JOIN erp_users u ON sf.student_id = u.id WHERE sf.status = 'approved' AND u.batch = ? AND sf.created_at BETWEEN ? AND ?");
+                            $stmt_month->execute([$batch, $first_day_this_month, $last_day_this_month]);
+                            $month_collected = $stmt_month->fetchColumn() ?: 0;
+                            $grand_total_this_month += $month_collected;
+
+                            $stats[] = [
+                                'batch' => $batch,
+                                'total_collected' => $total_collected,
+                                'month_collected' => $month_collected
+                            ];
+                        }
+                        ?>
+                        <h3 style="color:#3a4a6b; margin-bottom:1.5rem;">Fee Collection Statistics</h3>
+                        <div style="overflow-x:auto;">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Batch</th>
+                                        <th>Fees Collected (This Month)</th>
+                                        <th>Total Fees Collected (All Time)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($stats as $stat): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($stat['batch']); ?></td>
+                                        <td>₹<?php echo number_format($stat['month_collected'], 2); ?></td>
+                                        <td>₹<?php echo number_format($stat['total_collected'], 2); ?></td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                                <tfoot>
+                                    <tr style="background:#e3eafc; font-weight:bold;">
+                                        <td>Grand Total</td>
+                                        <td>₹<?php echo number_format($grand_total_this_month, 2); ?></td>
+                                        <td>₹<?php echo number_format($grand_total_all_time, 2); ?></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    <?php elseif ($tab == 'all'): ?>
                         <form method="get" class="filter-form">
                             <input type="hidden" name="tab" value="all">
                             <input type="text" name="search" placeholder="Search by student name or email" class="form-input" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
@@ -101,14 +163,7 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : 'all';
                         ?>
                         <table class="table" style="width:100%;margin-top:1em;">
                             <thead>
-                                <tr>
-                                    <th>Student Name</th>
-                                    <th>Email</th>
-                                    <th>Paid Amount</th>
-                                    <th>Screenshot</th>
-                                    <th>Status</th>
-                                    <th>Submitted At</th>
-                                </tr>
+                                <tr><th>Student Name</th><th>Email</th><th>Paid Amount</th><th>Screenshot</th><th>Status</th><th>Submitted At</th></tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($fees as $fee): ?>
@@ -117,9 +172,7 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : 'all';
                                     <td data-label="Email"><?php echo htmlspecialchars($fee['email']); ?></td>
                                     <td data-label="Paid Amount">₹<?php echo number_format($fee['paid_amount']); ?></td>
                                     <td data-label="Screenshot"><a href="../uploads/<?php echo htmlspecialchars($fee['screenshot']); ?>" target="_blank">View</a></td>
-                                    <td data-label="Status" style="color:<?php echo ($fee['status'] == 'approved') ? '#2ecc71' : ($fee['status'] == 'rejected' ? '#e74c3c' : '#e67e22'); ?>; font-weight:500;">
-                                        <?php echo ucfirst($fee['status']); ?>
-                                    </td>
+                                    <td data-label="Status" style="color:<?php echo ($fee['status'] == 'approved') ? '#2ecc71' : ($fee['status'] == 'rejected' ? '#e74c3c' : '#e67e22'); ?>; font-weight:500;"><?php echo ucfirst($fee['status']); ?></td>
                                     <td data-label="Submitted At"><?php echo date('d M Y, h:i A', strtotime($fee['created_at'])); ?></td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -143,22 +196,12 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : 'all';
                             }
                             echo '<div style="background:#e3eafc;color:#2ecc71;padding:1em;border-radius:8px;margin-bottom:1em;text-align:center;font-weight:500;">Status updated successfully!</div>';
                         }
-                        // Fetch all pending/rejected fees
-                        $stmt = $pdo->query("SELECT sf.*, eu.name, eu.email FROM student_fees sf JOIN erp_users eu ON sf.student_id = eu.id WHERE sf.status IN ('pending','rejected') ORDER BY sf.created_at DESC");
+                        // Fetch all pending fees
+                        $stmt = $pdo->query("SELECT sf.*, eu.name, eu.email FROM student_fees sf JOIN erp_users eu ON sf.student_id = eu.id WHERE sf.status = 'pending' ORDER BY sf.created_at DESC");
                         $fees = $stmt->fetchAll();
                         ?>
                         <table class="table" style="width:100%;margin-top:1em;">
-                            <thead>
-                                <tr>
-                                    <th>Student Name</th>
-                                    <th>Email</th>
-                                    <th>Paid Amount</th>
-                                    <th>Screenshot</th>
-                                    <th>Status</th>
-                                    <th>Submitted At</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
+                            <thead><tr><th>Student Name</th><th>Email</th><th>Paid Amount</th><th>Screenshot</th><th>Status</th><th>Submitted At</th><th>Action</th></tr></thead>
                             <tbody>
                                 <?php foreach ($fees as $fee): ?>
                                 <tr>
@@ -166,15 +209,13 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : 'all';
                                     <td data-label="Email"><?php echo htmlspecialchars($fee['email']); ?></td>
                                     <td data-label="Paid Amount">₹<?php echo number_format($fee['paid_amount']); ?></td>
                                     <td data-label="Screenshot"><a href="../uploads/<?php echo htmlspecialchars($fee['screenshot']); ?>" target="_blank">View</a></td>
-                                    <td data-label="Status" style="color:<?php echo ($fee['status'] == 'approved') ? '#2ecc71' : ($fee['status'] == 'rejected' ? '#e74c3c' : '#e67e22'); ?>; font-weight:500;">
-                                        <?php echo ucfirst($fee['status']); ?>
-                                    </td>
+                                    <td data-label="Status" style="color:#e67e22; font-weight:500;"><?php echo ucfirst($fee['status']); ?></td>
                                     <td data-label="Submitted At"><?php echo date('d M Y, h:i A', strtotime($fee['created_at'])); ?></td>
                                     <td data-label="Action">
                                         <form method="post" style="display:inline">
                                             <input type="hidden" name="fee_id" value="<?php echo $fee['id']; ?>">
                                             <button type="submit" name="action" value="approve" class="btn btn-primary" style="margin-right:0.5em;">Approve</button>
-                                            <button type="submit" name="action" value="reject" class="btn btn-danger">Reject</button>
+                                            <button type="submit" name="action" value="reject" class="btn">Reject</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -182,7 +223,7 @@ $tab = isset($_GET['tab']) ? $_GET['tab'] : 'all';
                             </tbody>
                         </table>
                         <?php if (empty($fees)): ?>
-                            <p style="text-align:center; color:#3a4a6b;">No pending or rejected fee submissions.</p>
+                            <p style="text-align:center; color:#3a4a6b;">No pending fee submissions.</p>
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>

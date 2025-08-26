@@ -3,6 +3,15 @@ $required_role = 'admin';
 include '../auth.php';
 require_once '../db.php';
 $message = '';
+$admin_id = $_SESSION['user_id'];
+
+// **NEW:** Fetch the logged-in admin's details to get their batch and location
+$stmt_admin = $pdo->prepare("SELECT batch, location FROM erp_users WHERE id = ?");
+$stmt_admin->execute([$admin_id]);
+$admin_details = $stmt_admin->fetch();
+$admin_batch = $admin_details['batch'] ?? '';
+$admin_location = $admin_details['location'] ?? '';
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_student'])) {
     $name = $_POST['name'] ?? '';
@@ -11,8 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_student'])) {
     $dob = $_POST['dob'] ?? null;
     $phone = $_POST['phone'] ?? '';
     $college_name = $_POST['college_name'] ?? '';
-    $batch = $_POST['batch'] ?? '';
-    $location = $_POST['location'] ?? '';
+    // **CHANGE:** Batch and location are no longer taken from the form
+    // $batch = $_POST['batch'] ?? '';
+    // $location = $_POST['location'] ?? '';
+
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message = 'Invalid email address.';
     } elseif (strlen($password) < 6) {
@@ -26,9 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_student'])) {
             $message = 'Email already exists.';
         } else {
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            // **CHANGE:** New students are created with approved = 0
+            // **CHANGE:** New students are created with approved = 0 and the admin's batch/location
             $stmt = $pdo->prepare('INSERT INTO erp_users (name, email, password, dob, phone, college_name, role, approved, batch, location) VALUES (?, ?, ?, ?, ?, ?, "student", 0, ?, ?)');
-            $stmt->execute([$name, $email, $hash, $dob, $phone, $college_name, $batch, $location]);
+            $stmt->execute([$name, $email, $hash, $dob, $phone, $college_name, $admin_batch, $admin_location]);
             $message = 'Student created successfully! Awaiting approval from Super Admin.';
         }
     }
@@ -97,8 +108,7 @@ $students = $stmt->fetchAll();
                     <div><label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Date of Birth</label><input type="date" name="dob" class="form-input"></div>
                     <div><label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Phone *</label><input type="text" name="phone" required class="form-input"></div>
                     <div><label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">College Name</label><input type="text" name="college_name" class="form-input"></div>
-                    <div><label for="batch" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Batch</label><input type="text" id="batch" name="batch" class="form-input"></div>
-                    <div><label for="location" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Location</label><input type="text" id="location" name="location" class="form-input"></div>
+                    
                     <div style="grid-column: 1 / -1;"><button type="submit" name="create_student" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Student</button></div>
                 </form>
             </section>
@@ -119,7 +129,8 @@ $students = $stmt->fetchAll();
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>College</th>
-                                <th>Date of Birth</th>
+                                <th>Batch</th>
+                                <th>Location</th>
                                 <th>Created</th>
                             </tr>
                         </thead>
@@ -130,7 +141,8 @@ $students = $stmt->fetchAll();
                                 <td><?php echo htmlspecialchars($student['email']); ?></td>
                                 <td><?php echo htmlspecialchars($student['phone']); ?></td>
                                 <td><?php echo htmlspecialchars($student['college_name']); ?></td>
-                                <td><?php echo $student['dob'] ? date('M d, Y', strtotime($student['dob'])) : '-'; ?></td>
+                                <td><?php echo htmlspecialchars($student['batch']); ?></td>
+                                <td><?php echo htmlspecialchars($student['location']); ?></td>
                                 <td><?php echo date('M d, Y', strtotime($student['created_at'])); ?></td>
                             </tr>
                             <?php endforeach; ?>
