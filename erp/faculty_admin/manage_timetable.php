@@ -13,18 +13,24 @@ $date_obj->setISODate($year, $week_num);
 $week_start_date = $date_obj->format('Y-m-d');
 // --- End Week Selection Logic ---
 
-$time_slots = [
-    'GD_MORNING' => '9:00 AM - 9:30 AM (Group Discussion)',
-    'CLASS_1' => '9:30 AM - 11:00 AM (Class 1)',
-    'BREAK' => '11:00 AM - 11:30 AM (Break)',
-    'CLASS_2' => '11:30 AM - 1:30 PM (Class 2)',
-    'LUNCH' => '1:30 PM - 2:30 PM (Lunch)',
-    'LAB' => '2:30 PM - 4:30 PM (Lab Session)',
-    'GD_EVENING' => '4:30 PM - 6:00 PM (Evening GD)'
+// **CHANGE:** Updated time slots array for display and logic
+$all_time_slots = [
+    'GD_MORNING' => '9:00 AM - 9:30 AM',
+    'CLASS_1' => '9:30 AM - 11:00 AM',
+    'BREAK' => '11:00 AM - 11:30 AM',
+    'CLASS_2' => '11:30 AM - 1:30 PM',
+    'LUNCH' => '1:30 PM - 2:30 PM',
+    'LAB' => '2:30 PM - 4:30 PM',
+    'GD_EVENING' => '4:30 PM - 6:00 PM'
 ];
 
+// **CHANGE:** Filtered array for the form dropdown (excluding breaks)
+$bookable_time_slots = array_filter($all_time_slots, function($key) {
+    return $key !== 'BREAK' && $key !== 'LUNCH';
+}, ARRAY_FILTER_USE_KEY);
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // --- Handle Add Slot ---
     if (isset($_POST['add_slot'])) {
         $week_start_for_insert = $_POST['week_start_date'];
         $day_of_week = $_POST['day_of_week'];
@@ -45,7 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     } 
-    // --- Handle Edit Slot ---
     elseif (isset($_POST['edit_slot'])) {
         $slot_id = $_POST['edit_slot_id'];
         $class_name = $_POST['edit_class_name'];
@@ -60,7 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $message = '<span style="color:red;">Error updating slot: ' . $e->getMessage() . '</span>';
         }
     }
-    // --- Handle Delete Slot ---
     elseif (isset($_POST['delete_slot'])) {
         $slot_id = $_POST['slot_id'];
         $stmt = $pdo->prepare('DELETE FROM erp_timetable WHERE id = ?');
@@ -69,12 +73,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Fetch faculty list for dropdowns
 $stmt = $pdo->prepare('SELECT id, name FROM erp_users WHERE role IN ("faculty", "faculty_admin") ORDER BY name ASC');
 $stmt->execute();
 $faculty_list = $stmt->fetchAll();
 
-// Fetch timetable for the selected week
 $timetable = [];
 $stmt = $pdo->prepare('SELECT tt.*, u.name as faculty_name FROM erp_timetable tt LEFT JOIN erp_users u ON tt.faculty_id = u.id WHERE tt.week_start_date = ? ORDER BY FIELD(day_of_week, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"), FIELD(time_slot, "GD_MORNING", "CLASS_1", "BREAK", "CLASS_2", "LUNCH", "LAB", "GD_EVENING")');
 $stmt->execute([$week_start_date]);
@@ -102,7 +104,7 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
                     <a href="manage_faculty.php" class="nav-link">Manage Faculty</a>
-                    <a href="manage_timetable.php" class="nav-link">Manage Timetable</a>
+                    <a href="manage_timetable.php" class="nav-link active">Manage Timetable</a>
                     <a href="review_logs.php" class="nav-link">Review Work Logs</a>
                     <a href="submit_work_log.php" class="nav-link">Submit My Log</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
@@ -128,25 +130,21 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
                     <div style="display:grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
                         <div>
                             <label>Day of the Week</label>
-                            <select name="day_of_week" required class="form-input">
-                                <?php foreach ($days as $day): ?><option value="<?php echo $day; ?>"><?php echo $day; ?></option><?php endforeach; ?>
-                            </select>
+                            <select name="day_of_week" required class="form-input"><?php foreach ($days as $day): ?><option value="<?php echo $day; ?>"><?php echo $day; ?></option><?php endforeach; ?></select>
                         </div>
                         <div>
                             <label>Time Slot</label>
                             <select name="time_slot" required class="form-input">
-                                <?php foreach ($time_slots as $key => $value): ?><option value="<?php echo $key; ?>"><?php echo $value; ?></option><?php endforeach; ?>
+                                <?php foreach ($bookable_time_slots as $key => $value): ?>
+                                    <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                         <div><label>Class Name</label><input type="text" name="class_name" required class="form-input" placeholder="e.g., Battery Technology"></div>
                         <div>
                             <label>Class Type</label>
                             <select name="class_type" required class="form-input">
-                                <option value="Theory">Theory</option>
-                                <option value="Practical">Practical</option>
-                                <option value="Presentation">Presentation</option>
-                                <option value="Group Discussion">Group Discussion</option>
-                                <option value="Others">Others</option>
+                                <option value="Theory">Theory</option><option value="Practical">Practical</option><option value="Presentation">Presentation</option><option value="Group Discussion">Group Discussion</option><option value="Others">Others</option>
                             </select>
                         </div>
                         <div>
@@ -171,16 +169,13 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
                                     <?php foreach ($timetable[$day] as $slot): ?>
                                         <tr>
                                             <td><?php echo htmlspecialchars($slot['day_of_week']); ?></td>
-                                            <td><?php echo $time_slots[$slot['time_slot']]; ?></td>
+                                            <td><?php echo $all_time_slots[$slot['time_slot']]; ?></td>
                                             <td><?php echo htmlspecialchars($slot['class_name']); ?></td>
                                             <td><?php echo htmlspecialchars($slot['class_type']); ?></td>
                                             <td><?php echo htmlspecialchars($slot['faculty_name'] ?? 'N/A'); ?></td>
                                             <td>
                                                 <button onclick="openEditModal(<?php echo $slot['id']; ?>)" class="btn" style="background:#e3eafc; color:#3a4a6b; margin-right: 0.5rem;"><i class="fa-solid fa-edit"></i> Edit</button>
-                                                <form method="POST" onsubmit="return confirm('Are you sure?');" style="display:inline-block;">
-                                                    <input type="hidden" name="slot_id" value="<?php echo $slot['id']; ?>">
-                                                    <button type="submit" name="delete_slot" class="btn" style="background: #e74c3c; color: #fff;">Delete</button>
-                                                </form>
+                                                <form method="POST" onsubmit="return confirm('Are you sure?');" style="display:inline-block;"><input type="hidden" name="slot_id" value="<?php echo $slot['id']; ?>"><button type="submit" name="delete_slot" class="btn" style="background: #e74c3c; color: #fff;">Delete</button></form>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -204,11 +199,7 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
                     <div>
                         <label>Class Type</label>
                         <select id="edit_class_type" name="edit_class_type" required class="form-input">
-                            <option value="Theory">Theory</option>
-                            <option value="Practical">Practical</option>
-                            <option value="Presentation">Presentation</option>
-                            <option value="Group Discussion">Group Discussion</option>
-                            <option value="Others">Others</option>
+                            <option value="Theory">Theory</option><option value="Practical">Practical</option><option value="Presentation">Presentation</option><option value="Group Discussion">Group Discussion</option><option value="Others">Others</option>
                         </select>
                     </div>
                     <div>
@@ -228,26 +219,17 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
     </div>
     <script>
         const editModal = document.getElementById('editModal');
-
         function openEditModal(slotId) {
-            fetch(`get_timetable_slot.php?id=${slotId}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        alert(data.error);
-                        return;
-                    }
-                    document.getElementById('edit_slot_id').value = data.id;
-                    document.getElementById('edit_class_name').value = data.class_name;
-                    document.getElementById('edit_class_type').value = data.class_type;
-                    document.getElementById('edit_faculty_id').value = data.faculty_id || '';
-                    editModal.style.display = 'flex';
-                });
+            fetch(`get_timetable_slot.php?id=${slotId}`).then(response => response.json()).then(data => {
+                if(data.error){ alert(data.error); return; }
+                document.getElementById('edit_slot_id').value = data.id;
+                document.getElementById('edit_class_name').value = data.class_name;
+                document.getElementById('edit_class_type').value = data.class_type;
+                document.getElementById('edit_faculty_id').value = data.faculty_id || '';
+                editModal.style.display = 'flex';
+            });
         }
-
-        function closeEditModal() {
-            editModal.style.display = 'none';
-        }
+        function closeEditModal() { editModal.style.display = 'none'; }
     </script>
 </body>
 </html>

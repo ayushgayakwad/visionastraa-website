@@ -13,15 +13,22 @@ $date_obj->setISODate($year, $week_num);
 $week_start_date = $date_obj->format('Y-m-d');
 // --- End Week Selection Logic ---
 
-$time_slots = [
-    'GD_MORNING' => '9:00 AM - 9:30 AM (Group Discussion)',
-    'CLASS_1' => '9:30 AM - 11:00 AM (Class 1)',
-    'BREAK' => '11:00 AM - 11:30 AM (Break)',
-    'CLASS_2' => '11:30 AM - 1:30 PM (Class 2)',
-    'LUNCH' => '1:30 PM - 2:30 PM (Lunch)',
-    'LAB' => '2:30 PM - 4:30 PM (Lab Session)',
-    'GD_EVENING' => '4:30 PM - 6:00 PM (Evening GD)'
+// **CHANGE:** Updated time slots array for display and logic
+$all_time_slots = [
+    'GD_MORNING' => '9:00 AM - 9:30 AM',
+    'CLASS_1' => '9:30 AM - 11:00 AM',
+    'BREAK' => '11:00 AM - 11:30 AM',
+    'CLASS_2' => '11:30 AM - 1:30 PM',
+    'LUNCH' => '1:30 PM - 2:30 PM',
+    'LAB' => '2:30 PM - 4:30 PM',
+    'GD_EVENING' => '4:30 PM - 6:00 PM'
 ];
+
+// **CHANGE:** Filtered array for the form dropdown (excluding breaks)
+$bookable_time_slots = array_filter($all_time_slots, function($key) {
+    return $key !== 'BREAK' && $key !== 'LUNCH';
+}, ARRAY_FILTER_USE_KEY);
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_slot'])) {
@@ -96,7 +103,7 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
                 <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
-                    <a href="manage_timetable.php" class="nav-link">Manage Timetable</a>
+                    <a href="manage_timetable.php" class="nav-link active">Manage Timetable</a>
                     <a href="manage_faculty.php" class="nav-link">Faculty</a>
                     <a href="manage_students.php" class="nav-link">Students</a>
                     <a href="manage_fees.php" class="nav-link">Fees</a>
@@ -129,7 +136,11 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
                         </div>
                         <div>
                             <label>Time Slot</label>
-                            <select name="time_slot" required class="form-input"><?php foreach ($time_slots as $key => $value): ?><option value="<?php echo $key; ?>"><?php echo $value; ?></option><?php endforeach; ?></select>
+                            <select name="time_slot" required class="form-input">
+                                <?php foreach ($bookable_time_slots as $key => $value): ?>
+                                    <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div><label>Class Name</label><input type="text" name="class_name" required class="form-input" placeholder="e.g., Battery Technology"></div>
                         <div>
@@ -160,7 +171,7 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
                                     <?php foreach ($timetable[$day] as $slot): ?>
                                         <tr>
                                             <td><?php echo htmlspecialchars($slot['day_of_week']); ?></td>
-                                            <td><?php echo $time_slots[$slot['time_slot']]; ?></td>
+                                            <td><?php echo $all_time_slots[$slot['time_slot']]; ?></td>
                                             <td><?php echo htmlspecialchars($slot['class_name']); ?></td>
                                             <td><?php echo htmlspecialchars($slot['class_type']); ?></td>
                                             <td><?php echo htmlspecialchars($slot['faculty_name'] ?? 'N/A'); ?></td>
