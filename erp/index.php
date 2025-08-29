@@ -49,12 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <header class="header" id="header">
         <div class="container">
             <div class="header-content" style="display:flex;align-items:center;justify-content:space-between;">
-                <a href="../ev-academy.html" class="logo" style="display:flex;align-items:center;gap:0.5em;">
-                    <div class="logo-icon"><span>VA</span></div>
-                    <span class="logo-text">EV Academy ERP</span>
+                <a href="https://visionastraa.com/the-best-ev-course-in-india.html" class="logo" style="display:flex;align-items:center;gap:0.5em;">
+                    <img src="logo.png" alt="Logo" style="height: 80px;">
                 </a>
                 <nav class="nav-desktop">
-                    <a href="../ev-academy.html" class="nav-link">Home</a>
+                    <a href="https://visionastraa.com/the-best-ev-course-in-india.html" class="nav-link">Home</a>
                     <a href="index.php" class="nav-link active">Login</a>
                 </nav>
             </div>

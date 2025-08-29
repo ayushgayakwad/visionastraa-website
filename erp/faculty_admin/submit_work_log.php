@@ -65,8 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="container">
             <div class="header-content" style="display:flex;align-items:center;justify-content:space-between;">
                 <a href="dashboard.php" class="logo" style="display:flex;align-items:center;gap:0.5em;">
-                    <div class="logo-icon"><span>VA</span></div>
-                    <span class="logo-text">EV Academy ERP</span>
+                    <img src="../logo.png" alt="Logo" style="height: 80px;">
                 </a>
                 <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
