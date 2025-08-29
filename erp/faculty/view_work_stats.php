@@ -78,13 +78,13 @@ foreach ($stmt_monthly_actual->fetchAll(PDO::FETCH_COLUMN) as $slot) { $monthly_
                 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
                     <div class="card">
                         <h3 style="color:#3a4a6b;">Daily Stats for <?php echo date("F j, Y", strtotime($selected_date)); ?></h3>
-                        <p><strong>Expected Hours:</strong> <?php echo number_format($daily_expected, 2); ?> hrs</p>
-                        <p><strong>Actual Worked Hours:</strong> <?php echo number_format($daily_actual, 2); ?> hrs</p>
+                        <p><strong>Expected Hours:</strong> <?php echo number_format($daily_expected, 1); ?> hrs</p>
+                        <p><strong>Actual Worked Hours:</strong> <?php echo number_format($daily_actual, 1); ?> hrs</p>
                     </div>
                     <div class="card">
                         <h3 style="color:#3a4a6b;">Monthly Stats for <?php echo date("F Y", strtotime($selected_month)); ?></h3>
-                        <p><strong>Expected Hours:</strong> <?php echo number_format($monthly_expected, 2); ?> hrs</p>
-                        <p><strong>Actual Worked Hours:</strong> <?php echo number_format($monthly_actual, 2); ?> hrs</p>
+                        <p><strong>Expected Hours:</strong> <?php echo number_format($monthly_expected, 1); ?> hrs</p>
+                        <p><strong>Actual Worked Hours:</strong> <?php echo number_format($monthly_actual, 1); ?> hrs</p>
                     </div>
                 </div>
             </section>
