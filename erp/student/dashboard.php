@@ -40,6 +40,7 @@ if ($hour < 12) {
                 <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link active">Dashboard</a>
+                    <a href="view_timetable.php" class="nav-link">View Timetable</a>
                     <a href="view_attendance.php" class="nav-link">View Attendance</a>
                     <a href="fee_payment.php" class="nav-link">Fee Payment</a>
                     <a href="upload_documents.php" class="nav-link">Upload Documents</a>
@@ -54,6 +55,10 @@ if ($hour < 12) {
                  <div class="hero-content" style="max-width: 600px; margin: 0 auto;">
                     <h1 class="hero-title" style="text-align:center; color:#3a4a6b;"><?php echo $greeting . ", " . $user_name; ?>!</h1>
                     <div class="dashboard-actions">
+                        <a href="view_timetable.php" class="dashboard-action-btn">
+                            <span class="dashboard-action-icon"><i class="fa-solid fa-calendar-alt"></i></span>
+                            View Timetable
+                        </a>
                         <a href="view_attendance.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-calendar-days"></i></span>
                             View Attendance
@@ -62,7 +67,7 @@ if ($hour < 12) {
                             <span class="dashboard-action-icon"><i class="fa-solid fa-indian-rupee-sign"></i></span>
                             Fee Payment
                         </a>
-                        <a href="upload_documents.php" class="dashboard-action-btn" style="margin-top:1em;">
+                        <a href="upload_documents.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-file-arrow-up"></i></span>
                             Upload Documents
                         </a>
