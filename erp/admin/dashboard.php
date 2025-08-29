@@ -41,6 +41,7 @@ if ($hour < 12) {
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link active">Dashboard</a>
                     <a href="manage_students.php" class="nav-link">Students</a>
+                    <a href="view_timetable.php" class="nav-link">View Timetable</a>
                     <a href="mark_attendance.php" class="nav-link">Mark Attendance</a>
                     <a href="view_attendance.php" class="nav-link">View Attendance</a>
                     <a href="upload_documents.php" class="nav-link">Upload Documents</a>
@@ -58,6 +59,10 @@ if ($hour < 12) {
                         <a href="manage_students.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-users"></i></span>
                             Students
+                        </a>
+                        <a href="view_timetable.php" class="dashboard-action-btn">
+                            <span class="dashboard-action-icon"><i class="fa-solid fa-calendar-alt"></i></span>
+                            View Timetable
                         </a>
                         <a href="mark_attendance.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-calendar-check"></i></span>
