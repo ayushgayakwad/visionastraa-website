@@ -66,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
+                    <a href="view_timetable.php" class="nav-link">View Timetable</a>
                     <a href="submit_work_log.php" class="nav-link">Submit Work Log</a>
                     <a href="view_work_logs.php" class="nav-link">View Work Logs</a>
                     <a href="view_work_stats.php" class="nav-link">My Work Stats</a>
