@@ -137,7 +137,7 @@ def send_email(name, to_email, role, attachment_path):
         <br><br>
         For any queries reach out to us on LinkedIn: <a href="https://in.linkedin.com/company/va-ev-academy">https://in.linkedin.com/company/va-ev-academy</a>
         <br>
-        Talk to our CEO: <a href="https://in.linkedin.com/in/nikhiljaincs">https://in.linkedin.com/in/nikhiljaincs</a>
+        Talk to our CEO: <a href="https://in.linkedin.com/in/nikhiljaincs">Nikhil Jain C S</a>
         <br><br>
         Find your offer letter attached below.
         """
