@@ -19,19 +19,15 @@ $tableCreationQuery = "CREATE TABLE IF NOT EXISTS ev_pbi_applications (
     last_name VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL,
     phone VARCHAR(15) NOT NULL,
-    dob VARCHAR(25) NOT NULL,
+    alt_phone VARCHAR(15) NOT NULL,
     state VARCHAR(100) NOT NULL,
-    location VARCHAR(255) NOT NULL,
     college VARCHAR(100) NOT NULL,
+    usn VARCHAR(15) NOT NULL,
     degree VARCHAR(100) NOT NULL,
     specialization VARCHAR(100) NOT NULL,
-    graduation_year VARCHAR(4) NOT NULL,
-    cgpa VARCHAR(10) NOT NULL,
-    resume LONGBLOB NOT NULL,
-    resume_filename VARCHAR(100) NOT NULL,
-    goals TEXT NOT NULL,
-    referral_code VARCHAR(50),
-    role VARCHAR(200) NOT NULL DEFAULT 'Not Selected',
+    internship VARCHAR(200) NOT NULL DEFAULT 'Not Selected',
+    center VARCHAR(100) NOT NULL,
+    start VARCHAR(100) NOT NULL,
     enrolled ENUM('true', 'false') NOT NULL DEFAULT 'false',
     confirmationEmailSent ENUM('true', 'false') NOT NULL DEFAULT 'false',
     submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -46,20 +42,15 @@ $first_name = $_POST['first_name'];
 $last_name = $_POST['last_name'];
 $email = $_POST['email'];
 $phone = $_POST['phone'];
-$dob = $_POST['dob'];
+$alt_phone = $_POST['alt_phone'];
 $state = $_POST['state'];
-$location = $_POST['location'];
 $college = $_POST['college'];
+$usn = $_POST['usn'];
 $degree = $_POST['degree'];
 $specialization = $_POST['specialization'];
-$graduation_year = $_POST['graduation'];
-$cgpa = $_POST['cgpa'];
-$goals = $_POST['goals'];
-$referral_code = isset($_POST['referral']) ? $_POST['referral'] : null;
-$role = $_POST['role'];
-
-$resume = file_get_contents($_FILES['resume']['tmp_name']);
-$resume_filename = $_FILES['resume']['name'];
+$internship = $_POST['internship'];
+$center = $_POST['center'];
+$start = $_POST['start'];
 
 $checkQuery = $conn->prepare("SELECT id FROM ev_pbi_applications WHERE email = ? OR phone = ?");
 $checkQuery->bind_param("ss", $email, $phone);
@@ -75,10 +66,10 @@ if ($checkQuery->num_rows > 0) {
 $checkQuery->close();
 
 $stmt = $conn->prepare("INSERT INTO ev_pbi_applications 
-    (first_name, last_name, email, phone, dob, state, location, college, degree, specialization, graduation_year, cgpa, resume, resume_filename, goals, referral_code, role, enrolled, confirmationEmailSent) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'false', 'false')");
+    (first_name, last_name, email, phone, alt_phone, state, college, usn, degree, specialization, internship, center, start, enrolled, confirmationEmailSent) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'false', 'false')");
 
-$stmt->bind_param("sssssssssssssssss", $first_name, $last_name, $email, $phone, $dob, $state, $location, $college, $degree, $specialization, $graduation_year, $cgpa, $resume, $resume_filename, $goals, $referral_code, $role);
+$stmt->bind_param("sssssssssssss", $first_name, $last_name, $email, $phone, $alt_phone, $state, $college, $usn, $degree, $specialization, $internship, $center, $start);
 
 if ($stmt->execute()) {
     echo json_encode(["success" => true]);

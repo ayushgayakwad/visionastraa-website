@@ -80,8 +80,8 @@
                 <label for="phone">Phone Number *</label>
                 <input type="tel" id="phone" name="phone" placeholder="Phone number" required>
 
-                <label for="dob">Date of Birth *</label>
-                <input type="date" id="dob" name="dob" required>
+                <label for="alt_phone">Alternate Phone Number *</label>
+                <input type="tel" id="alt_phone" name="alt_phone" placeholder="Alternate phone number" required>
 
                 <button class="btn" onclick="nextStep()">Next</button>
             </div>
@@ -128,13 +128,13 @@
                     <option value="Puducherry">Puducherry</option>
                 </select>
 
-                <label for="location">Your Location (City/Town) *</label>
-                <input type="text" id="location" name="location" placeholder="Enter your city/town" required>
-
                 <label for="college">College *</label>
                 <select id="college" name="college" required>
                     <option value="">Select College</option>
                 </select>
+                
+                <label for="usn">USN *</label>
+                <input type="text" id="usn" name="usn" placeholder="Enter your USN" required>
 
                 <label for="degree">Degree *</label>
                 <select id="degree" name="degree" required>
@@ -147,32 +147,26 @@
                 <label for="specialization">Specialization (Branch) *</label>
                 <input type="text" id="specialization" name="specialization" placeholder="Enter your specialization" required>
 
-                <label for="graduation_year">Year of Graduation *</label>
-                <input type="text" id="graduation_year" name="graduation" placeholder="Enter your year of graduation" required>
-
-                <label for="cgpa">CGPA *</label>
-                <input type="text" id="cgpa" name="cgpa" placeholder="Enter your CGPA" required>
-
-                <label for="role">Applying for which internship? *</label>
-                <select id="role" name="role" required>
-                    <option value="Project-based Internship on Embedded Systems for Electric Vehicles (EV)">Project-based Internship on Embedded Systems for Electric Vehicles (EV)</option>
-                    <option value="Project-based Internship on AI/ML for Electric Vehicles (EV)">Project-based Internship on AI/ML for Electric Vehicles (EV)</option>
-                    <option value="Project-based Internship on Design &amp; Development for Electric Vehicles">Project-based Internship on Design &amp; Development for Electric Vehicles (EV)</option>
+                <label for="internship">Applying for which internship? *</label>
+                <select id="internship" name="internship" required>
+                    <option value="Embedded Systems for Electric Vehicles (EV)">Embedded Systems for Electric Vehicles (EV)</option>
+                    <option value="AI/ML for Electric Vehicles (EV)">AI/ML for Electric Vehicles (EV)</option>
+                    <option value="Design &amp; Development for Electric Vehicles (EV)">Design &amp; Development for Electric Vehicles (EV)</option>
                 </select>
 
-                <label for="resume">Upload Resume (PDF, max 2MB) *</label>
-                <input type="file" id="resume" name="resume" accept="application/pdf" required>
-
-                <label for="referral">Do you have a referral code? *</label>
-                <select id="referral" name="referral" required>
-                    <option value=""></option>
-                    <option value="No Referral">No Referral</option>
-                    <option value="VEVT1-P1">VEVT1-P1</option> 
-                    <option value="VEVT1-P1J1">VEVT1-P1J1</option> 
+                <label for="center">Center *</label>
+                <select id="center" name="center" required>
+                    <option value="Select Option">Select Option</option>
+                    <option value="Belagavi">Belagavi</option>
+                    <option value="Bangalore">Bangalore</option>
                 </select>
 
-                <label for="goals">Why should you be selected? (max 500 words) *</label>
-                <textarea id="goals" name="goals" rows="5" placeholder="Why should you be selected?" required></textarea>
+                <label for="start">Starting From *</label>
+                <select id="start" name="start" required>
+                    <option value="Select Option">Select Option</option>
+                    <option value="September 2025">September 2025</option>
+                    <option value="January 2026">January 2026</option>
+                </select>
 
                 <div class="button-container">
                     <button class="back-button" onclick="prevStep()">Back</button>
@@ -249,37 +243,8 @@
             document.getElementById("step-2").style.display = "none";
             document.getElementById("step-1").style.display = "block";
         }
-        function validateForm() {
-            const resumeInput = document.getElementById('resume');
-            const file = resumeInput.files[0];
-
-            if(referral.value == ""){
-                alert('Please enter a valid referral code.');
-                return false;
-            }
-
-            if (file) {
-                const fileSizeInMB = file.size / (1024 * 1024);
-                const fileType = file.type;
-
-                if (fileType !== 'application/pdf') {
-                    alert('Please upload the resume in PDF format only.');
-                    return false;
-                }
-
-                if (fileSizeInMB > 2) { 
-                    alert('The resume file size should not exceed 2MB.');
-                    return false;
-                }
-            }
-            return true;
-        }
         function submitForm(event) {
             event.preventDefault();
-
-            if (!validateForm()) {
-                return;
-            }
 
             const form = document.getElementById('application-form');
             const formData = new FormData(form);

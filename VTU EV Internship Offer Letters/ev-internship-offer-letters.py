@@ -93,7 +93,7 @@ def send_email(name, to_email, role, attachment_path):
         body = f"""
         Hello {name},
         <br><br>
-        <strong>CONGRATULATIONS</strong> for getting selected for Internship in <strong>{role}</strong> and your starting date is <strong>3rd September, 2025</strong>. 
+        <strong>CONGRATULATIONS</strong> for getting selected for Internship in <strong>{role}</strong> and your starting date is <strong>8th September, 2025</strong>. 
         <br><br>
         Please accept the offer letter in the VTU Portal. <strong>Follow the steps below:</strong>
         <br><br>
