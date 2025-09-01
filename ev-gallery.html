@@ -28,7 +28,41 @@
         padding: 24px 20px 56px;
       }
       .gallery h2 { text-align: center; margin-bottom: 8px; }
-      .gallery p { text-align: center; color: #555; margin-bottom: 24px; }
+      .gallery .gallery-intro { text-align: center; color: #555; margin-bottom: 24px; }
+      
+      .gallery-filters {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 32px;
+      }
+      .gallery-filters button {
+        padding: 8px 16px;
+        border: 1px solid #ddd;
+        background-color: #f9f9f9;
+        color: #333;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+      }
+      .gallery-filters button:hover {
+        background-color: #f0f0f0;
+        border-color: #ccc;
+      }
+      .gallery-filters button.active {
+        background-color: #6c5ce7;
+        color: #fff;
+        border-color: #6c5ce7;
+      }
+      .gallery-pane {
+        display: none;
+      }
+      .gallery-pane.active {
+        display: block;
+      }
+
       .gallery-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -63,21 +97,17 @@
         <div class="logo-container">
           <a href="the-best-ev-course-in-india.html"><img src="images/1000052219-removebg-preview.png" alt="EV Academy Logo" class="logo"></a>
         </div>
-
         <div class="hamburger" onclick="toggleMenu()" id="hamburger">
           <span></span>
           <span></span>
           <span></span>
         </div>
-
         <ul class="nav-links">
           <li><a href="the-best-ev-course-in-india.html">EV Academy</a></li>
           <li><a href="ev-course.html">EV Course</a></li>
-          <!-- <li><a href="ev-mentors.html">EV Mentors</a></li> -->
           <li><a href="ev-jobs.html">EV Placements</a></li>
           <li><a href="ev-projects.html">EV Internship</a></li>
           <li><a href="ev-gallery.html" class="active">Gallery</a></li>
-          <!-- <li><a href="ev-careers.html">EV Careers</a></li> -->
           <li><a href="ev-contact.html">Contact Us</a></li>
           <li><a href="best-ev-training-institute.html">About Us</a></li>
           <li><a href="ev-application.html" class="apply">Apply Now</a></li>
@@ -104,49 +134,98 @@
       </section>
 
       <section class="gallery">
-        <h2>Highlights and Memories</h2>
-        <p>Click any image to open the full view.</p>
-        <div class="gallery-grid">
-          <a href="images/IMG-20250811-WA0060.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0060.jpg" alt="Gallery Image 1"></a>
-          <a href="images/IMG-20250811-WA0061.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0061.jpg" alt="Gallery Image 2"></a>
-          <a href="images/IMG-20250811-WA0062.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0062.jpg" alt="Gallery Image 3"></a>
-          <a href="images/IMG-20250811-WA0063.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0063.jpg" alt="Gallery Image 4"></a>
-          <a href="images/IMG-20250811-WA0064.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0064.jpg" alt="Gallery Image 5"></a>
-          <a href="images/IMG-20250811-WA0065.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0065.jpg" alt="Gallery Image 6"></a>
-          <a href="images/IMG-20250811-WA0066.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0066.jpg" alt="Gallery Image 7"></a>
-          <a href="images/IMG-20250811-WA0067.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0067.jpg" alt="Gallery Image 8"></a>
-          <a href="images/IMG-20250811-WA0068.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0068.jpg" alt="Gallery Image 9"></a>
-          <a href="images/IMG-20250811-WA0069.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0069.jpg" alt="Gallery Image 10"></a>
-          <a href="images/IMG-20250811-WA0072.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0072.jpg" alt="Gallery Image 11"></a>
-          <a href="images/IMG-20250811-WA0073.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0073.jpg" alt="Gallery Image 12"></a>
-          <a href="images/IMG-20250811-WA0074.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0074.jpg" alt="Gallery Image 13"></a>
-          <a href="images/IMG-20250811-WA0075.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0075.jpg" alt="Gallery Image 14"></a>
-          <a href="images/IMG-20250811-WA0076.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0076.jpg" alt="Gallery Image 15"></a>
-          <a href="images/IMG-20250811-WA0077.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0077.jpg" alt="Gallery Image 16"></a>
-          <a href="images/IMG-20250811-WA0078.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0078.jpg" alt="Gallery Image 17"></a>
-          <a href="images/IMG-20250811-WA0079.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0079.jpg" alt="Gallery Image 18"></a>
-          <a href="images/IMG-20250811-WA0080.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0080.jpg" alt="Gallery Image 19"></a>
-          <a href="images/IMG-20250811-WA0081.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0081.jpg" alt="Gallery Image 20"></a>
-          <a href="images/IMG-20250811-WA0080.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0080.jpg" alt="Gallery Image 21"></a>
-          <a href="images/IMG-20250811-WA0082.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0082.jpg" alt="Gallery Image 22"></a>
-          <a href="images/IMG-20250811-WA0083.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0083.jpg" alt="Gallery Image 23"></a>
-          <a href="images/IMG-20250811-WA0084.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0084.jpg" alt="Gallery Image 24"></a>
-          <a href="images/IMG-20250811-WA0085.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0085.jpg" alt="Gallery Image 25"></a>
-          <a href="images/IMG-20250811-WA0086.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0086.jpg" alt="Gallery Image 26"></a>
-          <a href="images/IMG-20250811-WA0087.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0087.jpg" alt="Gallery Image 27"></a>
-          <a href="images/IMG-20250811-WA0088.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0088.jpg" alt="Gallery Image 28"></a>
-          <a href="images/IMG-20250811-WA0089.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0089.jpg" alt="Gallery Image 29"></a>
-          <a href="images/IMG-20250811-WA0090.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0090.jpg" alt="Gallery Image 30"></a>
-          <a href="images/IMG-20250811-WA0091.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0091.jpg" alt="Gallery Image 31"></a>
-          <a href="images/IMG-20250811-WA0092.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0092.jpg" alt="Gallery Image 32"></a>
+        <div class="gallery-filters">
+          <button class="filter-btn active" data-target="#highlights">Highlights</button>
+          <button class="filter-btn" data-target="#labs">Labs & Facilities</button>
+          <button class="filter-btn" data-target="#activities">Student Activities</button>
+          <button class="filter-btn" data-target="#branding">Branding</button>
+          <button class="filter-btn" data-target="#alumni">Alumni Sessions</button>
         </div>
-      </section>
 
-      <section class="gallery">
-        <h2>Alumni Sessions</h2>
-        <div class="gallery-grid">
-          <a href="images/as1.jpg" target="_blank" rel="noopener"><img src="images/as1.jpg" alt="Gallery Image 1"></a>
-          <a href="images/as2.jpg" target="_blank" rel="noopener"><img src="images/as2.jpg" alt="Gallery Image 2"></a>
+        <div class="gallery-content">
+          <div id="highlights" class="gallery-pane active">
+            <div class="gallery-grid">
+              <a href="images/IMG-20250811-WA0060.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0060.jpg" alt="Gallery Image 1"></a>
+              <a href="images/IMG-20250811-WA0061.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0061.jpg" alt="Gallery Image 2"></a>
+              <a href="images/IMG-20250811-WA0062.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0062.jpg" alt="Gallery Image 3"></a>
+              <a href="images/IMG-20250811-WA0063.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0063.jpg" alt="Gallery Image 4"></a>
+              <a href="images/IMG-20250811-WA0064.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0064.jpg" alt="Gallery Image 5"></a>
+              <a href="images/IMG-20250811-WA0065.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0065.jpg" alt="Gallery Image 6"></a>
+              <a href="images/IMG-20250811-WA0066.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0066.jpg" alt="Gallery Image 7"></a>
+              <a href="images/IMG-20250811-WA0067.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0067.jpg" alt="Gallery Image 8"></a>
+              <a href="images/IMG-20250811-WA0068.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0068.jpg" alt="Gallery Image 9"></a>
+              <a href="images/IMG-20250811-WA0069.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0069.jpg" alt="Gallery Image 10"></a>
+              <a href="images/IMG-20250811-WA0072.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0072.jpg" alt="Gallery Image 11"></a>
+              <a href="images/IMG-20250811-WA0073.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0073.jpg" alt="Gallery Image 12"></a>
+              <a href="images/IMG-20250811-WA0074.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0074.jpg" alt="Gallery Image 13"></a>
+              <a href="images/IMG-20250811-WA0075.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0075.jpg" alt="Gallery Image 14"></a>
+              <a href="images/IMG-20250811-WA0076.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0076.jpg" alt="Gallery Image 15"></a>
+              <a href="images/IMG-20250811-WA0077.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0077.jpg" alt="Gallery Image 16"></a>
+              <a href="images/IMG-20250811-WA0078.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0078.jpg" alt="Gallery Image 17"></a>
+              <a href="images/IMG-20250811-WA0079.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0079.jpg" alt="Gallery Image 18"></a>
+              <a href="images/IMG-20250811-WA0080.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0080.jpg" alt="Gallery Image 19"></a>
+              <a href="images/IMG-20250811-WA0081.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0081.jpg" alt="Gallery Image 20"></a>
+              <a href="images/IMG-20250811-WA0080.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0080.jpg" alt="Gallery Image 21"></a>
+              <a href="images/IMG-20250811-WA0082.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0082.jpg" alt="Gallery Image 22"></a>
+              <a href="images/IMG-20250811-WA0083.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0083.jpg" alt="Gallery Image 23"></a>
+              <a href="images/IMG-20250811-WA0084.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0084.jpg" alt="Gallery Image 24"></a>
+              <a href="images/IMG-20250811-WA0085.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0085.jpg" alt="Gallery Image 25"></a>
+              <a href="images/IMG-20250811-WA0086.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0086.jpg" alt="Gallery Image 26"></a>
+              <a href="images/IMG-20250811-WA0087.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0087.jpg" alt="Gallery Image 27"></a>
+              <a href="images/IMG-20250811-WA0088.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0088.jpg" alt="Gallery Image 28"></a>
+              <a href="images/IMG-20250811-WA0089.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0089.jpg" alt="Gallery Image 29"></a>
+              <a href="images/IMG-20250811-WA0090.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0090.jpg" alt="Gallery Image 30"></a>
+              <a href="images/IMG-20250811-WA0091.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0091.jpg" alt="Gallery Image 31"></a>
+              <a href="images/IMG-20250811-WA0092.jpg" target="_blank" rel="noopener"><img src="images/IMG-20250811-WA0092.jpg" alt="Gallery Image 32"></a>
+            </div>
+          </div>
+
+          <div id="labs" class="gallery-pane">
+            <div class="gallery-grid">
+              <a href="images/3.jpg" target="_blank" rel="noopener"><img src="images/3.jpg" alt="Computer Lab"></a>
+              <a href="images/4.jpg" target="_blank" rel="noopener"><img src="images/4.jpg" alt="Computer Lab"></a>
+              <a href="images/5.jpg" target="_blank" rel="noopener"><img src="images/5.jpg" alt="2W Integration Lab"></a>
+              <a href="images/10.jpg" target="_blank" rel="noopener"><img src="images/10.jpg" alt="Hardware Lab"></a>
+              <a href="images/12.jpg" target="_blank" rel="noopener"><img src="images/12.jpg" alt="4W Integration Lab"></a>
+              <a href="images/13.jpg" target="_blank" rel="noopener"><img src="images/13.jpg" alt="EV Makerspace Lab"></a>
+              <a href="images/14.jpg" target="_blank" rel="noopener"><img src="images/14.jpg" alt="EV Makerspace Lab"></a>
+              <a href="images/15.jpg" target="_blank" rel="noopener"><img src="images/15.jpg" alt="Embedded Lab"></a>
+              <a href="images/16.jpg" target="_blank" rel="noopener"><img src="images/16.jpg" alt="Embedded Lab"></a>
+              <a href="images/17.jpg" target="_blank" rel="noopener"><img src="images/17.jpg" alt="Embedded Lab"></a>
+              <a href="images/18.jpg" target="_blank" rel="noopener"><img src="images/18.jpg" alt="4W EV Lab 2"></a>
+              <a href="images/19.jpg" target="_blank" rel="noopener"><img src="images/19.jpg" alt="4W EV Lab 2"></a>
+            </div>
+          </div>
+
+          <div id="activities" class="gallery-pane">
+            <div class="gallery-grid">
+              <a href="images/1.jpg" target="_blank" rel="noopener"><img src="images/1.jpg" alt="Pre-interview Session"></a>
+              <a href="images/2.jpg" target="_blank" rel="noopener"><img src="images/2.jpg" alt="Pre-interview Session"></a>
+              <a href="images/6.jpg" target="_blank" rel="noopener"><img src="images/6.jpg" alt="Team Building Activity"></a>
+              <a href="images/7.jpg" target="_blank" rel="noopener"><img src="images/7.jpg" alt="Team Building Activity"></a>
+              <a href="images/8.jpg" target="_blank" rel="noopener"><img src="images/8.jpg" alt="Group Discussion"></a>
+              <a href="images/9.jpg" target="_blank" rel="noopener"><img src="images/9.jpg" alt="Group Discussion"></a>
+              <a href="images/11.jpg" target="_blank" rel="noopener"><img src="images/11.jpg" alt="Group Activity"></a>
+              <a href="images/20.jpg" target="_blank" rel="noopener"><img src="images/20.jpg" alt="Interview Hall"></a>
+              <a href="images/23.jpg" target="_blank" rel="noopener"><img src="images/23.jpg" alt="Birthday Celebrations"></a>
+              <a href="images/24.jpg" target="_blank" rel="noopener"><img src="images/24.jpg" alt="Birthday Celebrations"></a>
+              <a href="images/25.jpg" target="_blank" rel="noopener"><img src="images/25.jpg" alt="Birthday Celebrations"></a>
+            </div>
+          </div>
+          
+          <div id="branding" class="gallery-pane">
+              <div class="gallery-grid">
+                  <a href="images/21.jpg" target="_blank" rel="noopener"><img src="images/21.jpg" alt="EV Academy Branding"></a>
+                  <a href="images/22.jpg" target="_blank" rel="noopener"><img src="images/22.jpg" alt="EV Academy Branding"></a>
+              </div>
+          </div>
+
+          <div id="alumni" class="gallery-pane">
+            <div class="gallery-grid">
+              <a href="images/as1.jpg" target="_blank" rel="noopener"><img src="images/as1.jpg" alt="Alumni Session Image 1"></a>
+              <a href="images/as2.jpg" target="_blank" rel="noopener"><img src="images/as2.jpg" alt="Alumni Session Image 2"></a>
+            </div>
+          </div>
         </div>
       </section>
     </div>
@@ -219,6 +298,24 @@
     </footer>
 
     <script>
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const galleryPanes = document.querySelectorAll('.gallery-pane');
+
+      filterBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+              filterBtns.forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+
+              const targetId = btn.getAttribute('data-target');
+              galleryPanes.forEach(pane => {
+                  if ('#' + pane.id === targetId) {
+                      pane.classList.add('active');
+                  } else {
+                      pane.classList.remove('active');
+                  }
+              });
+          });
+      });
       document.getElementById('subscribeButton').addEventListener('click', function (e) {
         e.preventDefault();
         var emailInput = document.getElementById('newsletterEmail');
@@ -352,5 +449,3 @@
     </script>
   </body>
 </html>
-
-

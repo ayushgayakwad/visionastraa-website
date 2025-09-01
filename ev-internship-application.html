@@ -142,6 +142,7 @@
                     <option value="B.E">B.E</option>
                     <option value="B.Tech">B.Tech</option>
                     <option value="M.Tech">M.Tech</option>
+                    <option value="MCA">MCA</option>
                 </select>
 
                 <label for="specialization">Specialization (Branch) *</label>
@@ -149,9 +150,17 @@
 
                 <label for="internship">Applying for which internship? *</label>
                 <select id="internship" name="internship" required>
+                    <option value="Select Option">Select Option</option>
                     <option value="Embedded Systems for Electric Vehicles (EV)">Embedded Systems for Electric Vehicles (EV)</option>
                     <option value="AI/ML for Electric Vehicles (EV)">AI/ML for Electric Vehicles (EV)</option>
                     <option value="Design &amp; Development for Electric Vehicles (EV)">Design &amp; Development for Electric Vehicles (EV)</option>
+                </select>
+
+                <label for="offer">Accepted Offer in VTU Portal? *</label>
+                <select id="offer" name="offer" required>
+                    <option value="Select Option">Select Option</option>
+                    <option value="YES">YES</option>
+                    <option value="NO">NO</option>
                 </select>
 
                 <label for="center">Center *</label>
@@ -248,6 +257,25 @@
 
             const form = document.getElementById('application-form');
             const formData = new FormData(form);
+
+            const degree = formData.get('degree');
+            const internship = formData.get('internship');
+            const offer = formData.get('offer');
+            const center = formData.get('center');
+            const start = formData.get('start');
+
+            if (
+                degree === "Select Option" ||
+                internship === "Select Option" ||
+                offer === "Select Option" ||
+                center === "Select Option" ||
+                start === "Select Option"
+            ) {
+                const messageDiv = document.getElementById('message');
+                messageDiv.textContent = "Please select valid options in all required dropdowns.";
+                messageDiv.style.color = "red";
+                return;
+            }
 
             const firstName = formData.get('first_name');
             const lastName = formData.get('last_name');

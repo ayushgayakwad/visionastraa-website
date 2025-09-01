@@ -26,6 +26,7 @@ $tableCreationQuery = "CREATE TABLE IF NOT EXISTS ev_pbi_applications (
     degree VARCHAR(100) NOT NULL,
     specialization VARCHAR(100) NOT NULL,
     internship VARCHAR(200) NOT NULL DEFAULT 'Not Selected',
+    offer VARCHAR(7) NOT NULL,
     center VARCHAR(100) NOT NULL,
     start VARCHAR(100) NOT NULL,
     enrolled ENUM('true', 'false') NOT NULL DEFAULT 'false',
@@ -49,6 +50,7 @@ $usn = $_POST['usn'];
 $degree = $_POST['degree'];
 $specialization = $_POST['specialization'];
 $internship = $_POST['internship'];
+$offer = $_POST['offer'];
 $center = $_POST['center'];
 $start = $_POST['start'];
 
@@ -66,10 +68,10 @@ if ($checkQuery->num_rows > 0) {
 $checkQuery->close();
 
 $stmt = $conn->prepare("INSERT INTO ev_pbi_applications 
-    (first_name, last_name, email, phone, alt_phone, state, college, usn, degree, specialization, internship, center, start, enrolled, confirmationEmailSent) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'false', 'false')");
+    (first_name, last_name, email, phone, alt_phone, state, college, usn, degree, specialization, internship, offer, center, start, enrolled, confirmationEmailSent) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'false', 'false')");
 
-$stmt->bind_param("sssssssssssss", $first_name, $last_name, $email, $phone, $alt_phone, $state, $college, $usn, $degree, $specialization, $internship, $center, $start);
+$stmt->bind_param("ssssssssssssss", $first_name, $last_name, $email, $phone, $alt_phone, $state, $college, $usn, $degree, $specialization, $internship, $offer, $center, $start);
 
 if ($stmt->execute()) {
     echo json_encode(["success" => true]);
