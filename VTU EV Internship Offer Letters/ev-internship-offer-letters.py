@@ -14,7 +14,7 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 
-CSV_FILE_PATH = 'VTU EV Internship Offer Letters/applicants-vtu-internyet-2.csv'
+CSV_FILE_PATH = 'VTU EV Internship Offer Letters/applicants-vtu-internyet-3.csv'
 PDF_TEMPLATE_PATH = 'VTU EV Internship Offer Letters/Template.pdf'
 OUTPUT_DIRECTORY = 'VTU EV Internship Offer Letters/Generated_Offer_Letters'
 
@@ -33,7 +33,7 @@ def get_letter_paragraph(name, role):
 
     text = f"""
     Dear <b>{name}</b>,<br/><br/>
-    We are pleased to offer you an Internship in <b>{role}</b> at <b>VisionAstraa EV Academy</b> with effect from 3rd September 2025. We are excited to welcome you onboard.<br/><br/>
+    We are pleased to offer you an Internship in <b>{role}</b> at <b>VisionAstraa EV Academy</b> with effect from 8th September 2025. We are excited to welcome you onboard.<br/><br/>
     As an Intern, you will be part of a collaborative environment where you will learn and contribute to impactful projects in the electric vehicle (EV) domain. You will gain hands-on experience and have the opportunity to apply your academic knowledge to real-world applications while developing practical skills that will strengthen your career prospects.<br/><br/>
     At <b>VisionAstraa EV Academy</b>, we are committed to a supportive and enriching learning environment. Our aim is to empower you with relevant, hands-on experience and to support your growth in the EV industry.<br/><br/>
     We look forward to working with you and hope this internship will be a valuable step in your professional journey.
@@ -123,17 +123,17 @@ def send_email(name, to_email, role, attachment_path):
         <br><br>
         <strong>Total Duration:</strong> 16 weeks
         <br><br>
-        <strong>-> Internship Start Date</strong> - Sept 3rd.
+        <strong>-> Internship Start Date</strong> - Sept 8th
         <br>
-        <strong>-> Online Mode</strong> - Sept 3rd to Sept 14th (2 weeks)
+        <strong>-> Online Mode</strong> - Sept 8th to Sept 21st (2 weeks)
         <br>
-        <strong>-> Offline Mode</strong> - Sept 15th - Sept 28th (2 weeks)
+        <strong>-> Offline Mode</strong> - Sept 22nd to Oct 5th (2 weeks)
         <br>
-        <strong>-> Projects (Hybrid Mode)</strong> - Sept 29th - Nov 29th (8 weeks)
+        <strong>-> Projects (Hybrid Mode)</strong> - Oct 6th to Nov 30th (8 weeks)
         <br>
-        <strong>-> Projects Evaluation and Submission (offline)</strong> - Dec 1 to 14 (2 weeks)
+        <strong>-> Projects Evaluation and Submission (offline)</strong> - Dec 2 to Dec 15 (2 weeks)
         <br>
-        <strong>-> Certificate Distribution</strong> - Dec 15
+        <strong>-> Certificate Distribution</strong> - Dec 16
         <br><br>
         For any queries reach out to us on LinkedIn: <a href="https://in.linkedin.com/company/va-ev-academy">https://in.linkedin.com/company/va-ev-academy</a>
         <br>
