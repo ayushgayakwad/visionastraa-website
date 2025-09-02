@@ -14,7 +14,7 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 
-CSV_FILE_PATH = 'VTU EV Internship Offer Letters/applicants-vtu-internyet-3.csv'
+CSV_FILE_PATH = 'VTU EV Internship Offer Letters/applicants-vtu-internyet-4.csv'
 PDF_TEMPLATE_PATH = 'VTU EV Internship Offer Letters/Template.pdf'
 OUTPUT_DIRECTORY = 'VTU EV Internship Offer Letters/Generated_Offer_Letters'
 
@@ -104,6 +104,12 @@ def send_email(name, to_email, role, attachment_path):
         -> Navigate to `Applied Internships` section in the dashboard
         <br>
         -> Click on the `Accept` button to accept <strong>VisionAstraa EV Academy's offer</strong>.
+        <br><br>
+        We also request you to fill out the following application form at your earliest convenience. This will help us plan your internship better.
+        <br>
+        <a href="https://visionastraa.com/ev-internship-application.html">https://visionastraa.com/ev-internship-application.html</a>
+        <br><br>
+        <strong>In the application form</strong>, please select your <strong>preferred internship commencement date (September 2025 or January 2026)</strong>, your <strong>preferred center (Belagavi or Bangalore)</strong>, and also <strong>confirm in the VTU Portal that you have accepted the offer.</strong>
         <br><br>
         Below are the benefits of joining VisionAstraa EV Academy (<a href="https://visionastraa.com/ev-projects.html">https://visionastraa.com/ev-projects.html</a>):
         <br>
