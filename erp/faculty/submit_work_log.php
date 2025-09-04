@@ -21,7 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $date = $_POST['date'];
     $timetable_id = $_POST['timetable_id'];
     $topics_covered = $_POST['topics_covered'];
-    $assignment_details = $_POST['assignment_details'];
+    $assignment_details = $_POST['assignment_details'] ?? null;
+    $assignment_deadline = !empty($_POST['assignment_deadline']) ? $_POST['assignment_deadline'] : null;
     $document_path = null;
 
     if (isset($_FILES['document']) && $_FILES['document']['error'] == 0) {
@@ -40,8 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($message)) {
-        $stmt = $pdo->prepare('INSERT INTO erp_faculty_logs (faculty_id, date, timetable_id, topics_covered, document_path, assignment_details) VALUES (?, ?, ?, ?, ?, ?)');
-        $stmt->execute([$faculty_id, $date, $timetable_id, $topics_covered, $document_path, $assignment_details]);
+        $stmt = $pdo->prepare('INSERT INTO erp_faculty_logs (faculty_id, date, timetable_id, topics_covered, document_path, assignment_details, assignment_deadline) VALUES (?, ?, ?, ?, ?, ?, ?)');
+        $stmt->execute([$faculty_id, $date, $timetable_id, $topics_covered, $document_path, $assignment_details, $assignment_deadline]);
         $message = 'Work log submitted successfully for review!';
     }
 }
@@ -91,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php if (empty($assigned_classes)): ?>
                     <div class="alert">You have no classes assigned in the timetable for <?php echo htmlspecialchars($date); ?>.</div>
                 <?php else: ?>
-                    <form method="POST" enctype="multipart/form-data" style="display: grid; gap: 1rem;">
+                    <form method="POST" enctype="multipart/form-data" style="display: grid; gap: 1rem;" onsubmit="return validateForm()">
                         <input type="hidden" name="date" value="<?php echo htmlspecialchars($date); ?>">
                         <div>
                             <label style="display:block; margin-bottom:0.5rem;">Class for <?php echo htmlspecialchars($date); ?></label>
@@ -106,14 +107,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <label style="display:block; margin-bottom:0.5rem;">Topics Covered</label>
                             <textarea name="topics_covered" required class="form-input" rows="4"></textarea>
                         </div>
+                        
                         <div>
-                            <label style="display:block; margin-bottom:0.5rem;">Assignment Given</label>
-                            <textarea name="assignment_details" class="form-input" rows="3"></textarea>
+                            <label for="add_assignment_switch" style="display: block; margin-bottom: 0.5rem;">Add Assignment</label>
+                            <input type="checkbox" id="add_assignment_switch" onchange="toggleAssignmentFields()">
                         </div>
-                         <div>
-                            <label style="display:block; margin-bottom:0.5rem;">Upload Relevant Document (Optional)</label>
-                            <input type="file" name="document" class="form-input">
+
+                        <div id="assignment_fields" style="display: none;">
+                            <div>
+                                <label style="display:block; margin-bottom:0.5rem;">Assignment Description</label>
+                                <textarea name="assignment_details" id="assignment_details" class="form-input" rows="3"></textarea>
+                            </div>
+                             <div>
+                                <label style="display:block; margin-bottom:0.5rem;">Upload Relevant Document (Optional)</label>
+                                <input type="file" name="document" id="assignment_document" class="form-input">
+                            </div>
+                            <div>
+                                <label style="display:block; margin-bottom:0.5rem;">Assignment Deadline</label>
+                                <input type="date" name="assignment_deadline" id="assignment_deadline" class="form-input">
+                            </div>
                         </div>
+                        
                         <div>
                             <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Submit for Review</button>
                         </div>
@@ -122,5 +136,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </section>
         </div>
     </main>
+    <script>
+        function toggleAssignmentFields() {
+            const assignmentFields = document.getElementById('assignment_fields');
+            const addAssignmentSwitch = document.getElementById('add_assignment_switch');
+            assignmentFields.style.display = addAssignmentSwitch.checked ? 'block' : 'none';
+        }
+
+        function validateForm() {
+            const addAssignmentSwitch = document.getElementById('add_assignment_switch');
+            if (addAssignmentSwitch.checked) {
+                const assignmentDetails = document.getElementById('assignment_details').value;
+                const assignmentDeadline = document.getElementById('assignment_deadline').value;
+
+                if (assignmentDetails.trim() === '') {
+                    alert('Please provide a description for the assignment.');
+                    return false;
+                }
+                if (assignmentDeadline.trim() === '') {
+                    alert('Please provide a deadline for the assignment.');
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>
