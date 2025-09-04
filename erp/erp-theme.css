@@ -41,8 +41,24 @@ body {
 }
 .nav-desktop {
   display: flex;
-  gap: 1.5em;
+  gap: 1.2em;
   align-items: center;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #b3c7f7 #f6f8fb;
+  padding-bottom: 5px;
+}
+.nav-desktop::-webkit-scrollbar {
+  height: 5px;
+}
+.nav-desktop::-webkit-scrollbar-track {
+  background: #f6f8fb;
+}
+.nav-desktop::-webkit-scrollbar-thumb {
+  background-color: #b3c7f7;
+  border-radius: 10px;
 }
 .mobile-menu-btn {
   display: none;
@@ -60,8 +76,9 @@ body {
   padding: 0.5em 1em;
   border-radius: 6px;
   transition: background 0.2s, color 0.2s;
+  flex-shrink: 0;
 }
-.nav-link.active, .nav-link:hover {
+.nav-link:hover {
   background: #e3eafc;
   color: #3a4a6b;
 }
@@ -186,18 +203,6 @@ body {
   .dashboard-action-btn { min-width: 100%; width: 100%; font-size: 1rem; padding: 1rem 0.5rem; }
   .form-section, .card { padding: 0.5rem; }
 } 
-
-@media (max-width: 820px) {
-  .nav-desktop {
-    gap: 0.75em;
-    overflow-x: auto;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    padding-bottom: 0.25rem;
-  }
-  .nav-link { padding: 0.4em 0.7em; font-size: 0.95em; }
-}
 
 @media (max-width: 700px) {
   .table th, .table td { padding: 0.6em 0.6em; }
