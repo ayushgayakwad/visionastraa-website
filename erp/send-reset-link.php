@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <p>Click the link below to reset your password:</p>
           <p><a href='$reset_link'>$reset_link</a></p>
           <p>This password reset link is valid for 1 hour. If you did not request a password reset, no further action is required.</p>
-          <p>Regards,<br>EV Academy Team</p>
+          <p>Regards,<br>VisionAstraa EV Academy</p>
         </body>
         </html>
         ";
