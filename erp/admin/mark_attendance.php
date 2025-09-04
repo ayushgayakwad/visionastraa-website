@@ -4,15 +4,20 @@ include '../auth.php';
 require_once '../db.php';
 $message = '';
 
-// --- Week & Day Logic ---
-$date = $_GET['date'] ?? date('Y-m-d');
+// --- Get current date from server (UTC) and convert to IST ---
+$stmt_time = $pdo->query("SELECT NOW() as current_utc");
+$current_utc_time = $stmt_time->fetchColumn();
+$utc_date_obj = new DateTime($current_utc_time, new DateTimeZone('UTC'));
+$utc_date_obj->setTimezone(new DateTimeZone('Asia/Kolkata'));
+$date = $utc_date_obj->format('Y-m-d');
+// --- End of date logic ---
+
 $day_of_week = date('l', strtotime($date));
 
 // Find the start of the week (Monday) for the selected date
 $date_obj = new DateTime($date);
 $date_obj->modify('monday this week');
 $week_start_date = $date_obj->format('Y-m-d');
-// --- End Week & Day Logic ---
 
 
 // Fetch today's classes from the timetable for the specific week
@@ -28,14 +33,19 @@ $users = $stmt->fetchAll();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['timetable_id'])) {
     $timetable_id = $_POST['timetable_id'];
     $date_for_insert = $_POST['date'];
+    
+    // Security check: ensure the date being submitted is the current date
+    if ($date_for_insert !== $date) {
+        $message = "Error: Attendance can only be marked for the current date.";
+    } else {
+        foreach ($users as $user) {
+            $status = $_POST['attendance'][$user['id']] ?? 'absent';
 
-    foreach ($users as $user) {
-        $status = $_POST['attendance'][$user['id']] ?? 'absent';
-
-        $stmt = $pdo->prepare('INSERT INTO erp_attendance (student_id, timetable_id, date, status, marked_by) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE status=VALUES(status), marked_by=VALUES(marked_by)');
-        $stmt->execute([$user['id'], $timetable_id, $date_for_insert, $status, $_SESSION['user_id']]);
+            $stmt = $pdo->prepare('INSERT INTO erp_attendance (student_id, timetable_id, date, status, marked_by) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE status=VALUES(status), marked_by=VALUES(marked_by)');
+            $stmt->execute([$user['id'], $timetable_id, $date_for_insert, $status, $_SESSION['user_id']]);
+        }
+        $message = 'Attendance marked successfully!';
     }
-    $message = 'Attendance marked successfully!';
 }
 ?>
 <!DOCTYPE html>
@@ -60,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['timetable_id'])) {
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
                     <a href="manage_students.php" class="nav-link">Students</a>
                     <a href="view_timetable.php" class="nav-link">View Timetable</a>
-                    <a href="mark_attendance.php" class="nav-link">Mark Attendance</a>
+                    <a href="mark_attendance.php" class="nav-link active">Mark Attendance</a>
                     <a href="view_attendance.php" class="nav-link">View Attendance</a>
                     <a href="upload_documents.php" class="nav-link">Upload Documents</a>
                     <a href="fee_payment.php" class="nav-link">Fee Payment</a>
@@ -77,10 +87,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['timetable_id'])) {
                     <div class="alert"><?php echo htmlspecialchars($message); ?></div>
                 <?php endif; ?>
 
-                <form method="GET" style="margin-bottom: 2em;">
-                    <label for="date" style="font-weight: 500;">Select Date:</label>
-                    <input type="date" id="date" name="date" value="<?php echo htmlspecialchars($date); ?>" class="form-input" onchange="this.form.submit()">
-                </form>
+                <div style="margin-bottom: 2em;">
+                    <label for="date" style="font-weight: 500;">Date:</label>
+                    <input type="date" id="date" name="date" value="<?php echo htmlspecialchars($date); ?>" class="form-input" readonly style="background-color: #f0f2f8; cursor: not-allowed;">
+                </div>
 
                 <?php if (empty($todays_classes)): ?>
                     <div class="alert">No classes scheduled for today in the timetable.</div>
