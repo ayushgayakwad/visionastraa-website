@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </a>
                 <nav class="nav-desktop">
                     <a href="https://visionastraa.com/the-best-ev-course-in-india.html" class="nav-link">Home</a>
-                    <a href="index.php" class="nav-link active">Login</a>
+                    <a href="index.php" class="nav-link">Login</a>
                 </nav>
             </div>
         </div>
@@ -69,6 +69,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <h1 class="hero-title" style="text-align:center; color:#3a4a6b;">Login to EV Academy ERP</h1>
                     <?php if ($error): ?>
                         <div class="alert"><?php echo htmlspecialchars($error); ?></div>
+                    <?php endif; ?>
+                    <?php if (isset($_GET['message'])): ?>
+                        <div class="alert" style="background:#d4edda; color:#155724; border-color:#c3e6cb;"><?php echo htmlspecialchars($_GET['message']); ?></div>
                     <?php endif; ?>
                     <form method="post" class="login-form" style="display: grid; gap: 1rem;">
                         <div>
@@ -83,6 +86,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <i id="toggleIcon" class="fa-regular fa-eye"></i>
                                 </button>
                             </div>
+                        </div>
+                        <div style="text-align: right; margin-top: -0.5rem;">
+                            <a href="forgot-password.php" style="color:#3a4a6b; font-size: 0.9em;">Forgot Password?</a>
                         </div>
                         <button type="submit" class="btn btn-primary"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
                             <p style="margin-top:2em;text-align:center;color:#e67e22;">Don't have an account? <a href="register.php" style="color:#3a4a6b;text-decoration:underline;">Register here</a>.</p>
