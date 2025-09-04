@@ -84,6 +84,14 @@ while ($row = $stmt->fetch()) {
     $timetable[$row['day_of_week']][] = $row;
 }
 $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+
+// Generate dates for each day of the selected week
+$week_dates = [];
+for ($i = 0; $i < 5; $i++) {
+    $date = clone $date_obj;
+    $date->modify("+$i days");
+    $week_dates[$days[$i]] = $date->format('M j');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -133,7 +141,7 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
                     <div style="display:grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
                         <div>
                             <label>Day of the Week</label>
-                            <select name="day_of_week" required class="form-input"><?php foreach ($days as $day): ?><option value="<?php echo $day; ?>"><?php echo $day; ?></option><?php endforeach; ?></select>
+                            <select name="day_of_week" required class="form-input"><?php foreach ($days as $day): ?><option value="<?php echo $day; ?>"><?php echo $day . ' (' . $week_dates[$day] . ')'; ?></option><?php endforeach; ?></select>
                         </div>
                         <div>
                             <label>Time Slot</label>
@@ -171,7 +179,7 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
                                 <?php if (isset($timetable[$day]) && !empty($timetable[$day])): ?>
                                     <?php foreach ($timetable[$day] as $slot): ?>
                                         <tr>
-                                            <td><?php echo htmlspecialchars($slot['day_of_week']); ?></td>
+                                            <td><?php echo htmlspecialchars($slot['day_of_week']) . ' (' . $week_dates[$slot['day_of_week']] . ')'; ?></td>
                                             <td><?php echo $all_time_slots[$slot['time_slot']]; ?></td>
                                             <td><?php echo htmlspecialchars($slot['class_name']); ?></td>
                                             <td><?php echo htmlspecialchars($slot['class_type']); ?></td>
@@ -183,7 +191,7 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php else: ?>
-                                    <tr><td><?php echo $day; ?></td><td colspan="5" style="text-align: center; color: #777;">No classes scheduled</td></tr>
+                                    <tr><td><?php echo $day . ' (' . $week_dates[$day] . ')'; ?></td><td colspan="5" style="text-align: center; color: #777;">No classes scheduled</td></tr>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </tbody>
