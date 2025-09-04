@@ -42,7 +42,7 @@ if ($hour < 12) {
                 </a>
                 <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
-                    <a href="dashboard.php" class="nav-link active">Dashboard</a>
+                    <a href="dashboard.php" class="nav-link">Dashboard</a>
                     <a href="manage_students.php" class="nav-link">Students</a>
                     <a href="view_timetable.php" class="nav-link">View Timetable</a>
                     <a href="mark_attendance.php" class="nav-link">Mark Attendance</a>

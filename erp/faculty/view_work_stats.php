@@ -57,6 +57,7 @@ foreach ($stmt_monthly_actual->fetchAll(PDO::FETCH_COLUMN) as $slot) { $monthly_
                     <a href="view_timetable.php" class="nav-link">View Timetable</a>
                     <a href="submit_work_log.php" class="nav-link">Submit Work Log</a>
                     <a href="view_work_logs.php" class="nav-link">View Work Logs</a>
+                    <a href="view_submissions.php" class="nav-link">View Submissions</a>
                     <a href="view_work_stats.php" class="nav-link">My Work Stats</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>

@@ -57,7 +57,16 @@ $time_slots = [
                 <a href="dashboard.php" class="logo" style="display:flex;align-items:center;gap:0.5em;"><img src="../logo.png" alt="Logo" style="height: 80px;"></a>
                 <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
-                    <a href="dashboard.php" class="nav-link">Dashboard</a><a href="manage_students.php" class="nav-link">Students</a><a href="view_timetable.php" class="nav-link">View Timetable</a><a href="mark_attendance.php" class="nav-link">Mark Attendance</a><a href="view_attendance.php" class="nav-link active">View Attendance</a><a href="upload_documents.php" class="nav-link">Upload Documents</a><a href="fee_payment.php" class="nav-link">Fee Payment</a><a href="../logout.php" class="nav-link">Logout</a>
+                    <a href="dashboard.php" class="nav-link">Dashboard</a>
+                    <a href="manage_students.php" class="nav-link">Students</a>
+                    <a href="view_timetable.php" class="nav-link">View Timetable</a>
+                    <a href="mark_attendance.php" class="nav-link">Mark Attendance</a>
+                    <a href="view_attendance.php" class="nav-link">View Attendance</a>
+                    <a href="upload_documents.php" class="nav-link">Upload Documents</a>
+                    <a href="fee_payment.php" class="nav-link">Fee Payment</a>
+                    <a href="give_feedback.php" class="nav-link">Give Feedback</a>
+                    <a href="submit_assignment.php" class="nav-link">Submit Assignment</a>
+                    <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>
         </div>

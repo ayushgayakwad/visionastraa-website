@@ -79,10 +79,12 @@ while ($row = $stmt_existing_attendance->fetch()) {
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
                     <a href="manage_students.php" class="nav-link">Students</a>
                     <a href="view_timetable.php" class="nav-link">View Timetable</a>
-                    <a href="mark_attendance.php" class="nav-link active">Mark Attendance</a>
+                    <a href="mark_attendance.php" class="nav-link">Mark Attendance</a>
                     <a href="view_attendance.php" class="nav-link">View Attendance</a>
                     <a href="upload_documents.php" class="nav-link">Upload Documents</a>
-                     <a href="fee_payment.php" class="nav-link">Fee Payment</a>
+                    <a href="fee_payment.php" class="nav-link">Fee Payment</a>
+                    <a href="give_feedback.php" class="nav-link">Give Feedback</a>
+                    <a href="submit_assignment.php" class="nav-link">Submit Assignment</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>

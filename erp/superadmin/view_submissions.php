@@ -74,8 +74,9 @@ if (!empty($assignments)) {
                     <a href="manage_fees.php" class="nav-link">Fees</a>
                     <a href="view_attendance.php" class="nav-link">Attendance</a>
                     <a href="view_faculty_work.php" class="nav-link">Faculty Work</a>
-                    <a href="view_submissions.php" class="nav-link active">View Submissions</a>
+                    <a href="view_submissions.php" class="nav-link">View Submissions</a>
                     <a href="view_work_stats.php" class="nav-link">Work Stats</a>
+                    <a href="view_feedback.php" class="nav-link">View Feedback</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>
