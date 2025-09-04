@@ -20,10 +20,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dob = $_POST['dob'] ?? null;
     $phone = $_POST['phone'] ?? '';
 
+    $today = new DateTime();
+    $min_age_date = $today->modify('-21 years');
+    $dob_date = new DateTime($dob);
+
     if ($password !== $confirm_password) {
         $message = 'Passwords do not match.';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message = 'Invalid email address.';
+    } elseif (!preg_match('/^[0-9]{10}$/', $phone)) {
+        $message = 'Phone number must be 10 digits.';
+    } elseif ($dob_date > $min_age_date) {
+        $message = 'Invalid date of birth.';
     } elseif (strlen($password) < 6) {
         $message = 'Password must be at least 6 characters.';
     } elseif (empty($name) || empty($phone)) {
