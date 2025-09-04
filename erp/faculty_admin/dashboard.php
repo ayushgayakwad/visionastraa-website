@@ -46,6 +46,7 @@ if ($hour < 12) {
                     <a href="review_logs.php" class="nav-link">Review Work Logs</a>
                     <a href="submit_work_log.php" class="nav-link">Submit My Log</a>
                     <a href="view_work_stats.php" class="nav-link">Work Stats</a>
+                    <a href="view_feedback.php" class="nav-link">View Feedback</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>
@@ -80,6 +81,10 @@ if ($hour < 12) {
                         <a href="view_work_stats.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-chart-line"></i></span>
                             Work Stats
+                        </a>
+                         <a href="view_feedback.php" class="dashboard-action-btn">
+                            <span class="dashboard-action-icon"><i class="fa-solid fa-comments"></i></span>
+                            View Feedback
                         </a>
                     </div>
                 </div>
