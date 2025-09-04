@@ -72,6 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
                     <a href="manage_faculty.php" class="nav-link">Manage Faculty</a>
                     <a href="manage_timetable.php" class="nav-link">Manage Timetable</a>
+                    <a href="view_timetable.php" class="nav-link">View Timetable</a>
                     <a href="review_logs.php" class="nav-link">Review Work Logs</a>
                     <a href="submit_work_log.php" class="nav-link">Submit My Log</a>
                     <a href="view_work_stats.php" class="nav-link">Work Stats</a>

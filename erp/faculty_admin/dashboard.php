@@ -42,6 +42,7 @@ if ($hour < 12) {
                     <a href="dashboard.php" class="nav-link active">Dashboard</a>
                     <a href="manage_faculty.php" class="nav-link">Manage Faculty</a>
                     <a href="manage_timetable.php" class="nav-link">Manage Timetable</a>
+                    <a href="view_timetable.php" class="nav-link">View Timetable</a>
                     <a href="review_logs.php" class="nav-link">Review Work Logs</a>
                     <a href="submit_work_log.php" class="nav-link">Submit My Log</a>
                     <a href="view_work_stats.php" class="nav-link">Work Stats</a>
@@ -63,6 +64,10 @@ if ($hour < 12) {
                         <a href="manage_timetable.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-calendar-alt"></i></span>
                             Manage Timetable
+                        </a>
+                        <a href="view_timetable.php" class="dashboard-action-btn">
+                            <span class="dashboard-action-icon"><i class="fa-solid fa-calendar-alt"></i></span>
+                            View Timetable
                         </a>
                         <a href="review_logs.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-check-to-slot"></i></span>
