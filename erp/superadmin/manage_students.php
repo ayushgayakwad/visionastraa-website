@@ -27,11 +27,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_user'])) {
     $location = $_POST['location'] ?? '';
     $role = $_POST['role'] ?? 'student'; // New field for role
 
+    // Date of birth validation
+    $today = new DateTime();
+    $min_age_date = $today->modify('-21 years');
+    $dob_date = new DateTime($dob);
+
     if (!in_array($role, ['student', 'admin'])) {
         $message = 'Invalid role specified.';
     }
     else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message = 'Invalid email address.';
+    } elseif (!preg_match('/^[0-9]{10}$/', $phone)) {
+        $message = 'Phone number must be 10 digits.';
+    } elseif ($dob && $dob_date > $min_age_date) {
+        $message = 'Invalid date of birth.';
     } elseif (strlen($password) < 6) {
         $message = 'Password must be at least 6 characters.';
     } elseif (empty($name) || empty($phone)) {
@@ -152,19 +161,19 @@ $users = $stmt->fetchAll();
                     </div>
                     <div>
                         <label for="email" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Email *</label>
-                        <input type="email" id="email" name="email" class="form-input" required>
+                        <input type="email" id="email" name="email" class="form-input" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                     </div>
                     <div>
                         <label for="password" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Password *</label>
-                        <input type="password" id="password" name="password" class="form-input" required>
+                        <input type="password" id="password" name="password" class="form-input" required minlength="6">
                     </div>
                     <div>
                         <label for="dob" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Date of Birth</label>
-                        <input type="date" id="dob" name="dob" class="form-input">
+                        <input type="date" id="dob" name="dob" class="form-input" max="<?php echo date('Y-m-d', strtotime('-21 years')); ?>">
                     </div>
                     <div>
                         <label for="phone" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Phone *</label>
-                        <input type="tel" id="phone" name="phone" class="form-input" required>
+                        <input type="tel" id="phone" name="phone" class="form-input" required pattern="[0-9]{10}" maxlength="10" placeholder="10 digit phone number">
                     </div>
                     <div>
                         <label for="college_name" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">College Name</label>
@@ -346,6 +355,42 @@ $users = $stmt->fetchAll();
         document.getElementById('editModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeEditModal();
+            }
+        });
+
+        // Phone number validation - only allow digits
+        document.querySelector('input[name="phone"]').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        // Form validation for create user form
+        document.querySelector('form[method="POST"]').addEventListener('submit', function(e) {
+            const phone = document.querySelector('input[name="phone"]').value;
+            const email = document.querySelector('input[name="email"]').value;
+            const password = document.querySelector('input[name="password"]').value;
+            const dob = document.querySelector('input[name="dob"]').value;
+
+            if (phone.length !== 10) {
+                alert('Phone number must be exactly 10 digits.');
+                e.preventDefault();
+                return;
+            }
+
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters long.');
+                e.preventDefault();
+                return;
+            }
+
+            if (dob) {
+                const dobDate = new Date(dob);
+                const today = new Date();
+                const age = today.getFullYear() - dobDate.getFullYear();
+                if (age < 21) {
+                    alert('Date of birth must be at least 21 years ago.');
+                    e.preventDefault();
+                    return;
+                }
             }
         });
     </script>

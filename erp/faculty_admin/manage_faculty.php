@@ -12,8 +12,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_faculty'])) {
     $dob = $_POST['dob'] ?? null;
     $phone = $_POST['phone'] ?? '';
     
+    // Date of birth validation
+    $today = new DateTime();
+    $min_age_date = $today->modify('-21 years');
+    $dob_date = new DateTime($dob);
+
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message = 'Invalid email address.';
+    } elseif (!preg_match('/^[0-9]{10}$/', $phone)) {
+        $message = 'Phone number must be 10 digits.';
+    } elseif ($dob && $dob_date > $min_age_date) {
+        $message = 'Invalid date of birth.';
     } elseif (strlen($password) < 6) {
         $message = 'Password must be at least 6 characters.';
     } elseif (empty($name) || empty($phone)) {
@@ -90,10 +99,10 @@ $faculty = $stmt->fetchAll();
                 <h2 style="color:#3a4a6b; margin-bottom: 1.5rem;">Add New Faculty</h2>
                 <form method="POST" style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
                     <div><label style="display: block; margin-bottom: 0.5rem;">Name *</label><input type="text" name="name" class="form-input" required></div>
-                    <div><label style="display: block; margin-bottom: 0.5rem;">Email *</label><input type="email" name="email" class="form-input" required></div>
-                    <div><label style="display: block; margin-bottom: 0.5rem;">Password *</label><input type="password" name="password" class="form-input" required></div>
-                    <div><label style="display: block; margin-bottom: 0.5rem;">Date of Birth</label><input type="date" name="dob" class="form-input"></div>
-                    <div><label style="display: block; margin-bottom: 0.5rem;">Phone *</label><input type="tel" name="phone" class="form-input" required></div>
+                    <div><label style="display: block; margin-bottom: 0.5rem;">Email *</label><input type="email" name="email" class="form-input" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></div>
+                    <div><label style="display: block; margin-bottom: 0.5rem;">Password *</label><input type="password" name="password" class="form-input" required minlength="6"></div>
+                    <div><label style="display: block; margin-bottom: 0.5rem;">Date of Birth</label><input type="date" name="dob" class="form-input" max="<?php echo date('Y-m-d', strtotime('-21 years')); ?>"></div>
+                    <div><label style="display: block; margin-bottom: 0.5rem;">Phone *</label><input type="tel" name="phone" class="form-input" required pattern="[0-9]{10}" maxlength="10" placeholder="10 digit phone number"></div>
                     <div style="grid-column: 1 / -1;"><button type="submit" name="create_faculty" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Faculty</button></div>
                 </form>
             </section>
@@ -124,5 +133,42 @@ $faculty = $stmt->fetchAll();
             </section>
         </div>
     </main>
+    <script>
+        // Phone number validation - only allow digits
+        document.querySelector('input[name="phone"]').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        // Form validation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const phone = document.querySelector('input[name="phone"]').value;
+            const email = document.querySelector('input[name="email"]').value;
+            const password = document.querySelector('input[name="password"]').value;
+            const dob = document.querySelector('input[name="dob"]').value;
+
+            if (phone.length !== 10) {
+                alert('Phone number must be exactly 10 digits.');
+                e.preventDefault();
+                return;
+            }
+
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters long.');
+                e.preventDefault();
+                return;
+            }
+
+            if (dob) {
+                const dobDate = new Date(dob);
+                const today = new Date();
+                const age = today.getFullYear() - dobDate.getFullYear();
+                if (age < 21) {
+                    alert('Date of birth must be at least 21 years ago.');
+                    e.preventDefault();
+                    return;
+                }
+            }
+        });
+    </script>
 </body>
 </html>

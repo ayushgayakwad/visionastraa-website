@@ -109,23 +109,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <form method="POST" style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
                         <input type="hidden" name="form_type" value="student">
                         <div><label style="display: block; margin-bottom: 0.5rem;">Name *</label><input type="text" name="name" class="form-input" required></div>
-                        <div><label style="display: block; margin-bottom: 0.5rem;">Email *</label><input type="email" name="email" class="form-input" required></div>
+                        <div><label style="display: block; margin-bottom: 0.5rem;">Email *</label><input type="email" name="email" class="form-input" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></div>
                         <div>
                             <label style="display: block; margin-bottom: 0.5rem;">Password *</label>
                             <div class="password-wrapper">
-                                <input type="password" id="student_password" name="password" class="form-input" required>
+                                <input type="password" id="student_password" name="password" class="form-input" required minlength="6">
                                 <button type="button" class="show-password-toggle" onclick="togglePassword('student_password')"><i class="fa-regular fa-eye"></i></button>
                             </div>
                         </div>
                         <div>
                             <label style="display: block; margin-bottom: 0.5rem;">Confirm Password *</label>
                             <div class="password-wrapper">
-                                <input type="password" id="student_confirm_password" name="confirm_password" class="form-input" required>
+                                <input type="password" id="student_confirm_password" name="confirm_password" class="form-input" required minlength="6">
                                 <button type="button" class="show-password-toggle" onclick="togglePassword('student_confirm_password')"><i class="fa-regular fa-eye"></i></button>
                             </div>
                         </div>
-                        <div><label style="display: block; margin-bottom: 0.5rem;">Date of Birth</label><input type="date" name="dob" class="form-input"></div>
-                        <div><label style="display: block; margin-bottom: 0.5rem;">Phone *</label><input type="tel" name="phone" class="form-input" required></div>
+                        <div><label style="display: block; margin-bottom: 0.5rem;">Date of Birth</label><input type="date" name="dob" class="form-input" max="<?php echo date('Y-m-d', strtotime('-21 years')); ?>"></div>
+                        <div><label style="display: block; margin-bottom: 0.5rem;">Phone *</label><input type="tel" name="phone" class="form-input" required pattern="[0-9]{10}" maxlength="10" placeholder="10 digit phone number"></div>
                         <div>
                             <label style="display: block; margin-bottom: 0.5rem;">State *</label>
                             <select name="state" id="state" class="form-input" onchange="populateColleges()" required>
@@ -149,23 +149,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <form method="POST" style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
                         <input type="hidden" name="form_type" value="faculty">
                         <div><label style="display: block; margin-bottom: 0.5rem;">Name *</label><input type="text" name="name" class="form-input" required></div>
-                        <div><label style="display: block; margin-bottom: 0.5rem;">Email *</label><input type="email" name="email" class="form-input" required></div>
+                        <div><label style="display: block; margin-bottom: 0.5rem;">Email *</label><input type="email" name="email" class="form-input" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></div>
                          <div>
                             <label style="display: block; margin-bottom: 0.5rem;">Password *</label>
                             <div class="password-wrapper">
-                                <input type="password" id="faculty_password" name="password" class="form-input" required>
+                                <input type="password" id="faculty_password" name="password" class="form-input" required minlength="6">
                                 <button type="button" class="show-password-toggle" onclick="togglePassword('faculty_password')"><i class="fa-regular fa-eye"></i></button>
                             </div>
                         </div>
                         <div>
                             <label style="display: block; margin-bottom: 0.5rem;">Confirm Password *</label>
                             <div class="password-wrapper">
-                                <input type="password" id="faculty_confirm_password" name="confirm_password" class="form-input" required>
+                                <input type="password" id="faculty_confirm_password" name="confirm_password" class="form-input" required minlength="6">
                                 <button type="button" class="show-password-toggle" onclick="togglePassword('faculty_confirm_password')"><i class="fa-regular fa-eye"></i></button>
                             </div>
                         </div>
-                        <div><label style="display: block; margin-bottom: 0.5rem;">Date of Birth</label><input type="date" name="dob" class="form-input"></div>
-                        <div><label style="display: block; margin-bottom: 0.5rem;">Phone *</label><input type="tel" name="phone" class="form-input" required></div>
+                        <div><label style="display: block; margin-bottom: 0.5rem;">Date of Birth</label><input type="date" name="dob" class="form-input" max="<?php echo date('Y-m-d', strtotime('-21 years')); ?>"></div>
+                        <div><label style="display: block; margin-bottom: 0.5rem;">Phone *</label><input type="tel" name="phone" class="form-input" required pattern="[0-9]{10}" maxlength="10" placeholder="10 digit phone number"></div>
                         <div style="grid-column: 1 / -1; text-align:center;"><button type="submit" name="register_faculty" class="btn btn-primary"><i class="fa-solid fa-chalkboard-teacher"></i> Register as Faculty</button></div>
                     </form>
                 </div>
@@ -3152,6 +3152,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                  collegeSelect.innerHTML = '<option value="">Select State First</option>';
             }
         }
+
+        // Phone number validation - only allow digits
+        document.addEventListener('DOMContentLoaded', function() {
+            const phoneInputs = document.querySelectorAll('input[name="phone"]');
+            phoneInputs.forEach(input => {
+                input.addEventListener('input', function(e) {
+                    this.value = this.value.replace(/[^0-9]/g, '');
+                });
+            });
+
+            // Form validation for both student and faculty forms
+            const forms = document.querySelectorAll('form[method="POST"]');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    const phone = this.querySelector('input[name="phone"]').value;
+                    const email = this.querySelector('input[name="email"]').value;
+                    const password = this.querySelector('input[name="password"]').value;
+                    const confirmPassword = this.querySelector('input[name="confirm_password"]').value;
+                    const dob = this.querySelector('input[name="dob"]').value;
+
+                    if (phone.length !== 10) {
+                        alert('Phone number must be exactly 10 digits.');
+                        e.preventDefault();
+                        return;
+                    }
+
+                    if (password.length < 6) {
+                        alert('Password must be at least 6 characters long.');
+                        e.preventDefault();
+                        return;
+                    }
+
+                    if (password !== confirmPassword) {
+                        alert('Passwords do not match.');
+                        e.preventDefault();
+                        return;
+                    }
+
+                    if (dob) {
+                        const dobDate = new Date(dob);
+                        const today = new Date();
+                        const age = today.getFullYear() - dobDate.getFullYear();
+                        if (age < 21) {
+                            alert('Date of birth must be at least 21 years ago.');
+                            e.preventDefault();
+                            return;
+                        }
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
