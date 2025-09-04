@@ -9,6 +9,9 @@ $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch();
 $user_name = $user ? htmlspecialchars($user['name']) : 'Admin';
 
+// Check for role update notification
+$role_updated = isset($_GET['role_updated']) && $_GET['role_updated'] == '1';
+
 // Dynamic greeting
 date_default_timezone_set('Asia/Kolkata');
 $hour = date('G');
@@ -57,6 +60,11 @@ if ($hour < 12) {
             <div class="container">
                 <div class="hero-content" style="max-width: 600px; margin: 0 auto;">
                     <h1 class="hero-title" style="text-align:center; color:#3a4a6b;"><?php echo $greeting . ", " . $user_name; ?>!</h1>
+                    <?php if ($role_updated): ?>
+                        <div class="alert alert-success" style="background: #d4edda; color: #155724; border: 1px solid #c3e6cb; padding: 12px; border-radius: 4px; margin: 1rem 0; text-align: center;">
+                            <i class="fa-solid fa-check-circle"></i> Your role has been updated! You now have Admin access.
+                        </div>
+                    <?php endif; ?>
                     <div class="dashboard-actions">
                         <a href="manage_students.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-users"></i></span>
@@ -91,5 +99,20 @@ if ($hour < 12) {
             </div>
         </section>
     </main>
+    <script>
+        // Auto-hide role update notification after 5 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+            const notification = document.querySelector('.alert-success');
+            if (notification) {
+                setTimeout(function() {
+                    notification.style.transition = 'opacity 0.5s ease';
+                    notification.style.opacity = '0';
+                    setTimeout(function() {
+                        notification.remove();
+                    }, 500);
+                }, 5000);
+            }
+        });
+    </script>
 </body>
 </html>

@@ -6,6 +6,9 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
 }
 require_once 'db.php';
 $error = '';
+if (isset($_GET['error']) && $_GET['error'] === 'account_disabled') {
+    $error = 'Your account has been disabled. Please contact an administrator.';
+}
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
