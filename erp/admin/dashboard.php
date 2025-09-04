@@ -46,6 +46,7 @@ if ($hour < 12) {
                     <a href="view_attendance.php" class="nav-link">View Attendance</a>
                     <a href="upload_documents.php" class="nav-link">Upload Documents</a>
                     <a href="fee_payment.php" class="nav-link">Fee Payment</a>
+                    <a href="give_feedback.php" class="nav-link">Give Feedback</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
             </div>
@@ -77,9 +78,13 @@ if ($hour < 12) {
                             <span class="dashboard-action-icon"><i class="fa-solid fa-file-arrow-up"></i></span>
                             Upload Documents
                         </a>
-                         <a href="fee_payment.php" class="dashboard-action-btn">
+                        <a href="fee_payment.php" class="dashboard-action-btn">
                             <span class="dashboard-action-icon"><i class="fa-solid fa-indian-rupee-sign"></i></span>
                             Fee Payment
+                        </a>
+                        <a href="give_feedback.php" class="dashboard-action-btn">
+                            <span class="dashboard-action-icon"><i class="fa-solid fa-comments"></i></span>
+                            Give Feedback
                         </a>
                     </div>
                 </div>
