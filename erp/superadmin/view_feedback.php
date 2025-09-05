@@ -49,6 +49,7 @@ $feedback_data = $stmt->fetchAll();
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
                     <a href="manage_timetable.php" class="nav-link">Manage Timetable</a>
+                    <a href="view_timetable.php" class="nav-link">View Timetable</a>
                     <a href="manage_faculty.php" class="nav-link">Faculty</a>
                     <a href="manage_students.php" class="nav-link">Students</a>
                     <a href="manage_fees.php" class="nav-link">Fees</a>

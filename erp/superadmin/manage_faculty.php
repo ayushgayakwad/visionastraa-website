@@ -130,12 +130,12 @@ $faculty = $stmt->fetchAll();
             <div class="header-content" style="display:flex;align-items:center;justify-content:space-between;">
                 <a href="dashboard.php" class="logo" style="display:flex;align-items:center;gap:0.5em;">
                     <img src="../logo.png" alt="Logo" style="height: 80px;">
-                    <span class="logo-text">EV Academy ERP</span>
                 </a>
                 <button class="mobile-menu-btn" onclick="document.body.classList.toggle('nav-open')"><i class="fa-solid fa-bars"></i></button>
                 <nav class="nav-desktop">
                     <a href="dashboard.php" class="nav-link">Dashboard</a>
                     <a href="manage_timetable.php" class="nav-link">Manage Timetable</a>
+                    <a href="view_timetable.php" class="nav-link">View Timetable</a>
                     <a href="manage_faculty.php" class="nav-link">Faculty</a>
                     <a href="manage_students.php" class="nav-link">Students</a>
                     <a href="manage_fees.php" class="nav-link">Fees</a>
