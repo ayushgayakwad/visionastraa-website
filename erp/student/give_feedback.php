@@ -77,6 +77,9 @@ while ($row = $stmt_existing_feedback->fetch()) {
         <div class="container">
             <section class="form-section card">
                 <h2 style="color:#3a4a6b; margin-bottom: 1.5rem;">Feedback for <?php echo date("F j, Y"); ?></h2>
+                <div class="alert" style="background-color: #e3eafc; border-left-color: #b3c7f7; margin-bottom: 2em;">
+                    <i class="fa-solid fa-info-circle"></i> This page is for submitting feedback for today's classes only. To submit feedback for a class on a different date, please visit the <a href="view_timetable.php" style="font-weight: bold; text-decoration: underline; color: #3a4a6b;">View Timetable</a> page and click on the desired class.
+                </div>
                 <?php if ($message): ?>
                     <div class="alert"><?php echo htmlspecialchars($message); ?></div>
                 <?php endif; ?>
