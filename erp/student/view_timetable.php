@@ -3,6 +3,29 @@ $required_role = 'student';
 include '../auth.php';
 require_once '../db.php';
 
+$message = '';
+$student_id = $_SESSION['user_id'];
+
+// --- Get current date from server (UTC) and convert to IST ---
+$stmt_time = $pdo->query("SELECT NOW() as current_utc");
+$current_utc_time = $stmt_time->fetchColumn();
+$utc_date_obj = new DateTime($current_utc_time, new DateTimeZone('UTC'));
+$utc_date_obj->setTimezone(new DateTimeZone('Asia/Kolkata'));
+$current_date = $utc_date_obj->format('Y-m-d');
+
+
+// Handle feedback submission from the modal
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_feedback'])) {
+    $timetable_id = $_POST['timetable_id'];
+    $rating = $_POST['rating'];
+    $comments = $_POST['comments'];
+
+    $stmt = $pdo->prepare('INSERT INTO erp_feedback (student_id, timetable_id, rating, comments) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE rating=VALUES(rating), comments=VALUES(comments)');
+    $stmt->execute([$student_id, $timetable_id, $rating, $comments]);
+    $message = 'Thank you for your feedback!';
+}
+
+
 // --- Time Slot Definitions ---
 $time_slots = [
     'GD_MORNING' => '9:00 AM - 9:30 AM',
@@ -25,7 +48,7 @@ $week_start_date = $date_obj->format('Y-m-d');
 $week_dates = [];
 $days_of_week = [];
 for ($i = 0; $i < 5; $i++) {
-    $week_dates[] = $date_obj->format('Y-m-d');
+    $week_dates[$date_obj->format('l')] = $date_obj->format('Y-m-d');
     $days_of_week[] = $date_obj->format('l');
     $date_obj->modify('+1 day');
 }
@@ -33,7 +56,7 @@ for ($i = 0; $i < 5; $i++) {
 
 // Fetch the timetable for the entire week and join with users to get faculty name
 $stmt_timetable = $pdo->prepare("
-    SELECT tt.day_of_week, tt.time_slot, tt.class_name, tt.class_type, u.name as faculty_name
+    SELECT tt.id as timetable_id, tt.day_of_week, tt.time_slot, tt.class_name, tt.class_type, u.name as faculty_name
     FROM erp_timetable tt
     LEFT JOIN erp_users u ON tt.faculty_id = u.id
     WHERE tt.week_start_date = ?
@@ -44,6 +67,15 @@ $timetable_data = [];
 while($row = $stmt_timetable->fetch()){
     $timetable_data[$row['day_of_week']][$row['time_slot']] = $row;
 }
+
+// Fetch existing feedback for the week to show status
+$stmt_existing_feedback = $pdo->prepare("
+    SELECT timetable_id FROM erp_feedback 
+    WHERE student_id = ? AND timetable_id IN 
+        (SELECT id FROM erp_timetable WHERE week_start_date = ?)");
+$stmt_existing_feedback->execute([$student_id, $week_start_date]);
+$existing_feedback = $stmt_existing_feedback->fetchAll(PDO::FETCH_COLUMN, 0);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,8 +130,8 @@ while($row = $stmt_timetable->fetch()){
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($days_of_week as $index => $day): ?>
-                                <?php $date = $week_dates[$index]; ?>
+                            <?php foreach ($days_of_week as $day): ?>
+                                <?php $date = $week_dates[$day]; ?>
                                 <tr>
                                     <td style="text-align:left; font-weight:500;"><?php echo date('M d (l)', strtotime($date)); ?></td>
                                     <?php
@@ -109,11 +141,24 @@ while($row = $stmt_timetable->fetch()){
                                             if ($slot_key === 'BREAK' || $slot_key === 'LUNCH') {
                                                  echo '<td style="background-color:#f0f2f8; color:#6b7a99; text-align:center; font-weight:500;">' . ucfirst(strtolower($slot_key)) . '</td>';
                                             } elseif ($slot_data) {
-                                                echo '<td style="text-align:center;">
-                                                        <strong>' . htmlspecialchars($slot_data['class_name']) . '</strong><br>
-                                                        <small>(' . htmlspecialchars($slot_data['class_type']) . ')</small><br>
-                                                        <small style="color:#555;"><em>' . htmlspecialchars($slot_data['faculty_name'] ?? 'N/A') . '</em></small>
-                                                      </td>';
+                                                $is_past_or_today = $date <= $current_date;
+                                                $is_submitted = in_array($slot_data['timetable_id'], $existing_feedback);
+                                                $class_name = htmlspecialchars($slot_data['class_name']);
+                                                $class_type = htmlspecialchars($slot_data['class_type']);
+                                                $faculty_name = htmlspecialchars($slot_data['faculty_name'] ?? 'N/A');
+                                                $timetable_id = $slot_data['timetable_id'];
+
+                                                $onclick = $is_past_or_today && !$is_submitted ? "openFeedbackModal('$class_name', '$faculty_name', $timetable_id)" : '';
+                                                $style = $is_past_or_today && !$is_submitted ? 'cursor:pointer; text-decoration:underline;' : '';
+
+                                                echo "<td style='text-align:center; $style' onclick=\"$onclick\">
+                                                        <strong>$class_name</strong><br>
+                                                        <small>($class_type)</small><br>
+                                                        <small style='color:#555;'><em>$faculty_name</em></small>";
+                                                if ($is_submitted) {
+                                                    echo '<br><span style="font-size:0.8em; color:green;">Feedback Submitted</span>';
+                                                }
+                                                echo "</td>";
                                             } else {
                                                 echo '<td style="background-color:#f8fafc;"></td>'; // No class scheduled
                                             }
@@ -127,5 +172,48 @@ while($row = $stmt_timetable->fetch()){
             </section>
         </div>
     </main>
+
+    <div id="feedbackModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+        <div style="background:white; padding:2rem; border-radius:14px; width:90%; max-width:500px;">
+            <h3 id="modalClassName" style="color:#3a4a6b; margin-bottom:0.5rem;"></h3>
+            <p id="modalFacultyName" style="color:#6b7a99; margin-top:0; margin-bottom:1.5rem;"></p>
+            <form method="POST">
+                <input type="hidden" name="timetable_id" id="modalTimetableId">
+                <div>
+                    <label>Rating (1-5):</label>
+                    <select name="rating" required class="form-input">
+                        <option value="5">5 - Excellent</option>
+                        <option value="4">4 - Very Good</option>
+                        <option value="3">3 - Good</option>
+                        <option value="2">2 - Fair</option>
+                        <option value="1">1 - Poor</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Comments:</label>
+                    <textarea name="comments" class="form-input" rows="3"></textarea>
+                </div>
+                <div style="display:flex; gap:1rem; justify-content:flex-end; margin-top:1rem;">
+                    <button type="button" class="btn" onclick="closeFeedbackModal()">Cancel</button>
+                    <button type="submit" name="submit_feedback" class="btn btn-primary">Submit Feedback</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const feedbackModal = document.getElementById('feedbackModal');
+        
+        function openFeedbackModal(className, facultyName, timetableId) {
+            document.getElementById('modalClassName').innerText = className;
+            document.getElementById('modalFacultyName').innerText = 'Faculty: ' + facultyName;
+            document.getElementById('modalTimetableId').value = timetableId;
+            feedbackModal.style.display = 'flex';
+        }
+
+        function closeFeedbackModal() {
+            feedbackModal.style.display = 'none';
+        }
+    </script>
 </body>
 </html>
