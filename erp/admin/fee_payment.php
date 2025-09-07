@@ -9,12 +9,10 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 $admin_id = $_SESSION['user_id'];
 $total_fee = 100300;
 
-// Fetch all fee records for the admin
 $stmt = $pdo->prepare("SELECT * FROM student_fees WHERE student_id = ? ORDER BY created_at ASC");
 $stmt->execute([$admin_id]);
 $fees = $stmt->fetchAll();
 
-// Calculate paid amount based only on 'approved' transactions
 $paid = 0;
 foreach ($fees as $fee) {
     if ($fee['status'] == 'approved') {
@@ -23,13 +21,12 @@ foreach ($fees as $fee) {
 }
 $remaining = $total_fee - $paid;
 
-// Handle form processing
 if (isset($_POST['submit_fee'])) {
     $paid_amount = floatval($_POST['paid_amount']);
     
     $potential_remaining = $total_fee;
     foreach ($fees as $fee) {
-        if ($fee['status'] != 'rejected') { // Only subtract approved or pending payments
+        if ($fee['status'] != 'rejected') {
             $potential_remaining -= $fee['paid_amount'];
         }
     }
@@ -61,6 +58,62 @@ if (isset($_POST['submit_fee'])) {
     <link rel="stylesheet" href="../erp-theme.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        .image-modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .image-modal-content {
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        @keyframes zoom {
+            from {transform:scale(0)}
+            to {transform:scale(1)}
+        }
+
+        .image-modal .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .image-modal .close:hover,
+        .image-modal .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #qrCodeImg {
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        #qrCodeImg:hover {
+            opacity: 0.7;
+        }
+    </style>
 </head>
 <body>
     <header class="header" id="header">
@@ -119,12 +172,16 @@ if (isset($_POST['submit_fee'])) {
                             </div>
                         <?php endif; ?>
                     </div>
-                    <?php if ($remaining > 0): ?>
+                     <?php if ($remaining > 0): ?>
+                    <div style="text-align:center; margin-bottom: 1.5em; padding: 1em; background-color: #f6f8fb; border-radius: 8px;">
+                        <p style="margin:0; color: #3a4a6b; font-weight:500;">Scan the QR code below to pay using any UPI app.</p>
+                        <img id="qrCodeImg" src="../upi_qr.jpg" alt="UPI QR Code for fee payment" style="max-width: 200px; width:100%; border-radius: 8px; margin-top: 1em; border: 1px solid #e0e6f0;">
+                    </div>
                     <?php if (isset($error_message)) echo $error_message; ?>
                     <form method="post" enctype="multipart/form-data" style="display:flex;flex-direction:column;gap:1em;">
                         <label style="font-weight:500;">Enter Amount to Pay:</label>
                         <input type="number" name="paid_amount" min="1" max="<?php echo $remaining; ?>" required class="form-input" style="padding:0.7em;">
-                        <label style="font-weight:500;">Upload Screenshot:</label>
+                        <label style="font-weight:500;">Upload Payment Screenshot:</label>
                         <input type="file" name="screenshot" accept="image/*" required class="form-input" style="padding:0.7em;">
                         <button type="submit" name="submit_fee" class="btn btn-primary" style="margin-top:1em;">Submit Payment</button>
                     </form>
@@ -137,5 +194,37 @@ if (isset($_POST['submit_fee'])) {
             </div>
         </section>
     </main>
+
+    <div id="imageModal" class="image-modal">
+        <span class="close">&times;</span>
+        <img class="image-modal-content" id="modalImage">
+    </div>
+
+    <script>
+        var modal = document.getElementById("imageModal");
+
+        var img = document.getElementById("qrCodeImg");
+        var modalImg = document.getElementById("modalImage");
+        if(img) {
+            img.onclick = function(){
+                modal.style.display = "block";
+                modalImg.src = this.src;
+            }
+        }
+
+        var span = document.getElementsByClassName("close")[0];
+
+        if(span) {
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
