@@ -30,22 +30,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_assignment']))
     }
 }
 
-// Fetch all assignments with deadlines
+// Fetch all assignments with their submission status for the current student
 $stmt = $pdo->prepare("
-    SELECT fl.id, fl.assignment_details, fl.assignment_deadline, fl.document_path, tt.class_name, u.name as faculty_name
+    SELECT 
+        fl.id, fl.assignment_details, fl.assignment_deadline, fl.document_path, fl.max_marks, 
+        tt.class_name, u.name as faculty_name,
+        sa.id as submission_id, sa.status as submission_status, sa.marks_scored, sa.feedback
     FROM erp_faculty_logs fl
     JOIN erp_timetable tt ON fl.timetable_id = tt.id
     JOIN erp_users u ON fl.faculty_id = u.id
+    LEFT JOIN erp_student_assignments sa ON fl.id = sa.log_id AND sa.student_id = ?
     WHERE fl.assignment_deadline IS NOT NULL AND fl.status = 'approved'
     ORDER BY fl.assignment_deadline DESC
 ");
-$stmt->execute();
+$stmt->execute([$student_id]);
 $assignments = $stmt->fetchAll();
-
-// Fetch submitted assignments
-$stmt_submitted = $pdo->prepare("SELECT log_id FROM erp_student_assignments WHERE student_id = ?");
-$stmt_submitted->execute([$student_id]);
-$submitted_assignments = $stmt_submitted->fetchAll(PDO::FETCH_COLUMN);
 
 ?>
 <!DOCTYPE html>
@@ -90,25 +89,33 @@ $submitted_assignments = $stmt_submitted->fetchAll(PDO::FETCH_COLUMN);
                     <div class="alert">No assignments found.</div>
                 <?php else: ?>
                     <?php foreach ($assignments as $assignment): ?>
-                        <div class="card" style="margin-bottom: 2em;">
+                        <div class="card" style="margin-bottom: 2em; padding:1.5em;">
                             <h3 style="color:#3a4a6b;"><?php echo htmlspecialchars($assignment['class_name']); ?></h3>
                             <p style="color:#6b7a99;">Faculty: <?php echo htmlspecialchars($assignment['faculty_name']); ?></p>
                             <p><strong>Assignment:</strong> <?php echo nl2br(htmlspecialchars($assignment['assignment_details'])); ?></p>
                             <p><strong>Deadline:</strong> <?php echo date('F j, Y', strtotime($assignment['assignment_deadline'])); ?></p>
+                             <p><strong>Marks:</strong> <?php echo htmlspecialchars($assignment['max_marks']); ?></p>
                             <?php if ($assignment['document_path']): ?>
                                 <p><a href="../uploads/faculty_work/<?php echo htmlspecialchars($assignment['document_path']); ?>" target="_blank">View Assignment Document</a></p>
                             <?php endif; ?>
                             
-                            <?php if (in_array($assignment['id'], $submitted_assignments)): ?>
-                                <div class="alert" style="background:#d4edda; color:#155724;">You have already submitted this assignment.</div>
+                            <?php if ($assignment['submission_id']): // Student has submitted ?>
+                                <div class="alert" style="background:#e3eafc; margin-top:1em;">
+                                    <h4 style="margin-top:0; color:#3a4a6b;">Your Submission Status</h4>
+                                    <p><strong>Status:</strong> <span class="status-<?php echo htmlspecialchars($assignment['submission_status']); ?>"><?php echo ucfirst(htmlspecialchars($assignment['submission_status'])); ?></span></p>
+                                    <?php if($assignment['submission_status'] != 'pending'): ?>
+                                        <p><strong>Marks Scored:</strong> <?php echo htmlspecialchars($assignment['marks_scored'] ?? 'Not graded'); ?> / <?php echo htmlspecialchars($assignment['max_marks']); ?></p>
+                                        <p><strong>Feedback:</strong> <?php echo nl2br(htmlspecialchars($assignment['feedback'] ?? 'No feedback provided.')); ?></p>
+                                    <?php endif; ?>
+                                </div>
                             <?php elseif (date('Y-m-d') > $assignment['assignment_deadline']): ?>
                                 <div class="alert" style="background:#f8d7da; color:#721c24;">The deadline for this assignment has passed.</div>
-                            <?php else: ?>
+                            <?php else: // Not submitted and deadline has not passed ?>
                                 <form method="POST" enctype="multipart/form-data" style="margin-top: 1em;">
                                     <input type="hidden" name="log_id" value="<?php echo $assignment['id']; ?>">
                                     <div>
-                                        <label for="solution_file" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Upload Solution (PDF only)</label>
-                                        <input type="file" id="solution_file" name="solution_file" class="form-input" accept=".pdf" required>
+                                        <label for="solution_file_<?php echo $assignment['id']; ?>" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Upload Solution (PDF only)</label>
+                                        <input type="file" id="solution_file_<?php echo $assignment['id']; ?>" name="solution_file" class="form-input" accept=".pdf" required>
                                     </div>
                                     <div>
                                         <button type="submit" name="submit_assignment" class="btn btn-primary" style="margin-top: 1em;"><i class="fa-solid fa-upload"></i> Submit Assignment</button>

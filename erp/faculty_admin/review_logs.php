@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['log_id'], $_POST['act
     if ($action === 'approved' || $action === 'rejected') {
         $stmt = $pdo->prepare('UPDATE erp_faculty_logs SET status = ?, reviewer_id = ?, review_comments = ?, reviewed_at = NOW() WHERE id = ?');
         $stmt->execute([$action, $reviewer_id, $comments, $log_id]);
-        $message = "Log has been " . $action . "d.";
+        $message = "Log has been " . $action . ".";
     }
 }
 

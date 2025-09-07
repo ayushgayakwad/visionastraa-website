@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $topics_covered = $_POST['topics_covered'];
     $assignment_details = $_POST['assignment_details'] ?? null;
     $assignment_deadline = !empty($_POST['assignment_deadline']) ? $_POST['assignment_deadline'] : null;
+    $max_marks = !empty($_POST['max_marks']) ? $_POST['max_marks'] : null;
     $document_path = null;
 
     if (isset($_FILES['document']) && $_FILES['document']['error'] == 0) {
@@ -43,10 +44,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $review_comments = 'Auto-approved for Faculty Admin.';
         
         $stmt = $pdo->prepare(
-            'INSERT INTO erp_faculty_logs (faculty_id, date, timetable_id, topics_covered, document_path, assignment_details, status, reviewer_id, review_comments, reviewed_at, assignment_deadline) 
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)'
+            'INSERT INTO erp_faculty_logs (faculty_id, date, timetable_id, topics_covered, document_path, assignment_details, status, reviewer_id, review_comments, reviewed_at, assignment_deadline, max_marks) 
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?)'
         );
-        $stmt->execute([$faculty_admin_id, $date, $timetable_id, $topics_covered, $document_path, $assignment_details, $status, $reviewer_id, $review_comments, $assignment_deadline]);
+        $stmt->execute([$faculty_admin_id, $date, $timetable_id, $topics_covered, $document_path, $assignment_details, $status, $reviewer_id, $review_comments, $assignment_deadline, $max_marks]);
         $message = 'Work log submitted and auto-approved!';
     }
 }
@@ -117,12 +118,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         
                         <div>
-                            <label for="add_assignment_switch" style="display: block; margin-bottom: 0.5rem;">Add Assignment</label>
-                            <input type="checkbox" id="add_assignment_switch" onchange="toggleAssignmentFields()">
+                           <label for="add_assignment_switch" style="display: block; margin-bottom: 0.5rem; font-weight:500;">
+                                <input type="checkbox" id="add_assignment_switch" onchange="toggleAssignmentFields()" style="margin-right:0.5em;">Add Assignment
+                            </label>
                         </div>
 
-                        <div id="assignment_fields" style="display: none;">
-                            <div>
+                        <div id="assignment_fields" style="display: none; border-left: 3px solid #3a4a6b; padding-left: 1rem; display:none; grid-template-columns: 1fr 1fr; gap:1rem;">
+                            <div style="grid-column: 1 / -1;">
                                 <label style="display:block; margin-bottom:0.5rem;">Assignment Description</label>
                                 <textarea name="assignment_details" id="assignment_details" class="form-input" rows="3"></textarea>
                             </div>
@@ -133,6 +135,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <div>
                                 <label style="display:block; margin-bottom:0.5rem;">Assignment Deadline</label>
                                 <input type="date" name="assignment_deadline" id="assignment_deadline" class="form-input">
+                            </div>
+                             <div>
+                                <label style="display:block; margin-bottom:0.5rem;">Maximum Marks</label>
+                                <input type="number" name="max_marks" id="max_marks" class="form-input" placeholder="e.g., 10 or 50">
                             </div>
                         </div>
                         
@@ -148,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         function toggleAssignmentFields() {
             const assignmentFields = document.getElementById('assignment_fields');
             const addAssignmentSwitch = document.getElementById('add_assignment_switch');
-            assignmentFields.style.display = addAssignmentSwitch.checked ? 'block' : 'none';
+            assignmentFields.style.display = addAssignmentSwitch.checked ? 'grid' : 'none';
         }
 
         function validateForm() {
@@ -156,6 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (addAssignmentSwitch.checked) {
                 const assignmentDetails = document.getElementById('assignment_details').value;
                 const assignmentDeadline = document.getElementById('assignment_deadline').value;
+                const maxMarks = document.getElementById('max_marks').value;
 
                 if (assignmentDetails.trim() === '') {
                     alert('Please provide a description for the assignment.');
@@ -163,6 +170,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 if (assignmentDeadline.trim() === '') {
                     alert('Please provide a deadline for the assignment.');
+                    return false;
+                }
+                 if (maxMarks.trim() === '' || isNaN(maxMarks) || parseInt(maxMarks) <= 0) {
+                    alert('Please provide valid maximum marks for the assignment.');
                     return false;
                 }
             }

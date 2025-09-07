@@ -2,6 +2,25 @@
 $required_role = 'faculty_admin';
 include '../auth.php';
 require_once '../db.php';
+$message = '';
+$faculty_admin_id = $_SESSION['user_id'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['review_submission'])) {
+    $submission_id = $_POST['submission_id'];
+    $marks_scored = $_POST['marks_scored'];
+    $max_marks = $_POST['max_marks'];
+    $feedback = $_POST['feedback'];
+    $status = $_POST['status'];
+
+    if ($marks_scored > $max_marks) {
+        $message = '<div class="alert" style="background-color: #f8d7da; color: #721c24;">Error: Marks scored cannot be greater than maximum marks.</div>';
+    } else {
+        $stmt = $pdo->prepare('UPDATE erp_student_assignments SET marks_scored = ?, feedback = ?, status = ?, reviewed_by = ?, reviewed_at = NOW() WHERE id = ?');
+        $stmt->execute([$marks_scored, $feedback, $status, $faculty_admin_id, $submission_id]);
+        $message = '<div class="alert" style="background-color: #d4edda; color: #155724;">Assignment reviewed successfully!</div>';
+    }
+}
+
 
 // Fetch all faculty for the filter dropdown
 $stmt_faculty = $pdo->query("SELECT id, name FROM erp_users WHERE role IN ('faculty', 'faculty_admin') ORDER BY name ASC");
@@ -11,7 +30,7 @@ $selected_faculty_id = $_GET['faculty_id'] ?? 'all';
 
 // Base query
 $sql = "
-    SELECT fl.id, fl.assignment_details, tt.class_name, u.name as faculty_name
+    SELECT fl.id, fl.assignment_details, fl.max_marks, tt.class_name, u.name as faculty_name
     FROM erp_faculty_logs fl
     JOIN erp_timetable tt ON fl.timetable_id = tt.id
     JOIN erp_users u ON fl.faculty_id = u.id
@@ -35,7 +54,7 @@ if (!empty($assignments)) {
     $placeholders = implode(',', array_fill(0, count($assignment_ids), '?'));
     
     $stmt_submissions = $pdo->prepare("
-        SELECT sa.log_id, sa.solution_path, sa.submitted_at, u.name as student_name
+        SELECT sa.id, sa.log_id, sa.solution_path, sa.submitted_at, u.name as student_name, sa.status, sa.marks_scored, sa.feedback
         FROM erp_student_assignments sa
         JOIN erp_users u ON sa.student_id = u.id
         WHERE sa.log_id IN ($placeholders)
@@ -85,6 +104,7 @@ if (!empty($assignments)) {
         <div class="container">
             <section class="card">
                 <h2 style="color:#3a4a6b; margin-bottom: 1.5rem;">View Assignment Submissions</h2>
+                <?php if ($message) { echo $message; } ?>
 
                 <form method="GET" style="margin-bottom: 2em;">
                     <label for="faculty_id" style="display: block; margin-bottom: 0.5rem;">Filter by Faculty</label>
@@ -106,29 +126,54 @@ if (!empty($assignments)) {
                             <h3 style="color:#3a4a6b;"><?php echo htmlspecialchars($assignment['class_name']); ?></h3>
                             <p><strong>Faculty:</strong> <?php echo htmlspecialchars($assignment['faculty_name']); ?></p>
                             <p><strong>Assignment:</strong> <?php echo nl2br(htmlspecialchars($assignment['assignment_details'])); ?></p>
+                            <p><strong>Max Marks:</strong> <?php echo htmlspecialchars($assignment['max_marks'] ?? 'N/A'); ?></p>
                             
                             <h4 style="color:#3a4a6b; margin-top: 1.5em;">Submissions</h4>
                             <?php if (isset($submissions[$assignment['id']])): ?>
+                                <div style="overflow-x:auto;">
                                 <table class="table">
-                                    <thead>
+                                     <thead>
                                         <tr>
-                                            <th>Student Name</th>
+                                            <th>Student</th>
                                             <th>Submitted At</th>
-                                            <th>Download Solution</th>
+                                            <th>Solution</th>
+                                            <th>Status</th>
+                                            <th>Marks</th>
+                                            <th>Feedback</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php foreach ($submissions[$assignment['id']] as $submission): ?>
                                             <tr>
                                                 <td><?php echo htmlspecialchars($submission['student_name']); ?></td>
-                                                <td><?php echo date('F j, Y, g:i a', strtotime($submission['submitted_at'])); ?></td>
+                                                <td><?php echo date('M j, Y, g:i a', strtotime($submission['submitted_at'])); ?></td>
+                                                <td><a href="../uploads/assignment_solutions/<?php echo htmlspecialchars($submission['solution_path']); ?>" target="_blank" class="btn">View</a></td>
+                                                <form method="POST">
+                                                <td class="status-<?php echo htmlspecialchars($submission['status']); ?>"><?php echo ucfirst(htmlspecialchars($submission['status'])); ?></td>
+                                                <td><?php echo htmlspecialchars($submission['marks_scored']); ?> / <?php echo htmlspecialchars($assignment['max_marks']); ?></td>
+                                                <td><?php echo nl2br(htmlspecialchars($submission['feedback'])); ?></td>
                                                 <td>
-                                                    <a href="../uploads/assignment_solutions/<?php echo htmlspecialchars($submission['solution_path']); ?>" target="_blank" class="btn">Download</a>
+                                                    
+                                                        <input type="hidden" name="submission_id" value="<?php echo $submission['id']; ?>">
+                                                        <input type="hidden" name="max_marks" value="<?php echo $assignment['max_marks']; ?>">
+                                                        <div style="min-width: 250px;">
+                                                        <select name="status" class="form-input" style="margin-bottom: 0.5rem;">
+                                                            <option value="pending" <?php if($submission['status'] == 'pending') echo 'selected'; ?>>Pending</option>
+                                                            <option value="approved" <?php if($submission['status'] == 'approved') echo 'selected'; ?>>Approve</option>
+                                                            <option value="rejected" <?php if($submission['status'] == 'rejected') echo 'selected'; ?>>Reject</option>
+                                                        </select>
+                                                        <input type="number" name="marks_scored" class="form-input" placeholder="Marks Scored" value="<?php echo htmlspecialchars($submission['marks_scored']); ?>" max="<?php echo htmlspecialchars($assignment['max_marks']); ?>" style="margin-bottom: 0.5rem;">
+                                                        <textarea name="feedback" class="form-input" placeholder="Feedback/Comments" rows="2" style="margin-bottom: 0.5rem;"><?php echo htmlspecialchars($submission['feedback']); ?></textarea>
+                                                        <button type="submit" name="review_submission" class="btn btn-primary">Save Review</button>
+                                                        </div>
                                                 </td>
+                                                </form>
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
+                                </div>
                             <?php else: ?>
                                 <p>No submissions for this assignment yet.</p>
                             <?php endif; ?>
