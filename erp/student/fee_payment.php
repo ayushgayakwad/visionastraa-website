@@ -129,7 +129,6 @@ if (isset($_POST['submit_fee'])) {
                     <a href="view_attendance.php" class="nav-link">View Attendance</a>
                     <a href="fee_payment.php" class="nav-link">Fee Payment</a>
                     <a href="upload_documents.php" class="nav-link">Upload Documents</a>
-                    <a href="give_feedback.php" class="nav-link">Give Feedback</a>
                     <a href="submit_assignment.php" class="nav-link">Submit Assignment</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>

@@ -101,7 +101,6 @@ $existing_feedback = $stmt_existing_feedback->fetchAll(PDO::FETCH_COLUMN, 0);
                     <a href="view_attendance.php" class="nav-link">View Attendance</a>
                     <a href="upload_documents.php" class="nav-link">Upload Documents</a>
                     <a href="fee_payment.php" class="nav-link">Fee Payment</a>
-                    <a href="give_feedback.php" class="nav-link">Give Feedback</a>
                     <a href="submit_assignment.php" class="nav-link">Submit Assignment</a>
                     <a href="../logout.php" class="nav-link">Logout</a>
                 </nav>
@@ -149,13 +148,16 @@ $existing_feedback = $stmt_existing_feedback->fetchAll(PDO::FETCH_COLUMN, 0);
                                                 $timetable_id = $slot_data['timetable_id'];
 
                                                 $onclick = $is_past_or_today && !$is_submitted ? "openFeedbackModal('$class_name', '$faculty_name', $timetable_id)" : '';
-                                                $style = $is_past_or_today && !$is_submitted ? 'cursor:pointer; text-decoration:underline;' : '';
+                                                $style = $is_past_or_today && !$is_submitted ? 'cursor:pointer;' : '';
 
                                                 echo "<td style='text-align:center; $style' onclick=\"$onclick\">
                                                         <strong>$class_name</strong><br>
                                                         <small>($class_type)</small><br>
                                                         <small style='color:#555;'><em>$faculty_name</em></small>";
-                                                if ($is_submitted) {
+                                                
+                                                if ($is_past_or_today && !$is_submitted) {
+                                                    echo '<br><span style="font-size:0.8em; color:#3a4a6b; text-decoration: underline;">Give Feedback</span>';
+                                                } elseif ($is_submitted) {
                                                     echo '<br><span style="font-size:0.8em; color:green;">Feedback Submitted</span>';
                                                 }
                                                 echo "</td>";
