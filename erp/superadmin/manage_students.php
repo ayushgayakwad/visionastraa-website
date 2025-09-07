@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_user'])) {
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
+    $confirm_password = $_POST['confirm_password'] ?? '';
     $dob = $_POST['dob'] ?? null;
     $phone = $_POST['phone'] ?? '';
     $college_name = $_POST['college_name'] ?? '';
@@ -32,7 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_user'])) {
     $min_age_date = $today->modify('-21 years');
     $dob_date = new DateTime($dob);
 
-    if (!in_array($role, ['student', 'admin'])) {
+    if ($password !== $confirm_password) {
+        $message = 'Passwords do not match.';
+    } else if (!in_array($role, ['student', 'admin'])) {
         $message = 'Invalid role specified.';
     }
     else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -169,6 +172,10 @@ $users = $stmt->fetchAll();
                     <div>
                         <label for="password" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Password *</label>
                         <input type="password" id="password" name="password" class="form-input" required minlength="6">
+                    </div>
+                     <div>
+                        <label for="confirm_password" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Confirm Password *</label>
+                        <input type="password" id="confirm_password" name="confirm_password" class="form-input" required minlength="6">
                     </div>
                     <div>
                         <label for="dob" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Date of Birth</label>
@@ -371,6 +378,7 @@ $users = $stmt->fetchAll();
             const phone = document.querySelector('input[name="phone"]').value;
             const email = document.querySelector('input[name="email"]').value;
             const password = document.querySelector('input[name="password"]').value;
+            const confirm_password = document.querySelector('input[name="confirm_password"]').value;
             const dob = document.querySelector('input[name="dob"]').value;
 
             if (phone.length !== 10) {
@@ -381,6 +389,12 @@ $users = $stmt->fetchAll();
 
             if (password.length < 6) {
                 alert('Password must be at least 6 characters long.');
+                e.preventDefault();
+                return;
+            }
+            
+            if (password !== confirm_password) {
+                alert('Passwords do not match.');
                 e.preventDefault();
                 return;
             }

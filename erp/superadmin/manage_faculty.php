@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_faculty'])) {
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
+    $confirm_password = $_POST['confirm_password'] ?? '';
     $dob = $_POST['dob'] ?? null;
     $phone = $_POST['phone'] ?? '';
     $role = $_POST['role'] ?? 'faculty';
@@ -34,7 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_faculty'])) {
     $min_age_date = $today->modify('-21 years');
     $dob_date = new DateTime($dob);
 
-    if (!in_array($role, ['faculty', 'faculty_admin'])) {
+    if ($password !== $confirm_password) {
+        $message = 'Passwords do not match.';
+    } else if (!in_array($role, ['faculty', 'faculty_admin'])) {
         $message = 'Invalid role selected.';
     }
     else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -169,6 +172,10 @@ $faculty = $stmt->fetchAll();
                     <div>
                         <label style="display: block; margin-bottom: 0.5rem;">Password *</label>
                         <input type="password" name="password" class="form-input" required minlength="6">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem;">Confirm Password *</label>
+                        <input type="password" name="confirm_password" class="form-input" required minlength="6">
                     </div>
                     <div>
                         <label style="display: block; margin-bottom: 0.5rem;">Date of Birth</label>
@@ -322,6 +329,7 @@ $faculty = $stmt->fetchAll();
             const phone = document.querySelector('input[name="phone"]').value;
             const email = document.querySelector('input[name="email"]').value;
             const password = document.querySelector('input[name="password"]').value;
+            const confirm_password = document.querySelector('input[name="confirm_password"]').value;
             const dob = document.querySelector('input[name="dob"]').value;
 
             if (phone.length !== 10) {
@@ -332,6 +340,12 @@ $faculty = $stmt->fetchAll();
 
             if (password.length < 6) {
                 alert('Password must be at least 6 characters long.');
+                e.preventDefault();
+                return;
+            }
+
+            if (password !== confirm_password) {
+                alert('Passwords do not match.');
                 e.preventDefault();
                 return;
             }

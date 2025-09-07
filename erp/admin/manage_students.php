@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_student'])) {
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
+    $confirm_password = $_POST['confirm_password'] ?? '';
     $dob = $_POST['dob'] ?? null;
     $phone = $_POST['phone'] ?? '';
     $college_name = $_POST['college_name'] ?? '';
@@ -29,7 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_student'])) {
     $min_age_date = $today->modify('-21 years');
     $dob_date = new DateTime($dob);
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if ($password !== $confirm_password) {
+        $message = 'Passwords do not match.';
+    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message = 'Invalid email address.';
     } elseif (!preg_match('/^[0-9]{10}$/', $phone)) {
         $message = 'Phone number must be 10 digits.';
@@ -117,6 +120,7 @@ $students = $stmt->fetchAll();
                     <div><label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Name *</label><input type="text" name="name" required class="form-input"></div>
                     <div><label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Email *</label><input type="email" name="email" required class="form-input" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></div>
                     <div><label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Password *</label><input type="password" name="password" required class="form-input" minlength="6"></div>
+                    <div><label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Confirm Password *</label><input type="password" name="confirm_password" required class="form-input" minlength="6"></div>
                     <div><label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Date of Birth</label><input type="date" name="dob" class="form-input" max="<?php echo date('Y-m-d', strtotime('-21 years')); ?>"></div>
                     <div><label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">Phone *</label><input type="tel" name="phone" required class="form-input" pattern="[0-9]{10}" maxlength="10" placeholder="10 digit phone number"></div>
                     <div><label style="display:block; margin-bottom:0.5rem; color:#3a4a6b; font-weight:500;">College Name</label><input type="text" name="college_name" class="form-input"></div>
@@ -175,6 +179,7 @@ $students = $stmt->fetchAll();
             const phone = document.querySelector('input[name="phone"]').value;
             const email = document.querySelector('input[name="email"]').value;
             const password = document.querySelector('input[name="password"]').value;
+            const confirm_password = document.querySelector('input[name="confirm_password"]').value;
             const dob = document.querySelector('input[name="dob"]').value;
 
             if (phone.length !== 10) {
@@ -185,6 +190,12 @@ $students = $stmt->fetchAll();
 
             if (password.length < 6) {
                 alert('Password must be at least 6 characters long.');
+                e.preventDefault();
+                return;
+            }
+
+            if (password !== confirm_password) {
+                alert('Passwords do not match.');
                 e.preventDefault();
                 return;
             }
