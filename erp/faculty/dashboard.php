@@ -73,7 +73,7 @@ if ($hour < 12) {
                             Submit Daily Work Log
                         </a>
                         <a href="view_work_logs.php" class="dashboard-action-btn">
-                            <span class="dashboard-action-icon"><i class="fa-solid fa-list-check"></i></span>
+                            <span class="dashboard-action-icon"><i class="fa-solid fa-history"></i></span>
                             View My Work Logs
                         </a>
                         <a href="view_submissions.php" class="dashboard-action-btn">

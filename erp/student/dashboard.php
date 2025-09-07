@@ -66,7 +66,7 @@ if ($hour < 12) {
                     <?php endif; ?>
                     <div class="dashboard-actions">
                         <a href="view_timetable.php" class="dashboard-action-btn">
-                            <span class="dashboard-action-icon"><i class="fa-solid fa-calendar-alt"></i></span>
+                            <span class="dashboard-action-icon"><i class="fa-solid fa-calendar-day"></i></span>
                             View Timetable
                         </a>
                         <a href="view_attendance.php" class="dashboard-action-btn">

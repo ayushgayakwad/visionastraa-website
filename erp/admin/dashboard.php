@@ -72,7 +72,7 @@ if ($hour < 12) {
                             Students
                         </a>
                         <a href="view_timetable.php" class="dashboard-action-btn">
-                            <span class="dashboard-action-icon"><i class="fa-solid fa-calendar-alt"></i></span>
+                            <span class="dashboard-action-icon"><i class="fa-solid fa-calendar-day"></i></span>
                             View Timetable
                         </a>
                         <a href="mark_attendance.php" class="dashboard-action-btn">

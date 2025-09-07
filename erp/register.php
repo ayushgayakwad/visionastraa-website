@@ -13,7 +13,7 @@ $indian_states = [
 ];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'] ?? '';
+    $name = trim($_POST['name'] ?? '');
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
@@ -24,7 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $min_age_date = $today->modify('-21 years');
     $dob_date = new DateTime($dob);
 
-    if ($password !== $confirm_password) {
+    if (empty($name)) {
+        $message = 'Name cannot be empty.';
+    } elseif (!preg_match("/^[a-zA-Z\s]+$/", $name)) {
+        $message = 'Name can only contain alphabets and spaces.';
+    } elseif ($password !== $confirm_password) {
         $message = 'Passwords do not match.';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message = 'Invalid email address.';
@@ -34,8 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message = 'Invalid date of birth.';
     } elseif (strlen($password) < 6) {
         $message = 'Password must be at least 6 characters.';
-    } elseif (empty($name) || empty($phone)) {
-        $message = 'Name and phone are required.';
+    } elseif (empty($phone)) {
+        $message = 'Phone is required.';
     } else {
         $stmt = $pdo->prepare('SELECT id FROM erp_users WHERE email = ?');
         $stmt->execute([$email]);
