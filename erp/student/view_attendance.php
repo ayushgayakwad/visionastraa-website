@@ -21,7 +21,7 @@ $date_obj->setISODate($year, $week_num);
 $week_start_date = $date_obj->format('Y-m-d');
 $week_dates = [];
 $days_of_week = [];
-for ($i = 0; $i < 5; $i++) {
+for ($i = 0; $i < 7; $i++) {
     $week_dates[] = $date_obj->format('Y-m-d');
     $days_of_week[] = $date_obj->format('l');
     $date_obj->modify('+1 day');

@@ -13,7 +13,6 @@ $date_obj->setISODate($year, $week_num);
 $week_start_date = $date_obj->format('Y-m-d');
 // --- End Week Selection Logic ---
 
-// **CHANGE:** Updated time slots array for display and logic
 $all_time_slots = [
     'GD_MORNING' => '9:00 AM - 9:30 AM',
     'CLASS_1' => '9:30 AM - 11:00 AM',
@@ -24,7 +23,6 @@ $all_time_slots = [
     'GD_EVENING' => '4:30 PM - 6:00 PM'
 ];
 
-// **CHANGE:** Filtered array for the form dropdown (excluding breaks)
 $bookable_time_slots = array_filter($all_time_slots, function($key) {
     return $key !== 'BREAK' && $key !== 'LUNCH';
 }, ARRAY_FILTER_USE_KEY);
@@ -78,16 +76,15 @@ $stmt->execute();
 $faculty_list = $stmt->fetchAll();
 
 $timetable = [];
-$stmt = $pdo->prepare('SELECT tt.*, u.name as faculty_name FROM erp_timetable tt LEFT JOIN erp_users u ON tt.faculty_id = u.id WHERE tt.week_start_date = ? ORDER BY FIELD(day_of_week, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"), FIELD(time_slot, "GD_MORNING", "CLASS_1", "BREAK", "CLASS_2", "LUNCH", "LAB", "GD_EVENING")');
+$stmt = $pdo->prepare('SELECT tt.*, u.name as faculty_name FROM erp_timetable tt LEFT JOIN erp_users u ON tt.faculty_id = u.id WHERE tt.week_start_date = ? ORDER BY FIELD(day_of_week, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"), FIELD(time_slot, "GD_MORNING", "CLASS_1", "BREAK", "CLASS_2", "LUNCH", "LAB", "GD_EVENING")');
 $stmt->execute([$week_start_date]);
 while ($row = $stmt->fetch()) {
     $timetable[$row['day_of_week']][] = $row;
 }
-$days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+$days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-// Generate dates for each day of the selected week
 $week_dates = [];
-for ($i = 0; $i < 5; $i++) {
+for ($i = 0; $i < 7; $i++) {
     $date = clone $date_obj;
     $date->modify("+$i days");
     $week_dates[$days[$i]] = $date->format('M j');

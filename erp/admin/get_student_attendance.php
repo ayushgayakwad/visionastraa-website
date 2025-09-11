@@ -26,7 +26,7 @@ $week_num = (int)substr($week_string, 6, 2);
 $date_obj = new DateTime();
 $date_obj->setISODate($year, $week_num);
 $week_start_date = $date_obj->format('Y-m-d');
-$week_end_date = $date_obj->modify('+4 days')->format('Y-m-d');
+$week_end_date = $date_obj->modify('+6 days')->format('Y-m-d');
 
 // --- Data Fetching ---
 // Fetch timetable for the week

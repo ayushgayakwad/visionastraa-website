@@ -11,7 +11,7 @@ $date_obj = new DateTime();
 $date_obj->setISODate($year, $week_num);
 $week_start_date = $date_obj->format('Y-m-d');
 $week_dates = [];
-for ($i = 0; $i < 5; $i++) {
+for ($i = 0; $i < 7; $i++) {
     $week_dates[] = $date_obj->format('Y-m-d');
     $date_obj->modify('+1 day');
 }
@@ -90,7 +90,7 @@ $time_slots = [
                         </thead>
                         <tbody>
                             <?php if (empty($users)): ?>
-                                <tr><td colspan="7" style="text-align:center;">No users found.</td></tr>
+                                <tr><td colspan="9" style="text-align:center;">No users found.</td></tr>
                             <?php else: ?>
                                 <?php foreach ($users as $user): ?>
                                 <tr>
@@ -152,7 +152,7 @@ $time_slots = [
                     tableHtml += '<th>Daily Total</th></tr></thead><tbody>';
                     
                     const weekDates = <?php echo json_encode($week_dates); ?>;
-                    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+                    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
                     weekDates.forEach((date, index) => {
                         const day = daysOfWeek[index];
