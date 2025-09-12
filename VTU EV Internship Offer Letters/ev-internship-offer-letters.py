@@ -14,7 +14,7 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 
-CSV_FILE_PATH = 'VTU EV Internship Offer Letters/applicants-vtu-internyet-6.csv'
+CSV_FILE_PATH = 'VTU EV Internship Offer Letters/applicants-vtu-internyet-7.csv'
 PDF_TEMPLATE_PATH = 'VTU EV Internship Offer Letters/Template.pdf'
 OUTPUT_DIRECTORY = 'VTU EV Internship Offer Letters/Generated_Offer_Letters'
 
