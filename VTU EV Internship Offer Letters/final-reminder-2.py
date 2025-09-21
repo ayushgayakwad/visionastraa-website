@@ -6,7 +6,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formataddr
 
-CSV_FILE_PATH = 'VTU EV Internship Offer Letters/applicants-vtu-internyet-rajeev-akshaya-bgmit.csv'
+CSV_FILE_PATH = 'VTU EV Internship Offer Letters/applicants-vtu-internyet-rith-ait-bgmit.csv'
 
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
