@@ -16,11 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_role'])) {
     $message = 'Faculty role updated successfully!';
 }
 
-
-$stmt = $pdo->prepare('SELECT id, name FROM erp_classes ORDER BY name ASC');
-$stmt->execute();
-$class_list = $stmt->fetchAll();
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_faculty'])) {
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
