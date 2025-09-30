@@ -1,5 +1,3 @@
-# CURRENTLY SENDS 1 EMAIL EVERY 3 SECONDS (BUT MORE ROBUST AND RELIABLE)
-
 import mysql.connector
 import smtplib
 import time
