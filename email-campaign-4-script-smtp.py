@@ -272,8 +272,8 @@ conn = mysql.connector.connect(
     # database = "u707137586_EV_Reg_2024_T1"
 )
 cursor = conn.cursor(dictionary=True)
-tables = ['test']
-# tables = ['crdf25', 'crdf25_north', 'crdf25_south']
+# tables = ['test']
+tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 # tables = ['email_list_4', 'email_list_5', 'email_list_6']
 
 for tbl in tables:
