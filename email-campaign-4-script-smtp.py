@@ -168,14 +168,6 @@ EMAIL_BODY_TEMPLATE = """\
         </div>
 
         <hr style="margin: 25px 0;">
-
-        <h2>Connect with us on Whatsapp for more details - <a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}">+91-8075664438</a></h2>
-        <p>Get updates on the program, potential job opportunities, webinars on EV-related topics, and more! Join Now -</p>
-        <div class="button-container">
-            <a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp_group}&campaign_id={campaign_id}" class="btn">EV Academy Whatsapp Group</a>
-        </div>
-
-        <hr style="margin: 25px 0;">
         
         <div class="footer">
             <p>For questions, contact us:</p>
