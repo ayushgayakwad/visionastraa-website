@@ -263,7 +263,7 @@ conn = mysql.connector.connect(
 cursor = conn.cursor(dictionary=True)
 # tables = ['test']
 tables = ['crdf25', 'crdf25_north', 'crdf25_south']
-# tables = ['email_list_4', 'email_list_5', 'email_list_6']
+# tables = ['email_list_1', 'email_list_2', 'email_list_3']
 
 emails_sent_count = 0
 max_emails_to_send = 3000
