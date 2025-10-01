@@ -265,16 +265,49 @@ cursor = conn.cursor(dictionary=True)
 tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 # tables = ['email_list_4', 'email_list_5', 'email_list_6']
 
+emails_sent_count = 0
+max_emails_to_send = 3000
+limit_reached = False
+
 for tbl in tables:
-    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE emailSent=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
-    # cursor.execute(f"SELECT email, name FROM {tbl} WHERE emailSent=0")
-    for row in cursor.fetchall():
-        if send_email(row['email'], row['first_name']):
+    if limit_reached:
+        break
+
+    query = f"""
+        SELECT email, first_name 
+        FROM {tbl} 
+        WHERE emailSent=0 
+        AND email NOT IN (SELECT email FROM unsubscribed_emails)
+    """
+
+    # query = f"""
+    #     SELECT email, name FROM {tbl} WHERE emailSent=0
+    # """
+
+    cursor.execute(query)
+    
+    rows_to_process = cursor.fetchall()
+    
+    for row in rows_to_process:
+        if emails_sent_count >= max_emails_to_send:
+            print(f"\nReached the limit of {max_emails_to_send} emails. Stopping.")
+            limit_reached = True
+            break 
+
+        if send_email(row['email'], row.get('first_name', 'there')):
         # if send_email(row['email'], row['name']):
-            print(f"✅ Sent to {row['email']}")
-            cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
-            # cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
+            emails_sent_count += 1
+            print(f"✅ ({emails_sent_count}/{max_emails_to_send}) Sent to {row['email']}")
+            
+            update_cursor = conn.cursor()
+            update_cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
+            # update_cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
             conn.commit()
+            update_cursor.close()
 
 cursor.close()
 conn.close()
+
+print(f"\n--- Campaign Finished ---")
+print(f"Total emails sent in this run: {emails_sent_count}")
+
