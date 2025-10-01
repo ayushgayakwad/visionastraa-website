@@ -11,11 +11,17 @@ from email.utils import formataddr
 
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 587
-SMTP_USERNAME = 'visionastraa@evcourse.in'
-SMTP_PASSWORD = '>p>W|jv?Kg1'
 
-# SMTP_USERNAME = 'careers@visionastraa.in'
-# SMTP_PASSWORD = '1?Q#v!$adw:M'
+SMTP_ACCOUNTS = [
+    {
+        'username': 'visionastraa@evcourse.in',
+        'password': '>p>W|jv?Kg1'
+    },
+    {
+        'username': 'careers@visionastraa.in',
+        'password': 'Z1SIOO0A9b~'
+    }
+]
 
 CAMPAIGN_ID = "ev_marketing_campaign_1_december_2025"
 
@@ -206,7 +212,7 @@ EMAIL_BODY_TEMPLATE = """\
 </html>
 """
 
-def send_email(to_address, first_name):
+def send_email(to_address, first_name, smtp_username, smtp_password):
     vaev_linkedin = quote("https://www.linkedin.com/company/va-ev-academy", safe='')
     vaev_website = quote("https://visionastraa.com/ev-jobs.html", safe='')
     apply = quote("https://www.visionastraa.com/ev-application.html", safe='')
@@ -237,15 +243,15 @@ def send_email(to_address, first_name):
 
     msg = MIMEMultipart('mixed')
     msg['Subject'] = EMAIL_SUBJECT
-    msg['From'] = formataddr(("VisionAstraa EV Academy", SMTP_USERNAME))
+    msg['From'] = formataddr(("VisionAstraa EV Academy", smtp_username))
     msg['To'] = to_address
     msg.attach(MIMEText(body, 'html'))
 
     try:
         with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
             server.starttls()
-            server.login(SMTP_USERNAME, SMTP_PASSWORD)
-            server.sendmail(SMTP_USERNAME, to_address, msg.as_string())
+            server.login(smtp_username, smtp_password)
+            server.sendmail(smtp_username, to_address, msg.as_string())
         return True
     except Exception as e:
         print(f"❌ Error sending to {to_address}: {e}")
@@ -266,7 +272,7 @@ tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 # tables = ['email_list_1', 'email_list_2', 'email_list_3']
 
 emails_sent_count = 0
-max_emails_to_send = 3000
+max_emails_to_send = 6000
 limit_reached = False
 
 for tbl in tables:
@@ -294,14 +300,18 @@ for tbl in tables:
             limit_reached = True
             break 
 
-        if send_email(row['email'], row.get('first_name', 'there')):
-        # if send_email(row['email'], row['name']):
+        if emails_sent_count < 3000:
+            current_account = SMTP_ACCOUNTS[0]
+        else:
+            current_account = SMTP_ACCOUNTS[1]
+
+        if send_email(row['email'], row.get('first_name', 'there'), current_account['username'], current_account['password']):
+        # if send_email(row['email'], row['name'], current_account['username'], current_account['password']):
             emails_sent_count += 1
-            print(f"✅ ({emails_sent_count}/{max_emails_to_send}) Sent to {row['email']}")
+            print(f"✅ ({emails_sent_count}/{max_emails_to_send}) Sent to {row['email']} using {current_account['username']}")
             
             update_cursor = conn.cursor()
             update_cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
-            # update_cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
             conn.commit()
             update_cursor.close()
 
@@ -310,4 +320,3 @@ conn.close()
 
 print(f"\n--- Campaign Finished ---")
 print(f"Total emails sent in this run: {emails_sent_count}")
-
