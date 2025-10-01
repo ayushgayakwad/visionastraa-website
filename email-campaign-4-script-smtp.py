@@ -19,14 +19,14 @@ SMTP_PASSWORD = '>p>W|jv?Kg1'
 
 CAMPAIGN_ID = "ev_marketing_campaign_1_december_2025"
 
-EMAIL_SUBJECT = "First Placement from our Second Batch!"
+EMAIL_SUBJECT = "First Placement from our Second Batch in less than 2 months!"
 
 EMAIL_BODY_TEMPLATE = """\
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First Placement from our Second Batch!</title>
+    <title>First Placement from our Second Batch in less than 2 months!</title>
     <style>
         body {{
             font-family: Arial, sans-serif;
@@ -119,7 +119,7 @@ EMAIL_BODY_TEMPLATE = """\
             <img src="https://visionastraa.com/images/EV_Academy.png" alt="EV Academy Logo" style="max-width: 150px;">
         </div>
 
-        <h1>🌟 First Placement from our Second Batch!</h1>
+        <h1>🌟 First Placement from our Second Batch in less than 2 months!</h1>
 
         <p>
             Congratulations to <strong>Hemanth V</strong>, (EEE, B.Tech) from Velammal Institute of Technology, Chennai for becoming the first student to get hired from the second batch (2025) of <a href="https://visionastraa.com/track/click.php?email={email}&target={vaev_website}&campaign_id={campaign_id}" target="_blank">VisionAstraa EV Academy</a>!
@@ -129,14 +129,13 @@ EMAIL_BODY_TEMPLATE = """\
             In <span class="highlight">less than 2 months</span> after the 4-month Program started (on Aug 4), Hemanth has cleared all interview rounds at <strong>Sun Mobility</strong> and will be joining them for a Full-Time role on Oct 6.
         </p>
         
-        <img src="https://www.visionastraa.com/images/hemant-1.jpg" alt="Success at EV Academy" style="width:100%; max-width:600px; margin-top:20px; margin-bottom: 10px; border-radius: 8px;">
-        <br><br>
-        <img src="https://www.visionastraa.com/images/hemant-2.jpg" alt="Success at EV Academy" style="width:100%; max-width:600px; margin-top:20px; margin-bottom: 10px; border-radius: 8px;">
-
         <hr style="margin: 25px 0;">
 
         <h2>Your Success Story Starts Here!</h2>
-        <img src="https://www.visionastraa.com/image/ev-apply-email.png" alt="Upskill in EV Technologies" style="width:100%; max-width:600px; margin-top:20px; margin-bottom: 10px; border-radius: 8px;">
+        <img src="https://www.visionastraa.com/images/hemant-1.jpg" alt="Success at EV Academy" style="width:100%; max-width:600px; margin-top:20px; margin-bottom: 10px; border-radius: 8px;">
+        <br><br>
+        <img src="https://www.visionastraa.com/images/hemant-2.jpg" alt="Success at EV Academy" style="width:100%; max-width:600px; margin-top:20px; margin-bottom: 10px; border-radius: 8px;">
+        <br><br>
         <p>
             Our next batch starts in <strong>December 2025</strong>, and admissions are now open!
         </p>
@@ -154,7 +153,7 @@ EMAIL_BODY_TEMPLATE = """\
         <ul>
             <li><strong>100% Placement Guarantee</strong> in the EV industry (or your money back).</li>
             <li>Hands-On, Practical-Oriented Training at our Centre of Excellence.</li>
-            <li>Industry Expert Seminars from top companies like Mercedes Benz, Maruti Suzuki, etc.</li>
+            <li>Full support & mentorship in clearing Technical interviews in EV Domain.</li>
             <li>Industrial Visits to Leading EV Companies.</li>
         </ul>
 
@@ -209,7 +208,7 @@ EMAIL_BODY_TEMPLATE = """\
 
 def send_email(to_address, first_name):
     vaev_linkedin = quote("https://www.linkedin.com/company/va-ev-academy", safe='')
-    vaev_website = quote("https://www.visionastraa.com", safe='')
+    vaev_website = quote("https://visionastraa.com/ev-jobs.html", safe='')
     apply = quote("https://www.visionastraa.com/ev-application.html", safe='')
     whatsapp = quote("https://wa.me/918075664438", safe='')
     whatsapp_group = quote("https://chat.whatsapp.com/EhvWb9kldqI7Np2MbfCW3u", safe='')
