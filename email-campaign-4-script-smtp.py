@@ -261,10 +261,11 @@ conn = mysql.connector.connect(
     host='srv1640.hstgr.io',
     user='u707137586_Campus_Hiring',
     password='6q+SFd~o[go',
-    database='u707137586_Campus_Hiring'
+    database='u707137586_Campus_Hiring',
     # user = "u707137586_EV_Reg_T1_24",
     # password = "DMKL0IYoP&4",
     # database = "u707137586_EV_Reg_2024_T1"
+    connect_timeout=20
 )
 cursor = conn.cursor(dictionary=True)
 # tables = ['test']
@@ -310,10 +311,18 @@ for tbl in tables:
             emails_sent_count += 1
             print(f"✅ ({emails_sent_count}/{max_emails_to_send}) Sent to {row['email']} using {current_account['username']}")
             
+            try:
+                conn.ping(reconnect=True, attempts=3, delay=5)
+            except mysql.connector.Error as err:
+                print(f"❌ Error reconnecting to DB: {err}. Skipping update for {row['email']}")
+                continue
+
             update_cursor = conn.cursor()
             update_cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
             conn.commit()
             update_cursor.close()
+            delay = random.uniform(0.5, 2.0)
+            time.sleep(delay)
 
 cursor.close()
 conn.close()
