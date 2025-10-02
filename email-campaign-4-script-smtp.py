@@ -14,12 +14,12 @@ SMTP_PORT = 587
 
 SMTP_ACCOUNTS = [
     {
-        'username': 'careers@visionastraa.in',
-        'password': 'Z1SIOO0A9b~'
-    },
-    {
         'username': 'visionastraa@evcourse.in',
         'password': '>p>W|jv?Kg1'
+    },
+    {
+        'username': 'careers@visionastraa.in',
+        'password': 'Z1SIOO0A9b~'
     }
 ]
 
