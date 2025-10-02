@@ -273,18 +273,24 @@ tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 # tables = ['email_list_1', 'email_list_2', 'email_list_3']
 
 emails_sent_count = 0
-max_emails_to_send = 2500
-limit_reached = False
+max_emails_to_send = 6000
+consecutive_failures = 0
+FAILURE_THRESHOLD = 10
+stop_campaign_due_to_errors = False
 
 for tbl in tables:
-    if limit_reached:
+    if emails_sent_count >= max_emails_to_send:
+        print(f"\nReached the daily limit of {max_emails_to_send} emails. Stopping.")
         break
+
+    emails_to_fetch = max_emails_to_send - emails_sent_count
 
     query = f"""
         SELECT email, first_name 
         FROM {tbl} 
         WHERE emailSent=0 
         AND email NOT IN (SELECT email FROM unsubscribed_emails)
+        LIMIT {emails_to_fetch}
     """
 
     # query = f"""
@@ -292,22 +298,24 @@ for tbl in tables:
     # """
 
     cursor.execute(query)
-    
+
     rows_to_process = cursor.fetchall()
-    
+
+    if not rows_to_process:
+        continue
+
     for row in rows_to_process:
         if emails_sent_count >= max_emails_to_send:
-            print(f"\nReached the limit of {max_emails_to_send} emails. Stopping.")
-            limit_reached = True
-            break 
+            break
 
-        if emails_sent_count < 2501:
+        if emails_sent_count < 3000:
             current_account = SMTP_ACCOUNTS[0]
         else:
             current_account = SMTP_ACCOUNTS[1]
 
         if send_email(row['email'], row.get('first_name', 'there'), current_account['username'], current_account['password']):
         # if send_email(row['email'], row['name'], current_account['username'], current_account['password']):
+            consecutive_failures = 0
             emails_sent_count += 1
             print(f"✅ ({emails_sent_count}/{max_emails_to_send}) Sent to {row['email']} using {current_account['username']}")
             
@@ -323,6 +331,17 @@ for tbl in tables:
             update_cursor.close()
             delay = random.uniform(0.5, 2.0)
             time.sleep(delay)
+        else:
+            consecutive_failures += 1
+            print(f"⚠️ Consecutive send failures: {consecutive_failures}")
+            if consecutive_failures >= FAILURE_THRESHOLD:
+                print(f"\n❌ STOPPING CAMPAIGN: Reached {FAILURE_THRESHOLD} consecutive send errors.")
+                print("This likely means the email provider has blocked the account for the day.")
+                stop_campaign_due_to_errors = True
+                break
+    
+    if stop_campaign_due_to_errors:
+        break
 
 cursor.close()
 conn.close()
