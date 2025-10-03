@@ -10,7 +10,7 @@ $student_id = $_SESSION['user_id'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_assignment'])) {
     $log_id = $_POST['log_id'];
     
-    $validation_result = validate_upload($_FILES['solution_file'], ['pdf'], 5 * 1024 * 1024); // 5MB max size for PDFs
+    $validation_result = validate_upload($_FILES['solution_file'], ['pdf'], 5 * 1024 * 1024);
 
     if ($validation_result !== true) {
         $message = "Upload Error: " . htmlspecialchars($validation_result);

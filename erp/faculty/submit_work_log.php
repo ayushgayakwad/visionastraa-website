@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $document_path = null;
 
     if (isset($_FILES['document']) && $_FILES['document']['error'] == 0) {
-        $validation_result = validate_upload($_FILES['document'], ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'], 5 * 1024 * 1024); // 5MB max size
+        $validation_result = validate_upload($_FILES['document'], ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png', 'xls', 'xlsx', 'ppt', 'pptx'], 10 * 1024 * 1024);
 
         if ($validation_result !== true) {
             $message = "Upload Error: " . htmlspecialchars($validation_result);

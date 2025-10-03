@@ -39,11 +39,15 @@ function validate_upload($file, $allowed_extensions, $max_size_bytes) {
         'pdf'  => 'application/pdf',
         'doc'  => 'application/msword',
         'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'xls'  => 'application/vnd.ms-excel',
+        'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'ppt'  => 'application/vnd.ms-powerpoint',
+        'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
     ];
 
     $expected_mime = $allowed_mime_types[$file_extension] ?? '';
-    if (!$expected_mime || $mime_type !== $expected_mime) {
-        return "Invalid file content. The file type does not match its content.";
+    if (!$expected_mime || !in_array($mime_type, $allowed_mime_types)) {
+         return "Invalid file content. The file type does not match its content.";
     }
 
     return true;
