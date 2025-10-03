@@ -273,7 +273,7 @@ tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 # tables = ['email_list_1', 'email_list_2', 'email_list_3']
 
 emails_sent_count = 0
-max_emails_to_send = 3000
+max_emails_to_send = 6000
 consecutive_failures = 0
 FAILURE_THRESHOLD = 10
 stop_campaign_due_to_errors = False
@@ -308,7 +308,7 @@ for tbl in tables:
         if emails_sent_count >= max_emails_to_send:
             break
 
-        if emails_sent_count < 3001:
+        if emails_sent_count < 3000:
             current_account = SMTP_ACCOUNTS[0]
         else:
             current_account = SMTP_ACCOUNTS[1]
