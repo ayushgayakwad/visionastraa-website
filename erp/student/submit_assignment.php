@@ -2,15 +2,20 @@
 $required_role = 'student';
 include '../auth.php';
 require_once '../db.php';
+require_once '../upload_validation.php';
 $message = '';
 $student_id = $_SESSION['user_id'];
 
 // Handle assignment submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_assignment'])) {
     $log_id = $_POST['log_id'];
-    $solution_file = $_FILES['solution_file'];
+    
+    $validation_result = validate_upload($_FILES['solution_file'], ['pdf'], 5 * 1024 * 1024); // 5MB max size for PDFs
 
-    if ($solution_file['error'] == 0) {
+    if ($validation_result !== true) {
+        $message = "Upload Error: " . htmlspecialchars($validation_result);
+    } else {
+        $solution_file = $_FILES['solution_file'];
         $upload_dir = '../uploads/assignment_solutions/';
         if (!is_dir($upload_dir)) {
             mkdir($upload_dir, 0777, true);
@@ -23,10 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_assignment']))
             $stmt->execute([$student_id, $log_id, $filename]);
             $message = 'Assignment submitted successfully!';
         } else {
-            $message = 'Failed to upload assignment solution.';
+            $message = 'Failed to save the uploaded file.';
         }
-    } else {
-        $message = 'Error uploading file.';
     }
 }
 

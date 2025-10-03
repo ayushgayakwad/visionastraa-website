@@ -2,6 +2,7 @@
 $required_role = 'student';
 include '../auth.php';
 require_once '../db.php';
+require_once '../upload_validation.php';
 $message = '';
 $student_id = $_SESSION['user_id'];
 
@@ -13,24 +14,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $files_to_upload = [
-        'acknowledgement_form' => 'acknowledgement_form',
-        'application_form' => 'application_form',
-        'resume' => 'resume',
-        'certificates' => 'certificates'
+        'acknowledgement_form' => ['pdf', 'doc', 'docx', 'jpg', 'png'],
+        'application_form' => ['pdf', 'doc', 'docx', 'jpg', 'png'],
+        'resume' => ['pdf', 'doc', 'docx'],
+        'certificates' => ['pdf']
     ];
+    
+    $max_size = 5 * 1024 * 1024;
 
-    foreach ($files_to_upload as $input_name => $db_column) {
+    foreach ($files_to_upload as $input_name => $allowed_types) {
         if (isset($_FILES[$input_name]) && $_FILES[$input_name]['error'] == 0) {
-            $file = $_FILES[$input_name];
-            $filename = time() . '_' . uniqid() . '_' . basename($file['name']);
-            $target_path = $upload_dir . $filename;
-
-            if (move_uploaded_file($file['tmp_name'], $target_path)) {
-                $stmt = $pdo->prepare("UPDATE erp_users SET $db_column = ? WHERE id = ?");
-                $stmt->execute([$filename, $student_id]);
-                $message .= ucfirst(str_replace('_', ' ', $input_name)) . " uploaded successfully!<br>";
+            
+            $validation_result = validate_upload($_FILES[$input_name], $allowed_types, $max_size);
+            
+            if ($validation_result !== true) {
+                $message .= "Error for " . ucfirst(str_replace('_', ' ', $input_name)) . ": " . htmlspecialchars($validation_result) . "<br>";
             } else {
-                $message .= "Failed to upload " . ucfirst(str_replace('_', ' ', $input_name)) . ".<br>";
+                $file = $_FILES[$input_name];
+                $db_column = $input_name;
+                $filename = time() . '_' . uniqid() . '_' . basename($file['name']);
+                $target_path = $upload_dir . $filename;
+
+                if (move_uploaded_file($file['tmp_name'], $target_path)) {
+                    $stmt = $pdo->prepare("UPDATE erp_users SET $db_column = ? WHERE id = ?");
+                    $stmt->execute([$filename, $student_id]);
+                    $message .= ucfirst(str_replace('_', ' ', $input_name)) . " uploaded successfully!<br>";
+                } else {
+                    $message .= "Failed to upload " . ucfirst(str_replace('_', ' ', $input_name)) . ".<br>";
+                }
             }
         }
     }
@@ -82,14 +93,14 @@ $documents = $stmt->fetch();
                 <form method="POST" enctype="multipart/form-data" style="display: grid; gap: 1.5rem;">
                     <div>
                         <label for="acknowledgement_form" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Acknowledgement Form</label>
-                        <input type="file" id="acknowledgement_form" name="acknowledgement_form" class="form-input">
+                        <input type="file" id="acknowledgement_form" name="acknowledgement_form" class="form-input" accept=".pdf,.doc,.docx,.jpg,.png">
                         <?php if ($documents['acknowledgement_form']): ?>
                             <p style="margin-top: 0.5rem;"><a href="../uploads/documents/<?php echo htmlspecialchars($documents['acknowledgement_form']); ?>" target="_blank">View Uploaded File</a></p>
                         <?php endif; ?>
                     </div>
                     <div>
                         <label for="application_form" style="display: block; margin-bottom: 0.5rem; color: #3a4a6b; font-weight: 500;">Application Form</label>
-                        <input type="file" id="application_form" name="application_form" class="form-input">
+                        <input type="file" id="application_form" name="application_form" class="form-input" accept=".pdf,.doc,.docx,.jpg,.png">
                         <?php if ($documents['application_form']): ?>
                             <p style="margin-top: 0.5rem;"><a href="../uploads/documents/<?php echo htmlspecialchars($documents['application_form']); ?>" target="_blank">View Uploaded File</a></p>
                         <?php endif; ?>

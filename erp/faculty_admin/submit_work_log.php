@@ -2,6 +2,7 @@
 $required_role = 'faculty_admin';
 include '../auth.php';
 require_once '../db.php';
+require_once '../upload_validation.php';
 $message = '';
 $faculty_admin_id = $_SESSION['user_id'];
 
@@ -11,7 +12,6 @@ $date_obj = new DateTime($date);
 $date_obj->modify('monday this week');
 $week_start_date = $date_obj->format('Y-m-d');
 
-// Fetch all classes for the selected day for the dropdown
 $stmt = $pdo->prepare('SELECT id, class_name FROM erp_timetable WHERE week_start_date = ? AND day_of_week = ? ORDER BY time_slot ASC');
 $stmt->execute([$week_start_date, $day_of_week]);
 $todays_classes = $stmt->fetchAll();
@@ -26,14 +26,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $document_path = null;
 
     if (isset($_FILES['document']) && $_FILES['document']['error'] == 0) {
-        $upload_dir = '../uploads/faculty_work/';
-        if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
-        $filename = time() . '_' . uniqid() . '_' . basename($_FILES['document']['name']);
-        $target_path = $upload_dir . $filename;
-        if (move_uploaded_file($_FILES['document']['tmp_name'], $target_path)) {
-            $document_path = $filename;
+        $validation_result = validate_upload($_FILES['document'], ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'], 5 * 1024 * 1024); // 5MB max size
+        
+        if ($validation_result !== true) {
+            $message = "Upload Error: " . htmlspecialchars($validation_result);
         } else {
-            $message = "Failed to upload document.";
+            $upload_dir = '../uploads/faculty_work/';
+            if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
+            $filename = time() . '_' . uniqid() . '_' . basename($_FILES['document']['name']);
+            $target_path = $upload_dir . $filename;
+            if (move_uploaded_file($_FILES['document']['tmp_name'], $target_path)) {
+                $document_path = $filename;
+            } else {
+                $message = "Failed to save the uploaded document.";
+            }
         }
     }
 
@@ -130,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                              <div>
                                 <label style="display:block; margin-bottom:0.5rem;">Upload Relevant Document (Optional)</label>
-                                <input type="file" name="document" id="assignment_document" class="form-input">
+                                <input type="file" name="document" id="assignment_document" class="form-input" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
                             </div>
                             <div>
                                 <label style="display:block; margin-bottom:0.5rem;">Assignment Deadline</label>

@@ -2,12 +2,15 @@
 $required_role = 'student';
 include '../auth.php';
 require_once '../db.php';
+require_once '../upload_validation.php';
+
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'student') {
     echo '<p style="color:red">Student session not found or not a student. Please login again.</p>';
     exit;
 }
 $student_id = $_SESSION['user_id'];
 $total_fee = 100300;
+$error_message = '';
 
 $stmt = $pdo->prepare("SELECT * FROM student_fees WHERE student_id = ? ORDER BY created_at ASC");
 $stmt->execute([$student_id]);
@@ -34,16 +37,22 @@ if (isset($_POST['submit_fee'])) {
     if ($paid_amount < 1 || $paid_amount > $potential_remaining) {
         $error_message = "<p style='color:red'>Invalid amount. You cannot pay more than the total remaining balance (₹" . number_format($potential_remaining) . ").</p>";
     } else {
-        $file = $_FILES['screenshot'];
-        $filename = time() . '_' . basename($file['name']);
-        $target = '../uploads/' . $filename;
-        if (move_uploaded_file($file['tmp_name'], $target)) {
-            $stmt = $pdo->prepare("INSERT INTO student_fees (student_id, paid_amount, screenshot, remaining_balance) VALUES (?, ?, ?, ?)");
-            $stmt->execute([$student_id, $paid_amount, $filename, $remaining - $paid_amount]);
-            header('Location: fee_payment.php?success=1');
-            exit;
+        $validation_result = validate_upload($_FILES['screenshot'], ['jpg', 'jpeg', 'png'], 2 * 1024 * 1024); // 2MB max size
+
+        if ($validation_result !== true) {
+            $error_message = "<p style='color:red'>Upload Error: " . htmlspecialchars($validation_result) . "</p>";
         } else {
-            $error_message = "<p style='color:red'>File upload failed.</p>";
+            $file = $_FILES['screenshot'];
+            $filename = time() . '_' . uniqid() . '_' . basename($file['name']);
+            $target = '../uploads/' . $filename;
+            if (move_uploaded_file($file['tmp_name'], $target)) {
+                $stmt = $pdo->prepare("INSERT INTO student_fees (student_id, paid_amount, screenshot, remaining_balance) VALUES (?, ?, ?, ?)");
+                $stmt->execute([$student_id, $paid_amount, $filename, $remaining - $paid_amount]);
+                header('Location: fee_payment.php?success=1');
+                exit;
+            } else {
+                $error_message = "<p style='color:red'>File could not be saved. Please try again.</p>";
+            }
         }
     }
 }
@@ -180,7 +189,7 @@ if (isset($_POST['submit_fee'])) {
                         <label style="font-weight:500;">Enter Amount to Pay:</label>
                         <input type="number" name="paid_amount" min="1" max="<?php echo $remaining; ?>" required class="form-input" style="padding:0.7em;">
                         <label style="font-weight:500;">Upload Payment Screenshot:</label>
-                        <input type="file" name="screenshot" accept="image/*" required class="form-input" style="padding:0.7em;">
+                        <input type="file" name="screenshot" accept="image/jpeg,image/png" required class="form-input" style="padding:0.7em;">
                         <button type="submit" name="submit_fee" class="btn btn-primary" style="margin-top:1em;">Submit Payment</button>
                     </form>
                     <?php else: ?>
