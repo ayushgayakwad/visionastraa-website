@@ -5,10 +5,65 @@ import os
 from datetime import datetime
 from decimal import Decimal
 from docx2pdf import convert
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
+
+def send_email_with_attachment(recipient_email, student_name, pdf_filepath, invoice_number, smtp_config):
+    msg = MIMEMultipart()
+    msg['From'] = f"{smtp_config['sender_name']} <{smtp_config['sender_email']}>"
+    msg['To'] = recipient_email
+    msg['Subject'] = f"Fee Receipt from VisionAstraa EV Academy - {invoice_number}"
+
+    body = f"""
+Dear {student_name},
+
+Please find your fee receipt attached to this email.
+
+If you have any questions, feel free to contact us.
+
+Best regards,
+VisionAstraa EV Academy
+    """
+    msg.attach(MIMEText(body, 'plain'))
+
+    try:
+        with open(pdf_filepath, "rb") as attachment:
+            part = MIMEBase('application', 'octet-stream')
+            part.set_payload(attachment.read())
+        encoders.encode_base64(part)
+        part.add_header(
+            'Content-Disposition',
+            f"attachment; filename= {os.path.basename(pdf_filepath)}",
+        )
+        msg.attach(part)
+    except IOError as e:
+        print(f"  - ERROR: Could not read attachment file for email. Error: {e}")
+        return 
+    
+    server = None
+    try:
+        server = smtplib.SMTP_SSL(smtp_config['host'], smtp_config['port'])
+        server.login(smtp_config['sender_email'], smtp_config['password'])
+        server.sendmail(smtp_config['sender_email'], recipient_email, msg.as_string())
+    finally:
+        if server:
+            server.quit()
+
 
 def generate_receipts():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     
+    smtp_config = {
+        'host': 'smtp.hostinger.com',
+        'port': 465,
+        'sender_email': 'careers@visionastraa.in',
+        'sender_name': 'VisionAstraa EV Academy',
+        'password': 'Z1SIOO0A9b~'
+    }
+
     online_template_path = os.path.join(script_dir, "EVA_Fee_Receipt_Template_Online.docx")
     cash_template_path = os.path.join(script_dir, "EVA_Fee_Receipt_Template_Cash.docx")
 
@@ -120,7 +175,20 @@ def generate_receipts():
             except Exception as e:
                 print(f"  - ERROR: Failed to convert to PDF. Please ensure Microsoft Word or LibreOffice is installed. Error: {e}")
                 continue
-
+            
+            try:
+                print("  - Sending email with receipt...")
+                send_email_with_attachment(
+                    student['email'],
+                    student['full_name'],
+                    pdf_filename,
+                    invoice_number,
+                    smtp_config
+                )
+                print(f"  -> Email sent successfully to {student['email']}.")
+            except Exception as e:
+                print(f"  - ERROR: Failed to send email. Error: {e}")
+            
             pdf_data = None
             try:
                 with open(pdf_filename, 'rb') as f:
