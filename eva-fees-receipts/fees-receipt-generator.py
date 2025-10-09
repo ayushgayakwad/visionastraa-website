@@ -120,9 +120,9 @@ def generate_receipts():
                 total_in_words = f"{num2words(total, lang='en_IN').title()} Paid"
                 
                 replacements = {
-                    "10,000": f"{rate:,.2f}",
-                    "1,800": f"{gst:,.2f}",
-                    "11,800": f"{total:,.2f}",
+                    "[RATE]": f"{rate:,.2f}",
+                    "[GST]": f"{gst:,.2f}",
+                    "[TOTAL]": f"{total:,.2f}",
                 }
             elif payment_mode == 'Cash':
                 doc = Document(cash_template_path)
@@ -131,8 +131,8 @@ def generate_receipts():
                 total_in_words = f"{num2words(total, lang='en_IN').title()} Paid"
 
                 replacements = {
-                    "10,000": f"{rate:,.2f}",
-                    "11,800": f"{total:,.2f}",
+                    "[RATE]": f"{rate:,.2f}",
+                    "[TOTAL]": f"{total:,.2f}",
                 }
             else:
                 print(f"  - WARNING: Unknown payment mode '{payment_mode}' for {student['full_name']}. Skipping.")
