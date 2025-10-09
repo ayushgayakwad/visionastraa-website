@@ -8,11 +8,15 @@ from docx2pdf import convert
 
 def generate_receipts():
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    template_path = os.path.join(script_dir, "EVA_Fee_Receipt_Template_Online.docx")
     
-    if not os.path.exists(template_path):
-        print(f"Error: '{os.path.basename(template_path)}' not found.")
-        print(f"Please make sure it's in the same directory as the script: {script_dir}")
+    online_template_path = os.path.join(script_dir, "EVA_Fee_Receipt_Template_Online.docx")
+    cash_template_path = os.path.join(script_dir, "EVA_Fee_Receipt_Template_Cash.docx")
+
+    if not os.path.exists(online_template_path):
+        print(f"Error: '{os.path.basename(online_template_path)}' not found in {script_dir}")
+        return
+    if not os.path.exists(cash_template_path):
+        print(f"Error: '{os.path.basename(cash_template_path)}' not found in {script_dir}")
         return
 
     connection = None
@@ -29,7 +33,7 @@ def generate_receipts():
 
         cursor = connection.cursor(dictionary=True)
 
-        cursor.execute("SELECT id, full_name, email, phone_number, program_category, base_rate FROM students WHERE payment_status = 'pending'")
+        cursor.execute("SELECT id, full_name, email, phone_number, program_category, base_rate, payment_mode FROM students WHERE payment_status = 'pending'")
         students = cursor.fetchall()
 
         if not students:
@@ -42,29 +46,48 @@ def generate_receipts():
             print(f"Created directory: {output_dir}")
 
         for i, student in enumerate(students):
-            doc = Document(template_path)
+            payment_mode = student.get('payment_mode', 'Online').strip().title()
+            print(f"\nProcessing {student['full_name']} (Payment Mode: {payment_mode})...")
+
+            if payment_mode == 'Online':
+                doc = Document(online_template_path)
+                rate = student['base_rate']
+                gst = rate * Decimal('0.18')
+                total = rate + gst
+                total_in_words = f"{num2words(total, lang='en_IN').title()} Paid"
+                
+                replacements = {
+                    "10,000": f"{rate:,.2f}",
+                    "1,800": f"{gst:,.2f}",
+                    "11,800": f"{total:,.2f}",
+                }
+            elif payment_mode == 'Cash':
+                doc = Document(cash_template_path)
+                rate = student['base_rate']
+                total = rate
+                total_in_words = f"{num2words(total, lang='en_IN').title()} Paid"
+
+                replacements = {
+                    "10,000": f"{rate:,.2f}",
+                    "11,800": f"{total:,.2f}",
+                }
+            else:
+                print(f"  - WARNING: Unknown payment mode '{payment_mode}' for {student['full_name']}. Skipping.")
+                continue
 
             invoice_number = f"FEE-25B01-{str(i+1).zfill(3)}"
             invoice_date = datetime.now().strftime("%d/%m/%Y")
-            rate = student['base_rate']
-            gst = rate * Decimal('0.18') 
-            total = rate + gst
-            total_in_words = f"{num2words(total, lang='en_IN').title()} Paid"
-
-            replacements = {
+            
+            common_replacements = {
                 "FEE-25B01-00X": invoice_number,
                 "0X/0X/2025": invoice_date,
                 "[STUDENT FULL NAME]": student['full_name'],
                 "[EMAIL]": student['email'],
                 "[PHONE]": student['phone_number'],
                 "[CATEGORY]": student['program_category'],
-                "10,000": f"{rate:,.2f}",
-                "1,800": f"{gst:,.2f}",
-                "11,800": f"{total:,.2f}",
                 "One Lakh and Three Hundred [MENTION “PAID”]": total_in_words,
             }
-            
-            print(f"\nProcessing {student['full_name']}...")
+            replacements.update(common_replacements)
 
             for para in doc.paragraphs:
                 for key, value in replacements.items():
@@ -128,4 +151,3 @@ def generate_receipts():
 
 if __name__ == "__main__":
     generate_receipts()
-
