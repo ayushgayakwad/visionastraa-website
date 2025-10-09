@@ -33,7 +33,7 @@ def generate_receipts():
 
         cursor = connection.cursor(dictionary=True)
 
-        cursor.execute("SELECT id, full_name, email, phone_number, program_category, base_rate, payment_mode FROM students WHERE payment_status = 'pending'")
+        cursor.execute("SELECT id, full_name, email, phone_number, program_category, base_rate, payment_mode, invoice_date FROM students WHERE payment_status = 'pending'")
         students = cursor.fetchall()
 
         if not students:
@@ -45,9 +45,17 @@ def generate_receipts():
             os.makedirs(output_dir)
             print(f"Created directory: {output_dir}")
 
-        for i, student in enumerate(students):
+        for student in students:
+            if not student['invoice_date']:
+                print(f"\n- WARNING: Skipping {student['full_name']} (ID: {student['id']}) because 'invoice_date' is not set in the database.")
+                continue
+
             payment_mode = student.get('payment_mode', 'Online').strip().title()
-            print(f"\nProcessing {student['full_name']} (Payment Mode: {payment_mode})...")
+            print(f"\nProcessing {student['full_name']} (ID: {student['id']}, Payment Mode: {payment_mode})...")
+
+            invoice_number = f"FEE-25B01-{str(student['id']).zfill(3)}"
+
+            invoice_date = student['invoice_date'].strftime("%d/%m/%Y")
 
             if payment_mode == 'Online':
                 doc = Document(online_template_path)
@@ -74,9 +82,6 @@ def generate_receipts():
             else:
                 print(f"  - WARNING: Unknown payment mode '{payment_mode}' for {student['full_name']}. Skipping.")
                 continue
-
-            invoice_number = f"FEE-25B01-{str(i+1).zfill(3)}"
-            invoice_date = datetime.now().strftime("%d/%m/%Y")
             
             common_replacements = {
                 "FEE-25B01-00X": invoice_number,
