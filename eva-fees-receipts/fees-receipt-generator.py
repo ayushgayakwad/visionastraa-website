@@ -4,6 +4,7 @@ from num2words import num2words
 import os
 from datetime import datetime
 from decimal import Decimal
+from docx2pdf import convert
 
 def generate_receipts():
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -14,6 +15,7 @@ def generate_receipts():
         print(f"Please make sure it's in the same directory as the script: {script_dir}")
         return
 
+    connection = None
     try:
         connection = mysql.connector.connect(
             host="srv1640.hstgr.io",
@@ -67,35 +69,59 @@ def generate_receipts():
             for para in doc.paragraphs:
                 for key, value in replacements.items():
                     if key in para.text:
-                        inline = para.runs
-                        for j in range(len(inline)):
-                            if key in inline[j].text:
-                                text = inline[j].text.replace(key, value)
-                                inline[j].text = text
-                                print(f"  - Replaced '{key}' in paragraph.")
+                        para.text = para.text.replace(key, str(value))
 
             for table in doc.tables:
                 for row in table.rows:
                     for cell in row.cells:
                         for key, value in replacements.items():
                             if key in cell.text:
-                                cell.text = cell.text.replace(key, value)
-                                print(f"  - Replaced '{key}' in table cell.")
+                                cell.text = cell.text.replace(key, str(value))
+            
+            print("  - Replaced placeholders.")
 
-            output_filename = os.path.join(output_dir, f"Fee_Receipt_{student['full_name']}_{invoice_number}.docx")
-            doc.save(output_filename)
-            print(f"  -> Successfully generated receipt: {output_filename}")
+            docx_filename = os.path.join(output_dir, f"Fee_Receipt_{student['full_name']}_{invoice_number}.docx")
+            doc.save(docx_filename)
+            print(f"  -> Successfully generated DOCX: {os.path.basename(docx_filename)}")
 
-            update_query = "UPDATE students SET payment_status = 'paid', invoice_number = %s WHERE id = %s"
-            cursor.execute(update_query, (invoice_number, student['id']))
-            connection.commit()
-            print(f"  - Updated payment status for {student['full_name']} in the database.")
+            pdf_filename = os.path.join(output_dir, f"Fee_Receipt_{student['full_name']}_{invoice_number}.pdf")
+            try:
+                print(f"  - Converting to PDF...")
+                convert(docx_filename, pdf_filename)
+                print(f"  -> Successfully converted to PDF: {os.path.basename(pdf_filename)}")
+            except Exception as e:
+                print(f"  - ERROR: Failed to convert to PDF. Please ensure Microsoft Word or LibreOffice is installed. Error: {e}")
+                continue
 
+            pdf_data = None
+            try:
+                with open(pdf_filename, 'rb') as f:
+                    pdf_data = f.read()
+                print("  - Read PDF file content for database storage.")
+            except IOError as e:
+                print(f"  - ERROR: Could not read PDF file. Error: {e}")
+                continue
+
+            if pdf_data:
+                try:
+                    update_query = "UPDATE students SET payment_status = 'paid', invoice_number = %s, receipt_pdf = %s WHERE id = %s"
+                    cursor.execute(update_query, (invoice_number, pdf_data, student['id']))
+                    connection.commit()
+                    print(f"  - Updated payment status and saved receipt for {student['full_name']} in the database.")
+                except mysql.connector.Error as err:
+                    print(f"  - ERROR: Failed to update database with PDF. Error: {err}")
+            
+            try:
+                os.remove(docx_filename)
+                os.remove(pdf_filename)
+                print("  - Cleaned up local files.")
+            except OSError as e:
+                print(f"  - WARNING: Could not clean up local files. Error: {e}")
 
     except mysql.connector.Error as err:
         print(f"Error connecting to database: {err}")
     finally:
-        if 'connection' in locals() and connection.is_connected():
+        if connection and connection.is_connected():
             cursor.close()
             connection.close()
             print("\nDatabase connection closed.")
