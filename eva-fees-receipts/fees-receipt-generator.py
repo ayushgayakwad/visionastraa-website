@@ -8,7 +8,7 @@ from docx2pdf import convert
 
 def generate_receipts():
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    template_path = os.path.join(script_dir, "EVA_Fee_Receipt_Template.docx")
+    template_path = os.path.join(script_dir, "EVA_Fee_Receipt_Template_Online.docx")
     
     if not os.path.exists(template_path):
         print(f"Error: '{os.path.basename(template_path)}' not found.")
