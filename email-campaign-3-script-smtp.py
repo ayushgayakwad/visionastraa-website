@@ -17,7 +17,7 @@ SMTP_PORT = 587
 # SMTP_PASSWORD = '>p>W|jv?Kg1'
 
 SMTP_USERNAME = 'careers@visionastraa.in'
-SMTP_PASSWORD = '1?Q#v!$adw:M'
+SMTP_PASSWORD = 'Z1SIOO0A9b~'
 
 CAMPAIGN_ID = "ev_promotional_campaign_3_2025"
 

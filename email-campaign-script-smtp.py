@@ -14,7 +14,7 @@ from email.utils import formataddr
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 587
 SMTP_USERNAME = 'careers@visionastraa.in'
-SMTP_PASSWORD = '4@upm7$K'
+SMTP_PASSWORD = 'Z1SIOO0A9b~'
 
 CAMPAIGN_ID = "ev_promotional_campaign_2025"
 
