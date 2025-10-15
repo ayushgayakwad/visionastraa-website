@@ -150,29 +150,33 @@ cursor = conn.cursor(dictionary=True)
 # tables = ['test']
 tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 
+target_colleges = [
+    "BAPUJI INSTITUTE OF ENGINEERING & TECHNOLOGY",
+    "DAYANANDA SAGAR COLLEGE OF ENGINEERING",
+    "K.L.S. GOGTE INSTITUTE OF TECHNOLOGY",
+    "BANGALORE INSTITUTE OF TECHNOLOGY",
+    "SHARNBASVA UNIVERSITY",
+    "GM INSTITUTE OF TECHNOLOGY",
+    "M. S. RAMAIAH INSTITUTE OF TECHNOLOGY",
+    "THE NATIONAL INSTITUTE OF ENGINEERING",
+    "JAWAHARLAL NEHRU NEW COLLEGE OF ENGINEERING",
+    "RAO BAHADUR Y MAHABALESWARAPPA ENGINEERING COLLEGE"
+]
+
+college_placeholders = ', '.join(['%s'] * len(target_colleges))
+
 email_count = 0
 
-# target_colleges = [
-#     "SHARAD INSTITUTE OF TECHNOLOGY COLLEGE OF ENGINEERING",
-#     "DR. D. Y. PATIL INSTITUTE OF TECHNOLOGY",
-#     "PROGRESSIVE EDUCATION SOCIETY'S MODERN COLLEGE OF ENGINEERING, PUNE",
-#     "MODERN EDUCATION SOCIETY'S WADIA COLLEGE OF ENGINEERING",
-# ]
-
-# college_placeholders = ', '.join(['%s'] * len(target_colleges))
-
-# for tbl in tables:
-#     query = f"""
-#         SELECT email, first_name FROM {tbl} 
-# WHERE college IN ({college_placeholders}) 
-# AND emailSent = 0 
-# AND email NOT IN (SELECT email FROM unsubscribed_emails)
-#     """
-
-#     cursor.execute(query, target_colleges)
-
 for tbl in tables:
-    cursor.execute(f"SELECT email, first_name FROM {tbl} WHERE state='Telangana' AND emailSent=0 AND email NOT IN (SELECT email FROM unsubscribed_emails)")
+    query = f"""
+        SELECT email, first_name 
+        FROM {tbl} 
+        WHERE college IN ({college_placeholders}) 
+        AND emailSent_2 = 0 
+        AND email NOT IN (SELECT email FROM unsubscribed_emails)
+    """
+    cursor.execute(query, tuple(target_colleges))
+
     for row in cursor.fetchall():
         if email_count == 1500:
             SMTP_USERNAME = SMTP2_USERNAME
@@ -181,11 +185,15 @@ for tbl in tables:
         elif email_count == 3000:
             print("📧 Sent 3000 emails.")
             break
+        
         if send_email(row['email'], row['first_name']):
             print(f"✅ Sent to {row['email']}")
-            cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
+            cursor.execute(f"UPDATE {tbl} SET emailSent_2=1 WHERE email=%s", (row['email'],))
             conn.commit()
             email_count += 1
+
+        if email_count >= 3000:
+            break
 
 cursor.close()
 conn.close()
