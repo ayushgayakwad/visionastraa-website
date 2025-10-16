@@ -160,7 +160,23 @@ target_colleges = [
     "M. S. RAMAIAH INSTITUTE OF TECHNOLOGY",
     "THE NATIONAL INSTITUTE OF ENGINEERING",
     "JAWAHARLAL NEHRU NEW COLLEGE OF ENGINEERING",
-    "RAO BAHADUR Y MAHABALESWARAPPA ENGINEERING COLLEGE"
+    "RAO BAHADUR Y MAHABALESWARAPPA ENGINEERING COLLEGE",
+    "K.L.E.INSTITUTE OF TECHNOLOGY",
+    "CAMBRIDGE INSTITUTE OF TECHNOLOGY",
+    "B.M.S.COLLEGE OF ENGINEERING",
+    "PES INSTITUTE OF TECHNOLOGY & MANAGEMENT",
+    "S J C INSTITUTE OF TECHNOLOGY",
+    "KLS VISHWANATHRAO DESHPANDE INSTITUTE OF TECHNOLOGY",
+    "MAHARAJA INSTITUTE OF TECHNOLOGY MYSORE",
+    "MVJ COLLEGE OF ENGINEERING",
+    "P.E.S. COLLEGE OF ENGINEERING, MANDYA",
+    "ST. JOSEPH ENGINEERING COLLEGE",
+    "GLOBAL ACADEMY OF TECHNOLOGY",
+    "THE OXFORD COLLEGE OF ENGINEERING",
+    "EAST WEST INSTITUTE OF TECHNOLOGY",
+    "SRI SAIRAM COLLEGE OF ENGINEERING",
+    "S.D.M. COLLEGE OF ENGINEERING & TECHNOLOGY",
+    "DAYANANDA SAGAR ACADEMY OF TECHNOLOGY & MANAGEMENT TECHNICAL CAMPUS"
 ]
 
 college_placeholders = ', '.join(['%s'] * len(target_colleges))
@@ -178,16 +194,23 @@ for tbl in tables:
     cursor.execute(query, tuple(target_colleges))
 
     for row in cursor.fetchall():
-        if email_count == 1500:
+        if email_count == 1282:
             SMTP_USERNAME = SMTP2_USERNAME
             SMTP_PASSWORD = SMTP2_PASSWORD
             print("🔁 Switched to second SMTP credentials.")
-        elif email_count == 3000:
+        elif email_count == 2782:
             print("📧 Sent 3000 emails.")
             break
         
         if send_email(row['email'], row['first_name']):
             print(f"✅ Sent to {row['email']}")
+            
+            try:
+                conn.ping(reconnect=True, attempts=3, delay=5)
+            except mysql.connector.Error as err:
+                print(f"❌ Error reconnecting to DB: {err}. Skipping update for {row['email']}")
+                continue
+            
             cursor.execute(f"UPDATE {tbl} SET emailSent_2=1 WHERE email=%s", (row['email'],))
             conn.commit()
             email_count += 1
