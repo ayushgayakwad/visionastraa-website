@@ -20,8 +20,8 @@ MAX_WORKERS = 4
 
 
 SMTP_CREDENTIALS = [
-    {'username': 'visionastraa@evcourse.in', 'password': '>p>W|jv?Kg1'},
-    {'username': 'careers@visionastraa.in', 'password': 'Z1SIOO0A9b~'}
+    #{'username': 'careers@visionastraa.in', 'password': 'Z1SIOO0A9b~'},
+    {'username': 'visionastraa@evcourse.in', 'password': '>p>W|jv?Kg1'}
 ]
 
 DB_CONFIG = {
@@ -142,12 +142,6 @@ def send_and_update(recipient, smtp_config, db_connection):
         print(f"✅ Sent to {to_address} using {smtp_config['username']}")
     except Exception as e:
         print(f"❌ Mail Error for {to_address}: {e}")
-        return 
-    
-    try:
-        db_connection.ping(reconnect=True, attempts=3, delay=5)
-    except mysql.connector.Error as err:
-        print(f"❌ DB Reconnect Error for {to_address}: {err}. Skipping update.")
         return 
     
     with db_lock:
