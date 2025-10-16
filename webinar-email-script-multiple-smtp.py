@@ -29,7 +29,7 @@ SMTP_PASSWORD = SMTP1_PASSWORD
 
 CAMPAIGN_ID = "ev_webinar_2025_10_17"
 
-EMAIL_SUBJECT = "Job Opportunities in the EV Industry Webinar - October 17, 10:00 AM (Fri)"
+EMAIL_SUBJECT = "REMINDER: Job Opportunities in the EV Industry Webinar - October 17, 10:00 AM (Fri)"
 
 EMAIL_BODY_TEMPLATE = """\
 <html>

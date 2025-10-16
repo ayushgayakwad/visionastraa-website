@@ -15,11 +15,11 @@ from urllib.parse import quote
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 587
 CAMPAIGN_ID = "ev_webinar_2025_10_17"
-EMAIL_SUBJECT = "Job Opportunities in the EV Industry Webinar - October 17, 10:00 AM (Fri)"
+EMAIL_SUBJECT = "REMINDER: Job Opportunities in the EV Industry Webinar - October 17, 10:00 AM (Fri)"
 MAX_WORKERS = 4 
 
 SMTP_CREDENTIALS = [
-    #{'username': 'careers@visionastraa.in', 'password': 'Z1SIOO0A9b~'},
+    {'username': 'careers@visionastraa.in', 'password': 'Z1SIOO0A9b~'},
     {'username': 'visionastraa@evcourse.in', 'password': '>p>W|jv?Kg1'}
 ]
 
