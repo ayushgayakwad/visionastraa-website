@@ -140,19 +140,25 @@ def send_and_update(recipient, smtp_config, db_connection):
             server.login(smtp_config['username'], smtp_config['password'])
             server.sendmail(smtp_config['username'], to_address, msg.as_string())
         print(f"✅ Sent to {to_address} using {smtp_config['username']}")
-        
-        with db_lock:
-            try:
-                cursor = db_connection.cursor()
-                cursor.execute(f"UPDATE {table_name} SET emailSent_2=1 WHERE email=%s", (to_address,))
-                db_connection.commit()
-                cursor.close()
-            except mysql.connector.Error as err:
-                print(f"❌ DB Error updating {to_address}: {err}")
-                db_connection.rollback()
-        
     except Exception as e:
         print(f"❌ Mail Error for {to_address}: {e}")
+        return 
+    
+    try:
+        db_connection.ping(reconnect=True, attempts=3, delay=5)
+    except mysql.connector.Error as err:
+        print(f"❌ DB Reconnect Error for {to_address}: {err}. Skipping update.")
+        return 
+    
+    with db_lock:
+        try:
+            cursor = db_connection.cursor()
+            cursor.execute(f"UPDATE {table_name} SET emailSent_2=1 WHERE email=%s", (to_address,))
+            db_connection.commit()
+            cursor.close()
+        except mysql.connector.Error as err:
+            print(f"❌ DB Update Error for {to_address}: {err}")
+            db_connection.rollback()
 
 def main():
     all_recipients = []
@@ -161,18 +167,34 @@ def main():
     conn = mysql.connector.connect(**DB_CONFIG, autocommit=False)
     cursor = conn.cursor(dictionary=True)
     
+    # tables = ['test']
     tables = ['crdf25', 'crdf25_north', 'crdf25_south']
     target_colleges = [
-        "BAPUJI INSTITUTE OF ENGINEERING & TECHNOLOGY", "DAYANANDA SAGAR COLLEGE OF ENGINEERING",
-        "K.L.S. GOGTE INSTITUTE OF TECHNOLOGY", "BANGALORE INSTITUTE OF TECHNOLOGY", "SHARNBASVA UNIVERSITY",
-        "GM INSTITUTE OF TECHNOLOGY", "M. S. RAMAIAH INSTITUTE OF TECHNOLOGY", "THE NATIONAL INSTITUTE OF ENGINEERING",
-        "JAWAHARLAL NEHRU NEW COLLEGE OF ENGINEERING", "RAO BAHADUR Y MAHABALESWARAPPA ENGINEERING COLLEGE",
-        "K.L.E.INSTITUTE OF TECHNOLOGY", "CAMBRIDGE INSTITUTE OF TECHNOLOGY", "B.M.S.COLLEGE OF ENGINEERING",
-        "PES INSTITUTE OF TECHNOLOGY & MANAGEMENT", "S J C INSTITUTE OF TECHNOLOGY",
-        "KLS VISHWANATHRAO DESHPANDE INSTITUTE OF TECHNOLOGY", "MAHARAJA INSTITUTE OF TECHNOLOGY MYSORE",
-        "MVJ COLLEGE OF ENGINEERING", "P.E.S. COLLEGE OF ENGINEERING, MANDYA", "ST. JOSEPH ENGINEERING COLLEGE",
-        "GLOBAL ACADEMY OF TECHNOLOGY", "THE OXFORD COLLEGE OF ENGINEERING", "EAST WEST INSTITUTE OF TECHNOLOGY",
-        "SRI SAIRAM COLLEGE OF ENGINEERING", "S.D.M. COLLEGE OF ENGINEERING & TECHNOLOGY",
+        "BAPUJI INSTITUTE OF ENGINEERING & TECHNOLOGY",
+        "DAYANANDA SAGAR COLLEGE OF ENGINEERING",
+        "K.L.S. GOGTE INSTITUTE OF TECHNOLOGY",
+        "BANGALORE INSTITUTE OF TECHNOLOGY",
+        "SHARNBASVA UNIVERSITY",
+        "GM INSTITUTE OF TECHNOLOGY",
+        "M. S. RAMAIAH INSTITUTE OF TECHNOLOGY",
+        "THE NATIONAL INSTITUTE OF ENGINEERING",
+        "JAWAHARLAL NEHRU NEW COLLEGE OF ENGINEERING",
+        "RAO BAHADUR Y MAHABALESWARAPPA ENGINEERING COLLEGE",
+        "K.L.E.INSTITUTE OF TECHNOLOGY",
+        "CAMBRIDGE INSTITUTE OF TECHNOLOGY",
+        "B.M.S.COLLEGE OF ENGINEERING",
+        "PES INSTITUTE OF TECHNOLOGY & MANAGEMENT",
+        "S J C INSTITUTE OF TECHNOLOGY",
+        "KLS VISHWANATHRAO DESHPANDE INSTITUTE OF TECHNOLOGY",
+        "MAHARAJA INSTITUTE OF TECHNOLOGY MYSORE",
+        "MVJ COLLEGE OF ENGINEERING",
+        "P.E.S. COLLEGE OF ENGINEERING, MANDYA",
+        "ST. JOSEPH ENGINEERING COLLEGE",
+        "GLOBAL ACADEMY OF TECHNOLOGY",
+        "THE OXFORD COLLEGE OF ENGINEERING",
+        "EAST WEST INSTITUTE OF TECHNOLOGY",
+        "SRI SAIRAM COLLEGE OF ENGINEERING",
+        "S.D.M. COLLEGE OF ENGINEERING & TECHNOLOGY",
         "DAYANANDA SAGAR ACADEMY OF TECHNOLOGY & MANAGEMENT TECHNICAL CAMPUS"
     ]
     college_placeholders = ', '.join(['%s'] * len(target_colleges))
@@ -184,7 +206,7 @@ def main():
             WHERE college IN ({college_placeholders}) 
             AND emailSent_2 = 0 
             AND email NOT IN (SELECT email FROM unsubscribed_emails)
-            LIMIT 1500 
+            LIMIT 3000 
         """
         cursor.execute(query, tuple(target_colleges))
         all_recipients.extend(cursor.fetchall())
