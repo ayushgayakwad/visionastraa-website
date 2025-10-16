@@ -194,11 +194,11 @@ for tbl in tables:
     cursor.execute(query, tuple(target_colleges))
 
     for row in cursor.fetchall():
-        if email_count == 1282:
+        if email_count == 1500:
             SMTP_USERNAME = SMTP2_USERNAME
             SMTP_PASSWORD = SMTP2_PASSWORD
             print("🔁 Switched to second SMTP credentials.")
-        elif email_count == 2782:
+        elif email_count == 3000:
             print("📧 Sent 3000 emails.")
             break
         
