@@ -27,7 +27,8 @@ DB_CONFIG = {
     'host': 'srv1640.hstgr.io',
     'user': 'u707137586_Campus_Hiring',
     'password': '6q+SFd~o[go',
-    'database': 'u707137586_Campus_Hiring'
+    'database': 'u707137586_Campus_Hiring',
+    'connect_timeout': 60
 }
 
 EMAIL_BODY_TEMPLATE = """\
@@ -145,6 +146,7 @@ def send_and_update(recipient, smtp_config, db_connection):
     
     with db_lock:
         try:
+            db_connection.ping(reconnect=True, attempts=3, delay=5)
             cursor = db_connection.cursor()
             cursor.execute(f"UPDATE {table_name} SET emailSent_2=1 WHERE email=%s", (to_address,))
             db_connection.commit()
