@@ -15,7 +15,7 @@ from urllib.parse import quote
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 587
 CAMPAIGN_ID = "ev_webinar_2025_10_18"
-EMAIL_SUBJECT = "Job Opportunities in the EV Industry Webinar - October 18, 11:45 AM (Sat)"
+EMAIL_SUBJECT = "REMINDER: Job Opportunities in the EV Industry Webinar - October 18, 11:45 AM (Sat)"
 MAX_WORKERS = 4
 
 SMTP_CREDENTIALS = [
