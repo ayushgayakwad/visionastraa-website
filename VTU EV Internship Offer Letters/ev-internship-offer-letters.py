@@ -108,7 +108,7 @@ def send_email(name, to_email, role, attachment_path):
         <strong>Please note: Kindly accept this offer within 5 days from the date of this email. Offers not accepted within this period will be considered expired</strong>.
         <br><br>
         We also request you to fill out the following application form at your earliest convenience. This will help us plan your internship better.
-        <br>
+        <br><br>
         <strong>In the application form</strong>,
         <br>
         -> Please select your <strong> internship commencement date (January 2026)</strong>, 
