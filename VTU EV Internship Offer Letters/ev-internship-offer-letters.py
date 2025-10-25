@@ -109,9 +109,15 @@ def send_email(name, to_email, role, attachment_path):
         <br><br>
         We also request you to fill out the following application form at your earliest convenience. This will help us plan your internship better.
         <br>
-        <a href="https://visionastraa.com/ev-internship-application.html">https://visionastraa.com/ev-internship-application.html</a>
+        <strong>In the application form</strong>,
+        <br>
+        -> Please select your <strong> internship commencement date (January 2026)</strong>, 
+        <br>
+        -> Your <strong>preferred center (Online/Belagavi/Bangalore)</strong>, and
+        <br>
+        -> Confirm whether you have <strong>accepted the offer</strong> in VTU Portal (Yes/No).
         <br><br>
-        <strong>In the application form</strong>, please select your <strong> internship commencement date (January 2026)</strong>, your <strong>preferred center (Belagavi or Bangalore)</strong>, and also <strong>confirm in the VTU Portal that you have accepted the offer.</strong>
+        <strong>Application Form Link:</strong> <a href="https://visionastraa.com/ev-internship-application.html">https://visionastraa.com/ev-internship-application.html</a>
         <br><br>
         To ensure a smooth onboarding process, it is essential that you join the WhatsApp group:
         <br>
@@ -131,15 +137,15 @@ def send_email(name, to_email, role, attachment_path):
         <br>
         ▶ Best projects get funding and mentorship to register as startups
         <br><br>
-        <strong>Total Duration:</strong> 16 weeks
-        <br><br>
-        <strong>Note: Students can choose any center. Belagavi and Bangalore centers run parallely.</strong>
-        <br><br>
         For any queries reach out to us on LinkedIn: <a href="https://in.linkedin.com/company/va-ev-academy">https://in.linkedin.com/company/va-ev-academy</a>
         <br>
         Talk to our CEO: <a href="https://in.linkedin.com/in/nikhiljaincs">Nikhil Jain C S</a>
         <br><br>
         Find your offer letter attached below.
+        <br><br>
+        Looking forward to having you onboard!
+        <br><br>
+        Happy Interning!
         """
         msg.attach(MIMEText(body, 'html'))
 
