@@ -185,8 +185,8 @@ def main():
 
     try:
         df = pd.read_csv(CSV_FILE_PATH, header=None)
-        if len(df.columns) < 5:
-            print("Error: CSV file does not have the expected 5 columns.")
+        if len(df.columns) < 8:
+            print("Error: CSV file does not have the expected 8 columns.")
             return
 
         df.columns = ['Name', 'Email', 'Phone', 'College', 'Specialization', 'Role', 'Status', 'EmailSent']
