@@ -188,8 +188,8 @@ def main():
         if len(df.columns) < 5:
             print("Error: CSV file does not have the expected 5 columns.")
             return
-            
-        df.columns = ['ID', 'Name', 'Email', 'Role', 'EmailSent']
+
+        df.columns = ['Name', 'Email', 'Phone', 'College', 'Specialization', 'Role', 'Status', 'EmailSent']
 
         for index, row in df.iterrows():
             if str(row['EmailSent']).strip().upper() == 'FALSE':
