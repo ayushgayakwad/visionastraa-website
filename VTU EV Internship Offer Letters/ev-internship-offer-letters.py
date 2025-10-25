@@ -33,7 +33,7 @@ def get_letter_paragraph(name, role):
 
     text = f"""
     Dear <b>{name}</b>,<br/><br/>
-    We are pleased to offer you an Internship in <b>{role}</b> at <b>VisionAstraa EV Academy</b> with effect from 8th September 2025. We are excited to welcome you onboard.<br/><br/>
+    We are pleased to offer you an Internship in <b>{role}</b> at <b>VisionAstraa EV Academy</b> with effect from January 2026. We are excited to welcome you onboard.<br/><br/>
     As an Intern, you will be part of a collaborative environment where you will learn and contribute to impactful projects in the electric vehicle (EV) domain. You will gain hands-on experience and have the opportunity to apply your academic knowledge to real-world applications while developing practical skills that will strengthen your career prospects.<br/><br/>
     At <b>VisionAstraa EV Academy</b>, we are committed to a supportive and enriching learning environment. Our aim is to empower you with relevant, hands-on experience and to support your growth in the EV industry.<br/><br/>
     We look forward to working with you and hope this internship will be a valuable step in your professional journey.
@@ -93,7 +93,7 @@ def send_email(name, to_email, role, attachment_path):
         body = f"""
         Hello {name},
         <br><br>
-        <strong>CONGRATULATIONS</strong> for getting selected for Internship in <strong>{role}</strong> and your starting date is <strong>8th September, 2025</strong>. 
+        <strong>CONGRATULATIONS</strong> for getting selected for Internship in <strong>{role}</strong> and your starting date is <strong>January, 2026</strong>. 
         <br><br>
         Please accept the offer letter in the VTU Portal. <strong>Follow the steps below:</strong>
         <br><br>
@@ -109,13 +109,11 @@ def send_email(name, to_email, role, attachment_path):
         <br>
         <a href="https://visionastraa.com/ev-internship-application.html">https://visionastraa.com/ev-internship-application.html</a>
         <br><br>
-        <strong>In the application form</strong>, please select your <strong>preferred internship commencement date (September 2025 or January 2026)</strong>, your <strong>preferred center (Belagavi or Bangalore)</strong>, and also <strong>confirm in the VTU Portal that you have accepted the offer.</strong>
+        <strong>In the application form</strong>, please select your <strong> internship commencement date (January 2026)</strong>, your <strong>preferred center (Belagavi or Bangalore)</strong>, and also <strong>confirm in the VTU Portal that you have accepted the offer.</strong>
         <br><br>
-        To ensure a smooth onboarding process, it is essential that you join the correct WhatsApp group based on your internship start date as soon as possible:
+        To ensure a smooth onboarding process, it is essential that you join the WhatsApp group:
         <br>
-        - For interns starting in <strong>September 2025</strong>, please join: <a href="https://chat.whatsapp.com/LWRFIbB73yu1OvVbE8goUX?mode=ems_wa_t">September 2025 Internship Group</a>
-        <br>
-        - For interns starting in <strong>January 2026</strong>, please join: <a href="https://chat.whatsapp.com/E1ghfP3cstjDphOQEpTB7x?mode=ems_wa_t">January 2026 Internship Group</a>
+        - <strong>January 2026</strong>, please join: <a href="https://chat.whatsapp.com/E1ghfP3cstjDphOQEpTB7x?mode=ems_wa_t">January 2026 Internship Group</a>
         <br><br>
         Below are the benefits of joining VisionAstraa EV Academy (<a href="https://visionastraa.com/ev-projects.html">https://visionastraa.com/ev-projects.html</a>):
         <br>
@@ -131,21 +129,9 @@ def send_email(name, to_email, role, attachment_path):
         <br>
         ▶ Best projects get funding and mentorship to register as startups
         <br><br>
-        <strong>VisionAstraa EV Academy Internship Timeline (Note: Students can choose any center. Belagavi and Bangalore centers run parallely)</strong>
-        <br><br>
         <strong>Total Duration:</strong> 16 weeks
         <br><br>
-        <strong>-> Internship Start Date</strong> - Sept 8th
-        <br>
-        <strong>-> Online Mode</strong> - Sept 8th to Sept 21st (2 weeks)
-        <br>
-        <strong>-> Offline Mode</strong> - Sept 22nd to Oct 5th (2 weeks)
-        <br>
-        <strong>-> Projects (Hybrid Mode)</strong> - Oct 6th to Nov 30th (8 weeks)
-        <br>
-        <strong>-> Projects Evaluation and Submission (offline)</strong> - Dec 2 to Dec 15 (2 weeks)
-        <br>
-        <strong>-> Certificate Distribution</strong> - Dec 16
+        <strong>Note: Students can choose any center. Belagavi and Bangalore centers run parallely.</strong>
         <br><br>
         For any queries reach out to us on LinkedIn: <a href="https://in.linkedin.com/company/va-ev-academy">https://in.linkedin.com/company/va-ev-academy</a>
         <br>
