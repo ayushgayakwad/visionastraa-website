@@ -105,6 +105,8 @@ def send_email(name, to_email, role, attachment_path):
         <br>
         -> Click on the `Accept` button to accept <strong>VisionAstraa EV Academy's offer</strong>.
         <br><br>
+        <strong>Please note: Kindly accept this offer within 5 days from the date of this email. Offers not accepted within this period will be considered expired</strong>.
+        <br><br>
         We also request you to fill out the following application form at your earliest convenience. This will help us plan your internship better.
         <br>
         <a href="https://visionastraa.com/ev-internship-application.html">https://visionastraa.com/ev-internship-application.html</a>
