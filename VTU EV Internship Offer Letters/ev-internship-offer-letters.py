@@ -115,7 +115,7 @@ def send_email(name, to_email, role, attachment_path):
         <br>
         -> Your <strong>preferred center (Online/Belagavi/Bangalore)</strong>, and
         <br>
-        -> Confirm whether you have <strong>accepted the offer</strong> in VTU Portal (Yes/No).
+        -> Confirm whether you have <strong>accepted the offer</strong> in VTU Portal <strong>(Yes/No)</strong>.
         <br><br>
         <strong>Application Form Link:</strong> <a href="https://visionastraa.com/ev-internship-application.html">https://visionastraa.com/ev-internship-application.html</a>
         <br><br>
