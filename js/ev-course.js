@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ]
         },
         2: {
-            title: "Module 2: Advanced EV Systems",
+            title: "Module 2: Automotive System Engineering and Tools",
             content: [
                 "Introduction",
                 "Current State of the Art",
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ]
         },
         3: {
-            title: "Module 3: Battery & Charging",
+            title: "Module 3: EV Powertrain System Modeling and Simulation using MATLAB Simulink",
             content: [
                 "Vehicle Dynamics",
                 "Modeling Vehicle Acceleration using Matlab",
