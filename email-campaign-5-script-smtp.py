@@ -1,0 +1,350 @@
+import mysql.connector
+import smtplib
+import time
+import random
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.application import MIMEApplication
+from datetime import datetime, timedelta, timezone
+from urllib.parse import quote
+from email.utils import formataddr
+
+SMTP_SERVER = 'smtp.hostinger.com'
+SMTP_PORT = 587
+
+SMTP_ACCOUNTS = [
+    {
+        'username': 'careers@visionastraa.in',
+        'password': 'Z1SIOO0A9b~'
+    },
+    {
+        'username': 'visionastraa@evcourse.in',
+        'password': '>p>W|jv?Kg1'
+    }
+]
+
+CAMPAIGN_ID = "ev_marketing_campaign_2_december_2025"
+
+EMAIL_SUBJECT = "6 students placed already before end of 3rd month!"
+
+EMAIL_BODY_TEMPLATE = """\
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6 students placed already before end of 3rd month!</title>
+    <style>
+        body {{
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }}
+        .container {{
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }}
+        h1, h2, h3 {{
+            color: #28a745;
+        }}
+        h1 {{
+            font-size: 28px;
+            margin-bottom: 20px;
+        }}
+        h2 {{
+            font-size: 21px;
+            margin-bottom: 15px;
+        }}
+        h3 {{
+            font-size: 18px;
+            margin-bottom: 10px;
+        }}
+        p, li {{
+            font-size: 16px;
+            margin-top: 0px;
+            margin-bottom: 10px;
+        }}
+        a {{
+            color: #1a73e8;
+            font-weight: bold;
+            text-decoration: none;
+        }}
+        a:hover {{
+            text-decoration: underline;
+        }}
+        .highlight {{
+            color: #ff5722;
+            font-weight: bold;
+        }}
+        .button-container {{
+            text-align: center;
+            margin: 30px 0;
+        }}
+        .btn {{
+            background-color: #28a745;
+            color: #ffffff !important;
+            padding: 12px 25px;
+            text-align: center;
+            border-radius: 5px;
+            display: inline-block;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }}
+        .btn:hover {{
+            background-color: #218838;
+            text-decoration: none;
+        }}
+        .footer {{
+            text-align: center;
+            font-size: 14px;
+            color: #777777;
+            margin-top: 20px;
+        }}
+        .logo-container {{
+            text-align: center;
+            margin-bottom: 20px;
+        }}
+        .social-links table {{
+            margin: 0 auto;
+        }}
+        .social-links td {{
+            padding: 0 10px;
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img src="https://visionastraa.com/images/EV_Academy.png" alt="EV Academy Logo" style="max-width: 150px;">
+        </div>
+
+        <h1>🌟 Before End of the 3rd month, we placed 6 students already!</h1>
+
+        <p>
+            Congratulations to <strong>Akash Chaudhari</strong>, (Mech, B.Tech) from Amrutvahini College of Engineering, Sangamner, Maharashtra for becoming the first Mechanical Engineering student to get hired from the second batch (2025) of <a href="https://visionastraa.com/track/click.php?email={email}&target={vaev_website}&campaign_id={campaign_id}" target="_blank">VisionAstraa EV Academy</a>!
+        </p>
+
+        <p>
+            In <span class="highlight">less than 3 months</span> after the 4-month Program started (on Aug 4), Akash & few others have cleared all interview rounds at <strong>IPEC India Pvt. Ltd.</strong> and will be joining them for a Full-Time role on Nov 3.
+        </p>
+        
+        <hr style="margin: 25px 0;">
+
+        <h2>Your Success Story Starts Here!</h2>
+        <img src="https://www.visionastraa.com/images/hemant-1.jpg" alt="Success at EV Academy" style="width:100%; max-width:600px; margin-top:20px; margin-bottom: 10px; border-radius: 8px;">
+        <br><br>
+        <img src="https://www.visionastraa.com/images/hemant-2.jpg" alt="Success at EV Academy" style="width:100%; max-width:600px; margin-top:20px; margin-bottom: 10px; border-radius: 8px;">
+        <br><br>
+        <p>
+            Our next batch starts in <strong>December 2025</strong>, and admissions are now open!
+        </p>
+        <p>
+            Don't wait, come join VisionAstraa EV Academy if you are interested for a guaranteed job in the EV Industry!
+        </p>
+
+        <div class="button-container">
+            <a href="https://visionastraa.com/track/click.php?email={email}&target={apply}&campaign_id={campaign_id}" class="btn">APPLY NOW</a>
+        </div>
+
+        <hr style="margin: 25px 0;">
+
+        <h2>Why Choose VisionAstraa EV Academy?</h2>
+        <ul>
+            <li><strong>100% Placement Guarantee</strong> in the EV industry (or your money back).</li>
+            <li>Hands-On, Practical-Oriented Training at our Centre of Excellence.</li>
+            <li>Full support & mentorship in clearing Technical interviews in EV Domain.</li>
+            <li>Industrial Visits to Leading EV Companies.</li>
+        </ul>
+
+        <hr style="margin: 25px 0;">
+
+        <h2>What are you waiting for?</h2>
+        <p>Don't miss this <span class="highlight">GOLDEN opportunity</span> to join our upcoming batch starting in December 2025 and secure a job in just 4 months!</p>
+
+        <div class="image-container">
+            <img src="https://www.visionastraa.com/image/133ddeb8.jpeg" alt="Upskill in EV Technologies" style="width:100%; max-width:600px; margin-top:8px" class="responsive-image">
+        </div>
+
+        <hr style="margin: 25px 0;">
+        
+        <div class="footer">
+            <p>For questions, contact us:</p>
+            <p>Email: <a href="mailto:admissions@visionastraa.com">admissions@visionastraa.com</a></p>
+            <p>Phone: <a href="tel:+918075664438">+91 80756 64438</a></p>
+            <p>Talk to our CEO, Nikhil Jain C S: <a href="https://visionastraa.com/track/click.php?email={email}&target={njcs}&campaign_id={campaign_id}">LinkedIn</a></p>
+            <div class="social-links">
+              <table align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; border-spacing: 15px;">
+                  <tr>
+                      <td align="center">
+                          <a href="https://visionastraa.com/track/click.php?email={email}&target={linkedin}&campaign_id={campaign_id}" target="_blank" title="LinkedIn">
+                              <img src="https://www.visionastraa.com/images/linkedin.webp" alt="LinkedIn" width="28" height="28" style="display: block; border: 0;">
+                          </a>
+                      </td>
+                      <td align="center">
+                          <a href="https://visionastraa.com/track/click.php?email={email}&target={instagram}&campaign_id={campaign_id}" target="_blank" title="Instagram">
+                              <img src="https://www.visionastraa.com/images/instagram.webp" alt="Instagram" width="28" height="28" style="display: block; border: 0;">
+                          </a>
+                      </td>
+                      <td align="center">
+                          <a href="https://visionastraa.com/track/click.php?email={email}&target={youtube}&campaign_id={campaign_id}" target="_blank" title="YouTube">
+                              <img src="https://www.visionastraa.com/images/youtube.webp" alt="YouTube" width="36" height="28" style="display: block; border: 0;">
+                          </a>
+                      </td>
+                  </tr>
+              </table>
+            </div>
+            <br>
+            <p style="font-size:12px;color:#888;">
+              If you no longer wish to receive emails from us, you can 
+              <a href="https://visionastraa.com/track/unsubscribe.php?email={email}&campaign_id={campaign_id}" style="color:#1a73e8;">unsubscribe here</a>.
+            </p>
+        </div>
+        <img src="{image_url}" width="1" height="1" style="display:none;">
+    </div>
+</body>
+</html>
+"""
+
+def send_email(to_address, first_name, smtp_username, smtp_password):
+    vaev_linkedin = quote("https://www.linkedin.com/company/va-ev-academy", safe='')
+    vaev_website = quote("https://visionastraa.com/ev-jobs.html", safe='')
+    apply = quote("https://www.visionastraa.com/ev-application.html", safe='')
+    whatsapp = quote("https://wa.me/918075664438", safe='')
+    whatsapp_group = quote("https://chat.whatsapp.com/EhvWb9kldqI7Np2MbfCW3u", safe='')
+    njcs = quote("https://in.linkedin.com/in/nikhiljaincs", safe='')
+    linkedin = quote("https://in.linkedin.com/company/va-ev-academy", safe='')
+    instagram = quote("https://www.instagram.com/va_ev_academy", safe='')
+    youtube = quote("https://www.youtube.com/@VisionAstraaEVAcademy", safe='')
+    random_token = random.randint(100000, 999999)
+    image_url = f"https://visionastraa.com/track/open.php?email={quote(to_address)}&campaign_id={CAMPAIGN_ID}&r={random_token}"
+
+    body = EMAIL_BODY_TEMPLATE.format(
+        first_name=first_name,
+        email=quote(to_address),
+        campaign_id=CAMPAIGN_ID,
+        image_url=image_url,
+        vaev_linkedin=vaev_linkedin,
+        apply=apply,
+        vaev_website=vaev_website,
+        whatsapp=whatsapp,
+        whatsapp_group=whatsapp_group,
+        njcs=njcs,
+        linkedin=linkedin,
+        instagram=instagram,
+        youtube=youtube
+    )
+
+    msg = MIMEMultipart('mixed')
+    msg['Subject'] = EMAIL_SUBJECT
+    msg['From'] = formataddr(("VisionAstraa EV Academy", smtp_username))
+    msg['To'] = to_address
+    msg.attach(MIMEText(body, 'html'))
+
+    try:
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+            server.starttls()
+            server.login(smtp_username, smtp_password)
+            server.sendmail(smtp_username, to_address, msg.as_string())
+        return True
+    except Exception as e:
+        print(f"❌ Error sending to {to_address}: {e}")
+        return False
+
+conn = mysql.connector.connect(
+    host='srv1640.hstgr.io',
+    # user='u707137586_Campus_Hiring',
+    # password='6q+SFd~o[go',
+    # database='u707137586_Campus_Hiring',
+    user = "u707137586_EV_Reg_T1_24",
+    password = "DMKL0IYoP&4",
+    database = "u707137586_EV_Reg_2024_T1",
+    connect_timeout=20
+)
+cursor = conn.cursor(dictionary=True)
+# tables = ['test']
+# tables = ['crdf25', 'crdf25_north', 'crdf25_south']
+tables = ['email_list_1', 'email_list_2', 'email_list_3', 'email_list_4', 'email_list_5', 'email_list_6', 'email_list_7']
+
+emails_sent_count = 0
+max_emails_to_send = 6000
+consecutive_failures = 0
+FAILURE_THRESHOLD = 10
+stop_campaign_due_to_errors = False
+
+for tbl in tables:
+    if emails_sent_count >= max_emails_to_send:
+        print(f"\nReached the daily limit of {max_emails_to_send} emails. Stopping.")
+        break
+
+    emails_to_fetch = max_emails_to_send - emails_sent_count
+
+    # query = f"""
+    #     SELECT email, first_name 
+    #     FROM {tbl} 
+    #     WHERE emailSent=0 
+    #     AND email NOT IN (SELECT email FROM unsubscribed_emails)
+    #     LIMIT {emails_to_fetch}
+    # """
+
+    query = f"""
+        SELECT email, name FROM {tbl} WHERE emailSent=0
+    """
+
+    cursor.execute(query)
+
+    rows_to_process = cursor.fetchall()
+
+    if not rows_to_process:
+        continue
+
+    for row in rows_to_process:
+        if emails_sent_count >= max_emails_to_send:
+            break
+
+        if emails_sent_count < 3000:
+            current_account = SMTP_ACCOUNTS[0]
+        else:
+            current_account = SMTP_ACCOUNTS[1]
+
+        # if send_email(row['email'], row.get('first_name', 'there'), current_account['username'], current_account['password']):
+        if send_email(row['email'], row['name'], current_account['username'], current_account['password']):
+            consecutive_failures = 0
+            emails_sent_count += 1
+            print(f"✅ ({emails_sent_count}/{max_emails_to_send}) Sent to {row['email']} using {current_account['username']}")
+            
+            try:
+                conn.ping(reconnect=True, attempts=3, delay=5)
+            except mysql.connector.Error as err:
+                print(f"❌ Error reconnecting to DB: {err}. Skipping update for {row['email']}")
+                continue
+
+            update_cursor = conn.cursor()
+            update_cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
+            conn.commit()
+            update_cursor.close()
+            delay = random.uniform(0.5, 2.0)
+            time.sleep(delay)
+        else:
+            consecutive_failures += 1
+            print(f"⚠️ Consecutive send failures: {consecutive_failures}")
+            if consecutive_failures >= FAILURE_THRESHOLD:
+                print(f"\n❌ STOPPING CAMPAIGN: Reached {FAILURE_THRESHOLD} consecutive send errors.")
+                print("This likely means the email provider has blocked the account for the day.")
+                stop_campaign_due_to_errors = True
+                break
+    
+    if stop_campaign_due_to_errors:
+        break
+
+cursor.close()
+conn.close()
+
+print(f"\n--- Campaign Finished ---")
+print(f"Total emails sent in this run: {emails_sent_count}")
