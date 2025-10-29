@@ -14,7 +14,7 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 
-CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_offer_released_applicants_1.csv'
+CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_offer_released_applicants_2.csv'
 PDF_TEMPLATE_PATH = 'VTU EV Internship Offer Letters/Template.pdf'
 OUTPUT_DIRECTORY = 'VTU EV Internship Offer Letters/Generated_Offer_Letters'
 
@@ -95,7 +95,7 @@ def send_email(name, to_email, role, attachment_path):
         <br><br>
         <strong>CONGRATULATIONS</strong> for getting selected for Internship in <strong>{role}</strong> and your starting date is <strong>January, 2026</strong>. 
         <br><br>
-        Please accept the offer letter in the VTU Portal. <strong>Follow the steps below:</strong>
+        <strong>Kindly accept the offer in the VTU Portal by paying the internship acceptance fees and follow the steps below:</strong>
         <br><br>
         -> Enter the URL (<a href="https://vtu.internyet.in">https://vtu.internyet.in</a>)
         <br>
