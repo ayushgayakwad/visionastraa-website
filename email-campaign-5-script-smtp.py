@@ -25,14 +25,14 @@ SMTP_ACCOUNTS = [
 
 CAMPAIGN_ID = "ev_marketing_campaign_2_december_2025"
 
-EMAIL_SUBJECT = "6 students placed already before end of 3rd month!"
+EMAIL_SUBJECT = "6 students placed already before the end of 3rd month!"
 
 EMAIL_BODY_TEMPLATE = """\
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>6 students placed already before end of 3rd month!</title>
+    <title>6 students placed already before the end of 3rd month!</title>
     <style>
         body {{
             font-family: Arial, sans-serif;
