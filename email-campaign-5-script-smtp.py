@@ -198,7 +198,7 @@ EMAIL_BODY_TEMPLATE = """\
             <p>Email: <a href="mailto:admissions@visionastraa.com">admissions@visionastraa.com</a></p>
             <p>Phone: <a href="tel:+918075664438">+91 80756 64438</a></p>
             <p><strong>Please connect with us directly on WhatsApp if you have any questions on our Program and Placement opportunity.</strong></p>
-            <a href="https://wa.me/918075664438" target="_blank" class="whatsapp-link">
+            <a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}" target="_blank" class="whatsapp-link">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png" alt="WhatsApp Logo">
                 Chat with us on WhatsApp
             </a>
