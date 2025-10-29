@@ -117,6 +117,27 @@ EMAIL_BODY_TEMPLATE = """\
         .social-links td {{
             padding: 0 10px;
         }}
+        .whatsapp-link {{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #25D366;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 10px;
+        }}
+        .whatsapp-link img {{
+            margin-right: 8px;
+            width: 22px;
+            height: 22px;
+        }}
+        .whatsapp-link:hover {{
+            background-color: #1ebe5d;
+            text-decoration: none;
+        }}
     </style>
 </head>
 <body>
@@ -125,7 +146,7 @@ EMAIL_BODY_TEMPLATE = """\
             <img src="https://visionastraa.com/images/EV_Academy.png" alt="EV Academy Logo" style="max-width: 150px;">
         </div>
 
-        <h1>🌟 Before End of the 3rd month, we placed 6 students already!</h1>
+        <h1>🌟 Before end of the 3rd month, we placed 6 students already!</h1>
 
         <p>
             Congratulations to <strong>Akash Chaudhari</strong>, (Mech, B.Tech) from Amrutvahini College of Engineering, Sangamner, Maharashtra for becoming the first Mechanical Engineering student to get hired from the second batch (2025) of <a href="https://visionastraa.com/track/click.php?email={email}&target={vaev_website}&campaign_id={campaign_id}" target="_blank">VisionAstraa EV Academy</a>!
@@ -176,6 +197,12 @@ EMAIL_BODY_TEMPLATE = """\
             <p>For questions, contact us:</p>
             <p>Email: <a href="mailto:admissions@visionastraa.com">admissions@visionastraa.com</a></p>
             <p>Phone: <a href="tel:+918075664438">+91 80756 64438</a></p>
+            <p><strong>Please connect with us directly on WhatsApp if you have any questions on our Program and Placement opportunity.</strong></p>
+            <a href="https://wa.me/918075664438" target="_blank" class="whatsapp-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png" alt="WhatsApp Logo">
+                Chat with us on WhatsApp
+            </a>
+            <br><br>
             <p>Talk to our CEO, Nikhil Jain C S: <a href="https://visionastraa.com/track/click.php?email={email}&target={njcs}&campaign_id={campaign_id}">LinkedIn</a></p>
             <div class="social-links">
               <table align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; border-spacing: 15px;">
