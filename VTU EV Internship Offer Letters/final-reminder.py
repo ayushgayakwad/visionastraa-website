@@ -6,13 +6,13 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formataddr
 
-CSV_FILE_PATH = 'VTU EV Internship Offer Letters/applicants-bit-bgmit-rith.csv'
+CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_offer_released_applicants_1.csv'
 
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
 SENDER_EMAIL = os.getenv('SENDER_EMAIL')
 SENDER_PASSWORD = os.getenv('SENDER_PASSWORD')
-EMAIL_SUBJECT = '[URGENT] Final Reminder: Action Required for Your Internship at VisionAstraa EV Academy'
+EMAIL_SUBJECT = '[URGENT] Reminder: Action Required for Your Internship at VisionAstraa EV Academy'
 
 def send_internship_details_email(name, to_email, role):
     try:
@@ -24,35 +24,45 @@ def send_internship_details_email(name, to_email, role):
         body = f"""
         Hello {name},
         <br><br>
-        This is the final reminder regarding the project-based internship. The program for the <strong>September 2025</strong> cohort has already commenced as of <strong>Monday, September 8th, 2025</strong>.
+        This is a reminder regarding the project-based internship starting from <strong>January 2026</strong>.
         <br><br>
-        All critical information, including your detailed schedule and Google Meet links, is being shared exclusively in the official WhatsApp group. To receive these details and officially begin your internship, you must join the group immediately.
+        <strong>Deadline to accept the offer has been extended to an additional five days from the date of this email due to exceptionally high number of applicants.</strong>
         <br><br>
-        To ensure a smooth onboarding process, it is essential that you join the correct WhatsApp group based on your internship start date as soon as possible:
+        <strong>Kindly pay the internship acceptance fees in the VTU portal and accept the offer in the VTU Portal before the deadline.</strong>
+        <br><br>
+        <strong>Follow the steps below to accept the offer:</strong>
+        <br><br>
+        -> Enter the URL (<a href="https://vtu.internyet.in">https://vtu.internyet.in</a>)
         <br>
-        - For interns starting in <strong>September 2025</strong>, please join: <a href="https://chat.whatsapp.com/LWRFIbB73yu1OvVbE8goUX?mode=ems_wa_t">September 2025 Internship Group</a>
+        -> Login using your username and password
         <br>
-        - For interns starting in <strong>January 2026</strong>, please join: <a href="https://chat.whatsapp.com/E1ghfP3cstjDphOQEpTB7x?mode=ems_wa_t">January 2026 Internship Group</a>
+        -> Navigate to `Applied Internships` section in the dashboard
+        <br>
+        -> Click on the `Accept` button to accept <strong>VisionAstraa EV Academy's offer</strong>.
         <br><br>
         We also request you to fill out the following application form at your earliest convenience. This will help us plan your internship better.
+        <br><br>
+        <strong>In the application form</strong>,
         <br>
-        <a href="https://visionastraa.com/ev-internship-application.html">https://visionastraa.com/ev-internship-application.html</a>
-        <br><br>
-        <strong>In the application form</strong>, please select your <strong>preferred internship commencement date (September 2025 or January 2026)</strong>, your <strong>preferred center (Belagavi or Bangalore)</strong>, and also <strong>confirm in the VTU Portal that you have accepted the offer.</strong>
-        <br><br>
-            Additionally, if you have friends who are interested in joining our internship program, please share their details in the respective WhatsApp group based on their preferred start date (September 2025 or January 2026). Your referrals are highly appreciated!
-        <br><br>
-        For any queries, please do not hesitate to reach out to us on LinkedIn. We are here to help you in any way we can.
+        -> Please select your <strong> internship commencement date (January 2026)</strong>, 
         <br>
-        - Company LinkedIn Page: <a href="https://in.linkedin.com/company/va-ev-academy">https://in.linkedin.com/company/va-ev-academy</a>
+        -> Your <strong>preferred center (Online/Belagavi/Bangalore)</strong>, and
         <br>
-        - Talk to our CEO, Nikhil Jain C S: <a href="https://in.linkedin.com/in/nikhiljaincs">https://in.linkedin.com/in/nikhiljaincs</a>
+        -> Confirm whether you have <strong>accepted the offer</strong> in VTU Portal <strong>(Yes/No)</strong>.
         <br><br>
-        We are looking forward to you joining our team and contributing to the future of electric vehicle technology!
+        <strong>Application Form Link:</strong> <a href="https://visionastraa.com/ev-internship-application.html">https://visionastraa.com/ev-internship-application.html</a>
         <br><br>
-        Best regards,
+        To ensure a smooth onboarding process, it is essential that you join the WhatsApp group:
         <br>
-        VisionAstraa EV Academy
+        - <strong>January 2026</strong>, please join: <a href="https://chat.whatsapp.com/E1ghfP3cstjDphOQEpTB7x?mode=ems_wa_t">January 2026 Internship Group</a>
+        <br><br>
+        For any queries reach out to us on LinkedIn: <a href="https://in.linkedin.com/company/va-ev-academy">https://in.linkedin.com/company/va-ev-academy</a>
+        <br>
+        Talk to our CEO: <a href="https://in.linkedin.com/in/nikhiljaincs">Nikhil Jain C S</a>
+        <br><br>
+        Looking forward to having you onboard!
+        <br><br>
+        Happy Interning!
         """
         msg.attach(MIMEText(body, 'html'))
 
@@ -82,12 +92,12 @@ def main():
 
     try:
         df = pd.read_csv(CSV_FILE_PATH, header=None)
-        if len(df.columns) < 5:
-            df.columns = ['ID', 'Name', 'Email', 'Role', 'EmailSent']
+        if len(df.columns) < 8:
+            df.columns = ['Name', 'Email', 'Phone', 'College', 'Specialization', 'Role', 'Status', 'EmailSent']
         else:
-            print("CSV file has an unexpected number of columns. Processing the first 5.")
-            df = df.iloc[:, :5]
-            df.columns = ['ID', 'Name', 'Email', 'Role', 'EmailSent']
+            print("CSV file has an unexpected number of columns. Processing the first 8.")
+            df = df.iloc[:, :8]
+            df.columns = ['Name', 'Email', 'Phone', 'College', 'Specialization', 'Role', 'Status', 'EmailSent']
 
 
         print("\nSending internship details emails...")
