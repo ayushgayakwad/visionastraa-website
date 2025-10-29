@@ -138,12 +138,10 @@ EMAIL_BODY_TEMPLATE = """\
         <hr style="margin: 25px 0;">
 
         <h2>Your Success Story Starts Here!</h2>
-        <img src="https://www.visionastraa.com/images/hemant-1.jpg" alt="Success at EV Academy" style="width:100%; max-width:600px; margin-top:20px; margin-bottom: 10px; border-radius: 8px;">
-        <br><br>
-        <img src="https://www.visionastraa.com/images/hemant-2.jpg" alt="Success at EV Academy" style="width:100%; max-width:600px; margin-top:20px; margin-bottom: 10px; border-radius: 8px;">
+        <img src="https://www.visionastraa.com/images/akash-1.png" alt="Success at EV Academy" style="width:100%; max-width:600px; margin-top:20px; margin-bottom: 10px; border-radius: 8px;">
         <br><br>
         <p>
-            Our next batch starts in <strong>December 2025</strong>, and admissions are now open!
+            Our <strong>third</strong> batch starts in <strong>December 2025</strong>, and admissions are now open!
         </p>
         <p>
             Don't wait, come join VisionAstraa EV Academy if you are interested for a guaranteed job in the EV Industry!
