@@ -176,7 +176,10 @@ EMAIL_BODY_TEMPLATE = """\
             <a href="https://visionastraa.com/track/click.php?email={email}&target={apply}&campaign_id={campaign_id}" class="btn">APPLY NOW</a>
         </div>
         <div class="cta-button-container">
-            <a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}" class="btn">Chat with us on WhatsApp</a>
+            <a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}" target="_blank" class="whatsapp-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png" alt="WhatsApp Logo">
+                Chat with us on WhatsApp
+            </a>
         </div>
 
         <hr style="margin: 25px 0;">
