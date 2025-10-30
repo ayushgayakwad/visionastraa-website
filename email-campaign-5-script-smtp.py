@@ -84,7 +84,11 @@ EMAIL_BODY_TEMPLATE = """\
         }}
         .button-container {{
             text-align: center;
-            margin: 30px 0;
+            margin: 30px 0px 10px 0px;
+        }}
+        .cta-button-container {{
+            text-align: center;
+            margin: 0px 0px 30px 0px;
         }}
         .btn {{
             background-color: #28a745;
@@ -171,8 +175,7 @@ EMAIL_BODY_TEMPLATE = """\
         <div class="button-container">
             <a href="https://visionastraa.com/track/click.php?email={email}&target={apply}&campaign_id={campaign_id}" class="btn">APPLY NOW</a>
         </div>
-        <br>
-        <div class="button-container">
+        <div class="cta-button-container">
             <a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}" class="btn">Chat with us on WhatsApp</a>
         </div>
 
