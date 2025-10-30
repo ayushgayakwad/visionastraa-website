@@ -14,12 +14,12 @@ SMTP_PORT = 587
 
 SMTP_ACCOUNTS = [
     {
-        'username': 'careers@visionastraa.in',
-        'password': 'Z1SIOO0A9b~'
-    },
-    {
         'username': 'visionastraa@evcourse.in',
         'password': '>p>W|jv?Kg1'
+    },
+    {
+        'username': 'careers@visionastraa.in',
+        'password': 'Z1SIOO0A9b~'
     }
 ]
 
@@ -308,7 +308,7 @@ tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 # tables = ['email_list_1', 'email_list_2', 'email_list_3', 'email_list_4', 'email_list_5', 'email_list_6', 'email_list_7']
 
 emails_sent_count = 0
-max_emails_to_send = 6000
+max_emails_to_send = 3000
 consecutive_failures = 0
 FAILURE_THRESHOLD = 10
 stop_campaign_due_to_errors = False
