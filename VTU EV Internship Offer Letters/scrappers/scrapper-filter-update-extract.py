@@ -1,4 +1,4 @@
-# save_as: scrape_and_update_applicants.py
+# save_as: filter_applied_to_shortlisted.py
 import time
 import pandas as pd
 from urllib.parse import urljoin
@@ -16,7 +16,8 @@ LOGIN_URL = "https://vtu.internyet.in/sign-in"
 BASE_URL = "https://vtu.internyet.in"   # used for joining relative hrefs
 EMAIL = "admissions@visionastraa.com"
 PASSWORD = "VisionAstraa@23"
-OUTPUT_XLSX = "updated_applicants.xlsx" # Changed output file name
+# Changed output file name to reflect the new action
+OUTPUT_XLSX = "applied_to_shortlisted_applicants.xlsx" 
 
 # ---------------- SETUP DRIVER ----------------
 chrome_options = Options()
@@ -59,9 +60,9 @@ applicants_btn = wait.until(
 )
 applicants_btn.click()
 
-# ---------------- NEW: FILTER BY STATUS ----------------
+# ---------------- NEW: FILTER BY STATUS (MODIFIED) ----------------
 try:
-    print("Applying 'Shortlisted' filter...")
+    print("Applying 'Applied' filter...") # MODIFIED
     # 1. Click on the "Application Status" filter button to open the dropdown
     # This selector assumes it's a button with text. Adjust if it's different.
     status_filter_btn = wait.until(
@@ -69,19 +70,19 @@ try:
     )
     status_filter_btn.click()
     
-    # 2. Click on the "Shortlisted" option from the dropdown
+    # 2. Click on the "Applied" option from the dropdown (MODIFIED)
     # This assumes the option is a link or a clickable div/span
-    shortlisted_option = wait.until(
-        EC.element_to_be_clickable((By.XPATH, "//*[normalize-space()='Shortlisted']"))
+    applied_option = wait.until(
+        EC.element_to_be_clickable((By.XPATH, "//*[normalize-space()='Applied']")) # MODIFIED
     )
-    shortlisted_option.click()
+    applied_option.click() # MODIFIED
     
     # 3. Wait for the table to refresh
-    print("Waiting for filter to apply...")
+    print("Waiting for 'Applied' filter to apply...") # MODIFIED
     time.sleep(3) # Give 3 seconds for the table list to populate
 
 except TimeoutException:
-    print("Could not find or apply the 'Shortlisted' filter. Exiting.")
+    print("Could not find or apply the 'Applied' filter. Exiting.") # MODIFIED
     driver.quit()
     exit()
 except Exception as e:
@@ -161,21 +162,21 @@ while True:  # Loop over pages
 
             print(f"  > Scraped: {scraped_info.get('Name')}, {scraped_info.get('Email')}")
 
-            # --- Update Status ---
-            print("  > Updating status to 'Offer Released'...")
-            # 1. Click the status dropdown (which should currently show "Shortlisted")
-            # We find the button that triggers the dropdown. This might need adjustment.
-            # Let's assume the dropdown trigger is a button.
+            # --- Update Status (MODIFIED) ---
+            print("  > Updating status to 'Shortlisted'...") # MODIFIED
+            # 1. Click the status dropdown (which should currently show "Applied")
+            # This selector is now simpler and more robust.
+            # It looks for a button where its exact visible text (including children) is "Applied".
             status_dropdown_trigger = wait.until(
-                EC.element_to_be_clickable((By.XPATH, "//button[@id='headlessui-listbox-button-:r1:'] | //button[contains(., 'Shortlisted')]")) # Example: using an ID or text
+                EC.element_to_be_clickable((By.XPATH, "//button[normalize-space(.)='Applied']")) # MODIFIED
             )
             status_dropdown_trigger.click()
             
-            # 2. Click the "Offer Released" option
-            offer_released_option = wait.until(
-                EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Offer Released']"))
+            # 2. Click the "Shortlisted" option (MODIFIED)
+            shortlisted_option = wait.until(
+                EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Shortlisted']")) # MODIFIED
             )
-            offer_released_option.click()
+            shortlisted_option.click() # MODIFIED
             
             # 3. Click the "Update Status" button
             update_btn = wait.until(
@@ -188,7 +189,7 @@ while True:  # Loop over pages
             print("  > Status updated successfully.")
             
             # Add final status to our scraped data
-            scraped_info["Status"] = "Offer Released"
+            scraped_info["Status"] = "Shortlisted" # MODIFIED
             applicants_data.append(scraped_info)
 
         except Exception as e:
@@ -215,12 +216,12 @@ while True:  # Loop over pages
             # As a fallback, try to click the "Applicants" button again
             try:
                  driver.find_element(By.XPATH, "//span[normalize-space()='Applicants']").click()
-                 # Re-apply filter if we had to re-navigate
-                 print("  > Re-applying 'Shortlisted' filter...")
+                 # Re-apply filter if we had to re-navigate (MODIFIED)
+                 print("  > Re-applying 'Applied' filter...") # MODIFIED
                  status_filter_btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Application Status')]")))
                  status_filter_btn.click()
-                 shortlisted_option = wait.until(EC.element_to_be_clickable((By.XPATH, "//*[normalize-space()='Shortlisted']")))
-                 shortlisted_option.click()
+                 applied_option = wait.until(EC.element_to_be_clickable((By.XPATH, "//*[normalize-space()='Applied']"))) # MODIFIED
+                 applied_option.click() # MODIFIED
                  time.sleep(3)
             except Exception as nav_e:
                 print(f"  > CRITICAL: Failed to re-navigate. Stopping loop. {nav_e}")
