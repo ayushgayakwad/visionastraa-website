@@ -153,7 +153,7 @@ EMAIL_BODY_TEMPLATE = """\
         </p>
 
         <p>
-            In <span class="highlight">less than 3 months</span> after the 4-month Program started (on Aug 4), Akash & few others have cleared all interview rounds at <strong>IPEC India Pvt. Ltd.</strong> and will be joining them for a Full-Time role on Nov 3.
+            In <span class="highlight">less than 3 months</span> after the 4-month Program started (on Aug 4), Akash & a few others cleared all interview rounds at one of India's leading EV charger manufacturing companies, <strong>IPEC India Pvt. Ltd.</strong>, and will be joining them for a Full-Time role on Nov 3.
         </p>
         
         <hr style="margin: 25px 0;">
@@ -170,6 +170,10 @@ EMAIL_BODY_TEMPLATE = """\
 
         <div class="button-container">
             <a href="https://visionastraa.com/track/click.php?email={email}&target={apply}&campaign_id={campaign_id}" class="btn">APPLY NOW</a>
+        </div>
+        <br>
+        <div class="button-container">
+            <a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}" class="btn">Chat with us on WhatsApp</a>
         </div>
 
         <hr style="margin: 25px 0;">
