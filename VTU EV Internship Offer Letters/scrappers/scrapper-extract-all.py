@@ -1,4 +1,3 @@
-# save_as: scrape_applicants_to_excel.py
 import time
 import pandas as pd
 from urllib.parse import urljoin

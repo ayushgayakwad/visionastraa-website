@@ -1,4 +1,3 @@
-# save_as: scrape_offer_released_applicants.py
 import time
 import pandas as pd
 from urllib.parse import urljoin

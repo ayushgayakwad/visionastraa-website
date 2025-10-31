@@ -15,8 +15,10 @@ LOGIN_URL = "https://vtu.internyet.in/sign-in"
 BASE_URL = "https://vtu.internyet.in"   # used for joining relative hrefs
 EMAIL = "admissions@visionastraa.com"
 PASSWORD = "VisionAstraa@23"
-# Changed output file name to reflect the new action
-OUTPUT_XLSX = "applied_to_shortlisted_applicants.xlsx" 
+OUTPUT_XLSX = "offer_released_applicants.xlsx" # Changed output file name
+
+#status = filter and page = page number
+START_URL = "https://vtu.internyet.in/dashboard/company/applicants?status=4&page=69" 
 
 # ---------------- SETUP DRIVER ----------------
 chrome_options = Options()
@@ -52,45 +54,31 @@ try:
 except:
     password_el.submit()
 
-# Wait until the "Applicants" span is clickable, then click it
-print("Navigating to Applicants page...")
-applicants_btn = wait.until(
-    EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Applicants']"))
-)
-applicants_btn.click()
+time.sleep(5)  # wait for login to process
 
-# ---------------- NEW: FILTER BY STATUS (MODIFIED) ----------------
+# Navigate directly to the filtered applicants page
+print("Navigating to filtered applicants page...")
+filtered_url = START_URL
+driver.get(filtered_url)
+
+# Wait for the page to load
 try:
-    print("Applying 'Applied' filter...") # MODIFIED
-    # 1. Click on the "Application Status" filter button to open the dropdown
-    # This selector assumes it's a button with text. Adjust if it's different.
-    status_filter_btn = wait.until(
-        EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Application Status')]"))
+    # Wait for at least one edit link to appear, indicating the page has loaded
+    wait.until(
+        EC.presence_of_element_located((By.XPATH, "//a[contains(@href, 'dashboard/company/edit-applicant/')]"))
     )
-    status_filter_btn.click()
-    
-    # 2. Click on the "Applied" option from the dropdown (MODIFIED)
-    # This assumes the option is a link or a clickable div/span
-    applied_option = wait.until(
-        EC.element_to_be_clickable((By.XPATH, "//*[normalize-space()='Applied']")) # MODIFIED
-    )
-    applied_option.click() # MODIFIED
-    
-    # 3. Wait for the table to refresh
-    print("Waiting for 'Applied' filter to apply...") # MODIFIED
-    time.sleep(3) # Give 3 seconds for the table list to populate
-
+    print("Successfully loaded filtered applicants page")
 except TimeoutException:
-    print("Could not find or apply the 'Applied' filter. Exiting.") # MODIFIED
+    print("Could not load the filtered applicants page. Exiting.")
     driver.quit()
     exit()
 except Exception as e:
-    print(f"An error occurred while filtering: {e}")
+    print(f"An error occurred while loading the page: {e}")
     driver.quit()
     exit()
 
 
-# ---------------- PROCESS APPLICANTS (MODIFIED) ----------------
+# ---------------- PROCESS APPLICANTS (SCRAPE ONLY) ----------------
 applicants_data = []
 
 while True:  # Loop over pages
@@ -107,9 +95,8 @@ while True:  # Loop over pages
         all_links = driver.find_elements(By.XPATH, "//a[contains(@href, 'dashboard/company/edit-applicant/')]")
         
         # Get the actual href attribute from each link
-        # We must do this *before* iterating, as the page will change
         action_links = [link.get_attribute("href") for link in all_links if link.get_attribute("href")]
-        # Filter out any potential duplicates if multiple icons/links go to the same URL
+        # Filter out any potential duplicates
         action_links = list(dict.fromkeys(action_links)) 
 
     except TimeoutException:
@@ -128,6 +115,7 @@ while True:  # Loop over pages
             driver.get(link)
 
             # Wait for "Update Status" button to ensure page is loaded
+            # We still wait for this button just to know the page is ready
             wait.until(
                 EC.presence_of_element_located((By.XPATH, "//button[normalize-space()='Update Status']"))
             )
@@ -159,37 +147,10 @@ while True:  # Loop over pages
             except NoSuchElementException:
                 scraped_info["Internship"] = ""
 
-            print(f"  > Scraped: {scraped_info.get('Name')}, {scraped_info.get('Email')}")
-
-            # --- Update Status (MODIFIED) ---
-            print("  > Updating status to 'Shortlisted'...") # MODIFIED
-            # 1. Click the status dropdown (which should currently show "Applied")
-            # This selector is now simpler and more robust.
-            # It looks for a button where its exact visible text (including children) is "Applied".
-            status_dropdown_trigger = wait.until(
-                EC.element_to_be_clickable((By.XPATH, "//button[normalize-space(.)='Applied']")) # MODIFIED
-            )
-            status_dropdown_trigger.click()
-            
-            # 2. Click the "Shortlisted" option (MODIFIED)
-            shortlisted_option = wait.until(
-                EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Shortlisted']")) # MODIFIED
-            )
-            shortlisted_option.click() # MODIFIED
-            
-            # 3. Click the "Update Status" button
-            update_btn = wait.until(
-                EC.element_to_be_clickable((By.XPATH, "//button[normalize-space()='Update Status']"))
-            )
-            update_btn.click()
-            
-            # Wait for confirmation or navigation. Let's wait for the "Update" button to disappear (become stale)
-            wait.until(EC.staleness_of(update_btn))
-            print("  > Status updated successfully.")
-            
-            # Add final status to our scraped data
-            scraped_info["Status"] = "Shortlisted" # MODIFIED
+            # Set status based on our filter
+            scraped_info["Status"] = "Offer Released"
             applicants_data.append(scraped_info)
+            print(f"  > Scraped: {scraped_info.get('Name')}, {scraped_info.get('Email')}")
 
         except Exception as e:
             print(f"  > Row {i} FAILED: {e}")
@@ -215,12 +176,12 @@ while True:  # Loop over pages
             # As a fallback, try to click the "Applicants" button again
             try:
                  driver.find_element(By.XPATH, "//span[normalize-space()='Applicants']").click()
-                 # Re-apply filter if we had to re-navigate (MODIFIED)
-                 print("  > Re-applying 'Applied' filter...") # MODIFIED
+                 # Re-apply filter if we had to re-navigate
+                 print("  > Re-applying 'Offer Released' filter...")
                  status_filter_btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Application Status')]")))
                  status_filter_btn.click()
-                 applied_option = wait.until(EC.element_to_be_clickable((By.XPATH, "//*[normalize-space()='Applied']"))) # MODIFIED
-                 applied_option.click() # MODIFIED
+                 offer_released_option = wait.until(EC.element_to_be_clickable((By.XPATH, "//*[normalize-space()='Offer Released']")))
+                 offer_released_option.click()
                  time.sleep(3)
             except Exception as nav_e:
                 print(f"  > CRITICAL: Failed to re-navigate. Stopping loop. {nav_e}")
@@ -244,7 +205,6 @@ while True:  # Loop over pages
             time.sleep(3)  # wait for page to load
             
             # After click, wait for an element from the *new* page to appear
-            # We can wait for the 'Next' button itself to be present again
             wait.until(EC.presence_of_element_located((By.XPATH, "//button[contains(text(),'Next »')]")))
         else:
             print("'Next' button is disabled. Reached last page.")
