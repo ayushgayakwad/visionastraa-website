@@ -5,8 +5,17 @@ on:
   workflow_dispatch: 
 
 jobs:
-  send-email:
+  send-email-matrix:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false 
+
+      matrix:
+        job_config:
+          - '{"account_index": 0, "limit": 3000, "tables": ["crdf25", "crdf25_north", "crdf25_south"], "mod_total": 2, "mod_value": 0}'
+          - '{"account_index": 1, "limit": 3000, "tables": ["crdf25", "crdf25_north", "crdf25_south"], "mod_total": 2, "mod_value": 1}'
+          # - '{"account_index": 0, "limit": 3000, "tables": ["email_list_1", "email_list_2", "email_list_3", "email_list_4", "email_list_5", "email_list_6", "email_list_7"], "mod_total": 2, "mod_value": 0}'
+          # - '{"account_index": 1, "limit": 3000, "tables": ["email_list_1", "email_list_2", "email_list_3", "email_list_4", "email_list_5", "email_list_6", "email_list_7"], "mod_total": 2, "mod_value": 1}'
     
     steps:
       - name: Checkout repository
@@ -22,5 +31,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run the Python script
-        run: python email-campaign-5-script-smtp.py
+      - name: Run the Python script for Job (Mod ${{ fromJson(matrix.job_config).mod_value }})
+        run: python email-campaign-5-script-smtp.py --config '${{ matrix.job_config }}'

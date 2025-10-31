@@ -2,6 +2,8 @@ import mysql.connector
 import smtplib
 import time
 import random
+import argparse
+import json
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
@@ -292,94 +294,129 @@ def send_email(to_address, first_name, smtp_username, smtp_password):
         print(f"❌ Error sending to {to_address}: {e}")
         return False
 
-conn = mysql.connector.connect(
-    host='srv1640.hstgr.io',
-    user='u707137586_Campus_Hiring',
-    password='6q+SFd~o[go',
-    database='u707137586_Campus_Hiring',
-    # user = "u707137586_EV_Reg_T1_24",
-    # password = "DMKL0IYoP&4",
-    # database = "u707137586_EV_Reg_2024_T1",
-    connect_timeout=20
-)
-cursor = conn.cursor(dictionary=True)
-# tables = ['test']
-tables = ['crdf25', 'crdf25_north', 'crdf25_south']
-# tables = ['email_list_1', 'email_list_2', 'email_list_3', 'email_list_4', 'email_list_5', 'email_list_6', 'email_list_7']
+def main():
+    parser = argparse.ArgumentParser(description='Send email campaign in parallel.')
+    parser.add_argument('--config', type=str, required=True, help='JSON string with job configuration')
+    args = parser.parse_args()
 
-emails_sent_count = 0
-max_emails_to_send = 3000
-consecutive_failures = 0
-FAILURE_THRESHOLD = 10
-stop_campaign_due_to_errors = False
+    try:
+        config = json.loads(args.config)
+        account_index = config['account_index']
+        max_emails_to_send = config['limit']
+        tables = config['tables']
+        mod_total = config['mod_total']
+        mod_value = config['mod_value']
+    except Exception as e:
+        print(f"❌ Error parsing --config JSON: {e}")
+        exit(1)
 
-for tbl in tables:
-    if emails_sent_count >= max_emails_to_send:
-        print(f"\nReached the daily limit of {max_emails_to_send} emails. Stopping.")
-        break
+    current_account = SMTP_ACCOUNTS[account_index]
+    print(f"--- Starting Job ---")
+    print(f"Using SMTP Account: {current_account['username']}")
+    print(f"Processing tables: {tables}")
+    print(f"Email limit for this job: {max_emails_to_send}")
+    print(f"Processing email partition: {mod_value} of {mod_total} (e.g., MOD(CRC32(email), {mod_total}) = {mod_value})")
 
-    emails_to_fetch = max_emails_to_send - emails_sent_count
+    try:
+        conn = mysql.connector.connect(
+            host='srv1640.hstgr.io',
+            user='u707137586_Campus_Hiring',
+            password='6q+SFd~o[go',
+            database='u707137586_Campus_Hiring',
+            # user = "u707137586_EV_Reg_T1_24",
+            # password = "DMKL0IYoP&4",
+            # database = "u707137586_EV_Reg_2024_T1",
+            connect_timeout=20
+        )
+        cursor = conn.cursor(dictionary=True)
+    except mysql.connector.Error as err:
+        print(f"❌ Error connecting to database: {err}")
+        exit(1)
 
-    query = f"""
-        SELECT email, first_name 
-        FROM {tbl} 
-        WHERE emailSent=0 
-        AND email NOT IN (SELECT email FROM unsubscribed_emails)
-        LIMIT {emails_to_fetch}
-    """
+    emails_sent_count = 0
+    consecutive_failures = 0
+    FAILURE_THRESHOLD = 10
+    stop_campaign_due_to_errors = False
 
-    # query = f"""
-    #     SELECT email, name FROM {tbl} WHERE emailSent=0
-    # """
-
-    cursor.execute(query)
-
-    rows_to_process = cursor.fetchall()
-
-    if not rows_to_process:
-        continue
-
-    for row in rows_to_process:
+    for tbl in tables:
         if emails_sent_count >= max_emails_to_send:
+            print(f"\nReached the job limit of {max_emails_to_send} emails. Stopping.")
             break
 
-        if emails_sent_count < 3000:
-            current_account = SMTP_ACCOUNTS[0]
-        else:
-            current_account = SMTP_ACCOUNTS[1]
+        emails_to_fetch = max_emails_to_send - emails_sent_count
 
-        if send_email(row['email'], row.get('first_name', 'there'), current_account['username'], current_account['password']):
-        # if send_email(row['email'], row['name'], current_account['username'], current_account['password']):
-            consecutive_failures = 0
-            emails_sent_count += 1
-            print(f"✅ ({emails_sent_count}/{max_emails_to_send}) Sent to {row['email']} using {current_account['username']}")
-            
-            try:
-                conn.ping(reconnect=True, attempts=3, delay=5)
-            except mysql.connector.Error as err:
-                print(f"❌ Error reconnecting to DB: {err}. Skipping update for {row['email']}")
-                continue
+        query = f"""
+            SELECT email, first_name 
+            FROM {tbl} 
+            WHERE emailSent=0 
+            AND email NOT IN (SELECT email FROM unsubscribed_emails)
+            AND MOD(CRC32(email), %s) = %s
+            LIMIT %s
+        """
 
-            update_cursor = conn.cursor()
-            update_cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
-            conn.commit()
-            update_cursor.close()
-            delay = random.uniform(0.5, 2.0)
-            time.sleep(delay)
-        else:
-            consecutive_failures += 1
-            print(f"⚠️ Consecutive send failures: {consecutive_failures}")
-            if consecutive_failures >= FAILURE_THRESHOLD:
-                print(f"\n❌ STOPPING CAMPAIGN: Reached {FAILURE_THRESHOLD} consecutive send errors.")
-                print("This likely means the email provider has blocked the account for the day.")
-                stop_campaign_due_to_errors = True
+        # query = f"""
+        #     SELECT email, name FROM {tbl} WHERE emailSent=0 AND MOD(CRC32(email), %s) = %s LIMIT %s
+        # """
+
+        try:
+            cursor.execute(query, (mod_total, mod_value, emails_to_fetch))
+            rows_to_process = cursor.fetchall()
+        except mysql.connector.Error as err:
+            print(f"❌ Error querying table {tbl}: {err}")
+            continue
+
+        if not rows_to_process:
+            print(f"No emails to send in table: {tbl} for this partition.")
+            continue
+
+        print(f"Found {len(rows_to_process)} emails to process in {tbl} for this partition")
+
+        for row in rows_to_process:
+            if emails_sent_count >= max_emails_to_send:
+                print(f"Reached job limit mid-table. Stopping.")
                 break
-    
-    if stop_campaign_due_to_errors:
-        break
 
-cursor.close()
-conn.close()
+            if send_email(row['email'], row.get('first_name', 'there'), current_account['username'], current_account['password']):
+            # if send_email(row['email'], row['name'], current_account['username'], current_account['password']):
+                consecutive_failures = 0
+                emails_sent_count += 1
+                print(f"✅ ({emails_sent_count}/{max_emails_to_send}) Sent to {row['email']} using {current_account['username']}")
+                
+                try:
+                    conn.ping(reconnect=True, attempts=3, delay=5)
+                except mysql.connector.Error as err:
+                    print(f"❌ Error reconnecting to DB: {err}. Skipping update for {row['email']}")
+                    continue
 
-print(f"\n--- Campaign Finished ---")
-print(f"Total emails sent in this run: {emails_sent_count}")
+                update_cursor = conn.cursor()
+                try:
+                    update_cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
+                    conn.commit()
+                except mysql.connector.Error as e:
+                    print(f"❌ Error updating emailSent flag for {row['email']}: {e}")
+                    conn.rollback()
+                finally:
+                    update_cursor.close()
+                    
+                delay = random.uniform(0.5, 2.0)
+                time.sleep(delay)
+            else:
+                consecutive_failures += 1
+                print(f"⚠️ Consecutive send failures: {consecutive_failures}")
+                if consecutive_failures >= FAILURE_THRESHOLD:
+                    print(f"\n❌ STOPPING JOB: Reached {FAILURE_THRESHOLD} consecutive send errors.")
+                    print("This likely means the email provider has blocked the account for the day.")
+                    stop_campaign_due_to_errors = True
+                    break
+        
+        if stop_campaign_due_to_errors:
+            break
+
+    cursor.close()
+    conn.close()
+
+    print(f"\n--- Job Finished ---")
+    print(f"Total emails sent in this job: {emails_sent_count}")
+
+if __name__ == "__main__":
+    main()
