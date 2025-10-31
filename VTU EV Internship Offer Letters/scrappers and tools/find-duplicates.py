@@ -4,9 +4,9 @@ import pandas as pd
 column_names = ["name", "email", "phone", "college", "branch", "internship", "status"]
 
 # Specify the name of your CSV file
-file_name = 'D:\\GitHub\\visionastraa-website\\VTU EV Internship Offer Letters\\scrappers\\offer_released_applicants.csv'
+file_name = 'D:\\GitHub\\visionastraa-website\\VTU EV Internship Offer Letters\\scrappers and tools\\offer_released_applicants.csv'
 # Define the new file to store duplicates
-output_file_name = 'D:\\GitHub\\visionastraa-website\\VTU EV Internship Offer Letters\\scrappers\\duplicate_applicants.csv'
+output_file_name = 'D:\\GitHub\\visionastraa-website\\VTU EV Internship Offer Letters\\scrappers and tools\\duplicate_applicants.csv'
 
 try:
     # Read the CSV file, specifying it has no header
