@@ -18,8 +18,8 @@ BASE_URL = "https://vtu.internyet.in"   # used for joining relative hrefs
 EMAIL = "admissions@visionastraa.com"
 PASSWORD = "VisionAstraa@23"
 # Changed output file name to reflect the new action
-OUTPUT_XLSX = "applied_to_shortlisted_applicants.xlsx" 
-CSV_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "duplicate_offer_released.csv")
+OUTPUT_XLSX = "shortlisted_to_offer_released_applicants.xlsx" 
+CSV_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "duplicate_shortlisted.csv")
 
 # ---------------- SETUP DRIVER ----------------
 chrome_options = Options()
@@ -127,10 +127,10 @@ ROLE_MECH_ALLOWED = list(map(_norm, [
 
 
 df_csv = pd.read_csv(CSV_FILE)
-# Work with unique emails that have status 'Offer Released'
-targets = df_csv[df_csv['status'].str.lower() == 'offer released']['email'].dropna().unique()
+# Work with unique emails that have status 'Shortlisted'
+targets = df_csv[df_csv['status'].str.lower() == 'shortlisted']['email'].dropna().unique()
 
-print(f"Found {len(targets)} unique emails in CSV with status 'Offer Released'.")
+print(f"Found {len(targets)} unique emails in CSV with status 'Shortlisted'.")
 
 applicants_data = []
 
@@ -165,9 +165,9 @@ for email in targets:
         except Exception:
             print("Search button not found/clickable. Continuing...")
 
-        # Apply 'Offer Released' filter (similar to earlier)
+        # Apply 'Shortlisted' filter
         try:
-            print("Applying 'Offer Released' filter...")
+            print("Applying 'Shortlisted' filter...")
             # Prefer the exact inner span for the Application Status trigger and click its ancestor button
             try:
                 status_span = wait.until(EC.presence_of_element_located((By.XPATH,
@@ -185,15 +185,15 @@ for email in targets:
                 driver.execute_script("arguments[0].scrollIntoView({block:'center'});", status_filter_btn)
                 driver.execute_script("arguments[0].click();", status_filter_btn)
 
-            # Wait for and click the 'Offer Released' option — try role/option/button/span variants
-            offer_option = wait.until(EC.element_to_be_clickable((By.XPATH,
-                "//div[@role='option' and normalize-space(.)='Offer Released'] | //button[normalize-space(.)='Offer Released'] | //span[normalize-space(.)='Offer Released'] | //li[normalize-space(.)='Offer Released'] | //a[normalize-space(.)='Offer Released']"
+            # Wait for and click the 'Shortlisted' option — try role/option/button/span variants
+            shortlisted_option = wait.until(EC.element_to_be_clickable((By.XPATH,
+                "//div[@role='option' and normalize-space(.)='Shortlisted'] | //button[normalize-space(.)='Shortlisted'] | //span[normalize-space(.)='Shortlisted'] | //li[normalize-space(.)='Shortlisted'] | //a[normalize-space(.)='Shortlisted']"
             )))
-            driver.execute_script("arguments[0].scrollIntoView({block:'center'});", offer_option)
-            driver.execute_script("arguments[0].click();", offer_option)
+            driver.execute_script("arguments[0].scrollIntoView({block:'center'});", shortlisted_option)
+            driver.execute_script("arguments[0].click();", shortlisted_option)
             time.sleep(2)
         except TimeoutException:
-            print("Could not apply 'Offer Released' filter. Continuing without it.")
+            print("Could not apply 'Shortlisted' filter. Continuing without it.")
         except Exception as e:
             print(f"Filter error: {e}")
 
@@ -285,33 +285,34 @@ for email in targets:
                             print("    - Branch(Mech) condition failed: role not allowed for this branch")
                             needs_under_review = True
 
-                # If either condition failed, update status to 'Under Review'
-                if needs_under_review:
-                    print("  > Updating status to 'Under Review'...")
-                    try:
-                        if status_button:
-                            status_button.click()
-                            # click 'Under Review' option
-                            under_option = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Under Review']")))
-                            under_option.click()
-                        else:
-                            # fallback: try to click any status button text and then select
-                            generic_status = wait.until(EC.element_to_be_clickable((By.XPATH, "(//button[contains(@class,'rounded')])[1]")))
-                            generic_status.click()
-                            under_option = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Under Review']")))
-                            under_option.click()
+                # Update status based on conditions
+                try:
+                    if status_button:
+                        status_button.click()
+                    else:
+                        # fallback: try to click any status button text
+                        generic_status = wait.until(EC.element_to_be_clickable((By.XPATH, "(//button[contains(@class,'rounded')])[1]")))
+                        generic_status.click()
 
-                        update_btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[normalize-space()='Update Status']")))
-                        update_btn.click()
-                        wait.until(EC.staleness_of(update_btn))
-                        scraped_info['Status'] = 'Under Review'
-                        print("  > Status set to 'Under Review'.")
-                    except Exception as e:
-                        print(f"  > Failed to update status: {e}")
-                        scraped_info['Status'] = current_status or ''
-                else:
-                    scraped_info['Status'] = scraped_info.get('Status', current_status)
-                    print("  > Conditions satisfied — leaving status as is.")
+                    # Select appropriate status based on conditions
+                    if needs_under_review:
+                        print("  > Conditions not met. Updating status to 'Under Review'...")
+                        status_option = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Under Review']")))
+                        new_status = 'Under Review'
+                    else:
+                        print("  > All conditions met. Updating status to 'Offer Released'...")
+                        status_option = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Offer Released']")))
+                        new_status = 'Offer Released'
+
+                    status_option.click()
+                    update_btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[normalize-space()='Update Status']")))
+                    update_btn.click()
+                    wait.until(EC.staleness_of(update_btn))
+                    scraped_info['Status'] = new_status
+                    print(f"  > Status set to '{new_status}'.")
+                except Exception as e:
+                    print(f"  > Failed to update status: {e}")
+                    scraped_info['Status'] = current_status or ''
 
                 applicants_data.append(scraped_info)
 
