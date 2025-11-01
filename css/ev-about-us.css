@@ -701,6 +701,11 @@ p {
     overflow: hidden;
     height: 625px;
     margin-top: 50px;
+    background: #fff;
+    background-image: url('../images/Course6.png'); /* Ensure correct path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 /* Overlay for Better Readability */
@@ -721,7 +726,6 @@ p {
     color: #333;
     margin-top: -10px;
     text-transform: uppercase;
-    backdrop-filter: blur(3px);
 }
 
 /* Central Image */
