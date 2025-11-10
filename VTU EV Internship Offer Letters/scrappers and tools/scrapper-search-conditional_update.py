@@ -1,4 +1,5 @@
 import time
+import random
 import pandas as pd
 from urllib.parse import urljoin
 from selenium import webdriver
@@ -33,6 +34,14 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), opti
 # Increased wait time for potentially slower page loads/updates
 wait = WebDriverWait(driver, 20)
 short_wait = WebDriverWait(driver, 5) # For quick checks
+
+# Small helper to add randomized human-like delays to avoid rate limiting
+def human_delay(min_s=0.5, max_s=1.5):
+    try:
+        time.sleep(random.uniform(min_s, max_s))
+    except Exception:
+        # defensive: in case sleep is interrupted for some reason, don't crash
+        pass
 
 # ---------------- LOGIN ----------------
 print("Logging in...")
@@ -152,6 +161,8 @@ for email in targets:
             search_input = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Search by student name, email, mobile number...']")))
             # clear and send
             search_input.clear()
+            # small random delay before typing/searching to mimic human behavior
+            human_delay(0.3, 1.0)
             search_input.send_keys(email)
         except TimeoutException:
             print("Search input not found, skipping this email.")
@@ -160,8 +171,9 @@ for email in targets:
         # Click Search button
         try:
             search_btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[.//p[normalize-space()='Search'] or normalize-space()='Search']")))
+            # click and add a small randomized pause to avoid rapid repeated actions
             search_btn.click()
-            time.sleep(1)
+            human_delay(0.8, 1.6)
         except Exception:
             print("Search button not found/clickable. Continuing...")
 
@@ -190,8 +202,9 @@ for email in targets:
                 "//div[@role='option' and normalize-space(.)='Shortlisted'] | //button[normalize-space(.)='Shortlisted'] | //span[normalize-space(.)='Shortlisted'] | //li[normalize-space(.)='Shortlisted'] | //a[normalize-space(.)='Shortlisted']"
             )))
             driver.execute_script("arguments[0].scrollIntoView({block:'center'});", shortlisted_option)
+            # click the option and wait a bit longer (selecting filters can be heavier)
             driver.execute_script("arguments[0].click();", shortlisted_option)
-            time.sleep(2)
+            human_delay(1.5, 3.0)
         except TimeoutException:
             print("Could not apply 'Shortlisted' filter. Continuing without it.")
         except Exception as e:
@@ -212,6 +225,8 @@ for email in targets:
         for link in action_links:
             try:
                 print(f"Opening {link}")
+                # randomized pause before navigating to applicant page
+                human_delay(0.6, 2.0)
                 driver.get(link)
                 wait.until(EC.presence_of_element_located((By.XPATH, "//button[normalize-space()='Update Status']")))
 
@@ -297,14 +312,20 @@ for email in targets:
                     # Select appropriate status based on conditions
                     if needs_under_review:
                         print("  > Conditions not met. Updating status to 'Under Review'...")
+                        # small randomized pause before selecting the new status
+                        human_delay(0.4, 1.2)
                         status_option = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Under Review']")))
                         new_status = 'Under Review'
                     else:
                         print("  > All conditions met. Updating status to 'Offer Released'...")
+                        # small randomized pause before selecting the new status
+                        human_delay(0.4, 1.2)
                         status_option = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Offer Released']")))
                         new_status = 'Offer Released'
 
                     status_option.click()
+                    # tiny pause before hitting "Update Status" to mimic human pause
+                    human_delay(0.6, 1.2)
                     update_btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[normalize-space()='Update Status']")))
                     update_btn.click()
                     wait.until(EC.staleness_of(update_btn))
@@ -319,6 +340,9 @@ for email in targets:
             except Exception as e:
                 print(f"  > Failed processing applicant link {link}: {e}")
                 continue
+
+            # brief randomized pause between applicants to avoid bursty requests
+            human_delay(0.4, 1.0)
 
         # After processing this email, clear search input for safety
         try:
