@@ -144,7 +144,7 @@ def main():
         for index, row in df_partition.iterrows():
             name = str(row['name']).strip()
             email = str(row['email']).strip()
-            role = str(row['internship role']).strip()
+            role = str(row['role']).strip()
 
             if name and email and role and name.lower() != 'nan' and email.lower() != 'nan' and role.lower() != 'nan':
                 send_internship_details_email(
