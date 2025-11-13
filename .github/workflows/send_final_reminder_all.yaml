@@ -1,0 +1,30 @@
+name: Send Final Reminder (All - Parallel)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  send-email-matrix:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        job_config:
+          - '{"account_index": 0, "mod_total": 2, "mod_value": 0}'
+          - '{"account_index": 1, "mod_total": 2, "mod_value": 1}'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install pandas
+
+      - name: Run the Python script for Job (Mod ${{ fromJson(matrix.job_config).mod_value }})
+        run: python "VTU EV Internship Offer Letters/final-reminder-all.py" --config '${{ matrix.job_config }}'
+        
