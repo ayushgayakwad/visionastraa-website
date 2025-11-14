@@ -192,6 +192,62 @@ header {
 
 }
 
+.asdc-announcement {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto; /* Adds space around the section */
+    padding: 8px 20px;
+    background-color: #fff; /* Clean white background */
+    text-align: center; /* Center all content */
+    gap: 20px;
+}
+
+.asdc-announcement h2 {
+    font-size: 2.5em; /* Matches other page h2 */
+    color: #636AE8; /* Matches page theme color */
+    margin-top: 0;
+    margin-bottom: 20px; /* Space below title */
+    font-weight: 700;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.asdc-announcement-images {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px; /* Space below images */
+}
+
+.asdc-announcement-images img {
+    width: 420px; 
+    height: auto;
+    border-radius: 20px; /* No rounded corners */
+    box-shadow: none; /* No shadow */
+    object-fit: cover;
+}
+
+.asdc-announcement p {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+    text-align: center; /* Center the paragraph text */
+    max-width: 800px; /* Constrain line width for readability */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .asdc-announcement {
+        width: 95%;
+    }
+    .asdc-announcement-images img {
+        width: 350px; /* Adjust image size for mobile */
+    }
+}
+
 /* Course section*/
 .course-section {
     display: flex;
