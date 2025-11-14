@@ -223,7 +223,7 @@ for tbl in tables:
         SELECT email, first_name 
         FROM {tbl} 
         WHERE college IN ({college_placeholders}) 
-        AND emailSent_2 = 0 
+        AND emailSent = 0 
         AND email NOT IN (SELECT email FROM unsubscribed_emails)
     """
     cursor.execute(query, tuple(target_colleges))
@@ -246,7 +246,7 @@ for tbl in tables:
                 print(f"❌ Error reconnecting to DB: {err}. Skipping update for {row['email']}")
                 continue
             
-            cursor.execute(f"UPDATE {tbl} SET emailSent_2=1 WHERE email=%s", (row['email'],))
+            cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
             conn.commit()
             email_count += 1
 
