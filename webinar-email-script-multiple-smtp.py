@@ -27,52 +27,87 @@ SMTP2_PASSWORD = '>p>W|jv?Kg1'
 SMTP_USERNAME = SMTP1_USERNAME
 SMTP_PASSWORD = SMTP1_PASSWORD
 
-CAMPAIGN_ID = "ev_webinar_2025_10_22"
+CAMPAIGN_ID = "ev_webinar_2025_11_15"
 
-EMAIL_SUBJECT = "Job Opportunities in the EV Industry Webinar - October 22, 10:00 AM (Wed)"
+EMAIL_SUBJECT = "Job Opportunities in the EV Industry Webinar - November 15, 05:00 PM (Sat)"
 
 EMAIL_BODY_TEMPLATE = """\
 <html>
   <body style="font-family:Arial, sans-serif;line-height:1.5;color:#333;">
     <p>Dear {first_name},</p>
-    <p>
-      Sharing webinar link for <strong>"Job Opportunities in EV Industry"</strong> for <strong>2025 graduates</strong><br>
-      (B.Tech & M.Tech) from <strong>EEE, ECE & Mechanical Engineering</strong> branches only.
+
+    <p style="font-size:16px;">
+      <strong>⚡ Secure Your High-Paying EV Job (2025 Grads): FREE Live Webinar & 100% Placement Guarantee 🚀</strong>
     </p>
-    <p><strong>Date: October 22, Wed</strong></p>
-    <p><strong>Time: 10:00 AM, IST</strong></p>
+
     <p>
-      Webinar Link: <a href="https://visionastraa.com/track/click.php?email={email}&target={meet_url}&campaign_id={campaign_id}" 
-      target="_blank" style="color:#1a73e8;">Join Webinar</a>
+      Are you a 2025 B.Tech/M.Tech graduate (EEE, ECE, Mechanical) still searching for a career path that guarantees 
+      massive growth and a premium salary?<br>
+      The Electric Vehicle (EV) industry is booming, but only for those with specialized skills.
     </p>
-    <p><strong>Webinar Details (Virtual):</strong></p>
+
+    <p>
+      Join this exclusive, free webinar to discover the proven roadmap that has helped VisionAstraa EV Academy place 
+      students in top EV roles.
+    </p>
+
+    <p><strong>Webinar Focus: VisionAstraa's EV Placement SECRET</strong></p>
+
     <ul>
-      <li>
-      <strong>"Why VisionAstraa is finding Success in Placing Students in EV Industry?"</strong> - Session Chaired by Yedu Jathavedan, Co-founder & Chairman, VisionAstraa Group
-      </li>
-      <li>Conversation will cover:
-        <ul>
-          <li>Why EV?</li>
-          <li>Industry Trends</li>
-          <li>Job Opportunities in the EV Industry, etc.</li>
-          <li>Why we guarantee you 100% placement in EV Industry or Money Back?</li>
-        </ul>
-      </li>
+      <li>We will reveal exactly how we achieve the industry's boldest promise:</li>
+      <ul>
+        <li>✅ <strong>100% Placement GUARANTEED</strong> in the EV Industry <strong>or Your ENTIRE Program Fee Back!</strong></li>
+        <li>✅ The REAL job opportunities and salary expectations in EV for freshers.</li>
+        <li>✅ Why waiting to upskill means missing the industry's biggest hiring wave.</li>
+      </ul>
     </ul>
-    <p><strong>To add the webinar to your calendar and receive a reminder, please click "YES" on the calendar invite.</strong></p>
+
+    <p><strong>🗓 Webinar Details</strong></p>
+
+    <table style="border-collapse:collapse;">
+      <tr>
+        <td style="padding:4px 8px;"><strong>Date</strong></td>
+        <td style="padding:4px 8px;">Saturday, November 15</td>
+      </tr>
+      <tr>
+        <td style="padding:4px 8px;"><strong>Time</strong></td>
+        <td style="padding:4px 8px;">05:00 PM IST</td>
+      </tr>
+      <tr>
+        <td style="padding:4px 8px;"><strong>Speaker</strong></td>
+        <td style="padding:4px 8px;">Yedu Jathavedan, Co-founder & Chairman, VisionAstraa Group</td>
+      </tr>
+    </table>
+
+    <p style="margin-top:15px;">
+      <strong>
+        🔥 <a 
+          href="https://visionastraa.com/track/click.php?email={email}&target={meet_url}&campaign_id={campaign_id}" 
+          target="_blank" 
+          style="color:#1a73e8;">CLICK HERE TO SECURE YOUR FREE SPOT NOW (Limited Seats!)</a>
+      </strong>
+    </p>
+
+    <p>
+      <strong>P.S.</strong> This session is for serious 2025 B.Tech/M.Tech (EEE, ECE, Mechanical) graduates ready 
+      to leapfrog into a high-demand EV career.
+    </p>
+
     <p>Best Regards,<br>VisionAstraa Group</p>
     <br>
+
     <p style="font-size:12px;color:#888;">
       If you no longer wish to receive emails from us, you can 
       <a href="https://visionastraa.com/track/unsubscribe.php?email={email}&campaign_id={campaign_id}" style="color:#1a73e8;">unsubscribe here</a>.
     </p>
+
     <img src="{image_url}" width="1" height="1" style="display:none;" />
   </body>
 </html>
 """
 
 def create_ics():
-    dt_start = datetime(2025, 10, 22, 10, 0)
+    dt_start = datetime(2025, 11, 15, 17, 0)
     dt_end = dt_start + timedelta(minutes=60)
     dtstamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     dtstart = dt_start.strftime("%Y%m%dT%H%M%S")
@@ -87,7 +122,7 @@ DTSTAMP:{dtstamp}
 DTSTART;TZID=Asia/Kolkata:{dtstart}
 DTEND;TZID=Asia/Kolkata:{dtend}
 SUMMARY:Job Opportunities in EV Industry Webinar
-UID:visionastraa-ev-webinar-20251022@visionastraa.in
+UID:visionastraa-ev-webinar-20251115@visionastraa.in
 ORGANIZER;CN=VisionAstraa Group:mailto:{SMTP_USERNAME}
 DESCRIPTION:Join the webinar on Job Opportunities in EV Industry.\\nhttps://meet.google.com/prn-gckz-eug
 LOCATION:Online (Google Meet)
@@ -151,44 +186,32 @@ cursor = conn.cursor(dictionary=True)
 tables = ['crdf25', 'crdf25_north', 'crdf25_south']
 
 target_colleges = [
-    "SAVEETHA INSTITUTE OF MEDICAL AND TECHNICAL SCIENCES",
-    "VELLORE INSTITUTE OF TECHNOLOGY CHENNAI OFF CAMPUS",
-    "SRI KRISHNA COLLEGE OF TECHNOLOGY",
-    "SRM VALLIAMMAI ENGINEERING COLLEGE",
-    "SRI KRISHNA COLLEGE OF ENGINEERING AND TECHNOLOGY",
-    "SRI VENKATESWARA COLLEGE OF ENGINEERING",
-    "PSNA COLLEGE OF ENGINEERING AND TECHNOLOGY , DINDIGUL",
-    "VELAMMAL INSTITUTE OF TECHNOLOGY",
-    "UNIVERSITY COLLEGE OF ENGINEERING, BITCAMPUS TIRUCHIRAPPALLI",
-    "SAVEETHA ENGINEERING COLLEGE",
-    "SONA COLLEGE OF TECHNOLOGY",
-    "KPR INSTITUTE OF ENGINEERING AND TECHNOLOGY",
-    "ANNA UNIVERSITY REGIONAL CAMPUS COIMBATORE",
-    "DR.MAHALINGAM COLLEGE OF ENGINEERING AND TECHNOLOGY",
-    "K RAMAKRISHNAN COLLEGE OF TECHNOLOGY",
-    "GOVERNMENT COLLEGE OF ENGINEERING, SALEM",
-    "PAAVAI ENGINEERING COLLEGE",
-    "PERI INSTITUTE OF TECHNOLOGY",
-    "SRI RAMAKRISHNA ENGINEERING COLLEGE",
-    "ST. JOSEPH'S COLLEGE OF ENGINEERING",
-    "KUMARAGURU COLLEGE OF TECHNOLOGY",
-    "HINDUSTHAN COLLEGE OF ENGINEERING AND TECHNOLOGY",
-    "GOVERNMENT COLLEGE OF ENGINEERING, TIRUNELVELI",
-    "KONGU ENGINEERING COLLEGE",
-    "BANNARI AMMAN INSTITUTE OF TECHNOLOGY",
-    "EASWARI ENGINEERING COLLEGE",
-    "GOVERNMENT COLLEGE OF TECHNOLOGY",
-    "ST. JOSEPH'S INSTITUTE OF TECHNOLOGY",
-    "HINDUSTHAN INSTITUTE OF TECHNOLOGY",
-    "GOVERNMENT COLLEGE OF ENGINEERING, BARGUR",
-    "K. RAMAKRISHNAN COLLEGE OF ENGINEERING",
-    "DR N.G.P. INSTITUTE OF TECHNOLOGY",
-    "K.L.N. COLLEGE OF ENGINEERING",
-    "GOVERNMENT COLLEGE OF ENGINEERING, SRIRANGAM",
-    "SRM TRP ENGINEERING COLLEGE",
-    "FRANCIS XAVIER ENGINEERING COLLEGE",
-    "VELAMMAL COLLEGE OF ENGINEERING & TECHNOLOGY",
-    "JANSONS INSTITUTE OF TECHNOLOGY"
+    "BAPUJI INSTITUTE OF ENGINEERING & TECHNOLOGY",
+    "DAYANANDA SAGAR COLLEGE OF ENGINEERING",
+    "K.L.S. GOGTE INSTITUTE OF TECHNOLOGY",
+    "BANGALORE INSTITUTE OF TECHNOLOGY",
+    "SHARNBASVA UNIVERSITY",
+    "GM INSTITUTE OF TECHNOLOGY",
+    "M. S. RAMAIAH INSTITUTE OF TECHNOLOGY",
+    "THE NATIONAL INSTITUTE OF ENGINEERING",
+    "JAWAHARLAL NEHRU NEW COLLEGE OF ENGINEERING",
+    "RAO BAHADUR Y MAHABALESWARAPPA ENGINEERING COLLEGE",
+    "K.L.E.INSTITUTE OF TECHNOLOGY",
+    "CAMBRIDGE INSTITUTE OF TECHNOLOGY",
+    "B.M.S.COLLEGE OF ENGINEERING",
+    "PES INSTITUTE OF TECHNOLOGY & MANAGEMENT",
+    "S J C INSTITUTE OF TECHNOLOGY",
+    "KLS VISHWANATHRAO DESHPANDE INSTITUTE OF TECHNOLOGY",
+    "MAHARAJA INSTITUTE OF TECHNOLOGY MYSORE",
+    "MVJ COLLEGE OF ENGINEERING",
+    "P.E.S. COLLEGE OF ENGINEERING, MANDYA",
+    "ST. JOSEPH ENGINEERING COLLEGE",
+    "GLOBAL ACADEMY OF TECHNOLOGY",
+    "THE OXFORD COLLEGE OF ENGINEERING",
+    "EAST WEST INSTITUTE OF TECHNOLOGY",
+    "SRI SAIRAM COLLEGE OF ENGINEERING",
+    "S.D.M. COLLEGE OF ENGINEERING & TECHNOLOGY",
+    "DAYANANDA SAGAR ACADEMY OF TECHNOLOGY & MANAGEMENT TECHNICAL CAMPUS"
 ]
 
 college_placeholders = ', '.join(['%s'] * len(target_colleges))
