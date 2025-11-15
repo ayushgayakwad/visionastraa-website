@@ -69,22 +69,31 @@ try:
     internship_filter_btn.click()
     
     # 2. Click on the specific internship option from the dropdown
-    internship_option_text = "EMBEDDED SYSTEMS FOR ELECTRIC VEHICLE ( Microcontrollers , IOT , Mechatronics , ADAS )"
+    internship_option_text = "AI/ML FOR EV ( Data Science , Cybersecurity , Machine Learning , Data Analytics , Full Stack Development , Artificial intelligence )"
     
-    # Wait for the option to be PRESENT in the DOM (it might be off-screen)
+    # ------------------- FIX 1 START -------------------
+    # The error message indicated the clickable element is a <div role="option">
+    # This XPath is much more specific and less likely to be ambiguous.
+    internship_option_xpath = f"//div[@role='option'][normalize-space(.)='{internship_option_text}']"
+    
+    # Wait for the option to be PRESENT in the DOM
     internship_option = wait.until(
-        EC.presence_of_element_located((By.XPATH, f"//*[normalize-space()='{internship_option_text}']"))
+        EC.presence_of_element_located((By.XPATH, internship_option_xpath))
     )
     
     # Scroll the option into view using JavaScript
     print("Scrolling to internship option...")
     driver.execute_script("arguments[0].scrollIntoView(true);", internship_option)
     
-    # Now that it's in view, wait for it to be clickable and click it
+    # Now that it's in view, wait for it to be clickable
     wait.until(
-        EC.element_to_be_clickable(internship_option)
+        EC.element_to_be_clickable((By.XPATH, internship_option_xpath))
     )
-    internship_option.click()
+    
+    # Use a JavaScript click to bypass the "element click intercepted" error
+    print("Clicking internship option via JavaScript...")
+    driver.execute_script("arguments[0].click();", internship_option)
+    # ------------------- FIX 1 END -------------------
     
     # 3. Wait for the table to refresh
     print(f"Waiting for '{internship_option_text}' filter to apply...")
@@ -103,7 +112,7 @@ except Exception as e:
 
 # ---------------- FILTER BY STATUS (MODIFIED) ----------------
 try:
-    print("Applying 'Applied' filter...") # MODIFIED
+    print("Applying 'Under Review' filter...") # MODIFIED
     # 1. Click on the "Application Status" filter button to open the dropdown
     # This selector assumes it's a button with text. Adjust if it's different.
     status_filter_btn = wait.until(
@@ -111,19 +120,27 @@ try:
     )
     status_filter_btn.click()
     
-    # 2. Click on the "Applied" option from the dropdown (MODIFIED)
-    # This assumes the option is a link or a clickable div/span
+    # 2. Click on the "Under Review" option from the dropdown (MODIFIED)
+    # ------------------- FIX 4 START -------------------
+    # Apply the same robust clicking logic as the internship filter
+    status_option_text = "Under Review"
+    status_option_xpath = f"//div[@role='option'][normalize-space(.)='{status_option_text}']"
+    
     applied_option = wait.until(
-        EC.element_to_be_clickable((By.XPATH, "//*[normalize-space()='Applied']")) # MODIFIED
+        EC.element_to_be_clickable((By.XPATH, status_option_xpath)) # MODIFIED XPath
     )
-    applied_option.click() # MODIFIED
+    
+    # Use JavaScript click to prevent interception
+    print("Clicking 'Under Review' option via JavaScript...")
+    driver.execute_script("arguments[0].click();", applied_option) # MODIFIED click
+    # ------------------- FIX 4 END -------------------
     
     # 3. Wait for the table to refresh
-    print("Waiting for 'Applied' filter to apply...") # MODIFIED
+    print("Waiting for 'Under Review' filter to apply...") # MODIFIED
     time.sleep(3) # Give 3 seconds for the table list to populate
 
 except TimeoutException:
-    print("Could not find or apply the 'Applied' filter. Exiting.") # MODIFIED
+    print("Could not find or apply the 'Under Review' filter. Exiting.") # MODIFIED
     driver.quit()
     exit()
 except Exception as e:
@@ -204,18 +221,18 @@ while True:  # Loop over pages
             print(f"  > Scraped: {scraped_info.get('Name')}, {scraped_info.get('Email')}")
 
             # --- Update Status (MODIFIED) ---
-            print("  > Updating status to 'Shortlisted'...") # MODIFIED
-            # 1. Click the status dropdown (which should currently show "Applied")
+            print("  > Updating status to 'Offer Released'...") # MODIFIED
+            # 1. Click the status dropdown (which should currently show "Under Review")
             # This selector is now simpler and more robust.
-            # It looks for a button where its exact visible text (including children) is "Applied".
+            # It looks for a button where its exact visible text (including children) is "Under Review".
             status_dropdown_trigger = wait.until(
-                EC.element_to_be_clickable((By.XPATH, "//button[normalize-space(.)='Applied']")) # MODIFIED
+                EC.element_to_be_clickable((By.XPATH, "//button[normalize-space(.)='Under Review']")) # MODIFIED
             )
             status_dropdown_trigger.click()
             
-            # 2. Click the "Shortlisted" option (MODIFIED)
+            # 2. Click the "Offer Released" option (MODIFIED)
             shortlisted_option = wait.until(
-                EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Shortlisted']")) # MODIFIED
+                EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Offer Released']")) # MODIFIED
             )
             shortlisted_option.click() # MODIFIED
             
@@ -230,7 +247,7 @@ while True:  # Loop over pages
             print("  > Status updated successfully.")
             
             # Add final status to our scraped data
-            scraped_info["Status"] = "Shortlisted" # MODIFIED
+            scraped_info["Status"] = "Offer Released" # MODIFIED
             applicants_data.append(scraped_info)
 
         except Exception as e:
@@ -262,11 +279,18 @@ while True:  # Loop over pages
                  print("  > Re-applying 'Internship Name' filter...")
                  internship_filter_btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Internship Name')]")))
                  internship_filter_btn.click()
-                 internship_option_text = "EMBEDDED SYSTEMS FOR ELECTRIC VEHICLE ( Microcontrollers , IOT , Mechatronics , ADAS )"
+                 
+                 # ------------------- FIX 2 START -------------------
+                 # This text must match the original filter text from line 100
+                 internship_option_text = "EMBEDDED SYSTEMS FOR EV ( Microcontrollers , Mechatronics , IOT , ADAS )"
+                 # ------------------- FIX 2 END -------------------
+                 
+                 # Use the more robust XPath and click from FIX 1
+                 internship_option_xpath = f"//div[@role='option'][normalize-space(.)='{internship_option_text}']"
                  
                  # Wait for the option to be PRESENT
                  internship_option = wait.until(
-                    EC.presence_of_element_located((By.XPATH, f"//*[normalize-space()='{internship_option_text}']"))
+                    EC.presence_of_element_located((By.XPATH, internship_option_xpath))
                  )
                  
                  # Scroll to it using JavaScript
@@ -274,16 +298,26 @@ while True:  # Loop over pages
                  driver.execute_script("arguments[0].scrollIntoView(true);", internship_option)
                  
                  # Wait for clickable and click
-                 wait.until(EC.element_to_be_clickable(internship_option))
-                 internship_option.click()
+                 wait.until(EC.element_to_be_clickable((By.XPATH, internship_option_xpath)))
+                 driver.execute_script("arguments[0].click();", internship_option)
                  time.sleep(3) # Wait for filter to apply
 
                  # Re-apply STATUS filter (MODIFIED)
-                 print("  > Re-applying 'Applied' filter...") # MODIFIED
+                 print("  > Re-applying 'Under Review' filter...") # MODIFIED
                  status_filter_btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Application Status')]")))
                  status_filter_btn.click()
-                 applied_option = wait.until(EC.element_to_be_clickable((By.XPATH, "//*[normalize-space()='Applied']"))) # MODIFIED
-                 applied_option.click() # MODIFIED
+                 
+                 # ------------------- FIX 5 START -------------------
+                 # This must match the original status filter logic
+                 status_option_text = "Under Review"
+                 status_option_xpath = f"//div[@role='option'][normalize-space(.)='{status_option_text}']"
+                 
+                 applied_option = wait.until(EC.element_to_be_clickable((By.XPATH, status_option_xpath))) # MODIFIED XPath
+                 
+                 print("  > Clicking 'Under Review' option via JavaScript...")
+                 driver.execute_script("arguments[0].click();", applied_option) # MODIFIED click
+                 # ------------------- FIX 5 END -------------------
+                 
                  time.sleep(3)
             except Exception as nav_e:
                 print(f"  > CRITICAL: Failed to re-navigate. Stopping loop. {nav_e}")
