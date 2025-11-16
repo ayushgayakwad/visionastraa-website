@@ -229,7 +229,7 @@ while True:  # Loop over pages
             # This selector is now simpler and more robust.
             # It looks for a button where its exact visible text (including children) is "Under Review".
             status_dropdown_trigger = wait.until(
-                EC.element_to_be_clickable((By.XPATH, "//button[normalize-space(.)='Under Review']")) # MODIFIED
+                EC.element_to_be_clickable((By.XPATH, f"//button[normalize-space(.)='{status}']")) # MODIFIED
             )
             status_dropdown_trigger.click()
             
