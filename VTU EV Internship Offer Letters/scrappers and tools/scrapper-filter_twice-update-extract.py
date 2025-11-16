@@ -69,7 +69,8 @@ try:
     internship_filter_btn.click()
     
     # 2. Click on the specific internship option from the dropdown
-    internship_option_text = "AI/ML FOR EV ( Data Science , Cybersecurity , Machine Learning , Data Analytics , Full Stack Development , Artificial intelligence )"
+    internship = "EMBEDDED SYSTEMS FOR ELECTRIC VEHICLE ( Microcontrollers , IOT , Mechatronics , ADAS )"
+    internship_option_text = internship
     
     # ------------------- FIX 1 START -------------------
     # The error message indicated the clickable element is a <div role="option">
@@ -123,7 +124,8 @@ try:
     # 2. Click on the "Under Review" option from the dropdown (MODIFIED)
     # ------------------- FIX 4 START -------------------
     # Apply the same robust clicking logic as the internship filter
-    status_option_text = "Under Review"
+    status = "Under Review"
+    status_option_text = status
     status_option_xpath = f"//div[@role='option'][normalize-space(.)='{status_option_text}']"
     
     applied_option = wait.until(
@@ -282,7 +284,7 @@ while True:  # Loop over pages
                  
                  # ------------------- FIX 2 START -------------------
                  # This text must match the original filter text from line 100
-                 internship_option_text = "EMBEDDED SYSTEMS FOR EV ( Microcontrollers , Mechatronics , IOT , ADAS )"
+                 internship_option_text = internship
                  # ------------------- FIX 2 END -------------------
                  
                  # Use the more robust XPath and click from FIX 1
@@ -309,7 +311,7 @@ while True:  # Loop over pages
                  
                  # ------------------- FIX 5 START -------------------
                  # This must match the original status filter logic
-                 status_option_text = "Under Review"
+                 status_option_text = status
                  status_option_xpath = f"//div[@role='option'][normalize-space(.)='{status_option_text}']"
                  
                  applied_option = wait.until(EC.element_to_be_clickable((By.XPATH, status_option_xpath))) # MODIFIED XPath
