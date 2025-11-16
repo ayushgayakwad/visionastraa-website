@@ -183,7 +183,7 @@ def send_and_update(recipient, smtp_config, db_connection):
         try:
             db_connection.ping(reconnect=True, attempts=3, delay=5)
             cursor = db_connection.cursor()
-            cursor.execute(f"UPDATE {table_name} SET emailSent=1 WHERE email=%s", (to_address,))
+            cursor.execute(f"UPDATE {table_name} SET emailSent_2=1 WHERE email=%s", (to_address,))
             db_connection.commit()
             cursor.close()
         except mysql.connector.Error as err:
@@ -353,7 +353,7 @@ def main():
             SELECT email, first_name, '{tbl}' as `table`
             FROM {tbl} 
             WHERE college IN ({college_placeholders}) 
-            AND emailSent = 0 
+            AND emailSent_2 = 0 
             AND email NOT IN (SELECT email FROM unsubscribed_emails)
             LIMIT 3000 
         """
