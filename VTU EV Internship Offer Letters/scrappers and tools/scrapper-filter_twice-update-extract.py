@@ -18,6 +18,9 @@ PASSWORD = "VisionAstraa@23"
 # Changed output file name to reflect the new action
 OUTPUT_XLSX = "applied_to_shortlisted_applicants.xlsx" 
 
+internship = "EMBEDDED SYSTEMS FOR EV ( Microcontrollers , Mechatronics , IOT , ADAS )"
+status = "Under Review"
+
 # ---------------- SETUP DRIVER ----------------
 chrome_options = Options()
 # Make sure the browser window is maximized to ensure all elements are visible
@@ -69,7 +72,6 @@ try:
     internship_filter_btn.click()
     
     # 2. Click on the specific internship option from the dropdown
-    internship = "EMBEDDED SYSTEMS FOR ELECTRIC VEHICLE ( Microcontrollers , IOT , Mechatronics , ADAS )"
     internship_option_text = internship
     
     # ------------------- FIX 1 START -------------------
@@ -124,7 +126,6 @@ try:
     # 2. Click on the "Under Review" option from the dropdown (MODIFIED)
     # ------------------- FIX 4 START -------------------
     # Apply the same robust clicking logic as the internship filter
-    status = "Under Review"
     status_option_text = status
     status_option_xpath = f"//div[@role='option'][normalize-space(.)='{status_option_text}']"
     
