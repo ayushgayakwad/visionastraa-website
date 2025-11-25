@@ -122,6 +122,12 @@ BRANCH_MECH = list(map(_norm, [
 ROLE_AI_ALLOWED = list(map(_norm, [
     "AI/ML FOR ELECTRIC VEHICLE ( Data Science , Cyber Security , Machine Learning , Data Analytics , Full Stack Development , Artificial intelligence )",
     "AI/ML FOR EV ( Data Science , Cybersecurity , Machine Learning , Data Analytics , Full Stack Development , Artificial intelligence )",
+    "Full Stack Development for Electric Vehicle",
+    "Full Stack Development for EV",
+    "Web Development for Electric Vehicle",
+    "Web Development for EV",
+    "Data Science for Electric Vehicle",
+    "Data Science for EV"
 ]))
 
 ROLE_EMBED_ALLOWED = list(map(_norm, [
