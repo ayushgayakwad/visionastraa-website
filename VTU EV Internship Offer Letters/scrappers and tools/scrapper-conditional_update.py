@@ -74,7 +74,10 @@ COLLEGE_LIST = list(map(_norm, [
 ROLE_COLLEGE_ALLOWED = list(map(_norm, [
     "AI/ML FOR EV ( Data Science , Cybersecurity , Machine Learning , Data Analytics , Full Stack Development , Artificial intelligence )",
     "EMBEDDED SYSTEMS FOR EV ( Microcontrollers , Mechatronics , IOT , ADAS )",
-    "DESIGN & DEVELOPMENT OF EV ( Mechanical , Mechatronics , Automobile )"
+    "DESIGN & DEVELOPMENT OF EV ( Mechanical , Mechatronics , Automobile )",
+    "Full Stack Development for EV",
+    "Web Development for EV",
+    "Data Science for EV"
 ]))
 
 BRANCH_AI = list(map(_norm, [
