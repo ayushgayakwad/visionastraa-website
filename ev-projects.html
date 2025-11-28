@@ -58,6 +58,68 @@
       font-weight: 600;
       line-height: 1.5;
     }
+    
+    /* New Styles for Poster Section */
+    .internship-posters-section {
+      padding: 60px 20px;
+      background-color: #ffffff;
+    }
+    .poster-heading {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      color: #333;
+      font-weight: 700;
+    }
+    .poster-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .poster-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: #f9f9f9;
+    }
+    .poster-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    .poster-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .poster-card:hover img {
+      transform: scale(1.05);
+    }
+    .poster-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      padding: 20px;
+      color: white;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .poster-card:hover .poster-overlay {
+      opacity: 1;
+    }
+    .poster-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
     @media (max-width: 768px) {
       .mou-section {
         padding: 25px 15px;
@@ -67,6 +129,9 @@
       }
       .mou-caption {
         font-size: 1rem;
+      }
+      .poster-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       }
     }
   </style>
@@ -154,6 +219,56 @@
         <h3 style="color:#817FF0">OUR GOAL</h3>
         <p><b>Our goal is to equip aspiring engineers with hands-on experience in EV technologies through real-world projects. We aim to bridge the gap between academic learning and industry requirements, fostering innovation and technical excellence.</b></p>
     </section>
+
+    <!-- NEW SECTION: Internship Posters -->
+    <section class="internship-posters-section">
+      <h2 class="poster-heading">Explore Our Domains</h2>
+      <div class="poster-grid">
+        <!-- Poster 1: Embedded Systems -->
+        <div class="poster-card">
+          <img src="image/esfev.jpg" alt="Embedded Systems Internship Poster">
+          <div class="poster-overlay">
+            <div class="poster-title">Embedded Systems for EV</div>
+          </div>
+        </div>
+        <!-- Poster 2: AIML -->
+        <div class="poster-card">
+          <img src="/image/aimlfev.jpg" alt="AIML Internship Poster">
+          <div class="poster-overlay">
+            <div class="poster-title">AIML for EV</div>
+          </div>
+        </div>
+        <!-- Poster 3: Design & Development -->
+        <div class="poster-card">
+          <img src="image/ddev.jpg" alt="Design & Development Internship Poster">
+          <div class="poster-overlay">
+            <div class="poster-title">Design & Development for EV</div>
+          </div>
+        </div>
+        <!-- Poster 4: Full Stack -->
+        <div class="poster-card">
+          <img src="image/fsdev.jpg" alt="Full Stack Internship Poster">
+          <div class="poster-overlay">
+            <div class="poster-title">Full Stack Development for EV</div>
+          </div>
+        </div>
+        <!-- Poster 5: Web Development -->
+        <div class="poster-card">
+          <img src="image/wdev.jpg" alt="Web Development Internship Poster">
+          <div class="poster-overlay">
+            <div class="poster-title">Web Development for EV</div>
+          </div>
+        </div>
+        <!-- Poster 6: Data Science -->
+        <div class="poster-card">
+          <img src="image/dsev.jpg" alt="Data Science Internship Poster">
+          <div class="poster-overlay">
+            <div class="poster-title">Data Science for EV</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END NEW SECTION -->
 
     <section class="pricing" id="ev-internship">
       <h2>Pricing</h2>
