@@ -1,4 +1,4 @@
-from random import random
+import random
 import time
 import pandas as pd
 from urllib.parse import urljoin
@@ -26,7 +26,6 @@ def human_delay(min_s=0.5, max_s=1.5):
     try:
         time.sleep(random.uniform(min_s, max_s))
     except Exception:
-        # defensive: in case sleep is interrupted for some reason, don't crash
         pass
 
 # ---------------- SETUP DRIVER ----------------
@@ -245,14 +244,14 @@ while True:  # Loop over pages
             shortlisted_option = wait.until(
                 EC.element_to_be_clickable((By.XPATH, "//span[normalize-space()='Offer Released']")) # MODIFIED
             )
-            human_delay(0.2, 0.7)
+            human_delay(0.5, 1.0)
             shortlisted_option.click() # MODIFIED
             
             # 3. Click the "Update Status" button
             update_btn = wait.until(
                 EC.element_to_be_clickable((By.XPATH, "//button[normalize-space()='Update Status']"))
             )
-            human_delay(0.3, 0.9)
+            human_delay(0.5, 1.0)
             update_btn.click()
             
             # Wait for confirmation or navigation. Let's wait for the "Update" button to disappear (become stale)
