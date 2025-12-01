@@ -135,6 +135,16 @@ ROLE_MECH_ALLOWED = list(map(_norm, [
     "EMBEDDED SYSTEMS FOR EV ( Microcontrollers , Mechatronics , IOT , ADAS )",
 ]))
 
+ROLES_TO_SHORTLIST = list(map(_norm, [
+    "EMBEDDED SYSTEMS FOR ELECTRIC VEHICLE ( Microcontrollers , IOT , Mechatronics , ADAS )",
+    "Full Stack Development for Electric Vehicle",
+    "Web Development for Electric Vehicle",
+    "Full Stack Development for EV",
+    "Web Development for EV",
+    "AI/ML FOR ELECTRIC VEHICLE ( Data Science , Cyber Security , Machine Learning , Data Analytics , Full Stack Development , Artificial intelligence )",
+    "Data Science for Electric Vehicle"
+]))
+
 # ----------------------------------------------------------------------------------
 
 
@@ -302,7 +312,18 @@ while True:  # Loop over pages
                         print("    - Branch(Mech) condition failed: role not allowed for this branch")
                         needs_under_review = True
 
-            new_status = 'Under Review' if needs_under_review else 'Offer Released'
+            # --- Logic Update: Determine final status ---
+            if needs_under_review:
+                new_status = 'Under Review'
+            else:
+                # If validation passes, check if the internship is in the shortlist map
+                # Note: We check if the current internship (normalized) is in our shortlist
+                if internship_norm in ROLES_TO_SHORTLIST:
+                    new_status = 'Shortlisted'
+                    print(f"    - Internship is in shortlist group: {internship_norm}")
+                else:
+                    new_status = 'Offer Released'
+
             print(f"  > Selected status: {new_status}")
 
             # 1. Click the status dropdown (expected to show "Applied")
