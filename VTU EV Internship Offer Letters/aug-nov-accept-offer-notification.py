@@ -19,12 +19,12 @@ EMAIL_SUBJECT = '[FINAL REMINDER] Important Information Regarding Your Internshi
 # Since this is a private repo, we hardcode them here to avoid GitHub Secrets
 BATCH_CREDENTIALS = {
     1: {
-        "EMAIL": "your_email_1@domain.com",
-        "PASSWORD": "your_password_1"
+        "EMAIL": "careers@visionastraa.in",
+        "PASSWORD": "Z1SIOO0A9b~"
     },
     2: {
-        "EMAIL": "your_email_2@domain.com",
-        "PASSWORD": "your_password_2"
+        "EMAIL": "visionastraa@evcourse.in",
+        "PASSWORD": ">p>W|jv?Kg1"
     }
 }
 
