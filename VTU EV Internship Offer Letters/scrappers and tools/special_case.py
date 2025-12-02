@@ -142,7 +142,11 @@ ROLES_TO_SHORTLIST = list(map(_norm, [
     "Full Stack Development for EV",
     "Web Development for EV",
     "AI/ML FOR ELECTRIC VEHICLE ( Data Science , Cyber Security , Machine Learning , Data Analytics , Full Stack Development , Artificial intelligence )",
-    "Data Science for Electric Vehicle"
+    "Data Science for Electric Vehicle",
+    "DESIGN & DEVELOPMENT OF ELECTRIC VEHICLE",
+    "EMBEDDED SYSTEMS FOR EV",
+    "AI/ML FOR EV",
+    "DESIGN & DEVELOPMENT OF EV"
 ]))
 
 # ----------------------------------------------------------------------------------
