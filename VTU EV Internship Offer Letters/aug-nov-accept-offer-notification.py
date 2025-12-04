@@ -10,10 +10,10 @@ from email.mime.text import MIMEText
 from email.utils import formataddr
 
 # ---------------- CONFIG ----------------
-CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_aug_nov_offer_released_applicants.csv'
+CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_offer_released_notification_1.csv'
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
-EMAIL_SUBJECT = '[FINAL REMINDER] Important Information Regarding Your Internship Application at VisionAstraa EV Academy'
+EMAIL_SUBJECT = '[FINAL REMINDER] Urgent Action Required Regarding Your Internship Application at VisionAstraa EV Academy'
 
 # --- HARDCODED CREDENTIALS (UPDATE THESE) ---
 # Since this is a private repo, we hardcode them here to avoid GitHub Secrets
@@ -42,13 +42,17 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         Hello {name},
         <br><br>
 
-        This is a gentle reminder that it has been a while since your <strong>internship offer for {role} role was released {date_text} on the VTU Portal</strong>, along with the official offer letter from <strong>VisionAstraa EV Academy</strong>.
+        This is a final reminder that it has been a while since your <strong>internship offer for {role} role was released {date_text} on the VTU Portal</strong>, along with the official offer letter from <strong>VisionAstraa EV Academy</strong>.
         <br><br>
 
-        However, our records indicate that the <strong>internship acceptance is still pending on the VTU Portal</strong>.
+        Our records indicate that the <strong>internship acceptance is still pending on the VTU Portal</strong>.
         <br><br>
 
-        <strong>The final date to accept the internship offer is 05th December 2025. Kindly accept the offer before this date to secure your internship position.</strong>
+        <strong>The final date to accept the internship offer is 05th December 2025 before 6:00 PM. Kindly accept the offer before this date to secure your internship position.</strong>
+        <br><br>
+
+        <strong><u>Please note that failure to accept the offer by the deadline may result in the revocation of the internship offer.</u></strong>
+        <br><br>
 
         <strong>Action Required on VTU Portal:</strong>
         <ul>
