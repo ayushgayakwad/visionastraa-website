@@ -147,7 +147,17 @@
                 </select>
 
                 <label for="specialization">Specialization (Branch) *</label>
-                <input type="text" id="specialization" name="specialization" placeholder="Enter your specialization" required>
+                <select id="specialization" name="specialization" required>
+                    <option value="Select Option">Select Option</option>
+                    <option value="EEE & Allied">EEE & Allied</option>
+                    <option value="ECE & Allied">ECE & Allied</option>
+                    <option value="Mechanical & Allied">Mechanical & Allied</option>
+                    <option value="CSE & Allied">CSE & Allied</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="cgpa">CGPA *</label>
+                <input type="text" id="cgpa" name="cgpa" placeholder="Enter your CGPA" required>
 
                 <label for="internship">Applying for which internship? *</label>
                 <select id="internship" name="internship" required>
@@ -268,6 +278,7 @@
             const internship = formData.get('internship');
             const offer = formData.get('offer');
             const center = formData.get('center');
+            const specialization = formData.get('specialization');
             const start = formData.get('start');
 
             if (
@@ -275,6 +286,7 @@
                 internship === "Select Option" ||
                 offer === "Select Option" ||
                 center === "Select Option" ||
+                specialization === "Select Option" ||
                 start === "Select Option"
             ) {
                 const messageDiv = document.getElementById('message');
