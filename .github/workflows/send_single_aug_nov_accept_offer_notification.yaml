@@ -1,0 +1,23 @@
+name: Send Single Aug-Nov Accept Offer Notification Emails
+
+on:
+  workflow_dispatch:
+
+jobs:
+  send_emails:
+    name: Send Emails (Single Batch)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install pandas
+
+      - name: Send Emails
+        run: python "VTU EV Internship Offer Letters/single-aug-nov-accept-offer-notification.py"
