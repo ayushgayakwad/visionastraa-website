@@ -1,4 +1,4 @@
-name: Send Under Review Notification Emails
+name: Send Shortlisted Notification Emails
 
 on:
   workflow_dispatch:
