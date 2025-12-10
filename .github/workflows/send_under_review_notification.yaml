@@ -23,4 +23,6 @@ jobs:
         env:
           SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
           SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}
+          # SENDER_EMAIL: "careers@visionastraa.in"
+          # SENDER_PASSWORD: "Z1SIOO0A9b~"
         run: python "VTU EV Internship Offer Letters/under-review-notification.py" 
