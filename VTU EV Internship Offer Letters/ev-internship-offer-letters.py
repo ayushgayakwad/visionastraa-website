@@ -123,6 +123,10 @@ def send_email(name, to_email, role, attachment_path):
         <br>
         - <strong>January 2026</strong>, please join: <a href="https://chat.whatsapp.com/E1ghfP3cstjDphOQEpTB7x?mode=ems_wa_t">January 2026 Internship Group</a>
         <br><br>
+        If the above group is full please join the alternate group (kindly join only one group):
+        <br>
+        - <strong>January 2026 [2]</strong>, please join: <a href="https://chat.whatsapp.com/LLuZoIxUhjFDjmqA8b2h4O?mode=hqrt3">January 2026 Internship Group - 2</a>
+        <br><br>
         Below are the benefits of joining VisionAstraa EV Academy (<a href="https://visionastraa.com/ev-projects.html">https://visionastraa.com/ev-projects.html</a>):
         <br>
         ▶ Top 10% to get PPOs from EV companies
