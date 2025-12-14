@@ -48,7 +48,7 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         Our records indicate that the <strong>internship acceptance is still pending on the VTU Portal</strong>.
         <br><br>
 
-        <strong>The final date to accept the internship offer is 14th December 2025 (tomorrow) before 6:00 PM. Kindly accept the offer before this date to secure your internship position. Otherwise, the offer will be revoked.</strong>
+        <strong>The final date to accept the internship offer is 17th December 2025 before 6:00 PM. Kindly accept the offer before this date to secure your internship position. Otherwise, the offer will be revoked.</strong>
         <br><br>
 
         <strong><u>Please note that failure to accept the offer by the deadline may result in the revocation of the internship offer.</u></strong>
@@ -66,7 +66,8 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
 
         <strong>For any help or queries, you may contact us on LinkedIn:</strong><br>
         <a href="https://in.linkedin.com/company/va-ev-academy">VisionAstraa EV Academy</a><br>
-        Talk to our CEO: <a href="https://in.linkedin.com/in/nikhiljaincs">Nikhil Jain C S</a>
+        Talk to our CEO: <a href="https://in.linkedin.com/in/nikhiljaincs">Nikhil Jain C S</a><br>
+        <strong>OR, call us on: <a href="tel:+918762246518">+91 87622 46518</a></strong>
         <br><br>
 
         We are here to support you throughout this process.  
