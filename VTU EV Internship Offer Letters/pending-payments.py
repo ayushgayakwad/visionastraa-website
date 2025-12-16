@@ -31,7 +31,8 @@ def send_pending_payments_email(sender_email, sender_password, name, to_email, r
         <br><br>
 
         This is a gentle reminder regarding your <strong>internship offer for the {role} role</strong>, which was released on the VTU Portal</strong> along with the official offer letter from <strong>VisionAstraa EV Academy</strong>.
-
+        <br><br>
+        
         Our records indicate that while you have <strong>successfully accepted the internship offer on the VTU Portal</strong>, the <strong>Internship Acceptance Fee payment is still pending</strong>.
         <br><br>
 
