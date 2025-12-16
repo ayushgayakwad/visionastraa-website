@@ -45,6 +45,7 @@ def send_internship_details_email(name, to_email, role):
         For any queries, you may contact us on LinkedIn:<br>
         <a href="https://in.linkedin.com/company/va-ev-academy">VisionAstraa EV Academy</a><br>
         Speak directly with our CEO: <a href="https://in.linkedin.com/in/nikhiljaincs">Nikhil Jain C S</a>
+        <strong>OR, call us on: <a href="tel:+918762246518">+91 87622 46518</a></strong>
         <br><br>
 
         Looking forward to supporting you through the onboarding process!  
