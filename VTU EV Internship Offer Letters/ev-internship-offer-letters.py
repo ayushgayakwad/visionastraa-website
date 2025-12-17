@@ -22,7 +22,7 @@ SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
 SENDER_EMAIL = os.getenv('SENDER_EMAIL')
 SENDER_PASSWORD = os.getenv('SENDER_PASSWORD')
-EMAIL_SUBJECT = 'Internship Offer from VisionAstraa EV Academy'
+EMAIL_SUBJECT = 'Internship OFFER LETTER from VisionAstraa EV Academy'
 
 def get_letter_paragraph(name, role):
     styles = getSampleStyleSheet()
@@ -140,6 +140,8 @@ def send_email(name, to_email, role, attachment_path):
         For any queries reach out to us on LinkedIn: <a href="https://in.linkedin.com/company/va-ev-academy">https://in.linkedin.com/company/va-ev-academy</a>
         <br>
         Talk to our CEO: <a href="https://in.linkedin.com/in/nikhiljaincs">Nikhil Jain C S</a>
+        <br>
+        <strong>OR, call us on: <a href="tel:+918762246518">+91 87622 46518</a></strong>
         <br><br>
         Find your offer letter attached below.
         <br><br>
