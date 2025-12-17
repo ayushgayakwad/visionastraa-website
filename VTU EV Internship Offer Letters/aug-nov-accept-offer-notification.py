@@ -48,7 +48,7 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         Our records indicate that the <strong>internship acceptance is still pending on the VTU Portal</strong>.
         <br><br>
 
-        <strong>The final date to accept the internship offer is 17th December 2025 before 6:00 PM. Kindly accept the offer before this date to secure your internship position. Otherwise, the offer will be revoked.</strong>
+        <strong>The final date to accept the internship offer has been extended till 18th December 2025 before 6:00 PM. Kindly accept the offer before this date to secure your internship position. Otherwise, the offer will be revoked.</strong>
         <br><br>
 
         <strong><u>Please note that failure to accept the offer by the deadline may result in the revocation of the internship offer.</u></strong>
