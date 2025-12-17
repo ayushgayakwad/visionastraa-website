@@ -10,7 +10,7 @@ from email.mime.text import MIMEText
 from email.utils import formataddr
 
 # ---------------- CONFIG ----------------
-CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_offer_released_notification_5.csv'
+CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_offer_released_notification_6.csv'
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
 EMAIL_SUBJECT = '[FINAL REMINDER] Urgent Action Required Regarding Your Internship Application at VisionAstraa EV Academy'
@@ -48,7 +48,7 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         Our records indicate that the <strong>internship acceptance is still pending on the VTU Portal</strong>.
         <br><br>
 
-        <strong>The final date to accept the internship offer has been extended till 18th December 2025 before 6:00 PM. Kindly accept the offer before this date to secure your internship position. Otherwise, the offer will be revoked.</strong>
+        <strong>The final date to accept the internship offer has been <u>extended till 18th December 2025 before 6:00 PM</u>. Kindly accept the offer before this date to secure your internship position. Otherwise, the offer will be revoked.</strong>
         <br><br>
 
         <strong><u>Please note that failure to accept the offer by the deadline may result in the revocation of the internship offer.</u></strong>
