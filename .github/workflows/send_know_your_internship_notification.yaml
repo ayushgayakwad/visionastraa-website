@@ -1,4 +1,4 @@
-name: Send AIML-DS Notification Emails (Parallel)
+name: Send Know-Your-Internship Notification Emails (Parallel)
 
 on:
   workflow_dispatch:
@@ -22,7 +22,7 @@ jobs:
 
       - name: Send Emails (Batch 1)
         # Credentials are now hardcoded in the python script
-        run: python "VTU EV Internship Offer Letters/aiml-ds-notification.py" --batch 1
+        run: python "VTU EV Internship Offer Letters/know-your-internship-notification.py" --batch 1
 
   # ---------------- JOB 2: Second Half of Records ----------------
   send_batch_2:
@@ -42,4 +42,4 @@ jobs:
 
       - name: Send Emails (Batch 2)
         # Credentials are now hardcoded in the python script
-        run: python "VTU EV Internship Offer Letters/aiml-ds-notification.py" --batch 2
+        run: python "VTU EV Internship Offer Letters/know-your-internship-notification.py" --batch 2

@@ -10,7 +10,7 @@ from email.mime.text import MIMEText
 from email.utils import formataddr
 
 # ---------------- CONFIG ----------------
-CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_aiml_ds_or_1.csv'
+CSV_FILE_PATH = 'VTU EV Internship Offer Letters/know_your_internship_1.csv'
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
 EMAIL_SUBJECT = 'Know your Internship before you accept the offer | VisionAstraa EV Academy'
@@ -70,6 +70,40 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         Thermal behavior monitoring, system fault diagnosis, motor control refinement, and driver behavior analysis<br><br>
         """
 
+        web_curriculum = """
+        <strong>Internship Curriculum Overview</strong><br>
+        <strong>For Web Development Internship Track (EV Software Applications)</strong><br><br>
+        <strong>Module 1 – Frontend Fundamentals for EV Interfaces</strong><br>
+        Building responsive user interfaces for EV dashboards and information portals using HTML5, CSS3, and modern JavaScript (ES6+)<br><br>
+        <strong>Module 2 – Dynamic UI with Frontend Frameworks</strong><br>
+        Developing interactive components such as charging station locators and vehicle status displays using modern frontend frameworks like React<br><br>
+        <strong>Module 3 – Backend Development with Node.js</strong><br>
+        Creating RESTful APIs using Node.js and Express to manage user data, vehicle information, and charging session details<br><br>
+        <strong>Module 4 – Database Management for Vehicle Data</strong><br>
+        Designing and managing NoSQL (MongoDB) or SQL (PostgreSQL) databases to store user profiles, telematics data, and service history<br><br>
+        <strong>Module 5 – API Integration & Real-time Data</strong><br>
+        Integrating third-party services such as mapping APIs and implementing WebSockets to visualize live EV data<br><br>
+        <strong>Module 6 – Deployment & Cloud Services</strong><br>
+        Deploying and maintaining EV web applications on cloud platforms like AWS, GCP, Azure, or Vercel, with an introduction to serverless architecture<br><br>
+        """
+
+        fullstack_curriculum = """
+        <strong>Internship Curriculum Overview</strong><br>
+        <strong>For Full Stack Development for EV Internship Track (Online Mode Only)</strong><br><br>
+        <strong>Module 1 – Full Stack EV Application Architecture</strong><br>
+        Introduction to the MERN stack (MongoDB, Express.js, React, Node.js) and client–server architecture for EV management systems<br><br>
+        <strong>Module 2 – Advanced Frontend for EV Dashboards</strong><br>
+        Building complex, state-managed dashboards for real-time battery monitoring, trip planning, and remote vehicle controls using advanced React concepts<br><br>
+        <strong>Module 3 – Secure Backend & API Development</strong><br>
+        Developing secure and scalable backends for EV telematics, user authentication (JWT), and charging infrastructure communication<br><br>
+        <strong>Module 4 – Real-time Communication & IoT Protocols</strong><br>
+        Implementing WebSockets and MQTT for real-time, bi-directional data streaming between vehicle systems, servers, and client interfaces<br><br>
+        <strong>Module 5 – Cloud Integration & Database Modeling</strong><br>
+        Advanced database schema design for fleet management and cloud service integration (e.g., AWS S3) for vehicle logs and user data<br><br>
+        <strong>Module 6 – DevOps, Containerization & Deployment</strong><br>
+        Setting up CI/CD pipelines, containerizing applications using Docker, and deploying scalable, production-ready EV software solutions<br><br>
+        """
+
         # --- Logic to Select Curriculum ---
         curriculum_section = ""
         clean_role = role.strip()
@@ -85,10 +119,24 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
             "Data Science for EV"
         ]
 
+        web_roles = [
+            "Web Development for Electric Vehicle",
+            "Web Development for EV"
+        ]
+
+        fullstack_roles = [
+            "Full Stack Development for Electric Vehicle",
+            "Full Stack Development for EV"
+        ]
+
         if clean_role in aiml_roles:
             curriculum_section = aiml_curriculum
         elif clean_role in ds_roles:
             curriculum_section = ds_curriculum
+        elif clean_role in web_roles:
+            curriculum_section = web_curriculum
+        elif clean_role in fullstack_roles:
+            curriculum_section = fullstack_curriculum
         
         # --- Construct Email Body ---
         body = f"""
