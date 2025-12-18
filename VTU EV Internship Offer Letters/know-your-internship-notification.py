@@ -13,7 +13,7 @@ from email.utils import formataddr
 CSV_FILE_PATH = 'VTU EV Internship Offer Letters/know_your_internship_1.csv'
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
-EMAIL_SUBJECT = 'Know your Internship before you accept the offer | VisionAstraa EV Academy'
+EMAIL_SUBJECT = 'Know Your Internship Before Accepting the Offer | VisionAstraa EV Academy'
 
 # --- HARDCODED CREDENTIALS (UPDATE THESE) ---
 # Since this is a private repo, we hardcode them here to avoid GitHub Secrets
