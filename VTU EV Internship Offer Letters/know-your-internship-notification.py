@@ -142,11 +142,11 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         body = f"""
         Hello {name},
         <br><br>
-        We hope you are doing well. Before you proceed with accepting your internship offer, we would like to clearly explain what the {role} Internship at VisionAstraa EV Academy is about, so you can make an informed decision with complete clarity.
+        We hope you are doing well. Before you proceed with accepting your internship offer, we would like to clearly explain what the <strong><u>{role}</u></strong> Internship at VisionAstraa EV Academy is about, so you can make an informed decision with complete clarity.
         <br><br>
         
         🔍 <strong>About the Internship</strong><br>
-        This internship is a structured, learning-driven and industry-aligned program focused on the application of Artificial Intelligence, Machine Learning, and Data Science in Electric Vehicles (EVs).
+        This internship is a structured, learning-driven and industry-aligned program focused on the application of software and coding in Electric Vehicles (EVs).
         <br><br>
         
         🔹 <strong>This is a fully software-based internship.</strong><br>
@@ -163,9 +163,9 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
 
         <strong>What You Gain from This Internship</strong>
         <ul>
-        <li>Fully software-based exposure to AI, ML, and Data Science in EVs</li>
+        <li>Fully software-based exposure in EVs</li>
         <li>Hands-on experience with industry-relevant datasets and projects</li>
-        <li>Career-aligned skills for EV, AI, and Data Science roles</li>
+        <li>Career-aligned skills software-based roles</li>
         <li>Uniform internship certificate issued by VisionAstraa EV Academy (independent of location)</li>
         </ul>
         <br>
@@ -174,9 +174,11 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         <strong>Connect with us on LinkedIn:</strong><br>
         <a href="https://in.linkedin.com/company/va-ev-academy">VisionAstraa EV Academy</a><br>
         Talk to our CEO: <a href="https://in.linkedin.com/in/nikhiljaincs">Nikhil Jain C S</a><br>
-        <strong>OR call us at: <a href="tel:+918762246518">+91 87622 46518</a></strong>
+        <strong>OR, if you are really interested in joining VisionAstraa EV Academy then call us on: <a href="tel:+918762246518">+91 87622 46518</a></strong>
         <br><br>
-        We encourage you to review the internship details carefully and proceed only if the program aligns with your career goals.
+        We are here to support you through the onboarding process and ensure a smooth internship experience.  
+        <br><br>
+        Happy Coding!
         <br><br>
         Warm regards,<br>
         <strong>VisionAstraa EV Academy</strong>
