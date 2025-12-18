@@ -1,0 +1,45 @@
+name: Send AIML-DS Notification Emails (Parallel)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  # ---------------- JOB 1: First Half of Records ----------------
+  send_batch_1:
+    name: Send Batch 1 (Account 1)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install pandas
+
+      - name: Send Emails (Batch 1)
+        # Credentials are now hardcoded in the python script
+        run: python "VTU EV Internship Offer Letters/aiml-ds-notification.py" --batch 1
+
+  # ---------------- JOB 2: Second Half of Records ----------------
+  send_batch_2:
+    name: Send Batch 2 (Account 2)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install pandas
+
+      - name: Send Emails (Batch 2)
+        # Credentials are now hardcoded in the python script
+        run: python "VTU EV Internship Offer Letters/aiml-ds-notification.py" --batch 2
