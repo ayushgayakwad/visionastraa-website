@@ -2,22 +2,36 @@ import pandas as pd
 import os
 import smtplib
 import ssl
+import sys
+import argparse
+import math
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formataddr
 
-CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_under_review_applicants_5.csv'
-
+# ---------------- CONFIG ----------------
+CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_under_review_applicants_6.csv'
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
-SENDER_EMAIL = os.getenv('SENDER_EMAIL')
-SENDER_PASSWORD = os.getenv('SENDER_PASSWORD')
 EMAIL_SUBJECT = 'Important Information Regarding Your Internship Application at VisionAstraa EV Academy'
 
-def send_internship_details_email(name, to_email, role):
+# --- HARDCODED CREDENTIALS (BATCH PROCESSING) ---
+# Hardcoded to avoid GitHub Secrets complexity for this private repo
+BATCH_CREDENTIALS = {
+    1: {
+        "EMAIL": "careers@visionastraa.in",
+        "PASSWORD": "Z1SIOO0A9b~"
+    },
+    2: {
+        "EMAIL": "visionastraa@evcourse.in",
+        "PASSWORD": ">p>W|jv?Kg1"
+    }
+}
+
+def send_internship_details_email(sender_email, sender_password, name, to_email, role):
     try:
         msg = MIMEMultipart()
-        msg['From'] = formataddr(("VisionAstraa EV Academy", SENDER_EMAIL))
+        msg['From'] = formataddr(("VisionAstraa EV Academy", sender_email))
         msg['To'] = to_email
         msg['Subject'] = EMAIL_SUBJECT
 
@@ -57,8 +71,8 @@ def send_internship_details_email(name, to_email, role):
 
         context = ssl.create_default_context()
         with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT, context=context) as server:
-            server.login(SENDER_EMAIL, SENDER_PASSWORD)
-            server.sendmail(SENDER_EMAIL, to_email, msg.as_string())
+            server.login(sender_email, sender_password)
+            server.sendmail(sender_email, to_email, msg.as_string())
 
         print(f"Successfully sent internship details email to: {name} at {to_email}")
         return True
@@ -72,34 +86,62 @@ def send_internship_details_email(name, to_email, role):
 
 
 def main():
-    if not SENDER_EMAIL or not SENDER_PASSWORD:
-        print("Error: SENDER_EMAIL or SENDER_PASSWORD environment variables not set.")
-        return
+    # 1. Parse Arguments
+    parser = argparse.ArgumentParser(description='Send under review emails in batches.')
+    parser.add_argument('--batch', type=int, choices=[1, 2], required=True, help='Batch number (1 or 2)')
+    args = parser.parse_args()
+    batch_num = args.batch
+
+    # 2. Get Credentials for this Batch
+    creds = BATCH_CREDENTIALS.get(batch_num)
+    sender_email = creds["EMAIL"]
+    sender_password = creds["PASSWORD"]
 
     if not os.path.exists(CSV_FILE_PATH):
         print(f"Error: Input data file not found at '{CSV_FILE_PATH}'")
         return
 
     try:
+        # 3. Load Data
         df = pd.read_csv(CSV_FILE_PATH, header=None)
+        
+        # Handle column names based on file structure (handling variable column counts)
         if len(df.columns) < 5:
             df.columns = ['Name', 'Email', 'Role', 'Status', 'EmailSent']
         else:
-            print("CSV file has an unexpected number of columns. Processing the first 5.")
+            # If there are extra columns, just take the first 5 relevant ones
+            # print("CSV file has an unexpected number of columns. Processing the first 5.")
             df = df.iloc[:, :5]
             df.columns = ['Name', 'Email', 'Role', 'Status', 'EmailSent']
 
-        print("\nSending internship details emails...")
-        for index, row in df.iterrows():
+        # 4. Split Data based on Batch
+        total_records = len(df)
+        mid_point = math.ceil(total_records / 2)
+
+        if batch_num == 1:
+            df_batch = df.iloc[:mid_point]
+            print(f"--- BATCH 1 STARTING ({sender_email}) ---")
+            print(f"Processing records 1 to {mid_point} (Total rows assigned: {len(df_batch)})")
+        else:
+            df_batch = df.iloc[mid_point:]
+            print(f"--- BATCH 2 STARTING ({sender_email}) ---")
+            print(f"Processing records {mid_point + 1} to {total_records} (Total rows assigned: {len(df_batch)})")
+
+        print("-" * 30)
+
+        # 5. Send Emails
+        for index, row in df_batch.iterrows():
             name = str(row['Name']).strip()
             email = str(row['Email']).strip()
             role = str(row['Role']).strip()
 
+            # Basic validation
             if name and email and role and name.lower() != 'nan' and email.lower() != 'nan' and role.lower() != 'nan':
-                send_internship_details_email(name, email, role)
+                send_internship_details_email(sender_email, sender_password, name, email, role)
             else:
                 print(f"Skipping row {index+1} due to missing name, email, or role.")
-        print("\nInternship details emailing complete.")
+        
+        print(f"\nBatch {batch_num} emailing complete.")
 
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
