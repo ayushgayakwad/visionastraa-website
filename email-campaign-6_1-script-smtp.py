@@ -229,6 +229,29 @@ EMAIL_BODY_TEMPLATE = """\
 
         <h3>🎉 Congratulations to Our Placed Students</h3>
 
+        <h4>From Karnataka:</h4>
+        
+        <div class="student-card">
+            <!-- TODO: Replace src with actual image URL for Devika -->
+            <img src="https://visionastraa.com/images/pratik-p.jpg" alt="Pratik Punyawant" class="student-img">
+            <span class="student-name">Pratik Punyawant</span>
+            <span class="student-detail">B.Tech in EEE</span>
+        </div>
+
+        <div class="student-card">
+            <!-- TODO: Replace src with actual image URL for Amrutha -->
+            <img src="https://visionastraa.com/images/tejashwini.jpg" alt="Tejaswini Nagavi" class="student-img">
+            <span class="student-name">Tejaswini Nagavi</span>
+            <span class="student-detail">B.Tech in EEE</span>
+        </div>
+
+        <div class="student-card">
+            <!-- TODO: Replace src with actual image URL for Ardra -->
+            <img src="https://visionastraa.com/images/akash-sn.jpg" alt="Akash S N" class="student-img">
+            <span class="student-name">Akash S N</span>
+            <span class="student-detail">B.Tech in EEE</span>
+        </div>
+
         <h4>From Kerala:</h4>
         
         <div class="student-card">
