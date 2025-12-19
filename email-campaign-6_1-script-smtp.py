@@ -1,0 +1,539 @@
+import mysql.connector
+import smtplib
+import time
+import random
+import argparse
+import json
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.application import MIMEApplication
+from datetime import datetime, timedelta, timezone
+from urllib.parse import quote
+from email.utils import formataddr
+
+SMTP_SERVER = 'smtp.hostinger.com'
+SMTP_PORT = 587
+
+SMTP_ACCOUNTS = [
+    {
+        'username': 'careers@visionastraa.in',
+        'password': 'Z1SIOO0A9b~'
+    },
+    {
+        'username': 'visionastraa@evcourse.in',
+        'password': '>p>W|jv?Kg1'
+    }
+]
+
+# Updated Campaign ID for the new email content
+CAMPAIGN_ID = "ev_marketing_campaign_montra_placements"
+
+EMAIL_SUBJECT = "⭐ Another Milestone at VisionAstraa EV Academy!"
+
+EMAIL_BODY_TEMPLATE = """\
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Another Milestone at VisionAstraa EV Academy!</title>
+    <style>
+        body {{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }}
+        .container {{
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }}
+        h1, h2, h3 {{
+            color: #28a745;
+        }}
+        h1 {{
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }}
+        h2 {{
+            font-size: 20px;
+            margin-bottom: 15px;
+            margin-top: 25px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+        }}
+        h3 {{
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #155724;
+            background-color: #d4edda;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+        }}
+        h4 {{
+            font-size: 16px;
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-left: 4px solid #28a745;
+            padding-left: 10px;
+        }}
+        p, li {{
+            font-size: 16px;
+            margin-top: 0px;
+            margin-bottom: 15px;
+        }}
+        ul {{
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }}
+        li {{
+            margin-bottom: 8px;
+        }}
+        a {{
+            color: #1a73e8;
+            font-weight: bold;
+            text-decoration: none;
+        }}
+        a:hover {{
+            text-decoration: underline;
+        }}
+        .highlight {{
+            color: #ff5722;
+            font-weight: bold;
+        }}
+        /* Student Profile Styles */
+        .student-grid {{
+            display: table;
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 10px;
+        }}
+        .student-card {{
+            display: table-cell;
+            width: 33%;
+            vertical-align: top;
+            text-align: center;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 6px;
+            border: 1px solid #eee;
+        }}
+        .student-card-2 {{
+            display: table-cell;
+            width: 50%; /* Wider for 2 items */
+            vertical-align: top;
+            text-align: center;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 6px;
+            border: 1px solid #eee;
+        }}
+        .student-img {{
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 2px solid #28a745;
+            background-color: #ddd; /* Placeholder color */
+        }}
+        .student-name {{
+            font-weight: bold;
+            color: #333;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 4px;
+        }}
+        .student-detail {{
+            font-size: 12px;
+            color: #666;
+            line-height: 1.3;
+        }}
+        
+        .button-container {{
+            text-align: center;
+            margin: 30px 0px 10px 0px;
+        }}
+        .cta-button-container {{
+            text-align: center;
+            margin: 0px 0px 30px 0px;
+        }}
+        .btn {{
+            background-color: #28a745;
+            color: #ffffff !important;
+            padding: 14px 30px;
+            text-align: center;
+            border-radius: 5px;
+            display: inline-block;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }}
+        .btn:hover {{
+            background-color: #218838;
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }}
+        .footer {{
+            text-align: center;
+            font-size: 14px;
+            color: #777777;
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }}
+        .logo-container {{
+            text-align: center;
+            margin-bottom: 20px;
+        }}
+        .contact-info {{
+            background-color: #e9f7ef;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            margin: 20px 0;
+            border: 1px dashed #28a745;
+        }}
+        .whatsapp-link {{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #25D366;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 10px;
+        }}
+        .whatsapp-link img {{
+            margin-right: 8px;
+            width: 22px;
+            height: 22px;
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img src="https://visionastraa.com/images/EV_Academy.png" alt="EV Academy Logo" style="max-width: 150px;">
+        </div>
+
+        <h1>⭐ Another Milestone at VisionAstraa EV Academy!</h1>
+
+        <p>Dear {first_name},</p>
+
+        <p>
+            Before the completion of the program, we are proud to share that <strong>5 of our students</strong> have been successfully placed at <span class="highlight">Montra Electric</span>, a leading name in India’s EV ecosystem.
+        </p>
+
+        <p>
+            This achievement reflects the strong technical foundation, hands-on exposure, and focused interview preparation our students receive throughout the program.
+        </p>
+
+        <h3>🎉 Congratulations to Our Placed Students</h3>
+
+        <h4>From Kerala:</h4>
+        <div class="student-grid">
+            <div class="student-card">
+                <!-- TODO: Replace src with actual image URL for Devika -->
+                <img src="https://visionastraa.com/images/devika-m.jpg" alt="Devika Manoj" class="student-img">
+                <span class="student-name">Devika Manoj</span>
+                <span class="student-detail">M.Tech in Power Electronics</span>
+            </div>
+            <div class="student-card">
+                <!-- TODO: Replace src with actual image URL for Amrutha -->
+                <img src="https://visionastraa.com/images/amrutha.jpg" alt="Amrutha Mohan" class="student-img">
+                <span class="student-name">Amrutha Mohan</span>
+                <span class="student-detail">M.Tech in Mechatronics</span>
+            </div>
+            <div class="student-card">
+                <!-- TODO: Replace src with actual image URL for Ardra -->
+                <img src="https://visionastraa.com/images/ardra.jpg" alt="Ardra" class="student-img">
+                <span class="student-name">Ardra</span>
+                <span class="student-detail">B.Tech in EEE</span>
+            </div>
+        </div>
+
+        <h4>From Tamil Nadu:</h4>
+        <div class="student-grid">
+            <div class="student-card-2">
+                <!-- TODO: Replace src with actual image URL for Kamal -->
+                <img src="https://visionastraa.com/images/kamalkannana.jpg" alt="Kamal" class="student-img">
+                <span class="student-name">Kamal</span>
+                <span class="student-detail">B.Tech in EEE</span>
+            </div>
+            <div class="student-card-2">
+                <!-- TODO: Replace src with actual image URL for Harikaran -->
+                <img src="https://visionastraa.com/images/harikaran.jpg" alt="Harikaran" class="student-img">
+                <span class="student-name">Harikaran</span>
+                <span class="student-detail">B.Tech in EEE</span>
+            </div>
+        </div>
+        
+        <br>
+        <p>
+            Their placements at <strong>Montra Electric</strong> highlight how candidates from diverse academic backgrounds and regions can successfully transition into the EV industry with the right guidance and practical training.
+        </p>
+
+        <!-- Group Image Added Here -->
+        <div style="text-align: center; margin: 25px 0;">
+            <img src="https://visionastraa.com/images/group-1.jpg" alt="VisionAstraa Students Placed at Montra Electric" style="width:100%; max-width:600px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        </div>
+        
+        <hr style="margin: 25px 0; border: 0; border-top: 1px solid #ddd;">
+
+        <h2>Why This Matters</h2>
+        <p>At <strong>VisionAstraa EV Academy</strong>, we focus on:</p>
+        <ul>
+            <li>Industry-relevant EV fundamentals</li>
+            <li>Hands-on, practical-oriented learning</li>
+            <li>Strong mentorship and interview readiness</li>
+            <li>Connecting talent with real EV industry opportunities</li>
+        </ul>
+        <p>
+            Results like these motivate us to keep raising the bar for EV skill development in India.
+        </p>
+
+        <hr style="margin: 25px 0; border: 0; border-top: 1px solid #ddd;">
+
+        <h2>🚀 Your EV Career Can Start Here</h2>
+        <p>
+            If you’re looking to build a career in the Electric Vehicle domain, now is the right time.
+        </p>
+
+        <div class="contact-info">
+            <p style="margin: 5px 0;"><strong>📩 Email:</strong> <a href="mailto:admissions@visionastraa.com">admissions@visionastraa.com</a></p>
+            <p style="margin: 5px 0;"><strong>📞 Phone / WhatsApp:</strong> <a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}">+91 80756 64438</a></p>
+            <p style="margin-top: 10px; color: #d9534f; font-weight: bold;">Admissions for the upcoming batch are open.</p>
+        </div>
+
+        <div class="button-container">
+            <a href="https://visionastraa.com/track/click.php?email={email}&target={apply}&campaign_id={campaign_id}" class="btn">APPLY NOW</a>
+        </div>
+
+        <div class="cta-button-container">
+            <a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}" target="_blank" class="whatsapp-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png" alt="WhatsApp Logo">
+                Chat with us on WhatsApp
+            </a>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Please connect with us directly on WhatsApp if you have any questions on our Program and Placement opportunity.</strong></p>
+            
+            <p>Talk to our CEO, Nikhil Jain C S: <a href="https://visionastraa.com/track/click.php?email={email}&target={njcs}&campaign_id={campaign_id}">LinkedIn</a></p>
+            <div class="social-links">
+              <table align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; border-spacing: 15px;">
+                  <tr>
+                      <td align="center">
+                          <a href="https://visionastraa.com/track/click.php?email={email}&target={linkedin}&campaign_id={campaign_id}" target="_blank" title="LinkedIn">
+                              <img src="https://www.visionastraa.com/images/linkedin.webp" alt="LinkedIn" width="28" height="28" style="display: block; border: 0;">
+                          </a>
+                      </td>
+                      <td align="center">
+                          <a href="https://visionastraa.com/track/click.php?email={email}&target={instagram}&campaign_id={campaign_id}" target="_blank" title="Instagram">
+                              <img src="https://www.visionastraa.com/images/instagram.webp" alt="Instagram" width="28" height="28" style="display: block; border: 0;">
+                          </a>
+                      </td>
+                      <td align="center">
+                          <a href="https://visionastraa.com/track/click.php?email={email}&target={youtube}&campaign_id={campaign_id}" target="_blank" title="YouTube">
+                              <img src="https://www.visionastraa.com/images/youtube.webp" alt="YouTube" width="36" height="28" style="display: block; border: 0;">
+                          </a>
+                      </td>
+                  </tr>
+              </table>
+            </div>
+            <br>
+            <p style="font-size:12px;color:#888;">
+              If you no longer wish to receive emails from us, you can 
+              <a href="https://visionastraa.com/track/unsubscribe.php?email={email}&campaign_id={campaign_id}" style="color:#1a73e8;">unsubscribe here</a>.
+            </p>
+        </div>
+        <img src="{image_url}" width="1" height="1" style="display:none;">
+    </div>
+</body>
+</html>
+"""
+
+def send_email(to_address, first_name, smtp_username, smtp_password):
+    vaev_linkedin = quote("https://www.linkedin.com/company/va-ev-academy", safe='')
+    vaev_website = quote("https://visionastraa.com/ev-jobs.html", safe='')
+    apply = quote("https://www.visionastraa.com/ev-application.html", safe='')
+    whatsapp = quote("https://wa.me/918075664438", safe='')
+    whatsapp_group = quote("https://chat.whatsapp.com/EhvWb9kldqI7Np2MbfCW3u", safe='')
+    njcs = quote("https://in.linkedin.com/in/nikhiljaincs", safe='')
+    linkedin = quote("https://in.linkedin.com/company/va-ev-academy", safe='')
+    instagram = quote("https://www.instagram.com/va_ev_academy", safe='')
+    youtube = quote("https://www.youtube.com/@VisionAstraaEVAcademy", safe='')
+    random_token = random.randint(100000, 999999)
+    image_url = f"https://visionastraa.com/track/open.php?email={quote(to_address)}&campaign_id={CAMPAIGN_ID}&r={random_token}"
+
+    body = EMAIL_BODY_TEMPLATE.format(
+        first_name=first_name,
+        email=quote(to_address),
+        campaign_id=CAMPAIGN_ID,
+        image_url=image_url,
+        vaev_linkedin=vaev_linkedin,
+        apply=apply,
+        vaev_website=vaev_website,
+        whatsapp=whatsapp,
+        whatsapp_group=whatsapp_group,
+        njcs=njcs,
+        linkedin=linkedin,
+        instagram=instagram,
+        youtube=youtube
+    )
+
+    msg = MIMEMultipart('mixed')
+    msg['Subject'] = EMAIL_SUBJECT
+    msg['From'] = formataddr(("VisionAstraa EV Academy", smtp_username))
+    msg['To'] = to_address
+    msg.attach(MIMEText(body, 'html'))
+
+    try:
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+            server.starttls()
+            server.login(smtp_username, smtp_password)
+            server.sendmail(smtp_username, to_address, msg.as_string())
+        return True
+    except Exception as e:
+        print(f"❌ Error sending to {to_address}: {e}")
+        return False
+
+def main():
+    parser = argparse.ArgumentParser(description='Send email campaign in parallel.')
+    parser.add_argument('--config', type=str, required=True, help='JSON string with job configuration')
+    args = parser.parse_args()
+
+    try:
+        config = json.loads(args.config)
+        account_index = config['account_index']
+        max_emails_to_send = config['limit']
+        tables = config['tables']
+        mod_total = config['mod_total']
+        mod_value = config['mod_value']
+    except Exception as e:
+        print(f"❌ Error parsing --config JSON: {e}")
+        exit(1)
+
+    current_account = SMTP_ACCOUNTS[account_index]
+    print(f"--- Starting Job ---")
+    print(f"Using SMTP Account: {current_account['username']}")
+    print(f"Processing tables: {tables}")
+    print(f"Email limit for this job: {max_emails_to_send}")
+    print(f"Processing email partition: {mod_value} of {mod_total} (e.g., MOD(CRC32(email), {mod_total}) = {mod_value})")
+
+    try:
+        conn = mysql.connector.connect(
+            host='srv1640.hstgr.io',
+            user='u707137586_Campus_Hiring',
+            password='6q+SFd~o[go',
+            database='u707137586_Campus_Hiring',
+            # user = "u707137586_EV_Reg_T1_24",
+            # password = "DMKL0IYoP&4",
+            # database = "u707137586_EV_Reg_2024_T1",
+            connect_timeout=20
+        )
+        cursor = conn.cursor(dictionary=True)
+    except mysql.connector.Error as err:
+        print(f"❌ Error connecting to database: {err}")
+        exit(1)
+
+    emails_sent_count = 0
+    consecutive_failures = 0
+    FAILURE_THRESHOLD = 10
+    stop_campaign_due_to_errors = False
+
+    for tbl in tables:
+        if emails_sent_count >= max_emails_to_send:
+            print(f"\nReached the job limit of {max_emails_to_send} emails. Stopping.")
+            break
+
+        emails_to_fetch = max_emails_to_send - emails_sent_count
+
+        query = f"""
+            SELECT email, first_name 
+            FROM {tbl} 
+            WHERE emailSent=0 
+            AND email NOT IN (SELECT email FROM unsubscribed_emails)
+            AND MOD(CRC32(email), %s) = %s
+            LIMIT %s
+        """
+
+        # query = f"""
+        #     SELECT email, name FROM {tbl} WHERE emailSent=0 AND MOD(CRC32(email), %s) = %s LIMIT %s
+        # """
+
+        try:
+            cursor.execute(query, (mod_total, mod_value, emails_to_fetch))
+            rows_to_process = cursor.fetchall()
+        except mysql.connector.Error as err:
+            print(f"❌ Error querying table {tbl}: {err}")
+            continue
+
+        if not rows_to_process:
+            print(f"No emails to send in table: {tbl} for this partition.")
+            continue
+
+        print(f"Found {len(rows_to_process)} emails to process in {tbl} for this partition")
+
+        for row in rows_to_process:
+            if emails_sent_count >= max_emails_to_send:
+                print(f"Reached job limit mid-table. Stopping.")
+                break
+
+            if send_email(row['email'], row.get('first_name', 'there'), current_account['username'], current_account['password']):
+            # if send_email(row['email'], row['name'], current_account['username'], current_account['password']):
+                consecutive_failures = 0
+                emails_sent_count += 1
+                print(f"✅ ({emails_sent_count}/{max_emails_to_send}) Sent to {row['email']} using {current_account['username']}")
+                
+                try:
+                    conn.ping(reconnect=True, attempts=3, delay=5)
+                except mysql.connector.Error as err:
+                    print(f"❌ Error reconnecting to DB: {err}. Skipping update for {row['email']}")
+                    continue
+
+                update_cursor = conn.cursor()
+                try:
+                    update_cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
+                    conn.commit()
+                except mysql.connector.Error as e:
+                    print(f"❌ Error updating emailSent flag for {row['email']}: {e}")
+                    conn.rollback()
+                finally:
+                    update_cursor.close()
+                    
+                delay = random.uniform(0.5, 2.0)
+                time.sleep(delay)
+            else:
+                consecutive_failures += 1
+                print(f"⚠️ Consecutive send failures: {consecutive_failures}")
+                if consecutive_failures >= FAILURE_THRESHOLD:
+                    print(f"\n❌ STOPPING JOB: Reached {FAILURE_THRESHOLD} consecutive send errors.")
+                    print("This likely means the email provider has blocked the account for the day.")
+                    stop_campaign_due_to_errors = True
+                    break
+        
+        if stop_campaign_due_to_errors:
+            break
+
+    cursor.close()
+    conn.close()
+
+    print(f"\n--- Job Finished ---")
+    print(f"Total emails sent in this job: {emails_sent_count}")
+
+if __name__ == "__main__":
+    main()
