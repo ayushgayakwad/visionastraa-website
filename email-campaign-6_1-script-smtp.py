@@ -26,7 +26,7 @@ SMTP_ACCOUNTS = [
 ]
 
 # Updated Campaign ID for the new email content
-CAMPAIGN_ID = "ev_marketing_campaign_montra_placements"
+CAMPAIGN_ID = "ev_marketing_campaign_3_1_december_2025"
 
 EMAIL_SUBJECT = "⭐ Another Milestone at VisionAstraa EV Academy!"
 
@@ -308,17 +308,17 @@ EMAIL_BODY_TEMPLATE = """\
         <div class="button-container">
             <a href="https://visionastraa.com/track/click.php?email={email}&target={apply}&campaign_id={campaign_id}" class="btn">APPLY NOW</a>
         </div>
-
-        <div class="cta-button-container">
-            <a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}" target="_blank" class="whatsapp-link">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png" alt="WhatsApp Logo">
-                Chat with us on WhatsApp
-            </a>
-        </div>
         
         <div class="footer">
             <p><strong>Please connect with us directly on WhatsApp if you have any questions on our Program and Placement opportunity.</strong></p>
             
+            <div class="cta-button-container">
+                <a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}" target="_blank" class="whatsapp-link">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png" alt="WhatsApp Logo">
+                    Chat with us on WhatsApp
+                </a>
+            </div>
+
             <p>Talk to our CEO, Nikhil Jain C S: <a href="https://visionastraa.com/track/click.php?email={email}&target={njcs}&campaign_id={campaign_id}">LinkedIn</a></p>
             <div class="social-links">
               <table align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; border-spacing: 15px;">
