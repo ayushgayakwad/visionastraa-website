@@ -123,8 +123,8 @@ EMAIL_BODY_TEMPLATE = """\
         }}
         .student-img {{
             width: 150px;
-            height: 150px;
-            border-radius: 50%;
+            height: 200px; /* Changed to 3:4 Aspect Ratio */
+            border-radius: 8px; /* Rounded rectangle instead of circle */
             object-fit: cover;
             margin-bottom: 15px;
             border: 4px solid #28a745;
@@ -300,8 +300,8 @@ EMAIL_BODY_TEMPLATE = """\
         </p>
 
         <div class="contact-info">
-            <p style="margin: 5px 0;"><strong>📩 Email:</strong> <a href="mailto:admissions@visionastraa.com">admissions@visionastraa.com</a></p>
-            <p style="margin: 5px 0;"><strong>📞 Phone / WhatsApp:</strong> <a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}">+91 80756 64438</a></p>
+            <p style="margin: 5px 0;"><strong>📩 Email:</strong><br><a href="mailto:admissions@visionastraa.com">admissions@visionastraa.com</a></p>
+            <p style="margin: 5px 0;"><strong>📞 Phone / WhatsApp:</strong><br><a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}">+91 80756 64438</a></p>
             <p style="margin-top: 10px; color: #d9534f; font-weight: bold;">Admissions for the upcoming batch are open.</p>
         </div>
 
