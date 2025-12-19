@@ -112,52 +112,38 @@ EMAIL_BODY_TEMPLATE = """\
             font-weight: bold;
         }}
         /* Student Profile Styles */
-        .student-grid {{
-            display: table;
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 10px;
-        }}
         .student-card {{
-            display: table-cell;
-            width: 33%;
-            vertical-align: top;
-            text-align: center;
-            padding: 10px;
             background: #f9f9f9;
-            border-radius: 6px;
-            border: 1px solid #eee;
-        }}
-        .student-card-2 {{
-            display: table-cell;
-            width: 50%; /* Wider for 2 items */
-            vertical-align: top;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            padding: 25px;
             text-align: center;
-            padding: 10px;
-            background: #f9f9f9;
-            border-radius: 6px;
-            border: 1px solid #eee;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }}
         .student-img {{
-            width: 80px;
-            height: 80px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             object-fit: cover;
-            margin-bottom: 10px;
-            border: 2px solid #28a745;
+            margin-bottom: 15px;
+            border: 4px solid #28a745;
             background-color: #ddd; /* Placeholder color */
+            display: inline-block;
         }}
         .student-name {{
             font-weight: bold;
             color: #333;
-            font-size: 14px;
+            font-size: 20px;
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
         }}
         .student-detail {{
-            font-size: 12px;
-            color: #666;
-            line-height: 1.3;
+            font-size: 15px;
+            color: #555;
+            font-weight: 500;
+            line-height: 1.4;
+            display: block;
         }}
         
         .button-container {{
@@ -244,41 +230,42 @@ EMAIL_BODY_TEMPLATE = """\
         <h3>🎉 Congratulations to Our Placed Students</h3>
 
         <h4>From Kerala:</h4>
-        <div class="student-grid">
-            <div class="student-card">
-                <!-- TODO: Replace src with actual image URL for Devika -->
-                <img src="https://visionastraa.com/images/devika-m.jpg" alt="Devika Manoj" class="student-img">
-                <span class="student-name">Devika Manoj</span>
-                <span class="student-detail">M.Tech in Power Electronics</span>
-            </div>
-            <div class="student-card">
-                <!-- TODO: Replace src with actual image URL for Amrutha -->
-                <img src="https://visionastraa.com/images/amrutha.jpg" alt="Amrutha Mohan" class="student-img">
-                <span class="student-name">Amrutha Mohan</span>
-                <span class="student-detail">M.Tech in Mechatronics</span>
-            </div>
-            <div class="student-card">
-                <!-- TODO: Replace src with actual image URL for Ardra -->
-                <img src="https://visionastraa.com/images/ardra.jpg" alt="Ardra" class="student-img">
-                <span class="student-name">Ardra</span>
-                <span class="student-detail">B.Tech in EEE</span>
-            </div>
+        
+        <div class="student-card">
+            <!-- TODO: Replace src with actual image URL for Devika -->
+            <img src="https://visionastraa.com/images/devika-m.jpg" alt="Devika Manoj" class="student-img">
+            <span class="student-name">Devika Manoj</span>
+            <span class="student-detail">M.Tech in Power Electronics</span>
+        </div>
+
+        <div class="student-card">
+            <!-- TODO: Replace src with actual image URL for Amrutha -->
+            <img src="https://visionastraa.com/images/amrutha.jpg" alt="Amrutha Mohan" class="student-img">
+            <span class="student-name">Amrutha Mohan</span>
+            <span class="student-detail">M.Tech in Mechatronics</span>
+        </div>
+
+        <div class="student-card">
+            <!-- TODO: Replace src with actual image URL for Ardra -->
+            <img src="https://visionastraa.com/images/ardra.jpg" alt="Ardra" class="student-img">
+            <span class="student-name">Ardra</span>
+            <span class="student-detail">B.Tech in EEE</span>
         </div>
 
         <h4>From Tamil Nadu:</h4>
-        <div class="student-grid">
-            <div class="student-card-2">
-                <!-- TODO: Replace src with actual image URL for Kamal -->
-                <img src="https://visionastraa.com/images/kamalkannana.jpg" alt="Kamal" class="student-img">
-                <span class="student-name">Kamal</span>
-                <span class="student-detail">B.Tech in EEE</span>
-            </div>
-            <div class="student-card-2">
-                <!-- TODO: Replace src with actual image URL for Harikaran -->
-                <img src="https://visionastraa.com/images/harikaran.jpg" alt="Harikaran" class="student-img">
-                <span class="student-name">Harikaran</span>
-                <span class="student-detail">B.Tech in EEE</span>
-            </div>
+        
+        <div class="student-card">
+            <!-- TODO: Replace src with actual image URL for Kamal -->
+            <img src="https://visionastraa.com/images/kamalkannana.jpg" alt="Kamal" class="student-img">
+            <span class="student-name">Kamal</span>
+            <span class="student-detail">B.Tech in EEE</span>
+        </div>
+
+        <div class="student-card">
+            <!-- TODO: Replace src with actual image URL for Harikaran -->
+            <img src="https://visionastraa.com/images/harikaran.jpg" alt="Harikaran" class="student-img">
+            <span class="student-name">Harikaran</span>
+            <span class="student-detail">B.Tech in EEE</span>
         </div>
         
         <br>
