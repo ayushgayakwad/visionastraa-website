@@ -220,7 +220,7 @@ EMAIL_BODY_TEMPLATE = """\
         <p>Dear {first_name},</p>
 
         <p>
-            Before the completion of the program, we are proud to share that <strong>5 of our students</strong> have been successfully placed at <span class="highlight">Montra Electric</span>, a leading name in India’s EV ecosystem.
+            Before the completion of the program, we are proud to share that <strong>8 of our students</strong> have been successfully placed at <span class="highlight">Montra Electric</span>, a leading name in India’s EV ecosystem.
         </p>
 
         <p>
