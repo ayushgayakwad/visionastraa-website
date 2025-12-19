@@ -32,4 +32,4 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run the Python script for Job (Mod ${{ fromJson(matrix.job_config).mod_value }})
-        run: python email-campaign-6_1-script-smtp.py --config '${{ matrix.job_config }}'
+        run: python email-campaign-6_2-script-smtp.py --config '${{ matrix.job_config }}'
