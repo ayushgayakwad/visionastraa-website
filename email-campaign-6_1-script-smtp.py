@@ -344,7 +344,7 @@ EMAIL_BODY_TEMPLATE = """\
                     </td>
 
                     <td align="center" width="50%" style="padding-left:10px;">
-                        <img src="https://visionastraa.com/images/hands-on-1.jpg"
+                        <img src="https://visionastraa.com/images/hands-on-5.jpg"
                             style="width:100%; max-width:260px; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.15);">
                     </td>
                 </tr>
