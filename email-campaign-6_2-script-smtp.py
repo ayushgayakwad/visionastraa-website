@@ -258,7 +258,6 @@ EMAIL_BODY_TEMPLATE = """\
 
         <!-- Student 4 -->
         <div class="student-card">
-            <!-- TODO: Replace placeholder with Avyajith's image URL -->
             <!-- <img src="REPLACE_WITH_AVYAJITH_IMAGE_URL" alt="Avyajith" class="student-img"> -->
             <span class="student-name">Avyajith</span>
             <span class="student-detail">B.E in Electrical & Electronics Engineering</span>
@@ -268,12 +267,65 @@ EMAIL_BODY_TEMPLATE = """\
 
         <!-- Student 5 -->
         <div class="student-card">
-            <!-- TODO: Replace placeholder with Pranav's image URL -->
             <img src="https://visionastraa.com/images/pranav.jpg" alt="Pranav" class="student-img">
             <span class="student-name">Pranav</span>
             <span class="student-detail">B.E in Mechanical Engineering</span>
             <span class="student-detail">Cochin University of Science and Technology</span>
             <div class="placement-badge">👉 Placed at Tata Motors</div>
+        </div>
+
+        <!-- Student 6 -->
+        <div class="student-card">
+            <img src="https://visionastraa.com/images/p10.jpg" alt="Athul K N" class="student-img">
+            <span class="student-name">Athul K N</span>
+            <span class="student-detail">B.Tech</span>
+            <span class="student-detail">GEC, Thrissur</span>
+            <div class="placement-badge">👉 Placed at Ultraviolette Automotive</div>
+        </div>
+
+        <!-- Student 7 -->
+        <div class="student-card">
+            <img src="https://visionastraa.com/images/p2.jpg" alt="Aiswarya R" class="student-img">
+            <span class="student-name">Aiswarya R</span>
+            <span class="student-detail">M.Tech in Electrical & Electronics Engineering</span>
+            <span class="student-detail">College of Engineering Trivandrum</span>
+            <div class="placement-badge">👉 Placed at Ultraviolette Automotive</div>
+        </div>
+
+        <!-- Student 8 -->
+        <div class="student-card">
+            <img src="https://visionastraa.com/images/p5.jpg" alt="Ashwin Thampi" class="student-img">
+            <span class="student-name">Ashwin Thampi</span>
+            <span class="student-detail">B.Tech in Mechanical Engineering</span>
+            <span class="student-detail">GEC, Thrissur</span>
+            <div class="placement-badge">👉 Placed at Mecwin Technologies</div>
+        </div>
+
+        <!-- Student 9 -->
+        <div class="student-card">
+            <img src="https://visionastraa.com/images/p18.jpg" alt="Fayas Khan" class="student-img">
+            <span class="student-name">Fayas Khan</span>
+            <span class="student-detail">M.Tech in Electrical & Electronics Engineering</span>
+            <span class="student-detail">SIT, Tumkur</span>
+            <div class="placement-badge">👉 Placed at Sun Mobility</div>
+        </div>
+
+        <!-- Student 10 -->
+        <div class="student-card">
+            <img src="https://visionastraa.com/images/p6.jpg" alt="Najiya" class="student-img">
+            <span class="student-name">Najiya</span>
+            <span class="student-detail">M.Tech in Electrical & Electronics Engineering</span>
+            <span class="student-detail">College of Engineering, Trivandrum</span>
+            <div class="placement-badge">👉 Placed at Mecwin Technologies</div>
+        </div>
+
+        <!-- Student 11 -->
+        <div class="student-card">
+            <img src="https://visionastraa.com/images/p19.jpg" alt="Shalina Nelson" class="student-img">
+            <span class="student-name">Shalina Nelson</span>
+            <span class="student-detail">B.Tech in Electrical & Electronics Engineering</span>
+            <span class="student-detail">GEC, Thrissur</span>
+            <div class="placement-badge">👉 Placed at Embitel</div>
         </div>
 
         <hr style="margin: 25px 0; border: 0; border-top: 1px solid #ddd;">
