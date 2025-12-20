@@ -26,7 +26,7 @@ EMAIL_SUBJECT = 'Know Your Internship | VisionAstraa EV Academy'
 #         "EMAIL": # "visionastraa@evinternships.in",
 #        "PASSWORD": "]9jw>Upu//Y"
 #     }
-}
+# }
 
 BATCH_CREDENTIALS = {
      1: {
