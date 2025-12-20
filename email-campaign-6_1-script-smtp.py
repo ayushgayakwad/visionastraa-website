@@ -207,6 +207,32 @@ EMAIL_BODY_TEMPLATE = """\
             width: 22px;
             height: 22px;
         }}
+        .hands-on-section {{
+            margin: 30px 0;
+        }}
+
+        .hands-on-title {{
+            font-size: 20px;
+            margin-bottom: 15px;
+            margin-top: 25px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+            color: #28a745;
+            text-align: center;
+        }}
+
+        .hands-on-img {{
+            width: 100%;
+            max-width: 180px;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }}
+
+        .hands-on-caption {{
+            font-size: 14px;
+            color: #555;
+            margin-top: 8px;
+        }}
     </style>
 </head>
 <body>
@@ -299,6 +325,41 @@ EMAIL_BODY_TEMPLATE = """\
         <!-- Group Image Added Here -->
         <div style="text-align: center; margin: 25px 0;">
             <img src="https://visionastraa.com/images/group-1.jpg" alt="VisionAstraa Students Placed at Montra Electric" style="width:100%; max-width:600px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        </div>
+        
+        <hr style="margin: 25px 0; border: 0; border-top: 1px solid #ddd;">
+
+        <div class="hands-on-section">
+            <h2 class="hands-on-title">Learning by Doing at VisionAstraa</h2>
+
+            <p style="text-align:center;">
+                Our students gain real-world EV skills through extensive hands-on training, lab work, and live demonstrations.
+            </p>
+
+            <table width="100%" cellpadding="0" cellspacing="0" align="center" style="margin-top:20px;">
+                <tr>
+                    <td align="center" width="33%">
+                        <img src="https://visionastraa.com/images/hands-on-2.jpg" 
+                            alt="Students working on EV components" 
+                            class="hands-on-img">
+                        <div class="hands-on-caption">EV Powertrain Lab</div>
+                    </td>
+
+                    <td align="center" width="33%">
+                        <img src="https://visionastraa.com/images/hands-on-3.jpg" 
+                            alt="Battery testing and analysis session" 
+                            class="hands-on-img">
+                        <div class="hands-on-caption">Battery Testing & Analysis</div>
+                    </td>
+
+                    <td align="center" width="33%">
+                        <img src="https://visionastraa.com/images/hands-on-4.jpg" 
+                            alt="Hands-on motor and controller training" 
+                            class="hands-on-img">
+                        <div class="hands-on-caption">Motor & Controller Training</div>
+                    </td>
+                </tr>
+            </table>
         </div>
         
         <hr style="margin: 25px 0; border: 0; border-top: 1px solid #ddd;">
