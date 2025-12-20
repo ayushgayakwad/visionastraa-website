@@ -209,6 +209,32 @@ EMAIL_BODY_TEMPLATE = """\
             width: 22px;
             height: 22px;
         }}
+        .hands-on-section {{
+            margin: 30px 0;
+        }}
+
+        .hands-on-title {{
+            font-size: 20px;
+            margin-bottom: 15px;
+            margin-top: 25px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+            color: #28a745;
+            text-align: center;
+        }}
+
+        .hands-on-img {{
+            width: 100%;
+            max-width: 180px;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }}
+
+        .hands-on-caption {{
+            font-size: 14px;
+            color: #555;
+            margin-top: 8px;
+        }}
     </style>
 </head>
 <body>
@@ -341,6 +367,34 @@ EMAIL_BODY_TEMPLATE = """\
             <li>Structured interview preparation</li>
             <li>Connecting talent with meaningful opportunities</li>
         </ul>
+
+        <table width="100%" cellpadding="0" cellspacing="0" align="center" style="margin-top:20px;">
+            <tr>
+                <td align="center" width="50%" style="padding-right:10px;">
+                    <img src="https://visionastraa.com/images/hands-on-2.jpg"
+                        style="width:100%; max-width:260px; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.15);">
+                </td>
+
+                <td align="center" width="50%" style="padding-left:10px;">
+                    <img src="https://visionastraa.com/images/hands-on-5.jpg"
+                        style="width:100%; max-width:260px; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.15);">
+                </td>
+            </tr>
+        </table>
+
+        <table width="100%" cellpadding="0" cellspacing="0" align="center" style="margin-top:15px;">
+            <tr>
+                <td align="center" width="50%" style="padding-right:10px;">
+                    <img src="https://visionastraa.com/images/hands-on-3.jpg"
+                        style="width:100%; max-width:260px; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.15);">
+                </td>
+
+                <td align="center" width="50%" style="padding-left:10px;">
+                    <img src="https://visionastraa.com/images/hands-on-4.jpg"
+                        style="width:100%; max-width:260px; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.15);">
+                </td>
+            </tr>
+        </table>
 
         <hr style="margin: 25px 0; border: 0; border-top: 1px solid #ddd;">
 
