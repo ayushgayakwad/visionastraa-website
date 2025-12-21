@@ -233,16 +233,23 @@ EMAIL_BODY_TEMPLATE = """\
         .hands-on-section {{
             margin: 30px 0;
         }}
-        .vehicle-showcase {{
+        .vehicle-table {{
+            width: 100%;
+            border-collapse: collapse;
             margin-bottom: 20px;
+        }}
+        .vehicle-cell-td {{
+            width: 50%;
+            padding: 0 4px; /* Tiny padding between images */
+            vertical-align: top;
             text-align: center;
         }}
         .vehicle-img {{
-            width: 48%;
-            max-width: 260px;
+            width: 100%;       /* Fill the cell */
+            max-width: 100%;
+            height: auto;
             border-radius: 6px;
-            display: inline-block;
-            margin: 1%;
+            display: block;    /* Removes bottom gap */
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }}
     </style>
@@ -254,10 +261,16 @@ EMAIL_BODY_TEMPLATE = """\
         </div>
         
         <!-- Montra Electric Vehicles Showcase -->
-        <div class="vehicle-showcase">
-            <img src="https://visionastraa.com/images/montra-3w.png" alt="Montra Electric 3-Wheeler" class="vehicle-img">
-            <img src="https://visionastraa.com/images/montra-4w.png" alt="Montra Electric 4-Wheeler" class="vehicle-img">
-        </div>
+        <table class="vehicle-table" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="vehicle-cell-td">
+                     <img src="https://visionastraa.com/images/montra-3w.png" alt="Montra Electric 3-Wheeler" class="vehicle-img">
+                </td>
+                <td class="vehicle-cell-td">
+                     <img src="https://visionastraa.com/images/montra-4w.png" alt="Montra Electric 4-Wheeler" class="vehicle-img">
+                </td>
+            </tr>
+        </table>
 
         <h1>Montra Electric Hires from VisionAstraa EV Academy!</h1>
 
@@ -280,14 +293,12 @@ EMAIL_BODY_TEMPLATE = """\
                     <span class="student-name">Pratik Punyawant</span>
                     <span class="student-detail">B.Tech in EEE</span>
                     <span class="student-college">K.L.E. Institute of Technology, Hubli</span>
-                    <span class="student-detail" style="margin-top:5px; color:#28a745;">Batch of 2025</span>
                 </div>
                 <div class="student-cell">
                     <img src="https://visionastraa.com/images/tejashwini.jpg" alt="Tejaswini Nagavi" class="student-img">
                     <span class="student-name">Tejaswini Nagavi</span>
                     <span class="student-detail">B.Tech in EEE</span>
                     <span class="student-college">S.D.M. College of Engineering & Technology, Dharwad</span>
-                    <span class="student-detail" style="margin-top:5px; color:#28a745;">Batch of 2025</span>
                 </div>
             </div>
             
@@ -298,14 +309,12 @@ EMAIL_BODY_TEMPLATE = """\
                     <span class="student-name">Akash S N</span>
                     <span class="student-detail">B.Tech in EEE</span>
                     <span class="student-college">S.D.M. College of Engineering & Technology, Dharwad</span>
-                    <span class="student-detail" style="margin-top:5px; color:#28a745;">Batch of 2025</span>
                 </div>
                 <div class="student-cell">
                     <img src="https://visionastraa.com/images/devika-m.jpg" alt="Devika Manoj" class="student-img">
                     <span class="student-name">Devika Manoj</span>
                     <span class="student-detail">M.Tech in Power Electronics</span>
                     <span class="student-college">College of Engineering Trivandrum, Thiruvananthapuram</span>
-                    <span class="student-detail" style="margin-top:5px; color:#28a745;">Batch of 2025</span>
                 </div>
             </div>
 
@@ -316,14 +325,12 @@ EMAIL_BODY_TEMPLATE = """\
                     <span class="student-name">Amrutha Mohan</span>
                     <span class="student-detail">M.Tech in Mechatronics</span>
                     <span class="student-college">Vellore Institute of Technology, Vellore</span>
-                    <span class="student-detail" style="margin-top:5px; color:#28a745;">Batch of 2025</span>
                 </div>
                 <div class="student-cell">
                     <img src="https://visionastraa.com/images/ardra.jpg" alt="Ardra K" class="student-img">
                     <span class="student-name">Ardra K</span>
                     <span class="student-detail">B.Tech in ECE</span>
                     <span class="student-college">Cochin University of Science and Technology, Kochi</span>
-                    <span class="student-detail" style="margin-top:5px; color:#28a745;">Batch of 2025</span>
                 </div>
             </div>
 
@@ -334,14 +341,12 @@ EMAIL_BODY_TEMPLATE = """\
                     <span class="student-name">Kamalakannan Selvam</span>
                     <span class="student-detail">B.Tech in EEE</span>
                     <span class="student-college">University College of Engineering, Bitcampus Tiruchirappalli</span>
-                    <span class="student-detail" style="margin-top:5px; color:#28a745;">Batch of 2025</span>
                 </div>
                 <div class="student-cell">
                     <img src="https://visionastraa.com/images/harikaran.jpg" alt="Harikaran S" class="student-img">
                     <span class="student-name">Harikaran S</span>
                     <span class="student-detail">B.Tech in EEE</span>
                     <span class="student-college">University College of Engineering, Bitcampus Tiruchirappalli</span>
-                    <span class="student-detail" style="margin-top:5px; color:#28a745;">Batch of 2025</span>
                 </div>
             </div>
         </div>
