@@ -13,16 +13,29 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
+import argparse
+import math
 
+# ---------------- CONFIG ----------------
 CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_offer_released_applicants_38.csv'
 PDF_TEMPLATE_PATH = 'VTU EV Internship Offer Letters/Template.pdf'
 OUTPUT_DIRECTORY = 'VTU EV Internship Offer Letters/Generated_Offer_Letters'
 
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
-SENDER_EMAIL = os.getenv('SENDER_EMAIL')
-SENDER_PASSWORD = os.getenv('SENDER_PASSWORD')
 EMAIL_SUBJECT = 'Internship OFFER LETTER from VisionAstraa EV Academy'
+
+# --- HARDCODED CREDENTIALS ---
+BATCH_CREDENTIALS = {
+    1: {
+        "EMAIL": "visionastraa@evinternships.com",
+        "PASSWORD": "a[kE?V6lm7G="
+    },
+    2: {
+        "EMAIL": "visionastraa@evinternships.in",
+        "PASSWORD": "]9jw>Upu//Y"
+    }
+}
 
 def get_letter_paragraph(name, role):
     styles = getSampleStyleSheet()
@@ -61,6 +74,11 @@ def create_offer_letter(name, role):
 
         packet.seek(0)
         text_pdf = fitz.open(stream=packet, filetype="pdf")
+        
+        if not os.path.exists(PDF_TEMPLATE_PATH):
+            print(f"Error: Template not found at {PDF_TEMPLATE_PATH}")
+            return None
+            
         template_pdf = fitz.open(PDF_TEMPLATE_PATH)
 
         template_page = template_pdf[0]
@@ -83,10 +101,10 @@ def create_offer_letter(name, role):
         print(f"Error creating PDF for {name}: {e}")
         return None
 
-def send_email(name, to_email, role, attachment_path):
+def send_email(sender_email, sender_password, name, to_email, role, attachment_path):
     try:
         msg = MIMEMultipart()
-        msg['From'] = SENDER_EMAIL
+        msg['From'] = sender_email
         msg['To'] = to_email
         msg['Subject'] = EMAIL_SUBJECT
 
@@ -163,8 +181,8 @@ def send_email(name, to_email, role, attachment_path):
 
         context = ssl.create_default_context()
         with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT, context=context) as server:
-            server.login(SENDER_EMAIL, SENDER_PASSWORD)
-            server.sendmail(SENDER_EMAIL, to_email, msg.as_string())
+            server.login(sender_email, sender_password)
+            server.sendmail(sender_email, to_email, msg.as_string())
 
         print(f"Successfully sent email to: {name} at {to_email}")
         return True
@@ -178,10 +196,17 @@ def send_email(name, to_email, role, attachment_path):
         return False
 
 def main():
-    if not SENDER_EMAIL or not SENDER_PASSWORD:
-        print("Error: SENDER_EMAIL or SENDER_PASSWORD environment variables not set.")
-        return
-        
+    # 1. Parse Arguments
+    parser = argparse.ArgumentParser(description='Send Offer Letters in batches.')
+    parser.add_argument('--batch', type=int, choices=[1, 2], required=True, help='Batch number (1 or 2)')
+    args = parser.parse_args()
+    batch_num = args.batch
+
+    # 2. Get Credentials for this Batch
+    creds = BATCH_CREDENTIALS.get(batch_num)
+    sender_email = creds["EMAIL"]
+    sender_password = creds["PASSWORD"]
+
     if not os.path.exists(CSV_FILE_PATH):
         print(f"Error: Input data file not found at '{CSV_FILE_PATH}'")
         return
@@ -194,14 +219,31 @@ def main():
         print(f"Created output directory: '{OUTPUT_DIRECTORY}'")
 
     try:
+        # 3. Load Data
         df = pd.read_csv(CSV_FILE_PATH, header=None)
         if len(df.columns) < 8:
             print("Error: CSV file does not have the expected 8 columns.")
             return
 
         df.columns = ['Name', 'Email', 'Phone', 'College', 'Specialization', 'Role', 'Status', 'EmailSent']
+        
+        # 4. Split Data based on Batch
+        total_records = len(df)
+        mid_point = math.ceil(total_records / 2)
 
-        for index, row in df.iterrows():
+        if batch_num == 1:
+            df_batch = df.iloc[:mid_point].copy()
+            print(f"--- BATCH 1 STARTING ({sender_email}) ---")
+            print(f"Processing records 1 to {mid_point} (Total rows assigned: {len(df_batch)})")
+        else:
+            df_batch = df.iloc[mid_point:].copy()
+            print(f"--- BATCH 2 STARTING ({sender_email}) ---")
+            print(f"Processing records {mid_point + 1} to {total_records} (Total rows assigned: {len(df_batch)})")
+        
+        print("-" * 30)
+
+        # 5. Process Batch
+        for index, row in df_batch.iterrows():
             if str(row['EmailSent']).strip().upper() == 'FALSE':
                 name = str(row['Name']).strip()
                 email = str(row['Email']).strip()
@@ -211,15 +253,16 @@ def main():
                     offer_letter_path = create_offer_letter(name, role)
                     if offer_letter_path:
                         email_sent = send_email(
-                            name, email, role, offer_letter_path)
+                            sender_email, sender_password, name, email, role, offer_letter_path)
                         if email_sent:
-                            df.loc[index, 'EmailSent'] = 'TRUE'
+                            df_batch.loc[index, 'EmailSent'] = 'TRUE'
                 else:
                     print(
-                        f"Skipping row {index+1} due to missing name, email, or role.")
+                        f"Skipping row due to missing name, email, or role.")
+            else:
+                 print(f"Skipping {row['Name']}: Email already sent.")
 
-        df.to_csv(CSV_FILE_PATH, index=False, header=False)
-        print("\nOffer letter generation and emailing complete.")
+        print(f"\nBatch {batch_num} complete.")
 
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
