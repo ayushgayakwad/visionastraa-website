@@ -249,7 +249,7 @@ EMAIL_BODY_TEMPLATE = """\
                     <div class="student-card">
                         <img src="https://visionastraa.com/images/devika-m.jpg" alt="Devika Manoj" class="student-img">
                         <span class="student-name">Devika Manoj</span>
-                        <span class="student-detail">M.Tech in Power Electronics</span>
+                        <span class="student-detail">M.Tech, Power Electronics, 2025</span>
                         <span class="student-detail">College of Engineering, Trivandrum</span>
                         <div class="placement-badge">Placed at Montra Electric</div>
                     </div>
@@ -258,7 +258,7 @@ EMAIL_BODY_TEMPLATE = """\
                     <div class="student-card">
                         <img src="https://visionastraa.com/images/amrutha.jpg" alt="Amrutha Mohan" class="student-img">
                         <span class="student-name">Amrutha Mohan</span>
-                        <span class="student-detail">M.Tech in Mechatronics</span>
+                        <span class="student-detail">M.Tech, Mechatronics, 2025</span>
                         <span class="student-detail">VIT, Vellore</span>
                         <div class="placement-badge">Placed at Montra Electric</div>
                     </div>
@@ -269,8 +269,8 @@ EMAIL_BODY_TEMPLATE = """\
                 <td width="50%" valign="top" class="student-col" style="padding-right: 5px; padding-bottom: 10px;">
                     <div class="student-card">
                         <img src="https://visionastraa.com/images/ardra.jpg" alt="Ardra K" class="student-img">
-                        <span class="student-name">Ardra K (2025)</span>
-                        <span class="student-detail">B.Tech, Electrical & Electronics Engg.</span>
+                        <span class="student-name">Ardra K</span>
+                        <span class="student-detail">B.Tech, Electrical & Electronics Engg., 2025</span>
                         <span class="student-detail">Cochin University of Science and Technology</span>
                         <div class="placement-badge">Placed at Montra Electric</div>
                     </div>
@@ -278,8 +278,8 @@ EMAIL_BODY_TEMPLATE = """\
                 <td width="50%" valign="top" class="student-col" style="padding-left: 5px; padding-bottom: 10px;">
                     <div class="student-card">
                         <img src="https://visionastraa.com/images/pranav.jpg" alt="Pranav P" class="student-img">
-                        <span class="student-name">Pranav P (2025)</span>
-                        <span class="student-detail">B.Tech, Mechanical Engineering</span>
+                        <span class="student-name">Pranav P</span>
+                        <span class="student-detail">B.Tech, Mechanical Engineering, 2025</span>
                         <span class="student-detail">Cochin University of Science and Technology</span>
                         <div class="placement-badge">Placed at Tata Motors</div>
                     </div>
@@ -300,7 +300,7 @@ EMAIL_BODY_TEMPLATE = """\
                     <div class="student-card">
                         <img src="https://visionastraa.com/images/p2.jpg" alt="Aiswarya R" class="student-img">
                         <span class="student-name">Aiswarya R</span>
-                        <span class="student-detail">M.Tech, Electrical & Electronics Engg.</span>
+                        <span class="student-detail">M.Tech, Electrical & Electronics Engg., 2023</span>
                         <span class="student-detail">College of Engineering Trivandrum</span>
                         <div class="placement-badge">Placed at Ultraviolette Auto</div>
                     </div>
@@ -312,7 +312,7 @@ EMAIL_BODY_TEMPLATE = """\
                     <div class="student-card">
                         <img src="https://visionastraa.com/images/p5.jpg" alt="Ashwin Thampi" class="student-img">
                         <span class="student-name">Ashwin Thampi</span>
-                        <span class="student-detail">B.Tech, Mechanical Engineering</span>
+                        <span class="student-detail">B.Tech, Mechanical Engineering, 2024</span>
                         <span class="student-detail">GEC, Thrissur</span>
                         <div class="placement-badge">Placed at Mecwin Technologies</div>
                     </div>
@@ -332,8 +332,8 @@ EMAIL_BODY_TEMPLATE = """\
                 <td width="50%" valign="top" class="student-col" style="padding-right: 5px; padding-bottom: 10px;">
                     <div class="student-card">
                         <img src="https://visionastraa.com/images/p6.jpg" alt="Najiya N" class="student-img">
-                        <span class="student-name">Najiya N (2023)</span>
-                        <span class="student-detail">M.Tech, Electrical & Electronics Engg.</span>
+                        <span class="student-name">Najiya N</span>
+                        <span class="student-detail">M.Tech, Electrical & Electronics Engg., 2023</span>
                         <span class="student-detail">College of Engineering, Trivandrum</span>
                         <div class="placement-badge">Placed at Mecwin Technologies</div>
                     </div>
@@ -342,7 +342,7 @@ EMAIL_BODY_TEMPLATE = """\
                     <div class="student-card">
                         <img src="https://visionastraa.com/images/p19.jpg" alt="Shalina Nelson" class="student-img">
                         <span class="student-name">Shalina Nelson</span>
-                        <span class="student-detail">B.Tech, Electrical & Electronics Engg.</span>
+                        <span class="student-detail">B.Tech, Electrical & Electronics Engg., 2024</span>
                         <span class="student-detail">GEC, Thrissur</span>
                         <div class="placement-badge">Placed at Embitel</div>
                     </div>
@@ -353,8 +353,8 @@ EMAIL_BODY_TEMPLATE = """\
                 <td width="50%" valign="top" class="student-col" style="padding-right: 5px; padding-bottom: 10px;">
                    <div class="student-card">
                         <!-- <img src="REPLACE_WITH_AVYAJITH_IMAGE_URL" alt="Avyajith S" class="student-img"> -->
-                        <span class="student-name">Avyajith S (2025)</span>
-                        <span class="student-detail">B.Tech, Electrical & Electronics Engg.</span>
+                        <span class="student-name">Avyajith S</span>
+                        <span class="student-detail">B.Tech, Electrical & Electronics Engg., 2025</span>
                         <span class="student-detail">College of Engineering, Trivandrum</span>
                         <div class="placement-badge">Placed at Chara Technologies</div>
                     </div>
