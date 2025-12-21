@@ -108,32 +108,35 @@ EMAIL_BODY_TEMPLATE = """\
             background: #f9f9f9;
             border-radius: 8px;
             border: 1px solid #e0e0e0;
-            padding: 25px;
+            padding: 15px;
             text-align: center;
-            margin-bottom: 20px;
+            height: 100%; /* Fill cell height */
+            box-sizing: border-box;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }}
         .student-img {{
-            width: 150px;
-            height: 200px; /* 3:4 Aspect Ratio */
+            width: 100%;
+            max-width: 120px;
+            height: 160px; /* 3:4 Aspect Ratio */
             border-radius: 8px;
             object-fit: cover;
-            margin-bottom: 15px;
-            border: 4px solid #28a745;
+            margin-bottom: 10px;
+            border: 3px solid #28a745;
             background-color: #ddd;
             display: inline-block;
         }}
         .student-name {{
             font-weight: bold;
             color: #333;
-            font-size: 20px;
+            font-size: 16px;
             display: block;
             margin-bottom: 5px;
+            line-height: 1.2;
         }}
         .student-detail {{
-            font-size: 14px;
+            font-size: 13px;
             color: #555;
-            line-height: 1.4;
+            line-height: 1.3;
             display: block;
             margin-bottom: 3px;
         }}
@@ -141,11 +144,11 @@ EMAIL_BODY_TEMPLATE = """\
             display: inline-block;
             background-color: #28a745;
             color: white;
-            padding: 5px 10px;
+            padding: 4px 8px;
             border-radius: 4px;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
-            margin-top: 10px;
+            margin-top: 8px;
         }}
         
         .button-container {{
@@ -209,31 +212,14 @@ EMAIL_BODY_TEMPLATE = """\
             width: 22px;
             height: 22px;
         }}
-        .hands-on-section {{
-            margin: 30px 0;
-        }}
-
-        .hands-on-title {{
-            font-size: 20px;
-            margin-bottom: 15px;
-            margin-top: 25px;
-            border-bottom: 2px solid #e9ecef;
-            padding-bottom: 10px;
-            color: #28a745;
-            text-align: center;
-        }}
-
-        .hands-on-img {{
-            width: 100%;
-            max-width: 180px;
-            border-radius: 6px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-        }}
-
-        .hands-on-caption {{
-            font-size: 14px;
-            color: #555;
-            margin-top: 8px;
+        
+        /* Table overrides for mobile responsiveness */
+        @media screen and (max-width: 480px) {{
+            .student-col {{
+                display: block;
+                width: 100% !important;
+                padding: 0 0 15px 0 !important;
+            }}
         }}
     </style>
 </head>
@@ -255,104 +241,130 @@ EMAIL_BODY_TEMPLATE = """\
 
         <h3>🎓 Student Placements – Kerala</h3>
 
-        <!-- Student 1 -->
-        <div class="student-card">
-            <img src="https://visionastraa.com/images/devika-m.jpg" alt="Devika Manoj" class="student-img">
-            <span class="student-name">Devika Manoj</span>
-            <span class="student-detail">M.Tech in Power Electronics</span>
-            <span class="student-detail">College of Engineering, Trivandrum</span>
-            <div class="placement-badge">👉 Placed at Montra Electric</div>
-        </div>
-
-        <!-- Student 2 -->
-        <div class="student-card">
-            <img src="https://visionastraa.com/images/amrutha.jpg" alt="Amrutha Mohan" class="student-img">
-            <span class="student-name">Amrutha Mohan</span>
-            <span class="student-detail">M.Tech in Mechatronics</span>
-            <span class="student-detail">VIT, Vellore</span>
-            <div class="placement-badge">👉 Placed at Montra Electric</div>
-        </div>
-
-        <!-- Student 3 -->
-        <div class="student-card">
-            <img src="https://visionastraa.com/images/ardra.jpg" alt="Ardra" class="student-img">
-            <span class="student-name">Ardra</span>
-            <span class="student-detail">B.E in Electrical & Electronics Engineering</span>
-            <span class="student-detail">Cochin University of Science and Technology</span>
-            <div class="placement-badge">👉 Placed at Montra Electric</div>
-        </div>
-
-        <!-- Student 4 -->
-        <div class="student-card">
-            <!-- <img src="REPLACE_WITH_AVYAJITH_IMAGE_URL" alt="Avyajith" class="student-img"> -->
-            <span class="student-name">Avyajith</span>
-            <span class="student-detail">B.E in Electrical & Electronics Engineering</span>
-            <span class="student-detail">College of Engineering, Trivandrum</span>
-            <div class="placement-badge">👉 Placed at Chara Technologies</div>
-        </div>
-
-        <!-- Student 5 -->
-        <div class="student-card">
-            <img src="https://visionastraa.com/images/pranav.jpg" alt="Pranav" class="student-img">
-            <span class="student-name">Pranav</span>
-            <span class="student-detail">B.E in Mechanical Engineering</span>
-            <span class="student-detail">Cochin University of Science and Technology</span>
-            <div class="placement-badge">👉 Placed at Tata Motors</div>
-        </div>
-
-        <!-- Student 6 -->
-        <div class="student-card">
-            <img src="https://visionastraa.com/images/p10.jpg" alt="Athul K N" class="student-img">
-            <span class="student-name">Athul K N</span>
-            <span class="student-detail">B.Tech</span>
-            <span class="student-detail">GEC, Thrissur</span>
-            <div class="placement-badge">👉 Placed at Ultraviolette Automotive</div>
-        </div>
-
-        <!-- Student 7 -->
-        <div class="student-card">
-            <img src="https://visionastraa.com/images/p2.jpg" alt="Aiswarya R" class="student-img">
-            <span class="student-name">Aiswarya R</span>
-            <span class="student-detail">M.Tech in Electrical & Electronics Engineering</span>
-            <span class="student-detail">College of Engineering Trivandrum</span>
-            <div class="placement-badge">👉 Placed at Ultraviolette Automotive</div>
-        </div>
-
-        <!-- Student 8 -->
-        <div class="student-card">
-            <img src="https://visionastraa.com/images/p5.jpg" alt="Ashwin Thampi" class="student-img">
-            <span class="student-name">Ashwin Thampi</span>
-            <span class="student-detail">B.Tech in Mechanical Engineering</span>
-            <span class="student-detail">GEC, Thrissur</span>
-            <div class="placement-badge">👉 Placed at Mecwin Technologies</div>
-        </div>
-
-        <!-- Student 9 -->
-        <div class="student-card">
-            <img src="https://visionastraa.com/images/p18.jpg" alt="Fayas Khan" class="student-img">
-            <span class="student-name">Fayas Khan</span>
-            <span class="student-detail">M.Tech in Electrical & Electronics Engineering</span>
-            <span class="student-detail">SIT, Tumkur</span>
-            <div class="placement-badge">👉 Placed at Sun Mobility</div>
-        </div>
-
-        <!-- Student 10 -->
-        <div class="student-card">
-            <img src="https://visionastraa.com/images/p6.jpg" alt="Najiya" class="student-img">
-            <span class="student-name">Najiya</span>
-            <span class="student-detail">M.Tech in Electrical & Electronics Engineering</span>
-            <span class="student-detail">College of Engineering, Trivandrum</span>
-            <div class="placement-badge">👉 Placed at Mecwin Technologies</div>
-        </div>
-
-        <!-- Student 11 -->
-        <div class="student-card">
-            <img src="https://visionastraa.com/images/p19.jpg" alt="Shalina Nelson" class="student-img">
-            <span class="student-name">Shalina Nelson</span>
-            <span class="student-detail">B.Tech in Electrical & Electronics Engineering</span>
-            <span class="student-detail">GEC, Thrissur</span>
-            <div class="placement-badge">👉 Placed at Embitel</div>
-        </div>
+        <!-- Student Grid Start -->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+            <!-- Row 1 -->
+            <tr>
+                <td width="50%" valign="top" class="student-col" style="padding-right: 5px; padding-bottom: 10px;">
+                    <div class="student-card">
+                        <img src="https://visionastraa.com/images/devika-m.jpg" alt="Devika Manoj" class="student-img">
+                        <span class="student-name">Devika Manoj</span>
+                        <span class="student-detail">M.Tech in Power Electronics</span>
+                        <span class="student-detail">College of Engineering, Trivandrum</span>
+                        <div class="placement-badge">Placed at Montra Electric</div>
+                    </div>
+                </td>
+                <td width="50%" valign="top" class="student-col" style="padding-left: 5px; padding-bottom: 10px;">
+                    <div class="student-card">
+                        <img src="https://visionastraa.com/images/amrutha.jpg" alt="Amrutha Mohan" class="student-img">
+                        <span class="student-name">Amrutha Mohan</span>
+                        <span class="student-detail">M.Tech in Mechatronics</span>
+                        <span class="student-detail">VIT, Vellore</span>
+                        <div class="placement-badge">Placed at Montra Electric</div>
+                    </div>
+                </td>
+            </tr>
+            <!-- Row 2 -->
+            <tr>
+                <td width="50%" valign="top" class="student-col" style="padding-right: 5px; padding-bottom: 10px;">
+                    <div class="student-card">
+                        <img src="https://visionastraa.com/images/ardra.jpg" alt="Ardra K" class="student-img">
+                        <span class="student-name">Ardra K (2025)</span>
+                        <span class="student-detail">B.Tech, Electrical & Electronics Engg.</span>
+                        <span class="student-detail">Cochin University of Science and Technology</span>
+                        <div class="placement-badge">Placed at Montra Electric</div>
+                    </div>
+                </td>
+                <td width="50%" valign="top" class="student-col" style="padding-left: 5px; padding-bottom: 10px;">
+                    <div class="student-card">
+                        <img src="https://visionastraa.com/images/pranav.jpg" alt="Pranav P" class="student-img">
+                        <span class="student-name">Pranav P (2025)</span>
+                        <span class="student-detail">B.Tech, Mechanical Engineering</span>
+                        <span class="student-detail">Cochin University of Science and Technology</span>
+                        <div class="placement-badge">Placed at Tata Motors</div>
+                    </div>
+                </td>
+            </tr>
+            <!-- Row 3 -->
+            <tr>
+                <td width="50%" valign="top" class="student-col" style="padding-right: 5px; padding-bottom: 10px;">
+                    <div class="student-card">
+                        <img src="https://visionastraa.com/images/p10.jpg" alt="Athul K N" class="student-img">
+                        <span class="student-name">Athul K N</span>
+                        <span class="student-detail">B.Tech, Mechanical Engineering, 2024</span>
+                        <span class="student-detail">Government Engineering College, Thrissur</span>
+                        <div class="placement-badge">Placed at Ultraviolette Auto</div>
+                    </div>
+                </td>
+                <td width="50%" valign="top" class="student-col" style="padding-left: 5px; padding-bottom: 10px;">
+                    <div class="student-card">
+                        <img src="https://visionastraa.com/images/p2.jpg" alt="Aiswarya R" class="student-img">
+                        <span class="student-name">Aiswarya R</span>
+                        <span class="student-detail">M.Tech, Electrical & Electronics Engg.</span>
+                        <span class="student-detail">College of Engineering Trivandrum</span>
+                        <div class="placement-badge">Placed at Ultraviolette Auto</div>
+                    </div>
+                </td>
+            </tr>
+             <!-- Row 4 -->
+            <tr>
+                <td width="50%" valign="top" class="student-col" style="padding-right: 5px; padding-bottom: 10px;">
+                    <div class="student-card">
+                        <img src="https://visionastraa.com/images/p5.jpg" alt="Ashwin Thampi" class="student-img">
+                        <span class="student-name">Ashwin Thampi</span>
+                        <span class="student-detail">B.Tech, Mechanical Engineering</span>
+                        <span class="student-detail">GEC, Thrissur</span>
+                        <div class="placement-badge">Placed at Mecwin Technologies</div>
+                    </div>
+                </td>
+                <td width="50%" valign="top" class="student-col" style="padding-left: 5px; padding-bottom: 10px;">
+                    <div class="student-card">
+                        <img src="https://visionastraa.com/images/p18.jpg" alt="Fayas Khan" class="student-img">
+                        <span class="student-name">Fayas Khan</span>
+                        <span class="student-detail">B.Tech, Mechanical Engineering, 2024</span>
+                        <span class="student-detail">Government Engineering College, Thrissur</span>
+                        <div class="placement-badge">Placed at Sun Mobility</div>
+                    </div>
+                </td>
+            </tr>
+             <!-- Row 5 -->
+            <tr>
+                <td width="50%" valign="top" class="student-col" style="padding-right: 5px; padding-bottom: 10px;">
+                    <div class="student-card">
+                        <img src="https://visionastraa.com/images/p6.jpg" alt="Najiya N" class="student-img">
+                        <span class="student-name">Najiya N (2023)</span>
+                        <span class="student-detail">M.Tech, Electrical & Electronics Engg.</span>
+                        <span class="student-detail">College of Engineering, Trivandrum</span>
+                        <div class="placement-badge">Placed at Mecwin Technologies</div>
+                    </div>
+                </td>
+                <td width="50%" valign="top" class="student-col" style="padding-left: 5px; padding-bottom: 10px;">
+                    <div class="student-card">
+                        <img src="https://visionastraa.com/images/p19.jpg" alt="Shalina Nelson" class="student-img">
+                        <span class="student-name">Shalina Nelson</span>
+                        <span class="student-detail">B.Tech, Electrical & Electronics Engg.</span>
+                        <span class="student-detail">GEC, Thrissur</span>
+                        <div class="placement-badge">Placed at Embitel</div>
+                    </div>
+                </td>
+            </tr>
+             <!-- Row 6 -->
+            <tr>
+                <td width="50%" valign="top" class="student-col" style="padding-right: 5px; padding-bottom: 10px;">
+                   <div class="student-card">
+                        <!-- <img src="REPLACE_WITH_AVYAJITH_IMAGE_URL" alt="Avyajith S" class="student-img"> -->
+                        <span class="student-name">Avyajith S (2025)</span>
+                        <span class="student-detail">B.Tech, Electrical & Electronics Engg.</span>
+                        <span class="student-detail">College of Engineering, Trivandrum</span>
+                        <div class="placement-badge">Placed at Chara Technologies</div>
+                    </div>
+                </td>
+                <td width="50%" valign="top" class="student-col" style="padding-left: 5px; padding-bottom: 10px;">
+                    <!-- Empty Cell for balance -->
+                </td>
+            </tr>
+        </table>
+        <!-- Student Grid End -->
 
         <hr style="margin: 25px 0; border: 0; border-top: 1px solid #ddd;">
 
