@@ -416,7 +416,7 @@ EMAIL_BODY_TEMPLATE = """\
         <div class="contact-info">
             <p style="margin: 5px 0;"><strong>📩 Email:</strong><br><a href="mailto:admissions@visionastraa.com">admissions@visionastraa.com</a></p>
             <p style="margin: 5px 0;"><strong>📞 Phone / WhatsApp:</strong><br><a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}">+91 80756 64438</a></p>
-            <p style="margin-top: 10px; color: #d9534f; font-weight: bold;">Admissions for upcoming batch starting in January 2026 is now open! Hurry, limited seats!</p>
+            <p style="margin-top: 10px; color: #d9534f; font-weight: bold;">Admissions for upcoming batch starting in January 2026 is now open!<br><br>Hurry, limited seats!</p>
         </div>
 
         <div class="button-container">
