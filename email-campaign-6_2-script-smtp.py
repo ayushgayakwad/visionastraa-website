@@ -293,7 +293,7 @@ EMAIL_BODY_TEMPLATE = """\
                         <span class="student-name">Athul K N</span>
                         <span class="student-detail">B.Tech, Mechanical Engineering, 2024</span>
                         <span class="student-detail">Government Engineering College, Thrissur</span>
-                        <div class="placement-badge">Placed at Ultraviolette Auto</div>
+                        <div class="placement-badge">Placed at Ultraviolette Automotive</div>
                     </div>
                 </td>
                 <td width="50%" valign="top" class="student-col" style="padding-left: 5px; padding-bottom: 10px;">
@@ -302,7 +302,7 @@ EMAIL_BODY_TEMPLATE = """\
                         <span class="student-name">Aiswarya R</span>
                         <span class="student-detail">M.Tech, Electrical & Electronics Engg., 2023</span>
                         <span class="student-detail">College of Engineering Trivandrum</span>
-                        <div class="placement-badge">Placed at Ultraviolette Auto</div>
+                        <div class="placement-badge">Placed at Ultraviolette Automotive</div>
                     </div>
                 </td>
             </tr>
@@ -313,7 +313,7 @@ EMAIL_BODY_TEMPLATE = """\
                         <img src="https://visionastraa.com/images/p5.jpg" alt="Ashwin Thampi" class="student-img">
                         <span class="student-name">Ashwin Thampi</span>
                         <span class="student-detail">B.Tech, Mechanical Engineering, 2024</span>
-                        <span class="student-detail">GEC, Thrissur</span>
+                        <span class="student-detail">Government Engineering College, Thrissur</span>
                         <div class="placement-badge">Placed at Mecwin Technologies</div>
                     </div>
                 </td>
@@ -343,7 +343,7 @@ EMAIL_BODY_TEMPLATE = """\
                         <img src="https://visionastraa.com/images/p19.jpg" alt="Shalina Nelson" class="student-img">
                         <span class="student-name">Shalina Nelson</span>
                         <span class="student-detail">B.Tech, Electrical & Electronics Engg., 2024</span>
-                        <span class="student-detail">GEC, Thrissur</span>
+                        <span class="student-detail">Government Engineering College, Thrissur</span>
                         <div class="placement-badge">Placed at Embitel</div>
                     </div>
                 </td>
