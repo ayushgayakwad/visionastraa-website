@@ -273,7 +273,7 @@ EMAIL_BODY_TEMPLATE = """\
                         <img src="https://visionastraa.com/images/ardra.jpg" alt="Ardra K" class="student-img">
                         <span class="student-name">Ardra K</span>
                         <span class="student-detail">B.Tech, Electrical & Electronics Engg., 2025</span>
-                        <span class="student-detail">Cochin University of Science and Technology</span>
+                        <span class="student-detail">Cochin University of Science and Technology, Kochi</span>
                         <div class="placement-badge">Placed at Montra Electric</div>
                     </div>
                 </td>
@@ -282,7 +282,7 @@ EMAIL_BODY_TEMPLATE = """\
                         <img src="https://visionastraa.com/images/pranav.jpg" alt="Pranav P" class="student-img">
                         <span class="student-name">Pranav P</span>
                         <span class="student-detail">B.Tech, Mechanical Engineering, 2025</span>
-                        <span class="student-detail">Cochin University of Science and Technology</span>
+                        <span class="student-detail">Cochin University of Science and Technology, Kochi</span>
                         <div class="placement-badge">Placed at Tata Motors</div>
                     </div>
                 </td>
