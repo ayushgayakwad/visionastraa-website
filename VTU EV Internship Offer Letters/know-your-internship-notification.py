@@ -17,27 +17,27 @@ EMAIL_SUBJECT = 'Know Your Internship | VisionAstraa EV Academy'
 
 # --- HARDCODED CREDENTIALS (UPDATE THESE) ---
 # Since this is a private repo, we hardcode them here to avoid GitHub Secrets
-# BATCH_CREDENTIALS = {
-#     1: {
-#         "EMAIL": # "visionastraa@evinternships.com",
-#         "PASSWORD": "a[kE?V6lm7G="
-#     },
-#     2: {
-#         "EMAIL": # "visionastraa@evinternships.in",
-#        "PASSWORD": "]9jw>Upu//Y"
-#     }
-# }
-
 BATCH_CREDENTIALS = {
-     1: {
-         "EMAIL": "careers@visionastraa.in",
-         "PASSWORD": "Z1SIOO0A9b~"
-     },
-     2: {
-         "EMAIL": "visionastraa@evcourse.in",
-         "PASSWORD": ">p>W|jv?Kg1"
-     }
+    1: {
+        "EMAIL": "visionastraa@evinternships.com",
+        "PASSWORD": "a[kE?V6lm7G="
+    },
+    2: {
+        "EMAIL": "visionastraa@evinternships.in",
+        "PASSWORD": "]9jw>Upu//Y"
+    }
 }
+
+# BATCH_CREDENTIALS = {
+#      1: {
+#          "EMAIL": "careers@visionastraa.in",
+#          "PASSWORD": "Z1SIOO0A9b~"
+#      },
+#      2: {
+#          "EMAIL": "visionastraa@evcourse.in",
+#          "PASSWORD": ">p>W|jv?Kg1"
+#      }
+# }
 
 def send_internship_details_email(sender_email, sender_password, name, to_email, role, date_str):
     try:
