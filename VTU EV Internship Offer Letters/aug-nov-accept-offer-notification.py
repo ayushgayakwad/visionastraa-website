@@ -19,12 +19,12 @@ EMAIL_SUBJECT = '[FINAL REMINDER] Urgent Action Required Regarding Your Internsh
 # Since this is a private repo, we hardcode them here to avoid GitHub Secrets
 BATCH_CREDENTIALS = {
     1: {
-        "EMAIL": "careers@visionastraa.in",
-        "PASSWORD": "Z1SIOO0A9b~"
+        "EMAIL": "visionastraa@evinternships.com",
+        "PASSWORD": "a[kE?V6lm7G="
     },
     2: {
-        "EMAIL": "visionastraa@evcourse.in",
-        "PASSWORD": ">p>W|jv?Kg1"
+        "EMAIL": "visionastraa@evinternships.in",
+        "PASSWORD": "]9jw>Upu//Y"
     }
 }
 
