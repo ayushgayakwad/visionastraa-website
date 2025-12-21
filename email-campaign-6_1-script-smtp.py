@@ -291,13 +291,13 @@ EMAIL_BODY_TEMPLATE = """\
                 <div class="student-cell">
                     <img src="https://visionastraa.com/images/pratik-p.jpg" alt="Pratik Punyawant" class="student-img">
                     <span class="student-name">Pratik Punyawant</span>
-                    <span class="student-detail">B.Tech in EEE</span>
+                    <span class="student-detail">B.Tech in EEE, 2023</span>
                     <span class="student-college">K.L.E. Institute of Technology, Hubli</span>
                 </div>
                 <div class="student-cell">
                     <img src="https://visionastraa.com/images/tejashwini.jpg" alt="Tejaswini Nagavi" class="student-img">
                     <span class="student-name">Tejaswini Nagavi</span>
-                    <span class="student-detail">B.Tech in EEE</span>
+                    <span class="student-detail">B.Tech in EEE, 2025</span>
                     <span class="student-college">S.D.M. College of Engineering & Technology, Dharwad</span>
                 </div>
             </div>
@@ -307,13 +307,13 @@ EMAIL_BODY_TEMPLATE = """\
                 <div class="student-cell">
                     <img src="https://visionastraa.com/images/akash-sn.jpg" alt="Akash S N" class="student-img">
                     <span class="student-name">Akash S N</span>
-                    <span class="student-detail">B.Tech in EEE</span>
+                    <span class="student-detail">B.Tech in EEE, 2025</span>
                     <span class="student-college">S.D.M. College of Engineering & Technology, Dharwad</span>
                 </div>
                 <div class="student-cell">
                     <img src="https://visionastraa.com/images/devika-m.jpg" alt="Devika Manoj" class="student-img">
                     <span class="student-name">Devika Manoj</span>
-                    <span class="student-detail">M.Tech in Power Electronics</span>
+                    <span class="student-detail">M.Tech in Power Electronics, 2025</span>
                     <span class="student-college">College of Engineering Trivandrum, Thiruvananthapuram</span>
                 </div>
             </div>
@@ -323,13 +323,13 @@ EMAIL_BODY_TEMPLATE = """\
                 <div class="student-cell">
                     <img src="https://visionastraa.com/images/amrutha.jpg" alt="Amrutha Mohan" class="student-img">
                     <span class="student-name">Amrutha Mohan</span>
-                    <span class="student-detail">M.Tech in Mechatronics</span>
+                    <span class="student-detail">M.Tech in Mechatronics, 2025</span>
                     <span class="student-college">Vellore Institute of Technology, Vellore</span>
                 </div>
                 <div class="student-cell">
                     <img src="https://visionastraa.com/images/ardra.jpg" alt="Ardra K" class="student-img">
                     <span class="student-name">Ardra K</span>
-                    <span class="student-detail">B.Tech in ECE</span>
+                    <span class="student-detail">B.Tech in ECE, 2025</span>
                     <span class="student-college">Cochin University of Science and Technology, Kochi</span>
                 </div>
             </div>
@@ -339,13 +339,13 @@ EMAIL_BODY_TEMPLATE = """\
                 <div class="student-cell">
                     <img src="https://visionastraa.com/images/kamalkannana.jpg" alt="Kamalakannan Selvam" class="student-img">
                     <span class="student-name">Kamalakannan Selvam</span>
-                    <span class="student-detail">B.Tech in EEE</span>
+                    <span class="student-detail">B.Tech in EEE, 2025</span>
                     <span class="student-college">University College of Engineering, Bitcampus Tiruchirappalli</span>
                 </div>
                 <div class="student-cell">
                     <img src="https://visionastraa.com/images/harikaran.jpg" alt="Harikaran S" class="student-img">
                     <span class="student-name">Harikaran S</span>
-                    <span class="student-detail">B.Tech in EEE</span>
+                    <span class="student-detail">B.Tech in EEE, 2025</span>
                     <span class="student-college">University College of Engineering, Bitcampus Tiruchirappalli</span>
                 </div>
             </div>
