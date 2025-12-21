@@ -259,7 +259,9 @@ EMAIL_BODY_TEMPLATE = """\
         <div class="logo-container">
             <img src="https://visionastraa.com/images/EV_Academy.png" alt="EV Academy Logo" style="max-width: 150px;">
         </div>
-        
+
+        <h1>Montra Electric Hires from VisionAstraa EV Academy!</h1>
+
         <!-- Montra Electric Vehicles Showcase -->
         <table class="vehicle-table" border="0" cellpadding="0" cellspacing="0">
             <tr>
@@ -271,8 +273,6 @@ EMAIL_BODY_TEMPLATE = """\
                 </td>
             </tr>
         </table>
-
-        <h1>Montra Electric Hires from VisionAstraa EV Academy!</h1>
 
         <p>Dear {first_name},</p>
 
