@@ -301,7 +301,7 @@ EMAIL_BODY_TEMPLATE = """\
                         <img src="https://visionastraa.com/images/p2.jpg" alt="Aiswarya R" class="student-img">
                         <span class="student-name">Aiswarya R</span>
                         <span class="student-detail">M.Tech, Electrical & Electronics Engg., 2023</span>
-                        <span class="student-detail">College of Engineering Trivandrum</span>
+                        <span class="student-detail">College of Engineering, Trivandrum</span>
                         <div class="placement-badge">Placed at Ultraviolette Automotive</div>
                     </div>
                 </td>
