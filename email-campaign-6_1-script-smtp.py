@@ -25,17 +25,17 @@ SMTP_ACCOUNTS = [
     }
 ]
 
-# Updated Campaign ID for the new email content
+# Updated Campaign ID
 CAMPAIGN_ID = "ev_marketing_campaign_3_1_december_2025"
 
-EMAIL_SUBJECT = "⭐ Another Milestone at VisionAstraa EV Academy!"
+EMAIL_SUBJECT = "Montra Electric Hires from VisionAstraa EV Academy!"
 
 EMAIL_BODY_TEMPLATE = """\
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Another Milestone at VisionAstraa EV Academy!</title>
+    <title>Montra Electric Hires from VisionAstraa EV Academy!</title>
     <style>
         body {{
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -77,16 +77,6 @@ EMAIL_BODY_TEMPLATE = """\
             border-radius: 4px;
             text-align: center;
         }}
-        h4 {{
-            font-size: 16px;
-            color: #555;
-            margin-top: 20px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-left: 4px solid #28a745;
-            padding-left: 10px;
-        }}
         p, li {{
             font-size: 16px;
             margin-top: 0px;
@@ -111,41 +101,74 @@ EMAIL_BODY_TEMPLATE = """\
             color: #ff5722;
             font-weight: bold;
         }}
-        /* Student Profile Styles */
-        .student-card {{
+        
+        /* Grid Layout for Students */
+        .student-grid {{
+            display: table; /* Fallback for older clients */
+            width: 100%;
+            text-align: center;
+            border-spacing: 10px; /* Space between cells */
+            border-collapse: separate; 
+        }}
+        .student-row {{
+            display: table-row;
+        }}
+        .student-cell {{
+            display: table-cell;
+            width: 50%;
+            vertical-align: top;
             background: #f9f9f9;
             border-radius: 8px;
             border: 1px solid #e0e0e0;
-            padding: 25px;
-            text-align: center;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }}
+        
+        /* Responsive Block for Mobile */
+        @media only screen and (max-width: 480px) {{
+            .student-grid, .student-row, .student-cell {{
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }}
+            .student-cell {{
+                margin-bottom: 15px;
+            }}
+        }}
+
         .student-img {{
-            width: 150px;
-            height: 200px; /* Changed to 3:4 Aspect Ratio */
-            border-radius: 8px; /* Rounded rectangle instead of circle */
+            width: 100px;
+            height: 133px; /* 3:4 Aspect Ratio */
+            border-radius: 6px;
             object-fit: cover;
-            margin-bottom: 15px;
-            border: 4px solid #28a745;
-            background-color: #ddd; /* Placeholder color */
+            margin-bottom: 10px;
+            border: 3px solid #28a745;
+            background-color: #ddd;
             display: inline-block;
         }}
         .student-name {{
             font-weight: bold;
             color: #333;
-            font-size: 20px;
+            font-size: 15px;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }}
         .student-detail {{
-            font-size: 15px;
+            font-size: 13px;
             color: #555;
             font-weight: 500;
-            line-height: 1.4;
+            line-height: 1.3;
             display: block;
+            margin-bottom: 2px;
         }}
-        
+        .student-college {{
+            font-size: 11px;
+            color: #777;
+            font-style: italic;
+            display: block;
+            margin-top: 4px;
+        }}
+
         .button-container {{
             text-align: center;
             margin: 30px 0px 10px 0px;
@@ -210,28 +233,17 @@ EMAIL_BODY_TEMPLATE = """\
         .hands-on-section {{
             margin: 30px 0;
         }}
-
-        .hands-on-title {{
-            font-size: 20px;
-            margin-bottom: 15px;
-            margin-top: 25px;
-            border-bottom: 2px solid #e9ecef;
-            padding-bottom: 10px;
-            color: #28a745;
+        .vehicle-showcase {{
+            margin-bottom: 20px;
             text-align: center;
         }}
-
-        .hands-on-img {{
-            width: 100%;
-            max-width: 180px;
+        .vehicle-img {{
+            width: 48%;
+            max-width: 260px;
             border-radius: 6px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-        }}
-
-        .hands-on-caption {{
-            font-size: 14px;
-            color: #555;
-            margin-top: 8px;
+            display: inline-block;
+            margin: 1%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }}
     </style>
 </head>
@@ -240,81 +252,98 @@ EMAIL_BODY_TEMPLATE = """\
         <div class="logo-container">
             <img src="https://visionastraa.com/images/EV_Academy.png" alt="EV Academy Logo" style="max-width: 150px;">
         </div>
+        
+        <!-- Montra Electric Vehicles Showcase -->
+        <div class="vehicle-showcase">
+            <img src="https://visionastraa.com/images/montra-3w.png" alt="Montra Electric 3-Wheeler" class="vehicle-img">
+            <img src="https://visionastraa.com/images/montra-4w.png" alt="Montra Electric 4-Wheeler" class="vehicle-img">
+        </div>
 
-        <h1>⭐ Another Milestone at VisionAstraa EV Academy!</h1>
+        <h1>Montra Electric Hires from VisionAstraa EV Academy!</h1>
 
         <p>Dear {first_name},</p>
 
         <p>
-            Before the completion of the program, we are proud to share that <strong>8 of our students</strong> have been successfully placed at <span class="highlight">Montra Electric</span>, a leading name in India’s EV ecosystem.
+            We are glad to share with you that <strong>Montra Electric (Murugappa Group Company)</strong>, a leader in the Electric Vehicle Industry based out of Chennai have hired <strong>8 of our engineering students</strong> from Batch 2 for full-time roles in their R&D department.
         </p>
-
         <p>
-            This achievement reflects the strong technical foundation, hands-on exposure, and focused interview preparation our students receive throughout the program.
+            This achievement reflects the strong technical foundation, hands-on exposure and focused interview preparation each of our students get during the <strong>4-month hands-on in-person training in Electric PowerTrain Design</strong>, which is open for graduates from EEE, ECE, Mechatronics & Mechanical backgrounds.
         </p>
 
         <h3>🎉 Congratulations to Our Placed Students</h3>
 
-        <h4>From Karnataka:</h4>
-        
-        <div class="student-card">
-            <!-- TODO: Replace src with actual image URL for Devika -->
-            <img src="https://visionastraa.com/images/pratik-p.jpg" alt="Pratik Punyawant" class="student-img">
-            <span class="student-name">Pratik Punyawant</span>
-            <span class="student-detail">B.Tech in EEE</span>
-        </div>
+        <div class="student-grid">
+            <!-- Row 1 -->
+            <div class="student-row">
+                <div class="student-cell">
+                    <img src="https://visionastraa.com/images/pratik-p.jpg" alt="Pratik Punyawant" class="student-img">
+                    <span class="student-name">Pratik Punyawant</span>
+                    <span class="student-detail">B.Tech in EEE</span>
+                    <span class="student-college">K.L.E. Institute of Technology, Hubli</span>
+                    <span class="student-detail" style="margin-top:5px; color:#28a745;">Batch of 2025</span>
+                </div>
+                <div class="student-cell">
+                    <img src="https://visionastraa.com/images/tejashwini.jpg" alt="Tejaswini Nagavi" class="student-img">
+                    <span class="student-name">Tejaswini Nagavi</span>
+                    <span class="student-detail">B.Tech in EEE</span>
+                    <span class="student-college">S.D.M. College of Engineering & Technology, Dharwad</span>
+                    <span class="student-detail" style="margin-top:5px; color:#28a745;">Batch of 2025</span>
+                </div>
+            </div>
+            
+            <!-- Row 2 -->
+            <div class="student-row">
+                <div class="student-cell">
+                    <img src="https://visionastraa.com/images/akash-sn.jpg" alt="Akash S N" class="student-img">
+                    <span class="student-name">Akash S N</span>
+                    <span class="student-detail">B.Tech in EEE</span>
+                    <span class="student-college">S.D.M. College of Engineering & Technology, Dharwad</span>
+                    <span class="student-detail" style="margin-top:5px; color:#28a745;">Batch of 2025</span>
+                </div>
+                <div class="student-cell">
+                    <img src="https://visionastraa.com/images/devika-m.jpg" alt="Devika Manoj" class="student-img">
+                    <span class="student-name">Devika Manoj</span>
+                    <span class="student-detail">M.Tech in Power Electronics</span>
+                    <span class="student-college">College of Engineering Trivandrum, Thiruvananthapuram</span>
+                    <span class="student-detail" style="margin-top:5px; color:#28a745;">Batch of 2025</span>
+                </div>
+            </div>
 
-        <div class="student-card">
-            <!-- TODO: Replace src with actual image URL for Amrutha -->
-            <img src="https://visionastraa.com/images/tejashwini.jpg" alt="Tejaswini Nagavi" class="student-img">
-            <span class="student-name">Tejaswini Nagavi</span>
-            <span class="student-detail">B.Tech in EEE</span>
-        </div>
+            <!-- Row 3 -->
+            <div class="student-row">
+                <div class="student-cell">
+                    <img src="https://visionastraa.com/images/amrutha.jpg" alt="Amrutha Mohan" class="student-img">
+                    <span class="student-name">Amrutha Mohan</span>
+                    <span class="student-detail">M.Tech in Mechatronics</span>
+                    <span class="student-college">Vellore Institute of Technology, Vellore</span>
+                    <span class="student-detail" style="margin-top:5px; color:#28a745;">Batch of 2025</span>
+                </div>
+                <div class="student-cell">
+                    <img src="https://visionastraa.com/images/ardra.jpg" alt="Ardra K" class="student-img">
+                    <span class="student-name">Ardra K</span>
+                    <span class="student-detail">B.Tech in ECE</span>
+                    <span class="student-college">Cochin University of Science and Technology, Kochi</span>
+                    <span class="student-detail" style="margin-top:5px; color:#28a745;">Batch of 2025</span>
+                </div>
+            </div>
 
-        <div class="student-card">
-            <!-- TODO: Replace src with actual image URL for Ardra -->
-            <img src="https://visionastraa.com/images/akash-sn.jpg" alt="Akash S N" class="student-img">
-            <span class="student-name">Akash S N</span>
-            <span class="student-detail">B.Tech in EEE</span>
-        </div>
-
-        <h4>From Kerala:</h4>
-        
-        <div class="student-card">
-            <!-- TODO: Replace src with actual image URL for Devika -->
-            <img src="https://visionastraa.com/images/devika-m.jpg" alt="Devika Manoj" class="student-img">
-            <span class="student-name">Devika Manoj</span>
-            <span class="student-detail">M.Tech in Power Electronics</span>
-        </div>
-
-        <div class="student-card">
-            <!-- TODO: Replace src with actual image URL for Amrutha -->
-            <img src="https://visionastraa.com/images/amrutha.jpg" alt="Amrutha Mohan" class="student-img">
-            <span class="student-name">Amrutha Mohan</span>
-            <span class="student-detail">M.Tech in Mechatronics</span>
-        </div>
-
-        <div class="student-card">
-            <!-- TODO: Replace src with actual image URL for Ardra -->
-            <img src="https://visionastraa.com/images/ardra.jpg" alt="Ardra" class="student-img">
-            <span class="student-name">Ardra</span>
-            <span class="student-detail">B.Tech in EEE</span>
-        </div>
-
-        <h4>From Tamil Nadu:</h4>
-        
-        <div class="student-card">
-            <!-- TODO: Replace src with actual image URL for Kamal -->
-            <img src="https://visionastraa.com/images/kamalkannana.jpg" alt="Kamal" class="student-img">
-            <span class="student-name">Kamal</span>
-            <span class="student-detail">B.Tech in EEE</span>
-        </div>
-
-        <div class="student-card">
-            <!-- TODO: Replace src with actual image URL for Harikaran -->
-            <img src="https://visionastraa.com/images/harikaran.jpg" alt="Harikaran" class="student-img">
-            <span class="student-name">Harikaran</span>
-            <span class="student-detail">B.Tech in EEE</span>
+            <!-- Row 4 -->
+            <div class="student-row">
+                <div class="student-cell">
+                    <img src="https://visionastraa.com/images/kamalkannana.jpg" alt="Kamalakannan Selvam" class="student-img">
+                    <span class="student-name">Kamalakannan Selvam</span>
+                    <span class="student-detail">B.Tech in EEE</span>
+                    <span class="student-college">University College of Engineering, Bitcampus Tiruchirappalli</span>
+                    <span class="student-detail" style="margin-top:5px; color:#28a745;">Batch of 2025</span>
+                </div>
+                <div class="student-cell">
+                    <img src="https://visionastraa.com/images/harikaran.jpg" alt="Harikaran S" class="student-img">
+                    <span class="student-name">Harikaran S</span>
+                    <span class="student-detail">B.Tech in EEE</span>
+                    <span class="student-college">University College of Engineering, Bitcampus Tiruchirappalli</span>
+                    <span class="student-detail" style="margin-top:5px; color:#28a745;">Batch of 2025</span>
+                </div>
+            </div>
         </div>
         
         <br>
@@ -322,7 +351,7 @@ EMAIL_BODY_TEMPLATE = """\
             Their placements at <strong>Montra Electric</strong> highlight how candidates from diverse academic backgrounds and regions can successfully transition into the EV industry with the right guidance and practical training.
         </p>
 
-        <!-- Group Image Added Here -->
+        <!-- Group Image -->
         <div style="text-align: center; margin: 25px 0;">
             <img src="https://visionastraa.com/images/group-1.jpg" alt="VisionAstraa Students Placed at Montra Electric" style="width:100%; max-width:600px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
         </div>
@@ -330,12 +359,10 @@ EMAIL_BODY_TEMPLATE = """\
         <hr style="margin: 25px 0; border: 0; border-top: 1px solid #ddd;">
 
         <div class="hands-on-section">
-            <h2 class="hands-on-title">Learning by Doing at VisionAstraa</h2>
-
+            <h2 class="hands-on-title" style="text-align:center;">Learning by Doing at VisionAstraa</h2>
             <p style="text-align:center;">
                 Students gain real-world EV expertise through intensive hands-on lab sessions and practical training.
             </p>
-
             <table width="100%" cellpadding="0" cellspacing="0" align="center" style="margin-top:20px;">
                 <tr>
                     <td align="center" width="50%" style="padding-right:10px;">
@@ -383,13 +410,13 @@ EMAIL_BODY_TEMPLATE = """\
 
         <h2>🚀 Your EV Career Can Start Here</h2>
         <p>
-            If you’re looking to build a career in the Electric Vehicle domain, now is the right time.
+            If interested to pursue a career in the Electric Vehicle Industry, please contact us immediately to join our next batch starting in <strong>January 2026!</strong> Seats are limited & filling up quickly!
         </p>
 
         <div class="contact-info">
             <p style="margin: 5px 0;"><strong>📩 Email:</strong><br><a href="mailto:admissions@visionastraa.com">admissions@visionastraa.com</a></p>
             <p style="margin: 5px 0;"><strong>📞 Phone / WhatsApp:</strong><br><a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}">+91 80756 64438</a></p>
-            <p style="margin-top: 10px; color: #d9534f; font-weight: bold;">Admissions for the upcoming batch are open.</p>
+            <p style="margin-top: 10px; color: #d9534f; font-weight: bold;">Admissions for upcoming batch starting in January 2026 is now open! Hurry, limited seats!</p>
         </div>
 
         <div class="button-container">

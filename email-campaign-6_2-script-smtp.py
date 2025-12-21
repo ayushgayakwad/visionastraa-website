@@ -237,6 +237,8 @@ EMAIL_BODY_TEMPLATE = """\
             Students from Kerala continue to demonstrate how strong fundamentals and focused industry training can translate into real career outcomes in the EV and automotive sector.
         </p>
 
+        <p>If you are an engineering graduate with B.Tech or M.Tech degree in EEE, ECE, Mechanical (or allied branches ) and interested to pursue a career in the Electric Vehicle Industry, please contact us immediately to join our next batch starting in January 2026! Seats are limited & filling up quickly!</p>
+
         <p>We’re happy to share the successful placements of the following students:</p>
 
         <h3>🎓 Student Placements – Kerala</h3>
@@ -415,7 +417,7 @@ EMAIL_BODY_TEMPLATE = """\
         <div class="contact-info">
             <p style="margin: 5px 0;"><strong>📧 Email:</strong><br><a href="mailto:admissions@visionastraa.com">admissions@visionastraa.com</a></p>
             <p style="margin: 5px 0;"><strong>📞 Phone / WhatsApp:</strong><br><a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}">+91 80756 64438</a></p>
-            <p style="margin-top: 10px; color: #d9534f; font-weight: bold;">Admissions for the upcoming batch are now open.</p>
+            <p style="margin-top: 10px; color: #d9534f; font-weight: bold;">Admissions for upcoming batch starting in January 2026 is now open! Hurry, limited seats!</p>
         </div>
 
         <div class="button-container">
