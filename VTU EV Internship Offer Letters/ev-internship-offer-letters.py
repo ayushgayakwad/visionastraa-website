@@ -17,7 +17,7 @@ import argparse
 import math
 
 # ---------------- CONFIG ----------------
-CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_offer_released_applicants_39.csv'
+CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_offer_released_applicants_40.csv'
 PDF_TEMPLATE_PATH = 'VTU EV Internship Offer Letters/Template.pdf'
 OUTPUT_DIRECTORY = 'VTU EV Internship Offer Letters/Generated_Offer_Letters'
 
