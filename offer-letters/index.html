@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisionAstraa Offer Letter Dashboard</title>
+    <!-- Tailwind CSS for Styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- PDF-Lib for PDF Generation -->
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .loader {
+            border-top-color: #3498db;
+            -webkit-animation: spinner 1.5s linear infinite;
+            animation: spinner 1.5s linear infinite;
+        }
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen font-sans">
+
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        
+        <!-- Header -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8 border-l-4 border-blue-600">
+            <h1 class="text-2xl font-bold text-gray-800"><i class="fas fa-file-signature mr-2"></i>Offer Letter Generator</h1>
+            <p class="text-gray-600 mt-2">Generate and send offer letters directly via SMTP.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Form Section -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-semibold mb-4 text-gray-700 border-b pb-2">Candidate Details</h2>
+                
+                <form id="offerForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Candidate Name</label>
+                        <input type="text" id="candidateName" placeholder="e.g. John Doe" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Candidate Email</label>
+                        <input type="email" id="candidateEmail" placeholder="e.g. john@example.com" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Internship Role</label>
+                        <select id="candidateRole" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm" required>
+                            <option value="">Select a Role...</option>
+                            <option value="Full Stack Development for Electric Vehicle">Full Stack Development for Electric Vehicle</option>
+                            <option value="Full Stack Development for EV">Full Stack Development for EV</option>
+                            <option value="Web Development for Electric Vehicle">Web Development for Electric Vehicle</option>
+                            <option value="Web Development for EV">Web Development for EV</option>
+                            <option value="Data Science for Electric Vehicle">Data Science for Electric Vehicle</option>
+                            <option value="Data Science for EV">Data Science for EV</option>
+                            <option value="DESIGN & DEVELOPMENT OF ELECTRIC VEHICLE ( Mechanical , Mechatronics , Automobile )">DESIGN & DEVELOPMENT OF ELECTRIC VEHICLE (Mechanical, Mechatronics, Automobile)</option>
+                            <option value="EMBEDDED SYSTEMS FOR ELECTRIC VEHICLE ( Microcontrollers , IOT , Mechatronics , ADAS )">EMBEDDED SYSTEMS FOR ELECTRIC VEHICLE (Microcontrollers, IOT, Mechatronics, ADAS)</option>
+                            <option value="AI/ML FOR ELECTRIC VEHICLE ( Data Science , Cyber Security , Machine Learning , Data Analytics , Full Stack Development , Artificial intelligence )">AI/ML FOR ELECTRIC VEHICLE</option>
+                            <option value="DESIGN & DEVELOPMENT OF EV ( Mechanical , Mechatronics , Automobile )">DESIGN & DEVELOPMENT OF EV (Mechanical, Mechatronics, Automobile)</option>
+                            <option value="EMBEDDED SYSTEMS FOR EV ( Microcontrollers , Mechatronics , IOT , ADAS )">EMBEDDED SYSTEMS FOR EV (Microcontrollers, Mechatronics, IOT, ADAS)</option>
+                            <option value="AI/ML FOR EV ( Data Science , Cybersecurity , Machine Learning , Data Analytics , Full Stack Development , Artificial intelligence )">AI/ML FOR EV</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Sender Account</label>
+                        <select id="senderAccount" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm">
+                            <option value="1">visionastraa@evinternships.com</option>
+                            <option value="2">visionastraa@evinternships.in</option>
+                        </select>
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit" id="sendBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 flex justify-center items-center">
+                            <span id="btnText">Generate & Send Offer</span>
+                            <div id="btnLoader" class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-6 w-6 ml-3 hidden"></div>
+                        </button>
+                    </div>
+                </form>
+                
+                <div id="statusMessage" class="mt-4 hidden p-3 rounded text-sm"></div>
+            </div>
+
+            <!-- Preview Section -->
+            <div class="bg-gray-50 rounded-lg shadow-lg p-6 flex flex-col items-center justify-center min-h-[400px] border-2 border-dashed border-gray-300">
+                <i class="fas fa-file-pdf text-6xl text-gray-300 mb-4"></i>
+                <h3 class="text-lg font-medium text-gray-500">PDF Preview</h3>
+                <p class="text-sm text-gray-400 text-center mt-2">The generated PDF will be processed here internally before sending.</p>
+                <div id="pdfDownloadLink" class="mt-4 hidden">
+                    <a href="#" class="text-blue-600 underline text-sm hover:text-blue-800">Download Last Generated PDF</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { PDFDocument, StandardFonts, rgb } = PDFLib;
+
+        // Configuration
+        const TEMPLATE_URL = 'Template.pdf'; // Ensure this file exists in the same directory!
+
+        document.getElementById('offerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('candidateName').value;
+            const email = document.getElementById('candidateEmail').value;
+            const role = document.getElementById('candidateRole').value;
+            const account = document.getElementById('senderAccount').value;
+            const btn = document.getElementById('sendBtn');
+            const btnText = document.getElementById('btnText');
+            const btnLoader = document.getElementById('btnLoader');
+            const statusDiv = document.getElementById('statusMessage');
+
+            // UI Loading State
+            btn.disabled = true;
+            btnText.innerText = 'Processing...';
+            btnLoader.classList.remove('hidden');
+            statusDiv.classList.add('hidden');
+
+            try {
+                // 1. Load Template
+                const existingPdfBytes = await fetch(TEMPLATE_URL).then(res => {
+                    if (!res.ok) throw new Error("Template.pdf not found in current directory");
+                    return res.arrayBuffer();
+                });
+
+                // 2. Modify PDF
+                const pdfDoc = await PDFDocument.load(existingPdfBytes);
+                const pages = pdfDoc.getPages();
+                const firstPage = pages[0];
+                const { width, height } = firstPage.getSize();
+                const font = await pdfDoc.embedFont(StandardFonts.TimesRoman);
+                const boldFont = await pdfDoc.embedFont(StandardFonts.TimesRomanBold);
+
+                // Coordinates matching your Python script logic (approximate conversion)
+                // Python: top_margin = page_height * 0.775, left_margin = 45
+                // PDF-Lib uses points, (0,0) is bottom-left.
+                
+                const fontSize = 14;
+                const lineHeight = 18;
+                const leftMargin = 45;
+                const topStart = height * 0.775; 
+
+                // Construct Text
+                // Note: PDF-Lib doesn't support HTML/RichText easily. We draw line by line.
+                // Simplified text placement for reliability:
+                
+                const textLines = [
+                    { text: `Dear ${name},`, font: boldFont },
+                    { text: " ", font: font },
+                    { text: `We are pleased to offer you an Internship in ${role}`, font: font }, // We can't bold mid-sentence easily, rendering whole line
+                    { text: "at VisionAstraa EV Academy with effect from January 2026.", font: font },
+                    { text: "We are excited to welcome you onboard.", font: font },
+                    { text: " ", font: font },
+                    { text: "As an Intern, you will be part of a collaborative environment where you will", font: font },
+                    { text: "learn and contribute to impactful projects in the electric vehicle (EV)", font: font },
+                    { text: "domain. You will gain hands-on experience and have the opportunity to", font: font },
+                    { text: "apply your academic knowledge to real-world applications while developing", font: font },
+                    { text: "practical skills that will strengthen your career prospects.", font: font },
+                    { text: " ", font: font },
+                    { text: "At VisionAstraa EV Academy, we are committed to a supportive and", font: font },
+                    { text: "enriching learning environment. Our aim is to empower you with relevant,", font: font },
+                    { text: "hands-on experience and to support your growth in the EV industry.", font: font },
+                    { text: " ", font: font },
+                    { text: "We look forward to working with you and hope this internship will be a", font: font },
+                    { text: "valuable step in your professional journey.", font: font }
+                ];
+
+                let y = topStart;
+                for (const line of textLines) {
+                    firstPage.drawText(line.text, {
+                        x: leftMargin,
+                        y: y,
+                        size: fontSize,
+                        font: line.font,
+                        color: rgb(0, 0, 0),
+                    });
+                    y -= lineHeight;
+                }
+
+                // 3. Save PDF
+                const pdfBytes = await pdfDoc.save();
+                const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                
+                // Allow Download for Verification
+                const pdfUrl = URL.createObjectURL(blob);
+                const downloadLink = document.getElementById('pdfDownloadLink');
+                const linkTag = downloadLink.querySelector('a');
+                linkTag.href = pdfUrl;
+                linkTag.download = `Offer_Letter_${name.replace(/\s+/g, '_')}.pdf`;
+                downloadLink.classList.remove('hidden');
+
+                // 4. Send to Backend
+                const reader = new FileReader();
+                reader.readAsDataURL(blob); 
+                reader.onloadend = async function() {
+                    const base64data = reader.result.split(',')[1];
+
+                    const formData = new FormData();
+                    formData.append('pdf_data', base64data);
+                    formData.append('name', name);
+                    formData.append('email', email);
+                    formData.append('role', role);
+                    formData.append('account_id', account);
+
+                    try {
+                        const response = await fetch('send_offer.php', {
+                            method: 'POST',
+                            body: formData
+                        });
+                        
+                        const result = await response.json();
+
+                        if (result.success) {
+                            statusDiv.innerHTML = `<span class="text-green-600 font-bold"><i class="fas fa-check-circle"></i> Success: ${result.message}</span>`;
+                            statusDiv.className = "mt-4 p-3 rounded text-sm bg-green-100 border border-green-400 block";
+                            document.getElementById('offerForm').reset();
+                        } else {
+                            throw new Error(result.message);
+                        }
+                    } catch (err) {
+                        statusDiv.innerHTML = `<span class="text-red-600 font-bold"><i class="fas fa-exclamation-circle"></i> Error: ${err.message}</span>`;
+                        statusDiv.className = "mt-4 p-3 rounded text-sm bg-red-100 border border-red-400 block";
+                    } finally {
+                        btn.disabled = false;
+                        btnText.innerText = 'Generate & Send Offer';
+                        btnLoader.classList.add('hidden');
+                    }
+                }
+
+            } catch (error) {
+                console.error(error);
+                statusDiv.innerHTML = `<span class="text-red-600 font-bold">System Error: ${error.message}</span>`;
+                statusDiv.className = "mt-4 p-3 rounded text-sm bg-red-100 border border-red-400 block";
+                btn.disabled = false;
+                btnText.innerText = 'Generate & Send Offer';
+                btnLoader.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
