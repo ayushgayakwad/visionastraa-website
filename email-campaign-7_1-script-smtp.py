@@ -313,18 +313,18 @@ EMAIL_BODY_TEMPLATE = """\
             <!-- Row 2 -->
             <div class="student-row">
                 <div class="student-cell">
-                    <img src="https://visionastraa.com/images/nisaraga.jpg" alt="Nisarga Goudar" class="student-img">
-                    <span class="student-name">Nisarga Goudar</span>
-                    <span class="student-detail">B.Tech in EEE</span>
-                    <span class="student-college">K.L.E. Institute of Technology, Hubli</span>
-                    <span class="hired-tag">Hired at Royal Enfield</span>
-                </div>
-                <div class="student-cell">
                     <img src="https://visionastraa.com/images/rishabh.jpg" alt="Rishabh Bhansali" class="student-img">
                     <span class="student-name">Rishabh Bhansali</span>
                     <span class="student-detail">M.Tech in Mechatronics</span>
                     <span class="student-college">Vellore Institute of Technology, Vellore</span>
                     <span class="hired-tag">Hired at Euler Motors</span>
+                </div>
+                <div class="student-cell">
+                    <img src="https://visionastraa.com/images/nisaraga.jpg" alt="Nisarga Goudar" class="student-img">
+                    <span class="student-name">Nisarga Goudar</span>
+                    <span class="student-detail">B.Tech in EEE</span>
+                    <span class="student-college">K.L.E. Institute of Technology, Hubli</span>
+                    <span class="hired-tag">Hired at Royal Enfield</span>
                 </div>
             </div>
 
@@ -343,7 +343,6 @@ EMAIL_BODY_TEMPLATE = """\
             </div>
         </div>
         
-        <br>
         <p>
             Their placements highlight how candidates from diverse academic backgrounds can successfully transition into the EV industry with the right guidance and practical training.
         </p>
