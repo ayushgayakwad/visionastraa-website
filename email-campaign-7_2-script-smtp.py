@@ -489,7 +489,7 @@ def main():
         query = f"""
             SELECT email, first_name 
             FROM {tbl} 
-            WHERE emailSent=0 
+            WHERE emailSent_2=0 
             AND email NOT IN (SELECT email FROM unsubscribed_emails)
             AND state IN ('Kerala', 'Tamil Nadu')
             AND MOD(CRC32(email), %s) = %s
@@ -532,7 +532,7 @@ def main():
 
                 update_cursor = conn.cursor()
                 try:
-                    update_cursor.execute(f"UPDATE {tbl} SET emailSent=1 WHERE email=%s", (row['email'],))
+                    update_cursor.execute(f"UPDATE {tbl} SET emailSent_2=1 WHERE email=%s", (row['email'],))
                     conn.commit()
                 except mysql.connector.Error as e:
                     print(f"❌ Error updating emailSent_2 flag for {row['email']}: {e}")
