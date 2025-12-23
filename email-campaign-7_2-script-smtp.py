@@ -271,9 +271,9 @@ EMAIL_BODY_TEMPLATE = """\
                 <td width="50%" valign="top" class="student-col" style="padding-right: 5px; padding-bottom: 10px;">
                     <div class="student-card">
                         <img src="https://visionastraa.com/images/arun-r.jpg" alt="Arun R" class="student-img">
-                        <span class="student-name">Arun R</span>
+                        <span class="student-name">Arun R Kamala</span>
                         <span class="student-detail">B.Tech, EEE, 2025</span>
-                        <span class="student-detail">Amman Institute of Technology, Sathyamangalam</span>
+                        <span class="student-detail">Bannari Amman Institute of Technology, Sathyamangalam</span>
                         <div class="placement-badge">Placed at Euler Motors</div>
                     </div>
                 </td>
