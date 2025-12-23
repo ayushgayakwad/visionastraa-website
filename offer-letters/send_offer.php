@@ -43,33 +43,65 @@ $pdfContent = base64_decode($pdfBase64);
 $subject = "Internship OFFER LETTER from VisionAstraa EV Academy";
 $body = "
 <html>
-<head><style>body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }</style></head>
+<head><style>body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; } a { color: #0066cc; text-decoration: none; } a:hover { text-decoration: underline; }</style></head>
 <body>
-    <p>Hello <strong>$name</strong>,</p>
-    <p><strong>CONGRATULATIONS</strong> for getting selected for Internship in <strong>$role</strong> and your starting date is <strong>January, 2026</strong>.</p>
-    
-    <p><strong>Kindly accept the offer in the VTU Portal by paying the internship acceptance fees and follow the steps below:</strong></p>
-    <ul>
-        <li>Enter the URL (<a href='https://vtu.internyet.in'>https://vtu.internyet.in</a>)</li>
-        <li>Login using your username and password</li>
-        <li>Navigate to `Applied Internships` section in the dashboard</li>
-        <li>Click on the `Accept` button to accept <strong>VisionAstraa EV Academy's offer</strong>.</li>
-    </ul>
-
-    <p><strong>Please note: Kindly accept this offer within 5 days from the date of this email. Offers not accepted within this period will be considered expired.</strong></p>
-
-    <p>We also request you to fill out the following application form at your earliest convenience:</p>
-    <p><strong>Application Form Link:</strong> <a href='https://visionastraa.com/ev-internship-application.html'>https://visionastraa.com/ev-internship-application.html</a></p>
-    <p>In the form, please select <strong>January 2026</strong> as commencement date and confirm your VTU portal acceptance.</p>
-
-    <p>To ensure a smooth onboarding process, please join the WhatsApp group:<br>
-    <strong>January 2026:</strong> <a href='https://chat.whatsapp.com/JJc51uchsDpHKPdRRA091Q?mode=hqrt3'>Join Group</a></p>
-
-    <p>For any queries, reach out to us on LinkedIn: <a href='https://in.linkedin.com/company/va-ev-academy'>VisionAstraa EV Academy</a><br>
-    Or call us on: <a href='tel:+918762246518'>+91 87622 46518</a></p>
-
-    <p>Find your offer letter attached below.</p>
-    <p>Looking forward to having you onboard!<br>Happy Interning!</p>
+    Hello $name,
+    <br><br>
+    <strong>CONGRATULATIONS</strong> for getting selected for Internship in <strong>$role</strong> and your starting date is <strong>January, 2026</strong>. 
+    <br><br>
+    <strong>Kindly accept the offer in the VTU Portal by paying the internship acceptance fees and follow the steps below:</strong>
+    <br><br>
+    -> Enter the URL (<a href='https://vtu.internyet.in'>https://vtu.internyet.in</a>)
+    <br>
+    -> Login using your username and password
+    <br>
+    -> Navigate to `Applied Internships` section in the dashboard
+    <br>
+    -> Click on the `Accept` button to accept <strong>VisionAstraa EV Academy's offer</strong>.
+    <br><br>
+    <strong>Please note: Kindly accept this offer within 5 days from the date of this email. Offers not accepted within this period will be considered expired</strong>.
+    <br><br>
+    We also request you to fill out the following application form at your earliest convenience. This will help us plan your internship better.
+    <br><br>
+    <strong>In the application form</strong>,
+    <br>
+    -> Please select your <strong> internship commencement date (January 2026)</strong>, 
+    <br>
+    -> Your <strong>preferred center (Online/Belagavi/Bangalore)</strong>, and
+    <br>
+    -> Confirm whether you have <strong>accepted the offer</strong> in VTU Portal <strong>(Yes/No)</strong>.
+    <br><br>
+    <strong>Application Form Link:</strong> <a href='https://visionastraa.com/ev-internship-application.html'>https://visionastraa.com/ev-internship-application.html</a>
+    <br><br>
+    To ensure a smooth onboarding process, it is essential that you join the WhatsApp group:
+    <br>
+    - <strong>January 2026</strong>, please join: <a href='https://chat.whatsapp.com/JJc51uchsDpHKPdRRA091Q?mode=hqrt3'>January 2026 Internship Group</a>
+    <br><br>
+    Below are the benefits of joining VisionAstraa EV Academy (<a href='https://visionastraa.com/ev-projects.html'>https://visionastraa.com/ev-projects.html</a>):
+    <br>
+    ▶ Top 10% to get PPOs from EV companies
+    <br>
+    ▶ 70% Hands-on/Lab, formal presentations
+    <br>
+    ▶ Capstone projects in the EV domain
+    <br>
+    ▶ Scholarship for the best project
+    <br>
+    ▶ Internship completion certificate
+    <br>
+    ▶ Best projects get funding and mentorship to register as startups
+    <br><br>
+    For any queries reach out to us on LinkedIn: <a href='https://in.linkedin.com/company/va-ev-academy'>https://in.linkedin.com/company/va-ev-academy</a>
+    <br>
+    Talk to our CEO: <a href='https://in.linkedin.com/in/nikhiljaincs'>Nikhil Jain C S</a>
+    <br>
+    <strong>OR, call us on: <a href='tel:+918762246518'>+91 87622 46518</a></strong>
+    <br><br>
+    Find your offer letter attached below.
+    <br><br>
+    Looking forward to having you onboard!
+    <br><br>
+    Happy Interning!
 </body>
 </html>
 ";
