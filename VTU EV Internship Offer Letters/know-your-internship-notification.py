@@ -151,7 +151,7 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         # <br><br>
         
         # 🔍 <strong>About the Internship</strong><br>
-        
+        # <br>
         # 🔹 <strong>This is a fully software-based internship.</strong><br>
         # There is no hardware handling or physical EV work involved. All learning, projects, and case studies are conducted using software tools, simulations, datasets, and AI/ML models related to EV systems.
         # <br><br>
@@ -213,7 +213,7 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         <br><br>
         
         🔍 <strong>About the Internship</strong><br>
-        
+        <br>
         🔹 <strong>This is a fully software-based internship.</strong><br>
         There is no hardware handling or physical EV work involved. All learning, projects, and case studies are conducted using software tools, simulations, datasets, and AI/ML models related to EV systems.
         <br><br>
@@ -282,7 +282,7 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         # <br><br>
         
         # 🔍 <strong>About the Internship</strong><br>
-        
+        # <br>
         # 🔹 <strong>This is a fully software-based internship.</strong><br>
         # There is no hardware handling or physical EV work involved. All learning, projects, and case studies are conducted using software tools, simulations, datasets, and AI/ML models related to EV systems.
         # <br><br>
