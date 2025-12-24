@@ -48,7 +48,7 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
 
         # --- Curriculum Sections Definition ---
         aiml_curriculum = """
-        <strong>Internship Plan</strong><br><br>
+        🔹 <strong>Internship Plan</strong><br><br>
         <strong>Machine Learning</strong><br>
         Machine learning, data analytics, and feature engineering for powertrain optimization<br><br>
         <strong>Advanced AI Models</strong><br>
@@ -62,7 +62,7 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         """
 
         ds_curriculum = """
-        <strong>Internship Plan</strong><br><br>
+        🔹 <strong>Internship Plan</strong><br><br>
         <strong>Data Analytics & ML</strong><br>
         Exploratory data analysis, feature selection, and ML models for powertrain efficiency<br><br>
         <strong>Deep Learning Models</strong><br>
@@ -76,7 +76,7 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         """
 
         web_curriculum = """
-        <strong>Internship Plan</strong><br><br>
+        🔹 <strong>Internship Plan</strong><br><br>
         <strong>Frontend Fundamentals</strong><br>
         Building responsive user interfaces for EV dashboards and information portals using HTML5, CSS3, and modern JavaScript (ES6+)<br><br>
         <strong>Dynamic UI with Frontend Frameworks</strong><br>
@@ -92,7 +92,7 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         """
 
         fullstack_curriculum = """
-        <strong>Internship Plan</strong><br><br>
+        🔹 <strong>Internship Plan</strong><br><br>
         <strong>Full Stack EV Application Architecture</strong><br>
         Introduction to the MERN stack (MongoDB, Express.js, React, Node.js) and client–server architecture for EV management systems<br><br>
         <strong>Advanced Frontend</strong><br>
@@ -151,7 +151,6 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         # <br><br>
         
         # 🔍 <strong>About the Internship</strong><br>
-        # <br><br>
         
         # 🔹 <strong>This is a fully software-based internship.</strong><br>
         # There is no hardware handling or physical EV work involved. All learning, projects, and case studies are conducted using software tools, simulations, datasets, and AI/ML models related to EV systems.
@@ -162,7 +161,7 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         # 🔹 <strong>Internship Certificate Uniformity</strong><br>
         # Please note that the internship certificate issued by VisionAstraa EV Academy will be the same for all interns, irrespective of the center, city, or location mentioned on the VTU Portal.
         # <br><br>
-        # <strong>Interns have the option to choose between:</strong>
+        # 🔹 <strong>Interns have the option to choose between:</strong>
         # <ul>
         # <li>Fully-online</li>
         # <li>or, fully-offline (Bangalore/Belagavi) mode of internship</li>
@@ -178,7 +177,7 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
 
         # {curriculum_section}
 
-        # <strong>What You Gain from This Internship</strong>
+        # 🔹 <strong>What You Gain from This Internship</strong>
         # <ul>
         # <li>Fully software-based exposure in EVs</li>
         # <li>Hands-on experience with industry-relevant datasets and projects</li>
@@ -214,7 +213,6 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         <br><br>
         
         🔍 <strong>About the Internship</strong><br>
-        <br><br>
         
         🔹 <strong>This is a fully software-based internship.</strong><br>
         There is no hardware handling or physical EV work involved. All learning, projects, and case studies are conducted using software tools, simulations, datasets, and AI/ML models related to EV systems.
@@ -225,7 +223,7 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         🔹 <strong>Internship Certificate Uniformity</strong><br>
         Please note that the internship certificate issued by VisionAstraa EV Academy will be the same for all interns, irrespective of the center, city, or location mentioned on the VTU Portal.
         <br><br>
-        <strong>Interns have the option to choose between:</strong>
+        🔹 <strong>Interns have the option to choose between:</strong>
         <ul>
         <li>Fully-online</li>
         <li>or, fully-offline (Bangalore/Belagavi) mode of internship</li>
@@ -241,7 +239,7 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
 
         {curriculum_section}
 
-        <strong>What You Gain from This Internship</strong>
+        🔹 <strong>What You Gain from This Internship</strong>
         <ul>
         <li>Fully software-based exposure in EVs</li>
         <li>Hands-on experience with industry-relevant datasets and projects</li>
@@ -284,7 +282,6 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         # <br><br>
         
         # 🔍 <strong>About the Internship</strong><br>
-        # <br><br>
         
         # 🔹 <strong>This is a fully software-based internship.</strong><br>
         # There is no hardware handling or physical EV work involved. All learning, projects, and case studies are conducted using software tools, simulations, datasets, and AI/ML models related to EV systems.
@@ -295,7 +292,7 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         # 🔹 <strong>Internship Certificate Uniformity</strong><br>
         # Please note that the internship certificate issued by VisionAstraa EV Academy will be the same for all interns, irrespective of the center, city, or location mentioned on the VTU Portal.
         # <br><br>
-        # <strong>Interns have the option to choose between:</strong>
+        # 🔹 <strong>Interns have the option to choose between:</strong>
         # <ul>
         # <li>Fully-online</li>
         # <li>or, fully-offline (Bangalore/Belagavi center) mode of internship</li>
@@ -311,7 +308,7 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
 
         # {curriculum_section}
 
-        # <strong>What You Gain from This Internship</strong>
+        # 🔹 <strong>What You Gain from This Internship</strong>
         # <ul>
         # <li>Fully software-based exposure in EVs</li>
         # <li>Hands-on experience with industry-relevant datasets and projects</li>
