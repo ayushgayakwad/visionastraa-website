@@ -557,7 +557,10 @@
                 const para1Segments = [
                     { text: "This is to certify that ", bold: false },
                     { text: name.toUpperCase(), bold: true },
-                    { text: ` (USN: ${usn}) has successfully completed an internship at VisionAstraa EV Academy in the role of `, bold: false },
+                    { text: " (USN: ", bold: true },
+                    { text: usn.toUpperCase(), bold: true },
+                    { text: ")", bold: true },
+                    { text: " has successfully completed an internship at VisionAstraa EV Academy in the role of ", bold: false },
                     { text: role, bold: true },
                     { text: ` from ${start} to ${end}.`, bold: false }
                 ];
