@@ -153,9 +153,7 @@
 
     <script>
         const { PDFDocument, StandardFonts, rgb } = PDFLib;
-        const TEMPLATE_URL = 'Certificate_Template.pdf'; // Ensure this file exists in the folder
-
-        let currentPdfBytes = null;
+        const TEMPLATE_URL = 'Certificate_Template.pdf';
 
         // --- 1. Search Logic ---
         async function searchIntern() {
@@ -179,19 +177,15 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    // Populate Form
                     document.getElementById('usn').value = result.data.usn;
                     document.getElementById('name').value = result.data.name;
                     document.getElementById('role').value = result.data.role;
                     document.getElementById('paid_on').value = result.data.paid_on;
-                    // Assuming result might have email, if not leave blank or fill placeholder
                     document.getElementById('email').value = result.data.email || ''; 
 
-                    // Show Form
                     document.getElementById('detailsForm').classList.remove('hidden');
                     document.getElementById('previewPlaceholder').classList.add('hidden');
                     
-                    // Initialize Defaults
                     updateDatesAndId();
                     
                     msg.className = "text-sm mt-2 text-green-600 font-bold block";
@@ -233,16 +227,11 @@
 
             startDateEl.value = start;
             endDateEl.value = end;
-
-            // Generate ID if empty or if term changed significantly
             generateCertId(yearCode, idSuffix);
-            
-            // Trigger preview refresh
             refreshPreview();
         }
 
         function generateCertId(yearCode, idSuffix) {
-            // Random 6 digits
             const randomNum = Math.floor(100000 + Math.random() * 900000);
             const id = `VAEV${yearCode}${randomNum}${idSuffix}`;
             document.getElementById('certId').value = id;
@@ -256,21 +245,79 @@
             refreshPreview();
         }
 
-        // --- 3. PDF Generation Logic ---
+        // --- 3. Custom Justified Text Logic ---
+        function drawJustifiedText(page, text, x, y, width, font, fontSize, lineHeight, boldFont) {
+            const paragraphs = text.split('\n\n');
+            let currentY = y;
+
+            paragraphs.forEach(paragraph => {
+                const words = paragraph.split(' ');
+                let line = [];
+                let lineLength = 0;
+
+                for (let i = 0; i < words.length; i++) {
+                    const word = words[i];
+                    // Check if word has manual break (e.g. from segment combining)
+                    // Simplified here: assume flat text. 
+                    
+                    const wordWidth = font.widthOfTextAtSize(word, fontSize);
+                    
+                    // Add space width unless it's the start of line
+                    const spaceWidth = (line.length > 0) ? font.widthOfTextAtSize(' ', fontSize) : 0;
+
+                    if (lineLength + spaceWidth + wordWidth <= width) {
+                        line.push(word);
+                        lineLength += spaceWidth + wordWidth;
+                    } else {
+                        // Draw the full line justified
+                        drawJustifiedLine(page, line, x, currentY, width, font, fontSize);
+                        currentY -= lineHeight;
+                        line = [word];
+                        lineLength = wordWidth;
+                    }
+                }
+                // Draw last line (left aligned)
+                if (line.length > 0) {
+                    page.drawText(line.join(' '), { x: x, y: currentY, size: fontSize, font: font, color: rgb(0,0,0) });
+                    currentY -= lineHeight;
+                }
+                currentY -= (lineHeight * 0.5); // Extra gap for paragraph
+            });
+        }
+
+        function drawJustifiedLine(page, words, x, y, maxWidth, font, fontSize) {
+            if (words.length === 1) {
+                page.drawText(words[0], { x, y, size: fontSize, font, color: rgb(0,0,0) });
+                return;
+            }
+
+            const totalWordWidth = words.reduce((sum, word) => sum + font.widthOfTextAtSize(word, fontSize), 0);
+            const totalSpace = maxWidth - totalWordWidth;
+            const spaceWidth = totalSpace / (words.length - 1);
+
+            let currentX = x;
+            words.forEach((word, index) => {
+                page.drawText(word, { x: currentX, y, size: fontSize, font, color: rgb(0,0,0) });
+                currentX += font.widthOfTextAtSize(word, fontSize);
+                if (index < words.length - 1) {
+                    currentX += spaceWidth;
+                }
+            });
+        }
+
+        // --- 4. Main PDF Generation ---
         async function generatePdfBlob() {
             try {
-                // Fetch Template
                 const existingPdfBytes = await fetch(TEMPLATE_URL).then(res => res.arrayBuffer());
                 const pdfDoc = await PDFDocument.load(existingPdfBytes);
                 
-                // Embed Fonts
-                const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-                const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+                // Embed Times New Roman
+                const font = await pdfDoc.embedFont(StandardFonts.TimesRoman);
+                const boldFont = await pdfDoc.embedFont(StandardFonts.TimesRomanBold);
 
                 const page = pdfDoc.getPages()[0];
                 const { width, height } = page.getSize();
 
-                // Get Data
                 const name = document.getElementById('name').value;
                 const usn = document.getElementById('usn').value;
                 const role = document.getElementById('role').value;
@@ -278,82 +325,103 @@
                 const end = document.getElementById('endDate').value;
                 const certId = document.getElementById('certId').value;
 
-                // --- Draw Certificate ID (Top Right) ---
-                // Adjust x, y coordinates as needed based on your specific template layout
+                // --- 1. Draw ID (Top Right) ---
+                // Moved up and right: (width - 180, height - 130)
                 page.drawText(`ID: ${certId}`, {
-                    x: width - 200, // Approx top right
-                    y: height - 120, // Approx vertical position
+                    x: width - 180, 
+                    y: height - 130, 
                     size: 12,
                     font: boldFont,
                     color: rgb(0, 0, 0),
                 });
 
-                // --- Draw Main Body Text ---
-                // We define the paragraph logic
+                // --- 2. Draw Title (Top Center) ---
+                const titleText = "INTERNSHIP COMPLETION CERTIFICATE";
+                const titleSize = 16;
+                const titleWidth = boldFont.widthOfTextAtSize(titleText, titleSize);
+                page.drawText(titleText, {
+                    x: (width - titleWidth) / 2,
+                    y: height - 190, // Adjusted vertical position
+                    size: titleSize,
+                    font: boldFont,
+                    color: rgb(0, 0, 0),
+                });
+
+                // --- 3. Construct Justified Body Text ---
                 const fontSize = 14;
-                const lineHeight = 20;
+                const lineHeight = 18; // Reduced slightly to fit better if needed
                 const marginX = 60;
-                const startY = height - 250; // Start vertical position for body text
+                // Move Paragraph Text UP (Higher Y value)
+                const startY = height - 220; 
                 const maxWidth = width - (marginX * 2);
 
-                const textSegments = [
+                // Note: The justification function handles pure text. 
+                // To keep BOLD parts (Name, USN, Role), we can't easily use the simple justify function 
+                // unless we break it down into chunks. 
+                // However, pdf-lib doesn't support rich text justification easily.
+                // COMPROMISE: We will draw the first paragraph MANUALLY to handle Bold inserts, 
+                // and use the Justify function for the remaining standard paragraphs.
+                
+                let currentY = startY;
+
+                // --- Paragraph 1 (Complex with Bold Names) ---
+                // We will use standard wrap for this one to ensure bolding works, 
+                // but we can't fully justify mixed styles easily without complex math.
+                // We will keep this Left Aligned or try to manually space. 
+                // For simplicity and robustness with BOLD names, we'll use standard flow (Left Align)
+                // for the first paragraph, and Justify the rest which are plain text.
+                
+                // Constructing Para 1
+                const para1Segments = [
                     { text: "This is to certify that ", bold: false },
                     { text: name.toUpperCase(), bold: true },
                     { text: ` (USN: ${usn}) has successfully completed an internship at VisionAstraa EV Academy in the role of `, bold: false },
                     { text: role, bold: true },
-                    { text: ` from ${start} to ${end}.`, bold: false },
-                    { text: "\n\n", bold: false }, // Paragraph Break
-                    { text: "During the internship period, the intern actively participated in a structured learning program designed to provide practical exposure to industry-relevant concepts and workflows. The internship focused on developing technical understanding, problem-solving abilities, and professional skills applicable to real-world projects.", bold: false },
-                    { text: "\n\n", bold: false },
-                    { text: "Throughout the program, the intern demonstrated commitment, discipline, and a willingness to learn, while working in a collaborative and guided environment. The experience gained during this internship has contributed to strengthening foundational knowledge and enhancing readiness for future academic and professional opportunities.", bold: false },
-                    { text: "\n\n", bold: false },
-                    { text: "VisionAstraa EV Academy is committed to nurturing talent by providing meaningful learning experiences and hands-on exposure aligned with current industry practices.", bold: false },
-                    { text: "\n\n", bold: false },
-                    { text: "We acknowledge the successful completion of the internship and wish the intern continued success in all future endeavors.", bold: false }
+                    { text: ` from ${start} to ${end}.`, bold: false }
                 ];
 
-                // Helper to wrap text
                 let currentX = marginX;
-                let currentY = startY;
-
-                for (const segment of textSegments) {
-                    // Check for manual line breaks
-                    const parts = segment.text.split('\n');
+                for (const segment of para1Segments) {
+                    const fontToUse = segment.bold ? boldFont : font;
+                    const words = segment.text.split(' ');
                     
-                    for (let i = 0; i < parts.length; i++) {
-                        const partText = parts[i];
-                        if (partText) {
-                            const fontToUse = segment.bold ? boldFont : font;
-                            const words = partText.split(' ');
-                            
-                            for (const word of words) {
-                                const wordWithSpace = word + ' ';
-                                const wordWidth = fontToUse.widthOfTextAtSize(wordWithSpace, fontSize);
-
-                                if (currentX + wordWidth > marginX + maxWidth) {
-                                    currentX = marginX;
-                                    currentY -= lineHeight;
-                                }
-
-                                page.drawText(word, {
-                                    x: currentX,
-                                    y: currentY,
-                                    size: fontSize,
-                                    font: fontToUse,
-                                    color: rgb(0,0,0)
-                                });
-
-                                currentX += wordWidth;
-                            }
+                    for (const word of words) {
+                        // preserve spaces if split consumed them
+                        // Simple approach: add space after every word unless it's the very last in segment
+                        // But text might start with space.
+                        // Better: split by space, add space manually.
+                        
+                        if(word === "") { 
+                             // Could occur if double spaces, just add space width
+                             currentX += fontToUse.widthOfTextAtSize(' ', fontSize);
+                             continue;
                         }
 
-                        // Handle newlines
-                        if (i < parts.length - 1) {
+                        const wordWidth = fontToUse.widthOfTextAtSize(word, fontSize);
+                        const spaceWidth = fontToUse.widthOfTextAtSize(' ', fontSize);
+
+                        if (currentX + wordWidth > marginX + maxWidth) {
                             currentX = marginX;
                             currentY -= lineHeight;
                         }
+
+                        page.drawText(word, { x: currentX, y: currentY, size: fontSize, font: fontToUse, color: rgb(0,0,0) });
+                        currentX += wordWidth + spaceWidth;
                     }
                 }
+                
+                currentY -= (lineHeight * 2); // Gap after Para 1
+
+                // --- Paragraphs 2, 3, 4, 5 (Plain Text - Fully Justified) ---
+                const remainingText = `During the internship period, the intern actively participated in a structured learning program designed to provide practical exposure to industry-relevant concepts and workflows. The internship focused on developing technical understanding, problem-solving abilities, and professional skills applicable to real-world projects.
+
+Throughout the program, the intern demonstrated commitment, discipline, and a willingness to learn, while working in a collaborative and guided environment. The experience gained during this internship has contributed to strengthening foundational knowledge and enhancing readiness for future academic and professional opportunities.
+
+VisionAstraa EV Academy is committed to nurturing talent by providing meaningful learning experiences and hands-on exposure aligned with current industry practices.
+
+We acknowledge the successful completion of the internship and wish the intern continued success in all future endeavors.`;
+
+                drawJustifiedText(page, remainingText, marginX, currentY, maxWidth, font, fontSize, lineHeight);
 
                 return await pdfDoc.save();
 
@@ -372,12 +440,10 @@
             }
         }
 
-        // --- 4. Send Logic ---
+        // --- 5. Send Logic ---
         document.getElementById('certForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            // Confirm details
-            if (!confirm("Are you sure you want to generate and email this certificate? This will be recorded in the database.")) return;
+            if (!confirm("Are you sure you want to generate and email this certificate?")) return;
 
             const btn = document.getElementById('sendBtn');
             const btnText = document.getElementById('btnText');
@@ -390,18 +456,15 @@
             statusDiv.className = 'hidden';
 
             try {
-                // Generate Final PDF
                 const pdfBytes = await generatePdfBlob();
                 if (!pdfBytes) throw new Error("Failed to generate PDF");
 
-                // Convert to Base64
                 const pdfBase64 = await new Promise((resolve) => {
                     const reader = new FileReader();
                     reader.onloadend = () => resolve(reader.result.split(',')[1]);
                     reader.readAsDataURL(new Blob([pdfBytes]));
                 });
 
-                // Prepare Data
                 const formData = new FormData();
                 formData.append('action', 'generate_and_send');
                 formData.append('usn', document.getElementById('usn').value);
@@ -412,14 +475,12 @@
                 formData.append('cert_id', document.getElementById('certId').value);
                 formData.append('pdf_data', pdfBase64);
 
-                // Send
                 const response = await fetch('backend.php', { method: 'POST', body: formData });
                 const result = await response.json();
 
                 if (result.success) {
                     statusDiv.className = "mt-4 p-4 rounded bg-green-100 border border-green-400 text-green-800 text-sm";
                     statusDiv.innerHTML = `<strong>Success!</strong> Certificate sent to ${document.getElementById('email').value} and saved to database.`;
-                    // Optional: Reset form or lock it
                 } else {
                     throw new Error(result.message);
                 }
@@ -433,8 +494,6 @@
                 btnLoader.classList.add('hidden');
             }
         });
-
-        // Initialize preview on load if dummy data needed, otherwise wait for search
     </script>
 </body>
 </html>
