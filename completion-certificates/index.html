@@ -246,6 +246,80 @@
         }
 
         // --- 3. Custom Justified Text Logic ---
+        
+        // Helper: Mixed Style Justification (For Para 1)
+        function drawMixedJustifiedText(page, segments, x, startY, maxWidth, fontSize, lineHeight, font, boldFont) {
+            // 1. Tokenize into words with properties
+            const tokens = [];
+            segments.forEach(seg => {
+                const f = seg.bold ? boldFont : font;
+                // Split by whitespace but keep them as individual words
+                const words = seg.text.split(/\s+/);
+                words.forEach(w => {
+                    if (w.length > 0) {
+                        tokens.push({
+                            text: w,
+                            font: f,
+                            width: f.widthOfTextAtSize(w, fontSize)
+                        });
+                    }
+                });
+            });
+
+            // 2. Group into Lines
+            const lines = [];
+            let currentLine = [];
+            let currentLineWidth = 0;
+            const spaceWidth = font.widthOfTextAtSize(' ', fontSize); 
+
+            tokens.forEach(token => {
+                const potentialWidth = currentLineWidth + (currentLine.length > 0 ? spaceWidth : 0) + token.width;
+                if (potentialWidth > maxWidth) {
+                    lines.push(currentLine);
+                    currentLine = [token];
+                    currentLineWidth = token.width;
+                } else {
+                    if (currentLine.length > 0) currentLineWidth += spaceWidth;
+                    currentLine.push(token);
+                    currentLineWidth += token.width;
+                }
+            });
+            if (currentLine.length > 0) lines.push(currentLine);
+
+            // 3. Render
+            let currentY = startY;
+            lines.forEach((line, index) => {
+                const isLastLine = index === lines.length - 1;
+
+                if (isLastLine || line.length === 1) {
+                    // Left align
+                    let cx = x;
+                    line.forEach(token => {
+                        page.drawText(token.text, { x: cx, y: currentY, size: fontSize, font: token.font, color: rgb(0,0,0) });
+                        cx += token.width + spaceWidth;
+                    });
+                } else {
+                    // Justify
+                    const totalWordsWidth = line.reduce((acc, t) => acc + t.width, 0);
+                    const availableSpace = maxWidth - totalWordsWidth;
+                    // Calculate exact gap
+                    const gap = availableSpace / (line.length - 1);
+
+                    let cx = x;
+                    line.forEach((token, i) => {
+                        page.drawText(token.text, { x: cx, y: currentY, size: fontSize, font: token.font, color: rgb(0,0,0) });
+                        if (i < line.length - 1) {
+                            cx += token.width + gap;
+                        }
+                    });
+                }
+                currentY -= lineHeight;
+            });
+
+            return currentY; // Return where the next paragraph should start (minus some padding)
+        }
+
+        // Helper: Standard Text Justification (For other paragraphs)
         function drawJustifiedText(page, text, x, y, width, font, fontSize, lineHeight, boldFont) {
             const paragraphs = text.split('\n\n');
             let currentY = y;
@@ -322,7 +396,7 @@
 
                 // --- 1. Draw ID (Top Right) ---
                 page.drawText(`ID: ${certId}`, {
-                    x: width - 180, 
+                    x: width - 160, // Moved to Right (from 180)
                     y: height - 130, 
                     size: 12,
                     font: boldFont,
@@ -335,7 +409,7 @@
                 const titleWidth = boldFont.widthOfTextAtSize(titleText, titleSize);
                 page.drawText(titleText, {
                     x: (width - titleWidth) / 2,
-                    y: height - 165, // Moved UP from 190
+                    y: height - 165, 
                     size: titleSize,
                     font: boldFont,
                     color: rgb(0, 0, 0),
@@ -344,15 +418,13 @@
                 // --- 3. Construct Justified Body Text ---
                 const fontSize = 14;
                 const lineHeight = 18; 
-                // Increased Width: Reduced margins from 60 to 45
                 const marginX = 45; 
-                // Moved Body Up: From height - 220 to height - 200
                 const startY = height - 200; 
                 const maxWidth = width - (marginX * 2);
 
                 let currentY = startY;
 
-                // --- Paragraph 1 (Complex with Bold Names) ---
+                // --- Paragraph 1 (Complex with Bold Names - Now Justified) ---
                 const para1Segments = [
                     { text: "This is to certify that ", bold: false },
                     { text: name.toUpperCase(), bold: true },
@@ -361,31 +433,11 @@
                     { text: ` from ${start} to ${end}.`, bold: false }
                 ];
 
-                let currentX = marginX;
-                for (const segment of para1Segments) {
-                    const fontToUse = segment.bold ? boldFont : font;
-                    const words = segment.text.split(' ');
-                    
-                    for (const word of words) {
-                        if(word === "") { 
-                             currentX += fontToUse.widthOfTextAtSize(' ', fontSize);
-                             continue;
-                        }
-
-                        const wordWidth = fontToUse.widthOfTextAtSize(word, fontSize);
-                        const spaceWidth = fontToUse.widthOfTextAtSize(' ', fontSize);
-
-                        if (currentX + wordWidth > marginX + maxWidth) {
-                            currentX = marginX;
-                            currentY -= lineHeight;
-                        }
-
-                        page.drawText(word, { x: currentX, y: currentY, size: fontSize, font: fontToUse, color: rgb(0,0,0) });
-                        currentX += wordWidth + spaceWidth;
-                    }
-                }
+                // Use the new helper to render justified mixed text
+                currentY = drawMixedJustifiedText(page, para1Segments, marginX, currentY, maxWidth, fontSize, lineHeight, font, boldFont);
                 
-                currentY -= (lineHeight * 2); // Gap after Para 1
+                // Add extra gap after Para 1
+                currentY -= (lineHeight * 0.5); 
 
                 // --- Paragraphs 2, 3, 4, 5 (Plain Text - Fully Justified) ---
                 const remainingText = `During the internship period, the intern actively participated in a structured learning program designed to provide practical exposure to industry-relevant concepts and workflows. The internship focused on developing technical understanding, problem-solving abilities, and professional skills applicable to real-world projects.
