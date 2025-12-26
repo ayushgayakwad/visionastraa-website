@@ -52,16 +52,56 @@ function ensureTableStructure($pdo) {
     try {
         $pdo->query("SELECT role FROM issued_certificates LIMIT 1");
     } catch (Exception $e) {
-        // Column likely doesn't exist, add it
         try {
             $pdo->exec("ALTER TABLE issued_certificates ADD COLUMN role VARCHAR(150) AFTER name");
-        } catch (Exception $ex) {
-            // Ignore if error persists (e.g. table locked), but usually this fixes it
-        }
+        } catch (Exception $ex) { /* Ignore */ }
     }
 }
 
 $action = $_POST['action'] ?? '';
+
+// --------------------------------------------------------------------------
+// ACTION: GENERATE UNIQUE ID
+// --------------------------------------------------------------------------
+if ($action === 'generate_unique_id') {
+    $yearCode = $_POST['year_code'] ?? '25';
+    $suffix = $_POST['suffix'] ?? 'A';
+    
+    $pdo = getDbConnection();
+    if (!$pdo) { echo json_encode(['success' => false, 'message' => 'Database connection failed']); exit; }
+    
+    try {
+        ensureTableStructure($pdo);
+        
+        $uniqueId = '';
+        $maxRetries = 20;
+        $found = false;
+
+        for ($i = 0; $i < $maxRetries; $i++) {
+            $rand = rand(100000, 999999);
+            $candidate = "VAEV" . $yearCode . $rand . $suffix;
+            
+            // Check if exists
+            $stmt = $pdo->prepare("SELECT 1 FROM issued_certificates WHERE certificate_id = ?");
+            $stmt->execute([$candidate]);
+            
+            if (!$stmt->fetch()) {
+                $uniqueId = $candidate;
+                $found = true;
+                break;
+            }
+        }
+
+        if ($found) {
+            echo json_encode(['success' => true, 'id' => $uniqueId]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Could not generate unique ID after multiple attempts. Please try again.']);
+        }
+    } catch (Exception $e) {
+        echo json_encode(['success' => false, 'message' => 'DB Error: ' . $e->getMessage()]);
+    }
+    exit;
+}
 
 // --------------------------------------------------------------------------
 // ACTION 1: SEARCH INTERN
@@ -81,7 +121,6 @@ if ($action === 'search') {
         if ($intern) {
             echo json_encode(['success' => true, 'data' => $intern]);
         } else {
-            // Explicit message for frontend to trigger manual flow
             echo json_encode(['success' => false, 'message' => 'Intern not found']);
         }
     } catch (Exception $e) {
@@ -122,8 +161,25 @@ if ($action === 'generate_and_send') {
     $pdfBase64 = $_POST['pdf_data'] ?? '';
     $accountId = intval($_POST['account_id'] ?? 1);
 
-    if (empty($email) || empty($pdfBase64)) {
-        echo json_encode(['success' => false, 'message' => 'Missing email or PDF data.']);
+    if (empty($email) || empty($pdfBase64) || empty($certId)) {
+        echo json_encode(['success' => false, 'message' => 'Missing required data.']);
+        exit;
+    }
+
+    $pdo = getDbConnection();
+    if (!$pdo) { echo json_encode(['success' => false, 'message' => 'Database connection failed']); exit; }
+
+    // --- SAFETY CHECK: Ensure ID is still unique ---
+    try {
+        ensureTableStructure($pdo);
+        $check = $pdo->prepare("SELECT 1 FROM issued_certificates WHERE certificate_id = ?");
+        $check->execute([$certId]);
+        if ($check->fetch()) {
+            echo json_encode(['success' => false, 'message' => 'Error: This Certificate ID was just taken. Please click "Regenerate" to get a new ID.']);
+            exit;
+        }
+    } catch (Exception $e) {
+        echo json_encode(['success' => false, 'message' => 'DB Validation Error: ' . $e->getMessage()]);
         exit;
     }
 
@@ -169,19 +225,14 @@ if ($action === 'generate_and_send') {
         exit;
     }
 
-    // 2. Save to Database (issued_certificates ONLY)
-    $pdo = getDbConnection();
-    if ($pdo) {
-        try {
-            ensureTableStructure($pdo);
+    // 2. Save to Database
+    try {
+        $stmt = $pdo->prepare("INSERT INTO issued_certificates (usn, name, role, certificate_id, term) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute([$usn, $name, $role, $certId, $term]);
 
-            $stmt = $pdo->prepare("INSERT INTO issued_certificates (usn, name, role, certificate_id, term) VALUES (?, ?, ?, ?, ?)");
-            $stmt->execute([$usn, $name, $role, $certId, $term]);
-
-        } catch (Exception $e) {
-            echo json_encode(['success' => false, 'message' => "Email sent, but DB save failed: " . $e->getMessage()]);
-            exit;
-        }
+    } catch (Exception $e) {
+        echo json_encode(['success' => false, 'message' => "Email sent, but DB save failed: " . $e->getMessage()]);
+        exit;
     }
 
     echo json_encode(['success' => true, 'message' => 'Certificate sent and recorded successfully.']);

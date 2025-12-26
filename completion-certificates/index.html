@@ -120,7 +120,7 @@
                         <!-- Certificate ID -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 flex justify-between">
-                                <span>Certificate ID (Auto-generated)</span>
+                                <span>Certificate ID (Verified Unique)</span>
                                 <button type="button" onclick="regenerateId()" class="text-xs text-indigo-600 hover:underline"><i class="fas fa-sync"></i> Regenerate</button>
                             </label>
                             <input type="text" id="certId" class="w-full p-2 border border-gray-300 rounded font-mono text-lg tracking-wider bg-gray-50" readonly>
@@ -275,7 +275,7 @@
                     document.getElementById('detailsForm').classList.remove('hidden');
                     document.getElementById('previewPlaceholder').classList.add('hidden');
                     
-                    updateDatesAndId();
+                    await updateDatesAndId();
                     
                     msg.className = "text-sm font-bold text-green-600";
                     msg.innerHTML = '<i class="fas fa-check"></i> Found: ' + result.data.name;
@@ -323,7 +323,7 @@
         }
 
         // --- 2. Logic for Terms & ID ---
-        function updateDatesAndId() {
+        async function updateDatesAndId() {
             const term = document.getElementById('termSelect').value;
             const startDateEl = document.getElementById('startDate');
             const endDateEl = document.getElementById('endDate');
@@ -344,14 +344,38 @@
 
             startDateEl.value = start;
             endDateEl.value = end;
-            generateCertId(yearCode, idSuffix);
-            refreshPreview();
+            
+            // Async fetch for unique ID
+            await generateCertId(yearCode, idSuffix);
         }
 
-        function generateCertId(yearCode, idSuffix) {
-            const randomNum = Math.floor(100000 + Math.random() * 900000);
-            const id = `VAEV${yearCode}${randomNum}${idSuffix}`;
-            document.getElementById('certId').value = id;
+        async function generateCertId(yearCode, idSuffix) {
+            const certInput = document.getElementById('certId');
+            certInput.value = "Generating Unique ID...";
+            certInput.classList.add('animate-pulse');
+
+            try {
+                const formData = new FormData();
+                formData.append('action', 'generate_unique_id');
+                formData.append('year_code', yearCode);
+                formData.append('suffix', idSuffix);
+
+                const response = await fetch('backend.php', { method: 'POST', body: formData });
+                const result = await response.json();
+
+                if (result.success) {
+                    certInput.value = result.id;
+                    refreshPreview(); // Only refresh preview once ID is ready
+                } else {
+                    certInput.value = "Error generating ID";
+                    alert(result.message);
+                }
+            } catch (error) {
+                console.error('ID Gen Error:', error);
+                certInput.value = "Connection Error";
+            } finally {
+                certInput.classList.remove('animate-pulse');
+            }
         }
 
         function regenerateId() {
@@ -359,7 +383,6 @@
             const yearCode = (term === 'sep2025') ? "25" : "26";
             const idSuffix = (term === 'sep2025') ? "A" : "B";
             generateCertId(yearCode, idSuffix);
-            refreshPreview();
         }
 
         // --- 3. History Logic ---
