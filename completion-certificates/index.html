@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Generator | VisionAstraa</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- PDF-Lib -->
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .loader {
+            border-top-color: #3498db;
+            -webkit-animation: spinner 1.5s linear infinite;
+            animation: spinner 1.5s linear infinite;
+        }
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen font-sans pb-10">
+
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        
+        <!-- Header -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8 border-l-4 border-indigo-600 flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-800 flex items-center">
+                    <i class="fas fa-certificate mr-3 text-indigo-600"></i>
+                    Internship Certificate Generator
+                </h1>
+                <p class="text-gray-600 mt-2">Search intern, verify details, and issue completion certificates.</p>
+            </div>
+            <div class="hidden md:block text-right">
+                <p class="text-sm font-semibold text-gray-500">System Status</p>
+                <p class="text-green-600 font-bold"><i class="fas fa-check-circle"></i> Online</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Left Panel: Controls -->
+            <div class="lg:col-span-5 space-y-6">
+                
+                <!-- Search Section -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-lg font-semibold mb-4 text-gray-700 border-b pb-2">1. Search Intern</h2>
+                    <div class="flex gap-2">
+                        <input type="text" id="searchUsn" placeholder="Enter USN (e.g., 1VA21CS001)" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none uppercase">
+                        <button onclick="searchIntern()" id="searchBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg font-medium transition duration-200">
+                            Search
+                        </button>
+                    </div>
+                    <p id="searchMsg" class="text-sm mt-2 hidden"></p>
+                </div>
+
+                <!-- Details Form (Initially Hidden) -->
+                <div id="detailsForm" class="bg-white rounded-lg shadow-md p-6 hidden">
+                    <h2 class="text-lg font-semibold mb-4 text-gray-700 border-b pb-2">2. Verify & Edit Details</h2>
+                    
+                    <form id="certForm" class="space-y-4">
+                        <!-- Readonly / Editable Fields -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 uppercase">USN</label>
+                                <input type="text" id="usn" class="w-full p-2 border rounded bg-gray-50 text-gray-700 font-mono" readonly>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 uppercase">Payment Status</label>
+                                <input type="text" id="paid_on" class="w-full p-2 border rounded bg-green-50 text-green-700 font-medium" readonly>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Full Name</label>
+                            <input type="text" id="name" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Internship Role</label>
+                            <input type="text" id="role" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none">
+                        </div>
+
+                        <!-- Term Selection Logic -->
+                        <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100">
+                            <label class="block text-sm font-bold text-indigo-900 mb-2">Select Internship Term</label>
+                            <select id="termSelect" onchange="updateDatesAndId()" class="w-full p-2 border border-indigo-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none">
+                                <option value="sep2025">September 2025 (Sept 15, 2025 - Jan 19, 2026)</option>
+                                <option value="jan2026">January 2026 (Jan 20, 2026 - May 31, 2026)</option>
+                            </select>
+                            
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-sm">
+                                <div>
+                                    <span class="text-gray-500 text-xs block">Start Date</span>
+                                    <input type="text" id="startDate" class="w-full bg-white border px-2 py-1 rounded" readonly>
+                                </div>
+                                <div>
+                                    <span class="text-gray-500 text-xs block">End Date</span>
+                                    <input type="text" id="endDate" class="w-full bg-white border px-2 py-1 rounded" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Certificate ID -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 flex justify-between">
+                                <span>Certificate ID (Auto-generated)</span>
+                                <button type="button" onclick="regenerateId()" class="text-xs text-indigo-600 hover:underline"><i class="fas fa-sync"></i> Regenerate</button>
+                            </label>
+                            <input type="text" id="certId" class="w-full p-2 border border-gray-300 rounded font-mono text-lg tracking-wider bg-gray-50" readonly>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Candidate Email</label>
+                            <input type="email" id="email" placeholder="Confirm email address..." class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
+                        </div>
+
+                        <div class="pt-4 border-t">
+                            <button type="submit" id="sendBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 shadow flex justify-center items-center">
+                                <span id="btnText">Generate & Send Certificate</span>
+                                <div id="btnLoader" class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-6 w-6 ml-3 hidden"></div>
+                            </button>
+                        </div>
+                    </form>
+                    <div id="statusMessage" class="mt-4 hidden text-sm p-3 rounded"></div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Preview -->
+            <div class="lg:col-span-7">
+                <div class="bg-gray-800 rounded-lg shadow-xl p-4 h-full flex flex-col">
+                    <div class="flex justify-between items-center mb-4 text-gray-300">
+                        <h3 class="font-medium"><i class="fas fa-eye mr-2"></i>Live Certificate Preview</h3>
+                        <button type="button" onclick="refreshPreview()" class="text-sm hover:text-white transition"><i class="fas fa-sync-alt mr-1"></i> Refresh Preview</button>
+                    </div>
+                    
+                    <div class="flex-grow bg-gray-900 rounded border border-gray-700 flex items-center justify-center relative overflow-hidden" style="min-height: 500px;">
+                        <iframe id="pdfPreviewFrame" class="w-full h-full absolute inset-0 rounded"></iframe>
+                        <div id="previewPlaceholder" class="text-center text-gray-500">
+                            <i class="fas fa-file-pdf text-6xl mb-4"></i>
+                            <p>Search for a student to load preview</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const { PDFDocument, StandardFonts, rgb } = PDFLib;
+        const TEMPLATE_URL = 'Certificate_Template.pdf'; // Ensure this file exists in the folder
+
+        let currentPdfBytes = null;
+
+        // --- 1. Search Logic ---
+        async function searchIntern() {
+            const usn = document.getElementById('searchUsn').value.trim();
+            const btn = document.getElementById('searchBtn');
+            const msg = document.getElementById('searchMsg');
+            
+            if (!usn) return;
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i>';
+            msg.className = "text-sm mt-2 text-gray-500 block";
+            msg.innerText = "Searching database...";
+
+            try {
+                const formData = new FormData();
+                formData.append('action', 'search');
+                formData.append('usn', usn);
+
+                const response = await fetch('backend.php', { method: 'POST', body: formData });
+                const result = await response.json();
+
+                if (result.success) {
+                    // Populate Form
+                    document.getElementById('usn').value = result.data.usn;
+                    document.getElementById('name').value = result.data.name;
+                    document.getElementById('role').value = result.data.role;
+                    document.getElementById('paid_on').value = result.data.paid_on;
+                    // Assuming result might have email, if not leave blank or fill placeholder
+                    document.getElementById('email').value = result.data.email || ''; 
+
+                    // Show Form
+                    document.getElementById('detailsForm').classList.remove('hidden');
+                    document.getElementById('previewPlaceholder').classList.add('hidden');
+                    
+                    // Initialize Defaults
+                    updateDatesAndId();
+                    
+                    msg.className = "text-sm mt-2 text-green-600 font-bold block";
+                    msg.innerHTML = '<i class="fas fa-check"></i> Found: ' + result.data.name;
+                } else {
+                    msg.className = "text-sm mt-2 text-red-600 font-bold block";
+                    msg.innerText = result.message || "Intern not found.";
+                    document.getElementById('detailsForm').classList.add('hidden');
+                }
+            } catch (error) {
+                console.error(error);
+                msg.className = "text-sm mt-2 text-red-600 block";
+                msg.innerText = "Connection error.";
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Search";
+            }
+        }
+
+        // --- 2. Logic for Terms & ID ---
+        function updateDatesAndId() {
+            const term = document.getElementById('termSelect').value;
+            const startDateEl = document.getElementById('startDate');
+            const endDateEl = document.getElementById('endDate');
+            
+            let start, end, idSuffix, yearCode;
+
+            if (term === 'sep2025') {
+                start = "September 15, 2025";
+                end = "January 19, 2026";
+                yearCode = "25";
+                idSuffix = "A";
+            } else {
+                start = "January 20, 2026";
+                end = "May 31, 2026";
+                yearCode = "26";
+                idSuffix = "B";
+            }
+
+            startDateEl.value = start;
+            endDateEl.value = end;
+
+            // Generate ID if empty or if term changed significantly
+            generateCertId(yearCode, idSuffix);
+            
+            // Trigger preview refresh
+            refreshPreview();
+        }
+
+        function generateCertId(yearCode, idSuffix) {
+            // Random 6 digits
+            const randomNum = Math.floor(100000 + Math.random() * 900000);
+            const id = `VAEV${yearCode}${randomNum}${idSuffix}`;
+            document.getElementById('certId').value = id;
+        }
+
+        function regenerateId() {
+            const term = document.getElementById('termSelect').value;
+            const yearCode = (term === 'sep2025') ? "25" : "26";
+            const idSuffix = (term === 'sep2025') ? "A" : "B";
+            generateCertId(yearCode, idSuffix);
+            refreshPreview();
+        }
+
+        // --- 3. PDF Generation Logic ---
+        async function generatePdfBlob() {
+            try {
+                // Fetch Template
+                const existingPdfBytes = await fetch(TEMPLATE_URL).then(res => res.arrayBuffer());
+                const pdfDoc = await PDFDocument.load(existingPdfBytes);
+                
+                // Embed Fonts
+                const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+                const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+                const page = pdfDoc.getPages()[0];
+                const { width, height } = page.getSize();
+
+                // Get Data
+                const name = document.getElementById('name').value;
+                const usn = document.getElementById('usn').value;
+                const role = document.getElementById('role').value;
+                const start = document.getElementById('startDate').value;
+                const end = document.getElementById('endDate').value;
+                const certId = document.getElementById('certId').value;
+
+                // --- Draw Certificate ID (Top Right) ---
+                // Adjust x, y coordinates as needed based on your specific template layout
+                page.drawText(`ID: ${certId}`, {
+                    x: width - 200, // Approx top right
+                    y: height - 120, // Approx vertical position
+                    size: 12,
+                    font: boldFont,
+                    color: rgb(0, 0, 0),
+                });
+
+                // --- Draw Main Body Text ---
+                // We define the paragraph logic
+                const fontSize = 14;
+                const lineHeight = 20;
+                const marginX = 60;
+                const startY = height - 250; // Start vertical position for body text
+                const maxWidth = width - (marginX * 2);
+
+                const textSegments = [
+                    { text: "This is to certify that ", bold: false },
+                    { text: name.toUpperCase(), bold: true },
+                    { text: ` (USN: ${usn}) has successfully completed an internship at VisionAstraa EV Academy in the role of `, bold: false },
+                    { text: role, bold: true },
+                    { text: ` from ${start} to ${end}.`, bold: false },
+                    { text: "\n\n", bold: false }, // Paragraph Break
+                    { text: "During the internship period, the intern actively participated in a structured learning program designed to provide practical exposure to industry-relevant concepts and workflows. The internship focused on developing technical understanding, problem-solving abilities, and professional skills applicable to real-world projects.", bold: false },
+                    { text: "\n\n", bold: false },
+                    { text: "Throughout the program, the intern demonstrated commitment, discipline, and a willingness to learn, while working in a collaborative and guided environment. The experience gained during this internship has contributed to strengthening foundational knowledge and enhancing readiness for future academic and professional opportunities.", bold: false },
+                    { text: "\n\n", bold: false },
+                    { text: "VisionAstraa EV Academy is committed to nurturing talent by providing meaningful learning experiences and hands-on exposure aligned with current industry practices.", bold: false },
+                    { text: "\n\n", bold: false },
+                    { text: "We acknowledge the successful completion of the internship and wish the intern continued success in all future endeavors.", bold: false }
+                ];
+
+                // Helper to wrap text
+                let currentX = marginX;
+                let currentY = startY;
+
+                for (const segment of textSegments) {
+                    // Check for manual line breaks
+                    const parts = segment.text.split('\n');
+                    
+                    for (let i = 0; i < parts.length; i++) {
+                        const partText = parts[i];
+                        if (partText) {
+                            const fontToUse = segment.bold ? boldFont : font;
+                            const words = partText.split(' ');
+                            
+                            for (const word of words) {
+                                const wordWithSpace = word + ' ';
+                                const wordWidth = fontToUse.widthOfTextAtSize(wordWithSpace, fontSize);
+
+                                if (currentX + wordWidth > marginX + maxWidth) {
+                                    currentX = marginX;
+                                    currentY -= lineHeight;
+                                }
+
+                                page.drawText(word, {
+                                    x: currentX,
+                                    y: currentY,
+                                    size: fontSize,
+                                    font: fontToUse,
+                                    color: rgb(0,0,0)
+                                });
+
+                                currentX += wordWidth;
+                            }
+                        }
+
+                        // Handle newlines
+                        if (i < parts.length - 1) {
+                            currentX = marginX;
+                            currentY -= lineHeight;
+                        }
+                    }
+                }
+
+                return await pdfDoc.save();
+
+            } catch (e) {
+                console.error("PDF Gen Error:", e);
+                return null;
+            }
+        }
+
+        async function refreshPreview() {
+            const pdfBytes = await generatePdfBlob();
+            if (pdfBytes) {
+                const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                const url = URL.createObjectURL(blob);
+                document.getElementById('pdfPreviewFrame').src = url;
+            }
+        }
+
+        // --- 4. Send Logic ---
+        document.getElementById('certForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Confirm details
+            if (!confirm("Are you sure you want to generate and email this certificate? This will be recorded in the database.")) return;
+
+            const btn = document.getElementById('sendBtn');
+            const btnText = document.getElementById('btnText');
+            const btnLoader = document.getElementById('btnLoader');
+            const statusDiv = document.getElementById('statusMessage');
+
+            btn.disabled = true;
+            btnText.innerText = 'Processing...';
+            btnLoader.classList.remove('hidden');
+            statusDiv.className = 'hidden';
+
+            try {
+                // Generate Final PDF
+                const pdfBytes = await generatePdfBlob();
+                if (!pdfBytes) throw new Error("Failed to generate PDF");
+
+                // Convert to Base64
+                const pdfBase64 = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result.split(',')[1]);
+                    reader.readAsDataURL(new Blob([pdfBytes]));
+                });
+
+                // Prepare Data
+                const formData = new FormData();
+                formData.append('action', 'generate_and_send');
+                formData.append('usn', document.getElementById('usn').value);
+                formData.append('name', document.getElementById('name').value);
+                formData.append('email', document.getElementById('email').value);
+                formData.append('role', document.getElementById('role').value);
+                formData.append('term', document.getElementById('termSelect').options[document.getElementById('termSelect').selectedIndex].text);
+                formData.append('cert_id', document.getElementById('certId').value);
+                formData.append('pdf_data', pdfBase64);
+
+                // Send
+                const response = await fetch('backend.php', { method: 'POST', body: formData });
+                const result = await response.json();
+
+                if (result.success) {
+                    statusDiv.className = "mt-4 p-4 rounded bg-green-100 border border-green-400 text-green-800 text-sm";
+                    statusDiv.innerHTML = `<strong>Success!</strong> Certificate sent to ${document.getElementById('email').value} and saved to database.`;
+                    // Optional: Reset form or lock it
+                } else {
+                    throw new Error(result.message);
+                }
+
+            } catch (error) {
+                statusDiv.className = "mt-4 p-4 rounded bg-red-100 border border-red-400 text-red-800 text-sm";
+                statusDiv.innerHTML = `<strong>Error:</strong> ${error.message}`;
+            } finally {
+                btn.disabled = false;
+                btnText.innerText = 'Generate & Send Certificate';
+                btnLoader.classList.add('hidden');
+            }
+        });
+
+        // Initialize preview on load if dummy data needed, otherwise wait for search
+    </script>
+</body>
+</html>
