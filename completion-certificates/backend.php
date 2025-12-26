@@ -2,18 +2,25 @@
 header('Content-Type: application/json');
 
 // --- DATABASE CONFIGURATION ---
-// UPDATE THESE WITH YOUR HOSTINGER DB CREDENTIALS
-$db_host = 'localhost'; // Usually localhost or the IP provided by Hostinger
-$db_name = 'u707137586_EV_Internships'; // Update this
-$db_user = 'u707137586_EV_Internships';   // Update this
-$db_pass = '+ZkB>V>l;E1';       // Update this
+$db_host = 'localhost';
+$db_name = 'u707137586_EV_Internships';
+$db_user = 'u707137586_EV_Internships';
+$db_pass = '+ZkB>V>l;E1';
 
-// --- SMTP CONFIGURATION (Reused from Offer Letter) ---
-$smtp_config = [
-    "EMAIL" => "visionastraa@evinternships.com",
-    "PASSWORD" => "a[kE?V6lm7G=", // Verify this password is correct
-    "HOST" => "smtp.hostinger.com",
-    "PORT" => 465
+// --- SMTP CREDENTIALS ---
+$credentials = [
+    1 => [
+        "EMAIL" => "visionastraa@evinternships.com",
+        "PASSWORD" => "a[kE?V6lm7G=",
+        "HOST" => "smtp.hostinger.com",
+        "PORT" => 465
+    ],
+    2 => [
+        "EMAIL" => "visionastraa@evinternships.in",
+        "PASSWORD" => "]9jw>Upu//Y",
+        "HOST" => "smtp.hostinger.com",
+        "PORT" => 465
+    ]
 ];
 
 // --- HELPER: DB CONNECTION ---
@@ -24,8 +31,33 @@ function getDbConnection() {
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $pdo;
     } catch (PDOException $e) {
-        // Return null or handle error silently to not break JSON
         return null;
+    }
+}
+
+// --- HELPER: ENSURE TABLE STRUCTURE ---
+function ensureTableStructure($pdo) {
+    // 1. Create table if it doesn't exist
+    $pdo->exec("CREATE TABLE IF NOT EXISTS issued_certificates (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        usn VARCHAR(50),
+        name VARCHAR(100),
+        role VARCHAR(150),
+        certificate_id VARCHAR(50),
+        term VARCHAR(50),
+        issued_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )");
+
+    // 2. Check if 'role' column exists (Migration for existing tables)
+    try {
+        $pdo->query("SELECT role FROM issued_certificates LIMIT 1");
+    } catch (Exception $e) {
+        // Column likely doesn't exist, add it
+        try {
+            $pdo->exec("ALTER TABLE issued_certificates ADD COLUMN role VARCHAR(150) AFTER name");
+        } catch (Exception $ex) {
+            // Ignore if error persists (e.g. table locked), but usually this fixes it
+        }
     }
 }
 
@@ -36,34 +68,10 @@ $action = $_POST['action'] ?? '';
 // --------------------------------------------------------------------------
 if ($action === 'search') {
     $usn = $_POST['usn'] ?? '';
-    
-    if (empty($usn)) {
-        echo json_encode(['success' => false, 'message' => 'USN is required']);
-        exit;
-    }
+    if (empty($usn)) { echo json_encode(['success' => false, 'message' => 'USN is required']); exit; }
 
     $pdo = getDbConnection();
-    if (!$pdo) {
-        // Mock Response if DB fails (for testing purposes only - remove in production)
-        // echo json_encode(['success' => false, 'message' => 'Database connection failed']); 
-        // exit;
-        
-        // MOCK DATA FOR DEMONSTRATION IF DB NOT CONFIGURED
-        if ($usn === 'TEST') {
-            echo json_encode([
-                'success' => true,
-                'data' => [
-                    'name' => 'John Doe',
-                    'usn' => '1VA21CS099',
-                    'role' => 'Full Stack Development',
-                    'amount' => '2500',
-                    'paid_on' => '2025-08-15',
-                    'email' => 'student@example.com' // Assuming table has email, else empty
-                ]
-            ]);
-            exit;
-        }
-    }
+    if (!$pdo) { echo json_encode(['success' => false, 'message' => 'Database connection failed']); exit; }
 
     try {
         $stmt = $pdo->prepare("SELECT * FROM internship_payments WHERE usn = ? LIMIT 1");
@@ -73,7 +81,8 @@ if ($action === 'search') {
         if ($intern) {
             echo json_encode(['success' => true, 'data' => $intern]);
         } else {
-            echo json_encode(['success' => false, 'message' => 'USN not found in internship_payments table.']);
+            // Explicit message for frontend to trigger manual flow
+            echo json_encode(['success' => false, 'message' => 'Intern not found']);
         }
     } catch (Exception $e) {
         echo json_encode(['success' => false, 'message' => 'DB Error: ' . $e->getMessage()]);
@@ -82,7 +91,26 @@ if ($action === 'search') {
 }
 
 // --------------------------------------------------------------------------
-// ACTION 2: GENERATE AND SEND
+// ACTION 2: FETCH HISTORY
+// --------------------------------------------------------------------------
+if ($action === 'fetch_history') {
+    $pdo = getDbConnection();
+    if (!$pdo) { echo json_encode(['success' => false, 'message' => 'Database connection failed']); exit; }
+
+    try {
+        ensureTableStructure($pdo);
+
+        $stmt = $pdo->query("SELECT * FROM issued_certificates ORDER BY issued_at DESC LIMIT 50");
+        $history = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode(['success' => true, 'data' => $history]);
+    } catch (Exception $e) {
+        echo json_encode(['success' => false, 'message' => 'DB Error: ' . $e->getMessage()]);
+    }
+    exit;
+}
+
+// --------------------------------------------------------------------------
+// ACTION 3: GENERATE AND SEND
 // --------------------------------------------------------------------------
 if ($action === 'generate_and_send') {
     $usn = $_POST['usn'] ?? '';
@@ -92,11 +120,19 @@ if ($action === 'generate_and_send') {
     $term = $_POST['term'] ?? '';
     $certId = $_POST['cert_id'] ?? '';
     $pdfBase64 = $_POST['pdf_data'] ?? '';
+    $accountId = intval($_POST['account_id'] ?? 1);
 
     if (empty($email) || empty($pdfBase64)) {
         echo json_encode(['success' => false, 'message' => 'Missing email or PDF data.']);
         exit;
     }
+
+    // Select Account
+    if (!isset($credentials[$accountId])) {
+        echo json_encode(['success' => false, 'message' => 'Invalid Sender Account ID.']);
+        exit;
+    }
+    $creds = $credentials[$accountId];
 
     $pdfContent = base64_decode($pdfBase64);
     $filename = "Internship_Certificate_$usn.pdf";
@@ -126,33 +162,23 @@ if ($action === 'generate_and_send') {
     </html>
     ";
 
-    $mailResult = sendSmtpEmail($smtp_config, $email, $subject, $body, $pdfContent, $filename);
+    $mailResult = sendSmtpEmail($creds, $email, $subject, $body, $pdfContent, $filename);
 
     if ($mailResult !== true) {
         echo json_encode(['success' => false, 'message' => "Email Error: $mailResult"]);
         exit;
     }
 
-    // 2. Save to Database (issued_certificates)
+    // 2. Save to Database (issued_certificates ONLY)
     $pdo = getDbConnection();
     if ($pdo) {
         try {
-            // Create table if not exists (Optional safety check)
-            $pdo->exec("CREATE TABLE IF NOT EXISTS issued_certificates (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                usn VARCHAR(50),
-                name VARCHAR(100),
-                certificate_id VARCHAR(50),
-                term VARCHAR(50),
-                issued_at DATETIME DEFAULT CURRENT_TIMESTAMP
-            )");
+            ensureTableStructure($pdo);
 
-            $stmt = $pdo->prepare("INSERT INTO issued_certificates (usn, name, certificate_id, term) VALUES (?, ?, ?, ?)");
-            $stmt->execute([$usn, $name, $certId, $term]);
+            $stmt = $pdo->prepare("INSERT INTO issued_certificates (usn, name, role, certificate_id, term) VALUES (?, ?, ?, ?, ?)");
+            $stmt->execute([$usn, $name, $role, $certId, $term]);
 
         } catch (Exception $e) {
-            // Email sent but DB failed. Log it but maybe return success with warning?
-            // For now, return error so admin knows.
             echo json_encode(['success' => false, 'message' => "Email sent, but DB save failed: " . $e->getMessage()]);
             exit;
         }
@@ -164,7 +190,7 @@ if ($action === 'generate_and_send') {
 
 echo json_encode(['success' => false, 'message' => 'Invalid Action']);
 
-// --- SMTP FUNCTION (Same as before) ---
+// --- SMTP FUNCTION ---
 function sendSmtpEmail($creds, $to, $subject, $htmlBody, $attachmentData, $attachmentName) {
     $smtpHost = "ssl://" . $creds['HOST']; 
     $smtpPort = $creds['PORT'];

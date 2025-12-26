@@ -24,10 +24,10 @@
 </head>
 <body class="bg-gray-100 min-h-screen font-sans pb-10">
 
-    <div class="container mx-auto px-4 py-8 max-w-6xl">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
         
         <!-- Header -->
-        <div class="bg-white rounded-lg shadow-md p-6 mb-8 border-l-4 border-indigo-600 flex justify-between items-center">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8 border-l-4 border-indigo-600 flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
                 <h1 class="text-2xl font-bold text-gray-800 flex items-center">
                     <i class="fas fa-certificate mr-3 text-indigo-600"></i>
@@ -35,13 +35,18 @@
                 </h1>
                 <p class="text-gray-600 mt-2">Search intern, verify details, and issue completion certificates.</p>
             </div>
-            <div class="hidden md:block text-right">
-                <p class="text-sm font-semibold text-gray-500">System Status</p>
-                <p class="text-green-600 font-bold"><i class="fas fa-check-circle"></i> Online</p>
+            <div class="flex gap-3">
+                <button onclick="toggleView('generator')" id="navGenerator" class="px-4 py-2 rounded-lg font-medium bg-indigo-100 text-indigo-700 border border-indigo-200">
+                    <i class="fas fa-magic mr-2"></i> Generator
+                </button>
+                <button onclick="toggleView('history')" id="navHistory" class="px-4 py-2 rounded-lg font-medium bg-white text-gray-600 hover:bg-gray-50 border border-gray-200">
+                    <i class="fas fa-history mr-2"></i> Issued History
+                </button>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- VIEW: GENERATOR -->
+        <div id="viewGenerator" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
             <!-- Left Panel: Controls -->
             <div class="lg:col-span-5 space-y-6">
@@ -55,7 +60,14 @@
                             Search
                         </button>
                     </div>
-                    <p id="searchMsg" class="text-sm mt-2 hidden"></p>
+                    
+                    <!-- Search Feedback Area -->
+                    <div id="searchFeedback" class="mt-4 hidden">
+                        <p id="searchMsg" class="text-sm font-medium mb-2"></p>
+                        <button id="manualEntryBtn" onclick="enableManualEntry()" class="hidden w-full text-center bg-yellow-50 text-yellow-700 border border-yellow-200 p-2 rounded text-sm hover:bg-yellow-100 transition">
+                            <i class="fas fa-pen mr-1"></i> Record not found. <strong>Click here to enter manually.</strong>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Details Form (Initially Hidden) -->
@@ -70,7 +82,7 @@
                                 <input type="text" id="usn" class="w-full p-2 border rounded bg-gray-50 text-gray-700 font-mono" readonly>
                             </div>
                             <div>
-                                <label class="block text-xs font-bold text-gray-500 uppercase">Payment Status</label>
+                                <label class="block text-xs font-bold text-gray-500 uppercase">Payment Status / Note</label>
                                 <input type="text" id="paid_on" class="w-full p-2 border rounded bg-green-50 text-green-700 font-medium" readonly>
                             </div>
                         </div>
@@ -119,6 +131,15 @@
                             <input type="email" id="email" placeholder="Confirm email address..." class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none" required>
                         </div>
 
+                        <!-- Sender Account Selection -->
+                        <div class="bg-gray-50 p-3 rounded border border-gray-200">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Sender Email Account</label>
+                            <select id="senderAccount" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
+                                <option value="1">visionastraa@evinternships.com</option>
+                                <option value="2">visionastraa@evinternships.in</option>
+                            </select>
+                        </div>
+
                         <div class="pt-4 border-t">
                             <button type="submit" id="sendBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 shadow flex justify-center items-center">
                                 <span id="btnText">Generate & Send Certificate</span>
@@ -147,26 +168,87 @@
                     </div>
                 </div>
             </div>
-
         </div>
+
+        <!-- VIEW: HISTORY -->
+        <div id="viewHistory" class="hidden">
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-4 border-b border-gray-200 flex justify-between items-center bg-gray-50">
+                    <h2 class="text-lg font-bold text-gray-700">Issued Certificates History</h2>
+                    <button onclick="fetchHistory()" class="text-sm text-indigo-600 hover:text-indigo-800"><i class="fas fa-sync"></i> Refresh</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">USN</th>
+                                <th scope="col" class="px-6 py-3">Name</th>
+                                <th scope="col" class="px-6 py-3">Role</th>
+                                <th scope="col" class="px-6 py-3">Certificate ID</th>
+                                <th scope="col" class="px-6 py-3">Date Issued</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody">
+                            <tr><td colspan="5" class="px-6 py-4 text-center">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script>
         const { PDFDocument, StandardFonts, rgb } = PDFLib;
         const TEMPLATE_URL = 'Certificate_Template.pdf';
 
+        // --- View Switching Logic ---
+        function toggleView(viewName) {
+            const genDiv = document.getElementById('viewGenerator');
+            const histDiv = document.getElementById('viewHistory');
+            const navGen = document.getElementById('navGenerator');
+            const navHist = document.getElementById('navHistory');
+
+            if (viewName === 'generator') {
+                genDiv.classList.remove('hidden');
+                histDiv.classList.add('hidden');
+                
+                navGen.classList.replace('bg-white', 'bg-indigo-100');
+                navGen.classList.replace('text-gray-600', 'text-indigo-700');
+                navHist.classList.replace('bg-indigo-100', 'bg-white');
+                navHist.classList.replace('text-indigo-700', 'text-gray-600');
+            } else {
+                genDiv.classList.add('hidden');
+                histDiv.classList.remove('hidden');
+
+                navHist.classList.replace('bg-white', 'bg-indigo-100');
+                navHist.classList.replace('text-gray-600', 'text-indigo-700');
+                navGen.classList.replace('bg-indigo-100', 'bg-white');
+                navGen.classList.replace('text-indigo-700', 'text-gray-600');
+                
+                fetchHistory();
+            }
+        }
+
         // --- 1. Search Logic ---
         async function searchIntern() {
             const usn = document.getElementById('searchUsn').value.trim();
             const btn = document.getElementById('searchBtn');
+            const feedbackDiv = document.getElementById('searchFeedback');
             const msg = document.getElementById('searchMsg');
+            const manualBtn = document.getElementById('manualEntryBtn');
             
             if (!usn) return;
 
             btn.disabled = true;
             btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i>';
-            msg.className = "text-sm mt-2 text-gray-500 block";
+            feedbackDiv.classList.remove('hidden');
+            msg.className = "text-sm font-medium mb-2 text-gray-500";
             msg.innerText = "Searching database...";
+            manualBtn.classList.add('hidden');
+            
+            // Hide previous results
+            document.getElementById('detailsForm').classList.add('hidden');
 
             try {
                 const formData = new FormData();
@@ -177,6 +259,13 @@
                 const result = await response.json();
 
                 if (result.success) {
+                    // Lock DB Fields
+                    document.getElementById('usn').readOnly = true;
+                    document.getElementById('paid_on').readOnly = true;
+                    document.getElementById('usn').classList.add('bg-gray-50');
+                    document.getElementById('paid_on').classList.add('bg-green-50');
+
+                    // Populate Data
                     document.getElementById('usn').value = result.data.usn;
                     document.getElementById('name').value = result.data.name;
                     document.getElementById('role').value = result.data.role;
@@ -188,21 +277,49 @@
                     
                     updateDatesAndId();
                     
-                    msg.className = "text-sm mt-2 text-green-600 font-bold block";
+                    msg.className = "text-sm font-bold text-green-600";
                     msg.innerHTML = '<i class="fas fa-check"></i> Found: ' + result.data.name;
                 } else {
-                    msg.className = "text-sm mt-2 text-red-600 font-bold block";
-                    msg.innerText = result.message || "Intern not found.";
-                    document.getElementById('detailsForm').classList.add('hidden');
+                    // Not found - Offer Manual Entry
+                    msg.className = "text-sm font-bold text-red-600";
+                    msg.innerText = "Intern not found in payments database.";
+                    manualBtn.classList.remove('hidden');
                 }
             } catch (error) {
                 console.error(error);
-                msg.className = "text-sm mt-2 text-red-600 block";
+                msg.className = "text-sm text-red-600";
                 msg.innerText = "Connection error.";
             } finally {
                 btn.disabled = false;
                 btn.innerText = "Search";
             }
+        }
+
+        function enableManualEntry() {
+            const usn = document.getElementById('searchUsn').value.trim();
+            
+            // Show Form
+            document.getElementById('detailsForm').classList.remove('hidden');
+            document.getElementById('previewPlaceholder').classList.add('hidden');
+
+            // Unlock Fields for Manual Entry
+            const usnField = document.getElementById('usn');
+            const paidField = document.getElementById('paid_on');
+            
+            usnField.value = usn;
+            usnField.readOnly = false; // Allow correction
+            usnField.classList.remove('bg-gray-50');
+            
+            paidField.value = "Manual Entry (Not in DB)";
+            paidField.readOnly = false;
+            paidField.classList.remove('bg-green-50');
+
+            // Clear other fields
+            document.getElementById('name').value = "";
+            document.getElementById('role').value = "";
+            document.getElementById('email').value = "";
+
+            updateDatesAndId();
         }
 
         // --- 2. Logic for Terms & ID ---
@@ -245,28 +362,51 @@
             refreshPreview();
         }
 
-        // --- 3. Custom Justified Text Logic ---
-        
-        // Helper: Mixed Style Justification (For Para 1)
+        // --- 3. History Logic ---
+        async function fetchHistory() {
+            const tbody = document.getElementById('historyTableBody');
+            tbody.innerHTML = '<tr><td colspan="5" class="px-6 py-4 text-center">Loading records...</td></tr>';
+
+            try {
+                const formData = new FormData();
+                formData.append('action', 'fetch_history');
+                const response = await fetch('backend.php', { method: 'POST', body: formData });
+                const result = await response.json();
+
+                if (result.success && result.data.length > 0) {
+                    tbody.innerHTML = result.data.map(row => `
+                        <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">${row.usn}</td>
+                            <td class="px-6 py-4">${row.name}</td>
+                            <td class="px-6 py-4">${row.role || '-'}</td>
+                            <td class="px-6 py-4 font-mono text-xs">${row.certificate_id}</td>
+                            <td class="px-6 py-4 text-xs">${row.issued_at}</td>
+                        </tr>
+                    `).join('');
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">No certificates issued yet.</td></tr>';
+                }
+            } catch (error) {
+                console.error(error);
+                tbody.innerHTML = '<tr><td colspan="5" class="px-6 py-4 text-center text-red-500">Failed to load history.</td></tr>';
+            }
+        }
+
+        // --- 4. Custom Justified Text Logic (Preserved) ---
         function drawMixedJustifiedText(page, segments, x, startY, maxWidth, fontSize, lineHeight, font, boldFont) {
-            // 1. Tokenize into words with properties
+            // Tokenize
             const tokens = [];
             segments.forEach(seg => {
                 const f = seg.bold ? boldFont : font;
-                // Split by whitespace but keep them as individual words
                 const words = seg.text.split(/\s+/);
                 words.forEach(w => {
                     if (w.length > 0) {
-                        tokens.push({
-                            text: w,
-                            font: f,
-                            width: f.widthOfTextAtSize(w, fontSize)
-                        });
+                        tokens.push({ text: w, font: f, width: f.widthOfTextAtSize(w, fontSize) });
                     }
                 });
             });
 
-            // 2. Group into Lines
+            // Group into Lines
             const lines = [];
             let currentLine = [];
             let currentLineWidth = 0;
@@ -286,55 +426,42 @@
             });
             if (currentLine.length > 0) lines.push(currentLine);
 
-            // 3. Render
+            // Render
             let currentY = startY;
             lines.forEach((line, index) => {
                 const isLastLine = index === lines.length - 1;
-
                 if (isLastLine || line.length === 1) {
-                    // Left align
                     let cx = x;
                     line.forEach(token => {
                         page.drawText(token.text, { x: cx, y: currentY, size: fontSize, font: token.font, color: rgb(0,0,0) });
                         cx += token.width + spaceWidth;
                     });
                 } else {
-                    // Justify
                     const totalWordsWidth = line.reduce((acc, t) => acc + t.width, 0);
                     const availableSpace = maxWidth - totalWordsWidth;
-                    // Calculate exact gap
                     const gap = availableSpace / (line.length - 1);
-
                     let cx = x;
                     line.forEach((token, i) => {
                         page.drawText(token.text, { x: cx, y: currentY, size: fontSize, font: token.font, color: rgb(0,0,0) });
-                        if (i < line.length - 1) {
-                            cx += token.width + gap;
-                        }
+                        if (i < line.length - 1) cx += token.width + gap;
                     });
                 }
                 currentY -= lineHeight;
             });
-
-            return currentY; // Return where the next paragraph should start (minus some padding)
+            return currentY;
         }
 
-        // Helper: Standard Text Justification (For other paragraphs)
         function drawJustifiedText(page, text, x, y, width, font, fontSize, lineHeight, boldFont) {
             const paragraphs = text.split('\n\n');
             let currentY = y;
-
             paragraphs.forEach(paragraph => {
                 const words = paragraph.split(' ');
                 let line = [];
                 let lineLength = 0;
-
                 for (let i = 0; i < words.length; i++) {
                     const word = words[i];
-                    
                     const wordWidth = font.widthOfTextAtSize(word, fontSize);
                     const spaceWidth = (line.length > 0) ? font.widthOfTextAtSize(' ', fontSize) : 0;
-
                     if (lineLength + spaceWidth + wordWidth <= width) {
                         line.push(word);
                         lineLength += spaceWidth + wordWidth;
@@ -345,12 +472,11 @@
                         lineLength = wordWidth;
                     }
                 }
-                // Draw last line (left aligned)
                 if (line.length > 0) {
                     page.drawText(line.join(' '), { x: x, y: currentY, size: fontSize, font: font, color: rgb(0,0,0) });
                     currentY -= lineHeight;
                 }
-                currentY -= (lineHeight * 0.5); // Extra gap for paragraph
+                currentY -= (lineHeight * 0.5); 
             });
         }
 
@@ -359,31 +485,24 @@
                 page.drawText(words[0], { x, y, size: fontSize, font, color: rgb(0,0,0) });
                 return;
             }
-
             const totalWordWidth = words.reduce((sum, word) => sum + font.widthOfTextAtSize(word, fontSize), 0);
             const totalSpace = maxWidth - totalWordWidth;
             const spaceWidth = totalSpace / (words.length - 1);
-
             let currentX = x;
             words.forEach((word, index) => {
                 page.drawText(word, { x: currentX, y, size: fontSize, font, color: rgb(0,0,0) });
                 currentX += font.widthOfTextAtSize(word, fontSize);
-                if (index < words.length - 1) {
-                    currentX += spaceWidth;
-                }
+                if (index < words.length - 1) currentX += spaceWidth;
             });
         }
 
-        // --- 4. Main PDF Generation ---
+        // --- 5. Main PDF Generation (Preserved) ---
         async function generatePdfBlob() {
             try {
                 const existingPdfBytes = await fetch(TEMPLATE_URL).then(res => res.arrayBuffer());
                 const pdfDoc = await PDFDocument.load(existingPdfBytes);
-                
-                // Embed Times New Roman
                 const font = await pdfDoc.embedFont(StandardFonts.TimesRoman);
                 const boldFont = await pdfDoc.embedFont(StandardFonts.TimesRomanBold);
-
                 const page = pdfDoc.getPages()[0];
                 const { width, height } = page.getSize();
 
@@ -394,28 +513,15 @@
                 const end = document.getElementById('endDate').value;
                 const certId = document.getElementById('certId').value;
 
-                // --- 1. Draw ID (Top Right) ---
-                page.drawText(`ID: ${certId}`, {
-                    x: width - 160, // Moved to Right (from 180)
-                    y: height - 130, 
-                    size: 12,
-                    font: boldFont,
-                    color: rgb(0, 0, 0),
-                });
-
-                // --- 2. Draw Title (Top Center) ---
+                // ID
+                page.drawText(`ID: ${certId}`, { x: width - 160, y: height - 130, size: 12, font: boldFont, color: rgb(0, 0, 0) });
+                // Title
                 const titleText = "INTERNSHIP COMPLETION CERTIFICATE";
                 const titleSize = 16;
                 const titleWidth = boldFont.widthOfTextAtSize(titleText, titleSize);
-                page.drawText(titleText, {
-                    x: (width - titleWidth) / 2,
-                    y: height - 165, 
-                    size: titleSize,
-                    font: boldFont,
-                    color: rgb(0, 0, 0),
-                });
+                page.drawText(titleText, { x: (width - titleWidth) / 2, y: height - 165, size: titleSize, font: boldFont, color: rgb(0, 0, 0) });
 
-                // --- 3. Construct Justified Body Text ---
+                // Body
                 const fontSize = 14;
                 const lineHeight = 18; 
                 const marginX = 45; 
@@ -424,7 +530,7 @@
 
                 let currentY = startY;
 
-                // --- Paragraph 1 (Complex with Bold Names - Now Justified) ---
+                // Para 1
                 const para1Segments = [
                     { text: "This is to certify that ", bold: false },
                     { text: name.toUpperCase(), bold: true },
@@ -432,14 +538,10 @@
                     { text: role, bold: true },
                     { text: ` from ${start} to ${end}.`, bold: false }
                 ];
-
-                // Use the new helper to render justified mixed text
                 currentY = drawMixedJustifiedText(page, para1Segments, marginX, currentY, maxWidth, fontSize, lineHeight, font, boldFont);
-                
-                // Add extra gap after Para 1
                 currentY -= (lineHeight * 0.5); 
 
-                // --- Paragraphs 2, 3, 4, 5 (Plain Text - Fully Justified) ---
+                // Other Paras
                 const remainingText = `During the internship period, the intern actively participated in a structured learning program designed to provide practical exposure to industry-relevant concepts and workflows. The internship focused on developing technical understanding, problem-solving abilities, and professional skills applicable to real-world projects.
 
 Throughout the program, the intern demonstrated commitment, discipline, and a willingness to learn, while working in a collaborative and guided environment. The experience gained during this internship has contributed to strengthening foundational knowledge and enhancing readiness for future academic and professional opportunities.
@@ -449,7 +551,6 @@ VisionAstraa EV Academy is committed to nurturing talent by providing meaningful
 We acknowledge the successful completion of the internship and wish the intern continued success in all future endeavors.`;
 
                 drawJustifiedText(page, remainingText, marginX, currentY, maxWidth, font, fontSize, lineHeight);
-
                 return await pdfDoc.save();
 
             } catch (e) {
@@ -467,7 +568,7 @@ We acknowledge the successful completion of the internship and wish the intern c
             }
         }
 
-        // --- 5. Send Logic ---
+        // --- 6. Send Logic ---
         document.getElementById('certForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             if (!confirm("Are you sure you want to generate and email this certificate?")) return;
@@ -500,6 +601,7 @@ We acknowledge the successful completion of the internship and wish the intern c
                 formData.append('role', document.getElementById('role').value);
                 formData.append('term', document.getElementById('termSelect').options[document.getElementById('termSelect').selectedIndex].text);
                 formData.append('cert_id', document.getElementById('certId').value);
+                formData.append('account_id', document.getElementById('senderAccount').value);
                 formData.append('pdf_data', pdfBase64);
 
                 const response = await fetch('backend.php', { method: 'POST', body: formData });
@@ -507,7 +609,7 @@ We acknowledge the successful completion of the internship and wish the intern c
 
                 if (result.success) {
                     statusDiv.className = "mt-4 p-4 rounded bg-green-100 border border-green-400 text-green-800 text-sm";
-                    statusDiv.innerHTML = `<strong>Success!</strong> Certificate sent to ${document.getElementById('email').value} and saved to database.`;
+                    statusDiv.innerHTML = `<strong>Success!</strong> Certificate sent to ${document.getElementById('email').value}.`;
                 } else {
                     throw new Error(result.message);
                 }
