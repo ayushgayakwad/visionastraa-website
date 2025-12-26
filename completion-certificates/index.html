@@ -257,19 +257,14 @@
 
                 for (let i = 0; i < words.length; i++) {
                     const word = words[i];
-                    // Check if word has manual break (e.g. from segment combining)
-                    // Simplified here: assume flat text. 
                     
                     const wordWidth = font.widthOfTextAtSize(word, fontSize);
-                    
-                    // Add space width unless it's the start of line
                     const spaceWidth = (line.length > 0) ? font.widthOfTextAtSize(' ', fontSize) : 0;
 
                     if (lineLength + spaceWidth + wordWidth <= width) {
                         line.push(word);
                         lineLength += spaceWidth + wordWidth;
                     } else {
-                        // Draw the full line justified
                         drawJustifiedLine(page, line, x, currentY, width, font, fontSize);
                         currentY -= lineHeight;
                         line = [word];
@@ -326,7 +321,6 @@
                 const certId = document.getElementById('certId').value;
 
                 // --- 1. Draw ID (Top Right) ---
-                // Moved up and right: (width - 180, height - 130)
                 page.drawText(`ID: ${certId}`, {
                     x: width - 180, 
                     y: height - 130, 
@@ -341,7 +335,7 @@
                 const titleWidth = boldFont.widthOfTextAtSize(titleText, titleSize);
                 page.drawText(titleText, {
                     x: (width - titleWidth) / 2,
-                    y: height - 190, // Adjusted vertical position
+                    y: height - 165, // Moved UP from 190
                     size: titleSize,
                     font: boldFont,
                     color: rgb(0, 0, 0),
@@ -349,29 +343,16 @@
 
                 // --- 3. Construct Justified Body Text ---
                 const fontSize = 14;
-                const lineHeight = 18; // Reduced slightly to fit better if needed
-                const marginX = 60;
-                // Move Paragraph Text UP (Higher Y value)
-                const startY = height - 220; 
+                const lineHeight = 18; 
+                // Increased Width: Reduced margins from 60 to 45
+                const marginX = 45; 
+                // Moved Body Up: From height - 220 to height - 200
+                const startY = height - 200; 
                 const maxWidth = width - (marginX * 2);
 
-                // Note: The justification function handles pure text. 
-                // To keep BOLD parts (Name, USN, Role), we can't easily use the simple justify function 
-                // unless we break it down into chunks. 
-                // However, pdf-lib doesn't support rich text justification easily.
-                // COMPROMISE: We will draw the first paragraph MANUALLY to handle Bold inserts, 
-                // and use the Justify function for the remaining standard paragraphs.
-                
                 let currentY = startY;
 
                 // --- Paragraph 1 (Complex with Bold Names) ---
-                // We will use standard wrap for this one to ensure bolding works, 
-                // but we can't fully justify mixed styles easily without complex math.
-                // We will keep this Left Aligned or try to manually space. 
-                // For simplicity and robustness with BOLD names, we'll use standard flow (Left Align)
-                // for the first paragraph, and Justify the rest which are plain text.
-                
-                // Constructing Para 1
                 const para1Segments = [
                     { text: "This is to certify that ", bold: false },
                     { text: name.toUpperCase(), bold: true },
@@ -386,13 +367,7 @@
                     const words = segment.text.split(' ');
                     
                     for (const word of words) {
-                        // preserve spaces if split consumed them
-                        // Simple approach: add space after every word unless it's the very last in segment
-                        // But text might start with space.
-                        // Better: split by space, add space manually.
-                        
                         if(word === "") { 
-                             // Could occur if double spaces, just add space width
                              currentX += fontToUse.widthOfTextAtSize(' ', fontSize);
                              continue;
                         }
