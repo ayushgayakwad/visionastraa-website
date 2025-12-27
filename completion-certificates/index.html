@@ -185,11 +185,12 @@
                                 <th scope="col" class="px-6 py-3">Name</th>
                                 <th scope="col" class="px-6 py-3">Role</th>
                                 <th scope="col" class="px-6 py-3">Certificate ID</th>
+                                <th scope="col" class="px-6 py-3">Term</th>
                                 <th scope="col" class="px-6 py-3">Date Issued</th>
                             </tr>
                         </thead>
                         <tbody id="historyTableBody">
-                            <tr><td colspan="5" class="px-6 py-4 text-center">Loading...</td></tr>
+                            <tr><td colspan="6" class="px-6 py-4 text-center">Loading...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -388,7 +389,7 @@
         // --- 3. History Logic ---
         async function fetchHistory() {
             const tbody = document.getElementById('historyTableBody');
-            tbody.innerHTML = '<tr><td colspan="5" class="px-6 py-4 text-center">Loading records...</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center">Loading records...</td></tr>';
 
             try {
                 const formData = new FormData();
@@ -403,15 +404,16 @@
                             <td class="px-6 py-4">${row.name}</td>
                             <td class="px-6 py-4">${row.role || '-'}</td>
                             <td class="px-6 py-4 font-mono text-xs">${row.certificate_id}</td>
+                            <td class="px-6 py-4 text-sm">${row.term || '-'}</td>
                             <td class="px-6 py-4 text-xs">${row.issued_at}</td>
                         </tr>
                     `).join('');
                 } else {
-                    tbody.innerHTML = '<tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">No certificates issued yet.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center text-gray-500">No certificates issued yet.</td></tr>';
                 }
             } catch (error) {
                 console.error(error);
-                tbody.innerHTML = '<tr><td colspan="5" class="px-6 py-4 text-center text-red-500">Failed to load history.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center text-red-500">Failed to load history.</td></tr>';
             }
         }
 

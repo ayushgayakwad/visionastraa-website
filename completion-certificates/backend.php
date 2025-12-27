@@ -56,6 +56,15 @@ function ensureTableStructure($pdo) {
             $pdo->exec("ALTER TABLE issued_certificates ADD COLUMN role VARCHAR(150) AFTER name");
         } catch (Exception $ex) { /* Ignore */ }
     }
+
+    // 3. Check if 'term' column exists (Migration for existing tables)
+    try {
+        $pdo->query("SELECT term FROM issued_certificates LIMIT 1");
+    } catch (Exception $e) {
+        try {
+            $pdo->exec("ALTER TABLE issued_certificates ADD COLUMN term VARCHAR(50) AFTER certificate_id");
+        } catch (Exception $ex) { /* Ignore */ }
+    }
 }
 
 $action = $_POST['action'] ?? '';
