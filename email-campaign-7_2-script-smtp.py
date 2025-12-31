@@ -491,7 +491,6 @@ def main():
             FROM {tbl} 
             WHERE emailSent_2=0 
             AND email NOT IN (SELECT email FROM unsubscribed_emails)
-            AND state IN ('Kerala', 'Tamil Nadu', 'Andhra Pradesh', 'Telangana', 'Karnataka', 'Maharashtra')
             AND MOD(CRC32(email), %s) = %s
             LIMIT %s;
         """
