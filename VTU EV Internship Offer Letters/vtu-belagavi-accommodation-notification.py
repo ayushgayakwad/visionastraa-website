@@ -43,7 +43,7 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         Hello {name},
         <br><br>
 
-        We are pleased to share details regarding accommodation for interns joining the <strong>Belagavi center</strong> at Visvesvaraya Technological University (VTU) Belagavi campus.
+        We are pleased to share details regarding accommodation for interns joining the <strong>Belagavi center</strong> at Visvesvaraya Technological University (VTU) Belagavi campus for internship at <strong>VisionAstraa EV Academy.</strong>
         <br><br>
         
         <strong><u>IMPORTANT NOTE:</u> This information is ONLY for interns preferring the Belagavi center for their internship. If you are preferring the Bangalore center, please ignore this email.</strong>
