@@ -11,7 +11,7 @@ from email.utils import formataddr
 
 # ---------------- CONFIG ----------------
 # Update this to your new CSV file if needed
-CSV_FILE_PATH = 'VTU EV Internship Offer Letters/full_quick_1.csv' 
+CSV_FILE_PATH = 'VTU EV Internship Offer Letters/full_quick_test.csv' 
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
 EMAIL_SUBJECT = 'Accommodation at VTU Belagavi starting at just ₹25 | VisionAstraa EV Academy'
