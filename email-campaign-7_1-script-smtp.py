@@ -529,12 +529,12 @@ def main():
     try:
         conn = mysql.connector.connect(
             host='srv1640.hstgr.io',
-            user='u707137586_Campus_Hiring',
-            password='6q+SFd~o[go',
-            database='u707137586_Campus_Hiring',
-            # user = "u707137586_EV_Reg_T1_24",
-            # password = "DMKL0IYoP&4",
-            # database = "u707137586_EV_Reg_2024_T1",
+            # user='u707137586_Campus_Hiring',
+            # password='6q+SFd~o[go',
+            # database='u707137586_Campus_Hiring',
+            user = "u707137586_EV_Reg_T1_24",
+            password = "DMKL0IYoP&4",
+            database = "u707137586_EV_Reg_2024_T1",
             connect_timeout=20
         )
         cursor = conn.cursor(dictionary=True)
@@ -554,18 +554,18 @@ def main():
 
         emails_to_fetch = max_emails_to_send - emails_sent_count
 
-        query = f"""
-            SELECT email, first_name 
-            FROM {tbl} 
-            WHERE emailSent=0 
-            AND email NOT IN (SELECT email FROM unsubscribed_emails)
-            AND MOD(CRC32(email), %s) = %s
-            LIMIT %s;
-        """
-
         # query = f"""
-        #     SELECT email, name FROM {tbl} WHERE emailSent=0 AND MOD(CRC32(email), %s) = %s LIMIT %s
+        #     SELECT email, first_name 
+        #     FROM {tbl} 
+        #     WHERE emailSent=0 
+        #     AND email NOT IN (SELECT email FROM unsubscribed_emails)
+        #     AND MOD(CRC32(email), %s) = %s
+        #     LIMIT %s;
         # """
+
+        query = f"""
+            SELECT email, name FROM {tbl} WHERE emailSent=0 AND MOD(CRC32(email), %s) = %s LIMIT %s
+        """
 
         try:
             cursor.execute(query, (mod_total, mod_value, emails_to_fetch))
@@ -585,8 +585,8 @@ def main():
                 print(f"Reached job limit mid-table. Stopping.")
                 break
 
-            if send_email(row['email'], row.get('first_name', 'there'), current_account['username'], current_account['password']):
-            # if send_email(row['email'], row['name'], current_account['username'], current_account['password']):
+            # if send_email(row['email'], row.get('first_name', 'there'), current_account['username'], current_account['password']):
+            if send_email(row['email'], row['name'], current_account['username'], current_account['password']):
                 consecutive_failures = 0
                 emails_sent_count += 1
                 print(f"✅ ({emails_sent_count}/{max_emails_to_send}) Sent to {row['email']} using {current_account['username']}")
