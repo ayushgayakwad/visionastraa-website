@@ -49,6 +49,9 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         <strong><u>IMPORTANT NOTE:</u> This information is ONLY for interns preferring the Belagavi center for their internship. If you are preferring the Bangalore center, please ignore this email.</strong>
         <br><br>
 
+<strong>Please don't call us or spam us for accommodation in Bangalore, which we cannot provide. Online opting students, kindly ignore this email. A separate Google Form will be shared with those preferring the Bangalore center or opting for online options.</strong>
+<br><br>
+
         We have arranged affordable stay and food options on campus to ensure a comfortable experience during your internship:
 
         <ul>
