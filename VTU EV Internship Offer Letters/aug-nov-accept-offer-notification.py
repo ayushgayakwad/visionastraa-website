@@ -10,7 +10,7 @@ from email.mime.text import MIMEText
 from email.utils import formataddr
 
 # ---------------- CONFIG ----------------
-CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_offer_released_notification_8.csv'
+CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_offer_released_notification_9.csv'
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
 EMAIL_SUBJECT = '[FINAL REMINDER] Urgent Action Required Regarding Your Internship Application at VisionAstraa EV Academy'
@@ -19,12 +19,12 @@ EMAIL_SUBJECT = '[FINAL REMINDER] Urgent Action Required Regarding Your Internsh
 # Since this is a private repo, we hardcode them here to avoid GitHub Secrets
 BATCH_CREDENTIALS = {
     1: {
-        "EMAIL": "visionastraa@evinternships.com",
-        "PASSWORD": "a[kE?V6lm7G="
+        "EMAIL": "careers@visionastraa.in",
+        "PASSWORD": "Z1SIOO0A9b~"
     },
     2: {
-        "EMAIL": "visionastraa@evinternships.in",
-        "PASSWORD": "]9jw>Upu//Y"
+        "EMAIL": "visionastraa@evcourse.in",
+        "PASSWORD": ">p>W|jv?Kg1"
     }
 }
 
@@ -48,7 +48,7 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         Our records indicate that the <strong>internship acceptance is still pending on the VTU Portal</strong>.
         <br><br>
 
-        <strong>The final date to accept the internship offer is 22nd December 2025 before 6:00 PM</u>. Kindly accept the offer before this date to secure your internship position. Otherwise, the offer will be revoked.</strong>
+        <strong>The final date to accept the internship offer is 10th January 2026</u>. Kindly accept the offer before this date to secure your internship position. Otherwise, the offer will be revoked.</strong>
         <br><br>
 
         <strong><u>Please note that failure to accept the offer by the deadline may result in the revocation of the internship offer.</u></strong>
@@ -62,6 +62,14 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         <br><br>
 
         If you have already completed the payment or are facing difficulties on the VTU portal, please reach out to VTU Portal's support team for verification or assistance.
+        <br><br>
+
+        <strong>Mode of Internship:</strong><br>
+        Interns have the option to choose between:
+        <ul>
+        <li>Fully-online</li>
+        <li>or, fully-offline (Bangalore/Belagavi center) mode of internship</li>
+        </ul>
         <br><br>
 
         <strong>For any help or queries, you may contact us on LinkedIn:</strong><br>
