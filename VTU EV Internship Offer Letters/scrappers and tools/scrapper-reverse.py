@@ -303,17 +303,28 @@ while True:  # Loop over pages
             scraped_info["City"] = get_value_by_label("City")
             
             # 7. LinkedIn
-            scraped_info["LinkedIn"] = get_value_by_label("LinkedIn")
-            # Fallback: Check if it's a link if scraping returned empty, or just to be safe
+            scraped_info["LinkedIn"] = ""
+            try:
+                # Strategy 1: Direct search for any link containing 'linkedin.com' in the href
+                # This is robust because it doesn't rely on the label 'LinkedIn' being present or formatted a specific way
+                linkedin_el = driver.find_element(By.XPATH, "//a[contains(@href, 'linkedin.com')]")
+                scraped_info["LinkedIn"] = linkedin_el.get_attribute("href")
+            except:
+                pass
+            
             if not scraped_info["LinkedIn"]:
                 try:
-                     # Check specifically for an anchor tag
-                     li_node = driver.find_element(By.XPATH, "//*[normalize-space()='LinkedIn']/following::a[1]")
+                     # Strategy 2: Fallback to looking for a link after a 'LinkedIn' text label
+                     li_node = driver.find_element(By.XPATH, "//*[contains(text(), 'LinkedIn')]/following::a[1]")
                      scraped_info["LinkedIn"] = li_node.get_attribute("href")
                 except:
                     pass
             
-            print(f"  > Scraped: {scraped_info.get('Full Name')}")
+            if not scraped_info["LinkedIn"]:
+                # Strategy 3: Last resort, try getting text using the generic label function
+                 scraped_info["LinkedIn"] = get_value_by_label("LinkedIn")
+            
+            print(f"  > Scraped: {scraped_info.get('Full Name')} | LinkedIn: {scraped_info.get('LinkedIn')}")
             
             applicants_data.append(scraped_info)
             processed_links.add(link) # Mark as done
