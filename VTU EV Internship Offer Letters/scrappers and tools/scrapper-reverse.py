@@ -131,7 +131,7 @@ def check_system_state(driver, wait):
         pass
 
     # 3. Check 10-Minute Logout Timer
-    if (time.time() - last_login_time) > 600: # 600 seconds = 10 minutes
+    if (time.time() - last_login_time) > 180:
         print("⏰ 10 minutes elapsed. Initiating mandatory logout/login cycle.")
         try:
             driver.execute_script("window.scrollTo(0, 0);")
@@ -180,6 +180,7 @@ except TimeoutException:
 applicants_data = []
 
 while True:  # Loop over pages
+    should_restart_page = False # Flag to track if we need to restart processing the current page
     
     # Update current URL tracker if we are on the list page
     if "dashboard/company/applicants" in driver.current_url:
@@ -211,19 +212,27 @@ while True:  # Loop over pages
         print(f"Error collecting links: {e}")
         break
 
+    # --- RESUME CHECK ---
+    # Check how many links on this page are already processed
+    processed_on_this_page = [link for link in action_links if link in processed_links]
     print(f"Found {len(action_links)} applicant links on current page.")
+    if processed_on_this_page:
+        print(f"   > Resume Check: {len(processed_on_this_page)} of {len(action_links)} applicants on this page are already done.")
+        if len(processed_on_this_page) == len(action_links):
+            print("   > All applicants on this page are already processed. Moving directly to pagination.")
 
     # 2. Visit each applicant link
     for i, link in enumerate(action_links, start=1):
         
-        # SKIP if already processed (since we don't change status, they stay on list)
+        # SKIP if already processed
         if link in processed_links:
             continue
 
         # Check system state before every applicant
         state = check_system_state(driver, wait)
         if state == "reset":
-            print("   > State reset triggered. Refreshing list...")
+            print("   > State reset triggered. Resuming current page processing...")
+            should_restart_page = True
             break 
 
         try:
@@ -232,7 +241,8 @@ while True:  # Loop over pages
 
             # Check if login screen appeared after navigation
             if check_system_state(driver, wait) == "reset":
-                 break # Break inner loop to restart
+                 should_restart_page = True
+                 break 
 
             # Wait for Name or Header
             wait.until(
@@ -294,14 +304,13 @@ while True:  # Loop over pages
             
             print(f"  > Scraped: {scraped_info.get('Full Name')}")
             
-            # --- NO STATUS UPDATE ---
-            
             applicants_data.append(scraped_info)
             processed_links.add(link) # Mark as done
 
         except Exception as e:
             print(f"  > Row {i} FAILED: {e}")
             if check_system_state(driver, wait) == "reset":
+                should_restart_page = True
                 break
             try:
                 driver.back()
@@ -320,6 +329,7 @@ while True:  # Loop over pages
         except Exception as e:
             print(f"  > FAILED to navigate back: {e}. Reloading via Current URL.")
             if check_system_state(driver, wait) == "reset":
+                should_restart_page = True
                 break
             try:
                  driver.get(current_scraping_url)
@@ -327,8 +337,19 @@ while True:  # Loop over pages
             except Exception as nav_e:
                 print(f"  > CRITICAL: Failed to re-navigate. Stopping loop. {nav_e}")
                 break 
+    
+    # --- CHECK IF RESTART NEEDED ---
+    # If we broke out of the inner loop due to a reset, we must NOT go to the next page.
+    # We must restart the outer loop to finish the remaining records on THIS page.
+    if should_restart_page:
+        print("   > Resuming current page to finish remaining records...")
+        # Optional: Save partial progress before restarting page
+        if applicants_data:
+             df = pd.DataFrame(applicants_data)
+             df.to_excel(OUTPUT_XLSX, index=False)
+        continue 
 
-    # Save to Excel
+    # Save to Excel (Normal flow)
     if applicants_data:
         df = pd.DataFrame(applicants_data)
         df.to_excel(OUTPUT_XLSX, index=False)
@@ -339,7 +360,7 @@ while True:  # Loop over pages
     try:
         # Before clicking previous, check state
         if check_system_state(driver, wait) == "reset":
-             continue
+             continue # Will restart current page logic if reset happens here
 
         # Look for "Previous" or "«" symbol usually associated with previous
         prev_btn_candidates = driver.find_elements(By.XPATH, "//button[contains(text(),'Previous') or contains(text(), '«')]")
