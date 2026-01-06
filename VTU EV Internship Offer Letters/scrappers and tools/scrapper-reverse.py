@@ -302,6 +302,17 @@ while True:  # Loop over pages
             scraped_info["State"] = get_value_by_label("State")
             scraped_info["City"] = get_value_by_label("City")
             
+            # 7. LinkedIn
+            scraped_info["LinkedIn"] = get_value_by_label("LinkedIn")
+            # Fallback: Check if it's a link if scraping returned empty, or just to be safe
+            if not scraped_info["LinkedIn"]:
+                try:
+                     # Check specifically for an anchor tag
+                     li_node = driver.find_element(By.XPATH, "//*[normalize-space()='LinkedIn']/following::a[1]")
+                     scraped_info["LinkedIn"] = li_node.get_attribute("href")
+                except:
+                    pass
+            
             print(f"  > Scraped: {scraped_info.get('Full Name')}")
             
             applicants_data.append(scraped_info)
