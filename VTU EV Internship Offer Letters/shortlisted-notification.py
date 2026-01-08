@@ -16,7 +16,6 @@ SMTP_PORT = 465
 EMAIL_SUBJECT = '[URGENT] Important Information Regarding Your Internship Application at VisionAstraa EV Academy'
 
 # --- HARDCODED CREDENTIALS ---
-
 BATCH_CREDENTIALS = {
     1: {
         "EMAIL": "visionastraa@evinternships.com",
