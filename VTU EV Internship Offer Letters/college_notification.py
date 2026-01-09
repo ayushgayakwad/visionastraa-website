@@ -182,6 +182,18 @@ def send_college_notification_email(sender_email, sender_password, recipient_nam
         <a href="https://visionastraa.com/ev-projects.html">https://visionastraa.com/ev-projects.html</a>
         <br><br>
 
+        If you have any questions, please feel free to <strong>reply directly to this email</strong>.
+        <br><br>
+
+        We also request you to share the following contact details with your students:
+        <br><br>
+
+        For any queries, you may contact us on LinkedIn:<br>
+        <a href="https://in.linkedin.com/company/va-ev-academy">VisionAstraa EV Academy</a><br>
+        Speak directly with our CEO: <a href="https://in.linkedin.com/in/nikhiljaincs">Nikhil Jain C S</a><br>
+        <strong>OR, if you are really interested in joining VisionAstraa EV Academy then call us on: <a href="tel:+918762246518">+91 87622 46518</a> or <a href="tel:+918075664438">+91 80756 64438</a></strong>
+        <br><br>
+
         Best Regards,<br>
         <strong>VisionAstraa EV Academy</strong><br>
         <a href="https://visionastraa.com">www.visionastraa.com</a>
