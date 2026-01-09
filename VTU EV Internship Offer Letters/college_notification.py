@@ -109,14 +109,90 @@ def update_email_sent_flag(college_name):
             conn.close()
         return False
 
-def send_college_notification_email(sender_email, sender_password, recipient_name, to_email):
+def send_college_notification_email(sender_email, sender_password, recipient_name, to_email, role_title):
     try:
         msg = MIMEMultipart()
         msg['From'] = formataddr(("VisionAstraa EV Academy", sender_email))
         msg['To'] = to_email
         msg['Subject'] = EMAIL_SUBJECT
 
-        # Constructing the HTML Body
+        # --- Define Content Blocks ---
+        
+        content_cse = """
+        <strong>For CSE and Allied students:</strong>
+        <ul>
+            <li>
+                <strong>AI/ML for Electric Vehicle (Software-based)</strong><br>
+                <a href="https://vtu.internyet.in/internships/365-aiml-for-electric-vehicle-data-science-cyber-security-machine-learning-data-analytics-full-stack-development-artificial-intelligence">Click here to apply</a>
+            </li>
+            <li>
+                <strong>Full Stack Development for Electric Vehicle (Software-based)</strong><br>
+                <a href="https://vtu.internyet.in/internships/365-full-stack-development-for-electric-vehicle">Click here to apply</a>
+            </li>
+            <li>
+                <strong>Web Development for Electric Vehicle (Software-based)</strong><br>
+                <a href="https://vtu.internyet.in/internships/365-web-development-for-electric-vehicle">Click here to apply</a>
+            </li>
+            <li>
+                <strong>Data Science for Electric Vehicle (Software-based)</strong><br>
+                <a href="https://vtu.internyet.in/internships/365-data-science-for-electric-vehicle">Click here to apply</a>
+            </li>
+        </ul>
+        """
+
+        content_ece_eee = """
+        <strong>For ECE/EEE and Allied students:</strong>
+        <ul>
+            <li>
+                <strong>Embedded Systems for Electric Vehicle</strong><br>
+                <a href="https://vtu.internyet.in/internships/365-embedded-systems-for-electric-vehicle-microcontrollers-iot-mechatronics-adas">Click here to apply</a>
+            </li>
+        </ul>
+        """
+
+        content_mech = """
+        <strong>For Mechanical and Allied students:</strong>
+        <ul>
+            <li>
+                <strong>Design and Development of Electric Vehicle</strong><br>
+                <a href="https://vtu.internyet.in/internships/365-design-development-of-electric-vehicle-mechanical-mechatronics-automobile">Click here to apply</a>
+            </li>
+        </ul>
+        """
+
+        # --- Logic to Select Content Based on Role ---
+        
+        dynamic_content_parts = []
+        
+        # 1. Principals and Placement Officers get EVERYTHING
+        if role_title in ["Principal", "Placement Officer"]:
+            dynamic_content_parts.append(content_cse)
+            dynamic_content_parts.append(content_ece_eee)
+            dynamic_content_parts.append(content_mech)
+            
+        else:
+            # 2. HOD Specific Logic
+            
+            # CSE / IT / AI / Data / Cyber / ISE Group
+            # Keywords matching the keys in ROLE_COLUMN_MAP: "CSE", "AI", "Data", "ISE", "DSE", "Cybersecurity"
+            if any(keyword in role_title for keyword in ["CSE", "AI", "Data", "ISE", "DSE", "Cybersecurity"]):
+                dynamic_content_parts.append(content_cse)
+                
+            # ECE / EEE Group
+            # Keywords: "ECE", "EEE"
+            if any(keyword in role_title for keyword in ["ECE", "EEE"]):
+                dynamic_content_parts.append(content_ece_eee)
+                
+            # Mechanical / IPE Group
+            # Keywords: "Mechanical", "IPE"
+            if any(keyword in role_title for keyword in ["Mechanical", "IPE"]):
+                dynamic_content_parts.append(content_mech)
+
+        # If for some reason no content was selected (shouldn't happen with current map), join nothing
+        final_dynamic_content = "".join(dynamic_content_parts)
+
+
+        # --- Constructing the HTML Body ---
         body = f"""
         Dear {recipient_name},
         <br><br>
@@ -140,41 +216,7 @@ def send_college_notification_email(sender_email, sender_password, recipient_nam
         <strong><u>Project-based Internship Details are given below:</u></strong>
         <br><br>
 
-        <strong>For CSE and Allied students:</strong>
-        <ul>
-            <li>
-                <strong>AI/ML for Electric Vehicle (Software-based)</strong><br>
-                <a href="https://vtu.internyet.in/internships/365-aiml-for-electric-vehicle-data-science-cyber-security-machine-learning-data-analytics-full-stack-development-artificial-intelligence">Click here to apply</a>
-            </li>
-            <li>
-                <strong>Full Stack Development for Electric Vehicle (Software-based)</strong><br>
-                <a href="https://vtu.internyet.in/internships/365-full-stack-development-for-electric-vehicle">Click here to apply</a>
-            </li>
-            <li>
-                <strong>Web Development for Electric Vehicle (Software-based)</strong><br>
-                <a href="https://vtu.internyet.in/internships/365-web-development-for-electric-vehicle">Click here to apply</a>
-            </li>
-            <li>
-                <strong>Data Science for Electric Vehicle (Software-based)</strong><br>
-                <a href="https://vtu.internyet.in/internships/365-data-science-for-electric-vehicle">Click here to apply</a>
-            </li>
-        </ul>
-
-        <strong>For ECE/EEE and Allied students:</strong>
-        <ul>
-            <li>
-                <strong>Embedded Systems for Electric Vehicle</strong><br>
-                <a href="https://vtu.internyet.in/internships/365-embedded-systems-for-electric-vehicle-microcontrollers-iot-mechatronics-adas">Click here to apply</a>
-            </li>
-        </ul>
-
-        <strong>For Mechanical and Allied students:</strong>
-        <ul>
-            <li>
-                <strong>Design and Development of Electric Vehicle</strong><br>
-                <a href="https://vtu.internyet.in/internships/365-design-development-of-electric-vehicle-mechanical-mechatronics-automobile">Click here to apply</a>
-            </li>
-        </ul>
+        {final_dynamic_content}
         <br>
 
         <strong>Mode of Internship:</strong><br>
@@ -286,8 +328,8 @@ def main():
                     # Create specific salutation
                     recipient_name = f"{role_title}, {college_name}"
                     
-                    # Send Email
-                    success = send_college_notification_email(sender_email, sender_password, recipient_name, email)
+                    # Send Email - Passing role_title now
+                    success = send_college_notification_email(sender_email, sender_password, recipient_name, email, role_title)
                     if success:
                         college_emails_successful += 1
                         total_emails_sent_count += 1
