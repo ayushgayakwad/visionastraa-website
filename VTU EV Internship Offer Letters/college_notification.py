@@ -13,7 +13,7 @@ from email.utils import formataddr
 # ---------------- CONFIG ----------------
 # Database Credentials
 # NOTE: If running from GitHub Actions or local PC, change 'localhost' to your Hostinger Remote SQL IP/Host
-DB_HOST = 'localhost' 
+DB_HOST = 'srv1640.hstgr.io' 
 DB_USER = 'u707137586_User_Data'
 DB_PASSWORD = 'C*&7Ua]X$k7h'
 DB_NAME = 'u707137586_User_Data'
