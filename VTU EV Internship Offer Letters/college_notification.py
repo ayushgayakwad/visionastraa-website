@@ -21,7 +21,7 @@ TABLE_NAME = 'karnataka_college_data'
 
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
-EMAIL_SUBJECT = 'Internship Opportunities for Students at VisionAstraa EV Academy (VTU InternYet Portal)'
+EMAIL_SUBJECT = 'Internship Opportunities for Students at VisionAstraa EV Academy'
 
 # --- HARDCODED CREDENTIALS ---
 BATCH_CREDENTIALS = {
