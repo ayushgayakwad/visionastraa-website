@@ -17,7 +17,7 @@ DB_HOST = 'localhost'
 DB_USER = 'u707137586_User_Data'
 DB_PASSWORD = 'C*&7Ua]X$k7h'
 DB_NAME = 'u707137586_User_Data'
-TABLE_NAME = 'karnataka_college_details'
+TABLE_NAME = 'karnataka_college_data'
 
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
