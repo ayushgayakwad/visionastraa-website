@@ -12,7 +12,6 @@ from email.utils import formataddr
 
 # ---------------- CONFIG ----------------
 # Database Credentials
-# NOTE: If running from GitHub Actions or local PC, change 'localhost' to your Hostinger Remote SQL IP/Host
 DB_HOST = 'srv1640.hstgr.io' 
 DB_USER = 'u707137586_User_Data'
 DB_PASSWORD = 'C*&7Ua]X$k7h'
@@ -25,11 +24,11 @@ EMAIL_SUBJECT = 'Internship Opportunities for Students at VisionAstraa EV Academ
 
 # --- HARDCODED CREDENTIALS ---
 BATCH_CREDENTIALS = {
-    2: {
+    1: {
         "EMAIL": "visionastraa@evinternships.com",
         "PASSWORD": "a[kE?V6lm7G="
     },
-    1: {
+    2: {
         "EMAIL": "visionastraa@evinternships.in",
         "PASSWORD": "]9jw>Upu//Y"
     }
