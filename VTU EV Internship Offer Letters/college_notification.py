@@ -25,11 +25,11 @@ EMAIL_SUBJECT = 'Internship Opportunities for Students at VisionAstraa EV Academ
 
 # --- HARDCODED CREDENTIALS ---
 BATCH_CREDENTIALS = {
-    1: {
+    2: {
         "EMAIL": "visionastraa@evinternships.com",
         "PASSWORD": "a[kE?V6lm7G="
     },
-    2: {
+    1: {
         "EMAIL": "visionastraa@evinternships.in",
         "PASSWORD": "]9jw>Upu//Y"
     }
