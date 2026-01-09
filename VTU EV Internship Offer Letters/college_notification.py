@@ -121,34 +121,38 @@ def send_college_notification_email(sender_email, sender_password, recipient_nam
         Dear {recipient_name},
         <br><br>
 
-        Greetings from VisionAstraa EV Academy!
+        Greetings from <a href="https://visionastraa.com/ev-projects.html">VisionAstraa EV Academy!</a>
         <br><br>
 
-        We are writing to inform you that VisionAstraa EV Academy is offering internship opportunities which are registered on the <strong>VTU InternYet Portal</strong>.
-        <br><br>
-        We request you to kindly ask your <strong>Internship Coordinators and Placement Officers</strong> to pass these details to your students as well.
+        <strong>As the internship confirmation deadline approaches for students across all branches of your esteemed institution, we are excited to open our doors and extend internship offers to those who are yet to receive any internship offer letters yet - offering them the chance to gain hands-on experience, real-world exposure, and a strong foundation to start their professional journey.</strong>
         <br><br>
 
-        <strong><u>Internship Courses Available:</u></strong>
+        We are pleased to inform you that VisionAstraa EV Academy is offering internship opportunities which are registered on the <strong><a href="https://vtu.internyet.in/companies/visionastraa-ev-academy">VTU InternYet Portal</a></strong>.
+        <br><br>
+    
+        We request you to kindly forward this email to <strong>Internship Coordinators and Placement Officers</strong> to share with the students.
+        <br><br>
+
+        <strong><u>Project-based Internship Details are given below:</u></strong>
         <br><br>
 
         <strong>For CSE and Allied students:</strong>
         <ul>
             <li>
-                <strong>AI/ML for Electric Vehicle</strong><br>
-                <a href="https://vtu.internyet.in/internships/365-aiml-for-electric-vehicle-data-science-cyber-security-machine-learning-data-analytics-full-stack-development-artificial-intelligence">Click here to view details</a>
+                <strong>AI/ML for Electric Vehicle (Software-based)</strong><br>
+                <a href="https://vtu.internyet.in/internships/365-aiml-for-electric-vehicle-data-science-cyber-security-machine-learning-data-analytics-full-stack-development-artificial-intelligence">Click here to apply</a>
             </li>
             <li>
-                <strong>Full Stack Development for Electric Vehicle</strong><br>
-                <a href="https://vtu.internyet.in/internships/365-full-stack-development-for-electric-vehicle">Click here to view details</a>
+                <strong>Full Stack Development for Electric Vehicle (Software-based)</strong><br>
+                <a href="https://vtu.internyet.in/internships/365-full-stack-development-for-electric-vehicle">Click here to apply</a>
             </li>
             <li>
-                <strong>Web Development for Electric Vehicle</strong><br>
-                <a href="https://vtu.internyet.in/internships/365-web-development-for-electric-vehicle">Click here to view details</a>
+                <strong>Web Development for Electric Vehicle (Software-based)</strong><br>
+                <a href="https://vtu.internyet.in/internships/365-web-development-for-electric-vehicle">Click here to apply</a>
             </li>
             <li>
-                <strong>Data Science for Electric Vehicle</strong><br>
-                <a href="https://vtu.internyet.in/internships/365-data-science-for-electric-vehicle">Click here to view details</a>
+                <strong>Data Science for Electric Vehicle (Software-based)</strong><br>
+                <a href="https://vtu.internyet.in/internships/365-data-science-for-electric-vehicle">Click here to apply</a>
             </li>
         </ul>
 
@@ -156,7 +160,7 @@ def send_college_notification_email(sender_email, sender_password, recipient_nam
         <ul>
             <li>
                 <strong>Embedded Systems for Electric Vehicle</strong><br>
-                <a href="https://vtu.internyet.in/internships/365-embedded-systems-for-electric-vehicle-microcontrollers-iot-mechatronics-adas">Click here to view details</a>
+                <a href="https://vtu.internyet.in/internships/365-embedded-systems-for-electric-vehicle-microcontrollers-iot-mechatronics-adas">Click here to apply</a>
             </li>
         </ul>
 
@@ -164,7 +168,7 @@ def send_college_notification_email(sender_email, sender_password, recipient_nam
         <ul>
             <li>
                 <strong>Design and Development of Electric Vehicle</strong><br>
-                <a href="https://vtu.internyet.in/internships/365-design-development-of-electric-vehicle-mechanical-mechatronics-automobile">Click here to view details</a>
+                <a href="https://vtu.internyet.in/internships/365-design-development-of-electric-vehicle-mechanical-mechatronics-automobile">Click here to apply</a>
             </li>
         </ul>
         <br>
@@ -172,32 +176,36 @@ def send_college_notification_email(sender_email, sender_password, recipient_nam
         <strong>Mode of Internship:</strong><br>
         Interns have the option to choose between:
         <ul>
-            <li>Fully-online</li>
-            <li>or, fully-offline (Bangalore/Belagavi center) mode of internship</li>
+            <li>Hybrid</li>
+            <li>Fully-offline (Bangalore/Belagavi center)</li>
+            <li>or, Fully-online</li>
         </ul>
         <br>
 
-        For more information regarding Internship modules, please visit our internship page: 
+        <strong>Internship Duration and Starting Date:</strong><br>
+        <strong>Duration:</strong> 1 month of training and 3 months of honds-on project work (Total 4 months)<br>
+        <strong>Tentative Starting Date:</strong> January 22, 2026<br>
+
+        For the detailed syllabus covered, please visit our website: 
         <a href="https://visionastraa.com/ev-projects.html">https://visionastraa.com/ev-projects.html</a>
         <br><br>
 
         If you have any questions, please feel free to <strong>reply directly to this email</strong>.
         <br><br>
 
-        We also request you to share the following contact details with your students:
+        For any queries, you may contact us:<br>
+        <strong>LinedkIn: <a href="https://in.linkedin.com/company/va-ev-academy">VisionAstraa EV Academy</a></strong><br>
+        <strong>Official Phone Numbers: <a href="tel:+918762246518">+91 87622 46518</a> or <a href="tel:+918075664438">+91 80756 64438</a></strong><br>
+        <strong>You may speak directly with me on LinkedIn: <a href="https://in.linkedin.com/in/nikhiljaincs">Nikhil Jain C S</a></strong>
         <br><br>
 
-        For any queries, you may contact us on LinkedIn:<br>
-        <a href="https://in.linkedin.com/company/va-ev-academy">VisionAstraa EV Academy</a><br>
-        Speak directly with our CEO: <a href="https://in.linkedin.com/in/nikhiljaincs">Nikhil Jain C S</a><br>
-        <strong>OR, if you are really interested in joining VisionAstraa EV Academy then call us on: <a href="tel:+918762246518">+91 87622 46518</a> or <a href="tel:+918075664438">+91 80756 64438</a></strong>
-        <br><br>
-
-        Best Regards,<br>
-        <strong>Nikhil Jain C S</strong><br>
-        <strong>Co-founder & CEO</strong><br>
-        <strong>VisionAstraa EV Academy</strong><br>
-        <a href="https://visionastraa.com">www.visionastraa.com</a>
+        <div style="margin:0; padding:0; line-height:1.4; color:#000000;">
+            Best Regards,<br>
+            <strong style="color:#000000;">Nikhil Jain C S</strong><br>
+            <strong style="color:#000000;">Co-founder &amp; CEO</strong><br>
+            <strong style="color:#000000;">VisionAstraa EV Academy</strong><br>
+            <a href="https://visionastraa.com">www.visionastraa.com</a>
+        </div>
         """
 
         msg.attach(MIMEText(body, 'html'))
