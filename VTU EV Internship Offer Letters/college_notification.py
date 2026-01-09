@@ -206,8 +206,8 @@ def send_college_notification_email(sender_email, sender_password, recipient_nam
 
         <div style="margin:0; padding:0; line-height:1.4; color:#000000;">
             Best Regards,<br>
-            <strong style="color:#000000;">Nikhil Jain C S</strong><br><br>
-            <strong style="color:#000000;">Co-founder &amp; CEO</strong><br>
+            <strong style="color:#000000;">Nikhil Jain C S</strong><br>
+            <strong style="color:#000000;">Co-founder &amp; CEO</strong>
             <strong style="color:#000000;">VisionAstraa EV Academy</strong>
         </div>
         """
