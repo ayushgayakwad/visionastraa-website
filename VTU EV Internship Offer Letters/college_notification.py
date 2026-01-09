@@ -124,7 +124,11 @@ def send_college_notification_email(sender_email, sender_password, recipient_nam
         Greetings from <a href="https://visionastraa.com/ev-projects.html">VisionAstraa EV Academy!</a>
         <br><br>
 
-        <strong>As the internship confirmation deadline approaches for students across all branches of your esteemed institution, we are excited to open our doors and extend internship offers to those who are yet to receive any internship offer letters yet - offering them the chance to gain hands-on experience, real-world exposure, and a strong foundation to start their professional journey.</strong>
+        <div style="background-color:#eaffd0; padding:10px 12px; border-left:5px solid #7ac943; color:#000000;">
+            <strong>
+                As the internship confirmation deadline approaches for students across all branches of your esteemed institution, we are excited to open our doors and extend internship offers to those who are yet to receive any internship offer letters - offering them the chance to gain hands-on experience, real-world exposure, and a strong foundation to start their professional journey.
+            </strong>
+        </div>
         <br><br>
 
         We are pleased to inform you that VisionAstraa EV Academy is offering internship opportunities which are registered on the <strong><a href="https://vtu.internyet.in/companies/visionastraa-ev-academy">VTU InternYet Portal</a></strong>.
@@ -200,10 +204,10 @@ def send_college_notification_email(sender_email, sender_password, recipient_nam
         <br><br>
 
         <div style="margin:0; padding:0; line-height:1.4; color:#000000;">
-            Best Regards,<br>
-            <strong style="color:#000000;">Nikhil Jain C S</strong><br>
-            <strong style="color:#000000;">Co-founder &amp; CEO</strong><br>
-            <strong style="color:#000000;">VisionAstraa EV Academy</strong><br>
+            Best Regards,
+            <strong style="color:#000000;">Nikhil Jain C S</strong>
+            <strong style="color:#000000;">Co-founder &amp; CEO</strong>
+            <strong style="color:#000000;">VisionAstraa EV Academy</strong>
             <a href="https://visionastraa.com">www.visionastraa.com</a>
         </div>
         """
