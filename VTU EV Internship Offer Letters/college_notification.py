@@ -196,7 +196,7 @@ def send_college_notification_email(sender_email, sender_password, recipient_nam
         If you have any questions, please feel free to <strong>reply directly to this email</strong>.
         <br><br>
 
-        For any queries, you may contact us:<br>
+        For any queries, you may contact us on:<br>
         <strong>LinedkIn: <a href="https://in.linkedin.com/company/va-ev-academy">VisionAstraa EV Academy</a></strong><br>
         <strong>Official Phone Numbers: <a href="tel:+918762246518">+91 87622 46518</a> or <a href="tel:+918075664438">+91 80756 64438</a></strong><br>
         <strong>You may speak directly with me on LinkedIn: <a href="https://in.linkedin.com/in/nikhiljaincs">Nikhil Jain C S</a></strong>
