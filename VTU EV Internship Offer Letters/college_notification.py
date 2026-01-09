@@ -185,8 +185,9 @@ def send_college_notification_email(sender_email, sender_password, recipient_nam
         <br>
 
         <strong>Internship Duration and Starting Date:</strong><br>
-        <strong>Duration:</strong> 1 month of training and 3 months of honds-on project work (Total 4 months)<br>
-        <strong>Tentative Starting Date:</strong> January 22, 2026<br>
+        <strong>-> Duration:</strong> 1 month of training and 3 months of honds-on project work (Total 4 months)<br>
+        <strong>-> Tentative Starting Date:</strong> January 22, 2026
+        <br><br>
 
         For the detailed syllabus covered, please visit our website: 
         <a href="https://visionastraa.com/ev-projects.html">https://visionastraa.com/ev-projects.html</a>
