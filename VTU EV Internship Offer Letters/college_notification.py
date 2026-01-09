@@ -195,6 +195,8 @@ def send_college_notification_email(sender_email, sender_password, recipient_nam
         <br><br>
 
         Best Regards,<br>
+        <strong>Nikhil Jain C S</strong><br>
+        <strong>Co-founder & CEO</strong><br>
         <strong>VisionAstraa EV Academy</strong><br>
         <a href="https://visionastraa.com">www.visionastraa.com</a>
         """
