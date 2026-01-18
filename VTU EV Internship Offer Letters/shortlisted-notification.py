@@ -10,10 +10,10 @@ from email.mime.text import MIMEText
 from email.utils import formataddr
 
 # ---------------- CONFIG ----------------
-CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_shortlisted_notification_applicants_6.csv'
+CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_shortlisted_notification_applicants_7.csv'
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
-EMAIL_SUBJECT = '[URGENT] Important Information Regarding Your Internship Application at VisionAstraa EV Academy'
+EMAIL_SUBJECT = '[LAST CHANCE] Last Chance to secure an internship at VisionAstraa EV Academy'
 
 # --- HARDCODED CREDENTIALS ---
 BATCH_CREDENTIALS = {
@@ -44,6 +44,9 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
 
         <strong>Regarding Your Internship Application for the role of <u>{role}</u>:</strong><br>
         If you haven't received any offer letter from us yet, please contact us immediately and we will release your offer letter as soon as possible.
+        <br><br>
+
+        <strong><u>This is the last chance</u> to secure your internship at VisionAstraa EV Academy!</strong><br>
         <br><br>
 
         <strong>Mode of Internship:</strong><br>
