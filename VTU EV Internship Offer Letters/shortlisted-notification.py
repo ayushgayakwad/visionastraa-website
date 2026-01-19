@@ -10,7 +10,7 @@ from email.mime.text import MIMEText
 from email.utils import formataddr
 
 # ---------------- CONFIG ----------------
-CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_shortlisted_notification_applicants_7.csv'
+CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_shortlisted_notification_applicants_8.csv'
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
 EMAIL_SUBJECT = '[LAST CHANCE] Last Chance to secure an internship at VisionAstraa EV Academy'
