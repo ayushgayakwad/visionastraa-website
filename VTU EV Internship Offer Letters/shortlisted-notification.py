@@ -10,20 +10,31 @@ from email.mime.text import MIMEText
 from email.utils import formataddr
 
 # ---------------- CONFIG ----------------
-CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_shortlisted_notification_applicants_8.csv'
+CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_shortlisted_notification_applicants_9.csv'
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
 EMAIL_SUBJECT = '[LAST CHANCE] Last Chance to secure an internship at VisionAstraa EV Academy'
 
 # --- HARDCODED CREDENTIALS ---
+# BATCH_CREDENTIALS = {
+#     1: {
+#         "EMAIL": "visionastraa@evinternships.com",
+#         "PASSWORD": "a[kE?V6lm7G="
+#     },
+#     2: {
+#         "EMAIL": "visionastraa@evinternships.in",
+#         "PASSWORD": "]9jw>Upu//Y"
+#     }
+# }
+
 BATCH_CREDENTIALS = {
     1: {
-        "EMAIL": "visionastraa@evinternships.com",
-        "PASSWORD": "a[kE?V6lm7G="
+        "EMAIL": "careers@visionastraa.in",
+        "PASSWORD": "Z1SIOO0A9b~"
     },
     2: {
-        "EMAIL": "visionastraa@evinternships.in",
-        "PASSWORD": "]9jw>Upu//Y"
+        "EMAIL": "visionastraa@evcourse.in",
+        "PASSWORD": ">p>W|jv?Kg1"
     }
 }
 
