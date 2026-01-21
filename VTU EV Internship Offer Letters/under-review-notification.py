@@ -10,10 +10,10 @@ from email.mime.text import MIMEText
 from email.utils import formataddr
 
 # ---------------- CONFIG ----------------
-CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_under_review_applicants_7.csv'
+CSV_FILE_PATH = 'VTU EV Internship Offer Letters/jan_under_review_applicants_8.csv'
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
-EMAIL_SUBJECT = 'Important Information Regarding Your Internship Application at VisionAstraa EV Academy'
+EMAIL_SUBJECT = '[URGENT] Important Information Regarding Your Internship Application at VisionAstraa EV Academy'
 
 # --- HARDCODED CREDENTIALS (BATCH PROCESSING) ---
 # Hardcoded to avoid GitHub Secrets complexity for this private repo
@@ -43,6 +43,10 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         This email is intended <u>only for applicants who have NOT yet received any offer letter</u> from VisionAstraa EV Academy.
         <br><br>
 
+        <strong>Regarding Your Internship Application for the role of <u>{role}</u>:</strong><br>
+        If you haven't received any offer letter from us yet, please contact us immediately and we will release your offer letter as soon as possible.
+        <br><br>
+
         <strong>Important Points:</strong>
         <ul>
             <li>This email is meant only for applicants who have not received any offer letter from VisionAstraa EV Academy so far.</li>
@@ -56,10 +60,18 @@ def send_internship_details_email(sender_email, sender_password, name, to_email,
         If you have any queries related to the offer letter or internship confirmation, feel free to reach out to us.
         <br><br>
 
+        <strong>Mode of Internship:</strong><br>
+        Interns have the option to choose between:
+        <ul>
+        <li>Fully-online</li>
+        <li>or, fully-offline (Bangalore/Belagavi center) mode of internship</li>
+        </ul>
+        <br><br>
+
         For any queries, you may contact us on LinkedIn:<br>
         <a href="https://in.linkedin.com/company/va-ev-academy">VisionAstraa EV Academy</a><br>
         Speak directly with our CEO: <a href="https://in.linkedin.com/in/nikhiljaincs">Nikhil Jain C S</a><br>
-        <strong>OR, if you are really interested in joining VisionAstraa EV Academy then call us on: <a href="tel:+918762246518">+91 87622 46518</a></strong>
+        <strong>OR, if you are really interested in joining VisionAstraa EV Academy then call us on: <a href="tel:+918762246518">+91 87622 46518</a> or <a href="tel:+918075664438">+91 80756 64438</a></strong>
         <br><br>
 
         Looking forward to supporting you through the onboarding process!  
