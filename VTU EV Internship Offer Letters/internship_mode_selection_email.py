@@ -11,7 +11,7 @@ from email.utils import formataddr
 
 # ---------------- CONFIG ----------------
 # UPDATE THIS FILENAME to match your uploaded CSV
-CSV_FILE_PATH = 'VTU EV Internship Offer Letters/internship_mode_selection_1.csv'
+CSV_FILE_PATH = 'VTU EV Internship Offer Letters/internship_mode_selection_2.csv'
 
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
