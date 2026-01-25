@@ -226,6 +226,7 @@ def main():
             return
 
         df.columns = ['Name', 'Email', 'Phone', 'College', 'Specialization', 'Role', 'Status', 'EmailSent']
+        df['EmailSent'] = df['EmailSent'].astype(str)
         
         # 4. Split Data based on Batch
         total_records = len(df)
