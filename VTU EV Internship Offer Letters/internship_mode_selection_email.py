@@ -46,9 +46,9 @@ def send_email(sender_email, sender_password, name, to_email):
 
             <p>Based on the <strong>VTU guidelines and instructions</strong>, we are starting Internships at <strong>VTU Nagarbavi</strong> (Bangalore Center), at <strong>VTU Belagavi</strong> (Belagavi Center), and Online parallelly.</p>
             
-            <p style="font-size: 16px;">
+            <p style="font-size: 14px;">
                 <strong>
-                    -> If you have not yet filled the Google Form, please do so immediately.  
+                    -> If you have not yet filled the Google Form, please do so immediately.<br>
                     -> Or, if you have already submitted the form and wish to change or update your preference, you may edit your response using the same link below.
                 </strong>
             </p>
