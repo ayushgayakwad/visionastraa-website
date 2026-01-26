@@ -15,7 +15,7 @@ CSV_FILE_PATH = 'VTU EV Internship Offer Letters/internship_mode_selection_2.csv
 
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
-EMAIL_SUBJECT = 'Action Required: Choose Your Internship Mode - VisionAstraa EV Academy'
+EMAIL_SUBJECT = 'Gentle Reminder: Internship Mode Selection Form - VisionAstraa EV Academy'
 
 # --- HARDCODED CREDENTIALS ---
 BATCH_CREDENTIALS = {
@@ -42,12 +42,18 @@ def send_email(sender_email, sender_password, name, to_email):
         <body>
             <p>Dear {name},</p>
 
-            <p>We are excited to welcome you all for your Internship at VisionAstraa EV Academy.</p>
+            <p>This is a gentle reminder regarding your Internship at <strong>VisionAstraa EV Academy</strong>.</p>
 
             <p>Based on the <strong>VTU guidelines and instructions</strong>, we are starting Internships at <strong>VTU Nagarbavi</strong> (Bangalore Center), at <strong>VTU Belagavi</strong> (Belagavi Center), and Online parallelly.</p>
             
-            <p style="font-size: 16px;"><strong>Please fill out the Google Form below to choose your preferred mode (Online / Offline):</strong></p>
-            <p><a href="https://forms.gle/naaETnaEtZmHa1ev8" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Click Here to Fill the Form</a></p>
+            <p style="font-size: 16px;">
+                <strong>
+                    -> If you have not yet filled the Google Form, please do so immediately.  
+                    -> Or, if you have already submitted the form and wish to change or update your preference, you may edit your response using the same link below.
+                </strong>
+            </p>
+
+            <p><a href="https://forms.gle/naaETnaEtZmHa1ev8" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Click Here to Fill / Edit the Form</a></p>
             <p>Or use this link: <a href="https://forms.gle/naaETnaEtZmHa1ev8">https://forms.gle/naaETnaEtZmHa1ev8</a></p>
 
             <p><strong>Internship Start Date:</strong> Feb 2nd</p>
