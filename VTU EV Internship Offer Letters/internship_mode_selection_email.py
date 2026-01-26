@@ -89,13 +89,12 @@ def send_email(sender_email, sender_password, name, to_email):
             <a href="https://in.linkedin.com/company/va-ev-academy">VisionAstraa EV Academy</a><br>
             Talk to our CEO: <a href="https://in.linkedin.com/in/nikhiljaincs">Nikhil Jain C S</a><br>
             <strong>OR, call us at: <a href="tel:+918762246518">+91 87622 46518</a> or <a href="tel:+918075664438">+91 80756 64438</a></strong>
-            <br><br>
+            <br>
 
             <p>We are here to support and help you all complete your internship successfully. Don't panic or worry about anything.</p>
             
             <p>Happy Interning 😊</p>
 
-            <br>
             <p>Warm regards,<br>
             <strong>VisionAstraa EV Academy</strong></p>
         </body>
