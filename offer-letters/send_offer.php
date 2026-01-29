@@ -75,7 +75,7 @@ $body = "
     <br><br>
     To ensure a smooth onboarding process, it is essential that you join the WhatsApp group:
     <br>
-    - <strong>January 2026</strong>, please join: <a href='https://chat.whatsapp.com/KX3Z05PQZ5rHOLx5Pi2Es7'>January 2026 Internship Group</a>
+    - <strong>January 2026</strong>, please join: <a href='https://chat.whatsapp.com/CbaJqadbFCpI0cAKtOeAcO'>January 2026 Internship Group</a>
     <br><br>
     Below are the benefits of joining VisionAstraa EV Academy (<a href='https://visionastraa.com/ev-projects.html'>https://visionastraa.com/ev-projects.html</a>):
     <br>
