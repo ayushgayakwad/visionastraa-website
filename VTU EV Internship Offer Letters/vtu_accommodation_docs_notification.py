@@ -104,37 +104,19 @@ def main():
 
     if not os.path.exists(CSV_FILE_PATH):
         print(f"Error: Input data file not found at '{CSV_FILE_PATH}'")
-        print("Please upload the CSV file with the correct name or update CSV_FILE_PATH in the script.")
         return
 
     try:
-        # 3. Load Data
-        df = pd.read_csv(CSV_FILE_PATH)
+        df = pd.read_csv(CSV_FILE_PATH, header=None)
         
-        # Structure assumed: Name, Email are critical.
-        # We try to find columns by name first, or fallback to index.
-        df_clean = pd.DataFrame()
-        
-        # Flexible Column Mapping
-        if 'Name' in df.columns and 'Email' in df.columns:
-            df_clean['Name'] = df['Name']
-            df_clean['Email'] = df['Email']
-        elif len(df.columns) >= 3:
-            # Fallback to index if headers don't match exactly (assuming standard format: ID, Name, Email...)
-            print("Headers not found, using index mapping (Col 1=Name, Col 2=Email)")
-            df_clean['Name'] = df.iloc[:, 1]  
-            df_clean['Email'] = df.iloc[:, 2] 
-        else:
-            print("CSV file format not recognized. Expecting 'Name' and 'Email' columns.")
+        if len(df.columns) < 8:
+            print(f"Error: CSV file must have at least 8 columns. Found {len(df.columns)}.")
             return
 
-        # Check for EmailSent column to avoid duplicates
-        if 'EmailSent' in df.columns:
-            df_clean['EmailSent'] = df['EmailSent']
-        elif len(df.columns) > 6:
-            df_clean['EmailSent'] = df.iloc[:, 6]
-        else:
-            df_clean['EmailSent'] = 'FALSE' 
+        df_clean = pd.DataFrame()
+        df_clean['Name'] = df.iloc[:, 0]
+        df_clean['Email'] = df.iloc[:, 2]
+        df_clean['EmailSent'] = df.iloc[:, 7]
 
         # 4. Split Data based on Batch
         total_records = len(df_clean)
