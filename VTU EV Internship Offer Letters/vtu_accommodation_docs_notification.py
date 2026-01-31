@@ -11,10 +11,10 @@ from email.utils import formataddr
 
 # ---------------- CONFIG ----------------
 # UPDATE THIS PATH TO YOUR ACTUAL CSV FILE NAME
-CSV_FILE_PATH = 'VTU EV Internship Offer Letters/accommodation_list.csv' 
+CSV_FILE_PATH = 'VTU EV Internship Offer Letters/vtu_belagavi_accomodation_list_1.csv' 
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
-EMAIL_SUBJECT = 'Important: Documents Required for VTU Belagavi Accommodation | VisionAstraa EV Academy'
+EMAIL_SUBJECT = 'Important: Documents Required for Accommodation at VTU Belagavi | VisionAstraa EV Academy'
 
 # --- HARDCODED CREDENTIALS ---
 BATCH_CREDENTIALS = {
