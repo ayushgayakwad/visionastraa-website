@@ -19,12 +19,12 @@ EMAIL_SUBJECT = 'Internship: Live Session Links - Feb 3, 2026 | VisionAstraa EV 
 # --- HARDCODED CREDENTIALS ---
 BATCH_CREDENTIALS = {
     1: {
-        "EMAIL": "visionastraa@evinternships.com",
-        "PASSWORD": "a[kE?V6lm7G="
+        "EMAIL": "careers@visionastraa.in",
+        "PASSWORD": "Z1SIOO0A9b~"
     },
     2: {
-        "EMAIL": "visionastraa@evinternships.in",
-        "PASSWORD": "]9jw>Upu//Y"
+        "EMAIL": "visionastraa@evcourse.in",
+        "PASSWORD": ">p>W|jv?Kg1"
     }
 }
 
