@@ -14,7 +14,7 @@ CSV_FILE_PATH = 'VTU EV Internship Offer Letters/full_offer_accepted.csv'
 
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
-EMAIL_SUBJECT = 'Internship: Live Session Link - Inauguration Day | VisionAstraa EV Academy'
+EMAIL_SUBJECT = 'Internship: Live Session Links - Feb 3, 2026 | VisionAstraa EV Academy'
 
 # --- HARDCODED CREDENTIALS ---
 BATCH_CREDENTIALS = {
@@ -39,48 +39,51 @@ def send_email(sender_email, sender_password, name, to_email):
         body = f"""
         <html>
         <body style="font-family: Arial, sans-serif; color: #333333; line-height: 1.6;">
-            <p>Dear {name},</p>
+            <p>Dear {name},</p> 
 
-            <p>Finally the time has arrived for your internship to commence!</p> 
+            <p>Please find below the schedule and joining links for the internship sessions scheduled for <strong>February 3, 2026</strong>.</p>
+            
+            <p><em>Please join the link corresponding to your specific domain.</em></p>
 
-            <p>We’re excited to invite you all to the <strong>VisionAstraa EV Academy Internship - Inauguration Day</strong>.</p>
-
-            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; border: 1px solid #e9ecef; margin: 20px 0;">
-                <h3 style="color: #0056b3; margin-top: 0;">VisionAstraa EV Academy Internship - Inauguration Day Agenda - Feb 2, 2026!</h3>
-                <ol style="padding-left: 20px;">
-                    <li>Welcome Address by <strong>Nikhil Jain C S</strong>, Co-founder & CEO, VisionAstraa EV Academy</li>
-                    <li>Internship Inaugural Address by <strong>Honorable Dr. Vidyashankar Sir</strong>, Vice Chancellor, VTU</li>
-                    <li>Keynote Address & Introduction to VisionAstraa EV Academy by <strong>Yedu Jathavedan</strong>, Co-founder & Chairman, VisionAstraa EV Academy</li>
-                    <li>Q/A Session and Conclusion</li>
-                </ol>
+            <div style="background-color: #f0f8ff; padding: 15px; border-radius: 5px; border: 1px solid #d6e9c6; margin: 20px 0;">
+                <h3 style="color: #0056b3; margin-top: 0; border-bottom: 1px solid #ccc; padding-bottom: 5px;">
+                    ☀️ Morning Session (10:00 AM - 12:00 PM)
+                </h3>
+                
+                <p><strong>Embedded Systems and Design & Development:</strong><br>
+                <a href="https://www.youtube.com/watch?v=VZqsrJurEVU" style="color: #007bff; font-weight: bold;">https://www.youtube.com/watch?v=VZqsrJurEVU</a></p>
+                
+                <p><strong>AIML and Data Science:</strong><br>
+                <a href="https://www.youtube.com/watch?v=t0Jf_ZOf3R8" style="color: #007bff; font-weight: bold;">https://www.youtube.com/watch?v=t0Jf_ZOf3R8</a></p>
+                
+                <p><strong>Full-Stack and Web Development:</strong><br>
+                <a href="https://www.youtube.com/watch?v=uWZJr5Nmj6w" style="color: #007bff; font-weight: bold;">https://www.youtube.com/watch?v=uWZJr5Nmj6w</a></p>
             </div>
 
-            <p>
-                <strong>🕑 Time (Feb 2, 2026):</strong> 2:00 PM – 4:00 PM<br>
-                <strong>📍 Platform:</strong> YouTube Live
-            </p>
+            <div style="background-color: #fff3cd; padding: 15px; border-radius: 5px; border: 1px solid #ffeeba; margin: 20px 0;">
+                <h3 style="color: #856404; margin-top: 0; border-bottom: 1px solid #ccc; padding-bottom: 5px;">
+                    🕑 Afternoon Session (2:00 PM - 4:00 PM)
+                </h3>
+                
+                <p><strong>Embedded Systems and Design & Development:</strong><br>
+                <a href="https://www.youtube.com/watch?v=ZZnns3uXDbE" style="color: #007bff; font-weight: bold;">https://www.youtube.com/watch?v=ZZnns3uXDbE</a></p>
+                
+                <p><strong>AIML and Data Science:</strong><br>
+                <a href="https://www.youtube.com/watch?v=h6upMa_9TV8" style="color: #007bff; font-weight: bold;">https://www.youtube.com/watch?v=h6upMa_9TV8</a></p>
+                
+                <p><strong>Full-Stack and Web Development:</strong><br>
+                <a href="https://www.youtube.com/watch?v=jA-sY8V2QjE" style="color: #007bff; font-weight: bold;">https://www.youtube.com/watch?v=jA-sY8V2QjE</a></p>
+            </div>
 
-            <p style="margin: 20px 0;">
-                🔗 <strong>Join the YouTube live stream using the following link:</strong><br>
-                <a href="https://www.youtube.com/watch?v=hp85pXj6EqY" style="color: #007bff; font-weight: bold; text-decoration: underline;">https://www.youtube.com/watch?v=hp85pXj6EqY</a>
-            </p>
+            <p><strong>Note:</strong> Please ensure you join on time.</p>
 
-            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+            <strong>For any help or queries, you may contact us on LinkedIn:</strong><br>
+            <a href="https://in.linkedin.com/company/va-ev-academy">VisionAstraa EV Academy</a><br>
+            Talk to our CEO: <a href="https://in.linkedin.com/in/nikhiljaincs">Nikhil Jain C S</a><br>
+            <strong>OR, call us at: <a href="tel:+918762246518">+91 87622 46518</a> or <a href="tel:+918075664438">+91 80756 64438</a></strong>
+            <br>
 
-            <p><strong>Important Note on Session Timings:</strong></p>
-            <ul>
-                <li><strong>Tomorrow (2nd Feb 2026):</strong> There will be <strong>only one session</strong> from <strong>2:00 PM to 4:00 PM</strong>.</li>
-                <li><strong>From 3rd Feb 2026 onwards:</strong> There will be <strong>two sessions every day</strong>:
-                    <ul>
-                        <li>Morning Session: <strong>10:00 AM – 12:00 PM</strong></li>
-                        <li>Afternoon Session: <strong>2:00 PM – 4:00 PM</strong></li>
-                    </ul>
-                </li>
-            </ul>
-
-            <p>We look forward to your enthusiastic participation as you begin this exciting internship journey.</p> 
-
-            <p>All the best! ✨</p>
+            <p>Happy Interning! ✨</p>
 
             <p>Warm regards,<br>
             <strong>VisionAstraa EV Academy</strong></p>
