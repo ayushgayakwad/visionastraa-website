@@ -75,7 +75,12 @@ def send_email(sender_email, sender_password, name, to_email):
                 <a href="https://www.youtube.com/watch?v=jA-sY8V2QjE" style="color: #007bff; font-weight: bold;">https://www.youtube.com/watch?v=jA-sY8V2QjE</a></p>
             </div>
 
-            <p><strong>Note:</strong> Please ensure you join on time.</p>
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+            <p><strong>Note on Recordings:</strong><br>
+            You can use the <strong>same links provided above</strong> to watch the recorded sessions after the live stream ends.</p>
+
+            <p><strong><u>Please ensure you join the session on time.</u></strong></p>
 
             <strong>For any help or queries, you may contact us on LinkedIn:</strong><br>
             <a href="https://in.linkedin.com/company/va-ev-academy">VisionAstraa EV Academy</a><br>
