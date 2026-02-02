@@ -1061,10 +1061,6 @@ p {
     100% { transform: translateX(-100%); }
 }
 
-.marquee-highlight {
-    color: red;
-}
-
 /* Quotation Styling */
 .founder-text span {
     font-size: 30px;
