@@ -1,4 +1,4 @@
-name: Send Internship Recording Emails (Parallel)
+name: Send Internship YouTube Recording Emails (Parallel)
 
 on:
   workflow_dispatch:
