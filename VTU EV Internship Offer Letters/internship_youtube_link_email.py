@@ -14,7 +14,7 @@ CSV_FILE_PATH = 'VTU EV Internship Offer Letters/full_offer_accepted.csv'
 
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
-EMAIL_SUBJECT = 'Internship: Live Session Links - Feb 3, 2026 | VisionAstraa EV Academy'
+EMAIL_SUBJECT = 'Internship: Live Session Links - Feb 4, 2026 | VisionAstraa EV Academy'
 
 # --- HARDCODED CREDENTIALS ---
 BATCH_CREDENTIALS = {
@@ -41,7 +41,7 @@ def send_email(sender_email, sender_password, name, to_email):
         <body style="font-family: Arial, sans-serif; color: #333333; line-height: 1.6;">
             <p>Dear {name},</p> 
 
-            <p>Please find below the schedule and joining links for the internship sessions scheduled for <strong>February 3, 2026</strong>.</p>
+            <p>Please find below the schedule and joining links for the internship sessions scheduled for <strong>February 4, 2026</strong>.</p>
             
             <p><em>Please join the link corresponding to your specific domain.</em></p>
 
