@@ -85,7 +85,7 @@ def send_email(sender_email, sender_password, name, to_email):
             <strong>For any help or queries, you may contact us on LinkedIn:</strong><br>
             <a href="https://in.linkedin.com/company/va-ev-academy">VisionAstraa EV Academy</a><br>
             Talk to our CEO: <a href="https://in.linkedin.com/in/nikhiljaincs">Nikhil Jain C S</a><br>
-            <strong>OR, call us at: <a href="tel:+918762246518">+91 87622 46518</a> or <a href="tel:+918075664438">+91 80756 64438</a></strong>
+            <strong>OR, send WhatsApp message to: <a href="tel:+918762246518">+91 87622 46518</a> or <a href="tel:+918075664438">+91 80756 64438</a></strong>
             <br>
 
             <p>Happy Interning! ✨</p>
