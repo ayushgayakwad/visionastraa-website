@@ -221,33 +221,28 @@ EMAIL_BODY_TEMPLATE = """\
             Their hard work, combined with our intensive 4-month hands-on PowerTrain Design training, has led them to exciting careers in R&D and Engineering.
         </p>
 
-        <h2>🏆 Hiring Partners for Batch 2</h2>
+        <h2>Hiring Partners for Batch 2</h2>
         <p>Our students have been hired by some of the most prestigious names in the EV ecosystem:</p>
 
-        <!-- ROBUST INLINE-BLOCK GRID -->
         <div class="company-grid-container">
-            <!-- Row 1 -->
             <div class="company-badge"><span></span><img src="https://visionastraa.com/images/tm.jpg" alt="Tata Motors" class="company-logo-img"></div>
-            <div class="company-badge"><span></span><img src="https://visionastraa.com/images/uv.png" alt="Ultraviolette" class="company-logo-img"></div>
+            <div class="company-badge"><span></span><img src="https://visionastraa.com/images/uv-bg.jpg" alt="Ultraviolette" class="company-logo-img"></div>
             <div class="company-badge"><span></span><img src="https://visionastraa.com/images/tvs.png" alt="TVS Motor" class="company-logo-img"></div>
             <div class="company-badge"><span></span><img src="https://visionastraa.com/images/royal-enfield.png" alt="Royal Enfield" class="company-logo-img"></div>
             
-            <!-- Row 2 -->
             <div class="company-badge"><span></span><img src="https://visionastraa.com/images/euler.jpg" alt="Euler Motors" class="company-logo-img"></div>
             <div class="company-badge"><span></span><img src="https://visionastraa.com/images/matter.webp" alt="Matter EV" class="company-logo-img"></div>
             <div class="company-badge"><span></span><img src="https://visionastraa.com/images/sm.jpeg" alt="Sun Mobility" class="company-logo-img"></div>
             <div class="company-badge"><span></span><img src="https://visionastraa.com/images/montra.png" alt="Montra Electric" class="company-logo-img"></div>
             
-            <!-- Row 3 -->
             <div class="company-badge"><span></span><img src="https://visionastraa.com/images/simple.jpg" alt="Simple Energy" class="company-logo-img"></div>
             <div class="company-badge"><span></span><img src="https://visionastraa.com/images/mecwin.webp" alt="Mecwin" class="company-logo-img"></div>
             <div class="company-badge"><span></span><img src="https://visionastraa.com/images/chara.png" alt="Chara" class="company-logo-img"></div>
             <div class="company-badge"><span></span><img src="https://visionastraa.com/images/embitel.png" alt="Embitel" class="company-logo-img"></div>
             
-            <!-- Row 4 -->
             <div class="company-badge"><span></span><img src="https://visionastraa.com/images/yulu.avif" alt="Yulu" class="company-logo-img"></div>
             <div class="company-badge"><span></span><img src="https://visionastraa.com/images/seg-logo.jpg" alt="SEG Automotive" class="company-logo-img"></div>
-            <!-- Note: Kept 'image/' as per your previous file, ensure this path is correct on server -->
+            
             <div class="company-badge"><span></span><img src="https://visionastraa.com/image/ipec-logo.png" alt="iPec" class="company-logo-img"></div>
             <div class="company-badge"><span></span><img src="https://visionastraa.com/images/mai.jpeg" alt="Moonrider" class="company-logo-img"></div>
         </div>
@@ -265,7 +260,7 @@ EMAIL_BODY_TEMPLATE = """\
         
         <div style="text-align: center; margin: 25px 0;">
             <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">
-                📅 Next Batch Starts: <span style="color: #d9534f;">March 1st Week, 2026</span>
+                📅 Next Batch Starts:<br><span style="color: #d9534f;">March 1st Week, 2026</span>
             </p>
             <p style="margin-bottom: 25px;">
                 Join our <strong>4-month EV PowerTrain Mastery Program</strong> and secure your job in the EV sector.
@@ -286,7 +281,7 @@ EMAIL_BODY_TEMPLATE = """\
         </div>
 
         <div class="footer">
-            <p><strong>VisionAstraa EV Academy</strong><br>Bridging the gap between Engineering & Industry.</p>
+            <p><strong>VisionAstraa EV Academy</strong><br>One Stop Solution For Best EV Talent.</p>
             
             <div class="social-links">
               <table align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; border-spacing: 15px;">
