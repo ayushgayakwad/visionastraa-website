@@ -54,7 +54,7 @@ EMAIL_BODY_TEMPLATE = """\
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }}
         h1 {{
-            font-size: 26px;
+            font-size: 24px;
             margin-bottom: 20px;
             text-align: center;
             color: #28a745;
@@ -96,36 +96,38 @@ EMAIL_BODY_TEMPLATE = """\
             text-decoration: underline;
         }}
         
-        /* Company Grid Layout */
-        .company-grid {{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin: 20px 0;
+        /* ROBUST GRID SYSTEM FOR EMAIL (INLINE-BLOCK) */
+        .company-grid-container {{
+            text-align: center;
+            font-size: 0; /* Removes whitespace between inline-blocks */
+            padding: 10px 0;
         }}
         .company-badge {{
+            display: inline-block;
+            width: 120px;       /* Fixed width for stability */
+            height: 90px;       /* Fixed height */
+            margin: 6px;
             background-color: #ffffff;
-            border: 1px solid #ddd;
+            border: 1px solid #eee;
             border-radius: 6px;
-            padding: 8px;
-            flex: 1 0 40%; /* 2 items per row on mobile */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 70px; /* Fixed height for logos */
+            vertical-align: middle;
+            text-align: center;
+            padding: 5px;
+            box-sizing: border-box; /* Ensures padding doesn't increase width */
+        }}
+        /* Helper to vertically align images inside the badge */
+        .company-badge span {{
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
         }}
         .company-logo-img {{
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            display: block;
-        }}
-        @media only screen and (min-width: 480px) {{
-            .company-badge {{
-                flex: 1 0 21%; /* 4 items per row on desktop */
-            }}
+            max-width: 100px;   /* Fit within badge width */
+            max-height: 70px;   /* Fit within badge height */
+            width: auto;
+            height: auto;
+            vertical-align: middle;
+            display: inline-block;
         }}
 
         /* Landscape Images */
@@ -222,23 +224,32 @@ EMAIL_BODY_TEMPLATE = """\
         <h2>🏆 Hiring Partners for Batch 2</h2>
         <p>Our students have been hired by some of the most prestigious names in the EV ecosystem:</p>
 
-        <div class="company-grid">
-            <div class="company-badge"><img src="https://visionastraa.com/images/tm.jpg" alt="Tata Motors" class="company-logo-img"></div>
-            <div class="company-badge"><img src="https://visionastraa.com/images/uv.png" alt="Royal Enfield" class="company-logo-img"></div>
-            <div class="company-badge"><img src="https://visionastraa.com/images/tvs.png" alt="TVS Motor" class="company-logo-img"></div>
-            <div class="company-badge"><img src="https://visionastraa.com/images/royal-enfield.png" alt="Ultraviolette / Ather" class="company-logo-img"></div>
-            <div class="company-badge"><img src="https://visionastraa.com/images/euler.jpg" alt="Euler Motors" class="company-logo-img"></div>
-            <div class="company-badge"><img src="https://visionastraa.com/images/matter.webp" alt="Matter EV" class="company-logo-img"></div>
-            <div class="company-badge"><img src="https://visionastraa.com/images/sm.jpeg" alt="Sun Mobility" class="company-logo-img"></div>
-            <div class="company-badge"><img src="https://visionastraa.com/images/montra.png" alt="Montra Electric" class="company-logo-img"></div>
-            <div class="company-badge"><img src="https://visionastraa.com/images/simple.jpg" alt="Simple Energy" class="company-logo-img"></div>
-            <div class="company-badge"><img src="https://visionastraa.com/images/mecwin.webp" alt="Mecwin" class="company-logo-img"></div>
-            <div class="company-badge"><img src="https://visionastraa.com/images/chara.png" alt="Chara" class="company-logo-img"></div>
-            <div class="company-badge"><img src="https://visionastraa.com/images/embitel.png" alt="Embitel" class="company-logo-img"></div>
-            <div class="company-badge"><img src="https://visionastraa.com/images/yulu.avif" alt="Yulu" class="company-logo-img"></div>
-            <div class="company-badge"><img src="https://visionastraa.com/images/seg-logo.jpg" alt="SEG Automotive" class="company-logo-img"></div>
-            <div class="company-badge"><img src="https://visionastraa.com/image/ipec-logo.png" alt="iPec" class="company-logo-img"></div>
-            <div class="company-badge"><img src="https://visionastraa.com/images/mai.jpeg" alt="Moonrider" class="company-logo-img"></div>
+        <!-- ROBUST INLINE-BLOCK GRID -->
+        <div class="company-grid-container">
+            <!-- Row 1 -->
+            <div class="company-badge"><span></span><img src="https://visionastraa.com/images/tm.jpg" alt="Tata Motors" class="company-logo-img"></div>
+            <div class="company-badge"><span></span><img src="https://visionastraa.com/images/uv.png" alt="Ultraviolette" class="company-logo-img"></div>
+            <div class="company-badge"><span></span><img src="https://visionastraa.com/images/tvs.png" alt="TVS Motor" class="company-logo-img"></div>
+            <div class="company-badge"><span></span><img src="https://visionastraa.com/images/royal-enfield.png" alt="Royal Enfield" class="company-logo-img"></div>
+            
+            <!-- Row 2 -->
+            <div class="company-badge"><span></span><img src="https://visionastraa.com/images/euler.jpg" alt="Euler Motors" class="company-logo-img"></div>
+            <div class="company-badge"><span></span><img src="https://visionastraa.com/images/matter.webp" alt="Matter EV" class="company-logo-img"></div>
+            <div class="company-badge"><span></span><img src="https://visionastraa.com/images/sm.jpeg" alt="Sun Mobility" class="company-logo-img"></div>
+            <div class="company-badge"><span></span><img src="https://visionastraa.com/images/montra.png" alt="Montra Electric" class="company-logo-img"></div>
+            
+            <!-- Row 3 -->
+            <div class="company-badge"><span></span><img src="https://visionastraa.com/images/simple.jpg" alt="Simple Energy" class="company-logo-img"></div>
+            <div class="company-badge"><span></span><img src="https://visionastraa.com/images/mecwin.webp" alt="Mecwin" class="company-logo-img"></div>
+            <div class="company-badge"><span></span><img src="https://visionastraa.com/images/chara.png" alt="Chara" class="company-logo-img"></div>
+            <div class="company-badge"><span></span><img src="https://visionastraa.com/images/embitel.png" alt="Embitel" class="company-logo-img"></div>
+            
+            <!-- Row 4 -->
+            <div class="company-badge"><span></span><img src="https://visionastraa.com/images/yulu.avif" alt="Yulu" class="company-logo-img"></div>
+            <div class="company-badge"><span></span><img src="https://visionastraa.com/images/seg-logo.jpg" alt="SEG Automotive" class="company-logo-img"></div>
+            <!-- Note: Kept 'image/' as per your previous file, ensure this path is correct on server -->
+            <div class="company-badge"><span></span><img src="https://visionastraa.com/image/ipec-logo.png" alt="iPec" class="company-logo-img"></div>
+            <div class="company-badge"><span></span><img src="https://visionastraa.com/images/mai.jpeg" alt="Moonrider" class="company-logo-img"></div>
         </div>
 
         <div style="margin: 25px 0; text-align: center;">
