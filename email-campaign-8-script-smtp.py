@@ -108,22 +108,34 @@ EMAIL_BODY_TEMPLATE = """\
             background-color: #ffffff;
             border: 1px solid #ddd;
             border-radius: 6px;
-            padding: 10px 15px;
-            font-weight: bold;
-            color: #555;
-            font-size: 14px;
-            text-align: center;
+            padding: 8px;
             flex: 1 0 40%; /* 2 items per row on mobile */
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 40px;
+            height: 70px; /* Fixed height for logos */
+        }}
+        .company-logo-img {{
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
         }}
         @media only screen and (min-width: 480px) {{
             .company-badge {{
                 flex: 1 0 21%; /* 4 items per row on desktop */
             }}
+        }}
+
+        /* Landscape Images */
+        .landscape-img {{
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }}
 
         .btn {{
@@ -187,6 +199,10 @@ EMAIL_BODY_TEMPLATE = """\
             <img src="https://visionastraa.com/images/EV_Academy.png" alt="EV Academy Logo" style="max-width: 150px;">
         </div>
 
+        <div style="margin-bottom: 25px; text-align: center;">
+            <img src="https://visionastraa.com/images/group-pic-1.jpeg" alt="Batch 2 Placed Students" class="landscape-img">
+        </div>
+
         <h1>Batch 2 (2025) Achieves 100% Placement!</h1>
 
         <div class="highlight-box">
@@ -207,23 +223,26 @@ EMAIL_BODY_TEMPLATE = """\
         <p>Our students have been hired by some of the most prestigious names in the EV ecosystem:</p>
 
         <div class="company-grid">
-            <!-- You can replace text with <img src="..."> if you have logos -->
-            <div class="company-badge">Tata Motors</div>
-            <div class="company-badge">Royal Enfield</div>
-            <div class="company-badge">TVS Motor</div>
-            <div class="company-badge">Ather / Ultraviolette</div>
-            <div class="company-badge">Euler Motors</div>
-            <div class="company-badge">Matter (EV)</div>
-            <div class="company-badge">Sun Mobility</div>
-            <div class="company-badge">Montra Electric</div>
-            <div class="company-badge">Simple Energy</div>
-            <div class="company-badge">Mecwin</div>
-            <div class="company-badge">Chara</div>
-            <div class="company-badge">Embitel</div>
-            <div class="company-badge">Yulu</div>
-            <div class="company-badge">SEG Automotive</div>
-            <div class="company-badge">iPec</div>
-            <div class="company-badge">Moonrider</div>
+            <div class="company-badge"><img src="https://visionastraa.com/images/tm.jpg" alt="Tata Motors" class="company-logo-img"></div>
+            <div class="company-badge"><img src="https://visionastraa.com/images/uv.png" alt="Royal Enfield" class="company-logo-img"></div>
+            <div class="company-badge"><img src="https://visionastraa.com/images/tvs.png" alt="TVS Motor" class="company-logo-img"></div>
+            <div class="company-badge"><img src="https://visionastraa.com/images/royal-enfield.png" alt="Ultraviolette / Ather" class="company-logo-img"></div>
+            <div class="company-badge"><img src="https://visionastraa.com/images/euler.jpg" alt="Euler Motors" class="company-logo-img"></div>
+            <div class="company-badge"><img src="https://visionastraa.com/images/matter.webp" alt="Matter EV" class="company-logo-img"></div>
+            <div class="company-badge"><img src="https://visionastraa.com/images/sm.jpeg" alt="Sun Mobility" class="company-logo-img"></div>
+            <div class="company-badge"><img src="https://visionastraa.com/images/montra.png" alt="Montra Electric" class="company-logo-img"></div>
+            <div class="company-badge"><img src="https://visionastraa.com/images/simple.jpg" alt="Simple Energy" class="company-logo-img"></div>
+            <div class="company-badge"><img src="https://visionastraa.com/images/mecwin.webp" alt="Mecwin" class="company-logo-img"></div>
+            <div class="company-badge"><img src="https://visionastraa.com/images/chara.png" alt="Chara" class="company-logo-img"></div>
+            <div class="company-badge"><img src="https://visionastraa.com/images/embitel.png" alt="Embitel" class="company-logo-img"></div>
+            <div class="company-badge"><img src="https://visionastraa.com/images/yulu.avif" alt="Yulu" class="company-logo-img"></div>
+            <div class="company-badge"><img src="https://visionastraa.com/images/seg-logo.jpg" alt="SEG Automotive" class="company-logo-img"></div>
+            <div class="company-badge"><img src="https://visionastraa.com/image/ipec-logo.png" alt="iPec" class="company-logo-img"></div>
+            <div class="company-badge"><img src="https://visionastraa.com/images/mai.jpeg" alt="Moonrider" class="company-logo-img"></div>
+        </div>
+
+        <div style="margin: 25px 0; text-align: center;">
+            <img src="https://visionastraa.com/images/tvs-iv.jpg" alt="Placement Celebration" class="landscape-img">
         </div>
 
         <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ddd;">
