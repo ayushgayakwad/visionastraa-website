@@ -12,8 +12,10 @@ jobs:
 
       matrix:
         job_config:
-          - '{"account_index": 0, "limit": 1500, "tables": ["crdf25", "crdf25_north", "crdf25_south"], "mod_total": 2, "mod_value": 0}'
-          - '{"account_index": 1, "limit": 1500, "tables": ["crdf25", "crdf25_north", "crdf25_south"], "mod_total": 2, "mod_value": 1}'
+          - '{"account_index": 0, "limit": 1500, "tables": ["test"], "mod_total": 2, "mod_value": 0}'
+          - '{"account_index": 1, "limit": 1500, "tables": ["test"], "mod_total": 2, "mod_value": 1}'
+          # - '{"account_index": 0, "limit": 1500, "tables": ["crdf25", "crdf25_north", "crdf25_south"], "mod_total": 2, "mod_value": 0}'
+          # - '{"account_index": 1, "limit": 1500, "tables": ["crdf25", "crdf25_north", "crdf25_south"], "mod_total": 2, "mod_value": 1}'
           # - '{"account_index": 0, "limit": 1500, "tables": ["email_list_1", "email_list_2", "email_list_3", "email_list_4", "email_list_5", "email_list_6", "email_list_7"], "mod_total": 2, "mod_value": 0}'
           # - '{"account_index": 1, "limit": 1500, "tables": ["email_list_1", "email_list_2", "email_list_3", "email_list_4", "email_list_5", "email_list_6", "email_list_7"], "mod_total": 2, "mod_value": 1}'
     
