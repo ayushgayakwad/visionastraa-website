@@ -140,11 +140,6 @@ EMAIL_BODY_TEMPLATE = """\
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }}
 
-        .cta-button-container {{
-            text-align: center;
-            margin: 0px 0px 30px 0px;
-        }}
-
         .btn {{
             background-color: #28a745;
             color: #ffffff !important;
@@ -286,15 +281,6 @@ EMAIL_BODY_TEMPLATE = """\
         </div>
 
         <div class="footer">
-            <p><strong>Please connect with us directly on WhatsApp if you have any questions on our Program and Placement opportunity.</strong></p>
-            
-            <div class="cta-button-container">
-                <a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}" target="_blank" class="whatsapp-link">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png" alt="WhatsApp Logo">
-                    Chat with us on WhatsApp
-                </a>
-            </div>
-
             <p>Talk to our CEO, Nikhil Jain C S: <a href="https://visionastraa.com/track/click.php?email={email}&target={njcs}&campaign_id={campaign_id}">LinkedIn</a></p>
 
             <div class="social-links">
