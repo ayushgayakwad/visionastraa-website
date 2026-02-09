@@ -14,27 +14,27 @@ from email.utils import formataddr
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 587
 
-SMTP_ACCOUNTS = [
-    {
-        'username': 'careers@visionastraa.in',
-        'password': 'Z1SIOO0A9b~'
-    },
-    {
-        'username': 'visionastraa@evcourse.in',
-        'password': '>p>W|jv?Kg1'
-    }
-]
-
 # SMTP_ACCOUNTS = [
 #     {
-#         'username': 'visionastraa@evinternships.com',
-#         'password': 'a[kE?V6lm7G='
+#         'username': 'careers@visionastraa.in',
+#         'password': 'Z1SIOO0A9b~'
 #     },
 #     {
-#         'username': 'visionastraa@evinternships.in',
-#         'password': ']9jw>Upu//Y'
+#         'username': 'visionastraa@evcourse.in',
+#         'password': '>p>W|jv?Kg1'
 #     }
 # ]
+
+SMTP_ACCOUNTS = [
+    {
+        'username': 'visionastraa@evinternships.com',
+        'password': 'a[kE?V6lm7G='
+    },
+    {
+        'username': 'visionastraa@evinternships.in',
+        'password': ']9jw>Upu//Y'
+    }
+]
 
 # Updated Campaign ID
 CAMPAIGN_ID = "ev_marketing_campaign_batch2_placement_feb_2026"
