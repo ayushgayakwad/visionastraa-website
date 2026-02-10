@@ -264,7 +264,7 @@ EMAIL_BODY_TEMPLATE = """\
       <p>Ans: Lowest compared to any other offline hands-on EV Programs for Engineering graduates. Payable in installments. Final installment only after placement. Details here - <a href="https://visionastraa.com/track/click.php?email={email}&target={curriculum}&campaign_id={campaign_id}" target="_blank">Fee Details</a></p>
       <br>
       <h4>9. How do I secure my admission?</h4>
-      <p>Just pay Admission Fee of INR 10,000 + GST (included in total fees) (Fully refundable if not admitted) - <a href="https://visionastraa.com/track/click.php?email={email}&target={payments}&campaign_id={campaign_id}" target="_blank">Admission Fees</a></p></p>
+      <p>Just pay Admission Fee of INR 10,000 + GST (included in total fees) (Non-refundable if not admitted) - <a href="https://visionastraa.com/track/click.php?email={email}&target={payments}&campaign_id={campaign_id}" target="_blank">Admission Fees</a></p></p>
       <br>
       <h4>10. Will I receive any recognized certification after completing the course?</h4>
       <p>Ans: Yes, you will receive ASDC certified credentials upon successful completion.</p>
