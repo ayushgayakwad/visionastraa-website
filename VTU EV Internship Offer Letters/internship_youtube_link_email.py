@@ -14,7 +14,7 @@ CSV_FILE_PATH = 'VTU EV Internship Offer Letters/full_offer_accepted.csv'
 
 SMTP_SERVER = 'smtp.hostinger.com'
 SMTP_PORT = 465
-EMAIL_SUBJECT = 'Internship: Live Session Links - Feb 12, 2026 | VisionAstraa EV Academy'
+EMAIL_SUBJECT = 'Internship: Live Session Links - Feb 13, 2026 | VisionAstraa EV Academy'
 
 # --- HARDCODED CREDENTIALS ---
 BATCH_CREDENTIALS = {
@@ -52,7 +52,7 @@ def send_email(sender_email, sender_password, name, to_email):
         <body style="font-family: Arial, sans-serif; color: #333333; line-height: 1.6;">
             <p>Dear {name},</p> 
 
-            <p>Please find below the schedule and joining links for the internship sessions scheduled for <strong>February 12, 2026</strong>.</p>
+            <p>Please find below the schedule and joining links for the internship sessions scheduled for <strong>February 13, 2026</strong>.</p>
             
             <p><em>Please join the link corresponding to your specific domain.</em></p>
 
@@ -62,13 +62,13 @@ def send_email(sender_email, sender_password, name, to_email):
                 </h3>
                 
                 <p><strong>Embedded Systems and Design & Development:</strong><br>
-                <a href="https://www.youtube.com/watch?v=LMGWvLTwtCE" style="color: #007bff; font-weight: bold;">https://www.youtube.com/watch?v=LMGWvLTwtCE</a></p>
+                <a href="https://www.youtube.com/watch?v=YbJPWcgb5DA" style="color: #007bff; font-weight: bold;">https://www.youtube.com/watch?v=YbJPWcgb5DA</a></p>
                 
                 <p><strong>AIML and Data Science:</strong><br>
-                <a href="https://www.youtube.com/watch?v=ISZl9aSP4ls" style="color: #007bff; font-weight: bold;">https://www.youtube.com/watch?v=ISZl9aSP4ls</a></p>
+                <a href="https://www.youtube.com/watch?v=-N3k2S2MnS4" style="color: #007bff; font-weight: bold;">https://www.youtube.com/watch?v=-N3k2S2MnS4</a></p>
                 
                 <p><strong>Full-Stack and Web Development:</strong><br>
-                <a href="https://www.youtube.com/watch?v=MCmBnuHsHcY" style="color: #007bff; font-weight: bold;">https://www.youtube.com/watch?v=MCmBnuHsHcY</a></p>
+                <a href="https://www.youtube.com/watch?v=dN1qM-y8T94" style="color: #007bff; font-weight: bold;">https://www.youtube.com/watch?v=dN1qM-y8T94</a></p>
             </div>
 
             <div style="background-color: #fff3cd; padding: 15px; border-radius: 5px; border: 1px solid #ffeeba; margin: 20px 0;">
@@ -77,13 +77,13 @@ def send_email(sender_email, sender_password, name, to_email):
                 </h3>
                 
                 <p><strong>Embedded Systems and Design & Development:</strong><br>
-                <a href="https://www.youtube.com/watch?v=Q_8sMRQeqiQ" style="color: #007bff; font-weight: bold;">https://www.youtube.com/watch?v=Q_8sMRQeqiQ</a></p>
+                <a href="https://www.youtube.com/watch?v=zus7ELs2nm8" style="color: #007bff; font-weight: bold;">https://www.youtube.com/watch?v=zus7ELs2nm8</a></p>
                 
                 <p><strong>AIML and Data Science:</strong><br>
-                <a href="https://www.youtube.com/watch?v=hCXanMzXrLM" style="color: #007bff; font-weight: bold;">https://www.youtube.com/watch?v=hCXanMzXrLM</a></p>
+                <a href="https://www.youtube.com/watch?v=0MTpuAeTQDg" style="color: #007bff; font-weight: bold;">https://www.youtube.com/watch?v=0MTpuAeTQDg</a></p>
                 
                 <p><strong>Full-Stack and Web Development:</strong><br>
-                <a href="https://www.youtube.com/watch?v=i1d6OelK64g" style="color: #007bff; font-weight: bold;">https://www.youtube.com/watch?v=i1d6OelK64g</a></p>
+                <a href="https://www.youtube.com/watch?v=ZlnLGJNiXS0" style="color: #007bff; font-weight: bold;">https://www.youtube.com/watch?v=ZlnLGJNiXS0</a></p>
             </div>
 
             <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
