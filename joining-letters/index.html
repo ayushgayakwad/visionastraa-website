@@ -103,7 +103,7 @@
                             <label class="block text-sm font-bold text-blue-900 mb-2">Internship Duration</label>
                             <select id="termSelect" onchange="updateDatesAndId()" class="w-full p-2 border border-blue-300 rounded focus:ring-2 focus:ring-blue-500 outline-none">
                                 <option value="sep2025">September 2025 Cohort (16 Weeks)</option>
-                                <option value="jan2026">January 2026 Cohort (16 Weeks)</option>
+                                <option value="jan2026" selected>January 2026 Cohort (16 Weeks)</option>
                             </select>
                             
                             <div class="mt-3 grid grid-cols-2 gap-2 text-sm">
@@ -426,6 +426,64 @@
             return role.replace(/\s*\(.*?\)/g, "").trim();
         }
 
+        function drawMixedJustifiedText(page, segments, x, startY, maxWidth, fontSize, lineHeight, font, boldFont) {
+            // Tokenize
+            const tokens = [];
+            segments.forEach(seg => {
+                const f = seg.bold ? boldFont : font;
+                const words = seg.text.split(/\s+/);
+                words.forEach((w, idx) => {
+                    if (w.length > 0) {
+                        tokens.push({ text: w, font: f, width: f.widthOfTextAtSize(w, fontSize) });
+                    }
+                });
+            });
+
+            // Group into Lines
+            const lines = [];
+            let currentLine = [];
+            let currentLineWidth = 0;
+            const spaceWidth = font.widthOfTextAtSize(' ', fontSize); 
+
+            tokens.forEach(token => {
+                const potentialWidth = currentLineWidth + (currentLine.length > 0 ? spaceWidth : 0) + token.width;
+                if (potentialWidth > maxWidth) {
+                    lines.push(currentLine);
+                    currentLine = [token];
+                    currentLineWidth = token.width;
+                } else {
+                    if (currentLine.length > 0) currentLineWidth += spaceWidth;
+                    currentLine.push(token);
+                    currentLineWidth += token.width;
+                }
+            });
+            if (currentLine.length > 0) lines.push(currentLine);
+
+            // Render
+            let currentY = startY;
+            lines.forEach((line, index) => {
+                const isLastLine = index === lines.length - 1;
+                if (isLastLine || line.length === 1) {
+                    let cx = x;
+                    line.forEach(token => {
+                        page.drawText(token.text, { x: cx, y: currentY, size: fontSize, font: token.font, color: rgb(0,0,0) });
+                        cx += token.width + spaceWidth;
+                    });
+                } else {
+                    const totalWordsWidth = line.reduce((acc, t) => acc + t.width, 0);
+                    const availableSpace = maxWidth - totalWordsWidth;
+                    const gap = availableSpace / (line.length - 1);
+                    let cx = x;
+                    line.forEach((token, i) => {
+                        page.drawText(token.text, { x: cx, y: currentY, size: fontSize, font: token.font, color: rgb(0,0,0) });
+                        if (i < line.length - 1) cx += token.width + gap;
+                    });
+                }
+                currentY -= lineHeight;
+            });
+            return currentY;
+        }
+
         function drawJustifiedText(page, text, x, y, width, font, fontSize, lineHeight) {
             const paragraphs = text.split('\n\n');
             let currentY = y;
@@ -569,17 +627,32 @@
                 const fontSize = 12;
                 const lineHeight = 16;
                 
-                const bodyText = `We are pleased to inform you that you are selected and permitted to join VisionAstraa EV Academy as a ${role} Intern for a period of 16 weeks, starting from ${start} to ${end}.
+                // PARA 1 with Mixed Bold formatting
+                const para1Segments = [
+                    { text: "We are pleased to inform you that you are selected and permitted to join ", bold: false },
+                    { text: "VisionAstraa EV Academy", bold: true },
+                    { text: " as a ", bold: false },
+                    { text: role, bold: true },
+                    { text: " Intern for a period of ", bold: false },
+                    { text: "16 weeks", bold: true },
+                    { text: ", starting from ", bold: false },
+                    { text: start, bold: true },
+                    { text: " to ", bold: false },
+                    { text: end + ".", bold: true }
+                ];
 
-During the internship period, you will be exposed to practical training, industry-oriented projects, and professional mentoring. You are expected to maintain discipline, follow company policies, and actively participate in all assigned tasks.
+                currentY = drawMixedJustifiedText(page, para1Segments, marginX, currentY, maxWidth, fontSize, lineHeight, font, boldFont);
+                currentY -= (lineHeight * 0.5);
+
+                const remainingBodyText = `During the internship period, you will be exposed to practical training, industry-oriented projects, and professional mentoring. You are expected to maintain discipline, follow company policies, and actively participate in all assigned tasks.
 
 This internship is intended purely for academic and training purposes. On successful completion of the internship, you will be issued an Internship Completion Certificate.
 
 We wish you a productive learning experience with us.`;
 
-                currentY = drawJustifiedText(page, bodyText, marginX, currentY, maxWidth, font, fontSize, lineHeight);
+                currentY = drawJustifiedText(page, remainingBodyText, marginX, currentY, maxWidth, font, fontSize, lineHeight);
 
-                // Reduced gap from 30 to 15
+                // Reduced gap
                 currentY -= 15;
 
                 // 7. Sign off
