@@ -95,6 +95,7 @@
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Internship Role</label>
                             <input type="text" id="role" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                            <p class="text-xs text-gray-500 mt-1">Text in brackets (...) will be automatically removed in the PDF.</p>
                         </div>
 
                         <!-- Term Selection Logic -->
@@ -337,7 +338,7 @@
                 yearCode = "25";
                 idSuffix = "A";
             } else {
-                start = "02 February 2026"; // Adjusted to match sample
+                start = "02 February 2026";
                 end = "30 May 2026";
                 yearCode = "26";
                 idSuffix = "B";
@@ -402,7 +403,7 @@
                         <tr class="bg-white border-b hover:bg-gray-50">
                             <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">${row.usn}</td>
                             <td class="px-6 py-4">${row.name}</td>
-                            <td class="px-6 py-4">${row.role || '-'}</td>
+                            <td class="px-6 py-4">${cleanRoleName(row.role || '-')}</td>
                             <td class="px-6 py-4 font-mono text-xs">${row.letter_id}</td>
                             <td class="px-6 py-4 text-sm">${row.term || '-'}</td>
                             <td class="px-6 py-4 text-xs">${row.issued_at}</td>
@@ -417,7 +418,14 @@
             }
         }
 
-        // --- 4. Text Utilities ---
+        // --- 4. Text Utilities & Role Cleaning ---
+        
+        // Remove text in brackets e.g. "AI/ML (Data Science)" -> "AI/ML"
+        function cleanRoleName(role) {
+            if (!role) return '';
+            return role.replace(/\s*\(.*?\)/g, "").trim();
+        }
+
         function drawJustifiedText(page, text, x, y, width, font, fontSize, lineHeight) {
             const paragraphs = text.split('\n\n');
             let currentY = y;
@@ -468,7 +476,7 @@
         // --- 5. PDF Generation (JOINING LETTER) ---
         async function generatePdfBlob() {
             try {
-                // Load existing template (assumed to be same background as certificate)
+                // Load existing template
                 const existingPdfBytes = await fetch(TEMPLATE_URL).then(res => res.arrayBuffer());
                 const pdfDoc = await PDFDocument.load(existingPdfBytes);
                 const font = await pdfDoc.embedFont(StandardFonts.TimesRoman);
@@ -478,7 +486,10 @@
 
                 const name = document.getElementById('name').value;
                 const usn = document.getElementById('usn').value;
-                const role = document.getElementById('role').value;
+                // CLEAN ROLE NAME HERE
+                const rawRole = document.getElementById('role').value;
+                const role = cleanRoleName(rawRole);
+                
                 const start = document.getElementById('startDate').value;
                 const end = document.getElementById('endDate').value;
                 const letterId = document.getElementById('letterId').value;
@@ -498,35 +509,66 @@
                 
                 currentY -= 40;
 
-                // 2. Date (Right Aligned)
+                // 2. Date & ID (Aligned Top)
+                // Left: ID, Right: Date
                 const dateText = `Date: ${dateStr}`;
+                const idText = `Ref: ${letterId}`;
+                
+                page.drawText(idText, { x: marginX, y: currentY, size: 12, font: boldFont });
                 page.drawText(dateText, { x: width - marginX - font.widthOfTextAtSize(dateText, 12), y: currentY, size: 12, font: boldFont });
 
                 currentY -= 30;
 
-                // 3. To Address
+                // 3. To Address (No Mr./Ms.)
                 page.drawText("To,", { x: marginX, y: currentY, size: 12, font: boldFont });
                 currentY -= 15;
-                page.drawText(`Mr./Ms. ${name} [${usn}]`, { x: marginX, y: currentY, size: 12, font: font });
+                page.drawText(`${name} [${usn}]`, { x: marginX, y: currentY, size: 12, font: font });
                 
                 currentY -= 30;
 
-                // 4. Subject
-                const subjectText = `Subject: Joining Confirmation as ${role} Intern (16 Weeks)`;
-                page.drawText(subjectText, { x: marginX, y: currentY, size: 12, font: boldFont });
+                // 4. Subject (Wrapped)
+                const subjectPrefix = "Subject: Joining Confirmation as ";
+                const subjectSuffix = " Intern (16 Weeks)";
+                const fullSubject = subjectPrefix + role + subjectSuffix;
+                
+                const maxWidth = width - (marginX * 2);
+                
+                // Simple wrapping for Subject (Bold)
+                const words = fullSubject.split(' ');
+                let line = [];
+                let lineLength = 0;
+                
+                for (let i = 0; i < words.length; i++) {
+                    const word = words[i];
+                    const wordWidth = boldFont.widthOfTextAtSize(word + ' ', 12);
+                    if (lineLength + wordWidth > maxWidth) {
+                        // Draw current line
+                        page.drawText(line.join(' '), { x: marginX, y: currentY, size: 12, font: boldFont });
+                        currentY -= 15; // Line height
+                        line = [word];
+                        lineLength = wordWidth;
+                    } else {
+                        line.push(word);
+                        lineLength += wordWidth;
+                    }
+                }
+                // Draw last line of subject
+                if (line.length > 0) {
+                    page.drawText(line.join(' '), { x: marginX, y: currentY, size: 12, font: boldFont });
+                    currentY -= 15;
+                }
 
-                currentY -= 30;
+                currentY -= 20;
 
-                // 5. Salutation
-                page.drawText(`Dear Mr./Ms. ${name} [${usn}],`, { x: marginX, y: currentY, size: 12, font: font });
+                // 5. Salutation (No Mr./Ms.)
+                page.drawText(`Dear ${name} [${usn}],`, { x: marginX, y: currentY, size: 12, font: font });
 
                 currentY -= 25;
 
                 // 6. Body
                 const fontSize = 12;
                 const lineHeight = 16;
-                const maxWidth = width - (marginX * 2);
-
+                
                 const bodyText = `We are pleased to inform you that you are selected and permitted to join VisionAstraa EV Academy as a ${role} Intern for a period of 16 weeks, starting from ${start} to ${end}.
 
 During the internship period, you will be exposed to practical training, industry-oriented projects, and professional mentoring. You are expected to maintain discipline, follow company policies, and actively participate in all assigned tasks.
@@ -542,13 +584,9 @@ We wish you a productive learning experience with us.`;
                 // 7. Sign off
                 page.drawText("Warm regards,", { x: marginX, y: currentY, size: 12, font: font });
                 currentY -= 15;
-                // Note: The template likely has a signature at the bottom. We position the text to align.
                 page.drawText("Program Coordinator", { x: marginX, y: currentY, size: 12, font: boldFont });
                 currentY -= 15;
                 page.drawText("VisionAstraa EV Academy", { x: marginX, y: currentY, size: 12, font: boldFont });
-
-                // ID at bottom right (Verification)
-                page.drawText(`Ref ID: ${letterId}`, { x: width - 200, y: 50, size: 10, font: font, color: rgb(0.3, 0.3, 0.3) });
 
                 return await pdfDoc.save();
 
@@ -597,7 +635,11 @@ We wish you a productive learning experience with us.`;
                 formData.append('usn', document.getElementById('usn').value);
                 formData.append('name', document.getElementById('name').value);
                 formData.append('email', document.getElementById('email').value);
-                formData.append('role', document.getElementById('role').value);
+                
+                // Clean role before sending to backend to ensure DB has clean data
+                const rawRole = document.getElementById('role').value;
+                formData.append('role', cleanRoleName(rawRole));
+                
                 formData.append('term', document.getElementById('termSelect').options[document.getElementById('termSelect').selectedIndex].text);
                 formData.append('letter_id', document.getElementById('letterId').value);
                 formData.append('account_id', document.getElementById('senderAccount').value);
