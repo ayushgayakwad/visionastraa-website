@@ -200,6 +200,10 @@ if ($action === 'generate_and_send') {
         <br><br>
         Please find your <strong>Joining Confirmation Letter</strong> attached to this email. It contains details regarding your internship duration and guidelines.
         <br><br>
+        To ensure a smooth onboarding process, it is essential that you join the WhatsApp group:
+        <br>
+        - <strong>January 2026</strong>, please join: <a href='https://chat.whatsapp.com/CbaJqadbFCpI0cAKtOeAcO'>January 2026 Internship Group</a>
+        <br><br>
         We look forward to a productive learning journey with you.
         <br><br>
         Warm Regards,<br>
