@@ -121,7 +121,7 @@
                         <!-- Letter ID -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 flex justify-between">
-                                <span>Reference ID (VA-JL...)</span>
+                                <span>Reference ID (VAEV-JL...)</span>
                                 <button type="button" onclick="regenerateId()" class="text-xs text-blue-600 hover:underline"><i class="fas fa-sync"></i> Regenerate</button>
                             </label>
                             <input type="text" id="letterId" class="w-full p-2 border border-gray-300 rounded font-mono text-lg tracking-wider bg-gray-50" readonly>
@@ -570,7 +570,7 @@
                 // 2. Date & ID (Aligned Top)
                 // Left: ID, Right: Date
                 const dateText = `Date: ${dateStr}`;
-                const idText = `Ref: ${letterId}`;
+                const idText = `ID: ${letterId}`;
                 
                 page.drawText(idText, { x: marginX, y: currentY, size: 12, font: boldFont });
                 page.drawText(dateText, { x: width - marginX - font.widthOfTextAtSize(dateText, 12), y: currentY, size: 12, font: boldFont });

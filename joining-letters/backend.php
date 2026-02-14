@@ -70,8 +70,8 @@ if ($action === 'generate_unique_id') {
 
         for ($i = 0; $i < $maxRetries; $i++) {
             $rand = rand(100000, 999999);
-            // Changed Prefix to VA-JL (VisionAstraa Joining Letter)
-            $candidate = "VA-JL" . $yearCode . $rand . $suffix;
+            // UPDATED Prefix to VAEV-JL
+            $candidate = "VAEV-JL" . $yearCode . $rand . $suffix;
             
             // Check if exists
             $stmt = $pdo->prepare("SELECT 1 FROM issued_joining_letters WHERE letter_id = ?");
@@ -196,7 +196,7 @@ if ($action === 'generate_and_send') {
         Congratulations! We are pleased to confirm your selection as an intern at VisionAstraa EV Academy.
         <br><br>
         <strong>Role:</strong> $role<br>
-        <strong>Reference ID:</strong> $letterId
+        <strong>ID:</strong> $letterId
         <br><br>
         Please find your <strong>Joining Confirmation Letter</strong> attached to this email. It contains details regarding your internship duration and guidelines.
         <br><br>
