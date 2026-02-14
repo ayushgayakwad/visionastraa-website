@@ -1121,7 +1121,7 @@ iframe {
     position: relative;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 40px; /* Default padding for desktop */
 }
 
 .intern-track {
@@ -1132,6 +1132,7 @@ iframe {
     padding: 20px 10px;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+    align-items: stretch; /* Ensure cards are same height */
 }
 
 .intern-track::-webkit-scrollbar {
@@ -1181,13 +1182,13 @@ iframe {
     font-style: normal;
 }
 
-/* Scroll Buttons - Updated Color #6c5ce7 */
+/* Scroll Buttons - Color #6c5ce7 */
 .intern-nav-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     background: #fff;
-    border: 1px solid #6c5ce7; /* Border matching the color */
+    border: 1px solid #6c5ce7;
     width: 45px;
     height: 45px;
     border-radius: 50%;
@@ -1195,7 +1196,7 @@ iframe {
     cursor: pointer;
     z-index: 10;
     font-size: 1.2rem;
-    color: #6c5ce7; /* Icon Color */
+    color: #6c5ce7;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
@@ -1203,7 +1204,7 @@ iframe {
 }
 
 .intern-nav-btn:hover {
-    background: #6c5ce7; /* Hover Background */
+    background: #6c5ce7;
     color: white;
     box-shadow: 0 6px 15px rgba(108, 92, 231, 0.3);
 }
@@ -1211,14 +1212,28 @@ iframe {
 .intern-prev { left: 0; }
 .intern-next { right: 0; }
 
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
-    .intern-card {
-        flex: 0 0 280px;
+    .internship-testimonials {
+        padding: 40px 0; /* Remove side padding from the section container */
     }
+    
     .intern-carousel-wrapper {
-        padding: 0;
+        padding: 0; /* Remove wrapper padding to allow full-width scroll */
+        width: 100%;
     }
+
+    .intern-track {
+        gap: 15px;
+        padding: 20px 20px; /* Add padding inside track for breathing room at edges */
+    }
+
+    .intern-card {
+        flex: 0 0 280px; /* Reduce width slightly for mobile */
+        padding: 25px;
+    }
+
     .intern-nav-btn {
-        display: none;
+        display: none; /* Hide buttons on mobile (swipe only) */
     }
 }

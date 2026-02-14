@@ -518,14 +518,13 @@
         }
 
         let internAutoScroll;
-        const internTrack = document.getElementById('internTrack');
         const internWrapper = document.getElementById('internWrapper');
 
         function startInternAutoScroll() {
-            stopInternAutoScroll(); // Clear any existing interval
+            stopInternAutoScroll();
             internAutoScroll = setInterval(() => {
                 scrollIntern(1);
-            }, 3000); // Scroll every 3 seconds
+            }, 3000); 
         }
 
         function stopInternAutoScroll() {
@@ -534,25 +533,29 @@
 
         function scrollIntern(direction) {
             const track = document.getElementById('internTrack');
-            // Card width (350px) + gap (30px)
-            const cardWidth = 380; 
-            
-            // Logic for looping back to start if at the end
+            // Dynamically get card width + gap for accurate scrolling on mobile & desktop
+            const card = track.querySelector('.intern-card');
+            const style = window.getComputedStyle(track);
+            const gap = parseInt(style.gap) || 30; // Default to 30 if gap calculation fails
+            const scrollAmount = card.offsetWidth + gap;
+
+            // Loop logic
             if (direction === 1 && (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10)) {
                 track.scrollTo({ left: 0, behavior: 'smooth' });
             } else {
-                track.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+                track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
             }
         }
 
-        // Initialize Auto Scroll on Load
         document.addEventListener('DOMContentLoaded', () => {
              startInternAutoScroll();
              
-             // Pause on Hover
              if(internWrapper) {
                  internWrapper.addEventListener('mouseenter', stopInternAutoScroll);
                  internWrapper.addEventListener('mouseleave', startInternAutoScroll);
+                 // Add touch support to pause/resume
+                 internWrapper.addEventListener('touchstart', stopInternAutoScroll);
+                 internWrapper.addEventListener('touchend', startInternAutoScroll);
              }
         });
 
