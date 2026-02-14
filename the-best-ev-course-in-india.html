@@ -28,6 +28,7 @@
     <meta property="twitter:image" content="https://visionastraa.com/images/ev_meta_image.png" />
     <link rel="icon" href="images/favicon-16x16.png" type="image/png">
     <link rel="stylesheet" href="css/ev-academy.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
@@ -288,6 +289,70 @@
         <a href="ev-projects.html"><button class="btn-features">Explore Internships</button></a>
     </section>
 
+    <section class="internship-testimonials">
+        <h2 class="internship-title">Internship Testimonials</h2>
+        
+        <div class="intern-carousel-wrapper">
+            <button class="intern-nav-btn intern-prev" onclick="scrollIntern(-1)">&#10094;</button>
+            
+            <div class="intern-track" id="internTrack">
+                
+                <!-- Testimonial 1 -->
+                <div class="intern-card">
+                    <div class="intern-quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p>"The sessions conducted so far have been well-structured and practically oriented, especially for understanding the fundamentals of EV batteries, BMS, and motors. The gradual flow from basic concepts like cell voltages to advanced topics like BLDC motor structure helped in building clarity step by step."</p>
+                    <div class="intern-author">
+                        <h4>Hemanth Kumar N N</h4>
+                        <p>Intern, VisionAstraa EV Academy</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="intern-card">
+                    <div class="intern-quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p>"I wanted to sincerely thank you for the EV battery sessions. Your classes made complex topics like battery pack design, S-P calculations, C-rating, and BMS selection feel very practical and easy to understand. I appreciated how you connected theory with real-world applications."</p>
+                    <div class="intern-author">
+                        <h4>Akshitha R</h4>
+                        <p>Intern, VisionAstraa EV Academy</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="intern-card">
+                    <div class="intern-quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p>"I am so glad about your teaching and the way you explain electric vehicles. You gave us clarity about every topic and made us so curious to learn and explore more. Thank you so much for your wonderful teaching."</p>
+                    <div class="intern-author">
+                        <h4>Rakshita M Kalaburgi</h4>
+                        <p>Intern, VisionAstraa EV Academy</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="intern-card">
+                    <div class="intern-quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p>"All the sessions were so good that we got to learn new things about EV vehicles. All the classes were informative and clear."</p>
+                    <div class="intern-author">
+                        <h4>Likhith B P</h4>
+                        <p>Intern, VisionAstraa EV Academy</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 5 -->
+                <div class="intern-card">
+                    <div class="intern-quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p>"The online sessions are very nice. Your teaching is excellent. Because you have experience and deep knowledge, the online sessions are very engaging. The practical components shown in the sessions were very helpful."</p>
+                    <div class="intern-author">
+                        <h4>Madhu Biradar</h4>
+                        <p>Intern, VisionAstraa EV Academy</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="intern-nav-btn intern-next" onclick="scrollIntern(1)">&#10095;</button>
+        </div>
+    </section>
+
     <section class="contact-section">
       <div class="contact-container">
         <form id="contactForm">
@@ -450,6 +515,12 @@
 
         function stopAutoScroll() {
             clearInterval(testimonialInterval);
+        }
+
+        function scrollIntern(direction) {
+            const track = document.getElementById('internTrack');
+            const cardWidth = track.querySelector('.intern-card').offsetWidth + 30; // Card width + gap
+            track.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
