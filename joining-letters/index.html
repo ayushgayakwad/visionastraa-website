@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joining Letter Dashboard | VisionAstraa</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- PDF-Lib -->
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .loader {
+            border-top-color: #3498db;
+            -webkit-animation: spinner 1.5s linear infinite;
+            animation: spinner 1.5s linear infinite;
+        }
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen font-sans pb-10">
+
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        
+        <!-- Header -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8 border-l-4 border-blue-600 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-800 flex items-center">
+                    <i class="fas fa-file-signature mr-3 text-blue-600"></i>
+                    VisionAstraa - Joining Letter Generator
+                </h1>
+                <p class="text-gray-600 mt-2">Issue internship joining confirmation letters to selected candidates.</p>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="toggleView('generator')" id="navGenerator" class="px-4 py-2 rounded-lg font-medium bg-blue-100 text-blue-700 border border-blue-200">
+                    <i class="fas fa-magic mr-2"></i> Generator
+                </button>
+                <button onclick="toggleView('history')" id="navHistory" class="px-4 py-2 rounded-lg font-medium bg-white text-gray-600 hover:bg-gray-50 border border-gray-200">
+                    <i class="fas fa-history mr-2"></i> Issued History
+                </button>
+            </div>
+        </div>
+
+        <!-- VIEW: GENERATOR -->
+        <div id="viewGenerator" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Left Panel: Controls -->
+            <div class="lg:col-span-5 space-y-6">
+                
+                <!-- Search Section -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-lg font-semibold mb-4 text-gray-700 border-b pb-2">1. Search Candidate</h2>
+                    <div class="flex gap-2">
+                        <input type="text" id="searchUsn" placeholder="Enter USN (e.g., 1VA21CS001)" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none uppercase">
+                        <button onclick="searchIntern()" id="searchBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition duration-200">
+                            Search
+                        </button>
+                    </div>
+                    
+                    <!-- Search Feedback Area -->
+                    <div id="searchFeedback" class="mt-4 hidden">
+                        <p id="searchMsg" class="text-sm font-medium mb-2"></p>
+                        <button id="manualEntryBtn" onclick="enableManualEntry()" class="hidden w-full text-center bg-yellow-50 text-yellow-700 border border-yellow-200 p-2 rounded text-sm hover:bg-yellow-100 transition">
+                            <i class="fas fa-pen mr-1"></i> Record not found. <strong>Click here to enter manually.</strong>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Details Form (Initially Hidden) -->
+                <div id="detailsForm" class="bg-white rounded-lg shadow-md p-6 hidden">
+                    <h2 class="text-lg font-semibold mb-4 text-gray-700 border-b pb-2">2. Letter Details</h2>
+                    
+                    <form id="certForm" class="space-y-4">
+                        <!-- Readonly / Editable Fields -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 uppercase">USN</label>
+                                <input type="text" id="usn" class="w-full p-2 border rounded bg-gray-50 text-gray-700 font-mono" readonly>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 uppercase">Payment Status</label>
+                                <input type="text" id="paid_on" class="w-full p-2 border rounded bg-green-50 text-green-700 font-medium" readonly>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Candidate Name</label>
+                            <input type="text" id="name" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Internship Role</label>
+                            <input type="text" id="role" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                        </div>
+
+                        <!-- Term Selection Logic -->
+                        <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                            <label class="block text-sm font-bold text-blue-900 mb-2">Internship Duration</label>
+                            <select id="termSelect" onchange="updateDatesAndId()" class="w-full p-2 border border-blue-300 rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                                <option value="sep2025">September 2025 Cohort (16 Weeks)</option>
+                                <option value="jan2026">January 2026 Cohort (16 Weeks)</option>
+                            </select>
+                            
+                            <div class="mt-3 grid grid-cols-2 gap-2 text-sm">
+                                <div>
+                                    <span class="text-gray-500 text-xs block font-medium">Start Date</span>
+                                    <input type="text" id="startDate" class="w-full bg-white border border-gray-300 px-2 py-1 rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                                </div>
+                                <div>
+                                    <span class="text-gray-500 text-xs block font-medium">End Date</span>
+                                    <input type="text" id="endDate" class="w-full bg-white border border-gray-300 px-2 py-1 rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Letter ID -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 flex justify-between">
+                                <span>Reference ID (VA-JL...)</span>
+                                <button type="button" onclick="regenerateId()" class="text-xs text-blue-600 hover:underline"><i class="fas fa-sync"></i> Regenerate</button>
+                            </label>
+                            <input type="text" id="letterId" class="w-full p-2 border border-gray-300 rounded font-mono text-lg tracking-wider bg-gray-50" readonly>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Candidate Email</label>
+                            <input type="email" id="email" placeholder="Confirm email address..." class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none" required>
+                        </div>
+
+                        <!-- Sender Account Selection -->
+                        <div class="bg-gray-50 p-3 rounded border border-gray-200">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Sender Email Account</label>
+                            <select id="senderAccount" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none text-sm">
+                                <option value="1">visionastraa@evinternships.com</option>
+                                <option value="2">visionastraa@evinternships.in</option>
+                            </select>
+                        </div>
+
+                        <div class="pt-4 border-t">
+                            <button type="submit" id="sendBtn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 shadow flex justify-center items-center">
+                                <span id="btnText">Generate & Send Letter</span>
+                                <div id="btnLoader" class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-6 w-6 ml-3 hidden"></div>
+                            </button>
+                        </div>
+                    </form>
+                    <div id="statusMessage" class="mt-4 hidden text-sm p-3 rounded"></div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Preview -->
+            <div class="lg:col-span-7">
+                <div class="bg-gray-800 rounded-lg shadow-xl p-4 h-full flex flex-col">
+                    <div class="flex justify-between items-center mb-4 text-gray-300">
+                        <h3 class="font-medium"><i class="fas fa-eye mr-2"></i>Letter Preview</h3>
+                        <button type="button" onclick="refreshPreview()" class="text-sm hover:text-white transition"><i class="fas fa-sync-alt mr-1"></i> Refresh Preview</button>
+                    </div>
+                    
+                    <div class="flex-grow bg-gray-900 rounded border border-gray-700 flex items-center justify-center relative overflow-hidden" style="min-height: 500px;">
+                        <iframe id="pdfPreviewFrame" class="w-full h-full absolute inset-0 rounded"></iframe>
+                        <div id="previewPlaceholder" class="text-center text-gray-500">
+                            <i class="fas fa-file-alt text-6xl mb-4"></i>
+                            <p>Search for a student to load preview</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW: HISTORY -->
+        <div id="viewHistory" class="hidden">
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-4 border-b border-gray-200 flex justify-between items-center bg-gray-50">
+                    <h2 class="text-lg font-bold text-gray-700">Issued Joining Letters</h2>
+                    <button onclick="fetchHistory()" class="text-sm text-blue-600 hover:text-blue-800"><i class="fas fa-sync"></i> Refresh</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">USN</th>
+                                <th scope="col" class="px-6 py-3">Name</th>
+                                <th scope="col" class="px-6 py-3">Role</th>
+                                <th scope="col" class="px-6 py-3">Letter ID</th>
+                                <th scope="col" class="px-6 py-3">Term</th>
+                                <th scope="col" class="px-6 py-3">Date Issued</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody">
+                            <tr><td colspan="6" class="px-6 py-4 text-center">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const { PDFDocument, StandardFonts, rgb } = PDFLib;
+        const TEMPLATE_URL = '../completion-certificates/Certificate_Template.pdf'; // Reuse existing template
+
+        // --- View Switching Logic ---
+        function toggleView(viewName) {
+            const genDiv = document.getElementById('viewGenerator');
+            const histDiv = document.getElementById('viewHistory');
+            const navGen = document.getElementById('navGenerator');
+            const navHist = document.getElementById('navHistory');
+
+            if (viewName === 'generator') {
+                genDiv.classList.remove('hidden');
+                histDiv.classList.add('hidden');
+                
+                navGen.classList.replace('bg-white', 'bg-blue-100');
+                navGen.classList.replace('text-gray-600', 'text-blue-700');
+                navHist.classList.replace('bg-blue-100', 'bg-white');
+                navHist.classList.replace('text-blue-700', 'text-gray-600');
+            } else {
+                genDiv.classList.add('hidden');
+                histDiv.classList.remove('hidden');
+
+                navHist.classList.replace('bg-white', 'bg-blue-100');
+                navHist.classList.replace('text-gray-600', 'text-blue-700');
+                navGen.classList.replace('bg-blue-100', 'bg-white');
+                navGen.classList.replace('text-blue-700', 'text-gray-600');
+                
+                fetchHistory();
+            }
+        }
+
+        // --- 1. Search Logic ---
+        async function searchIntern() {
+            const usn = document.getElementById('searchUsn').value.trim();
+            const btn = document.getElementById('searchBtn');
+            const feedbackDiv = document.getElementById('searchFeedback');
+            const msg = document.getElementById('searchMsg');
+            const manualBtn = document.getElementById('manualEntryBtn');
+            
+            if (!usn) return;
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i>';
+            feedbackDiv.classList.remove('hidden');
+            msg.className = "text-sm font-medium mb-2 text-gray-500";
+            msg.innerText = "Searching database...";
+            manualBtn.classList.add('hidden');
+            
+            // Hide previous results
+            document.getElementById('detailsForm').classList.add('hidden');
+
+            try {
+                const formData = new FormData();
+                formData.append('action', 'search');
+                formData.append('usn', usn);
+
+                const response = await fetch('backend.php', { method: 'POST', body: formData });
+                const result = await response.json();
+
+                if (result.success) {
+                    // Lock DB Fields
+                    document.getElementById('usn').readOnly = true;
+                    document.getElementById('paid_on').readOnly = true;
+                    document.getElementById('usn').classList.add('bg-gray-50');
+                    document.getElementById('paid_on').classList.add('bg-green-50');
+
+                    // Populate Data
+                    document.getElementById('usn').value = result.data.usn;
+                    document.getElementById('name').value = result.data.name;
+                    document.getElementById('role').value = result.data.role;
+                    document.getElementById('paid_on').value = result.data.paid_on;
+                    document.getElementById('email').value = result.data.email || ''; 
+
+                    document.getElementById('detailsForm').classList.remove('hidden');
+                    document.getElementById('previewPlaceholder').classList.add('hidden');
+                    
+                    await updateDatesAndId();
+                    
+                    msg.className = "text-sm font-bold text-green-600";
+                    msg.innerHTML = '<i class="fas fa-check"></i> Found: ' + result.data.name;
+                } else {
+                    // Not found - Offer Manual Entry
+                    msg.className = "text-sm font-bold text-red-600";
+                    msg.innerText = "Intern not found in payments database.";
+                    manualBtn.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error(error);
+                msg.className = "text-sm text-red-600";
+                msg.innerText = "Connection error.";
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Search";
+            }
+        }
+
+        function enableManualEntry() {
+            const usn = document.getElementById('searchUsn').value.trim();
+            
+            // Show Form
+            document.getElementById('detailsForm').classList.remove('hidden');
+            document.getElementById('previewPlaceholder').classList.add('hidden');
+
+            // Unlock Fields for Manual Entry
+            const usnField = document.getElementById('usn');
+            const paidField = document.getElementById('paid_on');
+            
+            usnField.value = usn;
+            usnField.readOnly = false; // Allow correction
+            usnField.classList.remove('bg-gray-50');
+            
+            paidField.value = "Manual Entry (Not in DB)";
+            paidField.readOnly = false;
+            paidField.classList.remove('bg-green-50');
+
+            // Clear other fields
+            document.getElementById('name').value = "";
+            document.getElementById('role').value = "";
+            document.getElementById('email').value = "";
+
+            updateDatesAndId();
+        }
+
+        // --- 2. Logic for Terms & ID ---
+        async function updateDatesAndId() {
+            const term = document.getElementById('termSelect').value;
+            const startDateEl = document.getElementById('startDate');
+            const endDateEl = document.getElementById('endDate');
+            
+            let start, end, idSuffix, yearCode;
+
+            if (term === 'sep2025') {
+                start = "08 September 2025";
+                end = "19 January 2026";
+                yearCode = "25";
+                idSuffix = "A";
+            } else {
+                start = "02 February 2026"; // Adjusted to match sample
+                end = "30 May 2026";
+                yearCode = "26";
+                idSuffix = "B";
+            }
+
+            startDateEl.value = start;
+            endDateEl.value = end;
+            
+            // Async fetch for unique ID
+            await generateCertId(yearCode, idSuffix);
+        }
+
+        async function generateCertId(yearCode, idSuffix) {
+            const certInput = document.getElementById('letterId');
+            certInput.value = "Generating ID...";
+            certInput.classList.add('animate-pulse');
+
+            try {
+                const formData = new FormData();
+                formData.append('action', 'generate_unique_id');
+                formData.append('year_code', yearCode);
+                formData.append('suffix', idSuffix);
+
+                const response = await fetch('backend.php', { method: 'POST', body: formData });
+                const result = await response.json();
+
+                if (result.success) {
+                    certInput.value = result.id;
+                    refreshPreview(); 
+                } else {
+                    certInput.value = "Error";
+                    alert(result.message);
+                }
+            } catch (error) {
+                console.error('ID Gen Error:', error);
+                certInput.value = "Connection Error";
+            } finally {
+                certInput.classList.remove('animate-pulse');
+            }
+        }
+
+        function regenerateId() {
+            const term = document.getElementById('termSelect').value;
+            const yearCode = (term === 'sep2025') ? "25" : "26";
+            const idSuffix = (term === 'sep2025') ? "A" : "B";
+            generateCertId(yearCode, idSuffix);
+        }
+
+        // --- 3. History Logic ---
+        async function fetchHistory() {
+            const tbody = document.getElementById('historyTableBody');
+            tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center">Loading records...</td></tr>';
+
+            try {
+                const formData = new FormData();
+                formData.append('action', 'fetch_history');
+                const response = await fetch('backend.php', { method: 'POST', body: formData });
+                const result = await response.json();
+
+                if (result.success && result.data.length > 0) {
+                    tbody.innerHTML = result.data.map(row => `
+                        <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">${row.usn}</td>
+                            <td class="px-6 py-4">${row.name}</td>
+                            <td class="px-6 py-4">${row.role || '-'}</td>
+                            <td class="px-6 py-4 font-mono text-xs">${row.letter_id}</td>
+                            <td class="px-6 py-4 text-sm">${row.term || '-'}</td>
+                            <td class="px-6 py-4 text-xs">${row.issued_at}</td>
+                        </tr>
+                    `).join('');
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center text-gray-500">No joining letters issued yet.</td></tr>';
+                }
+            } catch (error) {
+                console.error(error);
+                tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-4 text-center text-red-500">Failed to load history.</td></tr>';
+            }
+        }
+
+        // --- 4. Text Utilities ---
+        function drawJustifiedText(page, text, x, y, width, font, fontSize, lineHeight) {
+            const paragraphs = text.split('\n\n');
+            let currentY = y;
+            paragraphs.forEach(paragraph => {
+                const words = paragraph.split(' ');
+                let line = [];
+                let lineLength = 0;
+                for (let i = 0; i < words.length; i++) {
+                    const word = words[i];
+                    const wordWidth = font.widthOfTextAtSize(word, fontSize);
+                    const spaceWidth = (line.length > 0) ? font.widthOfTextAtSize(' ', fontSize) : 0;
+                    if (lineLength + spaceWidth + wordWidth <= width) {
+                        line.push(word);
+                        lineLength += spaceWidth + wordWidth;
+                    } else {
+                        drawJustifiedLine(page, line, x, currentY, width, font, fontSize);
+                        currentY -= lineHeight;
+                        line = [word];
+                        lineLength = wordWidth;
+                    }
+                }
+                if (line.length > 0) {
+                    // Last line of paragraph (left aligned)
+                    page.drawText(line.join(' '), { x: x, y: currentY, size: fontSize, font: font, color: rgb(0,0,0) });
+                    currentY -= lineHeight;
+                }
+                currentY -= (lineHeight * 0.5); 
+            });
+            return currentY;
+        }
+
+        function drawJustifiedLine(page, words, x, y, maxWidth, font, fontSize) {
+            if (words.length === 1) {
+                page.drawText(words[0], { x, y, size: fontSize, font, color: rgb(0,0,0) });
+                return;
+            }
+            const totalWordWidth = words.reduce((sum, word) => sum + font.widthOfTextAtSize(word, fontSize), 0);
+            const totalSpace = maxWidth - totalWordWidth;
+            const spaceWidth = totalSpace / (words.length - 1);
+            let currentX = x;
+            words.forEach((word, index) => {
+                page.drawText(word, { x: currentX, y, size: fontSize, font, color: rgb(0,0,0) });
+                currentX += font.widthOfTextAtSize(word, fontSize);
+                if (index < words.length - 1) currentX += spaceWidth;
+            });
+        }
+
+        // --- 5. PDF Generation (JOINING LETTER) ---
+        async function generatePdfBlob() {
+            try {
+                // Load existing template (assumed to be same background as certificate)
+                const existingPdfBytes = await fetch(TEMPLATE_URL).then(res => res.arrayBuffer());
+                const pdfDoc = await PDFDocument.load(existingPdfBytes);
+                const font = await pdfDoc.embedFont(StandardFonts.TimesRoman);
+                const boldFont = await pdfDoc.embedFont(StandardFonts.TimesRomanBold);
+                const page = pdfDoc.getPages()[0];
+                const { width, height } = page.getSize();
+
+                const name = document.getElementById('name').value;
+                const usn = document.getElementById('usn').value;
+                const role = document.getElementById('role').value;
+                const start = document.getElementById('startDate').value;
+                const end = document.getElementById('endDate').value;
+                const letterId = document.getElementById('letterId').value;
+                
+                const currentDate = new Date();
+                const dateStr = currentDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
+
+                // Margins
+                const marginX = 50;
+                let currentY = height - 160;
+
+                // 1. Title
+                const titleText = "JOINING CONFIRMATION LETTER";
+                const titleSize = 16;
+                const titleWidth = boldFont.widthOfTextAtSize(titleText, titleSize);
+                page.drawText(titleText, { x: (width - titleWidth) / 2, y: currentY, size: titleSize, font: boldFont, color: rgb(0, 0, 0) });
+                
+                currentY -= 40;
+
+                // 2. Date (Right Aligned)
+                const dateText = `Date: ${dateStr}`;
+                page.drawText(dateText, { x: width - marginX - font.widthOfTextAtSize(dateText, 12), y: currentY, size: 12, font: boldFont });
+
+                currentY -= 30;
+
+                // 3. To Address
+                page.drawText("To,", { x: marginX, y: currentY, size: 12, font: boldFont });
+                currentY -= 15;
+                page.drawText(`Mr./Ms. ${name} [${usn}]`, { x: marginX, y: currentY, size: 12, font: font });
+                
+                currentY -= 30;
+
+                // 4. Subject
+                const subjectText = `Subject: Joining Confirmation as ${role} Intern (16 Weeks)`;
+                page.drawText(subjectText, { x: marginX, y: currentY, size: 12, font: boldFont });
+
+                currentY -= 30;
+
+                // 5. Salutation
+                page.drawText(`Dear Mr./Ms. ${name} [${usn}],`, { x: marginX, y: currentY, size: 12, font: font });
+
+                currentY -= 25;
+
+                // 6. Body
+                const fontSize = 12;
+                const lineHeight = 16;
+                const maxWidth = width - (marginX * 2);
+
+                const bodyText = `We are pleased to inform you that you are selected and permitted to join VisionAstraa EV Academy as a ${role} Intern for a period of 16 weeks, starting from ${start} to ${end}.
+
+During the internship period, you will be exposed to practical training, industry-oriented projects, and professional mentoring. You are expected to maintain discipline, follow company policies, and actively participate in all assigned tasks.
+
+This internship is intended purely for academic and training purposes. On successful completion of the internship, you will be issued an Internship Completion Certificate.
+
+We wish you a productive learning experience with us.`;
+
+                currentY = drawJustifiedText(page, bodyText, marginX, currentY, maxWidth, font, fontSize, lineHeight);
+
+                currentY -= 30;
+
+                // 7. Sign off
+                page.drawText("Warm regards,", { x: marginX, y: currentY, size: 12, font: font });
+                currentY -= 15;
+                // Note: The template likely has a signature at the bottom. We position the text to align.
+                page.drawText("Program Coordinator", { x: marginX, y: currentY, size: 12, font: boldFont });
+                currentY -= 15;
+                page.drawText("VisionAstraa EV Academy", { x: marginX, y: currentY, size: 12, font: boldFont });
+
+                // ID at bottom right (Verification)
+                page.drawText(`Ref ID: ${letterId}`, { x: width - 200, y: 50, size: 10, font: font, color: rgb(0.3, 0.3, 0.3) });
+
+                return await pdfDoc.save();
+
+            } catch (e) {
+                console.error("PDF Gen Error:", e);
+                return null;
+            }
+        }
+
+        async function refreshPreview() {
+            const pdfBytes = await generatePdfBlob();
+            if (pdfBytes) {
+                const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                const url = URL.createObjectURL(blob);
+                document.getElementById('pdfPreviewFrame').src = url;
+            }
+        }
+
+        // --- 6. Send Logic ---
+        document.getElementById('certForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!confirm("Are you sure you want to generate and email this joining letter?")) return;
+
+            const btn = document.getElementById('sendBtn');
+            const btnText = document.getElementById('btnText');
+            const btnLoader = document.getElementById('btnLoader');
+            const statusDiv = document.getElementById('statusMessage');
+
+            btn.disabled = true;
+            btnText.innerText = 'Processing...';
+            btnLoader.classList.remove('hidden');
+            statusDiv.className = 'hidden';
+
+            try {
+                const pdfBytes = await generatePdfBlob();
+                if (!pdfBytes) throw new Error("Failed to generate PDF");
+
+                const pdfBase64 = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result.split(',')[1]);
+                    reader.readAsDataURL(new Blob([pdfBytes]));
+                });
+
+                const formData = new FormData();
+                formData.append('action', 'generate_and_send');
+                formData.append('usn', document.getElementById('usn').value);
+                formData.append('name', document.getElementById('name').value);
+                formData.append('email', document.getElementById('email').value);
+                formData.append('role', document.getElementById('role').value);
+                formData.append('term', document.getElementById('termSelect').options[document.getElementById('termSelect').selectedIndex].text);
+                formData.append('letter_id', document.getElementById('letterId').value);
+                formData.append('account_id', document.getElementById('senderAccount').value);
+                formData.append('pdf_data', pdfBase64);
+
+                const response = await fetch('backend.php', { method: 'POST', body: formData });
+                const result = await response.json();
+
+                if (result.success) {
+                    statusDiv.className = "mt-4 p-4 rounded bg-green-100 border border-green-400 text-green-800 text-sm";
+                    statusDiv.innerHTML = `<strong>Success!</strong> Joining letter sent to ${document.getElementById('email').value}.`;
+                } else {
+                    throw new Error(result.message);
+                }
+
+            } catch (error) {
+                statusDiv.className = "mt-4 p-4 rounded bg-red-100 border border-red-400 text-red-800 text-sm";
+                statusDiv.innerHTML = `<strong>Error:</strong> ${error.message}`;
+            } finally {
+                btn.disabled = false;
+                btnText.innerText = 'Generate & Send Letter';
+                btnLoader.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
