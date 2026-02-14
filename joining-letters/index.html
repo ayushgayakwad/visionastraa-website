@@ -579,12 +579,11 @@ We wish you a productive learning experience with us.`;
 
                 currentY = drawJustifiedText(page, bodyText, marginX, currentY, maxWidth, font, fontSize, lineHeight);
 
-                currentY -= 30;
+                // Reduced gap from 30 to 15
+                currentY -= 15;
 
                 // 7. Sign off
                 page.drawText("Warm regards,", { x: marginX, y: currentY, size: 12, font: font });
-                currentY -= 15;
-                page.drawText("Program Coordinator", { x: marginX, y: currentY, size: 12, font: boldFont });
                 currentY -= 15;
                 page.drawText("VisionAstraa EV Academy", { x: marginX, y: currentY, size: 12, font: boldFont });
 
