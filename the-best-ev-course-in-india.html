@@ -292,7 +292,7 @@
     <section class="internship-testimonials">
         <h2 class="internship-title">Internship Testimonials</h2>
         
-        <div class="intern-carousel-wrapper">
+        <div class="intern-carousel-wrapper" id="internWrapper">
             <button class="intern-nav-btn intern-prev" onclick="scrollIntern(-1)">&#10094;</button>
             
             <div class="intern-track" id="internTrack">
@@ -517,11 +517,44 @@
             clearInterval(testimonialInterval);
         }
 
+        let internAutoScroll;
+        const internTrack = document.getElementById('internTrack');
+        const internWrapper = document.getElementById('internWrapper');
+
+        function startInternAutoScroll() {
+            stopInternAutoScroll(); // Clear any existing interval
+            internAutoScroll = setInterval(() => {
+                scrollIntern(1);
+            }, 3000); // Scroll every 3 seconds
+        }
+
+        function stopInternAutoScroll() {
+            clearInterval(internAutoScroll);
+        }
+
         function scrollIntern(direction) {
             const track = document.getElementById('internTrack');
-            const cardWidth = track.querySelector('.intern-card').offsetWidth + 30; // Card width + gap
-            track.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+            // Card width (350px) + gap (30px)
+            const cardWidth = 380; 
+            
+            // Logic for looping back to start if at the end
+            if (direction === 1 && (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10)) {
+                track.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                track.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+            }
         }
+
+        // Initialize Auto Scroll on Load
+        document.addEventListener('DOMContentLoaded', () => {
+             startInternAutoScroll();
+             
+             // Pause on Hover
+             if(internWrapper) {
+                 internWrapper.addEventListener('mouseenter', stopInternAutoScroll);
+                 internWrapper.addEventListener('mouseleave', startInternAutoScroll);
+             }
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
             startAutoScroll();

@@ -1105,7 +1105,7 @@ iframe {
 
 .internship-testimonials {
     padding: 60px 20px;
-    background-color: #f8f9fa; /* Light grey background for contrast */
+    background-color: #f8f9fa;
     text-align: center;
     overflow: hidden;
 }
@@ -1138,9 +1138,9 @@ iframe {
     display: none;
 }
 
-/* Card Design matching Best EV Training Institute page */
+/* Card Design */
 .intern-card {
-    flex: 0 0 350px; /* Fixed width for cards */
+    flex: 0 0 350px;
     background: #fff;
     padding: 30px;
     border-radius: 15px;
@@ -1181,13 +1181,13 @@ iframe {
     font-style: normal;
 }
 
-/* Scroll Buttons */
+/* Scroll Buttons - Updated Color #6c5ce7 */
 .intern-nav-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     background: #fff;
-    border: none;
+    border: 1px solid #6c5ce7; /* Border matching the color */
     width: 45px;
     height: 45px;
     border-radius: 50%;
@@ -1195,7 +1195,7 @@ iframe {
     cursor: pointer;
     z-index: 10;
     font-size: 1.2rem;
-    color: #333;
+    color: #6c5ce7; /* Icon Color */
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
@@ -1203,8 +1203,9 @@ iframe {
 }
 
 .intern-nav-btn:hover {
-    background: #25D366; /* Using your brand green */
+    background: #6c5ce7; /* Hover Background */
     color: white;
+    box-shadow: 0 6px 15px rgba(108, 92, 231, 0.3);
 }
 
 .intern-prev { left: 0; }
@@ -1218,6 +1219,6 @@ iframe {
         padding: 0;
     }
     .intern-nav-btn {
-        display: none; /* Hide arrows on mobile, allow swipe */
+        display: none;
     }
 }
