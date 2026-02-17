@@ -197,12 +197,12 @@ EMAIL_BODY_TEMPLATE = """\
             <span class="highlight-stat">100% Guaranteed Placement</span>
             <span style="font-size: 14px;">(Or Money Back Guarantee)</span>
             <hr style="border: 0; border-top: 1px solid #c5e1a5; margin: 10px 0;">
-            <strong>Visit Dates:</strong> Feb 16 - Feb 27, 2026<br>
+            <strong>Visit Dates:</strong> Feb 19 - Feb 27, 2026<br>
             <strong>Location:</strong> VisionAstraa EV Academy Centre, RV College of Engineering
         </div>
 
         <p>
-            Visit us in-person at our <strong>Centre in RV College of Engineering (RVCE), Bengaluru</strong> between <strong>Feb 16 and Feb 27</strong> for admission to our 3rd Batch.
+            Visit us in-person at our <strong>Centre in RV College of Engineering (RVCE), Bengaluru</strong> between <strong>Feb 19 and Feb 27</strong> for admission to our 3rd Batch.
         </p>
 
         <h2>Program Highlights:</h2>
