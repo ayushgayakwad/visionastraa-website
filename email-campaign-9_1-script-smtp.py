@@ -58,7 +58,7 @@ EMAIL_BODY_TEMPLATE = """\
             font-size: 24px;
             margin-bottom: 20px;
             text-align: center;
-            color: #d32f2f; /* Red/Urgent color for attention */
+            color: #2e7d32; /* Updated to Green */
         }}
         h2 {{
             font-size: 20px;
@@ -69,17 +69,17 @@ EMAIL_BODY_TEMPLATE = """\
             color: #333;
         }}
         .highlight-box {{
-            background-color: #fff3cd;
-            border: 1px solid #ffeeba;
+            background-color: #f1f8e9; /* Subtle light green/greyish background */
+            border: 1px solid #c5e1a5;
             padding: 20px;
             border-radius: 8px;
             text-align: center;
             margin: 20px 0;
-            color: #856404;
+            color: #33691e;
         }}
         .highlight-stat {{
             font-size: 24px;
-            color: #d32f2f;
+            color: #2e7d32; /* Updated to Green */
             font-weight: bold;
             display: block;
             margin-bottom: 5px;
@@ -196,7 +196,7 @@ EMAIL_BODY_TEMPLATE = """\
         <div class="highlight-box">
             <span class="highlight-stat">100% Guaranteed Placement</span>
             <span style="font-size: 14px;">(Or Money Back Guarantee)</span>
-            <hr style="border: 0; border-top: 1px solid #ffeeba; margin: 10px 0;">
+            <hr style="border: 0; border-top: 1px solid #c5e1a5; margin: 10px 0;">
             <strong>Visit Dates:</strong> Feb 16 - Feb 27, 2026<br>
             <strong>Location:</strong> VisionAstraa EV Academy Centre, RV College of Engineering
         </div>
