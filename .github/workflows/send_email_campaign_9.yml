@@ -36,4 +36,4 @@ jobs:
           pip install mysql-connector-python
 
       - name: Run the Python script for Job (Mod ${{ fromJson(matrix.job_config).mod_value }})
-        run: python email-campaign-open-house-rvce.py --config '${{ matrix.job_config }}'
+        run: python email-campaign-9_1-script-smtp.py --config '${{ matrix.job_config }}'
