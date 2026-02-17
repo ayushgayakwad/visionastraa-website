@@ -67,7 +67,7 @@ EMAIL_BODY_TEMPLATE = """\
             max-width: 140px;
         }}
         .content {{
-            padding: 30px;
+            padding: 20px 30px 30px 30px; /* Reduced top padding to 20px */
         }}
         /* ACADEMIC TYPOGRAPHY */
         h1 {{
@@ -77,6 +77,7 @@ EMAIL_BODY_TEMPLATE = """\
             text-align: center;
             color: #004d40;
             line-height: 1.3;
+            margin-top: 10px; /* Slight top margin adjustment */
         }}
         h2 {{
             font-family: Georgia, 'Times New Roman', Times, serif;
@@ -113,13 +114,15 @@ EMAIL_BODY_TEMPLATE = """\
             color: white;
             width: 28px;
             height: 28px;
+            min-width: 28px; /* Fixed width to prevent oval shape */
+            min-height: 28px; /* Fixed height to prevent oval shape */
             border-radius: 50%;
             text-align: center;
             line-height: 28px;
             font-weight: bold;
             font-size: 14px;
             margin-right: 12px;
-            flex-shrink: 0;
+            flex-shrink: 0; /* Prevents shrinking on mobile */
         }}
         .step-content strong {{
             display: block;
@@ -148,23 +151,41 @@ EMAIL_BODY_TEMPLATE = """\
             border: 1px solid #ddd;
         }}
 
+        /* BUTTONS & SECTIONS */
         .btn {{
             background-color: #004d40;
             color: #ffffff !important;
             padding: 15px 30px;
             text-align: center;
             border-radius: 4px;
-            display: block; /* Full width button */
+            display: inline-block;
             text-decoration: none;
             font-weight: bold;
             font-size: 18px;
-            margin: 25px 0;
             letter-spacing: 0.5px;
         }}
         .btn:hover {{
             background-color: #00251a;
         }}
+
+        .whatsapp-section {{
+            background-color: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+        }}
         
+        .apply-section {{
+            background-color: #f0f4c3; /* Subtle greenish-yellow for action */
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+            border: 1px solid #dce775;
+        }}
+
         .footer {{
             background-color: #f5f5f5;
             padding: 20px;
@@ -174,23 +195,19 @@ EMAIL_BODY_TEMPLATE = """\
             border-top: 1px solid #eee;
         }}
         
-        /* Compact Contact Strip */
-        .contact-strip {{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }}
-        .contact-item {{
+        .whatsapp-btn {{
             display: inline-flex;
             align-items: center;
+            justify-content: center;
+            background-color: #25D366;
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 50px;
             font-weight: bold;
-            color: #00796b;
             text-decoration: none;
+            font-size: 16px;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }}
     </style>
 </head>
@@ -250,16 +267,25 @@ EMAIL_BODY_TEMPLATE = """\
                 We maintain a strict quality standard. Admissions are granted only after a virtual interview to assess your aptitude and intent.
             </p>
 
-            <a href="https://visionastraa.com/track/click.php?email={email}&target={apply}&campaign_id={campaign_id}" class="btn">APPLY FOR ADMISSION</a>
-
-            <div class="contact-strip">
-                <div class="contact-item">
-                     📞 +91 80756 64438
-                </div>
-                <a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}" class="contact-item" style="color: #25D366;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png" alt="WA" width="20" style="margin-right:5px;"> Chat on WhatsApp
+            <div class="whatsapp-section">
+                <p style="margin: 0 0 10px 0; font-weight: bold; color: #1b5e20;">Have questions before applying?</p>
+                <p style="font-size: 14px; margin-bottom: 10px;">Chat with our team directly.</p>
+                <a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}" class="whatsapp-btn">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png" alt="WA" width="20" height="20" style="margin-right:8px;"> 
+                    Chat on WhatsApp
                 </a>
             </div>
+
+            <div class="apply-section">
+                <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px; color: #004d40;">
+                    Ready to Start?
+                </p>
+                <p style="margin-bottom: 20px; font-size: 15px;">
+                    Secure your interview slot now.
+                </p>
+                <a href="https://visionastraa.com/track/click.php?email={email}&target={apply}&campaign_id={campaign_id}" class="btn">APPLY FOR ADMISSION</a>
+            </div>
+
         </div>
 
         <div class="footer">
