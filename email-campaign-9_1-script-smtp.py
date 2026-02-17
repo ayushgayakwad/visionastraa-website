@@ -29,7 +29,7 @@ SMTP_ACCOUNTS = [
 # Updated Campaign ID for Open House
 CAMPAIGN_ID = "ev_marketing_campaign_open_house_rvce_feb_2026"
 
-EMAIL_SUBJECT = "Invitation: Visit RVCE for VisionAstraa EV Academy Open House (100% Placement Guaranteed)"
+EMAIL_SUBJECT = "Visit RVCE for VisionAstraa EV Academy Open House (100% Placement Guaranteed)"
 
 EMAIL_BODY_TEMPLATE = """\
 <html>
