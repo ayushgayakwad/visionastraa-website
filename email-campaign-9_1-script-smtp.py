@@ -26,6 +26,17 @@ SMTP_ACCOUNTS = [
     }
 ]
 
+# SMTP_ACCOUNTS = [
+#     {
+#         'username': 'careers@visionastraa.in',
+#         'password': 'Z1SIOO0A9b~'
+#     },
+#     {
+#         'username': 'visionastraa@evcourse.in',
+#         'password': '>p>W|jv?Kg1'
+#     }
+# ]
+
 # Updated Campaign ID for Open House
 CAMPAIGN_ID = "ev_marketing_campaign_open_house_rvce_feb_2026"
 

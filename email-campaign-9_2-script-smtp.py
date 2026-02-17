@@ -26,6 +26,17 @@ SMTP_ACCOUNTS = [
     }
 ]
 
+# SMTP_ACCOUNTS = [
+#     {
+#         'username': 'visionastraa@evinternships.com',
+#         'password': 'a[kE?V6lm7G='
+#     },
+#     {
+#         'username': 'visionastraa@evinternships.in',
+#         'password': ']9jw>Upu//Y'
+#     }
+# ]
+
 # Updated Campaign ID for Batch 3
 CAMPAIGN_ID = "ev_marketing_campaign_batch3_march_2026"
 
