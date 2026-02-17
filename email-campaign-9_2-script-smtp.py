@@ -220,7 +220,7 @@ EMAIL_BODY_TEMPLATE = """\
         <div class="content">
             <h1>Start Your EV Career in March.<br>Get Hired by July.</h1>
 
-            <img src="https://visionastraa.com/images/group-pic-3.jpeg" alt="Batch 2 Classroom" class="landscape-img">
+            <img src="https://visionastraa.com/images/group-pic-4.jpeg" alt="Batch 2 Classroom" class="landscape-img">
 
             <div class="guarantee-badge">
                 ★ 100% Placement Guarantee or Money Back ★
