@@ -179,7 +179,7 @@ EMAIL_BODY_TEMPLATE = """\
         
         .apply-section {{
             background-color: #f0f4c3; /* Subtle greenish-yellow for action */
-            padding: 25px;
+            padding: 20px; /* Reduced padding from 25px */
             border-radius: 8px;
             text-align: center;
             margin-top: 20px;
@@ -277,7 +277,7 @@ EMAIL_BODY_TEMPLATE = """\
             </div>
 
             <div class="apply-section">
-                <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px; color: #004d40;">
+                <p style="font-size: 18px; font-weight: bold; margin-top: 0; margin-bottom: 10px; color: #004d40;">
                     Ready to Start?
                 </p>
                 <p style="margin-bottom: 20px; font-size: 15px;">
