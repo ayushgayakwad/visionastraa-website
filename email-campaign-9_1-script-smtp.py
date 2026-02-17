@@ -29,7 +29,7 @@ SMTP_ACCOUNTS = [
 # Updated Campaign ID for Open House
 CAMPAIGN_ID = "ev_marketing_campaign_open_house_rvce_feb_2026"
 
-EMAIL_SUBJECT = "Invitation: Visit RVCE for EV Academy Open House (100% Placement Guaranteed)"
+EMAIL_SUBJECT = "Invitation: Visit RVCE for VisionAstraa EV Academy Open House (100% Placement Guaranteed)"
 
 EMAIL_BODY_TEMPLATE = """\
 <html>
@@ -148,6 +148,7 @@ EMAIL_BODY_TEMPLATE = """\
             border-radius: 8px;
             text-align: center;
             margin-top: 20px;
+            margin-bottom: 20px;
         }}
         .whatsapp-link {{
             display: inline-flex;
@@ -186,19 +187,19 @@ EMAIL_BODY_TEMPLATE = """\
 
         <h1>Open House Admission at RVCE, Bengaluru</h1>
 
-        <div class="highlight-box">
-            <span class="highlight-stat">100% Guaranteed Placement</span>
-            <span style="font-size: 14px;">(Or Money Back Guarantee)</span>
-            <hr style="border: 0; border-top: 1px solid #ffeeba; margin: 10px 0;">
-            <strong>Visit Dates:</strong> Feb 16 - Feb 27, 2026<br>
-            <strong>Location:</strong> VisionAstraa Centre, RV College of Engineering
-        </div>
-
         <p>Dear {first_name},</p>
 
         <p>
             We are opening our doors for aspiring engineers! If you are serious about a career in the Electric Vehicle industry, this is your chance to see where the magic happens.
         </p>
+
+        <div class="highlight-box">
+            <span class="highlight-stat">100% Guaranteed Placement</span>
+            <span style="font-size: 14px;">(Or Money Back Guarantee)</span>
+            <hr style="border: 0; border-top: 1px solid #ffeeba; margin: 10px 0;">
+            <strong>Visit Dates:</strong> Feb 16 - Feb 27, 2026<br>
+            <strong>Location:</strong> VisionAstraa EV Academy Centre, RV College of Engineering
+        </div>
 
         <p>
             Visit us in-person at our <strong>Centre in RV College of Engineering (RVCE), Bengaluru</strong> between <strong>Feb 16 and Feb 27</strong> for admission to our 3rd Batch.
@@ -212,19 +213,8 @@ EMAIL_BODY_TEMPLATE = """\
             <li><strong>Outcome:</strong> Get a Job in the EV Industry by July!</li>
         </ul>
 
-        <div style="text-align: center; margin: 25px 0; padding: 15px; background-color: #f8f9fa; border-radius: 8px;">
-            <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px; color: #d32f2f;">
-                Hurry!! Limited Seats Available.
-            </p>
-            <p style="margin-bottom: 20px;">
-                Apply now and clear our interviews to secure your admit.
-            </p>
-            
-            <a href="https://visionastraa.com/track/click.php?email={email}&target={apply}&campaign_id={campaign_id}" class="btn">APPLY NOW</a>
-        </div>
-
         <div class="contact-card">
-            <p style="margin: 0 0 10px 0; font-weight: bold;">Plan your visit or ask questions:</p>
+            <p style="margin: 0 0 10px 0; font-weight: bold;">Have questions? Chat with us directly:</p>
             <p style="font-size: 20px; font-weight: bold; margin: 0;">📞 +91 80756 64438</p>
              <div style="margin-top: 15px;">
                 <a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}" target="_blank" class="whatsapp-link">
@@ -232,6 +222,17 @@ EMAIL_BODY_TEMPLATE = """\
                     Chat on WhatsApp
                 </a>
             </div>
+        </div>
+
+        <div style="text-align: center; margin: 25px 0; padding: 15px; background-color: #f8f9fa; border-radius: 8px;">
+            <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px; color: #d32f2f;">
+                Ready to Join?
+            </p>
+            <p style="margin-bottom: 20px;">
+                Secure your spot in the batch.
+            </p>
+            
+            <a href="https://visionastraa.com/track/click.php?email={email}&target={apply}&campaign_id={campaign_id}" class="btn">APPLY NOW</a>
         </div>
 
         <div class="footer">
