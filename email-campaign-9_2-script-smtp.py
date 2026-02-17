@@ -43,223 +43,236 @@ EMAIL_BODY_TEMPLATE = """\
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #e0f2f1; /* Very light teal background */
             color: #333;
         }}
         .container {{
             max-width: 600px;
             margin: 20px auto;
             background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px; /* Standard rounded corners */
+            overflow: hidden; /* Ensures header corners clip */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }}
+        /* DISTINCT HEADER DESIGN */
+        .header {{
+            background-color: #004d40; /* Deep Teal */
+            padding: 25px;
+            text-align: center;
+        }}
+        .header img {{
+            background-color: #ffffff;
+            padding: 8px;
+            border-radius: 4px;
+            max-width: 140px;
+        }}
+        .content {{
+            padding: 30px;
+        }}
+        /* ACADEMIC TYPOGRAPHY */
         h1 {{
-            font-size: 24px;
+            font-family: Georgia, 'Times New Roman', Times, serif; /* Serif for academic feel */
+            font-size: 26px;
             margin-bottom: 20px;
             text-align: center;
-            color: #2e7d32; /* VisionAstraa Green */
+            color: #004d40;
+            line-height: 1.3;
         }}
         h2 {{
+            font-family: Georgia, 'Times New Roman', Times, serif;
             font-size: 20px;
             margin-bottom: 15px;
             margin-top: 25px;
-            border-bottom: 2px solid #e9ecef;
-            padding-bottom: 10px;
-            color: #333;
+            border-bottom: 2px solid #b2dfdb;
+            padding-bottom: 8px;
+            color: #00695c;
         }}
-        .highlight-box {{
-            background-color: #e8f5e9; /* Very subtle green */
-            border: 1px solid #c8e6c9;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            margin: 20px 0;
-            color: #1b5e20;
-        }}
-        .highlight-stat {{
-            font-size: 24px;
-            color: #2e7d32;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
-        }}
-        p, li {{
+        p {{
             font-size: 16px;
-            margin-top: 0px;
             margin-bottom: 15px;
-        }}
-        ul {{
-            padding-left: 20px;
-        }}
-        li {{
-            margin-bottom: 10px;
-        }}
-        a {{
-            color: #1a73e8;
-            font-weight: bold;
-            text-decoration: none;
-        }}
-        a:hover {{
-            text-decoration: underline;
+            color: #444;
         }}
         
+        /* TIMELINE COMPONENT */
+        .timeline-box {{
+            background-color: #fafafa;
+            border-left: 4px solid #00796b;
+            padding: 20px;
+            margin: 25px 0;
+        }}
+        .timeline-step {{
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }}
+        .timeline-step:last-child {{
+            margin-bottom: 0;
+        }}
+        .step-icon {{
+            background-color: #00796b;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }}
+        .step-content strong {{
+            display: block;
+            color: #004d40;
+            font-size: 17px;
+        }}
+        
+        /* GUARANTEE BADGE */
+        .guarantee-badge {{
+            background-color: #fff8e1; /* Light Gold */
+            border: 1px dashed #ffa000;
+            color: #ff6f00;
+            text-align: center;
+            padding: 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }}
+
         .landscape-img {{
             width: 100%;
-            max-width: 100%;
             height: auto;
-            border-radius: 8px;
+            border-radius: 6px;
             display: block;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
         }}
 
         .btn {{
-            background-color: #2e7d32;
+            background-color: #004d40;
             color: #ffffff !important;
-            padding: 14px 30px;
+            padding: 15px 30px;
             text-align: center;
-            border-radius: 5px;
-            display: inline-block;
+            border-radius: 4px;
+            display: block; /* Full width button */
             text-decoration: none;
             font-weight: bold;
             font-size: 18px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 25px 0;
+            letter-spacing: 0.5px;
         }}
         .btn:hover {{
-            background-color: #1b5e20;
+            background-color: #00251a;
         }}
+        
         .footer {{
+            background-color: #f5f5f5;
+            padding: 20px;
             text-align: center;
-            font-size: 14px;
-            color: #777777;
-            margin-top: 30px;
+            font-size: 13px;
+            color: #666;
             border-top: 1px solid #eee;
-            padding-top: 20px;
         }}
-        .logo-container {{
-            text-align: center;
-            margin-bottom: 20px;
-        }}
-        .contact-card {{
-            background: #fff3e0; /* Subtle orange for contact/action */
-            border: 1px solid #ffe0b2;
-            color: #e65100;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
+        
+        /* Compact Contact Strip */
+        .contact-strip {{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
             margin-top: 20px;
-            margin-bottom: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
         }}
-        .whatsapp-link {{
+        .contact-item {{
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            background-color: #25D366;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 6px;
             font-weight: bold;
+            color: #00796b;
             text-decoration: none;
-            margin-top: 10px;
-        }}
-        .whatsapp-link img {{
-            margin-right: 8px;
-            width: 22px;
-            height: 22px;
         }}
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="logo-container">
-            <img src="https://visionastraa.com/images/EV_Academy.png" alt="EV Academy Logo" style="max-width: 150px;">
+        <div class="header">
+            <img src="https://visionastraa.com/images/EV_Academy.png" alt="EV Academy Logo">
         </div>
 
-        <div style="margin-bottom: 25px; text-align: center;">
-            <img src="https://visionastraa.com/images/group-pic-1.jpeg" alt="VisionAstraa Batch 2" class="landscape-img">
-        </div>
+        <div class="content">
+            <h1>Start Your EV Career in March.<br>Get Hired by July.</h1>
 
-        <h1>Start Your EV Career in March, Get Hired by July!</h1>
+            <img src="https://visionastraa.com/images/group-pic-1.jpeg" alt="Batch 2 Classroom" class="landscape-img">
 
-        <p>Dear {first_name},</p>
+            <div class="guarantee-badge">
+                ★ 100% Placement Guarantee or Money Back ★
+            </div>
 
-        <p>
-            The Electric Vehicle industry is hiring aggressively. Are you ready to secure your spot?
-        </p>
-        <p>
-            Our next cohort (Batch 3) begins in the <strong>first week of March 2026</strong>. This is your opportunity to undergo intensive training and walk out with a job offer in hand by July.
-        </p>
+            <p>Dear {first_name},</p>
 
-        <div class="highlight-box">
-            <span class="highlight-stat">100% Placement Guarantee</span>
-            <span style="font-size: 14px;">(Or Money Back Guarantee)</span>
-            <hr style="border: 0; border-top: 1px solid #c8e6c9; margin: 10px 0;">
-            <strong>Batch Starts:</strong> March 1st Week, 2026<br>
-            <strong>Job Target:</strong> June/July 2026
-        </div>
+            <p>
+                The admission process for <strong>Batch 3 (March 2026)</strong> is officially open. This is a rigorous, completely offline program designed for one outcome: <strong>Your Employment.</strong>
+            </p>
 
-        <h2>Program Details</h2>
-        <ul>
-            <li><strong>Location:</strong> In-person (Offline) at our Centre in <strong>RV College of Engineering, Bengaluru</strong>.</li>
-            <li><strong>Duration:</strong> 4 Months (March to July 2026).</li>
-            <li><strong>Focus:</strong> Complete PowerTrain Design & Engineering.</li>
-            <li><strong>Admission:</strong> Selection via Virtual Interview.</li>
-        </ul>
+            <div class="timeline-box">
+                <div class="timeline-step">
+                    <div class="step-icon">1</div>
+                    <div class="step-content">
+                        <strong>March 1st Week, 2026</strong>
+                        Batch Starts @ RV College of Engineering, Bengaluru.
+                    </div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-icon" style="background:transparent; color:#ccc;">|</div>
+                </div>
+                 <div class="timeline-step">
+                    <div class="step-icon">2</div>
+                    <div class="step-content">
+                        <strong>March - June 2026</strong>
+                        4 Months of Intensive PowerTrain Design Training.
+                    </div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-icon" style="background:transparent; color:#ccc;">|</div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-icon">3</div>
+                    <div class="step-content">
+                        <strong>July 2026</strong>
+                        Placement Drives & Job Offer in Hand.
+                    </div>
+                </div>
+            </div>
 
-        <p>
-            Don't wait! The admission process has already begun with virtual interviews.
-        </p>
+            <h2>Admission Process</h2>
+            <p>
+                We maintain a strict quality standard. Admissions are granted only after a virtual interview to assess your aptitude and intent.
+            </p>
 
-        <div class="contact-card">
-            <p style="margin: 0 0 10px 0; font-weight: bold;">Have doubts about the process?</p>
-            <p style="font-size: 20px; font-weight: bold; margin: 0;">📞 +91 80756 64438</p>
-             <div style="margin-top: 15px;">
-                <a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}" target="_blank" class="whatsapp-link">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png" alt="WhatsApp">
-                    Chat on WhatsApp
+            <a href="https://visionastraa.com/track/click.php?email={email}&target={apply}&campaign_id={campaign_id}" class="btn">APPLY FOR ADMISSION</a>
+
+            <div class="contact-strip">
+                <div class="contact-item">
+                     📞 +91 80756 64438
+                </div>
+                <a href="https://visionastraa.com/track/click.php?email={email}&target={whatsapp}&campaign_id={campaign_id}" class="contact-item" style="color: #25D366;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/2044px-WhatsApp.svg.png" alt="WA" width="20" style="margin-right:5px;"> Chat on WhatsApp
                 </a>
             </div>
         </div>
 
-        <div style="text-align: center; margin: 25px 0; padding: 15px; background-color: #f8f9fa; border-radius: 8px;">
-            <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px; color: #2e7d32;">
-                Book Your Interview Slot
-            </p>
-            <p style="margin-bottom: 20px;">
-                Apply now to start the admission process.
-            </p>
-            
-            <a href="https://visionastraa.com/track/click.php?email={email}&target={apply}&campaign_id={campaign_id}" class="btn">APPLY NOW</a>
-        </div>
-
         <div class="footer">
-            <p>Talk to our CEO, Nikhil Jain C S: <a href="https://visionastraa.com/track/click.php?email={email}&target={njcs}&campaign_id={campaign_id}">LinkedIn</a></p>
+            <p style="margin-bottom: 10px;">Connect with our CEO, Nikhil Jain C S: <a href="https://visionastraa.com/track/click.php?email={email}&target={njcs}&campaign_id={campaign_id}" style="color: #00796b;">LinkedIn</a></p>
 
             <div class="social-links">
-              <table align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; border-spacing: 15px;">
-                  <tr>
-                      <td align="center">
-                          <a href="https://visionastraa.com/track/click.php?email={email}&target={linkedin}&campaign_id={campaign_id}" target="_blank" title="LinkedIn">
-                              <img src="https://www.visionastraa.com/images/linkedin.webp" alt="LinkedIn" width="28" height="28" style="display: block; border: 0;">
-                          </a>
-                      </td>
-                      <td align="center">
-                          <a href="https://visionastraa.com/track/click.php?email={email}&target={instagram}&campaign_id={campaign_id}" target="_blank" title="Instagram">
-                              <img src="https://www.visionastraa.com/images/instagram.webp" alt="Instagram" width="28" height="28" style="display: block; border: 0;">
-                          </a>
-                      </td>
-                      <td align="center">
-                          <a href="https://visionastraa.com/track/click.php?email={email}&target={youtube}&campaign_id={campaign_id}" target="_blank" title="YouTube">
-                              <img src="https://www.visionastraa.com/images/youtube.webp" alt="YouTube" width="36" height="28" style="display: block; border: 0;">
-                          </a>
-                      </td>
-                  </tr>
-              </table>
+                <a href="https://visionastraa.com/track/click.php?email={email}&target={linkedin}&campaign_id={campaign_id}" style="text-decoration:none; margin: 0 8px;">LinkedIn</a> |
+                <a href="https://visionastraa.com/track/click.php?email={email}&target={instagram}&campaign_id={campaign_id}" style="text-decoration:none; margin: 0 8px;">Instagram</a> |
+                <a href="https://visionastraa.com/track/click.php?email={email}&target={youtube}&campaign_id={campaign_id}" style="text-decoration:none; margin: 0 8px;">YouTube</a>
             </div>
             <br>
-            <p style="font-size:12px;color:#888;">
-              If you no longer wish to receive emails from us, you can 
-              <a href="https://visionastraa.com/track/unsubscribe.php?email={email}&campaign_id={campaign_id}" style="color:#1a73e8;">unsubscribe here</a>.
+            <p style="font-size:11px; color:#999;">
+              <a href="https://visionastraa.com/track/unsubscribe.php?email={email}&campaign_id={campaign_id}" style="color:#777;">Unsubscribe</a> from future updates.
             </p>
         </div>
         <img src="{image_url}" width="1" height="1" style="display:none;">
